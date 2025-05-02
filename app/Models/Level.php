@@ -13,7 +13,7 @@ class Level extends Model
 
     protected $primaryKey = 'level_id';
 
-    protected $fillable = ['name'];
+    protected $fillable = ['level_nama'];
 
     public function users(): HasMany
     {
