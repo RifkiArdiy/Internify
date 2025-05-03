@@ -126,7 +126,7 @@
                                     </div>
                                     <ul class="header-action btns-inline">
                                         <li>
-                                            <a href="#" class="btn btn-primary btn-lg btn-round">
+                                            <a href="{{ route('login') }}" class="btn btn-primary btn-lg btn-round">
                                                 <span>Ayo Mulai!</span>
                                             </a>
                                         </li>
@@ -706,7 +706,8 @@
                                 <p>Daftar sekarang dan rasakan kemudahan manajemen magang digital bersama Internify.</p>
                                 <ul class="btns-inline justify-center pt-2">
                                     <li>
-                                        <a href="#" class="btn btn-xl btn-primary btn-round">Coba Gratis
+                                        <a href="{{ route('login') }}" class="btn btn-xl btn-primary btn-round">Coba
+                                            Gratis
                                             Sekarang</a>
                                     </li>
                                 </ul>
