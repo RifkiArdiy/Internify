@@ -25,11 +25,11 @@ class DatabaseSeeder extends Seeder
         \App\Models\Level::factory()->create(['level_nama' => 'dosen']);
 
         $this->call([
-            UserSeeder::class,
-            ProgramStudiSeeder::class,
-            MahasiswaSeeder::class,
-            DosenSeeder::class,
-            // CompanySeeder::class,
+            // UserSeeder::class,
+            // ProgramStudiSeeder::class,
+            // MahasiswaSeeder::class,
+            // DosenSeeder::class,
+            CompanySeeder::class,
             // PeriodeMagangSeeder::class,
             // LowonganMagangSeeder::class,
             // MagangApplicationSeeder::class,

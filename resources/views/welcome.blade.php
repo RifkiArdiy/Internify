@@ -61,8 +61,8 @@
                                 </ul>
                                 <ul class="menu-btns">
                                     <li>
-                                        <a href="https://1.envato.market/e0y3g" target="_blank"
-                                            class="btn btn-primary btn-lg">Download App</a>
+                                        <a href={{ route('login') }}
+                                            class="btn btn-primary btn-lg">Login</a>
                                     </li>
                                 </ul>
                             </nav>
