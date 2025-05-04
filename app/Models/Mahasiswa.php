@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Mahasiswa extends Model
 {
@@ -13,16 +14,16 @@ class Mahasiswa extends Model
 
     protected $primaryKey = 'mahasiswa_id';
 
-    protected $fillable = ['user_id', 'prodi_id', 'nim'];
+    protected $fillable = ['user_id', 'prodi_id', 'nim', 'no_telp', 'alamat'];
 
-    public function user()
+    public function user(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id', 'user_id');
     }
 
-    public function prodi()
+    public function prodi(): BelongsTo
     {
-        return $this->belongsTo(ProgramStudi::class);
+        return $this->belongsTo(ProgramStudi::class, 'prodi_id', 'prodi_id');
     }
 
     public function applications()
