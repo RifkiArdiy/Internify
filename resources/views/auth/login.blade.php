@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zxx" class="js">
+<html lang="en" class="js">
 
 <head>
     <meta charset="utf-8">
@@ -11,9 +11,12 @@
     <link rel="shortcut icon" href="{{ asset('assets/home/images/favicon.png') }}">
     <!-- Page Title  -->
     <title>Login | DashLite Admin Template</title>
+
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
     <!-- StyleSheets  -->
     <link rel="stylesheet" href="{{ asset('assets/home/css/dashlite.css') }}">
-    <link id="skin-default" rel="stylesheet" href="{{ asset('assets/home/css/theme.css') }}'">
+    <link id="skin-default" rel="stylesheet" href="{{ asset('assets/home/css/theme.css') }}">
 </head>
 
 <body class="nk-body bg-white npc-general pg-auth">
@@ -49,22 +52,33 @@
                                         </div>
                                     </div>
                                 </div><!-- .nk-block-head -->
-                                <form action="#" class="form-validate is-alter" autocomplete="off">
+                                {{-- @if ($errors->any())
+                                    <div class="alert alert-danger">
+                                        <ul>
+                                            @foreach ($errors->all() as $error)
+                                                <li>{{ $error }}</li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                @endif --}}
+                                <form action="{{ route('postLogin') }}" method="POST" class="form-validate is-alter"
+                                    autocomplete="off" id="form-login">
+                                    @csrf
                                     <div class="form-group">
                                         <div class="form-label-group">
-                                            <label class="form-label" for="email-address">Email or Username</label>
+                                            <label class="form-label" for="username">Email or Username</label>
                                             <a class="link link-primary link-sm" tabindex="-1" href="#">Need
                                                 Help?</a>
                                         </div>
                                         <div class="form-control-wrap">
-                                            <input autocomplete="off" type="text"
-                                                class="form-control form-control-lg" required id="email-address"
+                                            <input autocomplete="off" type="text" name="username" id="username"
+                                                class="form-control form-control-lg" required
                                                 placeholder="Enter your email address or username">
                                         </div>
                                     </div><!-- .form-group -->
                                     <div class="form-group">
                                         <div class="form-label-group">
-                                            <label class="form-label" for="password">Passcode</label>
+                                            <label class="form-label" for="password">Password</label>
                                             <a class="link link-primary link-sm" tabindex="-1"
                                                 href="html/pages/auths/auth-reset.html">Forgot Code?</a>
                                         </div>
@@ -75,8 +89,8 @@
                                                 <em class="passcode-icon icon-show icon ni ni-eye"></em>
                                                 <em class="passcode-icon icon-hide icon ni ni-eye-off"></em>
                                             </a>
-                                            <input autocomplete="new-password" type="password"
-                                                class="form-control form-control-lg" required id="password"
+                                            <input autocomplete="new-password" type="password" name="password"
+                                                id="password" class="form-control form-control-lg" required
                                                 placeholder="Enter your passcode">
                                         </div>
                                     </div><!-- .form-group -->
@@ -220,150 +234,64 @@
     </div>
     <!-- app-root @e -->
     <!-- JavaScript -->
-    <script src="{{ asset('assets/home/assets/js/bundle.js') }}"></script>
-    <script src="{{ asset('assets/home/assets/js/scripts.js') }}"></script>
-    <!-- select region modal -->
-    <div class="modal fade" tabindex="-1" role="dialog" id="region">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-                <a href="#" class="close" data-bs-dismiss="modal"><em class="icon ni ni-cross-sm"></em></a>
-                <div class="modal-body modal-body-md">
-                    <h5 class="title mb-4">Select Your Country</h5>
-                    <div class="nk-country-region">
-                        <ul class="country-list text-center gy-2">
-                            <li>
-                                <a href="#" class="country-item">
-                                    <img src="{{ asset('assets/home/images/flags/arg.png') }}" alt=""
-                                        class="country-flag">
-                                    <span class="country-name">Argentina</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="country-item">
-                                    <img src="{{ asset('assets/home/images/flags/aus.png') }}" alt=""
-                                        class="country-flag">
-                                    <span class="country-name">Australia</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="country-item">
-                                    <img src="{{ asset('assets/home/images/flags/bangladesh.png') }}" alt=""
-                                        class="country-flag">
-                                    <span class="country-name">Bangladesh</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="country-item">
-                                    <img src="{{ asset('assets/home/images/flags/canada.png') }}" alt=""
-                                        class="country-flag">
-                                    <span class="country-name">Canada <small>(English)</small></span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="country-item">
-                                    <img src="{{ asset('assets/home/images/flags/china.png') }}" alt=""
-                                        class="country-flag">
-                                    <span class="country-name">Centrafricaine</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="country-item">
-                                    <img src="{{ asset('assets/home/images/flags/china.png') }}" alt=""
-                                        class="country-flag">
-                                    <span class="country-name">China</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="country-item">
-                                    <img src="{{ asset('assets/home/images/flags/french.png') }}" alt=""
-                                        class="country-flag">
-                                    <span class="country-name">France</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="country-item">
-                                    <img src="{{ asset('assets/home/images/flags/germany.png') }}" alt=""
-                                        class="country-flag">
-                                    <span class="country-name">Germany</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="country-item">
-                                    <img src="{{ asset('assets/home/images/flags/iran.png') }}" alt=""
-                                        class="country-flag">
-                                    <span class="country-name">Iran</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="country-item">
-                                    <img src="{{ asset('assets/home/images/flags/italy.png') }}" alt=""
-                                        class="country-flag">
-                                    <span class="country-name">Italy</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="country-item">
-                                    <img src="{{ asset('assets/home/images/flags/mexico.png') }}" alt=""
-                                        class="country-flag">
-                                    <span class="country-name">México</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="country-item">
-                                    <img src="{{ asset('assets/home/images/flags/philipine.png') }}" alt=""
-                                        class="country-flag">
-                                    <span class="country-name">Philippines</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="country-item">
-                                    <img src="{{ asset('assets/home/images/flags/portugal.png') }}" alt=""
-                                        class="country-flag">
-                                    <span class="country-name">Portugal</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="country-item">
-                                    <img src="{{ asset('assets/home/images/flags/s-africa.png') }}" alt=""
-                                        class="country-flag">
-                                    <span class="country-name">South Africa</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="country-item">
-                                    <img src="{{ asset('assets/home/images/flags/spanish.png') }}" alt=""
-                                        class="country-flag">
-                                    <span class="country-name">Spain</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="country-item">
-                                    <img src="{{ asset('assets/home/images/flags/switzerland.png') }}" alt=""
-                                        class="country-flag">
-                                    <span class="country-name">Switzerland</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="country-item">
-                                    <img src="{{ asset('assets/home/images/flags/uk.png') }}" alt=""
-                                        class="country-flag">
-                                    <span class="country-name">United Kingdom</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="country-item">
-                                    <img src="{{ asset('assets/home/images/flags/english.png') }}" alt=""
-                                        class="country-flag">
-                                    <span class="country-name">United State</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div><!-- .modal-content -->
-        </div><!-- .modla-dialog -->
-    </div><!-- .modal -->
+    {{-- <script src="{{ asset('assets/home/assets/js/bundle.js') }}"></script>
+    <script src="{{ asset('assets/home/assets/js/scripts.js') }}"></script> --}}
     <script src="{{ asset('assets/home/js/bundle.js') }}"></script>
     <script src="{{ asset('assets/home/js/scripts.js') }}"></script>
+    <script src="{{ asset('assets/admin/js/example-sweetalert.js') }}"></script>
+    {{-- @if ($errors->any())
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: '{{ $errors->first() }}',
+                });
+            });
+        </script>
+    @endif --}}
+    <script>
+        $(document).ready(function() {
+            $('#form-login').on('submit', function(e) {
+                e.preventDefault();
+
+                $.ajax({
+                    url: "{{ route('postLogin') }}",
+                    method: "POST",
+                    data: $(this).serialize(),
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    beforeSend: function() {
+                        Swal.fire({
+                            title: 'Logging in...',
+                            allowOutsideClick: false,
+                            didOpen: () => Swal.showLoading()
+                        });
+                    },
+                    success: function(res) {
+                        Swal.fire({
+                            icon: 'success',
+                            title: res.message,
+                            toast: true,
+                            position: 'top-end',
+                            showConfirmButton: false,
+                            timer: 2000
+                        }).then(() => {
+                            window.location.href = res.redirect;
+                        });
+                    },
+                    error: function(xhr) {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Login Failed',
+                            text: xhr.responseJSON?.message || 'Something went wrong!',
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
 
 </html>
