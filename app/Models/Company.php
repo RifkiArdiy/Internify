@@ -19,4 +19,9 @@ class Company extends Model
     {
         return $this->hasMany(LowonganMagang::class);
     }
+
+    public function evaluasis()
+    {
+        return $this->hasMany(Evaluasi::class);
+    }
 }
