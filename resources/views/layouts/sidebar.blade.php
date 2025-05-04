@@ -49,6 +49,15 @@
                         </a>
                         <!-- .nk-menu-sub -->
                     </li>
+                    <li class="nk-menu-item has-sub">
+                        <a href={{ url('/companies') }} class="nk-menu-link">
+                            <span class="nk-menu-icon">
+                                <em class="icon ni ni-building"></em>
+                            </span>
+                            <span class="nk-menu-text">Companies</span>
+                        </a>
+                        <!-- .nk-menu-sub -->
+                    </li>
                     <!-- .nk-menu-item -->
                 </ul>
                 <!-- .nk-menu -->
