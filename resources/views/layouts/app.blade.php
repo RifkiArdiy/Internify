@@ -18,9 +18,11 @@
     <!-- StyleSheets  -->
     <link rel="stylesheet" href="{{ asset('assets/admin/css/dashlite.css') }}">
     <link id="skin-default" rel="stylesheet" href="{{ asset('assets/admin/css/theme.css') }}">
+    @livewireStyles
+    {{-- <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/turbolinks@5.2.0/dist/turbolinks.min.js"></script> --}}
 
     @stack('css')
-    @livewireStyles
 </head>
 
 <body class="nk-body bg-lighter npc-general has-sidebar ">
@@ -40,6 +42,14 @@
                     <div class="container-fluid">
                         <div class="nk-content-inner">
                             <div class="nk-content-body">
+                                <div class="nk-block-head nk-block-head-sm">
+                                    <div class="nk-block-between">
+                                        @include('layouts.breadcrumb')
+                                        <!-- .nk-block-head-content -->
+                                    </div>
+                                    <!-- .nk-block-between -->
+                                </div>
+                                <!-- .nk-block-head -->
                                 @yield('content')
                             </div>
                         </div>
@@ -59,6 +69,9 @@
     <script src="{{ asset('assets/admin/js/bundle.js') }}"></script>
     <script src="{{ asset('assets/admin/js/scripts.js') }}"></script>
     <script src="{{ asset('assets/admin/js/charts/gd-default.js') }}"></script>
+    <script src="{{ asset('assets/admin/js/libs/datatable-btns.js') }}"></script>
+    <script src="{{ asset('assets/admin/js/example-sweetalert.js') }}"></script>
+
 
     <script>
         $.ajaxSetup({
@@ -67,6 +80,7 @@
             }
         });
     </script>
+    @livewireScripts
     @stack('js')
     @livewireScripts
 </body>
