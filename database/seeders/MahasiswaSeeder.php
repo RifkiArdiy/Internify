@@ -18,13 +18,17 @@ class MahasiswaSeeder extends Seeder
         Mahasiswa::create([
             'user_id' => 2,
             'prodi_id' => 1,
-            'nim' => 'NIM001'
+            'nim' => 'NIM001',
+            'no_telp' => '089543217512',
+            'alamat' => 'Indonesia'
         ]);
 
         Mahasiswa::create([
             'user_id' => 3,
             'prodi_id' => 2,
-            'nim' => 'NIM002'
+            'nim' => 'NIM002',
+            'no_telp' => '081253782912',
+            'alamat' => 'Indonesia'
         ]);
     }
 }

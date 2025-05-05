@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class ProgramStudi extends Model
 {
@@ -15,8 +16,8 @@ class ProgramStudi extends Model
 
     protected $fillable = ['name'];
 
-    public function mahasiswas()
+    public function mahasiswas(): HasMany
     {
-        return $this->hasMany(Mahasiswa::class);
+        return $this->hasMany(Mahasiswa::class, 'prodi_id', 'prodi_id');
     }
 }
