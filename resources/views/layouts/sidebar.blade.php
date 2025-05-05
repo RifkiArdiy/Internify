@@ -11,17 +11,17 @@
         <div class="nk-sidebar-brand">
             @if (Auth::user()->level->level_nama == 'admin')
             <a href="{{route('admin.dashboard')}}" class="logo-link nk-sidebar-logo">
-                <h3 class="text-light">Logo</h3>
+                <h4 class="text-light">Logo</h4>
             </a>
             @endif
             @if (Auth::user()->level->level_nama == 'dosen')
             <a href="{{route('dosen.dashboard')}}" class="logo-link nk-sidebar-logo">
-                <h3 class="text-light">Logo</h3>
+                <h4 class="text-light">Logo</h4>
             </a>
             @endif
             @if (Auth::user()->level->level_nama == 'mahasiswa')
             <a href="{{route('mahasiswa.dashboard')}}" class="logo-link nk-sidebar-logo">
-                <h3 class="text-light">Logo</h3>
+                <h4 class="text-light">Logo</h4>
             </a>
             @endif
         </div>

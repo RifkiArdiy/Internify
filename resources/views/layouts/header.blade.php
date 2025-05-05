@@ -20,7 +20,7 @@
                             <em class="icon ni ni-card-view"></em>
                         </div>
                         <div class="nk-news-text">
-                            <h3>Internify</h2>
+                            <h4>Internify</h4>
                         </div>
                     </a>
                 </div>
@@ -71,8 +71,8 @@
                                     <em class="icon ni ni-user-alt"></em>
                                 </div>
                                 <div class="user-info d-none d-md-block">
-                                    <div class="user-status">Administrator</div>
-                                    <div class="user-name dropdown-indicator">Abu Bin Ishityak</div>
+                                    <div class="user-status">{{ Auth::user()->level->level_nama ?? 'Guest' }}</div>
+                                    <div class="user-name dropdown-indicator">{{ Auth::user()->username ?? 'Guest' }}</div>
                                 </div>
                             </div>
                         </a>
