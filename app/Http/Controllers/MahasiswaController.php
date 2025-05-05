@@ -18,7 +18,11 @@ class MahasiswaController extends Controller
     {
         //
         $mahasiswas = Mahasiswa::with('user', 'prodi')->get();
-        return view('mahasiswa.index', compact('mahasiswas'));
+        $breadcrumb = (object) [
+            'title' => 'Table Mahasiswa',
+            'subtitle' => ['Jumlah total Mahasiswa ' . $mahasiswas->count()]
+        ];
+        return view('mahasiswa.index', compact('mahasiswas', 'breadcrumb'));
     }
 
     /**
@@ -131,9 +135,10 @@ class MahasiswaController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Mahasiswa $mahasiswa)
+    public function destroy(string $id)
     {
         //
+        $mahasiswa = Mahasiswa::find($id);
         $mahasiswa->user->delete(); // Hapus user otomatis
         $mahasiswa->delete();
 
