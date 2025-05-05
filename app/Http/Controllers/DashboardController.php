@@ -9,21 +9,28 @@ class DashboardController extends Controller
     //
     public function indexAdmin()
     {
-        return view('dashboard.admin');
+        $breadcrumb = (object) [
+            'title' => 'Dashboard',
+            'subtitle' => ['Welcome to Dashboard Internify']
+        ];
+        return view('dashboard.admin', compact('breadcrumb'));
     }
 
     public function indexMahasiswa()
     {
-        return view('dashboard.mahasiswa');
+        $breadcrumb = (object) [
+            'title' => 'Dashboard',
+            'subtitle' => ['Welcome to Dashboard Internify']
+        ];
+        return view('dashboard.mahasiswa', compact('breadcrumb'));
     }
 
     public function indexDosen()
     {
-        return view('dashboard.dosen');
-    }
-
-    public function index()
-    {
-        return view('dashboard');
+        $breadcrumb = (object) [
+            'title' => 'Dashboard',
+            'subtitle' => ['Welcome to Dashboard Internify']
+        ];
+        return view('dashboard.dosen', compact('breadcrumb'));
     }
 }

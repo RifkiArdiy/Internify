@@ -35,17 +35,17 @@ class AuthController extends Controller
 
             $user = Auth::user();
 
-            if ($user->level->level_nama === 'admin') {
+            if ($user->level->level_nama === 'Administrator') {
                 return response()->json([
                     'message' => 'Login berhasil sebagai Admin',
                     'redirect' => route('admin.dashboard')
                 ]);
-            } elseif ($user->level->level_nama === 'dosen') {
+            } elseif ($user->level->level_nama === 'Dosen') {
                 return response()->json([
                     'message' => 'Login berhasil sebagai Dosen',
                     'redirect' => route('dosen.dashboard')
                 ]);
-            } elseif ($user->level->level_nama === 'mahasiswa') {
+            } elseif ($user->level->level_nama === 'Mahasiswa') {
                 return response()->json([
                     'message' => 'Login berhasil sebagai Mahasiswa',
                     'redirect' => route('mahasiswa.dashboard')

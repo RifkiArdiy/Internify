@@ -20,9 +20,9 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
 
-        \App\Models\Level::factory()->create(['level_nama' => 'admin']);
-        \App\Models\Level::factory()->create(['level_nama' => 'mahasiswa']);
-        \App\Models\Level::factory()->create(['level_nama' => 'dosen']);
+        \App\Models\Level::factory()->create(['level_nama' => 'Administrator']);
+        \App\Models\Level::factory()->create(['level_nama' => 'Mahasiswa']);
+        \App\Models\Level::factory()->create(['level_nama' => 'Dosen']);
 
         $this->call([
             UserSeeder::class,
