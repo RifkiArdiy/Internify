@@ -9,12 +9,21 @@
             </a>
         </div>
         <div class="nk-sidebar-brand">
-            <a href="html/index.html" class="logo-link nk-sidebar-logo">
-                <img class="logo-light logo-img" src="{{ asset('assets/admin/images/logo.png') }}"
-                    srcset="{{ asset('assets/admin/images/logo2x.png') }}" alt="logo">
-                <img class="logo-dark logo-img" src="{{ asset('assets/admin/images/logo-dark.png') }}"
-                    srcset="{{ asset('assets/admin/images/logo-dark2x.png') }}" alt="logo-dark">
+            @if (Auth::user()->level->level_nama == 'admin')
+            <a href="{{route('admin.dashboard')}}" class="logo-link nk-sidebar-logo">
+                <h3 class="text-light">Logo</h3>
             </a>
+            @endif
+            @if (Auth::user()->level->level_nama == 'dosen')
+            <a href="{{route('dosen.dashboard')}}" class="logo-link nk-sidebar-logo">
+                <h3 class="text-light">Logo</h3>
+            </a>
+            @endif
+            @if (Auth::user()->level->level_nama == 'mahasiswa')
+            <a href="{{route('mahasiswa.dashboard')}}" class="logo-link nk-sidebar-logo">
+                <h3 class="text-light">Logo</h3>
+            </a>
+            @endif
         </div>
     </div>
     <!-- .nk-sidebar-element -->
@@ -48,6 +57,14 @@
                                 <span class="nk-menu-text">User Manage</span>
                             </a>
                             <!-- .nk-menu-sub -->
+                        </li>
+                        <li class="nk-menu-item">
+                            <a href="{{ route('companies.index') }}" class="nk-menu-link">
+                                <span class="nk-menu-icon">
+                                    <em class="icon ni ni-building"></em>
+                                </span>
+                                <span class="nk-menu-text">Companies</span>
+                            </a>
                         </li>
                     @endif
                     @if (Auth::user()->level->level_nama == 'dosen')

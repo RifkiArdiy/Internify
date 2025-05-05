@@ -9,17 +9,22 @@
 
         <div class="form-group">
             <label>Nama Perusahaan</label>
-            <input type="text" name="nama_perusahaan" value="{{ $company->nama_perusahaan }}" class="form-control" required>
+            <input type="text" name="name" class="form-control" required>
         </div>
-
-        <div class="form-group mt-2">
-            <label>Kontak</label>
-            <input type="text" name="kontak" value="{{ $company->kontak }}" class="form-control">
-        </div>
-
+        
         <div class="form-group mt-2">
             <label>Bidang Industri</label>
-            <input type="text" name="bidang_industri" value="{{ $company->bidang_industri }}" class="form-control">
+            <input type="text" name="industry" class="form-control">
+        </div>
+
+        <div class="form-group mt-2">
+            <label>Alamat</label>
+            <input type="text" name="address" class="form-control">
+        </div>
+        
+        <div class="form-group mt-2">
+            <label>Kontak</label>
+            <input type="text" name="contact" class="form-control">
         </div>
 
         <button type="submit" class="btn btn-primary mt-3">Update</button>

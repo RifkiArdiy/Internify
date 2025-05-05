@@ -20,10 +20,7 @@
                             <em class="icon ni ni-card-view"></em>
                         </div>
                         <div class="nk-news-text">
-                            <p>
-                                Do you know the latest update of 2022? <span>A overview of our is now available on YouTube</span>
-                            </p>
-                            <em class="icon ni ni-external"></em>
+                            <h3>Internify</h2>
                         </div>
                     </a>
                 </div>
@@ -122,7 +119,7 @@
                             <div class="dropdown-inner">
                                 <ul class="link-list">
                                     <li>
-                                        <a href="#">
+                                        <a href="{{route('logout')}}">
                                             <em class="icon ni ni-signout"></em>
                                             <span>Sign out</span>
                                         </a>
