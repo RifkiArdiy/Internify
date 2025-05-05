@@ -35,4 +35,9 @@ class Mahasiswa extends Model
     {
         return $this->hasMany(Log::class);
     }
+
+    public function evaluasi()
+    {
+        return $this->hasMany(Evaluasi::class);
+    }
 }

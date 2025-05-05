@@ -82,6 +82,7 @@
     </script>
     @livewireScripts
     @stack('js')
+    @livewireScripts
 </body>
 
 </html>

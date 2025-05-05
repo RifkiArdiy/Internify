@@ -77,8 +77,9 @@
                                     <em class="icon ni ni-user-alt"></em>
                                 </div>
                                 <div class="user-info d-none d-md-block">
-                                    <div class="user-status">Administrator</div>
-                                    <div class="user-name dropdown-indicator">Abu Bin Ishityak</div>
+                                    <div class="user-status">{{ Auth::user()->level->level_nama ?? 'Guest' }}</div>
+                                    <div class="user-name dropdown-indicator">{{ Auth::user()->username ?? 'Guest' }}
+                                    </div>
                                 </div>
                             </div>
                         </a>
@@ -125,7 +126,7 @@
                             <div class="dropdown-inner">
                                 <ul class="link-list">
                                     <li>
-                                        <a href="{{ route('logout') }}">
+                                        <a href="#">
                                             <em class="icon ni ni-signout"></em>
                                             <span>Sign out</span>
                                         </a>

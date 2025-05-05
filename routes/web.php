@@ -9,6 +9,9 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\WelcomeController;
 use App\Models\Mahasiswa;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CompanyController;
+use App\Http\Controllers\MagangApplicationController;
+use App\Models\MagangApplication;
 
 /*
 |--------------------------------------------------------------------------
@@ -59,11 +62,22 @@ Route::middleware(['auth'])->group(function () {
 
     Route::prefix('mahasiswa')->middleware('role:Mahasiswa')->group(function () {
         Route::get('/dashboard', [DashboardController::class, 'indexMahasiswa'])->name('mahasiswa.dashboard');
+
+        Route::get('/lamaran', [MagangApplicationController::class, 'index'])->name('lamaran');
     });
 
     Route::prefix('dosen')->middleware('role:Dosen')->group(function () {
         Route::get('/dashboard', [DashboardController::class, 'indexDosen'])->name('dosen.dashboard');
     });
 
+    Route::prefix('companies')->group(function () {
+        Route::get('/', [CompanyController::class, 'index'])->name('companies.index');
+        Route::get('/create', [CompanyController::class, 'create'])->name('companies.create');
+        Route::post('/store', [CompanyController::class, 'store'])->name('companies.store');
+        Route::get('/{id}', [CompanyController::class, 'show'])->name('companies.show');
+        Route::get('/{id}/edit', [CompanyController::class, 'edit'])->name('companies.edit');
+        Route::put('/{id}', [CompanyController::class, 'update'])->name('companies.update');
+        Route::delete('/{id}', [CompanyController::class, 'destroy'])->name('companies.destroy');
+    });
     Route::get('logout', [AuthController::class, 'logout'])->name('logout');
 });

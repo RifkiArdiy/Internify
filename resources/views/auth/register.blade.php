@@ -50,7 +50,7 @@
                                         </div>
                                     </div>
                                 </div><!-- .nk-block-head -->
-                                <form action="html/pages/auths/auth-login.html">
+                                <form action="login">
                                     <div class="form-group">
                                         <label class="form-label" for="name">Name</label>
                                         <div class="form-control-wrap">
@@ -91,7 +91,7 @@
                                     </div>
                                 </form><!-- form -->
                                 <div class="form-note-s2 pt-4"> Already have an account ? <a
-                                        href="html/pages/auths/auth-login.html"><strong>Sign in instead</strong></a>
+                                        href="{{ route('login') }}"><strong>Sign in instead</strong></a>
                                 </div>
                                 <div class="text-center pt-4 pb-3">
                                     <h6 class="overline-title overline-title-sap"><span>OR</span></h6>

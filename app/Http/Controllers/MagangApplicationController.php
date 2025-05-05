@@ -11,7 +11,7 @@ class MagangApplicationController extends Controller
      */
     public function index()
     {
-        //
+        return view('lamaran.index');
     }
 
     /**
