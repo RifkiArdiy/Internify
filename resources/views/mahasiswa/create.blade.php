@@ -3,7 +3,6 @@
 @section('content')
     <div class="card card-bordered card-preview">
         <div class="card-inner">
-            <h4>Tambah Mahasiswa</h4>
 
             <form method="POST" action="{{ route('mahasiswa.store') }}">
                 @csrf

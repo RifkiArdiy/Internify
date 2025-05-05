@@ -1,4 +1,4 @@
-@if (Auth::user()->level->level_nama == 'admin')
+@if (Auth::user()->level->level_nama == 'Administrator')
     <li class="nk-menu-heading">
         <h6 class="overline-title text-primary-alt">Dashboards</h6>
     </li>
@@ -35,7 +35,7 @@
         <!-- .nk-menu-sub -->
     </li>
 @endif
-@if (Auth::user()->level->level_nama == 'dosen')
+@if (Auth::user()->level->level_nama == 'Dosen')
     <li class="nk-menu-heading">
         <h6 class="overline-title text-primary-alt">Dashboards</h6>
     </li>
@@ -50,7 +50,7 @@
     </li>
     <!-- .nk-menu-item -->
 @endif
-@if (Auth::user()->level->level_nama == 'mahasiswa')
+@if (Auth::user()->level->level_nama == 'Mahasiswa')
     <li class="nk-menu-heading">
         <h6 class="overline-title text-primary-alt">Dashboards</h6>
     </li>

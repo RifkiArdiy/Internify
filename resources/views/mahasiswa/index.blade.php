@@ -1,8 +1,15 @@
 @extends('layouts.app')
 
+@section('action')
+    <li class="nk-block-tools-opt">
+        <a href="{{ route('mahasiswa.create') }}" class="btn btn-primary">
+            <em class="icon ni ni-plus"></em>
+            <span>Tambah Mahasiswa</span>
+        </a>
+    </li>
+@endsection
+
 @section('content')
-    {{-- <a href="{{ route('mahasiswa.create') }}" class="btn btn-primary mb-3">+ Tambah Mahasiswa</a> --}}
-    {{-- @livewire('mahasiswa') --}}
     @if (session('success'))
         <div class="alert alert-success">{{ session('success') }}</div>
     @endif
@@ -67,12 +74,6 @@
                                 <ul class="nk-tb-actions gx-1">
                                     <li class="nk-tb-action-hidden">
                                         <a href="#" class="btn btn-trigger btn-icon" data-bs-toggle="tooltip"
-                                            data-bs-placement="top" title="Wallet">
-                                            <em class="icon ni ni-wallet-fill"></em>
-                                        </a>
-                                    </li>
-                                    <li class="nk-tb-action-hidden">
-                                        <a href="#" class="btn btn-trigger btn-icon" data-bs-toggle="tooltip"
                                             data-bs-placement="top" title="Send Email">
                                             <em class="icon ni ni-mail-fill"></em>
                                         </a>
@@ -105,7 +106,8 @@
                                                                 Pass</span></a></li>
                                                     <li><a href="#"><em class="icon ni ni-shield-off"></em><span>Reset
                                                                 2FA</span></a></li>
-                                                    <li><a href="#"><em class="icon ni ni-na"></em><span>Suspend
+                                                    <li><a href="{{ route('mahasiswa.destroy', $mhs->mahasiswa_id) }}"><em
+                                                                class="icon ni ni-na"></em><span>Hapus
                                                                 User</span></a></li>
                                                 </ul>
                                             </div>
