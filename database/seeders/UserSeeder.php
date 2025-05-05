@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 class UserSeeder extends Seeder
 {
@@ -19,28 +20,32 @@ class UserSeeder extends Seeder
             'level_id' => 1,
             'name' => 'Admin Internify',
             'username' => 'admin',
-            'password' => bcrypt('password'),
+            'email' => 'admin@admin.com',
+            'password' => Hash::make('password'),
         ]);
 
         User::create([
             'level_id' => 2,
-            'name' => 'Student One',
-            'username' => 'student1',
-            'password' => bcrypt('password'),
+            'name' => 'Mahasiswa Satu',
+            'username' => 'mahasiswa1',
+            'email' => 'mahasiswa1@gmail.com',
+            'password' => Hash::make('password'),
         ]);
 
         User::create([
             'level_id' => 2,
-            'name' => 'Student Two',
-            'username' => 'student2',
-            'password' => bcrypt('password'),
+            'name' => 'Mahasiswa Dua',
+            'username' => 'mahasiswa2',
+            'email' => 'mahasiswa2@gmail.com',
+            'password' => Hash::make('password'),
         ]);
 
         User::create([
             'level_id' => 3,
-            'name' => 'Lecturer One',
-            'username' => 'lecturer1',
-            'password' => bcrypt('password'),
+            'name' => 'Dosen Satu',
+            'username' => 'dosen1',
+            'email' => 'dosen1@gmail.com',
+            'password' => Hash::make('password'),
         ]);
     }
 }

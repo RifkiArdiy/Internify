@@ -16,6 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('level_id')->index();
             $table->string('name');
             $table->string('username')->unique();
+            $table->string('email')->unique();
             $table->string('password');
             $table->string('image')->nullable();
             $table->rememberToken();

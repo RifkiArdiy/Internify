@@ -17,7 +17,9 @@ class DosenSeeder extends Seeder
         //
         Dosen::create([
             'user_id' => 4,
-            'nip' => 'NIDN1234'
+            'nip' => 'NIDN1234',
+            'no_telp' => '089543217512',
+            'alamat' => 'Indonesia'
         ]);
     }
 }
