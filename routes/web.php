@@ -10,6 +10,9 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\WelcomeController;
 use App\Models\Mahasiswa;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CompanyController;
+use App\Http\Controllers\MagangApplicationController;
+use App\Models\MagangApplication;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,7 +30,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('login',[AuthController::class,'login'])->name('login');
 Route::get('register',[AuthController::class,'register'])->name('register');
 
-Route::resource('prodi', ProgramStudiController::class);
+
 
 Route::pattern('id', '[0-9]+');
 
@@ -39,27 +42,48 @@ Route::get('/', [WelcomeController::class, 'index'])->name('welcome.index');
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
-    Route::prefix('admin')->middleware('role:admin')->group(function () {
-
+    Route::prefix('admin')->middleware('role:Administrator')->group(function () {
+        Route::resource('prodi', ProgramStudiController::class);
         Route::get('/dashboard', [DashboardController::class, 'indexAdmin'])->name('admin.dashboard');
 
         Route::prefix('mahasiswa')->group(function () {
             Route::get('/', [MahasiswaController::class, 'index'])->name('mahasiswa.index');
             Route::get('/create', [MahasiswaController::class, 'create'])->name('mahasiswa.create');
             Route::post('/store', [MahasiswaController::class, 'store'])->name('mahasiswa.store');
-            Route::get('/edit', [MahasiswaController::class, 'edit'])->name('mahasiswa.edit');
-            Route::put('/update', [MahasiswaController::class, 'update'])->name('mahasiswa.update');
-            Route::get('/delete', [MahasiswaController::class, 'destroy'])->name('mahasiswa.destroy');
+            Route::get('/show/{id}', [MahasiswaController::class, 'show'])->name('mahasiswa.show');
+            Route::get('/edit/{id}', [MahasiswaController::class, 'edit'])->name('mahasiswa.edit');
+            Route::put('/{id}', [MahasiswaController::class, 'update'])->name('mahasiswa.update');
+            Route::get('/{id}', [MahasiswaController::class, 'destroy'])->name('mahasiswa.destroy');
+        });
+
+        Route::prefix('dosen')->group(function () {
+            Route::get('/', [DosenController::class, 'index'])->name('dosen.index');
+            Route::get('/create', [DosenController::class, 'create'])->name('dosen.create');
+            Route::post('/store', [DosenController::class, 'store'])->name('dosen.store');
+            Route::get('/edit/{id}', [DosenController::class, 'edit'])->name('dosen.edit');
+            Route::get('/show/{id}', [DosenController::class, 'show'])->name('dosen.show');
+            Route::put('/{id}', [DosenController::class, 'update'])->name('dosen.update');
+            Route::get('/{id}', [DosenController::class, 'destroy'])->name('dosen.destroy');
         });
     });
 
-    Route::prefix('mahasiswa')->middleware('role:mahasiswa')->group(function () {
+    Route::prefix('mahasiswa')->middleware('role:Mahasiswa')->group(function () {
         Route::get('/dashboard', [DashboardController::class, 'indexMahasiswa'])->name('mahasiswa.dashboard');
+
+        Route::get('/lamaran', [MagangApplicationController::class, 'index'])->name('lamaran');
     });
 
-    Route::prefix('dosen')->middleware('role:dosen')->group(function () {
+    Route::prefix('dosen')->middleware('role:Dosen')->group(function () {
         Route::get('/dashboard', [DashboardController::class, 'indexDosen'])->name('dosen.dashboard');
     });
 
+    Route::prefix('companies')->group(function () {
+        Route::get('/', [CompanyController::class, 'index'])->name('companies.index');
+        Route::get('/create', [CompanyController::class, 'create'])->name('companies.create');
+        Route::post('/store', [CompanyController::class, 'store'])->name('companies.store');
+        Route::get('/{id}/edit', [CompanyController::class, 'edit'])->name('companies.edit');
+        Route::put('/{id}', [CompanyController::class, 'update'])->name('companies.update');
+        Route::delete('/{id}', [CompanyController::class, 'destroy'])->name('companies.destroy');
+    });
     Route::get('logout', [AuthController::class, 'logout'])->name('logout');
 });

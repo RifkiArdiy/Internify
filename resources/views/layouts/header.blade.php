@@ -7,9 +7,11 @@
                 </a>
             </div>
             <div class="nk-header-brand d-xl-none">
-                <a href="html/index.html" class="logo-link">
-                    <img class="logo-light logo-img" src="{{asset('assets/admin/images/logo.png')}}" srcset="images/logo2x.png 2x" alt="logo">
-                    <img class="logo-dark logo-img" src="{{asset('assets/admin/images/logo-dark.png')}}" srcset="{{asset('assets/admin/images/logo-dark2x.png 2x')}}" alt="logo-dark">
+                <a href="{{ route('welcome.index') }}" class="logo-link">
+                    <img class="logo-light logo-img" src="{{ asset('assets/admin/images/logo.png') }}"
+                        srcset="{{ asset('assets/admin/images/logo2x.png') }}" alt="logo">
+                    <img class="logo-dark logo-img" src="{{ asset('assets/admin/images/logo-dark.png') }}"
+                        srcset="{{ asset('assets/admin/images/logo-dark2x.png') }}" alt="logo-dark">
                 </a>
             </div>
             <!-- .nk-header-brand -->
@@ -21,7 +23,8 @@
                         </div>
                         <div class="nk-news-text">
                             <p>
-                                Do you know the latest update of 2022? <span>A overview of our is now available on YouTube</span>
+                                Do you know the latest update of 2022? <span>A overview of our is now available on
+                                    YouTube</span>
                             </p>
                             <em class="icon ni ni-external"></em>
                         </div>
@@ -74,8 +77,9 @@
                                     <em class="icon ni ni-user-alt"></em>
                                 </div>
                                 <div class="user-info d-none d-md-block">
-                                    <div class="user-status">Administrator</div>
-                                    <div class="user-name dropdown-indicator">Abu Bin Ishityak</div>
+                                    <div class="user-status">{{ Auth::user()->level->level_nama ?? 'Guest' }}</div>
+                                    <div class="user-name dropdown-indicator">{{ Auth::user()->name ?? 'Guest' }}
+                                    </div>
                                 </div>
                             </div>
                         </a>

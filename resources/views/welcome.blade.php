@@ -26,7 +26,7 @@
                     <div class="container header-container">
                         <div class="header-wrap">
                             <div class="header-logo">
-                                <a href="html/index.html" class="logo-link">
+                                <a href="{{ route('welcome.index') }}" class="logo-link">
                                     <img class="logo-light logo-img" src="{{ asset('assets/home/images/logo.png') }}"
                                         srcset="{{ asset('assets/home/images/logo2x.png 2x') }}" alt="logo">
                                     <img class="logo-dark logo-img"
@@ -58,11 +58,75 @@
                                     <li class="menu-item">
                                         <a href="#reviews" class="menu-link nav-link">Reviews</a>
                                     </li>
+
                                 </ul>
                                 <ul class="menu-btns">
                                     <li>
-                                        <a href="https://1.envato.market/e0y3g" target="_blank"
-                                            class="btn btn-primary btn-lg">Download App</a>
+                                        @auth
+                                            <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown">
+                                                <div class="user-toggle">
+                                                    <div class="user-info d-none d-md-block">
+                                                        {{-- <div class="user-status">Administrator</div> --}}
+                                                        <div class="user-name">
+                                                            Hi..!! {{ Auth::user()->name }}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                            <div class="dropdown-menu dropdown-menu-md dropdown-menu-end dropdown-menu-s1">
+                                                <div class="dropdown-inner user-card-wrap bg-lighter d-none d-md-block">
+                                                    <div class="user-card">
+                                                        <div class="user-avatar">
+                                                            <span>AB</span>
+                                                        </div>
+                                                        <div class="user-info">
+                                                            <span class="lead-text">Abu Bin Ishtiyak</span>
+                                                            <span class="sub-text">info@softnio.com</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="dropdown-inner">
+                                                    <ul class="link-list">
+                                                        <li>
+                                                            <a href="html/user-profile-regular.html">
+                                                                <em class="icon ni ni-user-alt"></em>
+                                                                <span>View Profile</span>
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="html/user-profile-setting.html">
+                                                                <em class="icon ni ni-setting-alt"></em>
+                                                                <span>Account Setting</span>
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="html/user-profile-activity.html">
+                                                                <em class="icon ni ni-activity-alt"></em>
+                                                                <span>Login Activity</span>
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a class="dark-switch" href="#">
+                                                                <em class="icon ni ni-moon"></em>
+                                                                <span>Dark Mode</span>
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div class="dropdown-inner">
+                                                    <ul class="link-list">
+                                                        <li>
+                                                            <a href="{{ route('logout') }}">
+                                                                <em class="icon ni ni-signout"></em>
+                                                                <span>Sign out</span>
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            @else
+                                                <a href="{{ route('login') }}" target="_blank"
+                                                    class="btn btn-primary btn-lg">Masuk</a>
+                                            @endauth
                                     </li>
                                 </ul>
                             </nav>
