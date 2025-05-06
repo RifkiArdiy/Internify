@@ -1,5 +1,5 @@
 
-    @extends('layouts.app')
+@extends('layouts.app')
 
 @section('content')
     @if (session('success'))
@@ -7,23 +7,27 @@
     @endif
 
 
-    <a href="{{ route('prodi.create') }}"> Tambah</a>
+    <a href="{{ route('periodeMagang.create') }}"> Tambah</a>
     <table border="1">
         <thead>
             <tr>
                 <th>ID</th>
-                <th>Nama Program Studi</th>
+                <th>Nama Periode Magang</th>
+                <th>Masa Awal</th>
+                <th>Masa Akhir</th>
                 <th>Aksi</th>
             </tr>
         </thead>
         <tbody>
-            @foreach($prodi as $item)
+            @foreach($pegang as $item)
             <tr>
-                <td>{{ $item->prodi_id }}</td>
+                <td>{{ $item->period_id }}</td>
                 <td>{{ $item->name }}</td>
+                <td>{{ $item->start_date }}</td>
+                <td>{{ $item->end_date }}</td>
                 <td>
-                    <a href="{{ route('prodi.edit', $item->prodi_id) }}">Edit</a> |
-                    <form action="{{ route('prodi.destroy', $item->prodi_id) }}" method="POST" style="display:inline;">
+                    <a href="{{ route('periodeMagang.edit', $item->period_id) }}">Edit</a> |
+                    <form action="{{ route('periodeMagang.destroy', $item->period_id) }}" method="POST" style="display:inline;">
                         @csrf
                         @method('DELETE')
                         <button type="submit" onclick="return confirm('Yakin ingin menghapus?')">Delete</button>

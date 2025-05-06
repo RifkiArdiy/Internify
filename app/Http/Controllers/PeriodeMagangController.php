@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\PeriodeMagang;
 use Illuminate\Http\Request;
 
 class PeriodeMagangController extends Controller
@@ -11,7 +12,8 @@ class PeriodeMagangController extends Controller
      */
     public function index()
     {
-        //
+        $pegang = PeriodeMagang::all();
+        return view('periodeMagang.index', compact('pegang'));
     }
 
     /**
@@ -19,7 +21,7 @@ class PeriodeMagangController extends Controller
      */
     public function create()
     {
-        //
+        return view('periodeMagang.create');
     }
 
     /**
@@ -27,7 +29,13 @@ class PeriodeMagangController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        PeriodeMagang::create([
+            'name' => $request->name,
+            'start_date' => $request->masaAwal,
+            'end_date' => $request->masaAkhir,
+        ]);
+
+        return redirect()->route('periodeMagang.index')->with('success', 'Data periode diperbarui.');
     }
 
     /**
@@ -43,7 +51,8 @@ class PeriodeMagangController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $pegang = PeriodeMagang::find($id);
+        return view('periodeMagang.edit', compact('pegang'));
     }
 
     /**
@@ -51,7 +60,15 @@ class PeriodeMagangController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $pegang = PeriodeMagang::find($id);
+        $pegang->update([
+            'name' => $request->name,
+            'start_date' => $request->masaAwal,
+            'end_date' => $request->masaAkhir,
+        ]);
+
+        return redirect()->route('periodeMagang.index')->with('success', 'Data periode diperbarui.');
+
     }
 
     /**
@@ -59,6 +76,10 @@ class PeriodeMagangController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $pegang = PeriodeMagang::findOrFail($id);
+        $pegang->delete();
+
+        return redirect()->route('periodeMagang.index')->with('success', 'Periode berhasil dihapus.');
+
     }
 }

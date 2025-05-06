@@ -10,7 +10,6 @@
         <a href="#" class="btn btn-icon btn-trigger toggle-expand me-n1" data-target="pageMenu">
             <em class="icon ni ni-more-v"></em>
         </a>
-        <a href="{{ route('mahasiswa.create') }}" class="btn btn-primary mb-3">+ Tambah Mahasiswa</a>
         {{-- <div class="toggle-expand-content" data-content="pageMenu">
             <ul class="nk-block-tools g-3">
                 <li>

@@ -6,6 +6,8 @@
     @endif
     <div class="card card-bordered card-preview">
         <div class="card-inner">
+            <a href="{{ route('companies.create') }}" class="btn btn-primary mb-3">+ Tambah Perusahaan</a>
+
             <table class="datatable-init-export nowrap nk-tb-list nk-tb-ulist" data-auto-responsive="false">
                 <thead>
                     <tr class="nk-tb-item nk-tb-head">

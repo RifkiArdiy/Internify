@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\MagangApplication;
+use App\Models\Mahasiswa;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class MagangApplicationController extends Controller
 {
@@ -11,7 +14,11 @@ class MagangApplicationController extends Controller
      */
     public function index()
     {
-        return view('lamaran.index');
+        // $id = Auth::user()->user_id;
+        // $m_id = Mahasiswa::get('mahasiswa_id')->where('user_id', $id);
+        // $magangs = MagangApplication::where('mahasiswa_id', $m_id);
+        $magangs = MagangApplication::all();
+        return view('magangApplication.index', compact('magangs'));
     }
 
     /**

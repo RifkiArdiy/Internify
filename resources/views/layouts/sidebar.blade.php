@@ -59,6 +59,18 @@
                             <!-- .nk-menu-sub -->
                         </li>
                         <li class="nk-menu-item">
+                            <a href="{{ route('prodi.index') }}" class="nk-menu-link">Program Studi</a>
+                        </li>
+                        <li class="nk-menu-item">
+                            <a href="{{ route('lowonganMagang.index') }}" class="nk-menu-link">Lowongan Magang</a>
+                        </li>
+                        <li class="nk-menu-item">
+                            <a href="{{ route('periodeMagang.index') }}" class="nk-menu-link">Periode Magang</a>
+                        </li>
+                        <li class="nk-menu-item">
+                            <a href="{{ route('magangApplication.index') }}" class="nk-menu-link">Lamaran Magang</a>
+                        </li>
+                        <li class="nk-menu-item">
                             <a href="{{ route('companies.index') }}" class="nk-menu-link">
                                 <span class="nk-menu-icon">
                                     <em class="icon ni ni-building"></em>

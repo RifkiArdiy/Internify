@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
+use function Laravel\Prompts\alert;
+
 class AuthController extends Controller
 {
     public function login()
@@ -24,12 +26,38 @@ class AuthController extends Controller
         return view('auth.register');
     }
 
+    public function postRegister(Request $request) {
+        $rules = [
+            // 'level_id' => 'required|exists:m_level,level_id',
+            'username' => 'required|string|unique:users,username',
+            'name' => 'required|string|max:100',
+            'password' => 'required|confirmed',
+        ];
+
+        $validator = Validator::make($request->all(), $rules);
+
+        if ($validator->fails()) {
+            return alert('Validasi gagal');
+        }
+
+        $user = User::create([
+            'level_id' => 1,
+            'username' => $request->username,
+            'name' => $request->name,
+            'password' => Hash::make($request->password),
+        ]);
+
+        return redirect('/login');
+
+
+    }
+
     public function postLogin(Request $request)
     {
         $credentials = $request->only('username', 'password');
 
         if (
-            Auth::attempt(['email' => $credentials['username'], 'password' => $credentials['password']]) ||
+            // Auth::attempt(['email' => $credentials['username'], 'password' => $credentials['password']]) ||
             Auth::attempt(['username' => $credentials['username'], 'password' => $credentials['password']])
         ) {
 

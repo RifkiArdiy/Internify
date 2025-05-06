@@ -79,9 +79,9 @@ class ProgramStudiController extends Controller
     {
         try {
             ProgramStudi::destroy($id);
-            return redirect('/prodi')->with('success', 'Data level berhasil dihapus');
+            return redirect('/prodi')->with('success', 'Data prodi berhasil dihapus');
         } catch (\Illuminate\Database\QueryException $e) {
-            return redirect('/prodi')->with('error', 'Data level gagal dihapus karena masih terdapat tabel lain yang terkait dengan data ini');
+            return redirect('/prodi')->with('error', 'Data prodi gagal dihapus karena masih terdapat tabel lain yang terkait dengan data ini');
         }
 
     }

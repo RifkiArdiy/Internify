@@ -11,7 +11,9 @@ use App\Http\Controllers\WelcomeController;
 use App\Models\Mahasiswa;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CompanyController;
+use App\Http\Controllers\LowonganMagangController;
 use App\Http\Controllers\MagangApplicationController;
+use App\Http\Controllers\PeriodeMagangController;
 use App\Models\MagangApplication;
 
 /*
@@ -31,12 +33,16 @@ Route::get('login',[AuthController::class,'login'])->name('login');
 Route::get('register',[AuthController::class,'register'])->name('register');
 
 Route::resource('prodi', ProgramStudiController::class);
+Route::resource('lowonganMagang', LowonganMagangController::class);
+Route::resource('periodeMagang', PeriodeMagangController::class);
+Route::resource('magangApplication', MagangApplicationController::class);
 
 Route::pattern('id', '[0-9]+');
 
 Route::get('login', [AuthController::class, 'login'])->name('login');
 Route::post('login', [AuthController::class, 'postLogin'])->name('postLogin');
 Route::get('register', [AuthController::class, 'register'])->name('register');
+Route::post('register', [AuthController::class, 'postRegister']);
 Route::get('/', [WelcomeController::class, 'index'])->name('welcome.index');
 
 Route::middleware(['auth'])->group(function () {

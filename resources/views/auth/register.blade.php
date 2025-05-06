@@ -50,18 +50,19 @@
                                         </div>
                                     </div>
                                 </div><!-- .nk-block-head -->
-                                <form action="login">
+                                <form action="{{ url('register') }}" method="POST">
+                                    @csrf
                                     <div class="form-group">
                                         <label class="form-label" for="name">Name</label>
                                         <div class="form-control-wrap">
-                                            <input type="text" class="form-control form-control-lg" id="name"
+                                            <input type="text" class="form-control form-control-lg" id="name" name="name"
                                                 placeholder="Enter your name">
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="form-label" for="email">Email or Username</label>
                                         <div class="form-control-wrap">
-                                            <input type="text" class="form-control form-control-lg" id="email"
+                                            <input type="text" class="form-control form-control-lg" id="username" name="username"
                                                 placeholder="Enter your email address or username">
                                         </div>
                                     </div>
@@ -74,8 +75,21 @@
                                                 <em class="passcode-icon icon-show icon ni ni-eye"></em>
                                                 <em class="passcode-icon icon-hide icon ni ni-eye-off"></em>
                                             </a>
-                                            <input type="password" class="form-control form-control-lg" id="password"
+                                            <input type="password" class="form-control form-control-lg" id="password" name="password"
                                                 placeholder="Enter your passcode">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label" for="password_confirmation">Confirm Passcode</label>
+                                        <div class="form-control-wrap">
+                                            <a tabindex="-1" href="#"
+                                            class="form-icon form-icon-right passcode-switch lg"
+                                            data-target="password_confirmation">
+                                            <em class="passcode-icon icon-show icon ni ni-eye"></em>
+                                            <em class="passcode-icon icon-hide icon ni ni-eye-off"></em>
+                                        </a>
+
+                                            <input type="password" class="form-control form-control-lg" id="password_confirmation" name="password_confirmation" placeholder="Confirm your passcode">
                                         </div>
                                     </div>
                                     <div class="form-group">
