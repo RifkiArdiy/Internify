@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ProgramStudi;
 use Illuminate\Http\Request;
 
 class ProgramStudiController extends Controller
@@ -11,7 +12,9 @@ class ProgramStudiController extends Controller
      */
     public function index()
     {
-        //
+        $prodi = ProgramStudi::all();
+
+        return view('prodi.index', compact('prodi'));
     }
 
     /**
@@ -19,7 +22,7 @@ class ProgramStudiController extends Controller
      */
     public function create()
     {
-        //
+        return view('prodi.create');
     }
 
     /**
@@ -27,7 +30,12 @@ class ProgramStudiController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        ProgramStudi::create([
+            'name' => $request->name
+        ]);
+
+        return redirect('/prodi/');
+
     }
 
     /**
@@ -43,7 +51,10 @@ class ProgramStudiController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $prodi = ProgramStudi::find($id);
+
+        return view('prodi.edit', compact('prodi'));
+
     }
 
     /**
@@ -51,7 +62,14 @@ class ProgramStudiController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $level = ProgramStudi::find($id);
+
+        $level->update([
+            'name' => $request->name
+        ]);
+
+        return redirect('/prodi/');
+
     }
 
     /**
@@ -59,6 +77,12 @@ class ProgramStudiController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        try {
+            ProgramStudi::destroy($id);
+            return redirect('/prodi')->with('success', 'Data level berhasil dihapus');
+        } catch (\Illuminate\Database\QueryException $e) {
+            return redirect('/prodi')->with('error', 'Data level gagal dihapus karena masih terdapat tabel lain yang terkait dengan data ini');
+        }
+
     }
 }
