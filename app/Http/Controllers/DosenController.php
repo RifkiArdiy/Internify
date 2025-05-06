@@ -29,7 +29,11 @@ class DosenController extends Controller
     public function create()
     {
         //
-        return view('dosen.create');
+        $breadcrumb = (object) [
+            'title' => 'Tambah Dosen',
+            'subtitle' => ['Form Validation']
+        ];
+        return view('dosen.create', compact('breadcrumb'));
     }
 
     /**

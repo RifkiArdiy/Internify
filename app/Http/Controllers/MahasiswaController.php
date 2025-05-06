@@ -32,7 +32,11 @@ class MahasiswaController extends Controller
     {
         //
         $prodis = ProgramStudi::all();
-        return view('mahasiswa.create', compact('prodis'));
+        $breadcrumb = (object) [
+            'title' => 'Tambah Mahasiswa',
+            'subtitle' => ['Form Validation']
+        ];
+        return view('mahasiswa.create', compact('prodis', 'breadcrumb'));
     }
 
     /**

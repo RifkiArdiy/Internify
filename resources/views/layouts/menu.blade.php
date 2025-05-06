@@ -34,6 +34,14 @@
         </a>
         <!-- .nk-menu-sub -->
     </li>
+    <li class="nk-menu-item">
+        <a href="{{ route('companies.index') }}" class="nk-menu-link">
+            <span class="nk-menu-icon">
+                <em class="icon ni ni-building"></em>
+            </span>
+            <span class="nk-menu-text">Companies</span>
+        </a>
+    </li>
 @endif
 @if (Auth::user()->level->level_nama == 'Dosen')
     <li class="nk-menu-heading">

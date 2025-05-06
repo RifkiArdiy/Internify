@@ -10,12 +10,20 @@ class CompanyController extends Controller
     public function index()
     {
         $companies = Company::all();
-        return view('company.index', compact('companies'));
+        $breadcrumb = (object) [
+            'title' => 'Company',
+            'subtitle' => ['Welcome to Dashboard Internify']
+        ];
+        return view('company.index', compact('companies', 'breadcrumb'));
     }
 
     public function create()
     {
-        return view('company.create');
+        $breadcrumb = (object) [
+            'title' => 'Tambah Company',
+            'subtitle' => ['Form Validation']
+        ];
+        return view('company.create', compact('breadcrumb'));
     }
 
     public function store(Request $request)

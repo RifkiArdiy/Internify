@@ -78,7 +78,7 @@
                                 </div>
                                 <div class="user-info d-none d-md-block">
                                     <div class="user-status">{{ Auth::user()->level->level_nama ?? 'Guest' }}</div>
-                                    <div class="user-name dropdown-indicator">{{ Auth::user()->username ?? 'Guest' }}
+                                    <div class="user-name dropdown-indicator">{{ Auth::user()->name ?? 'Guest' }}
                                     </div>
                                 </div>
                             </div>
