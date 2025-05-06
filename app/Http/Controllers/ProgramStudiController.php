@@ -13,8 +13,11 @@ class ProgramStudiController extends Controller
     public function index()
     {
         $prodi = ProgramStudi::all();
-
-        return view('prodi.index', compact('prodi'));
+        $breadcrumb = (object) [
+            'title' => 'Prodi',
+            'subtitle' => ['Welcome to Dashboard Internify']
+        ];
+        return view('prodi.index', compact('prodi','breadcrumb'));
     }
 
     /**
@@ -22,7 +25,11 @@ class ProgramStudiController extends Controller
      */
     public function create()
     {
-        return view('prodi.create');
+        $breadcrumb = (object) [
+            'title' => 'Tambah Program Studi',
+            'subtitle' => ['Form Validation']
+        ];
+        return view('prodi.create',compact('breadcrumb'));
     }
 
     /**
@@ -34,8 +41,7 @@ class ProgramStudiController extends Controller
             'name' => $request->name
         ]);
 
-        return redirect('/prodi/');
-
+        return redirect()->route('prodi.index')->with('success', 'Data program studi berhasil ditambahkan');
     }
 
     /**
@@ -52,8 +58,11 @@ class ProgramStudiController extends Controller
     public function edit(string $id)
     {
         $prodi = ProgramStudi::find($id);
-
-        return view('prodi.edit', compact('prodi'));
+        $breadcrumb = (object) [
+            'title' => 'Edit Program Studi',
+            'subtitle' => ['Form Validation']
+        ];
+        return view('prodi.edit', compact('prodi','breadcrumb'));
 
     }
 
@@ -62,14 +71,12 @@ class ProgramStudiController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $level = ProgramStudi::find($id);
-
-        $level->update([
+        $prodi = ProgramStudi::find($id);
+        $prodi->update([
             'name' => $request->name
         ]);
 
-        return redirect('/prodi/');
-
+        return redirect()->route('prodi.index')->with('success', 'Data program studi berhasil diubah');
     }
 
     /**
@@ -79,10 +86,9 @@ class ProgramStudiController extends Controller
     {
         try {
             ProgramStudi::destroy($id);
-            return redirect('/prodi')->with('success', 'Data level berhasil dihapus');
+            return redirect()->route('prodi.index')->with('success', 'Data program studi berhasil dihapus');
         } catch (\Illuminate\Database\QueryException $e) {
-            return redirect('/prodi')->with('error', 'Data level gagal dihapus karena masih terdapat tabel lain yang terkait dengan data ini');
+            return redirect()->route('prodi.index')->with('error', 'Data program studi gagal dihapus karena masih digunakan');
         }
-
     }
 }

@@ -38,8 +38,17 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     Route::prefix('admin')->middleware('role:Administrator')->group(function () {
-
         Route::get('/dashboard', [DashboardController::class, 'indexAdmin'])->name('admin.dashboard');
+
+        Route::prefix('prodi')->group(function () {
+            Route::get('/', [ProgramStudiController::class, 'index'])->name('prodi.index');
+            Route::get('/create', [ProgramStudiController::class, 'create'])->name('prodi.create');
+            Route::post('/store', [ProgramStudiController::class, 'store'])->name('prodi.store');
+            Route::get('/show/{id}', [ProgramStudiController::class, 'show'])->name('prodi.show');
+            Route::get('/edit/{id}', [ProgramStudiController::class, 'edit'])->name('prodi.edit');
+            Route::put('/{id}', [ProgramStudiController::class, 'update'])->name('prodi.update');
+            Route::get('/{id}', [ProgramStudiController::class, 'destroy'])->name('prodi.destroy');
+        });
 
         Route::prefix('mahasiswa')->group(function () {
             Route::get('/', [MahasiswaController::class, 'index'])->name('mahasiswa.index');
