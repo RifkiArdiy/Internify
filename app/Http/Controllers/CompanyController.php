@@ -45,12 +45,6 @@ class CompanyController extends Controller
         return redirect()->route('companies.index')->with('success', 'Perusahaan berhasil ditambahkan.');
     }
 
-    public function show(string $id)
-    {
-        $company = Company::findOrFail($id);
-        return view('company.show', compact('company'));
-    }
-
     public function edit(string $id)
     {
         $company = Company::findOrFail($id);

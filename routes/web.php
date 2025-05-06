@@ -30,7 +30,7 @@ use App\Models\MagangApplication;
 Route::get('login',[AuthController::class,'login'])->name('login');
 Route::get('register',[AuthController::class,'register'])->name('register');
 
-Route::resource('prodi', ProgramStudiController::class);
+
 
 Route::pattern('id', '[0-9]+');
 
@@ -43,7 +43,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     Route::prefix('admin')->middleware('role:Administrator')->group(function () {
-
+        Route::resource('prodi', ProgramStudiController::class);
         Route::get('/dashboard', [DashboardController::class, 'indexAdmin'])->name('admin.dashboard');
 
         Route::prefix('mahasiswa')->group(function () {
@@ -81,7 +81,6 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/', [CompanyController::class, 'index'])->name('companies.index');
         Route::get('/create', [CompanyController::class, 'create'])->name('companies.create');
         Route::post('/store', [CompanyController::class, 'store'])->name('companies.store');
-        Route::get('/{id}', [CompanyController::class, 'show'])->name('companies.show');
         Route::get('/{id}/edit', [CompanyController::class, 'edit'])->name('companies.edit');
         Route::put('/{id}', [CompanyController::class, 'update'])->name('companies.update');
         Route::delete('/{id}', [CompanyController::class, 'destroy'])->name('companies.destroy');

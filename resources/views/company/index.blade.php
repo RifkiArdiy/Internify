@@ -4,7 +4,7 @@
     <li class="nk-block-tools-opt">
         <a href="{{ route('companies.create') }}" class="btn btn-primary">
             <em class="icon ni ni-plus"></em>
-            <span>Tambah Industri</span>
+            <span>Tambah Mitra</span>
         </a>
     </li>
 @endsection
@@ -62,13 +62,6 @@
                             </td>
                             <td class="nk-tb-col nk-tb-col-tools">
                                 <ul class="nk-tb-actions gx-1">
-                                    <li>
-                                        <a href="{{ route('companies.show', $company->company_id) }}"
-                                            class="btn btn-trigger btn-icon" data-bs-toggle="tooltip"
-                                            data-bs-placement="top" title="Detail">
-                                            <em class="icon ni ni-eye"></em>
-                                        </a>
-                                    </li>
                                     <li>
                                         <a href="{{ route('companies.edit', $company->company_id) }}"
                                             class="btn btn-trigger btn-icon" data-bs-toggle="tooltip"

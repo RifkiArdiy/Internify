@@ -13,8 +13,11 @@ class ProgramStudiController extends Controller
     public function index()
     {
         $prodi = ProgramStudi::all();
-
-        return view('prodi.index', compact('prodi'));
+        $breadcrumb = (object) [
+            'title' => 'Prodi',
+            'subtitle' => ['Welcome to Dashboard Internify']
+        ];
+        return view('prodi.index', compact('prodi','breadcrumb'));
     }
 
     /**
