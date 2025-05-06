@@ -3,8 +3,17 @@
 @section('content')
     <div class="card card-bordered card-preview">
         <div class="card-inner">
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
 
-            <form method="POST" action="{{ route('mahasiswa.store') }}">
+            <form method="POST" action="{{ route('dosen.store') }}">
                 @csrf
 
                 <div class="mb-3">
@@ -28,8 +37,8 @@
                 </div>
 
                 <div class="mb-3">
-                    <label>NIM</label>
-                    <input type="text" name="nim" class="form-control" value="" required>
+                    <label>NIP</label>
+                    <input type="text" name="nip" class="form-control" value="" required>
                 </div>
 
                 <div class="mb-3">
@@ -42,18 +51,8 @@
                     <input type="text" name="alamat" class="form-control" value="" required>
                 </div>
 
-                <div class="mb-3">
-                    <label>Jurusan</label>
-                    <select name="prodi_id" class="form-control" required>
-                        <option value="">-- Pilih Jurusan --</option>
-                        @foreach ($prodis as $prodi)
-                            <option value="{{ $prodi->prodi_id }}">{{ $prodi->name }}</option>
-                        @endforeach
-                    </select>
-                </div>
-
                 <button class="btn btn-primary">Simpan</button>
-                <a href="{{ route('mahasiswa.index') }}" class="btn btn-secondary">Kembali</a>
+                <a href="{{ route('dosen.index') }}" class="btn btn-secondary">Kembali</a>
             </form>
         </div>
     </div>

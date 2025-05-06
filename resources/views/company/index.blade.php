@@ -1,5 +1,14 @@
 @extends('layouts.app')
 
+@section('action')
+    <li class="nk-block-tools-opt">
+        <a href="{{ route('companies.create') }}" class="btn btn-primary">
+            <em class="icon ni ni-plus"></em>
+            <span>Tambah Industri</span>
+        </a>
+    </li>
+@endsection
+
 @section('content')
     @if (session('success'))
         <div class="alert alert-success">{{ session('success') }}</div>
@@ -39,7 +48,8 @@
                                         <img src="{{ asset('assets/home/images/team/a.jpg') }}" alt="company-logo">
                                     </div>
                                     <div class="user-info">
-                                        <span class="tb-lead">{{ $company->name }}<span class="dot dot-success d-md-none ms-1"></span></span>
+                                        <span class="tb-lead">{{ $company->name }}<span
+                                                class="dot dot-success d-md-none ms-1"></span></span>
                                     </div>
                                 </div>
                             </td>
@@ -55,20 +65,27 @@
                             <td class="nk-tb-col nk-tb-col-tools">
                                 <ul class="nk-tb-actions gx-1">
                                     <li>
-                                        <a href="{{ route('companies.show', $company->company_id) }}" class="btn btn-trigger btn-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Detail">
+                                        <a href="{{ route('companies.show', $company->company_id) }}"
+                                            class="btn btn-trigger btn-icon" data-bs-toggle="tooltip"
+                                            data-bs-placement="top" title="Detail">
                                             <em class="icon ni ni-eye"></em>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="{{ route('companies.edit', $company->company_id) }}" class="btn btn-trigger btn-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit">
+                                        <a href="{{ route('companies.edit', $company->company_id) }}"
+                                            class="btn btn-trigger btn-icon" data-bs-toggle="tooltip"
+                                            data-bs-placement="top" title="Edit">
                                             <em class="icon ni ni-repeat"></em>
                                         </a>
                                     </li>
                                     <li>
-                                        <form action="{{ route('companies.destroy', $company->company_id) }}" method="POST" class="d-inline" onsubmit="return confirm('Yakin ingin menghapus perusahaan ini?')">
+                                        <form action="{{ route('companies.destroy', $company->company_id) }}"
+                                            method="POST" class="d-inline"
+                                            onsubmit="return confirm('Yakin ingin menghapus perusahaan ini?')">
                                             @csrf
                                             @method('DELETE')
-                                            <button class="btn btn-trigger btn-icon btn-danger" data-bs-toggle="tooltip" data-bs-placement="top" title="Hapus">
+                                            <button class="btn btn-trigger btn-icon btn-danger" data-bs-toggle="tooltip"
+                                                data-bs-placement="top" title="Hapus">
                                                 <em class="icon ni ni-trash"></em>
                                             </button>
                                         </form>

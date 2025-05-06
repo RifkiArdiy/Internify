@@ -2,9 +2,9 @@
 
 @section('action')
     <li class="nk-block-tools-opt">
-        <a href="{{ route('mahasiswa.create') }}" class="btn btn-primary">
+        <a href="{{ route('dosen.create') }}" class="btn btn-primary">
             <em class="icon ni ni-plus"></em>
-            <span>Tambah Mahasiswa</span>
+            <span>Tambah Dosen</span>
         </a>
     </li>
 @endsection
@@ -15,8 +15,6 @@
     @endif
     <div class="card card-bordered card-preview">
         <div class="card-inner">
-            <a href="{{ route('mahasiswa.create') }}" class="btn btn-primary mb-3">+ Tambah Mahasiswa</a>
-
             <table class="datatable-init-export nowrap nk-tb-list nk-tb-ulist" data-auto-responsive="false">
                 <thead>
                     <tr class="nk-tb-item nk-tb-head">
@@ -27,7 +25,7 @@
                             </div>
                         </th>
                         <th class="nk-tb-col"><span class="sub-text">User</span></th>
-                        <th class="nk-tb-col tb-col-mb"><span class="sub-text">Nim</span></th>
+                        <th class="nk-tb-col tb-col-mb"><span class="sub-text">NIP</span></th>
                         <th class="nk-tb-col tb-col-md"><span class="sub-text">Phone</span></th>
                         <th class="nk-tb-col tb-col-lg"><span class="sub-text">Jurusan</span></th>
                         <th class="nk-tb-col tb-col-lg"><span class="sub-text">Last Login</span></th>
@@ -37,7 +35,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($mahasiswas as $mhs)
+                    @foreach ($dosens as $dosen)
                         <tr class="nk-tb-item">
                             <td class="nk-tb-col nk-tb-col-check">
                                 <div class="custom-control custom-control-sm custom-checkbox notext">
@@ -51,20 +49,20 @@
                                         <img src="{{ asset('assets/home/images/team/a.jpg') }}" alt="">
                                     </div>
                                     <div class="user-info">
-                                        <span class="tb-lead">{{ $mhs->user->name }}<span
+                                        <span class="tb-lead">{{ $dosen->user->name }}<span
                                                 class="dot dot-success d-md-none ms-1"></span></span>
-                                        <span>{{ $mhs->user->email }}</span>
+                                        <span>{{ $dosen->user->email }}</span>
                                     </div>
                                 </div>
                             </td>
                             <td class="nk-tb-col tb-col-mb">
-                                <span class="tb-amount">{{ $mhs->nim }}</span>
+                                <span class="tb-amount">{{ $dosen->nip }}</span>
                             </td>
                             <td class="nk-tb-col tb-col-md">
-                                <span>{{ $mhs->no_telp }}</span>
+                                <span>{{ $dosen->no_telp }}</span>
                             </td>
                             <td class="nk-tb-col tb-col-lg" data-order="Email Submited - Kyc More Info">
-                                <span class="tb-amount">{{ $mhs->prodi->name }}</span>
+                                <span class="tb-amount">{{ $dosen->alamat }}</span>
                             </td>
                             <td class="nk-tb-col tb-col-lg">
                                 <span>18 Jan 2020</span>
@@ -74,6 +72,12 @@
                             </td>
                             <td class="nk-tb-col nk-tb-col-tools">
                                 <ul class="nk-tb-actions gx-1">
+                                    <li class="nk-tb-action-hidden">
+                                        <a href="#" class="btn btn-trigger btn-icon" data-bs-toggle="tooltip"
+                                            data-bs-placement="top" title="Wallet">
+                                            <em class="icon ni ni-wallet-fill"></em>
+                                        </a>
+                                    </li>
                                     <li class="nk-tb-action-hidden">
                                         <a href="#" class="btn btn-trigger btn-icon" data-bs-toggle="tooltip"
                                             data-bs-placement="top" title="Send Email">
@@ -96,7 +100,7 @@
                                                                 View</span></a></li>
                                                     <li><a href="#"><em class="icon ni ni-eye"></em><span>View
                                                                 Details</span></a></li>
-                                                    <li><a href="{{ route('mahasiswa.edit', $mhs->mahasiswa_id) }}"><em
+                                                    <li><a href="{{ route('dosen.edit', $dosen->dosen_id) }}"><em
                                                                 class="icon ni ni-repeat"></em><span>Edit</span></a>
                                                     </li>
                                                     <li><a href="#"><em
@@ -108,7 +112,7 @@
                                                                 Pass</span></a></li>
                                                     <li><a href="#"><em class="icon ni ni-shield-off"></em><span>Reset
                                                                 2FA</span></a></li>
-                                                    <li><a href="{{ route('mahasiswa.destroy', $mhs->mahasiswa_id) }}"><em
+                                                    <li><a href="{{ route('dosen.destroy', $dosen->dosen_id) }}"><em
                                                                 class="icon ni ni-na"></em><span>Hapus
                                                                 User</span></a></li>
                                                 </ul>
@@ -124,36 +128,3 @@
         </div>
     </div>
 @endsection
-{{-- <table class="table table-bordered">
-        <thead class="table-light">
-            <tr>
-                <th>Nama</th>
-                <th>Username</th>
-                <th>NIM</th>
-                <th>Jurusan</th>
-                <th>Aksi</th>
-            </tr>
-        </thead>
-        <tbody>
-            @forelse($mahasiswas as $mahasiswa)
-                <tr>
-                    <td>{{ $mahasiswa->user->name }}</td>
-                    <td>{{ $mahasiswa->user->username }}</td>
-                    <td>{{ $mahasiswa->nim }}</td>
-                    <td>{{ $mahasiswa->prodi->name }}</td>
-                    <td>
-                        <a href="{{ route('mahasiswa.edit', $mahasiswa->id) }}" class="btn btn-sm btn-warning">Edit</a>
-                        <form action="{{ route('mahasiswa.destroy', $mahasiswa->id) }}" method="POST" class="d-inline"
-                            onsubmit="return confirm('Yakin ingin menghapus?')">
-                            @csrf @method('DELETE')
-                            <button class="btn btn-sm btn-danger">Hapus</button>
-                        </form>
-                    </td>
-                </tr>
-            @empty
-                <tr>
-                    <td colspan="5" class="text-center">Belum ada data.</td>
-                </tr>
-            @endforelse
-        </tbody>
-    </table> --}}

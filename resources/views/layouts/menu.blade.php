@@ -1,4 +1,4 @@
-@if (Auth::user()->level->level_nama == 'admin')
+@if (Auth::user()->level->level_nama == 'Administrator')
     <li class="nk-menu-heading">
         <h6 class="overline-title text-primary-alt">Dashboards</h6>
     </li>
@@ -34,8 +34,16 @@
         </a>
         <!-- .nk-menu-sub -->
     </li>
+    <li class="nk-menu-item">
+        <a href="{{ route('companies.index') }}" class="nk-menu-link">
+            <span class="nk-menu-icon">
+                <em class="icon ni ni-building"></em>
+            </span>
+            <span class="nk-menu-text">Companies</span>
+        </a>
+    </li>
 @endif
-@if (Auth::user()->level->level_nama == 'dosen')
+@if (Auth::user()->level->level_nama == 'Dosen')
     <li class="nk-menu-heading">
         <h6 class="overline-title text-primary-alt">Dashboards</h6>
     </li>
@@ -50,7 +58,7 @@
     </li>
     <!-- .nk-menu-item -->
 @endif
-@if (Auth::user()->level->level_nama == 'mahasiswa')
+@if (Auth::user()->level->level_nama == 'Mahasiswa')
     <li class="nk-menu-heading">
         <h6 class="overline-title text-primary-alt">Dashboards</h6>
     </li>

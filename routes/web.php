@@ -47,9 +47,8 @@ Route::get('/', [WelcomeController::class, 'index'])->name('welcome.index');
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-    
-    
-    Route::prefix('admin')->middleware('role:admin')->group(function () {
+
+    Route::prefix('admin')->middleware('role:Administrator')->group(function () {
 
         Route::get('/dashboard', [DashboardController::class, 'indexAdmin'])->name('admin.dashboard');
 
@@ -60,26 +59,27 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/show/{id}', [MahasiswaController::class, 'show'])->name('mahasiswa.show');
             Route::get('/edit/{id}', [MahasiswaController::class, 'edit'])->name('mahasiswa.edit');
             Route::put('/{id}', [MahasiswaController::class, 'update'])->name('mahasiswa.update');
-            Route::get('/delete', [MahasiswaController::class, 'destroy'])->name('mahasiswa.destroy');
+            Route::get('/{id}', [MahasiswaController::class, 'destroy'])->name('mahasiswa.destroy');
         });
 
         Route::prefix('dosen')->group(function () {
             Route::get('/', [DosenController::class, 'index'])->name('dosen.index');
             Route::get('/create', [DosenController::class, 'create'])->name('dosen.create');
             Route::post('/store', [DosenController::class, 'store'])->name('dosen.store');
-            Route::get('/edit', [DosenController::class, 'edit'])->name('dosen.edit');
-            Route::put('/update', [DosenController::class, 'update'])->name('dosen.update');
-            Route::get('/delete', [DosenController::class, 'destroy'])->name('dosen.destroy');
+            Route::get('/edit/{id}', [DosenController::class, 'edit'])->name('dosen.edit');
+            Route::get('/show/{id}', [DosenController::class, 'show'])->name('dosen.show');
+            Route::put('/{id}', [DosenController::class, 'update'])->name('dosen.update');
+            Route::get('/{id}', [DosenController::class, 'destroy'])->name('dosen.destroy');
         });
     });
 
-    Route::prefix('mahasiswa')->middleware('role:mahasiswa')->group(function () {
+    Route::prefix('mahasiswa')->middleware('role:Mahasiswa')->group(function () {
         Route::get('/dashboard', [DashboardController::class, 'indexMahasiswa'])->name('mahasiswa.dashboard');
 
         Route::get('/lamaran', [MagangApplicationController::class, 'index'])->name('lamaran');
     });
 
-    Route::prefix('dosen')->middleware('role:dosen')->group(function () {
+    Route::prefix('dosen')->middleware('role:Dosen')->group(function () {
         Route::get('/dashboard', [DashboardController::class, 'indexDosen'])->name('dosen.dashboard');
     });
 

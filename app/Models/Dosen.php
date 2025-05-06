@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Dosen extends Model
 {
@@ -13,11 +14,11 @@ class Dosen extends Model
 
     protected $primaryKey = 'dosen_id';
 
-    protected $fillable = ['user_id', 'nip'];
+    protected $fillable = ['user_id', 'nip', 'no_telp', 'alamat'];
 
-    public function user()
+    public function user(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id', 'user_id');
     }
 
     public function logs()

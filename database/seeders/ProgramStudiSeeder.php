@@ -14,7 +14,10 @@ class ProgramStudiSeeder extends Seeder
     public function run(): void
     {
         //
-        ProgramStudi::create(['name' => 'Informatika']);
+        ProgramStudi::create(['name' => 'Teknik Informatika']);
+        ProgramStudi::create(['name' => 'Teknik Mesin']);
         ProgramStudi::create(['name' => 'Sistem Informasi']);
+        ProgramStudi::create(['name' => 'Sistem Komputer']);
+        ProgramStudi::create(['name' => 'Manajemen']);
     }
 }
