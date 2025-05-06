@@ -22,11 +22,7 @@
                             <em class="icon ni ni-card-view"></em>
                         </div>
                         <div class="nk-news-text">
-                            <p>
-                                Do you know the latest update of 2022? <span>A overview of our is now available on
-                                    YouTube</span>
-                            </p>
-                            <em class="icon ni ni-external"></em>
+                            <h4>Internify</h4>
                         </div>
                     </a>
                 </div>

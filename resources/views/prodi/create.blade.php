@@ -4,10 +4,6 @@
 <div class="container">
     <form action="{{ route('prodi.store') }}" method="POST">
         @csrf
-        <div class="form-group">
-            <label>ID Prodi</label>
-            <input type="text" name="prodi_id" class="form-control" readonly>
-        </div>
         
         <div class="form-group mt-2">
             <label>Nama Prodi</label>

@@ -91,7 +91,11 @@ class MahasiswaController extends Controller
         //
         $prodis = ProgramStudi::all();
         $mahasiswa = Mahasiswa::find($id);
-        return view('mahasiswa.edit', compact('mahasiswa', 'prodis'));
+        $breadcrumb = (object) [
+            'title' => 'Edit Mahasiswa',
+            'subtitle' => ['Form Validation']
+        ];
+        return view('mahasiswa.edit', compact('mahasiswa', 'prodis','breadcrumb'));
     }
 
     /**

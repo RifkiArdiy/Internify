@@ -2,7 +2,6 @@
 
 @section('content')
 <div class="container">
-    <h2>Edit Perusahaan</h2>
     <form action="{{ route('companies.update', $company->company_id) }}" method="POST">
         @csrf
         @method('PUT')
