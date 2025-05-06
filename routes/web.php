@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ProgramStudiController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DosenController;
 use App\Http\Controllers\MahasiswaController;
@@ -24,6 +25,12 @@ use App\Models\MagangApplication;
 |
 */
 
+
+
+Route::get('login',[AuthController::class,'login'])->name('login');
+Route::get('register',[AuthController::class,'register'])->name('register');
+
+Route::resource('prodi', ProgramStudiController::class);
 
 Route::pattern('id', '[0-9]+');
 
