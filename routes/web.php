@@ -10,6 +10,9 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\WelcomeController;
 use App\Models\Mahasiswa;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CompanyController;
+use App\Http\Controllers\MagangApplicationController;
+use App\Models\MagangApplication;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,7 +41,8 @@ Route::get('/', [WelcomeController::class, 'index'])->name('welcome.index');
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-
+    
+    
     Route::prefix('admin')->middleware('role:admin')->group(function () {
 
         Route::get('/dashboard', [DashboardController::class, 'indexAdmin'])->name('admin.dashboard');
@@ -47,19 +51,40 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/', [MahasiswaController::class, 'index'])->name('mahasiswa.index');
             Route::get('/create', [MahasiswaController::class, 'create'])->name('mahasiswa.create');
             Route::post('/store', [MahasiswaController::class, 'store'])->name('mahasiswa.store');
-            Route::get('/edit', [MahasiswaController::class, 'edit'])->name('mahasiswa.edit');
-            Route::put('/update', [MahasiswaController::class, 'update'])->name('mahasiswa.update');
+            Route::get('/show/{id}', [MahasiswaController::class, 'show'])->name('mahasiswa.show');
+            Route::get('/edit/{id}', [MahasiswaController::class, 'edit'])->name('mahasiswa.edit');
+            Route::put('/{id}', [MahasiswaController::class, 'update'])->name('mahasiswa.update');
             Route::get('/delete', [MahasiswaController::class, 'destroy'])->name('mahasiswa.destroy');
+        });
+
+        Route::prefix('dosen')->group(function () {
+            Route::get('/', [DosenController::class, 'index'])->name('dosen.index');
+            Route::get('/create', [DosenController::class, 'create'])->name('dosen.create');
+            Route::post('/store', [DosenController::class, 'store'])->name('dosen.store');
+            Route::get('/edit', [DosenController::class, 'edit'])->name('dosen.edit');
+            Route::put('/update', [DosenController::class, 'update'])->name('dosen.update');
+            Route::get('/delete', [DosenController::class, 'destroy'])->name('dosen.destroy');
         });
     });
 
     Route::prefix('mahasiswa')->middleware('role:mahasiswa')->group(function () {
         Route::get('/dashboard', [DashboardController::class, 'indexMahasiswa'])->name('mahasiswa.dashboard');
+
+        Route::get('/lamaran', [MagangApplicationController::class, 'index'])->name('lamaran');
     });
 
     Route::prefix('dosen')->middleware('role:dosen')->group(function () {
         Route::get('/dashboard', [DashboardController::class, 'indexDosen'])->name('dosen.dashboard');
     });
 
+    Route::prefix('companies')->group(function () {
+        Route::get('/', [CompanyController::class, 'index'])->name('companies.index');
+        Route::get('/create', [CompanyController::class, 'create'])->name('companies.create');
+        Route::post('/store', [CompanyController::class, 'store'])->name('companies.store');
+        Route::get('/{id}', [CompanyController::class, 'show'])->name('companies.show');
+        Route::get('/{id}/edit', [CompanyController::class, 'edit'])->name('companies.edit');
+        Route::put('/{id}', [CompanyController::class, 'update'])->name('companies.update');
+        Route::delete('/{id}', [CompanyController::class, 'destroy'])->name('companies.destroy');
+    });
     Route::get('logout', [AuthController::class, 'logout'])->name('logout');
 });

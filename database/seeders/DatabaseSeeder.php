@@ -29,7 +29,7 @@ class DatabaseSeeder extends Seeder
             ProgramStudiSeeder::class,
             MahasiswaSeeder::class,
             DosenSeeder::class,
-            // CompanySeeder::class,
+            CompanySeeder::class,
             // PeriodeMagangSeeder::class,
             // LowonganMagangSeeder::class,
             // MagangApplicationSeeder::class,
