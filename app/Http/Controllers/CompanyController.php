@@ -20,7 +20,7 @@ class CompanyController extends Controller
     public function create()
     {
         $breadcrumb = (object) [
-            'title' => 'Tambah Company',
+            'title' => 'Tambah Perusahaan Mitra',
             'subtitle' => ['Form Validation']
         ];
         return view('company.create', compact('breadcrumb'));

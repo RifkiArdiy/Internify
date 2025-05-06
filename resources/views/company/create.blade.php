@@ -2,7 +2,6 @@
 
 @section('content')
 <div class="container">
-    <h2>Tambah Perusahaan Mitra</h2>
     <form action="{{ route('companies.store') }}" method="POST">
         @csrf
         <div class="form-group">
