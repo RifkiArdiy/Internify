@@ -58,8 +58,11 @@ class ProgramStudiController extends Controller
     public function edit(string $id)
     {
         $prodi = ProgramStudi::find($id);
-
-        return view('prodi.edit', compact('prodi'));
+        $breadcrumb = (object) [
+            'title' => 'Edit Program Studi',
+            'subtitle' => ['Form Validation']
+        ];
+        return view('prodi.edit', compact('prodi','breadcrumb'));
 
     }
 

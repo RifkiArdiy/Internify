@@ -48,7 +48,11 @@ class CompanyController extends Controller
     public function edit(string $id)
     {
         $company = Company::findOrFail($id);
-        return view('company.edit', compact('company'));
+        $breadcrumb = (object) [
+            'title' => 'Edit Perusahaan Mitra',
+            'subtitle' => ['Form Validation']
+        ];
+        return view('company.edit', compact('company', 'breadcrumb'));
     }
 
     public function update(Request $request, string $id)
