@@ -27,11 +27,6 @@ use App\Models\MagangApplication;
 
 
 
-Route::get('login',[AuthController::class,'login'])->name('login');
-Route::get('register',[AuthController::class,'register'])->name('register');
-
-Route::resource('prodi', ProgramStudiController::class);
-
 Route::pattern('id', '[0-9]+');
 
 Route::get('login', [AuthController::class, 'login'])->name('login');
@@ -65,6 +60,26 @@ Route::middleware(['auth'])->group(function () {
             Route::put('/{id}', [DosenController::class, 'update'])->name('dosen.update');
             Route::get('/{id}', [DosenController::class, 'destroy'])->name('dosen.destroy');
         });
+
+        Route::prefix('prodi')->group(function () {
+            Route::get('/', [ProgramStudiController::class, 'index'])->name('prodi.index');
+            Route::get('/create', [ProgramStudiController::class, 'create'])->name('prodi.create');
+            Route::post('/store', [ProgramStudiController::class, 'store'])->name('prodi.store');
+            Route::get('/edit/{id}', [ProgramStudiController::class, 'edit'])->name('prodi.edit');
+            Route::get('/show/{id}', [ProgramStudiController::class, 'show'])->name('prodi.show');
+            Route::put('/{id}', [ProgramStudiController::class, 'update'])->name('prodi.update');
+            Route::get('/{id}', [ProgramStudiController::class, 'destroy'])->name('prodi.destroy');
+        });
+
+        Route::prefix('companies')->group(function () {
+            Route::get('/', [CompanyController::class, 'index'])->name('companies.index');
+            Route::get('/create', [CompanyController::class, 'create'])->name('companies.create');
+            Route::post('/store', [CompanyController::class, 'store'])->name('companies.store');
+            Route::get('/{id}', [CompanyController::class, 'show'])->name('companies.show');
+            Route::get('/{id}/edit', [CompanyController::class, 'edit'])->name('companies.edit');
+            Route::put('/{id}', [CompanyController::class, 'update'])->name('companies.update');
+            Route::delete('/{id}', [CompanyController::class, 'destroy'])->name('companies.destroy');
+        });
     });
 
     Route::prefix('mahasiswa')->middleware('role:Mahasiswa')->group(function () {
@@ -77,14 +92,5 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/dashboard', [DashboardController::class, 'indexDosen'])->name('dosen.dashboard');
     });
 
-    Route::prefix('companies')->group(function () {
-        Route::get('/', [CompanyController::class, 'index'])->name('companies.index');
-        Route::get('/create', [CompanyController::class, 'create'])->name('companies.create');
-        Route::post('/store', [CompanyController::class, 'store'])->name('companies.store');
-        Route::get('/{id}', [CompanyController::class, 'show'])->name('companies.show');
-        Route::get('/{id}/edit', [CompanyController::class, 'edit'])->name('companies.edit');
-        Route::put('/{id}', [CompanyController::class, 'update'])->name('companies.update');
-        Route::delete('/{id}', [CompanyController::class, 'destroy'])->name('companies.destroy');
-    });
     Route::get('logout', [AuthController::class, 'logout'])->name('logout');
 });
