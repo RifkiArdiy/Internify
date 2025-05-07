@@ -31,6 +31,7 @@ Route::pattern('id', '[0-9]+');
 Route::get('login', [AuthController::class, 'login'])->name('login');
 Route::post('login', [AuthController::class, 'postLogin'])->name('postLogin');
 Route::get('register', [AuthController::class, 'register'])->name('register');
+Route::post('register', [AuthController::class, 'postRegister'])->name('postRegister');
 Route::get('/', [WelcomeController::class, 'index'])->name('welcome.index');
 
 Route::middleware(['auth'])->group(function () {
@@ -121,10 +122,14 @@ Route::middleware(['auth'])->group(function () {
 
     Route::prefix('mahasiswa')->middleware('role:Mahasiswa')->group(function () {
         Route::get('/dashboard', [DashboardController::class, 'indexMahasiswa'])->name('mahasiswa.dashboard');
-        Route::get('/', [LowonganMagangController::class, 'indexMhs'])->name('lowonganMagang.indexMhs');
-        Route::get('/lamaran', [MagangApplicationController::class, 'indexMhs'])->name('lamaran');
-        Route::post('/buatLamaran', [MagangApplicationController::class, 'store'])->name('buatLamaran');
-        Route::delete('/{id}/hapusLamaran', [MagangApplicationController::class, 'destroy'])->name('hapusLamaran');
+        Route::prefix('lowongan')->group(function () {
+            Route::get('/', [LowonganMagangController::class, 'indexMhs'])->name('lowonganMagang.indexMhs');
+        });
+        Route::prefix('lamaran')->group(function () {
+            Route::get('/', [MagangApplicationController::class, 'indexMhs'])->name('lamaran');
+            Route::post('/buatLamaran', [MagangApplicationController::class, 'store'])->name('buatLamaran');
+            Route::delete('/{id}/hapusLamaran', [MagangApplicationController::class, 'destroy'])->name('hapusLamaran');
+        });
     });
 
     Route::prefix('dosen')->middleware('role:Dosen')->group(function () {
