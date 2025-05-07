@@ -2,7 +2,6 @@
 
 @section('content')
     <div class="container">
-        <h4>Edit Periode Magang</h4>
 
         <form method="POST" action="{{route('periodeMagang.update', $pegang->period_id) }}">
             @csrf

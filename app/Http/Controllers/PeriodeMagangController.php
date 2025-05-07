@@ -61,8 +61,13 @@ class PeriodeMagangController extends Controller
      */
     public function edit(string $id)
     {
+        $breadcrumb = (object) [
+            'title' => 'Edit Periode Magang',
+            'subtitle' => ['Perbarui detail periode magang']
+        ];
+
         $pegang = PeriodeMagang::find($id);
-        return view('periodeMagang.edit', compact('pegang'));
+        return view('periodeMagang.edit', compact('pegang', 'breadcrumb'));
     }
 
     /**
