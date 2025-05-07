@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Company;
+use App\Models\LowonganMagang;
+use App\Models\PeriodeMagang;
 use Illuminate\Http\Request;
 
 class LowonganMagangController extends Controller
@@ -11,9 +14,6 @@ class LowonganMagangController extends Controller
      */
     public function index()
     {
-<<<<<<< HEAD
-        //
-=======
         $breadcrumb = (object) [
             'title' => 'Lowongan Magang',
             'subtitle' => ['Kelola lowongan magang']
@@ -24,6 +24,7 @@ class LowonganMagangController extends Controller
 
         return view('lowonganMagang.index', compact('logang', 'period', 'breadcrumb'));
     }
+
     public function indexMhs()
     {
         $breadcrumb = (object) [
@@ -35,7 +36,6 @@ class LowonganMagangController extends Controller
         $period = PeriodeMagang::all();
 
         return view('lowonganMagang.indexMhs', compact('logang', 'period', 'breadcrumb'));
->>>>>>> 85cac52f9f33edb676d8a435a6bc9529597fde41
     }
 
     /**
@@ -43,9 +43,6 @@ class LowonganMagangController extends Controller
      */
     public function create()
     {
-<<<<<<< HEAD
-        //
-=======
         $breadcrumb = (object) [
             'title' => 'Lowongan Magang',
             'subtitle' => ['Tambah lowongan magang baru']
@@ -55,7 +52,6 @@ class LowonganMagangController extends Controller
         $periode = PeriodeMagang::all();
         $lowongan = LowonganMagang::all();
         return view('lowonganMagang.create', compact('companies', 'periode', 'lowongan', 'breadcrumb'));
->>>>>>> 85cac52f9f33edb676d8a435a6bc9529597fde41
     }
 
     /**
@@ -79,9 +75,7 @@ class LowonganMagangController extends Controller
      */
     public function edit(string $id)
     {
-<<<<<<< HEAD
-        //
-=======
+
         $breadcrumb = (object) [
             'title' => 'Lowongan Magang',
             'subtitle' => ['Edit lowongan magang']
@@ -91,7 +85,6 @@ class LowonganMagangController extends Controller
         $periode = PeriodeMagang::all();
         $logang = LowonganMagang::find($id);
         return view('lowonganMagang.edit', compact('logang', 'companies', 'periode', 'breadcrumb'));
->>>>>>> 85cac52f9f33edb676d8a435a6bc9529597fde41
     }
 
     /**
