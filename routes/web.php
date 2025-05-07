@@ -32,10 +32,6 @@ use App\Models\MagangApplication;
 Route::get('login',[AuthController::class,'login'])->name('login');
 Route::get('register',[AuthController::class,'register'])->name('register');
 
-Route::resource('prodi', ProgramStudiController::class);
-Route::resource('lowonganMagang', LowonganMagangController::class);
-Route::resource('periodeMagang', PeriodeMagangController::class);
-Route::resource('magangApplication', MagangApplicationController::class);
 
 Route::pattern('id', '[0-9]+');
 
@@ -49,8 +45,17 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     Route::prefix('admin')->middleware('role:Administrator')->group(function () {
-
         Route::get('/dashboard', [DashboardController::class, 'indexAdmin'])->name('admin.dashboard');
+
+        Route::prefix('prodi')->group(function () {
+            Route::get('/', [ProgramStudiController::class, 'index'])->name('prodi.index');
+            Route::get('/create', [ProgramStudiController::class, 'create'])->name('prodi.create');
+            Route::post('/store', [ProgramStudiController::class, 'store'])->name('prodi.store');
+            Route::get('/show/{id}', [ProgramStudiController::class, 'show'])->name('prodi.show');
+            Route::get('/edit/{id}', [ProgramStudiController::class, 'edit'])->name('prodi.edit');
+            Route::put('/{id}', [ProgramStudiController::class, 'update'])->name('prodi.update');
+            Route::get('/{id}', [ProgramStudiController::class, 'destroy'])->name('prodi.destroy');
+        });
 
         Route::prefix('mahasiswa')->group(function () {
             Route::get('/', [MahasiswaController::class, 'index'])->name('mahasiswa.index');
@@ -87,7 +92,6 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/', [CompanyController::class, 'index'])->name('companies.index');
         Route::get('/create', [CompanyController::class, 'create'])->name('companies.create');
         Route::post('/store', [CompanyController::class, 'store'])->name('companies.store');
-        Route::get('/{id}', [CompanyController::class, 'show'])->name('companies.show');
         Route::get('/{id}/edit', [CompanyController::class, 'edit'])->name('companies.edit');
         Route::put('/{id}', [CompanyController::class, 'update'])->name('companies.update');
         Route::delete('/{id}', [CompanyController::class, 'destroy'])->name('companies.destroy');

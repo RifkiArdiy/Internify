@@ -20,7 +20,7 @@ class CompanyController extends Controller
     public function create()
     {
         $breadcrumb = (object) [
-            'title' => 'Tambah Company',
+            'title' => 'Tambah Perusahaan Mitra',
             'subtitle' => ['Form Validation']
         ];
         return view('company.create', compact('breadcrumb'));
@@ -45,16 +45,14 @@ class CompanyController extends Controller
         return redirect()->route('companies.index')->with('success', 'Perusahaan berhasil ditambahkan.');
     }
 
-    public function show(string $id)
-    {
-        $company = Company::findOrFail($id);
-        return view('company.show', compact('company'));
-    }
-
     public function edit(string $id)
     {
         $company = Company::findOrFail($id);
-        return view('company.edit', compact('company'));
+        $breadcrumb = (object) [
+            'title' => 'Edit Perusahaan Mitra',
+            'subtitle' => ['Form Validation']
+        ];
+        return view('company.edit', compact('company', 'breadcrumb'));
     }
 
     public function update(Request $request, string $id)

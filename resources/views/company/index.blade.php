@@ -4,7 +4,7 @@
     <li class="nk-block-tools-opt">
         <a href="{{ route('companies.create') }}" class="btn btn-primary">
             <em class="icon ni ni-plus"></em>
-            <span>Tambah Industri</span>
+            <span>Tambah Mitra</span>
         </a>
     </li>
 @endsection
@@ -14,9 +14,7 @@
         <div class="alert alert-success">{{ session('success') }}</div>
     @endif
     <div class="card card-bordered card-preview">
-        <div class="card-inner">
-            <a href="{{ route('companies.create') }}" class="btn btn-primary mb-3">+ Tambah Perusahaan</a>
-
+        <div class="card-inner table-responsive">
             <table class="datatable-init-export nowrap nk-tb-list nk-tb-ulist" data-auto-responsive="false">
                 <thead>
                     <tr class="nk-tb-item nk-tb-head">
@@ -64,31 +62,52 @@
                             </td>
                             <td class="nk-tb-col nk-tb-col-tools">
                                 <ul class="nk-tb-actions gx-1">
-                                    <li>
-                                        <a href="{{ route('companies.show', $company->company_id) }}"
-                                            class="btn btn-trigger btn-icon" data-bs-toggle="tooltip"
-                                            data-bs-placement="top" title="Detail">
-                                            <em class="icon ni ni-eye"></em>
+                                    <li class="nk-tb-action-hidden">
+                                        <a href="#" class="btn btn-trigger btn-icon" data-bs-toggle="tooltip"
+                                            data-bs-placement="top" title="Wallet">
+                                            <em class="icon ni ni-wallet-fill"></em>
+                                        </a>
+                                    </li>
+                                    <li class="nk-tb-action-hidden">
+                                        <a href="#" class="btn btn-trigger btn-icon" data-bs-toggle="tooltip"
+                                            data-bs-placement="top" title="Send Email">
+                                            <em class="icon ni ni-mail-fill"></em>
+                                        </a>
+                                    </li>
+                                    <li class="nk-tb-action-hidden">
+                                        <a href="#" class="btn btn-trigger btn-icon" data-bs-toggle="tooltip"
+                                            data-bs-placement="top" title="Suspend">
+                                            <em class="icon ni ni-user-cross-fill"></em>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="{{ route('companies.edit', $company->company_id) }}"
-                                            class="btn btn-trigger btn-icon" data-bs-toggle="tooltip"
-                                            data-bs-placement="top" title="Edit">
-                                            <em class="icon ni ni-repeat"></em>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <form action="{{ route('companies.destroy', $company->company_id) }}"
-                                            method="POST" class="d-inline"
-                                            onsubmit="return confirm('Yakin ingin menghapus perusahaan ini?')">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button class="btn btn-trigger btn-icon btn-danger" data-bs-toggle="tooltip"
-                                                data-bs-placement="top" title="Hapus">
-                                                <em class="icon ni ni-trash"></em>
-                                            </button>
-                                        </form>
+                                        <div class="drodown">
+                                            <a href="#" class="dropdown-toggle btn btn-icon btn-trigger"
+                                                data-bs-toggle="dropdown"><em class="icon ni ni-more-h"></em></a>
+                                            <div class="dropdown-menu dropdown-menu-end">
+                                                <ul class="link-list-opt no-bdr">
+                                                    <li><a href="#"><em class="icon ni ni-focus"></em><span>Quick
+                                                                View</span></a></li>
+                                                    <li><a href="#"><em class="icon ni ni-eye"></em><span>View
+                                                                Details</span></a></li>
+                                                    <li><a href="{{ route('companies.edit', $company->company_id) }}"><em
+                                                                class="icon ni ni-repeat"></em><span>Edit</span></a>
+                                                    </li>
+                                                    <li><a href="#"><em
+                                                                class="icon ni ni-activity-round"></em><span>Activities</span></a>
+                                                    </li>
+                                                    <li class="divider"></li>
+                                                    <li><a href="#"><em
+                                                                class="icon ni ni-shield-star"></em><span>Reset
+                                                                Pass</span></a></li>
+                                                    <li><a href="#"><em class="icon ni ni-shield-off"></em><span>Reset
+                                                                2FA</span></a></li>
+                                                    <li><a href="{{ route('companies.destroy', $company->company_id) }}"><em
+                                                                class="icon ni ni-na"></em><span>Hapus
+                                                                User</span></a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
                                     </li>
                                 </ul>
                             </td>

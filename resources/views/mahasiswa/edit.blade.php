@@ -2,8 +2,6 @@
 
 @section('content')
     <div class="container">
-        <h4>Edit Mahasiswa</h4>
-
         <form method="POST" action="{{ route('mahasiswa.update', $mahasiswa->mahasiswa_id ?? $mahasiswa->id) }}">
             @csrf @method('PUT')
 
