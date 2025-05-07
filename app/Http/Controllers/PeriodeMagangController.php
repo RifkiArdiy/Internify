@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\PeriodeMagang;
 use Illuminate\Http\Request;
 
 class PeriodeMagangController extends Controller
@@ -11,7 +12,13 @@ class PeriodeMagangController extends Controller
      */
     public function index()
     {
-        //
+        $breadcrumb = (object) [
+            'title' => 'Periode Magang',
+            'subtitle' => ['Kelola Periode Magang']
+        ];
+
+        $pegang = PeriodeMagang::all();
+        return view('periodeMagang.index', compact('pegang', 'breadcrumb'));
     }
 
     /**
@@ -19,7 +26,12 @@ class PeriodeMagangController extends Controller
      */
     public function create()
     {
-        //
+        $breadcrumb = (object) [
+            'title' => 'Tambah Periode Magang',
+            'subtitle' => ['Masukkan detail periode magang']
+        ];
+
+        return view('periodeMagang.create', compact('breadcrumb'));
     }
 
     /**
@@ -43,7 +55,14 @@ class PeriodeMagangController extends Controller
      */
     public function edit(string $id)
     {
-        //
+
+        $breadcrumb = (object) [
+            'title' => 'Edit Periode Magang',
+            'subtitle' => ['Perbarui detail periode magang']
+        ];
+
+        $pegang = PeriodeMagang::find($id);
+        return view('periodeMagang.edit', compact('pegang', 'breadcrumb'));
     }
 
     /**

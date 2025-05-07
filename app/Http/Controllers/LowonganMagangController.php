@@ -11,7 +11,31 @@ class LowonganMagangController extends Controller
      */
     public function index()
     {
+<<<<<<< HEAD
         //
+=======
+        $breadcrumb = (object) [
+            'title' => 'Lowongan Magang',
+            'subtitle' => ['Kelola lowongan magang']
+        ];
+
+        $logang = LowonganMagang::all();
+        $period = PeriodeMagang::all();
+
+        return view('lowonganMagang.index', compact('logang', 'period', 'breadcrumb'));
+    }
+    public function indexMhs()
+    {
+        $breadcrumb = (object) [
+            'title' => 'Lowongan Magang',
+            'subtitle' => ['Cari lowongan magang']
+        ];
+
+        $logang = LowonganMagang::all();
+        $period = PeriodeMagang::all();
+
+        return view('lowonganMagang.indexMhs', compact('logang', 'period', 'breadcrumb'));
+>>>>>>> 85cac52f9f33edb676d8a435a6bc9529597fde41
     }
 
     /**
@@ -19,7 +43,19 @@ class LowonganMagangController extends Controller
      */
     public function create()
     {
+<<<<<<< HEAD
         //
+=======
+        $breadcrumb = (object) [
+            'title' => 'Lowongan Magang',
+            'subtitle' => ['Tambah lowongan magang baru']
+        ];
+
+        $companies = Company::all();
+        $periode = PeriodeMagang::all();
+        $lowongan = LowonganMagang::all();
+        return view('lowonganMagang.create', compact('companies', 'periode', 'lowongan', 'breadcrumb'));
+>>>>>>> 85cac52f9f33edb676d8a435a6bc9529597fde41
     }
 
     /**
@@ -43,7 +79,19 @@ class LowonganMagangController extends Controller
      */
     public function edit(string $id)
     {
+<<<<<<< HEAD
         //
+=======
+        $breadcrumb = (object) [
+            'title' => 'Lowongan Magang',
+            'subtitle' => ['Edit lowongan magang']
+        ];
+
+        $companies = Company::all();
+        $periode = PeriodeMagang::all();
+        $logang = LowonganMagang::find($id);
+        return view('lowonganMagang.edit', compact('logang', 'companies', 'periode', 'breadcrumb'));
+>>>>>>> 85cac52f9f33edb676d8a435a6bc9529597fde41
     }
 
     /**
