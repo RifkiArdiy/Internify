@@ -12,8 +12,13 @@ class PeriodeMagangController extends Controller
      */
     public function index()
     {
+        $breadcrumb = (object) [
+            'title' => 'Periode Magang',
+            'subtitle' => ['Kelola Periode Magang']
+        ];
+
         $pegang = PeriodeMagang::all();
-        return view('periodeMagang.index', compact('pegang'));
+        return view('periodeMagang.index', compact('pegang', 'breadcrumb'));
     }
 
     /**
@@ -21,7 +26,12 @@ class PeriodeMagangController extends Controller
      */
     public function create()
     {
-        return view('periodeMagang.create');
+        $breadcrumb = (object) [
+            'title' => 'Tambah Periode Magang',
+            'subtitle' => ['Masukkan detail periode magang']
+        ];
+
+        return view('periodeMagang.create', compact('breadcrumb'));
     }
 
     /**

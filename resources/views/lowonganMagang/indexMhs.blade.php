@@ -1,4 +1,3 @@
-
 @extends('layouts.app')
 
 @section('content')
@@ -6,16 +5,21 @@
         <div class="alert alert-success">{{ session('success') }}</div>
     @endif
 
-@section('action')
-    <li class="nk-block-tools-opt">
-        <a href="{{ route('lowonganMagang.create') }}" class="btn btn-primary">
-            <em class="icon ni ni-plus"></em>
-            <span>Tambah Lowongan</span>
-        </a>
-    </li>
-@endsection
+    @if (session('error'))
+        <div class="alert alert-danger">{{ session('error') }}</div>
+    @endif
 
-    <a href="{{ route('lowonganMagang.create') }}"> Tambah</a>
+    @section('action')
+        <li class="nk-block-tools-opt">
+            <a href="{{ route('lowonganMagang.create') }}" class="btn btn-primary">
+                <em class="icon ni ni-plus"></em>
+                <span>Tambah Lowongan</span>
+            </a>
+        </li>
+    @endsection
+
+    <a href="{{ route('lowonganMagang.create') }}">Tambah</a>
+
     <table border="1">
         <thead>
             <tr>
@@ -42,17 +46,14 @@
                 <td>{{ $item->requirements }}</td>
                 <td>{{ $item->location }}</td>
                 <td>
-                    <a href="{{ route('lowonganMagang.edit', $item->lowongan_id) }}">Edit</a> |
-                    <form action="{{ route('lowonganMagang.destroy', $item->lowongan_id) }}" method="POST" style="display:inline;">
+                    <form action="{{ route('buatLamaran') }}" method="POST" style="display: inline;" onsubmit="return confirm('Yakin ingin melamar?')">
                         @csrf
-                        @method('DELETE')
-                        <button type="submit" onclick="return confirm('Yakin ingin menghapus?')">Delete</button>
+                        <input type="hidden" name="lowongan_id" value="{{ $item->lowongan_id }}">
+                        <button type="submit" class="btn btn-link p-0 m-0 align-baseline">Buat Lamaran</button>
                     </form>
-                    {{-- <a href="{{ route('magangApplication.create', $item->company->company_id) }}">Buat Lamaran</a> --}}
                 </td>
             </tr>
             @endforeach
         </tbody>
     </table>
-</body>
 @endsection

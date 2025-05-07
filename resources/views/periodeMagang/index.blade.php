@@ -6,9 +6,16 @@
         <div class="alert alert-success">{{ session('success') }}</div>
     @endif
 
+@section('action')
+    <li class="nk-block-tools-opt">
+        <a href="{{ route('periodeMagang.create') }}" class="btn btn-primary">
+            <em class="icon ni ni-plus"></em>
+            <span>Tambah Periode Magang</span>
+        </a>
+    </li>
+@endsection
 
-    <a href="{{ route('periodeMagang.create') }}"> Tambah</a>
-    <table border="1">
+<table border="1">
         <thead>
             <tr>
                 <th>ID</th>

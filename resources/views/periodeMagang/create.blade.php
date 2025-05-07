@@ -1,10 +1,10 @@
 @extends('layouts.app')
 
+
 @section('content')
     <div class="container">
-        <h4>Tambah Periode Magang</h4>
 
-        <form method="POST" action="{{ url('/periodeMagang/') }}">
+        <form method="POST" action="{{ route('periodeMagang.store') }}">
             @csrf
 
             <div class="mb-3">

@@ -4,7 +4,7 @@
     <div class="container">
         <h4>Tambah Lowongan Magang</h4>
 
-        <form method="POST" action="{{ url('/lowonganMagang/') }}">
+        <form method="POST" action="{{ route('lowonganMagang.update', $logang->lowongan_id) }}">
             @csrf
             @method('PUT')
 

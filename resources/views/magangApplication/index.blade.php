@@ -6,8 +6,6 @@
         <div class="alert alert-success">{{ session('success') }}</div>
     @endif
 
-
-    <a href="{{ route('magangApplication.create') }}"> Tambah</a>
     <table border="1">
         <thead>
             <tr>
@@ -26,13 +24,20 @@
                 <td>{{ $item->lowongan->title }}</td>
                 <td>{{ $item->status }}</td>
                 <td>
-                    <a href="{{ route('magangApplication.edit', $item->magang_id) }}">Edit</a> |
-                    <form action="{{ route('magangApplication.destroy', $item->magang_id) }}" method="POST" style="display:inline;">
+                    <form action="{{ route('magangApplication.update', $item->magang_id) }}" method="POST" style="display: inline;" onsubmit="return confirm('Apakah anda yakin menyetujui lamaran ini?')">
                         @csrf
-                        @method('DELETE')
-                        <button type="submit" onclick="return confirm('Yakin ingin menghapus?')">Delete</button>
+                        @method('PUT')
+                        <input type="hidden" name="status" value="Disetujui">
+                        <button type="submit" class="btn btn-link p-0 m-0 align-baseline">Setuju</button>
                     </form>
-                </td>
+                    
+                    <form action="{{ route('magangApplication.update', $item->magang_id) }}" method="POST" style="display: inline;" onsubmit="return confirm('Apakah anda yakin menolak lamaran ini?')">
+                        @csrf
+                        @method('PUT')
+                        <input type="hidden" name="status" value="Ditolak">
+                        <button type="submit" class="btn btn-link p-0 m-0 align-baseline">Tolak</button>
+                    </form>
+                                    </td>
             </tr>
             @endforeach
         </tbody>

@@ -4,7 +4,7 @@
     <div class="container">
         <h4>Edit Periode Magang</h4>
 
-        <form method="POST" action="{{ url('/periodeMagang/' . $pegang->period_id) }}">
+        <form method="POST" action="{{route('periodeMagang.update', $pegang->period_id) }}">
             @csrf
             @method('PUT')
 

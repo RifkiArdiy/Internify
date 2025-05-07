@@ -14,10 +14,27 @@ class LowonganMagangController extends Controller
      */
     public function index()
     {
+        $breadcrumb = (object) [
+            'title' => 'Lowongan Magang',
+            'subtitle' => ['Kelola lowongan magang']
+        ];
+
         $logang = LowonganMagang::all();
         $period = PeriodeMagang::all();
 
-        return view('lowonganMagang.index', compact('logang', 'period'));
+        return view('lowonganMagang.index', compact('logang', 'period', 'breadcrumb'));
+    }
+    public function indexMhs()
+    {
+        $breadcrumb = (object) [
+            'title' => 'Lowongan Magang',
+            'subtitle' => ['Cari lowongan magang']
+        ];
+
+        $logang = LowonganMagang::all();
+        $period = PeriodeMagang::all();
+
+        return view('lowonganMagang.indexMhs', compact('logang', 'period', 'breadcrumb'));
     }
 
     /**
@@ -25,10 +42,15 @@ class LowonganMagangController extends Controller
      */
     public function create()
     {
+        $breadcrumb = (object) [
+            'title' => 'Lowongan Magang',
+            'subtitle' => ['Tambah lowongan magang baru']
+        ];
+
         $companies = Company::all();
         $periode = PeriodeMagang::all();
         $lowongan = LowonganMagang::all();
-        return view('lowonganMagang.create', compact('companies', 'periode', 'lowongan'));
+        return view('lowonganMagang.create', compact('companies', 'periode', 'lowongan', 'breadcrumb'));
     }
 
     /**
@@ -62,10 +84,15 @@ class LowonganMagangController extends Controller
      */
     public function edit(string $id)
     {
+        $breadcrumb = (object) [
+            'title' => 'Lowongan Magang',
+            'subtitle' => ['Edit lowongan magang']
+        ];
+
         $companies = Company::all();
         $periode = PeriodeMagang::all();
         $logang = LowonganMagang::find($id);
-        return view('lowonganMagang.edit', compact('logang', 'companies', 'periode'));
+        return view('lowonganMagang.edit', compact('logang', 'companies', 'periode', 'breadcrumb'));
     }
 
     /**
