@@ -44,6 +44,9 @@
                                 <span>{{ $magang->status }}</span>
                             </td>
                             <td class="nk-tb-col nk-tb-col-tools">
+                                @if ($magang->status === 'Disetujui' || $magang->status === 'Ditolak')
+                                    <span>Reviewed</span>
+                                @else    
                                 <form action="{{ route('magangApplication.update', $magang->magang_id) }}" method="POST" style="display: inline;" onsubmit="return confirm('Apakah anda yakin menyetujui lamaran ini?')">
                                     @csrf
                                     @method('PUT')
@@ -60,6 +63,7 @@
                                         <span style="padding: 5px;">Tolak</span>
                                     </button>
                                 </form>
+                                @endif
                             </td>
                         </tr>
                     @endforeach
