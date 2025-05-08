@@ -110,49 +110,12 @@
                                                     </ul>
                                                 </div>
                                             </li>
-                                            {{-- <li class="dropdown language-dropdown d-none d-sm-block me-n1">
-                                                <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown">
-                                                    <div class="user-toggle">
-                                                        <div class="user-info d-none d-md-block">
-                                                            <div class="menu-link nav-link fw-bold">
-                                                                Hi..!! {{ Auth::user()->name }}
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                                <div
-                                                    class="dropdown-menu dropdown-menu-md dropdown-menu-end dropdown-menu-s1">
-                                                    <div class="dropdown-inner user-card-wrap bg-lighter d-none d-md-block">
-                                                        <div class="user-card">
-                                                            <div class="user-info">
-                                                                <span class="lead-text">{{ Auth::user()->name }}</span>
-                                                                <span class="sub-text">{{ Auth::user()->email }}</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="dropdown-inner">
-                                                        <ul class="link-list">
-                                                            <li>
-                                                                <a href="{{ route('logout') }}">
-                                                                    <em class="icon ni ni-signout"></em>
-                                                                    <span>Sign out</span>
-                                                                </a>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                    <div class="dropdown-inner">
-                                                        <ul class="link-list">
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </li> --}}
                                         </ul>
                                     </div>
                                 @else
                                     <ul class="menu-btns">
                                         <li>
-                                            <a href="{{ route('login') }}" target="_blank"
-                                                class="btn btn-primary btn-lg">Masuk</a>
+                                            <a href="{{ route('login') }}" class="btn btn-primary btn-lg">Masuk</a>
                                         </li>
                                     </ul>
                                 @endauth

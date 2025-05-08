@@ -14,23 +14,6 @@ class MahasiswaSeeder extends Seeder
      */
     public function run(): void
     {
-        //
-        // Mahasiswa::create([
-        //     'user_id' => 2,
-        //     'prodi_id' => 1,
-        //     'nim' => 'NIM001',
-        //     'no_telp' => '089543217512',
-        //     'alamat' => 'Indonesia'
-        // ]);
-
-        // Mahasiswa::create([
-        //     'user_id' => 3,
-        //     'prodi_id' => 2,
-        //     'nim' => 'NIM002',
-        //     'no_telp' => '081253782912',
-        //     'alamat' => 'Indonesia'
-        // ]);
-
         $mahasiswaData = [
             ['user_id' => 2, 'prodi_id' => 1, 'nim' => '2510876349'],
             ['user_id' => 3, 'prodi_id' => 2, 'nim' => '1892305716'],

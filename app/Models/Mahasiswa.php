@@ -14,7 +14,7 @@ class Mahasiswa extends Model
 
     protected $primaryKey = 'mahasiswa_id';
 
-    protected $fillable = ['user_id', 'prodi_id', 'nim', 'no_telp', 'alamat'];
+    protected $fillable = ['user_id', 'prodi_id', 'nim'];
 
     public function user(): BelongsTo
     {

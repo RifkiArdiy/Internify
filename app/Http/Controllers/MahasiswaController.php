@@ -16,13 +16,12 @@ class MahasiswaController extends Controller
      */
     public function index()
     {
-        //
         $mahasiswas = Mahasiswa::with('user', 'prodi')->get();
         $breadcrumb = (object) [
-            'title' => 'Table Mahasiswa',
-            'subtitle' => ['Jumlah total Mahasiswa ' . $mahasiswas->count()]
+            'title' => 'Semua Mahasiswa',
+            'subtitle' => ['Jumlah total Mahasiswa yang terdaftar ' . $mahasiswas->count()]
         ];
-        return view('mahasiswa.index', compact('mahasiswas', 'breadcrumb'));
+        return view('admin.mahasiswa.index', compact('mahasiswas', 'breadcrumb'));
     }
 
     /**
@@ -30,13 +29,12 @@ class MahasiswaController extends Controller
      */
     public function create()
     {
-        //
         $prodis = ProgramStudi::all();
         $breadcrumb = (object) [
             'title' => 'Tambah Mahasiswa',
-            'subtitle' => ['Form Validation']
+            'subtitle' => ['Formulir Pengisian Data Mahasiswa Baru']
         ];
-        return view('mahasiswa.create', compact('prodis', 'breadcrumb'));
+        return view('admin.mahasiswa.create', compact('prodis', 'breadcrumb'));
     }
 
     /**
@@ -44,7 +42,6 @@ class MahasiswaController extends Controller
      */
     public function store(Request $request)
     {
-        //
         $request->validate([
             'name' => 'required',
             'username' => 'required|unique:users',
@@ -62,14 +59,15 @@ class MahasiswaController extends Controller
             'username' => $request->username,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'no_telp' => $request->no_telp,
+            'alamat' => $request->alamat,
         ]);
 
         Mahasiswa::create([
             'user_id' => $user->user_id,
             'prodi_id' => $request->prodi_id,
             'nim' => $request->nim,
-            'no_telp' => $request->no_telp,
-            'alamat' => $request->alamat,
+
         ]);
 
         return redirect()->route('mahasiswa.index')->with('success', 'Mahasiswa berhasil ditambahkan.');
@@ -88,14 +86,13 @@ class MahasiswaController extends Controller
      */
     public function edit(string $id)
     {
-        //
         $prodis = ProgramStudi::all();
         $mahasiswa = Mahasiswa::find($id);
         $breadcrumb = (object) [
             'title' => 'Edit Mahasiswa',
-            'subtitle' => ['Form Validation']
+            'subtitle' => ['Edit Detail Mahasiswa']
         ];
-        return view('mahasiswa.edit', compact('mahasiswa', 'prodis','breadcrumb'));
+        return view('admin.mahasiswa.edit', compact('mahasiswa', 'prodis', 'breadcrumb'));
     }
 
     /**
@@ -113,6 +110,7 @@ class MahasiswaController extends Controller
             'email' => 'required|unique:users,email,' . $user->user_id . ',user_id',
             'nim' => 'required|unique:mahasiswas,nim,' . $mahasiswa->mahasiswa_id . ',mahasiswa_id',
             'prodi_id' => 'required|exists:program_studis,prodi_id',
+            'no_telp' => 'required',
             'alamat' => 'required',
         ]);
 
@@ -121,6 +119,8 @@ class MahasiswaController extends Controller
             'name' => $request->name,
             'username' => $request->username,
             'email' => $request->email,
+            'no_telp' => $request->no_telp,
+            'alamat' => $request->alamat,
         ]);
 
         if ($request->filled('password')) {
@@ -133,10 +133,9 @@ class MahasiswaController extends Controller
         $mahasiswa->update([
             'nim' => $request->nim,
             'prodi_id' => $request->prodi_id,
-            'alamat' => $request->alamat,
         ]);
 
-        return redirect()->route('mahasiswa.index')->with('success', 'Mahasiswa berhasil diperbarui.');
+        return redirect()->route('mahasiswa.index')->with('success', 'Mahasiswa ' . $mahasiswa->user->name . ' berhasil diperbarui.');
     }
 
 
@@ -145,11 +144,14 @@ class MahasiswaController extends Controller
      */
     public function destroy(string $id)
     {
-        //
         $mahasiswa = Mahasiswa::find($id);
         $mahasiswa->user->delete(); // Hapus user otomatis
         $mahasiswa->delete();
-
-        return redirect()->route('mahasiswa.index')->with('success', 'Mahasiswa berhasil dihapus.');
+        try {
+            Mahasiswa::destroy($id);
+            return redirect()->route('mahasiswa.index')->with('success', 'Mahasiswa ' . $mahasiswa->user->name . ' berhasil dihapus');
+        } catch (\Illuminate\Database\QueryException $e) {
+            return redirect()->route('mahasiswa.index')->with('error', 'Mahasiswa ' . $mahasiswa->user->name . ' gagal dihapus karena masih digunakan');
+        }
     }
 }
