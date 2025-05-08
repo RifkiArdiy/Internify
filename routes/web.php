@@ -79,6 +79,16 @@ Route::middleware(['auth'])->group(function () {
         });
 
 
+        Route::prefix('user')->group(function () {
+            Route::get('/', [UserController::class, 'index'])->name('user.index');
+            Route::get('/create', [UserController::class, 'create'])->name('user.create');
+            Route::post('/store', [UserController::class, 'store'])->name('user.store');
+            Route::get('/show/{id}', [UserController::class, 'show'])->name('user.show');
+            Route::get('/edit/{id}', [UserController::class, 'edit'])->name('user.edit');
+            Route::put('/{id}', [UserController::class, 'update'])->name('user.update');
+            Route::get('/{id}', [UserController::class, 'destroy'])->name('user.destroy');
+        });
+
         Route::prefix('mahasiswa')->group(function () {
             Route::get('/', [MahasiswaController::class, 'index'])->name('mahasiswa.index');
             Route::get('/create', [MahasiswaController::class, 'create'])->name('mahasiswa.create');

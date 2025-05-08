@@ -13,9 +13,18 @@
     </li>
     <!-- .nk-menu-item -->
     <li class="nk-menu-heading">
-        <h6 class="overline-title text-primary-alt">Pages</h6>
+        <h6 class="overline-title text-primary-alt">User Management</h6>
     </li>
     <!-- .nk-menu-heading -->
+    <li class="nk-menu-item has-sub">
+        <a href="{{ route('user.index') }}" class="nk-menu-link">
+            <span class="nk-menu-icon">
+                <em class="icon ni ni-users"></em>
+            </span>
+            <span class="nk-menu-text">User</span>
+        </a>
+        <!-- .nk-menu-sub -->
+    </li>
     <li class="nk-menu-item has-sub">
         <a href="{{ route('mahasiswa.index') }}" class="nk-menu-link">
             <span class="nk-menu-icon">

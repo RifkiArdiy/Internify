@@ -22,6 +22,8 @@ class UserSeeder extends Seeder
             'username' => 'admin',
             'email' => 'admin@admin.com',
             'password' => Hash::make('password'),
+            'no_telp' => '081234567890',
+            'alamat' => 'Malang'
         ]);
 
         // Mahasiswa
@@ -31,7 +33,7 @@ class UserSeeder extends Seeder
             'username' => 'citra',
             'email' => 'citra@gmail.com',
             'password' => Hash::make('password'),
-            'no_telp' => '081234567892',
+            'no_telp' => '081234567891',
             'alamat' => 'Bandung'
         ]);
         User::create([
@@ -40,7 +42,7 @@ class UserSeeder extends Seeder
             'username' => 'bagus',
             'email' => 'bagus@gmail.com',
             'password' => Hash::make('password'),
-            'no_telp' => '081234567891',
+            'no_telp' => '081234567892',
             'alamat' => 'Jakarta'
         ]);
         User::create([
