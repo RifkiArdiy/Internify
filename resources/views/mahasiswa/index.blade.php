@@ -18,7 +18,7 @@
             <table class="datatable-init-export nowrap nk-tb-list nk-tb-ulist" data-auto-responsive="false">
                 <thead>
                     <tr class="nk-tb-item nk-tb-head">
-                        <th class="nk-tb-col nk-tb-col-check export-col">
+                        <th class="nk-tb-col nk-tb-col-check">
                             <div class="custom-control custom-control-sm custom-checkbox notext">
                                 <input type="checkbox" class="custom-control-input" id="uid">
                                 <label class="custom-control-label" for="uid"></label>
