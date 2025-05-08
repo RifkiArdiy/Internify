@@ -14,12 +14,12 @@ class LowonganMagangController extends Controller
      */
     public function index()
     {
+        $logang = LowonganMagang::all();
         $breadcrumb = (object) [
             'title' => 'Lowongan Magang',
-            'subtitle' => ['Kelola lowongan magang']
+            'subtitle' => ['Jumlah Lowongan Magang : ' . $logang->count()]
         ];
-
-        $logang = LowonganMagang::all();
+        
         $period = PeriodeMagang::all();
 
         return view('lowonganMagang.index', compact('logang', 'period', 'breadcrumb'));

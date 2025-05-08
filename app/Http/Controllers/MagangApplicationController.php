@@ -15,12 +15,12 @@ class MagangApplicationController extends Controller
      */
     public function index()
     {
+        $magangs = MagangApplication::all();
         $breadcrumb = (object) [
             'title' => 'Lamaran Magang',
-            'subtitle' => ['Review lamaran magang yang masuk']
+            'subtitle' => ['Jumlah Pelamar : ' . $magangs->count()]
         ];
 
-        $magangs = MagangApplication::all();
         return view('magangApplication.index', compact('magangs', 'breadcrumb'));
     }
     public function indexMhs()

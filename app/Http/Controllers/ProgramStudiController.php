@@ -15,7 +15,7 @@ class ProgramStudiController extends Controller
         $prodi = ProgramStudi::all();
         $breadcrumb = (object) [
             'title' => 'Prodi',
-            'subtitle' => ['Welcome to Dashboard Internify']
+            'subtitle' => ['Kelola Prodi']
         ];
         return view('prodi.index', compact('prodi','breadcrumb'));
     }
