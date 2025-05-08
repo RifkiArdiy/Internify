@@ -17,10 +17,10 @@ class DosenController extends Controller
         //
         $dosens = Dosen::with('user')->get();
         $breadcrumb = (object) [
-            'title' => 'Dosen',
-            'subtitle' => ['Jumlah total Dosen ' . $dosens->count()]
+            'title' => 'Semua Dosen',
+            'subtitle' => ['Jumlah total Dosen yang terdaftar ' . $dosens->count()]
         ];
-        return view('dosen.index', compact('dosens', 'breadcrumb'));
+        return view('admin.dosen.index', compact('dosens', 'breadcrumb'));
     }
 
     /**
@@ -31,9 +31,9 @@ class DosenController extends Controller
         //
         $breadcrumb = (object) [
             'title' => 'Tambah Dosen',
-            'subtitle' => ['Form Validation']
+            'subtitle' => ['Formulir Pengisian Data Dosen Baru']
         ];
-        return view('dosen.create', compact('breadcrumb'));
+        return view('admin.dosen.create', compact('breadcrumb'));
     }
 
     /**
@@ -58,16 +58,16 @@ class DosenController extends Controller
             'username' => $request->username,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'no_telp' => $request->no_telp,
+            'alamat' => $request->alamat,
         ]);
 
         Dosen::create([
             'user_id' => $user->user_id,
             'nip' => $request->nip,
-            'no_telp' => $request->no_telp,
-            'alamat' => $request->alamat,
         ]);
 
-        return redirect()->route('dosen.index')->with('success', 'dosen berhasil ditambahkan.');
+        return redirect()->route('dosen.index')->with('success', 'Dosen berhasil ditambahkan.');
     }
 
     /**
@@ -85,7 +85,11 @@ class DosenController extends Controller
     {
         //
         $dosen = Dosen::find($id);
-        return view('dosen.edit', compact('dosen'));
+        $breadcrumb = (object) [
+            'title' => 'Edit Dosen',
+            'subtitle' => ['Edit Detail Dosen']
+        ];
+        return view('admin.dosen.edit', compact('dosen', 'breadcrumb'));
     }
 
     /**
@@ -103,6 +107,7 @@ class DosenController extends Controller
             'username' => 'required|unique:users,username,' . $user->user_id . ',user_id',
             'email' => 'required|unique:users,email,' . $user->user_id . ',user_id',
             'nip' => 'required|unique:dosens,nip,' . $dosen->dosen_id . ',dosen_id',
+            'no_telp' => 'required',
             'alamat' => 'required',
         ]);
 
@@ -111,6 +116,8 @@ class DosenController extends Controller
             'name' => $request->name,
             'username' => $request->username,
             'email' => $request->email,
+            'no_telp' => $request->no_telp,
+            'alamat' => $request->alamat,
         ]);
 
         if ($request->filled('password')) {
@@ -122,10 +129,9 @@ class DosenController extends Controller
         // Update dosen data
         $dosen->update([
             'nip' => $request->nip,
-            'alamat' => $request->alamat,
         ]);
 
-        return redirect()->route('dosen.index')->with('success', 'dosen berhasil diperbarui.');
+        return redirect()->route('dosen.index')->with('success', 'Dosen ' . $dosen->user->name . ' berhasil diperbarui.');
     }
 
     /**
@@ -138,7 +144,11 @@ class DosenController extends Controller
         $dosen = Dosen::find($id);
         $dosen->user->delete(); // Hapus user otomatis
         $dosen->delete();
-
-        return redirect()->route('dosen.index')->with('success', 'dosen berhasil dihapus.');
+        try {
+            Dosen::destroy($id);
+            return redirect()->route('dosen.index')->with('success', 'Dosen ' . $dosen->user->name . ' berhasil dihapus');
+        } catch (\Illuminate\Database\QueryException $e) {
+            return redirect()->route('dosen.index')->with('error', 'Dosen ' . $dosen->user->name . ' gagal dihapus karena masih digunakan');
+        }
     }
 }
