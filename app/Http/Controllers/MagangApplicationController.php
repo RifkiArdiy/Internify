@@ -37,7 +37,7 @@ class MagangApplicationController extends Controller
         } else {
             $magangs = collect(); // or handle error appropriately
         }
-
+        
         return view('magangApplication.indexMhs', compact('magangs', 'breadcrumb'));
     }
 
@@ -55,26 +55,26 @@ class MagangApplicationController extends Controller
     public function store(Request $request)
     {
         $mahasiswa = Mahasiswa::where('user_id', Auth::user()->user_id)->first();
-
+    
         // Cek apakah sudah pernah melamar untuk lowongan ini
         $existingApplication = MagangApplication::where('mahasiswa_id', $mahasiswa->mahasiswa_id)
             ->where('lowongan_id', $request->lowongan_id)
             ->first();
-
+    
         if ($existingApplication) {
-            return redirect('/mahasiswa/')->with('error', 'Anda sudah melamar untuk lowongan ini.');
+            return redirect(route('lamaran'))->with('error', 'Anda sudah melamar untuk lowongan ini.');
         }
-
+    
         // Jika belum ada, buat lamaran baru
         MagangApplication::create([
             'mahasiswa_id' => $mahasiswa->mahasiswa_id,
             'lowongan_id' => $request->lowongan_id,
             'status' => 'Pending',
         ]);
-
-        return redirect('/mahasiswa/')->with('success', 'Lamaran berhasil dikirim.');
+    
+        return redirect(route('lamaran'))->with('success', 'Lamaran berhasil dikirim.');
     }
-
+    
     /**
      * Display the specified resource.
      */
@@ -116,5 +116,6 @@ class MagangApplicationController extends Controller
         } catch (\Illuminate\Database\QueryException $e) {
             return redirect('/mahasiswa/lamaran')->with('error', 'Data lamaran gagal dihapus karena masih terdapat tabel lain yang terkait dengan data ini');
         }
+
     }
 }
