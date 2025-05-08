@@ -39,13 +39,7 @@ class PeriodeMagangController extends Controller
      */
     public function store(Request $request)
     {
-        PeriodeMagang::create([
-            'name' => $request->name,
-            'start_date' => $request->masaAwal,
-            'end_date' => $request->masaAkhir,
-        ]);
-
-        return redirect()->route('periodeMagang.index')->with('success', 'Data periode diperbarui.');
+        //
     }
 
     /**
@@ -61,6 +55,7 @@ class PeriodeMagangController extends Controller
      */
     public function edit(string $id)
     {
+
         $breadcrumb = (object) [
             'title' => 'Edit Periode Magang',
             'subtitle' => ['Perbarui detail periode magang']
@@ -75,15 +70,7 @@ class PeriodeMagangController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $pegang = PeriodeMagang::find($id);
-        $pegang->update([
-            'name' => $request->name,
-            'start_date' => $request->masaAwal,
-            'end_date' => $request->masaAkhir,
-        ]);
-
-        return redirect()->route('periodeMagang.index')->with('success', 'Data periode diperbarui.');
-
+        //
     }
 
     /**
@@ -91,10 +78,6 @@ class PeriodeMagangController extends Controller
      */
     public function destroy(string $id)
     {
-        $pegang = PeriodeMagang::findOrFail($id);
-        $pegang->delete();
-
-        return redirect()->route('periodeMagang.index')->with('success', 'Periode berhasil dihapus.');
-
+        //
     }
 }

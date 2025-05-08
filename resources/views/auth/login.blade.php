@@ -52,15 +52,6 @@
                                         </div>
                                     </div>
                                 </div><!-- .nk-block-head -->
-                                {{-- @if ($errors->any())
-                                    <div class="alert alert-danger">
-                                        <ul>
-                                            @foreach ($errors->all() as $error)
-                                                <li>{{ $error }}</li>
-                                            @endforeach
-                                        </ul>
-                                    </div>
-                                @endif --}}
                                 <form action="{{ route('postLogin') }}" method="POST" class="form-validate is-alter"
                                     autocomplete="off" id="form-login">
                                     @csrf
@@ -234,22 +225,9 @@
     </div>
     <!-- app-root @e -->
     <!-- JavaScript -->
-    {{-- <script src="{{ asset('assets/home/assets/js/bundle.js') }}"></script>
-    <script src="{{ asset('assets/home/assets/js/scripts.js') }}"></script> --}}
     <script src="{{ asset('assets/home/js/bundle.js') }}"></script>
     <script src="{{ asset('assets/home/js/scripts.js') }}"></script>
     <script src="{{ asset('assets/admin/js/example-sweetalert.js') }}"></script>
-    {{-- @if ($errors->any())
-        <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Oops...',
-                    text: '{{ $errors->first() }}',
-                });
-            });
-        </script>
-    @endif --}}
     <script>
         $(document).ready(function() {
             $('#form-login').on('submit', function(e) {
@@ -276,7 +254,10 @@
                             toast: true,
                             position: 'top-end',
                             showConfirmButton: false,
-                            timer: 2000
+                            timer: 2000,
+                            className: {
+                                popup: 'eg-toastr-with-title'
+                            }
                         }).then(() => {
                             window.location.href = res.redirect;
                         });

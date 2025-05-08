@@ -2,15 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Mahasiswa;
+use App\Models\ProgramStudi;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
-use App\Models\Mahasiswa;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
-
-use function Laravel\Prompts\alert;
 
 class AuthController extends Controller
 {
@@ -24,42 +23,9 @@ class AuthController extends Controller
 
     public function register()
     {
-        return view('auth.register');
-    }
 
-    public function postRegister(Request $request) {
-        $rules = [
-            // 'level_id' => 'required|exists:m_level,level_id',
-            'username' => 'required|string|unique:users,username',
-            'name' => 'required|string|max:100',
-            'password' => 'required|confirmed',
-        ];
-
-        $validator = Validator::make($request->all(), $rules);
-
-        if ($validator->fails()) {
-            return alert('Validasi gagal');
-        }
-
-        $newUser = User::create([
-            'level_id' => 2,
-            'username' => $request->username,
-            'email' => $request->username,
-            'name' => $request->name,
-            'password' => Hash::make($request->password),
-        ]);
-
-        Mahasiswa::create([
-            'user_id' => $newUser->user_id,
-            'prodi_id' => null,
-            'nim' => null,
-            'no_telp' => null,
-            'alamat' => null
-        ]);
-
-        return redirect('/login');
-
-
+        $prodis = ProgramStudi::all();
+        return view('auth.register', compact('prodis'));
     }
 
     public function postLogin(Request $request)
@@ -67,7 +33,7 @@ class AuthController extends Controller
         $credentials = $request->only('username', 'password');
 
         if (
-            // Auth::attempt(['email' => $credentials['username'], 'password' => $credentials['password']]) ||
+            Auth::attempt(['email' => $credentials['username'], 'password' => $credentials['password']]) ||
             Auth::attempt(['username' => $credentials['username'], 'password' => $credentials['password']])
         ) {
 
@@ -99,6 +65,33 @@ class AuthController extends Controller
                 'message' => 'Email/Username atau Password salah!',
             ], 401);
         }
+    }
+
+    public function postRegister(Request $request)
+    {
+        $request->validate([
+            'name' => 'required',
+            'username' => 'required|unique:users',
+            'email' => 'required|unique:users',
+            'password' => 'required|min:6',
+            'nim' => 'required|min:10|unique:mahasiswas',
+            'prodi_id' => 'required|integer'
+        ]);
+
+        $user = User::create([
+            'level_id' => 2,
+            'name' => $request->name,
+            'username' => $request->username,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+        ]);
+
+        Mahasiswa::create([
+            'user_id' => $user->user_id,
+            'prodi_id' => $request->prodi_id,
+            'nim' => $request->nim,
+        ]);
+        return redirect()->route('login')->with('success', 'Mahasiswa berhasil ditambahkan.');
     }
 
 

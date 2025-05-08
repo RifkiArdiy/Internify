@@ -50,24 +50,34 @@
                                         </div>
                                     </div>
                                 </div><!-- .nk-block-head -->
-                                <form action="{{ url('register') }}" method="POST">
+                                <form action="{{ route('postRegister') }}" method="POST">
                                     @csrf
                                     <div class="form-group">
                                         <label class="form-label" for="name">Name</label>
                                         <div class="form-control-wrap">
-                                            <input type="text" class="form-control form-control-lg" id="name" name="name"
-                                                placeholder="Enter your name">
+                                            <input type="text" name="name" class="form-control form-control-lg"
+                                                id="name" placeholder="Enter your full name" required>
                                         </div>
                                     </div>
+
                                     <div class="form-group">
-                                        <label class="form-label" for="email">Email or Username</label>
+                                        <label class="form-label" for="username">Username</label>
                                         <div class="form-control-wrap">
-                                            <input type="text" class="form-control form-control-lg" id="username" name="username"
-                                                placeholder="Enter your email address or username">
+                                            <input type="text" name="username" class="form-control form-control-lg"
+                                                id="username" placeholder="Choose a username" required>
                                         </div>
                                     </div>
+
                                     <div class="form-group">
-                                        <label class="form-label" for="password">Passcode</label>
+                                        <label class="form-label" for="email">Email</label>
+                                        <div class="form-control-wrap">
+                                            <input type="email" name="email" class="form-control form-control-lg"
+                                                id="email" placeholder="Enter your email address" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="form-label" for="password">Password</label>
                                         <div class="form-control-wrap">
                                             <a tabindex="-1" href="#"
                                                 class="form-icon form-icon-right passcode-switch lg"
@@ -75,35 +85,40 @@
                                                 <em class="passcode-icon icon-show icon ni ni-eye"></em>
                                                 <em class="passcode-icon icon-hide icon ni ni-eye-off"></em>
                                             </a>
-                                            <input type="password" class="form-control form-control-lg" id="password" name="password"
-                                                placeholder="Enter your passcode">
+                                            <input type="password" name="password" class="form-control form-control-lg"
+                                                id="password" placeholder="Enter a password (min. 6 characters)"
+                                                required>
                                         </div>
                                     </div>
-                                    <div class="form-group">
-                                        <label class="form-label" for="password_confirmation">Confirm Passcode</label>
-                                        <div class="form-control-wrap">
-                                            <a tabindex="-1" href="#"
-                                            class="form-icon form-icon-right passcode-switch lg"
-                                            data-target="password_confirmation">
-                                            <em class="passcode-icon icon-show icon ni ni-eye"></em>
-                                            <em class="passcode-icon icon-hide icon ni ni-eye-off"></em>
-                                        </a>
 
-                                            <input type="password" class="form-control form-control-lg" id="password_confirmation" name="password_confirmation" placeholder="Confirm your passcode">
+                                    <div class="form-group">
+                                        <label class="form-label" for="nim">NIM</label>
+                                        <div class="form-control-wrap">
+                                            <input type="text" name="nim" class="form-control form-control-lg"
+                                                id="nim" placeholder="Enter your NIM" required>
                                         </div>
                                     </div>
+
                                     <div class="form-group">
-                                        <div class="custom-control custom-control-xs custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input" id="checkbox">
-                                            <label class="custom-control-label" for="checkbox">I agree to Dashlite <a
-                                                    tabindex="-1" href="#">Privacy Policy</a> &amp; <a
-                                                    tabindex="-1" href="#"> Terms.</a></label>
+                                        <label class="form-label" for="prodi_id">Program Studi</label>
+                                        <div class="form-control-wrap">
+                                            <select name="prodi_id" id="prodi_id"
+                                                class="form-control form-control-lg" required>
+                                                <option value="" disabled selected>Select your program</option>
+                                                @foreach ($prodis as $prodi)
+                                                    <option value="{{ $prodi->prodi_id }}">{{ $prodi->name }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
                                         </div>
                                     </div>
+
                                     <div class="form-group">
-                                        <button class="btn btn-lg btn-primary btn-block">Register</button>
+                                        <button type="submit"
+                                            class="btn btn-lg btn-primary btn-block">Register</button>
                                     </div>
-                                </form><!-- form -->
+                                </form>
+
                                 <div class="form-note-s2 pt-4"> Already have an account ? <a
                                         href="{{ route('login') }}"><strong>Sign in instead</strong></a>
                                 </div>
@@ -379,5 +394,6 @@
             </div><!-- .modal-content -->
         </div><!-- .modla-dialog -->
     </div><!-- .modal -->
+</body>
 
 </html>
