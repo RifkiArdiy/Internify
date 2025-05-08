@@ -11,19 +11,19 @@ class CompanyController extends Controller
     {
         $companies = Company::all();
         $breadcrumb = (object) [
-            'title' => 'Company',
+            'title' => 'Semua Mitra',
             'subtitle' => ['Total data Company ' . $companies->count()]
         ];
-        return view('company.index', compact('companies', 'breadcrumb'));
+        return view('admin.company.index', compact('companies', 'breadcrumb'));
     }
 
     public function create()
     {
         $breadcrumb = (object) [
             'title' => 'Tambah Perusahaan Mitra',
-            'subtitle' => ['Form Validation']
+            'subtitle' => ['Formulir Pengisian Data Mitra Baru']
         ];
-        return view('company.create', compact('breadcrumb'));
+        return view('admin.company.create', compact('breadcrumb'));
     }
 
     public function store(Request $request)
@@ -50,9 +50,9 @@ class CompanyController extends Controller
         $company = Company::findOrFail($id);
         $breadcrumb = (object) [
             'title' => 'Edit Perusahaan Mitra',
-            'subtitle' => ['Form Validation']
+            'subtitle' => ['Edit Detail Mitra']
         ];
-        return view('company.edit', compact('company', 'breadcrumb'));
+        return view('admin.company.edit', compact('company', 'breadcrumb'));
     }
 
     public function update(Request $request, string $id)

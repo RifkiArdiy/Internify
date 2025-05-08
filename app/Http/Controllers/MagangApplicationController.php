@@ -21,7 +21,7 @@ class MagangApplicationController extends Controller
         ];
 
         $magangs = MagangApplication::all();
-        return view('magangApplication.index', compact('magangs', 'breadcrumb'));
+        return view('mahasiswa.magangApplication.index', compact('magangs', 'breadcrumb'));
     }
     public function indexMhs()
     {
@@ -38,7 +38,7 @@ class MagangApplicationController extends Controller
             $magangs = collect(); // or handle error appropriately
         }
 
-        return view('magangApplication.indexMhs', compact('magangs', 'breadcrumb'));
+        return view('mahasiswa.magangApplication.indexMhs', compact('magangs', 'breadcrumb'));
     }
 
     /**

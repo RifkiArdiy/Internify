@@ -22,7 +22,7 @@ class LowonganMagangController extends Controller
         $logang = LowonganMagang::all();
         $period = PeriodeMagang::all();
 
-        return view('lowonganMagang.index', compact('logang', 'period', 'breadcrumb'));
+        return view('admin.lowonganMagang.index', compact('logang', 'period', 'breadcrumb'));
     }
 
     public function indexMhs()
@@ -35,7 +35,7 @@ class LowonganMagangController extends Controller
         $logang = LowonganMagang::all();
         $period = PeriodeMagang::all();
 
-        return view('lowonganMagang.indexMhs', compact('logang', 'period', 'breadcrumb'));
+        return view('admin.lowonganMagang.indexMhs', compact('logang', 'period', 'breadcrumb'));
     }
 
     /**
@@ -45,13 +45,13 @@ class LowonganMagangController extends Controller
     {
         $breadcrumb = (object) [
             'title' => 'Lowongan Magang',
-            'subtitle' => ['Tambah lowongan magang baru']
+            'subtitle' => ['Formulir Pengisian Data Lowongan Magang Baru']
         ];
 
         $companies = Company::all();
         $periode = PeriodeMagang::all();
         $lowongan = LowonganMagang::all();
-        return view('lowonganMagang.create', compact('companies', 'periode', 'lowongan', 'breadcrumb'));
+        return view('admin.lowonganMagang.create', compact('companies', 'periode', 'lowongan', 'breadcrumb'));
     }
 
     /**
@@ -78,13 +78,13 @@ class LowonganMagangController extends Controller
 
         $breadcrumb = (object) [
             'title' => 'Lowongan Magang',
-            'subtitle' => ['Edit lowongan magang']
+            'subtitle' => ['Edit Detail Lowongan Magang']
         ];
 
         $companies = Company::all();
         $periode = PeriodeMagang::all();
         $logang = LowonganMagang::find($id);
-        return view('lowonganMagang.edit', compact('logang', 'companies', 'periode', 'breadcrumb'));
+        return view('admin.lowonganMagang.edit', compact('logang', 'companies', 'periode', 'breadcrumb'));
     }
 
     /**

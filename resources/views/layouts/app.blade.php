@@ -71,7 +71,7 @@
     <script src="{{ asset('assets/admin/js/charts/gd-default.js') }}"></script>
     <script src="{{ asset('assets/admin/js/libs/datatable-btns.js') }}"></script>
     <script src="{{ asset('assets/admin/js/example-sweetalert.js') }}"></script>
-
+    <script src="{{ asset('assets/admin/js/example-toastr.js') }}"></script>
 
     <script>
         $.ajaxSetup({

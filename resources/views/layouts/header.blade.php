@@ -17,14 +17,10 @@
             <!-- .nk-header-brand -->
             <div class="nk-header-news d-none d-xl-block">
                 <div class="nk-news-list">
-                    <a class="nk-news-item" href="#">
-                        <div class="nk-news-icon">
-                            <em class="icon ni ni-card-view"></em>
-                        </div>
-                        <div class="nk-news-text">
-                            <h4>Internify</h4>
-                        </div>
-                    </a>
+                    <ul class="breadcrumb breadcrumb-arrow">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item active">{{ $breadcrumb->title }}</li>
+                    </ul>
                 </div>
             </div>
             <!-- .nk-header-news -->
@@ -70,7 +66,7 @@
                         <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown">
                             <div class="user-toggle">
                                 <div class="user-avatar sm">
-                                    <em class="icon ni ni-user-alt"></em>
+                                    <span>{{ strtoupper(substr(Auth::user()->name, 0, 2)) }}</span>
                                 </div>
                                 <div class="user-info d-none d-md-block">
                                     <div class="user-status">{{ Auth::user()->level->level_nama ?? 'Guest' }}</div>
@@ -83,7 +79,7 @@
                             <div class="dropdown-inner user-card-wrap bg-lighter d-none d-md-block">
                                 <div class="user-card">
                                     <div class="user-avatar">
-                                        <span>AB</span>
+                                        <span>{{ strtoupper(substr(Auth::user()->name, 0, 2)) }}</span>
                                     </div>
                                     <div class="user-info">
                                         <span class="lead-text">{{ Auth::user()->name ?? 'Guest' }}</span>
