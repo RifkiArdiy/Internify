@@ -675,7 +675,35 @@
             responsive: {
                 details: true,
             },
-            buttons: ["copy", "excel", "csv", "pdf", "colvis"],
+            buttons: [
+                {
+                    extend: 'copy',
+                    exportOptions: {
+                        columns: '.export-col'
+                    }
+                },
+                {
+                    extend: 'excel',
+                    exportOptions: {
+                        columns: '.export-col'
+                    }
+                },
+                {
+                    extend: 'csv',
+                    exportOptions: {
+                        columns: '.export-col'
+                    }
+                },
+                {
+                    extend: 'pdf',
+                    exportOptions: {
+                        columns: '.export-col'
+                    }
+                },
+                {
+                    extend: 'colvis'
+                }
+            ],
         });
         $.fn.DataTable.ext.pager.numbers_length = 7;
     };

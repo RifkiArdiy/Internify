@@ -19,13 +19,13 @@
             <table class="datatable-init-export nowrap nk-tb-list nk-tb-ulist" data-auto-responsive="false">
                 <thead>
                     <tr class="nk-tb-item nk-tb-head">
-                        <th class="nk-tb-col"><span class="sub-text">Perusahaan</span></th>
-                        {{-- <th class="nk-tb-col"><span class="sub-text">Masa Awal</span></th>
-                        <th class="nk-tb-col"><span class="sub-text">Masa Akhir</span></th> --}}
-                        <th class="nk-tb-col"><span class="sub-text">Judul</span></th>
-                        <th class="nk-tb-col"><span class="sub-text">Deskripsi</span></th>
-                        <th class="nk-tb-col"><span class="sub-text">Kriteria</span></th>
-                        {{-- <th class="nk-tb-col"><span class="sub-text">Lokasi</span></th> --}}
+                        <th class="nk-tb-col export-col"><span class="sub-text">Perusahaan</span></th>
+                        {{-- <th class="nk-tb-col export-col"><span class="sub-text">Masa Awal</span></th>
+                        <th class="nk-tb-col export-col"><span class="sub-text">Masa Akhir</span></th> --}}
+                        <th class="nk-tb-col export-col"><span class="sub-text">Judul</span></th>
+                        <th class="nk-tb-col export-col"><span class="sub-text">Deskripsi</span></th>
+                        <th class="nk-tb-col export-col"><span class="sub-text">Kriteria</span></th>
+                        {{-- <th class="nk-tb-col export-col"><span class="sub-text">Lokasi</span></th> --}}
                         <th class="nk-tb-col nk-tb-col-tools text-end"></th>
                     </tr>
                 </thead>
