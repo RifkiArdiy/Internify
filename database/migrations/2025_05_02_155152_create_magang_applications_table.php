@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id('magang_id');
             $table->unsignedBigInteger('mahasiswa_id')->index();
             $table->unsignedBigInteger('lowongan_id')->index();
-            $table->string('status')->default('pending');
+            $table->string('status')->default('pending')->nullable();
             $table->timestamps();
 
             $table->foreign('mahasiswa_id')->references('mahasiswa_id')->on('mahasiswas')->onDelete('cascade');

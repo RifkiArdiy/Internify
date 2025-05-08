@@ -24,12 +24,12 @@
                                 <label class="custom-control-label" for="uid"></label>
                             </div>
                         </th>
-                        <th class="nk-tb-col"><span class="sub-text">User</span></th>
-                        <th class="nk-tb-col tb-col-mb"><span class="sub-text">Nim</span></th>
-                        <th class="nk-tb-col tb-col-md"><span class="sub-text">Phone</span></th>
-                        <th class="nk-tb-col tb-col-lg"><span class="sub-text">Jurusan</span></th>
-                        <th class="nk-tb-col tb-col-lg"><span class="sub-text">Last Login</span></th>
-                        <th class="nk-tb-col tb-col-md"><span class="sub-text">Status</span></th>
+                        <th class="nk-tb-col export-col"><span class="sub-text">User</span></th>
+                        <th class="nk-tb-col tb-col-mb export-col"><span class="sub-text">Nim</span></th>
+                        <th class="nk-tb-col tb-col-md export-col"><span class="sub-text">Phone</span></th>
+                        <th class="nk-tb-col tb-col-lg export-col"><span class="sub-text">Jurusan</span></th>
+                        <th class="nk-tb-col tb-col-lg export-col"><span class="sub-text">Last Login</span></th>
+                        <th class="nk-tb-col tb-col-md export-col"><span class="sub-text">Status</span></th>
                         <th class="nk-tb-col nk-tb-col-tools text-end">
                         </th>
                     </tr>

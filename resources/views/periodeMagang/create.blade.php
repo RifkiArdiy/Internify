@@ -4,12 +4,12 @@
 @section('content')
     <div class="container">
 
-        <form method="POST" action="{{ route('periodeMagang.store') }}">
+        <form action="{{ route('periodeMagang.store') }}" method="POST">
             @csrf
 
             <div class="mb-3">
                 <label>Nama Periode Magang</label>
-                <input type="text" name="name" required>
+                <input type="text" name="name" class="form-control" required>
             </div>
 
             <div class="mb-3">
@@ -23,7 +23,7 @@
             </div>
 
             <button type="submit" class="btn btn-success mt-3">Simpan</button>
-            <a href="{{ route('periodeMagang.index') }}" class="btn btn-secondary">Kembali</a>
+            <a href="{{ route('periodeMagang.index') }}" class="btn btn-secondary mt-3">Kembali</a>
         </form>
     </div>
 @endsection
