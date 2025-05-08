@@ -17,7 +17,7 @@ class EvaluasiMagangController extends Controller
             'subtitle' => ['Jumlah total Evaluasi Magang ' . EvaluasiMagang::count()]
         ];
         $evaluations = EvaluasiMagang::with('mahasiswa', 'company')->latest()->get();
-        return view('evaluasi_magang.index', ['evaluasi' => $evaluations], compact('breadcrumb'));
+        return view('dosen.evaluasi.index', ['evaluasi' => $evaluations], compact('breadcrumb'));
     }
     
 
@@ -70,6 +70,6 @@ class EvaluasiMagangController extends Controller
 
         $evaluation->update($request->all());
 
-        return redirect()->route('evaluasi_magang.index')->with('success', 'Evaluasi berhasil diperbarui');
+        return redirect()->route('dosen.evaluasi.index')->with('success', 'Evaluasi berhasil diperbarui');
     }
 }
