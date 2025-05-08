@@ -64,16 +64,10 @@
                                             <div class="dropdown-menu dropdown-menu-end">
                                                 <ul class="link-list-opt no-bdr">
                                                     <li><a href="{{ route('lowonganMagang.edit', $item->lowongan_id) }}">
-                                                        <em class="icon ni ni-edit-alt"></em><span>Edit</span></a></li>
-                                                    <li>
-                                                        <form action="{{ route('lowonganMagang.destroy', $item->lowongan_id) }}" method="POST" onsubmit="return confirm('Yakin ingin menghapus?')">
-                                                            @csrf
-                                                            @method('DELETE')
-                                                            <button type="submit" class="btn btn-link p-0">
-                                                                <em class="icon ni ni-trash"></em><span>Hapus</span>
-                                                            </button>
-                                                        </form>
+                                                        <em class="icon ni ni-edit-alt"></em><span>Edit</span></a>
                                                     </li>
+                                                    <li><a href="{{ route('lowonganMagang.destroy', $item->lowongan_id) }}">
+                                                        <em class="icon ni ni-trash"></em><span>Hapus</span></a></li>
                                                 </ul>
                                             </div>
                                         </div>

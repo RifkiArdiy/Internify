@@ -24,9 +24,9 @@
                                 <label class="custom-control-label" for="uid"></label>
                             </div>
                         </th>
-                        <th class="nk-tb-col"><span class="sub-text">Name</span></th>
-                        <th class="nk-tb-col"><span class="sub-text">Start</span></th>
-                        <th class="nk-tb-col"><span class="sub-text">End</span></th>
+                        <th class="nk-tb-col"><span class="sub-text">Program Magang</span></th>
+                        <th class="nk-tb-col"><span class="sub-text">Tanggal Mulai</span></th>
+                        <th class="nk-tb-col"><span class="sub-text">Tanggal Berakhir</span></th>
                         <th class="nk-tb-col nk-tb-col-tools text-end"></th>
                     </tr>
                 </thead>

@@ -121,9 +121,9 @@ class LowonganMagangController extends Controller
     {
         try {
             LowonganMagang::destroy($id);
-            return redirect('/lowonganMagang')->with('success', 'Data lowongan berhasil dihapus');
+            return redirect()->route('lowonganMagang.index')->with('success', 'Data lowongan berhasil dihapus');
         } catch (\Illuminate\Database\QueryException $e) {
-            return redirect('/lowonganMagang')->with('error', 'Data lowongan gagal dihapus karena masih terdapat tabel lain yang terkait dengan data ini');
+            return redirect()->route('lowonganMagang.index')->with('error', 'Data lowongan gagal dihapus karena masih terdapat tabel lain yang terkait dengan data ini');
         }
     }
 }
