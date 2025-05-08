@@ -12,6 +12,7 @@ use App\Models\Mahasiswa;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\MagangApplicationController;
+use App\Http\Controllers\EvaluasiMagangController;
 use App\Models\MagangApplication;
 
 /*
@@ -24,7 +25,6 @@ use App\Models\MagangApplication;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
 
 
 Route::pattern('id', '[0-9]+');
@@ -97,8 +97,22 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/lamaran', [MagangApplicationController::class, 'index'])->name('lamaran');
     });
 
-    Route::prefix('dosen')->middleware('role:Dosen')->group(function () {
-        Route::get('/dashboard', [DashboardController::class, 'indexDosen'])->name('dosen.dashboard');
+    Route::prefix('dosen')->middleware(['auth', 'role:Dosen'])->name('dosen.')->group(function () {
+        Route::get('/dashboard', [DashboardController::class, 'indexDosen'])->name('dashboard');
+    
+        // Halaman profil dosen
+        Route::get('/profil', [DosenController::class, 'profilSaya'])->name('profil');
+        Route::put('/profil', [DosenController::class, 'updateProfilSaya'])->name('profil.update');
+    
+        // Halaman evaluasi magang
+        Route::prefix('evaluasi')->name('evaluasi.')->group(function () {
+            Route::get('/', [EvaluasiMagangController::class, 'index'])->name('index');
+            Route::get('/create', [EvaluasiMagangController::class, 'create'])->name('create');
+            Route::post('/', [EvaluasiMagangController::class, 'store'])->name('store');
+            Route::get('/{evaluasi}/edit', [EvaluasiMagangController::class, 'edit'])->name('edit');
+            Route::put('/{evaluasi}', [EvaluasiMagangController::class, 'update'])->name('update');
+            Route::delete('/{evaluasi}', [EvaluasiMagangController::class, 'destroy'])->name('destroy');
+        });        
     });
 
     Route::get('logout', [AuthController::class, 'logout'])->name('logout');

@@ -65,8 +65,15 @@
             <span class="nk-menu-text">Dashboard</span>
         </a>
     </li>
-    <!-- .nk-menu-item -->
+    <li class="nk-menu-item">
+        <a href="{{ route('dosen.evaluasi.index') }}" class="nk-menu-link">
+            <span class="nk-menu-icon"><em class="icon ni ni-star"></em></span>
+            <span class="nk-menu-text">Evaluasi Magang</span>
+        </a>
+    </li>
 @endif
+    <!-- .nk-menu-item -->
+
 @if (Auth::user()->level->level_nama == 'Mahasiswa')
     <li class="nk-menu-heading">
         <h6 class="overline-title text-primary-alt">Dashboards</h6>
@@ -78,6 +85,12 @@
                 <em class="icon ni ni-dashlite"></em>
             </span>
             <span class="nk-menu-text">Dashboard</span>
+        </a>
+    </li>
+    <li class="nk-menu-item">
+        <a href="{{ route('mahasiswa.evaluasi.index') }}" class="nk-menu-link">
+            <span class="nk-menu-icon"><em class="icon ni ni-star"></em></span>
+            <span class="nk-menu-text">Evaluasi Magang</span>
         </a>
     </li>
     <!-- .nk-menu-item -->

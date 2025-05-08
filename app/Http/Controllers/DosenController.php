@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Dosen;
+use App\Models\EvaluasiMagang;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -21,6 +22,19 @@ class DosenController extends Controller
             'subtitle' => ['Jumlah total Dosen ' . $dosens->count()]
         ];
         return view('dosen.index', compact('dosens', 'breadcrumb'));
+    }
+
+    // Tambahkan method ini ke EvaluasiMagangController
+    public function indexDosen()
+    {
+        $evaluasis = EvaluasiMagang::with(['mahasiswa.user', 'company'])
+                    ->orderBy('evaluasi_id', 'desc')
+                    ->get();
+                    
+        return view('evaluasi_magang.index_dosen', [
+            'evaluasis' => $evaluasis,
+            'title' => 'Evaluasi Magang - Dosen'
+        ]);
     }
 
     /**
@@ -81,11 +95,16 @@ class DosenController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+        public function edit(string $id)
     {
-        //
         $dosen = Dosen::find($id);
-        return view('dosen.edit', compact('dosen'));
+
+        $breadcrumb = (object) [
+            'title' => 'Edit Dosen',
+            'subtitle' => ['Form untuk mengedit data dosen']
+        ];
+
+        return view('dosen.edit', compact('dosen', 'breadcrumb'));
     }
 
     /**
@@ -141,4 +160,48 @@ class DosenController extends Controller
 
         return redirect()->route('dosen.index')->with('success', 'dosen berhasil dihapus.');
     }
+
+    public function profilSaya()
+    {
+        $dosen = Dosen::with('user')->where('user_id', auth()->id())->firstOrFail();
+    
+        $breadcrumb = (object) [
+            'title' => 'Profil Saya',
+            'subtitle' => ['Halaman untuk melihat dan mengedit profil dosen']
+        ];
+    
+        return view('dosen.profil', compact('dosen', 'breadcrumb'));
+    }
+    
+    public function updateProfilSaya(Request $request)
+    {
+        $dosen = Dosen::with('user')->where('user_id', auth()->id())->firstOrFail();
+        $user = $dosen->user;
+    
+        $request->validate([
+            'name' => 'required',
+            'username' => 'required|unique:users,username,' . $user->user_id . ',user_id',
+            'email' => 'required|unique:users,email,' . $user->user_id . ',user_id',
+            'nip' => 'required|unique:dosens,nip,' . $dosen->dosen_id . ',dosen_id',
+            'alamat' => 'required',
+        ]);
+    
+        $user->update([
+            'name' => $request->name,
+            'username' => $request->username,
+            'email' => $request->email,
+        ]);
+    
+        if ($request->filled('password')) {
+            $user->update(['password' => Hash::make($request->password)]);
+        }
+    
+        $dosen->update([
+            'nip' => $request->nip,
+            'alamat' => $request->alamat,
+        ]);
+    
+        return redirect()->route('dosen.profil')->with('success', 'Profil berhasil diperbarui.');
+    }
+    
 }
