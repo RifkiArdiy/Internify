@@ -76,7 +76,16 @@ class LowonganMagangController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $logang = LowonganMagang::find($id);
+        $period = PeriodeMagang::all();
+        $breadcrumb = (object) [
+            'title' => $logang->title,
+            'subtitle' => ['Detail lowongan magang']
+        ];
+        
+        return view('lowonganMagang.show', compact('breadcrumb', 'logang', 'period'));
+
+
     }
 
     /**

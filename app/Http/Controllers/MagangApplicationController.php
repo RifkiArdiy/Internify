@@ -80,7 +80,15 @@ class MagangApplicationController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $magang = MagangApplication::find($id);
+        $breadcrumb = (object) [
+            'title' => 'Detail Lamaran',
+            'subtitle' => ['Lamaran ' . $magang->student->name]
+        ];
+
+        return view('magangApplication.show', compact('breadcrumb', 'magang'));
+
+        
     }
 
     /**

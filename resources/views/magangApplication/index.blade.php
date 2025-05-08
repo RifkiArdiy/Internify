@@ -37,7 +37,8 @@
                         <input type="hidden" name="status" value="Ditolak">
                         <button type="submit" class="btn btn-link p-0 m-0 align-baseline">Tolak</button>
                     </form>
-                                    </td>
+                    <a href="{{ route('magangApplication.show', $item->magang_id) }}">Detail</a>
+                </td>
             </tr>
             @endforeach
         </tbody>

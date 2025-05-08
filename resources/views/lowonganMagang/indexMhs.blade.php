@@ -25,11 +25,7 @@
             <tr>
                 <th>ID</th>
                 <th>Nama Perusahaan</th>
-                <th>Masa Awal</th>
-                <th>Masa Akhir</th>
                 <th>Judul</th>
-                <th>Deskripsi</th>
-                <th>Kriteria</th>
                 <th>Lokasi</th>
                 <th>Aksi</th>
             </tr>
@@ -39,11 +35,7 @@
             <tr>
                 <td>{{ $item->lowongan_id }}</td>
                 <td>{{ $item->company->name }}</td>
-                <td>{{ $item->period->start_date }}</td>
-                <td>{{ $item->period->end_date }}</td>
                 <td>{{ $item->title }}</td>
-                <td>{{ $item->description }}</td>
-                <td>{{ $item->requirements }}</td>
                 <td>{{ $item->location }}</td>
                 <td>
                     <form action="{{ route('buatLamaran') }}" method="POST" style="display: inline;" onsubmit="return confirm('Yakin ingin melamar?')">
@@ -51,6 +43,8 @@
                         <input type="hidden" name="lowongan_id" value="{{ $item->lowongan_id }}">
                         <button type="submit" class="btn btn-link p-0 m-0 align-baseline">Buat Lamaran</button>
                     </form>
+                    <a href="{{ route('lowongan.show', $item->lowongan_id) }}">Detail</a>
+
                 </td>
             </tr>
             @endforeach

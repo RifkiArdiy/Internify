@@ -124,11 +124,14 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/dashboard', [DashboardController::class, 'indexMahasiswa'])->name('mahasiswa.dashboard');
         Route::prefix('lowongan')->group(function () {
             Route::get('/', [LowonganMagangController::class, 'indexMhs'])->name('lowonganMagang.indexMhs');
+            Route::get('/show/{id}', [LowonganMagangController::class, 'show'])->name('lowongan.show');
+
         });
         Route::prefix('lamaran')->group(function () {
             Route::get('/', [MagangApplicationController::class, 'indexMhs'])->name('lamaran');
             Route::post('/buatLamaran', [MagangApplicationController::class, 'store'])->name('buatLamaran');
             Route::delete('/{id}/hapusLamaran', [MagangApplicationController::class, 'destroy'])->name('hapusLamaran');
+            Route::get('/{id}/lihat', [MagangApplicationController::class, 'show'])->name('lihatLamaran');
         });
     });
 
