@@ -14,9 +14,11 @@
         <thead>
             <tr>
                 <th>ID</th>
-                <th>Nama Mahasiswa</th>
                 <th>Judul Lowongan</th>
+                <th>Periode Awal</th>
+                <th>Periode Akhir</th>
                 <th>Status</th>
+                <th>Deskripsi</th>
                 <th>Aksi</th>
             </tr>
         </thead>
@@ -24,9 +26,11 @@
             @foreach($magangs as $item)
             <tr>
                 <td>{{ $item->magang_id }}</td>
-                <td>{{ $item->student->user->name }}</td>
                 <td>{{ $item->lowongan->title }}</td>
+                <td>{{ $item->lowongan->period->start_date }}</td>
+                <td>{{ $item->lowongan->period->end_date }}</td>
                 <td>{{ $item->status }}</td>
+                <td>{{ $item->lowongan->description }}</td>
                 <td>
                     <form action="{{ route('hapusLamaran', $item->magang_id) }}" method="POST" style="display:inline;">
                         @csrf
