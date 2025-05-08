@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Mahasiswa;
+use App\Models\ProgramStudi;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -21,7 +23,9 @@ class AuthController extends Controller
 
     public function register()
     {
-        return view('auth.register');
+
+        $prodis = ProgramStudi::all();
+        return view('auth.register', compact('prodis'));
     }
 
     public function postLogin(Request $request)
@@ -61,6 +65,33 @@ class AuthController extends Controller
                 'message' => 'Email/Username atau Password salah!',
             ], 401);
         }
+    }
+
+    public function postRegister(Request $request)
+    {
+        $request->validate([
+            'name' => 'required',
+            'username' => 'required|unique:users',
+            'email' => 'required|unique:users',
+            'password' => 'required|min:6',
+            'nim' => 'required|min:10|unique:mahasiswas',
+            'prodi_id' => 'required|integer'
+        ]);
+
+        $user = User::create([
+            'level_id' => 2,
+            'name' => $request->name,
+            'username' => $request->username,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+        ]);
+
+        Mahasiswa::create([
+            'user_id' => $user->user_id,
+            'prodi_id' => $request->prodi_id,
+            'nim' => $request->nim,
+        ]);
+        return redirect()->route('login')->with('success', 'Mahasiswa berhasil ditambahkan.');
     }
 
 

@@ -9,9 +9,9 @@
     <meta name="description"
         content="A powerful and conceptual apps base dashboard template that especially build for developers and programmers.">
     <!-- Fav Icon  -->
-    <link rel="shortcut icon" href="{{ asset('assets/admin/images/favicon.png') }}">
+    <link rel="shortcut icon" href="{{ asset('assets/admin/images/icon.png') }}">
     <!-- Page Title  -->
-    <title>Dashboard | Internify</title>
+    <title>{{ config('app.name', 'Point of Sales') }}</title>
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
@@ -82,7 +82,6 @@
     </script>
     @livewireScripts
     @stack('js')
-    @livewireScripts
 </body>
 
 </html>

@@ -12,7 +12,7 @@ class CompanyController extends Controller
         $companies = Company::all();
         $breadcrumb = (object) [
             'title' => 'Company',
-            'subtitle' => ['Welcome to Dashboard Internify']
+            'subtitle' => ['Total data Company ' . $companies->count()]
         ];
         return view('company.index', compact('companies', 'breadcrumb'));
     }

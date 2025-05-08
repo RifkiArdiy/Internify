@@ -9,7 +9,7 @@
     <meta name="description"
         content="A powerful and conceptual apps base dashboard template that especially build for developers and programmers.">
     <!-- Fav Icon  -->
-    <link rel="shortcut icon" href="{{ asset('assets/home/images/favicon.png') }}">
+    <link rel="shortcut icon" href="{{ asset('assets/admin/images/icon.png') }}">
     <!-- Page Title  -->
     <title>Home | Internify</title>
     <!-- StyleSheets  -->
@@ -60,75 +60,102 @@
                                     </li>
 
                                 </ul>
-                                <ul class="menu-btns">
-                                    <li>
-                                        @auth
-                                            <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown">
+                                @auth
+                                    <div class="nk-header-tools">
+                                        <ul class="nk-quick-nav">
+                                            <li class="menu-item has-sub">
+                                                {{-- <a href="#" class="menu-link menu-toggle">Landing</a> --}}
                                                 <div class="user-toggle">
                                                     <div class="user-info d-none d-md-block">
-                                                        {{-- <div class="user-status">Administrator</div> --}}
-                                                        <div class="user-name">
+                                                        <div class="menu-link nav-link fw-bold">
                                                             Hi..!! {{ Auth::user()->name }}
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </a>
-                                            <div class="dropdown-menu dropdown-menu-md dropdown-menu-end dropdown-menu-s1">
-                                                <div class="dropdown-inner user-card-wrap bg-lighter d-none d-md-block">
-                                                    <div class="user-card">
-                                                        <div class="user-avatar">
-                                                            <span>AB</span>
+                                                <div class="menu-sub">
+                                                    <ul class="menu-list">
+                                                        <div class="menu-info">
+                                                            @if (Auth::user()->level->level_nama == 'Administrator')
+                                                                <li class="menu-item">
+                                                                    <a href="{{ route('admin.dashboard') }}"
+                                                                        class="menu-link">
+                                                                        <em class="icon ni ni-dashboard"></em>
+                                                                        <span> Admin Dashboard</span>
+                                                                    </a>
+                                                                </li>
+                                                            @elseif (Auth::user()->level->level_nama == 'Mahasiswa')
+                                                                <li class="menu-item">
+                                                                    <a href="{{ route('mahasiswa.dashboard') }}"
+                                                                        class="menu-link">
+                                                                        <em class="icon ni ni-dashboard"></em>
+                                                                        <span> Mahasiswa Dashboard</span>
+                                                                    </a>
+                                                                </li>
+                                                            @elseif (Auth::user()->level->level_nama == 'Dosen')
+                                                                <li class="menu-item">
+                                                                    <a href="{{ route('dosen.dashboard') }}"
+                                                                        class="menu-link">
+                                                                        <em class="icon ni ni-dashboard"></em>
+                                                                        <span> Dosen Dashboard</span>
+                                                                    </a>
+                                                                </li>
+                                                            @endif
+                                                            <li class="menu-item">
+                                                                <a href="{{ route('logout') }}" class="menu-link">
+                                                                    <em class="icon ni ni-signout"></em>
+                                                                    <span> Sign out</span>
+                                                                </a>
+                                                            </li>
                                                         </div>
-                                                        <div class="user-info">
-                                                            <span class="lead-text">Abu Bin Ishtiyak</span>
-                                                            <span class="sub-text">info@softnio.com</span>
+                                                    </ul>
+                                                </div>
+                                            </li>
+                                            {{-- <li class="dropdown language-dropdown d-none d-sm-block me-n1">
+                                                <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown">
+                                                    <div class="user-toggle">
+                                                        <div class="user-info d-none d-md-block">
+                                                            <div class="menu-link nav-link fw-bold">
+                                                                Hi..!! {{ Auth::user()->name }}
+                                                            </div>
                                                         </div>
                                                     </div>
+                                                </a>
+                                                <div
+                                                    class="dropdown-menu dropdown-menu-md dropdown-menu-end dropdown-menu-s1">
+                                                    <div class="dropdown-inner user-card-wrap bg-lighter d-none d-md-block">
+                                                        <div class="user-card">
+                                                            <div class="user-info">
+                                                                <span class="lead-text">{{ Auth::user()->name }}</span>
+                                                                <span class="sub-text">{{ Auth::user()->email }}</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="dropdown-inner">
+                                                        <ul class="link-list">
+                                                            <li>
+                                                                <a href="{{ route('logout') }}">
+                                                                    <em class="icon ni ni-signout"></em>
+                                                                    <span>Sign out</span>
+                                                                </a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                    <div class="dropdown-inner">
+                                                        <ul class="link-list">
+                                                        </ul>
+                                                    </div>
                                                 </div>
-                                                <div class="dropdown-inner">
-                                                    <ul class="link-list">
-                                                        <li>
-                                                            <a href="html/user-profile-regular.html">
-                                                                <em class="icon ni ni-user-alt"></em>
-                                                                <span>View Profile</span>
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="html/user-profile-setting.html">
-                                                                <em class="icon ni ni-setting-alt"></em>
-                                                                <span>Account Setting</span>
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="html/user-profile-activity.html">
-                                                                <em class="icon ni ni-activity-alt"></em>
-                                                                <span>Login Activity</span>
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a class="dark-switch" href="#">
-                                                                <em class="icon ni ni-moon"></em>
-                                                                <span>Dark Mode</span>
-                                                            </a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                                <div class="dropdown-inner">
-                                                    <ul class="link-list">
-                                                        <li>
-                                                            <a href="{{ route('logout') }}">
-                                                                <em class="icon ni ni-signout"></em>
-                                                                <span>Sign out</span>
-                                                            </a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            @else
-                                                <a href="{{ route('login') }}" target="_blank"
-                                                    class="btn btn-primary btn-lg">Masuk</a>
-                                            @endauth
-                                    </li>
-                                </ul>
+                                            </li> --}}
+                                        </ul>
+                                    </div>
+                                @else
+                                    <ul class="menu-btns">
+                                        <li>
+                                            <a href="{{ route('login') }}" target="_blank"
+                                                class="btn btn-primary btn-lg">Masuk</a>
+                                        </li>
+                                    </ul>
+                                @endauth
                             </nav>
                             <!-- .nk-nav-menu -->
                         </div>
