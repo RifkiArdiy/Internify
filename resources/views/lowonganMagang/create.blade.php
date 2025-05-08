@@ -2,7 +2,6 @@
 
 @section('content')
     <div class="container">
-        <h4>Tambah Lowongan Magang</h4>
 
         <form method="POST" action="{{ route('lowonganMagang.store') }}">
             @csrf

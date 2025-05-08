@@ -44,8 +44,8 @@ class LowonganMagangController extends Controller
     public function create()
     {
         $breadcrumb = (object) [
-            'title' => 'Lowongan Magang',
-            'subtitle' => ['Tambah lowongan magang baru']
+            'title' => 'Tambah Lowongan Magang',
+            'subtitle' => ['Masukkan lowongan magang baru']
         ];
 
         $companies = Company::all();
