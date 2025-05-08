@@ -32,16 +32,16 @@ class MahasiswaSeeder extends Seeder
         // ]);
 
         $mahasiswaData = [
-            ['user_id' => 2, 'prodi_id' => 1, 'nim' => 'NIM001', 'no_telp' => '081234567891', 'alamat' => 'Jakarta'],
-            ['user_id' => 3, 'prodi_id' => 2, 'nim' => 'NIM002', 'no_telp' => '081234567892', 'alamat' => 'Bandung'],
-            ['user_id' => 4, 'prodi_id' => 1, 'nim' => 'NIM003', 'no_telp' => '081234567893', 'alamat' => 'Surabaya'],
-            ['user_id' => 5, 'prodi_id' => 2, 'nim' => 'NIM004', 'no_telp' => '081234567894', 'alamat' => 'Yogyakarta'],
-            ['user_id' => 6, 'prodi_id' => 1, 'nim' => 'NIM005', 'no_telp' => '081234567895', 'alamat' => 'Medan'],
-            ['user_id' => 7, 'prodi_id' => 2, 'nim' => 'NIM006', 'no_telp' => '081234567896', 'alamat' => 'Depok'],
-            ['user_id' => 8, 'prodi_id' => 1, 'nim' => 'NIM007', 'no_telp' => '081234567897', 'alamat' => 'Semarang'],
-            ['user_id' => 9, 'prodi_id' => 2, 'nim' => 'NIM008', 'no_telp' => '081234567898', 'alamat' => 'Palembang'],
-            ['user_id' => 10, 'prodi_id' => 1, 'nim' => 'NIM009', 'no_telp' => '081234567899', 'alamat' => 'Bogor'],
-            ['user_id' => 11, 'prodi_id' => 2, 'nim' => 'NIM010', 'no_telp' => '081234567800', 'alamat' => 'Malang'],
+            ['user_id' => 2, 'prodi_id' => 1, 'nim' => '2510876349'],
+            ['user_id' => 3, 'prodi_id' => 2, 'nim' => '1892305716'],
+            ['user_id' => 4, 'prodi_id' => 1, 'nim' => '3367912045'],
+            ['user_id' => 5, 'prodi_id' => 2, 'nim' => '0945287136'],
+            ['user_id' => 6, 'prodi_id' => 1, 'nim' => '4178569203'],
+            ['user_id' => 7, 'prodi_id' => 2, 'nim' => '9603148572'],
+            ['user_id' => 8, 'prodi_id' => 1, 'nim' => '7259063814'],
+            ['user_id' => 9, 'prodi_id' => 2, 'nim' => '5084729163'],
+            ['user_id' => 10, 'prodi_id' => 1, 'nim' => '8721694305'],
+            ['user_id' => 11, 'prodi_id' => 2, 'nim' => '6439501827'],
         ];
 
         foreach ($mahasiswaData as $data) {

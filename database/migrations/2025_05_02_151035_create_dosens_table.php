@@ -15,8 +15,6 @@ return new class extends Migration
             $table->id('dosen_id');
             $table->unsignedBigInteger('user_id')->index();
             $table->string('nip')->unique();
-            $table->string('no_telp')->nullable();
-            $table->string('alamat')->nullable();
             $table->timestamps();
 
             $table->foreign('user_id')->references('user_id')->on('users')->onDelete('cascade');
