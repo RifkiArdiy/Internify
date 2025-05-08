@@ -7,24 +7,23 @@
             @csrf
             @method('PUT')
 
-
             <div class="mb-3">
                 <label>Nama Periode Magang</label>
-                <input type="text" name="name" value="{{ $pegang->name }}" required>
+                <input type="text" name="name" value="{{ $pegang->name }}" class="form-control" required>
             </div>
 
             <div class="mb-3">
                 <label>Masa Awal</label>
-                <input type="date" name="masaAwal" value="{{ $pegang->start_date }}" class="form-control" required>
+                <input type="date" name="start_date" value="{{ $pegang->start_date }}" class="form-control" required>
             </div>
 
             <div class="mb-3">
                 <label>Masa Akhir</label>
-                <input type="date" name="masaAkhir" value="{{ $pegang->end_date }}" class="form-control" required>
+                <input type="date" name="end_date" value="{{ $pegang->end_date }}" class="form-control" required>
             </div>
 
             <button type="submit" class="btn btn-success mt-3">Simpan</button>
-            <a href="{{ route('periodeMagang.index') }}" class="btn btn-secondary">Kembali</a>
+            <a href="{{ route('periodeMagang.index') }}" class="btn btn-secondary mt-3">Kembali</a>
         </form>
     </div>
 @endsection

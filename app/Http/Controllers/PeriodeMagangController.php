@@ -39,7 +39,19 @@ class PeriodeMagangController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'start_date' => 'required|date',
+            'end_date' => 'required|date',
+        ]);
+
+        PeriodeMagang::create([
+            'name' => $request->name,
+            'start_date' => $request->start_date,
+            'end_date' => $request->end_date,
+        ]);
+
+        return redirect()->route('periodeMagang.index')->with('success', 'Periode berhasil ditambahkan.');
     }
 
     /**
@@ -70,7 +82,20 @@ class PeriodeMagangController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'start_date' => 'required|date',
+            'end_date' => 'required|date',
+        ]);
+
+        $pegang = PeriodeMagang::findOrFail($id);
+        $pegang->update([
+            'name' => $request->name,
+            'start_date' => $request->start_date,
+            'end_date' => $request->end_date,
+        ]);
+
+        return redirect()->route('periodeMagang.index')->with('success', 'Periode berhasil diubah.');
     }
 
     /**
@@ -78,6 +103,10 @@ class PeriodeMagangController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $pegang = PeriodeMagang::findOrFail($id);
+        $pegang->delete();
+
+        return redirect()->route('periodeMagang.index')->with('success', 'Periode berhasil dihapus.');
+    
     }
 }
