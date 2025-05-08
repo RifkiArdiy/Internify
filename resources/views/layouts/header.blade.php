@@ -18,7 +18,13 @@
             <div class="nk-header-news d-none d-xl-block">
                 <div class="nk-news-list">
                     <ul class="breadcrumb breadcrumb-arrow">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        @if (Auth::user()->level->level_nama == 'Administrator')
+                            <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
+                        @elseif (Auth::user()->level->level_nama == 'Mahasiswa')
+                            <li class="breadcrumb-item"><a href="{{ route('mahasiswa.dashboard') }}">Dashboard</a></li>
+                        @elseif (Auth::user()->level->level_nama == 'Dosen')
+                            <li class="breadcrumb-item"><a href="{{ route('dosen.dashboard') }}">Dashboard</a></li>
+                        @endif
                         <li class="breadcrumb-item active">{{ $breadcrumb->title }}</li>
                     </ul>
                 </div>
