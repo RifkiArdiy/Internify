@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use App\Models\Mahasiswa;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 use function Laravel\Prompts\alert;
@@ -40,11 +41,20 @@ class AuthController extends Controller
             return alert('Validasi gagal');
         }
 
-        $user = User::create([
-            'level_id' => 1,
+        $newUser = User::create([
+            'level_id' => 2,
             'username' => $request->username,
+            'email' => $request->username,
             'name' => $request->name,
             'password' => Hash::make($request->password),
+        ]);
+
+        Mahasiswa::create([
+            'user_id' => $newUser->user_id,
+            'prodi_id' => null,
+            'nim' => null,
+            'no_telp' => null,
+            'alamat' => null
         ]);
 
         return redirect('/login');
