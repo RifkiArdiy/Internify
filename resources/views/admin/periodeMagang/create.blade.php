@@ -14,12 +14,12 @@
 
             <div class="mb-3">
                 <label>Masa Awal</label>
-                <input type="date" name="masaAwal" class="form-control" required>
+                <input type="date" name="start_date" class="form-control" required>
             </div>
 
             <div class="mb-3">
                 <label>Masa Akhir</label>
-                <input type="date" name="masaAkhir" class="form-control" required>
+                <input type="date" name="end_date" class="form-control" required>
             </div>
 
             <button type="submit" class="btn btn-success mt-3">Simpan</button>

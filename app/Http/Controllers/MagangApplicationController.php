@@ -62,7 +62,7 @@ class MagangApplicationController extends Controller
             ->first();
 
         if ($existingApplication) {
-            return redirect('/mahasiswa/')->with('error', 'Anda sudah melamar untuk lowongan ini.');
+            return redirect(route('lamaran'))->with('error', 'Anda sudah melamar untuk lowongan ini.');
         }
 
         // Jika belum ada, buat lamaran baru
@@ -72,7 +72,7 @@ class MagangApplicationController extends Controller
             'status' => 'Pending',
         ]);
 
-        return redirect('/mahasiswa/')->with('success', 'Lamaran berhasil dikirim.');
+        return redirect(route('lamaran'))->with('success', 'Lamaran berhasil dikirim.');
     }
 
     /**
@@ -80,7 +80,13 @@ class MagangApplicationController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $magang = MagangApplication::find($id);
+        $breadcrumb = (object) [
+            'title' => 'Detail Lamaran',
+            'subtitle' => ['Lamaran ' . $magang->student->name]
+        ];
+
+        return view('magangApplication.show', compact('breadcrumb', 'magang'));
     }
 
     /**

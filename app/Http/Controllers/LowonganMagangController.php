@@ -44,8 +44,9 @@ class LowonganMagangController extends Controller
     public function create()
     {
         $breadcrumb = (object) [
-            'title' => 'Lowongan Magang',
-            'subtitle' => ['Formulir Pengisian Data Lowongan Magang Baru']
+
+            'title' => 'Tambah Lowongan Magang',
+            'subtitle' => ['Masukkan lowongan magang baru']
         ];
 
         $companies = Company::all();
@@ -59,7 +60,16 @@ class LowonganMagangController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        LowonganMagang::create([
+            'company_id' => $request->company,
+            'period_id' => $request->period,
+            'title' => $request->title,
+            'description' => $request->description,
+            'requirements' => $request->requirements,
+            'location' => $request->location,
+        ]);
+
+        return redirect()->route('lowonganMagang.index')->with('success', 'Lowongan berhasil ditambahkan.');
     }
 
     /**
@@ -67,7 +77,14 @@ class LowonganMagangController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $logang = LowonganMagang::find($id);
+        $period = PeriodeMagang::all();
+        $breadcrumb = (object) [
+            'title' => $logang->title,
+            'subtitle' => ['Detail lowongan magang']
+        ];
+
+        return view('lowonganMagang.show', compact('breadcrumb', 'logang', 'period'));
     }
 
     /**
@@ -92,7 +109,17 @@ class LowonganMagangController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $logang = LowonganMagang::find($id);
+        $logang->update([
+            'company_id' => $request->company,
+            'period_id' => $request->period,
+            'title' => $request->title,
+            'description' => $request->description,
+            'requirements' => $request->requirements,
+            'location' => $request->location,
+        ]);
+
+        return redirect()->route('lowonganMagang.index')->with('success', 'Lowongan berhasil diedit.');
     }
 
     /**
@@ -100,6 +127,11 @@ class LowonganMagangController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        try {
+            LowonganMagang::destroy($id);
+            return redirect('/lowonganMagang')->with('success', 'Data lowongan berhasil dihapus');
+        } catch (\Illuminate\Database\QueryException $e) {
+            return redirect('/lowonganMagang')->with('error', 'Data lowongan gagal dihapus karena masih terdapat tabel lain yang terkait dengan data ini');
+        }
     }
 }
