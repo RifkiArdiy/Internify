@@ -30,9 +30,9 @@ class DatabaseSeeder extends Seeder
             // MahasiswaSeeder::class,
             // DosenSeeder::class,
             // CompanySeeder::class,
-            PeriodeMagangSeeder::class,
+            // PeriodeMagangSeeder::class,
             // LowonganMagangSeeder::class,
-            // MagangApplicationSeeder::class,
+            MagangApplicationSeeder::class,
             // LogSeeder::class,
         ]);
     }

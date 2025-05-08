@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-
+use App\Models\MagangApplication;
 class MagangApplicationSeeder extends Seeder
 {
     /**
@@ -12,6 +12,12 @@ class MagangApplicationSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        $MagangApplicationData = [
+            ['mahasiswa_id' => '1', 'lowongan_id' => '2', 'status' => ''],
+        ];
+
+        foreach ($MagangApplicationData as $data) {
+            MagangApplication::create($data);
+        }
     }
 }
