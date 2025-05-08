@@ -44,7 +44,7 @@ class LowonganMagangController extends Controller
     public function create()
     {
         $breadcrumb = (object) [
-            'title' => 'Lowongan Magang',
+            'title' => 'Tambah Lowongan Magang',
             'subtitle' => ['Tambah lowongan magang baru']
         ];
 
@@ -86,7 +86,7 @@ class LowonganMagangController extends Controller
     {
 
         $breadcrumb = (object) [
-            'title' => 'Lowongan Magang',
+            'title' => 'Edit Lowongan Magang',
             'subtitle' => ['Edit lowongan magang']
         ];
 
