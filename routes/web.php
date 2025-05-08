@@ -57,7 +57,7 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/show/{id}', [PeriodeMagangController::class, 'show'])->name('periodeMagang.show');
             Route::get('/edit/{id}', [PeriodeMagangController::class, 'edit'])->name('periodeMagang.edit');
             Route::put('/{id}', [PeriodeMagangController::class, 'update'])->name('periodeMagang.update');
-            Route::get('/{id}', [PeriodeMagangController::class, 'destroy'])->name('periodeMagang.destroy');
+            Route::delete('/{id}', [PeriodeMagangController::class, 'destroy'])->name('periodeMagang.destroy');
         });
         Route::prefix('lowonganMagang')->group(callback: function () {
             Route::get('/', [LowonganMagangController::class, 'index'])->name('lowonganMagang.index');
