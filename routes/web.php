@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\LowonganMagangController;
 use App\Http\Controllers\MagangApplicationController;
+use App\Http\Controllers\EvaluasiMagangController;
 use App\Http\Controllers\PeriodeMagangController;
 use App\Models\MagangApplication;
 
@@ -37,18 +38,10 @@ Route::get('/', [WelcomeController::class, 'index'])->name('welcome.index');
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
-    Route::prefix('admin')->middleware('role:Administrator')->group(function () {
-        Route::get('/dashboard', [DashboardController::class, 'indexAdmin'])->name('admin.dashboard');
+    Route::prefix('admin')->group(function () {
+       });
 
-        Route::prefix('prodi')->group(function () {
-            Route::get('/', [ProgramStudiController::class, 'index'])->name('prodi.index');
-            Route::get('/create', [ProgramStudiController::class, 'create'])->name('prodi.create');
-            Route::post('/store', [ProgramStudiController::class, 'store'])->name('prodi.store');
-            Route::get('/show/{id}', [ProgramStudiController::class, 'show'])->name('prodi.show');
-            Route::get('/edit/{id}', [ProgramStudiController::class, 'edit'])->name('prodi.edit');
-            Route::put('/{id}', [ProgramStudiController::class, 'update'])->name('prodi.update');
-            Route::get('/{id}', [ProgramStudiController::class, 'destroy'])->name('prodi.destroy');
-        });
+        Route::get('/dashboard', [DashboardController::class, 'indexAdmin'])->name('admin.dashboard');
 
         Route::prefix('periodeMagang')->group(callback: function () {
             Route::get('/', [PeriodeMagangController::class, 'index'])->name('periodeMagang.index');
@@ -132,9 +125,22 @@ Route::middleware(['auth'])->group(function () {
         });
     });
 
-    Route::prefix('dosen')->middleware('role:Dosen')->group(function () {
-        Route::get('/dashboard', [DashboardController::class, 'indexDosen'])->name('dosen.dashboard');
+    Route::prefix('dosen')->middleware(['auth', 'role:Dosen'])->name('dosen.')->group(function () {
+        Route::get('/dashboard', [DashboardController::class, 'indexDosen'])->name('dashboard');
+    
+        // Halaman profil dosen
+        Route::get('/profil', [DosenController::class, 'profilSaya'])->name('profil');
+        Route::put('/profil', [DosenController::class, 'updateProfilSaya'])->name('profil.update');
+    
+        // Halaman evaluasi magang
+        Route::prefix('evaluasi')->name('evaluasi.')->group(function () {
+            Route::get('/', [EvaluasiMagangController::class, 'index'])->name('index');
+            Route::get('/create', [EvaluasiMagangController::class, 'create'])->name('create');
+            Route::post('/', [EvaluasiMagangController::class, 'store'])->name('store');
+            Route::get('/{evaluasi}/edit', [EvaluasiMagangController::class, 'edit'])->name('edit');
+            Route::put('/{evaluasi}', [EvaluasiMagangController::class, 'update'])->name('update');
+            Route::delete('/{evaluasi}', [EvaluasiMagangController::class, 'destroy'])->name('destroy');
+        });        
     });
 
     Route::get('logout', [AuthController::class, 'logout'])->name('logout');
-});
