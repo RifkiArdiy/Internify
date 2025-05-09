@@ -47,7 +47,7 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/show/{id}', [ProgramStudiController::class, 'show'])->name('prodi.show');
             Route::get('/edit/{id}', [ProgramStudiController::class, 'edit'])->name('prodi.edit');
             Route::put('/{id}', [ProgramStudiController::class, 'update'])->name('prodi.update');
-            Route::get('/{id}', [ProgramStudiController::class, 'destroy'])->name('prodi.destroy');
+            Route::delete('/{id}', [ProgramStudiController::class, 'destroy'])->name('prodi.destroy');
         });
 
         Route::prefix('periodeMagang')->group(callback: function () {
@@ -75,7 +75,7 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/show/{id}', [MagangApplicationController::class, 'show'])->name('magangApplication.show');
             Route::get('/edit/{id}', [MagangApplicationController::class, 'edit'])->name('magangApplication.edit');
             Route::put('/{id}', [MagangApplicationController::class, 'update'])->name('magangApplication.update');
-            Route::get('/{id}', [MagangApplicationController::class, 'destroy'])->name('magangApplication.destroy');
+            Route::delete('/{id}', [MagangApplicationController::class, 'destroy'])->name('magangApplication.destroy');
         });
 
 
@@ -129,11 +129,17 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/', [MagangApplicationController::class, 'indexMhs'])->name('lamaran');
             Route::post('/buatLamaran', [MagangApplicationController::class, 'store'])->name('buatLamaran');
             Route::delete('/{id}/hapusLamaran', [MagangApplicationController::class, 'destroy'])->name('hapusLamaran');
+            Route::post('/lamar/{id}', [MagangApplicationController::class, 'storeMhs'])->name('magangApplication.storeMhs')->middleware('auth');;
         });
     });
 
     Route::prefix('dosen')->middleware('role:Dosen')->group(function () {
         Route::get('/dashboard', [DashboardController::class, 'indexDosen'])->name('dosen.dashboard');
+    });
+
+    Route::prefix('company')->middleware('role:Company')->group(function () {
+        Route::get('/dashboard', [DashboardController::class, 'indexCompany'])->name('company.dashboard');
+        Route::get('/verifikasi', [DashboardController::class, 'indexCompany'])->name('company.verifikasi');
     });
 
     Route::get('logout', [AuthController::class, 'logout'])->name('logout');

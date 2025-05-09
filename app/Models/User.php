@@ -37,6 +37,11 @@ class User extends Authenticatable
         return $this->hasOne(Dosen::class);
     }
 
+    public function company(): HasOne
+    {
+        return $this->hasOne(Company::class);
+    }
+    
     public function getRoleName(): string
     {
         return $this->level->level_nama;

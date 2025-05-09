@@ -75,6 +75,38 @@ class MagangApplicationController extends Controller
         return redirect(route('lamaran'))->with('success', 'Lamaran berhasil dikirim.');
     }
     
+    public function storeMhs($id)
+    {
+        $user = auth()->user();
+
+        if (!$user) {
+            return redirect()->back()->with('error', 'Silakan login terlebih dahulu.');
+        }
+
+        // Cek apakah user punya role mahasiswa (opsional tapi disarankan)
+        if ($user->level_nama !== 'mahasiswa') {
+            return redirect()->back()->with('error', 'Hanya mahasiswa yang dapat melamar.');
+        }
+        $mahasiswa = Mahasiswa::where('user_id', $user->user_id)->first();
+        // Cegah duplikat lamaran
+        $cek = MagangApplication::where('mahasiswa_id', $mahasiswa->mahasiswa_id)
+                    ->where('lowongan_id', $id)
+                    ->first();
+
+        if ($cek) {
+            return redirect()->back()->with('success', 'Kamu sudah melamar lowongan ini.');
+        }
+
+        MagangApplication::create([
+            'mahasiswa_id' => $mahasiswa->mahasiswa_id,
+            'lowongan_id' => $id,
+            'status' => 'Pending',
+        ]);
+
+        return redirect()->back()->with('success', 'Lamaran berhasil dikirim.');
+    }
+
+
     /**
      * Display the specified resource.
      */

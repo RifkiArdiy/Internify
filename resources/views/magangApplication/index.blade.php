@@ -21,6 +21,7 @@
                         </th>
                         <th class="nk-tb-col export-col"><span class="sub-text">Mahasiswa</span></th>
                         <th class="nk-tb-col export-col"><span class="sub-text">Lowongan</span></th>
+                        <th class="nk-tb-col export-col"><span class="sub-text">Perusahaan</span></th>
                         <th class="nk-tb-col export-col"><span class="sub-text">Status</span></th>
                         <th class="nk-tb-col export-col"><span class="sub-text">Aksi</span></th>
                     </tr>
@@ -39,6 +40,9 @@
                             </td>
                             <td class="nk-tb-col">
                                 <span>{{ $magang->lowongan->title }}</span>
+                            </td>
+                            <td class="nk-tb-col">
+                                <span>{{ $magang->lowongan->company->name }}</span>
                             </td>
                             <td class="nk-tb-col">
                                 <span>{{ $magang->status }}</span>

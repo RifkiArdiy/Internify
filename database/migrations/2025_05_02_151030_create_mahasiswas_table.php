@@ -16,8 +16,8 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id')->index();
             $table->unsignedBigInteger('prodi_id')->index();
             $table->string('nim')->unique();
-            $table->string('no_telp')->nullable();
-            $table->string('alamat')->nullable();
+            $table->string('no_telp')->nullable()->default('-');
+            $table->string('alamat')->nullable()->default('-');
             $table->timestamps();
 
             $table->foreign('user_id')->references('user_id')->on('users')->onDelete('cascade');

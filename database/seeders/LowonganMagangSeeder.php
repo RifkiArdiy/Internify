@@ -14,7 +14,7 @@ class LowonganMagangSeeder extends Seeder
     public function run(): void
     {
         $LowonganMagangData = [
-            ['company_id' => '1', 'period_id' => '2', 'title' => 'MSIB BATCH 1','description' => 'assdno', 'requirements' => 'fsafsad','location' => 'Malang'],
+            ['company_id' => '1', 'period_id' => '1', 'title' => 'MSIB BATCH 1','description' => 'assdno', 'requirements' => 'fsafsad','location' => 'Malang'],
         ];
 
         foreach ($LowonganMagangData as $data) {
