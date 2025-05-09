@@ -11,8 +11,8 @@ class CompanyController extends Controller
     {
         $companies = Company::all();
         $breadcrumb = (object) [
-            'title' => 'Semua Mitra',
-            'subtitle' => ['Total data Company ' . $companies->count()]
+            'title' => 'Company',
+            'subtitle' => ['Jumlah Perusahaan Mitra : ' . $companies->count()]
         ];
         return view('admin.company.index', compact('companies', 'breadcrumb'));
     }
