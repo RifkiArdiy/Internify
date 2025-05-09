@@ -42,6 +42,30 @@
             <span class="nk-menu-text">Companies</span>
         </a>
     </li>
+    <li class="nk-menu-item">
+        <a href="{{ route('periodeMagang.index') }}" class="nk-menu-link">
+            <span class="nk-menu-icon">
+                <em class="icon ni ni-calendar"></em>
+            </span>
+            <span class="nk-menu-text">Periode Magang</span>
+        </a>
+    </li>
+    <li class="nk-menu-item">
+        <a href="{{ route('lowonganMagang.index') }}" class="nk-menu-link">
+            <span class="nk-menu-icon">
+                <em class="icon ni ni-briefcase"></em>
+            </span>
+            <span class="nk-menu-text">Lowongan Magang</span>
+        </a>
+    </li>
+    <li class="nk-menu-item">
+        <a href="{{ route('magangApplication.index') }}" class="nk-menu-link">
+            <span class="nk-menu-icon">
+                <em class="icon ni ni-file-text"></em>
+            </span>
+            <span class="nk-menu-text">Lamaran Magang</span>
+        </a>
+    </li>
     <li class="nk-menu-item has-sub">
         <a href="{{ route('prodi.index') }}" class="nk-menu-link">
             <span class="nk-menu-icon">
@@ -88,9 +112,25 @@
         </a>
     </li>
     <li class="nk-menu-item">
+
         <a href="{{ route('mahasiswa.evaluasi.index') }}" class="nk-menu-link">
             <span class="nk-menu-icon"><em class="icon ni ni-star"></em></span>
             <span class="nk-menu-text">Evaluasi Magang</span>
+        </a>
+    </li>
+        <a href="{{ route('lowonganMagang.indexMhs') }}" class="nk-menu-link">
+            <span class="nk-menu-icon">
+                <em class="icon ni ni-briefcase"></em>
+            </span>
+            <span class="nk-menu-text">Lowongan Magang</span>
+        </a>
+    </li>
+    <li class="nk-menu-item">
+        <a href="{{ route('lamaran') }}" class="nk-menu-link">
+            <span class="nk-menu-icon">
+                <em class="icon ni ni-file-text"></em>
+            </span>
+            <span class="nk-menu-text">Lamaran Magang</span>
         </a>
     </li>
     <!-- .nk-menu-item -->

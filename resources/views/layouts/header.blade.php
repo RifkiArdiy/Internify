@@ -17,10 +17,7 @@
             <!-- .nk-header-brand -->
             <div class="nk-header-news d-none d-xl-block">
                 <div class="nk-news-list">
-                    <a class="nk-news-item" href="#">
-                        <div class="nk-news-icon">
-                            <em class="icon ni ni-card-view"></em>
-                        </div>
+                    <a class="nk-news-item" href="{{ route('welcome.index') }}">
                         <div class="nk-news-text">
                             <h4>Internify</h4>
                         </div>

@@ -2,9 +2,9 @@
 
 @section('action')
     <li class="nk-block-tools-opt">
-        <a href="{{ route('companies.create') }}" class="btn btn-primary">
+        <a href="{{ route('periodeMagang.create') }}" class="btn btn-primary">
             <em class="icon ni ni-plus"></em>
-            <span>Tambah Mitra</span>
+            <span>Tambah Periode</span>
         </a>
     </li>
 @endsection
@@ -24,41 +24,29 @@
                                 <label class="custom-control-label" for="uid"></label>
                             </div>
                         </th>
-                        <th class="nk-tb-col export-col"><span class="sub-text">Perusahaan</span></th>
-                        <th class="nk-tb-col export-col"><span class="sub-text">Bidang Industri</span></th>
-                        <th class="nk-tb-col export-col"><span class="sub-text">Alamat</span></th>
-                        <th class="nk-tb-col export-col"><span class="sub-text">Kontak</span></th>
+                        <th class="nk-tb-col export-col"><span class="sub-text">Program Magang</span></th>
+                        <th class="nk-tb-col export-col"><span class="sub-text">Tanggal Mulai</span></th>
+                        <th class="nk-tb-col export-col"><span class="sub-text">Tanggal Berakhir</span></th>
                         <th class="nk-tb-col nk-tb-col-tools text-end"></th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($companies as $company)
+                    @foreach ($pegang as $pegangs)
                         <tr class="nk-tb-item">
                             <td class="nk-tb-col nk-tb-col-check">
                                 <div class="custom-control custom-control-sm custom-checkbox notext">
-                                    <input type="checkbox" class="custom-control-input" id="uid{{ $company->company_id }}">
-                                    <label class="custom-control-label" for="uid{{ $company->company_id }}"></label>
+                                    <input type="checkbox" class="custom-control-input" id="uid{{ $pegangs->period_id }}">
+                                    <label class="custom-control-label" for="uid{{ $pegangs->period_id }}"></label>
                                 </div>
                             </td>
                             <td class="nk-tb-col">
-                                <div class="user-card">
-                                    <div class="user-avatar bg-dark d-none d-sm-flex">
-                                        <img src="{{ asset('assets/home/images/team/a.jpg') }}" alt="company-logo">
-                                    </div>
-                                    <div class="user-info">
-                                        <span class="tb-lead">{{ $company->name }}<span
-                                                class="dot dot-success d-md-none ms-1"></span></span>
-                                    </div>
-                                </div>
+                                <span>{{ $pegangs->name }}</span>
                             </td>
                             <td class="nk-tb-col">
-                                <span>{{ $company->industry }}</span>
+                                <span>{{ $pegangs->start_date }}</span>
                             </td>
                             <td class="nk-tb-col">
-                                <span>{{ $company->address }}</span>
-                            </td>
-                            <td class="nk-tb-col">
-                                <span>{{ $company->contact }}</span>
+                                <span>{{ $pegangs->end_date }}</span>
                             </td>
                             <td class="nk-tb-col nk-tb-col-tools">
                                 <ul class="nk-tb-actions gx-1">
@@ -90,7 +78,7 @@
                                                                 View</span></a></li>
                                                     <li><a href="#"><em class="icon ni ni-eye"></em><span>View
                                                                 Details</span></a></li>
-                                                    <li><a href="{{ route('companies.edit', $company->company_id) }}"><em
+                                                    <li><a href="{{ route('periodeMagang.edit', $pegangs->period_id) }}"><em
                                                                 class="icon ni ni-repeat"></em><span>Edit</span></a>
                                                     </li>
                                                     <li><a href="#"><em
@@ -102,7 +90,7 @@
                                                                 Pass</span></a></li>
                                                     <li><a href="#"><em class="icon ni ni-shield-off"></em><span>Reset
                                                                 2FA</span></a></li>
-                                                    <li><a href="{{ route('companies.destroy', $company->company_id) }}"><em
+                                                    <li><a href="{{ route('periodeMagang.destroy', $pegangs->period_id) }}"><em
                                                                 class="icon ni ni-na"></em><span>Hapus
                                                                 User</span></a></li>
                                                 </ul>

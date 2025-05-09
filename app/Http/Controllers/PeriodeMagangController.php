@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\PeriodeMagang;
 use Illuminate\Http\Request;
 
 class PeriodeMagangController extends Controller
@@ -11,7 +12,13 @@ class PeriodeMagangController extends Controller
      */
     public function index()
     {
-        //
+        $pegang = PeriodeMagang::all();
+        $breadcrumb = (object) [
+            'title' => 'Periode Magang',
+            'subtitle' => ['Jumlah Periode Magang : ' . $pegang->count()]
+        ];
+
+        return view('periodeMagang.index', compact('pegang', 'breadcrumb'));
     }
 
     /**
@@ -19,7 +26,12 @@ class PeriodeMagangController extends Controller
      */
     public function create()
     {
-        //
+        $breadcrumb = (object) [
+            'title' => 'Tambah Periode Magang',
+            'subtitle' => ['Masukkan detail periode magang']
+        ];
+
+        return view('periodeMagang.create', compact('breadcrumb'));
     }
 
     /**
@@ -27,7 +39,13 @@ class PeriodeMagangController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        PeriodeMagang::create([
+            'name' => $request->name,
+            'start_date' => $request->start_date,
+            'end_date' => $request->end_date,
+        ]);
+
+        return redirect(route('periodeMagang.index'))->with('success', 'Periode berhasil ditambahkan');
     }
 
     /**
@@ -43,7 +61,14 @@ class PeriodeMagangController extends Controller
      */
     public function edit(string $id)
     {
-        //
+
+        $breadcrumb = (object) [
+            'title' => 'Edit Periode Magang',
+            'subtitle' => ['Perbarui detail periode magang']
+        ];
+
+        $pegang = PeriodeMagang::find($id);
+        return view('periodeMagang.edit', compact('pegang', 'breadcrumb'));
     }
 
     /**
@@ -51,7 +76,14 @@ class PeriodeMagangController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $pegang = PeriodeMagang::find($id);
+        $pegang->update([
+            'name' => $request->name,
+            'start_date' => $request->start_date,
+            'end_date' => $request->end_date,
+        ]);
+
+        return redirect(route('periodeMagang.index'));
     }
 
     /**
@@ -59,6 +91,9 @@ class PeriodeMagangController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $pegang = PeriodeMagang::find($id);
+        $pegang->delete();
+
+        return redirect(route('periodeMagang.index'))->with('success', 'Periode berhasil dihapus');
     }
 }

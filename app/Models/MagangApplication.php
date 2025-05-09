@@ -17,7 +17,7 @@ class MagangApplication extends Model
 
     public function student()
     {
-        return $this->belongsTo(Mahasiswa::class);
+        return $this->belongsTo(Mahasiswa::class, 'mahasiswa_id');
     }
 
     public function lowongan()

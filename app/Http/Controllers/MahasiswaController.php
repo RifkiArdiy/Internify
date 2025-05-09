@@ -19,7 +19,7 @@ class MahasiswaController extends Controller
         //
         $mahasiswas = Mahasiswa::with('user', 'prodi')->get();
         $breadcrumb = (object) [
-            'title' => 'Table Mahasiswa',
+            'title' => 'Mahasiswa',
             'subtitle' => ['Jumlah total Mahasiswa ' . $mahasiswas->count()]
         ];
         return view('mahasiswa.index', compact('mahasiswas', 'breadcrumb'));
