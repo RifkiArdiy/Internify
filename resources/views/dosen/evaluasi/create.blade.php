@@ -1,9 +1,10 @@
 @extends('layouts.app')
 
 @section('content')
-    <h2>Tambah Evaluasi Magang</h2>
+    
     <form action="{{ route('dosen.evaluasi.store') }}" method="POST">
-        @csrf
+        <h2>Tambah Evaluasi Magang</h2>
+       
         <div class="mb-3">
             <label for="mahasiswa_id" class="form-label">Mahasiswa</label>
             <select name="mahasiswa_id" class="form-control" required>

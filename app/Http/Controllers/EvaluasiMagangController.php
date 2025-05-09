@@ -18,8 +18,7 @@ class EvaluasiMagangController extends Controller
         ];
         $evaluations = EvaluasiMagang::with('mahasiswa', 'company')->latest()->get();
         return view('dosen.evaluasi.index', ['evaluasi' => $evaluations], compact('breadcrumb'));
-    }
-    
+    }  
 
     public function create()
     {
@@ -29,7 +28,7 @@ class EvaluasiMagangController extends Controller
             'title' => 'Tambah Evaluasi Magang',
             'subtitle' => ['Form Validation']
         ];
-        return view('evaluasi_magang.create', compact('mahasiswas', 'companies', 'breadcrumb'));
+        return view('dosen.evaluasi.create', compact('mahasiswas', 'companies', 'breadcrumb'));
     }
 
     public function store(Request $request)
@@ -42,7 +41,7 @@ class EvaluasiMagangController extends Controller
 
         EvaluasiMagang::create($request->all());
 
-        return redirect()->route('evaluasi.index')->with('success', 'Evaluasi berhasil disimpan');
+        return redirect()->route('dosen.evaluasi.index')->with('success', 'Evaluasi berhasil disimpan');
     }
 
     public function edit($id)
@@ -50,13 +49,12 @@ class EvaluasiMagangController extends Controller
         $evaluation = EvaluasiMagang::findOrFail($id);
         $mahasiswas = Mahasiswa::all();
         $companies = Company::all();
-        return view('evaluasi_magang.edit', [
-            'evaluasi_magang' => $evaluation,
+        return view('dosen.evaluasi.edit', [
+            'evaluation' => $evaluation,
             'mahasiswas' => $mahasiswas,
-            'companies' => $companies
+            'companies' => $companies,
         ]);
     }
-
 
     public function update(Request $request, $id)
     {

@@ -2,7 +2,7 @@
 
 @section('action')
     <li class="nk-block-tools-opt">
-        <a href="{{ route('dosen.create') }}" class="btn btn-primary">
+        <a href="{{ route('dosen.evaluasi.create') }}" class="btn btn-primary">
             <em class="icon ni ni-plus"></em>
             <span>Tambah Dosen</span>
         </a>
