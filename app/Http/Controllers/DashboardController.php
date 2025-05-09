@@ -33,4 +33,13 @@ class DashboardController extends Controller
         ];
         return view('dashboard.dosen', compact('breadcrumb'));
     }
+
+    public function indexCompany()
+    {
+        $breadcrumb = (object) [
+            'title' => 'Dashboard',
+            'subtitle' => ['Welcome to Dashboard Internify']
+        ];
+        return view('dashboard.company', compact('breadcrumb'));
+    }
 }

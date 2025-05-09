@@ -1,48 +1,108 @@
-
 @extends('layouts.app')
-
-@section('content')
-    @if (session('success'))
-        <div class="alert alert-success">{{ session('success') }}</div>
-    @endif
 
 @section('action')
     <li class="nk-block-tools-opt">
         <a href="{{ route('periodeMagang.create') }}" class="btn btn-primary">
             <em class="icon ni ni-plus"></em>
-            <span>Tambah Periode Magang</span>
+            <span>Tambah Periode</span>
         </a>
     </li>
 @endsection
 
-<table border="1">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Nama Periode Magang</th>
-                <th>Masa Awal</th>
-                <th>Masa Akhir</th>
-                <th>Aksi</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach($pegang as $item)
-            <tr>
-                <td>{{ $item->period_id }}</td>
-                <td>{{ $item->name }}</td>
-                <td>{{ $item->start_date }}</td>
-                <td>{{ $item->end_date }}</td>
-                <td>
-                    <a href="{{ route('periodeMagang.edit', $item->period_id) }}">Edit</a> |
-                    <form action="{{ route('periodeMagang.destroy', $item->period_id) }}" method="POST" style="display:inline;">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" onclick="return confirm('Yakin ingin menghapus?')">Delete</button>
-                    </form>
-                </td>
-            </tr>
-            @endforeach
-        </tbody>
-    </table>
-</body>
+@section('content')
+    @if (session('success'))
+        <div class="alert alert-success">{{ session('success') }}</div>
+    @endif
+    <div class="card card-bordered card-preview">
+        <div class="card-inner table-responsive">
+            <table class="datatable-init-export nowrap nk-tb-list nk-tb-ulist" data-auto-responsive="false">
+                <thead>
+                    <tr class="nk-tb-item nk-tb-head">
+                        <th class="nk-tb-col nk-tb-col-check">
+                            <div class="custom-control custom-control-sm custom-checkbox notext">
+                                <input type="checkbox" class="custom-control-input" id="uid">
+                                <label class="custom-control-label" for="uid"></label>
+                            </div>
+                        </th>
+                        <th class="nk-tb-col export-col"><span class="sub-text">Program Magang</span></th>
+                        <th class="nk-tb-col export-col"><span class="sub-text">Tanggal Mulai</span></th>
+                        <th class="nk-tb-col export-col"><span class="sub-text">Tanggal Berakhir</span></th>
+                        <th class="nk-tb-col nk-tb-col-tools text-end"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($pegang as $pegangs)
+                        <tr class="nk-tb-item">
+                            <td class="nk-tb-col nk-tb-col-check">
+                                <div class="custom-control custom-control-sm custom-checkbox notext">
+                                    <input type="checkbox" class="custom-control-input" id="uid{{ $pegangs->period_id }}">
+                                    <label class="custom-control-label" for="uid{{ $pegangs->period_id }}"></label>
+                                </div>
+                            </td>
+                            <td class="nk-tb-col">
+                                <span>{{ $pegangs->name }}</span>
+                            </td>
+                            <td class="nk-tb-col">
+                                <span>{{ $pegangs->start_date }}</span>
+                            </td>
+                            <td class="nk-tb-col">
+                                <span>{{ $pegangs->end_date }}</span>
+                            </td>
+                            <td class="nk-tb-col nk-tb-col-tools">
+                                <ul class="nk-tb-actions gx-1">
+                                    <li class="nk-tb-action-hidden">
+                                        <a href="#" class="btn btn-trigger btn-icon" data-bs-toggle="tooltip"
+                                            data-bs-placement="top" title="Wallet">
+                                            <em class="icon ni ni-wallet-fill"></em>
+                                        </a>
+                                    </li>
+                                    <li class="nk-tb-action-hidden">
+                                        <a href="#" class="btn btn-trigger btn-icon" data-bs-toggle="tooltip"
+                                            data-bs-placement="top" title="Send Email">
+                                            <em class="icon ni ni-mail-fill"></em>
+                                        </a>
+                                    </li>
+                                    <li class="nk-tb-action-hidden">
+                                        <a href="#" class="btn btn-trigger btn-icon" data-bs-toggle="tooltip"
+                                            data-bs-placement="top" title="Suspend">
+                                            <em class="icon ni ni-user-cross-fill"></em>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <div class="drodown">
+                                            <a href="#" class="dropdown-toggle btn btn-icon btn-trigger"
+                                                data-bs-toggle="dropdown"><em class="icon ni ni-more-h"></em></a>
+                                            <div class="dropdown-menu dropdown-menu-end">
+                                                <ul class="link-list-opt no-bdr">
+                                                    <li><a href="#"><em class="icon ni ni-focus"></em><span>Quick
+                                                                View</span></a></li>
+                                                    <li><a href="#"><em class="icon ni ni-eye"></em><span>View
+                                                                Details</span></a></li>
+                                                    <li><a href="{{ route('periodeMagang.edit', $pegangs->period_id) }}"><em
+                                                                class="icon ni ni-repeat"></em><span>Edit</span></a>
+                                                    </li>
+                                                    <li><a href="#"><em
+                                                                class="icon ni ni-activity-round"></em><span>Activities</span></a>
+                                                    </li>
+                                                    <li class="divider"></li>
+                                                    <li><a href="#"><em
+                                                                class="icon ni ni-shield-star"></em><span>Reset
+                                                                Pass</span></a></li>
+                                                    <li><a href="#"><em class="icon ni ni-shield-off"></em><span>Reset
+                                                                2FA</span></a></li>
+                                                    <li><a href="{{ route('periodeMagang.destroy', $pegangs->period_id) }}"><em
+                                                                class="icon ni ni-na"></em><span>Hapus
+                                                                User</span></a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+    </div>
 @endsection

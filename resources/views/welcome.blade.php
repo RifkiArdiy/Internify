@@ -99,6 +99,14 @@
                                                                         <span> Dosen Dashboard</span>
                                                                     </a>
                                                                 </li>
+                                                            @elseif (Auth::user()->level->level_nama == 'Company')
+                                                                <li class="menu-item">
+                                                                    <a href="{{ route('company.dashboard') }}"
+                                                                        class="menu-link">
+                                                                        <em class="icon ni ni-dashboard"></em>
+                                                                        <span> Company Dashboard</span>
+                                                                    </a>
+                                                                </li>
                                                             @endif
                                                             <li class="menu-item">
                                                                 <a href="{{ route('logout') }}" class="menu-link">

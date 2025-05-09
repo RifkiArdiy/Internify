@@ -118,7 +118,7 @@ class UserSeeder extends Seeder
             'alamat' => 'Malang'
         ]);
 
-        // Dosen
+        // // Dosen
         User::create([
             'level_id' => 3,
             'name' => 'Prof. Dr. Siti Aminah',

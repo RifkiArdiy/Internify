@@ -129,7 +129,22 @@
             <span class="nk-menu-text">Lamaran Magang</span>
         </a>
     </li>
-
-
-    <!-- .nk-menu-item -->
+@endif
+@if (Auth::user()->level->level_nama == 'Company')
+    <li class="nk-menu-item">
+        <a href="{{ route('company.dashboard') }}" class="nk-menu-link">
+            <span class="nk-menu-icon">
+                <em class="icon ni ni-dashlite"></em>
+            </span>
+            <span class="nk-menu-text">Dashboard</span>
+        </a>
+    </li>
+    <li class="nk-menu-item">
+        <a href="{{ route('company.verifikasi') }}" class="nk-menu-link">
+            <span class="nk-menu-icon">
+                <em class="icon ni ni-check"></em>
+            </span>
+            <span class="nk-menu-text">Verifikasi</span>
+        </a>
+    </li>
 @endif

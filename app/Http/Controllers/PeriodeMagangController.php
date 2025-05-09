@@ -12,9 +12,10 @@ class PeriodeMagangController extends Controller
      */
     public function index()
     {
+        $pegang = PeriodeMagang::all();
         $breadcrumb = (object) [
             'title' => 'Periode Magang',
-            'subtitle' => ['Kelola Periode Magang']
+            'subtitle' => ['Jumlah Periode Magang : ' . $pegang->count()]
         ];
 
         $pegang = PeriodeMagang::all();
