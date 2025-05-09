@@ -9,7 +9,6 @@ use App\Http\Controllers\MahasiswaController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WelcomeController;
 use App\Models\Mahasiswa;
-use App\Http\Controllers\EvaluasiMagangController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\MagangApplicationController;
@@ -38,13 +37,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     Route::prefix('admin')->group(function () {
-        Route::get('/', [AdminController::class, 'index'])->name('admin.index');
-        Route::get('/create', [AdminController::class, 'create'])->name('admin.create');
-        Route::post('/store', [AdminController::class, 'store'])->name('admin.store');
-        Route::get('/edit', [AdminController::class, 'edit'])->name('admin.edit');
-        Route::put('/update', [AdminController::class, 'update'])->name('admin.update');
-        Route::get('/delete', [AdminController::class, 'destroy'])->name('admin.destroy');
-    });
+       });
 
         Route::get('/dashboard', [DashboardController::class, 'indexAdmin'])->name('admin.dashboard');
 
@@ -105,14 +98,22 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/lamaran', [MagangApplicationController::class, 'index'])->name('lamaran');
     });
 
-    Route::prefix('dosen')->middleware('role:dosen')->group(function () {
-        Route::get('/dashboard', [DashboardController::class, 'indexDosen'])->name('dosen.dashboard');
-    });
-
-    // routes/web.php
-    Route::preficx('admin')->middleware('role:admin')->group(function () {
-        Route::resource('evaluasi_magang', EvaluasiMagangController::class);
+    Route::prefix('dosen')->middleware(['auth', 'role:Dosen'])->name('dosen.')->group(function () {
+        Route::get('/dashboard', [DashboardController::class, 'indexDosen'])->name('dashboard');
+    
+        // Halaman profil dosen
+        Route::get('/profil', [DosenController::class, 'profilSaya'])->name('profil');
+        Route::put('/profil', [DosenController::class, 'updateProfilSaya'])->name('profil.update');
+    
+        // Halaman evaluasi magang
+        Route::prefix('evaluasi')->name('evaluasi.')->group(function () {
+            Route::get('/', [EvaluasiMagangController::class, 'index'])->name('index');
+            Route::get('/create', [EvaluasiMagangController::class, 'create'])->name('create');
+            Route::post('/', [EvaluasiMagangController::class, 'store'])->name('store');
+            Route::get('/{evaluasi}/edit', [EvaluasiMagangController::class, 'edit'])->name('edit');
+            Route::put('/{evaluasi}', [EvaluasiMagangController::class, 'update'])->name('update');
+            Route::delete('/{evaluasi}', [EvaluasiMagangController::class, 'destroy'])->name('destroy');
+        });        
     });
 
     Route::get('logout', [AuthController::class, 'logout'])->name('logout');
-
