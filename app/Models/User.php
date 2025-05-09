@@ -22,7 +22,7 @@ class User extends Authenticatable
 
     protected $cast = ['password' => 'hashed'];
 
-    public function level(): BelongsTo //Menunjukkan bahwa setiap user memiliki relasi belongsTo dengan tabel LevelModel, dihubungkan melalui level_id.
+    public function level(): BelongsTo
     {
         return $this->belongsTo(Level::class, 'level_id', 'level_id');
     }

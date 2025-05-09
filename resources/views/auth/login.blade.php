@@ -10,7 +10,7 @@
     <!-- Fav Icon  -->
     <link rel="shortcut icon" href="{{ asset('assets/home/images/favicon.png') }}">
     <!-- Page Title  -->
-    <title>Login | DashLite Admin Template</title>
+    <title>Login | Internify</title>
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
@@ -174,7 +174,7 @@
                                                     alt="">
                                             </div>
                                             <div class="nk-feature-content py-4 p-sm-5">
-                                                <h4>Dashlite</h4>
+                                                <h4>Internify</h4>
                                                 <p>You can start to create your products easily with its user-friendly
                                                     design & most completed responsive layout.</p>
                                             </div>
@@ -189,7 +189,7 @@
                                                     alt="">
                                             </div>
                                             <div class="nk-feature-content py-4 p-sm-5">
-                                                <h4>Dashlite</h4>
+                                                <h4>Internify</h4>
                                                 <p>You can start to create your products easily with its user-friendly
                                                     design & most completed responsive layout.</p>
                                             </div>
@@ -204,7 +204,7 @@
                                                     alt="">
                                             </div>
                                             <div class="nk-feature-content py-4 p-sm-5">
-                                                <h4>Dashlite</h4>
+                                                <h4>Internify</h4>
                                                 <p>You can start to create your products easily with its user-friendly
                                                     design & most completed responsive layout.</p>
                                             </div>

@@ -860,10 +860,11 @@
                     <div class="row justify-content-center text-center">
                         <div class="col-xl-7 col-lg-9">
                             <div class="section-head">
-                                <h2 class="title text-dark px-1">Have questions or need support? Our team is here to
-                                    help!</h2>
-                                <p>Continually network virtual strategic theme areas vis-a-vis ubiquitous
-                                    potentialities. Holisticly negotiate focused e-tailers without premium solutions..
+                                <h2 class="title text-dark px-1">Hubungkan dengan Tujuan Proyek</h2>
+                                <p>
+                                    Internify adalah buah dari kerja keras dan kolaborasi tim kami. Setiap anggota
+                                    membawa keahlian unik yang berkontribusi pada terciptanya sistem manajemen magang
+                                    yang efektif dan efisien.
                                 </p>
                             </div>
                         </div>

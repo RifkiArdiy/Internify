@@ -19,14 +19,14 @@
 <body class="nk-body bg-white npc-general pg-auth">
     <div class="nk-app-root">
         @if ($errors->any())
-    <div class="alert alert-danger">
-        <ul class="mb-0">
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-@endif
+            <div class="alert alert-danger">
+                <ul class="mb-0">
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
         <!-- main @s -->
         <div class="nk-main ">
             <!-- wrap @s -->
@@ -209,7 +209,7 @@
                                                     alt="">
                                             </div>
                                             <div class="nk-feature-content py-4 p-sm-5">
-                                                <h4>Dashlite</h4>
+                                                <h4>Internify</h4>
                                                 <p>You can start to create your products easily with its user-friendly
                                                     design & most completed responsive layout.</p>
                                             </div>
@@ -224,7 +224,7 @@
                                                     alt="">
                                             </div>
                                             <div class="nk-feature-content py-4 p-sm-5">
-                                                <h4>Dashlite</h4>
+                                                <h4>Internify</h4>
                                                 <p>You can start to create your products easily with its user-friendly
                                                     design & most completed responsive layout.</p>
                                             </div>
@@ -239,7 +239,7 @@
                                                     alt="">
                                             </div>
                                             <div class="nk-feature-content py-4 p-sm-5">
-                                                <h4>Dashlite</h4>
+                                                <h4>Internify</h4>
                                                 <p>You can start to create your products easily with its user-friendly
                                                     design & most completed responsive layout.</p>
                                             </div>
