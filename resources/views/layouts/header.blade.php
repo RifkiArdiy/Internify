@@ -90,7 +90,14 @@
                             </div>
                             <div class="dropdown-inner">
                                 <ul class="link-list">
-                                    @if (Auth::user()->level->level_nama == 'Mahasiswa')
+                                    @if (Auth::user()->level->level_nama == 'Administrator')
+                                    <li>
+                                        <a href="{{ route('admin.profile') }}">
+                                            <em class="icon ni ni-user-alt"></em>
+                                            <span>View Profile</span>
+                                        </a>
+                                    </li>
+                                    @elseif (Auth::user()->level->level_nama == 'Mahasiswa')
                                     <li>
                                         <a href="{{ route('mahasiswa.profile') }}">
                                             <em class="icon ni ni-user-alt"></em>

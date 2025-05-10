@@ -40,6 +40,8 @@ Route::middleware(['auth'])->group(function () {
     Route::prefix('admin')->middleware('role:Administrator')->group(function () {
         Route::get('/dashboard', [DashboardController::class, 'indexAdmin'])->name('admin.dashboard');
         Route::get('/profile', [ProfileController::class, 'index'])->name('admin.profile');
+        Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
+        Route::post('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
         Route::prefix('prodi')->group(function () {
             Route::get('/', [ProgramStudiController::class, 'index'])->name('prodi.index');
             Route::get('/create', [ProgramStudiController::class, 'create'])->name('prodi.create');
