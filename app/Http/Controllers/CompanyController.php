@@ -17,6 +17,15 @@ class CompanyController extends Controller
         return view('company.index', compact('companies', 'breadcrumb'));
     }
 
+    public function indexVerifikasi()
+    {
+        $companies = Company::all();
+        $breadcrumb = (object) [
+            'title' => 'Verifikasi Perusahaan Mitra',
+            'subtitle' => ['Jumlah Perusahaan Mitra : ' . $companies->count()]
+        ];
+        return view('company.verifikasi', compact('companies', 'breadcrumb'));
+    }
     public function create()
     {
         $breadcrumb = (object) [

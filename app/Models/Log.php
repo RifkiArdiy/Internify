@@ -24,4 +24,9 @@ class Log extends Model
     {
         return $this->belongsTo(Dosen::class);
     }
+
+    public function companies()
+    {
+        return $this->belongsTo(Company::class);
+    }
 }

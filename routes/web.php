@@ -139,7 +139,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::prefix('company')->middleware('role:Company')->group(function () {
         Route::get('/dashboard', [DashboardController::class, 'indexCompany'])->name('company.dashboard');
-        Route::get('/verifikasi', [DashboardController::class, 'indexCompany'])->name('company.verifikasi');
+        Route::get('/verifikasi', [CompanyController::class, 'indexVerifikasi'])->name('company.verifikasi');
     });
 
     Route::get('logout', [AuthController::class, 'logout'])->name('logout');
