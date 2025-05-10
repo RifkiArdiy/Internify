@@ -90,12 +90,28 @@
                             </div>
                             <div class="dropdown-inner">
                                 <ul class="link-list">
+                                    @if (Auth::user()->level->level_nama == 'Mahasiswa')
                                     <li>
-                                        <a href="html/user-profile-regular.html">
+                                        <a href="{{ route('mahasiswa.profile') }}">
                                             <em class="icon ni ni-user-alt"></em>
                                             <span>View Profile</span>
                                         </a>
                                     </li>
+                                    @elseif (Auth::user()->level->level_nama == 'Dosen')
+                                    <li>
+                                        <a href="{{ route('dosen.profile') }}">
+                                            <em class="icon ni ni-user-alt"></em>
+                                            <span>View Profile</span>
+                                        </a>
+                                    </li>
+                                    @elseif (Auth::user()->level->level_nama == 'Company')
+                                    <li>
+                                        <a href="{{ route('company.profile') }}">
+                                            <em class="icon ni ni-user-alt"></em>
+                                            <span>View Profile</span>
+                                        </a>
+                                    </li>
+                                    @endif
                                     <li>
                                         <a href="html/user-profile-setting.html">
                                             <em class="icon ni ni-setting-alt"></em>
@@ -109,7 +125,7 @@
                                         </a>
                                     </li>
                                 </ul>
-                            </div>
+                            </div>                            
                             <div class="dropdown-inner">
                                 <ul class="link-list">
                                     <li>
