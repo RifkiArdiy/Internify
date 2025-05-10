@@ -1,12 +1,35 @@
 @extends('layouts.app')
 
 @section('action')
+    @if (Auth::user()->level->level_nama == 'Administrator')
     <li class="nk-block-tools-opt">
-        <a href="{{ route('profile.edit') }}" class="btn btn-primary">
+        <a href="{{ route('admin.profile.edit') }}" class="btn btn-primary">
             <em class="icon ni ni-edit"></em>
             <span>Edit Profile</span>
         </a>
     </li>
+    @elseif (Auth::user()->level->level_nama == 'Dosen')
+    <li class="nk-block-tools-opt">
+        <a href="{{ route('dosen.profile.edit') }}" class="btn btn-primary">
+            <em class="icon ni ni-edit"></em>
+            <span>Edit Profile</span>
+        </a>
+    </li>
+    @elseif (Auth::user()->level->level_nama == 'Mahasiswa')
+    <li class="nk-block-tools-opt">
+        <a href="{{ route('mahasiswa.profile.edit') }}" class="btn btn-primary">
+            <em class="icon ni ni-edit"></em>
+            <span>Edit Profile</span>
+        </a>
+    </li>
+    @else
+    <li class="nk-block-tools-opt">
+        <a href="{{ route('company.profile.edit') }}" class="btn btn-primary">
+            <em class="icon ni ni-edit"></em>
+            <span>Edit Profile</span>
+        </a>
+    </li>
+    @endif
 @endsection
 
 @section('content')
