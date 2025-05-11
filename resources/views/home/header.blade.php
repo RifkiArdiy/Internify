@@ -39,65 +39,100 @@
                     @auth
                         <div class="nk-header-tools">
                             <ul class="nk-quick-nav">
-                                <li class="menu-item has-sub">
-                                    {{-- <a href="#" class="menu-link menu-toggle">Landing</a> --}}
-                                    <div class="user-toggle">
-                                        <div class="user-info d-none d-md-block">
-                                            <div class="menu-link nav-link fw-bold">
-                                                Hi..!! {{ Auth::user()->name }}
+                                <li class="dropdown user-dropdown">
+                                    <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown">
+                                        <div class="user-toggle">
+                                            <div class="user-avatar sm">
+                                                <span>{{ strtoupper(substr(Auth::user()->name, 0, 2)) }}</span>
+                                            </div>
+                                            <div class="user-info d-none d-md-block">
+                                                <div class="user-status">{{ Auth::user()->level->level_nama ?? 'Guest' }}
+                                                </div>
+                                                <div class="user-name dropdown-indicator">
+                                                    {{ Auth::user()->name ?? 'Guest' }}
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="menu-sub">
-                                        <ul class="menu-list">
-                                            <div class="menu-info">
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-md dropdown-menu-end dropdown-menu-s1">
+                                        <div class="dropdown-inner user-card-wrap bg-lighter d-none d-md-block">
+                                            <div class="user-card">
+                                                <div class="user-avatar">
+                                                    <span>{{ strtoupper(substr(Auth::user()->name, 0, 2)) }}</span>
+                                                </div>
+                                                <div class="user-info">
+                                                    <span class="lead-text">{{ Auth::user()->name ?? 'Guest' }}</span>
+                                                    <span class="sub-text">{{ Auth::user()->email ?? 'Guest' }}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="dropdown-inner">
+                                            <ul class="link-list">
                                                 @if (Auth::user()->level->level_nama == 'Administrator')
-                                                    <li class="menu-item">
-                                                        <a href="{{ route('admin.dashboard') }}" class="menu-link">
-                                                            <em class="icon ni ni-dashboard"></em>
-                                                            <span> Admin Dashboard</span>
+                                                    <li>
+                                                        <a href="{{ route('admin.profile') }}">
+                                                            <em class="icon ni ni-user-alt"></em>
+                                                            <span>View Profile</span>
                                                         </a>
                                                     </li>
                                                 @elseif (Auth::user()->level->level_nama == 'Mahasiswa')
-                                                    <li class="menu-item">
-                                                        <a href="{{ route('mahasiswa.dashboard') }}" class="menu-link">
-                                                            <em class="icon ni ni-dashboard"></em>
-                                                            <span> Mahasiswa Dashboard</span>
+                                                    <li>
+                                                        <a href="{{ route('mahasiswa.profile') }}">
+                                                            <em class="icon ni ni-user-alt"></em>
+                                                            <span>View Profile</span>
                                                         </a>
                                                     </li>
                                                 @elseif (Auth::user()->level->level_nama == 'Dosen')
-                                                    <li class="menu-item">
-                                                        <a href="{{ route('dosen.dashboard') }}" class="menu-link">
-                                                            <em class="icon ni ni-dashboard"></em>
-                                                            <span> Dosen Dashboard</span>
+                                                    <li>
+                                                        <a href="{{ route('dosen.profile') }}">
+                                                            <em class="icon ni ni-user-alt"></em>
+                                                            <span>View Profile</span>
                                                         </a>
                                                     </li>
                                                 @elseif (Auth::user()->level->level_nama == 'Company')
-                                                    <li class="menu-item">
-                                                        <a href="{{ route('company.dashboard') }}" class="menu-link">
-                                                            <em class="icon ni ni-dashboard"></em>
-                                                            <span> Company Dashboard</span>
+                                                    <li>
+                                                        <a href="{{ route('company.profile') }}">
+                                                            <em class="icon ni ni-user-alt"></em>
+                                                            <span>View Profile</span>
                                                         </a>
                                                     </li>
                                                 @endif
-                                                <li class="menu-item">
-                                                    <a href="{{ route('logout') }}" class="menu-link">
-                                                        <em class="icon ni ni-signout"></em>
-                                                        <span> Sign out</span>
+                                                <li>
+                                                    <a href="html/user-profile-setting.html">
+                                                        <em class="icon ni ni-setting-alt"></em>
+                                                        <span>Account Setting</span>
                                                     </a>
                                                 </li>
-                                            </div>
-                                        </ul>
+                                                <li>
+                                                    <a class="dark-switch" href="#">
+                                                        <em class="icon ni ni-moon"></em>
+                                                        <span>Dark Mode</span>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="dropdown-inner">
+                                            <ul class="link-list">
+                                                <li>
+                                                    <a href="{{ route('logout') }}">
+                                                        <em class="icon ni ni-signout"></em>
+                                                        <span>Sign out</span>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
                                     </div>
                                 </li>
                             </ul>
                         </div>
                     @else
-                        <ul class="menu-btns">
-                            <li>
-                                <a href="{{ route('login') }}" class="btn btn-primary btn-lg">Masuk</a>
-                            </li>
-                        </ul>
+                        <div class="nk-header-tools">
+                            <ul class="nk-quick-nav">
+                                <li>
+                                    <a href="{{ route('login') }}" class="btn btn-primary btn-lg">Masuk</a>
+                                </li>
+                            </ul>
+                        </div>
                     @endauth
                 </nav>
                 <!-- .nk-nav-menu -->

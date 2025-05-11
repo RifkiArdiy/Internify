@@ -30941,4 +30941,87 @@ body.toggle-shown {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transform: translateY(-2px);
 }
+
+.dropdown-inner {
+    padding: 0 1.75rem;
+}
+.dropdown-inner + .dropdown-inner {
+    border-top: 1px solid #e5e9f2;
+}
+.dropdown-menu-md {
+    min-width: 280px;
+    max-width: 280px;
+}
+.dropdown-menu-s1 {
+    border-top: 3px solid #6576ff;
+}
+.user-status {
+    font-size: 11px;
+    font-weight: 500;
+    line-height: 1;
+    padding-top: 0.125rem;
+    padding-bottom: 0.375rem;
+}
+.user-name {
+    color: #526484;
+    font-size: 12px;
+    line-height: 16px;
+    font-weight: 700;
+}
+.user-info .lead-text,
+.user-info .sub-text {
+    display: flex;
+    align-items: center;
+}
+.user-info .edit {
+    font-size: 1.25rem;
+    color: #8094ae;
+    margin-left: 0.5rem;
+    display: inline-flex;
+}
+.user-card .user-info {
+    color: #8094ae;
+}
+.user-avatar {
+    border-radius: 50%;
+    height: 40px;
+    width: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    background: #798bff;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    position: relative;
+}
+.user-avatar.sm {
+    height: 32px;
+    width: 32px;
+    font-size: 12px;
+}
+.user-toggle {
+    display: flex;
+    align-items: center;
+    padding: 0 1px 1px;
+}
+.nk-header-tools {
+    margin-left: auto;
+    padding-top: 14px;
+    padding-bottom: 14px;
+}
+
+.nk-quick-nav {
+    display: flex;
+    align-items: center;
+    margin: 0 -6px;
+}
+.nk-quick-nav > li {
+    padding: 0 6px;
+}
+.nk-quick-nav > li.user-dropdown > a {
+    padding: 0 2px;
+}
+
 /*! END @iO */
