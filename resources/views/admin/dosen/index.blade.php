@@ -24,11 +24,11 @@
                                 <label class="custom-control-label" for="uid"></label>
                             </div>
                         </th>
-                        <th class="nk-tb-col"><span class="sub-text">User</span></th>
-                        <th class="nk-tb-col tb-col-mb"><span class="sub-text">NIP</span></th>
-                        <th class="nk-tb-col tb-col-lg"><span class="sub-text">Alamat</span></th>
-                        <th class="nk-tb-col tb-col-md"><span class="sub-text">Telepon</span></th>
-                        <th class="nk-tb-col tb-col-md"><span class="sub-text">Status</span></th>
+                        <th class="nk-tb-col export-col"><span class="sub-text">User</span></th>
+                        <th class="nk-tb-col tb-col-mb export-col"><span class="sub-text">NIP</span></th>
+                        <th class="nk-tb-col tb-col-md export-col"><span class="sub-text">Phone</span></th>
+                        <th class="nk-tb-col tb-col-lg export-col"><span class="sub-text">Alamat</span></th>
+                        <th class="nk-tb-col tb-col-md export-col"><span class="sub-text">Status</span></th>
                         <th class="nk-tb-col nk-tb-col-tools text-end">
                         </th>
                     </tr>
@@ -45,7 +45,7 @@
                             <td class="nk-tb-col">
                                 <div class="user-card">
                                     <div class="user-avatar bg-dark d-none d-sm-flex">
-                                        <span>{{ strtoupper(substr($dosen->user->name, 0, 2)) }}</span>
+                                        <img src="{{ asset('assets/home/images/team/a.jpg') }}" alt="">
                                     </div>
                                     <div class="user-info">
                                         <span class="tb-lead">{{ $dosen->user->name }}<span
@@ -57,28 +57,33 @@
                             <td class="nk-tb-col tb-col-mb">
                                 <span class="tb-amount">{{ $dosen->nip }}</span>
                             </td>
-                            <td class="nk-tb-col tb-col-lg" data-order="Email Submited - Kyc More Info">
-                                <span>{{ $dosen->user->alamat }}</span>
-                            </td>
                             <td class="nk-tb-col tb-col-md">
                                 <span>{{ $dosen->user->no_telp }}</span>
                             </td>
+                            <td class="nk-tb-col tb-col-lg" data-order="Email Submited - Kyc More Info">
+                                <span class="tb-amount">{{ $dosen->user->alamat }}</span>
+                            </td>
                             <td class="nk-tb-col tb-col-md">
-                                <span class="tb-status text-success">Active</span>
+                                <span class="tb-status text-info">Inactive</span>
                             </td>
                             <td class="nk-tb-col nk-tb-col-tools">
                                 <ul class="nk-tb-actions gx-1">
                                     <li class="nk-tb-action-hidden">
                                         <a href="#" class="btn btn-trigger btn-icon" data-bs-toggle="tooltip"
-                                            data-bs-placement="top" title="Suspend">
-                                            <em class="icon ni ni-user-cross-fill"></em>
+                                            data-bs-placement="top" title="Wallet">
+                                            <em class="icon ni ni-wallet-fill"></em>
                                         </a>
                                     </li>
                                     <li class="nk-tb-action-hidden">
-                                        <a href="{{ route('dosen.destroy', $dosen->dosen_id) }}"
-                                            class="btn btn-trigger btn-icon" data-bs-toggle="tooltip"
-                                            data-bs-placement="top" title="Delete">
-                                            <em class="icon ni ni-trash"></em>
+                                        <a href="#" class="btn btn-trigger btn-icon" data-bs-toggle="tooltip"
+                                            data-bs-placement="top" title="Send Email">
+                                            <em class="icon ni ni-mail-fill"></em>
+                                        </a>
+                                    </li>
+                                    <li class="nk-tb-action-hidden">
+                                        <a href="#" class="btn btn-trigger btn-icon" data-bs-toggle="tooltip"
+                                            data-bs-placement="top" title="Suspend">
+                                            <em class="icon ni ni-user-cross-fill"></em>
                                         </a>
                                     </li>
                                     <li>
@@ -98,9 +103,14 @@
                                                                 class="icon ni ni-activity-round"></em><span>Activities</span></a>
                                                     </li>
                                                     <li class="divider"></li>
+                                                    <li><a href="#"><em
+                                                                class="icon ni ni-shield-star"></em><span>Reset
+                                                                Pass</span></a></li>
+                                                    <li><a href="#"><em class="icon ni ni-shield-off"></em><span>Reset
+                                                                2FA</span></a></li>
                                                     <li><a href="{{ route('dosen.destroy', $dosen->dosen_id) }}"><em
-                                                                class="icon ni ni-trash"></em><span>Hapus
-                                                                Dosen</span></a></li>
+                                                                class="icon ni ni-na"></em><span>Hapus
+                                                                User</span></a></li>
                                                 </ul>
                                             </div>
                                         </div>
