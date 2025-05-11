@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class LowonganMagang extends Model
 {
@@ -15,9 +16,9 @@ class LowonganMagang extends Model
 
     protected $fillable = ['company_id', 'period_id', 'title', 'description', 'requirements', 'location'];
 
-    public function company()
+    public function company(): BelongsTo
     {
-        return $this->belongsTo(Company::class, 'company_id');
+        return $this->belongsTo(Company::class, 'company_id', 'company_id');
     }
 
     public function period()

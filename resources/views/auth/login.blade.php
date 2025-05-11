@@ -35,7 +35,7 @@
                             </div>
                             <div class="nk-block nk-block-middle nk-auth-body">
                                 <div class="brand-logo pb-5">
-                                    <a href="html/index.html" class="logo-link">
+                                    <a href="{{ route('welcome') }}" class="logo-link">
                                         <img class="logo-light logo-img logo-img-lg"
                                             src="{{ asset('assets/home/images/logo.png') }}"
                                             srcset="{{ asset('assets/home/images/logo2x.png') }}" alt="logo">

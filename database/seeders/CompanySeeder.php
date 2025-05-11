@@ -40,5 +40,26 @@ class CompanySeeder extends Seeder
             'address' => 'Malang',
             'contact' => '1242103012',
         ]);
+
+        Company::create([
+            'name' => 'PT. Fukasaki',
+            'industry' => 'Teknologi Ai',
+            'address' => 'Jakarta',
+            'contact' => '08213288207',
+        ]);
+
+        Company::create([
+            'name' => 'PT. Omura',
+            'industry' => 'Pakan Ternak',
+            'address' => 'Blitar',
+            'contact' => '021123345658',
+        ]);
+
+        Company::create([
+            'name' => 'Akademi Nankatsu',
+            'industry' => 'Football',
+            'address' => 'Jepang',
+            'contact' => '1298223232',
+        ]);
     }
 }

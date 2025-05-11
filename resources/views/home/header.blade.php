@@ -1,0 +1,180 @@
+<header class="header has-header-main-s1 bg-dark" id="home">
+    <div class="header-main header-main-s1 is-sticky is-transparent on-dark">
+        <div class="container header-container">
+            <div class="header-wrap">
+                <div class="header-logo">
+                    <a href="{{ route('welcome.index') }}" class="logo-link">
+                        <img class="logo-light logo-img" src="{{ asset('assets/home/images/logo.png') }}"
+                            srcset="{{ asset('assets/home/images/logo2x.png 2x') }}" alt="logo">
+                        <img class="logo-dark logo-img" src="{{ asset('assets/home/images/logo-dark.png') }}"
+                            srcset="{{ asset('assets/home/images/logo-dark2x.png 2x') }}" alt="logo-dark">
+                    </a>
+                </div>
+                <div class="header-toggle">
+                    <button class="menu-toggler" data-target="mainNav">
+                        <em class="menu-on icon ni ni-menu"></em>
+                        <em class="menu-off icon ni ni-cross"></em>
+                    </button>
+                </div>
+                <!-- .header-nav-toggle -->
+                <nav class="header-menu" data-content="mainNav">
+                    <ul class="menu-list ms-lg-auto">
+                        <li class="menu-item">
+                            <a href="#home" class="menu-link nav-link">Home</a>
+                        </li>
+                        <li class="menu-item">
+                            <a href="#joblist" class="menu-link nav-link">Lowongan</a>
+                        </li>
+                        {{-- <li class="menu-item">
+                            <a href="#package" class="menu-link nav-link">Packages</a>
+                        </li> --}}
+                        <li class="menu-item">
+                            <a href="#team" class="menu-link nav-link">Team</a>
+                        </li>
+                        <li class="menu-item">
+                            <a href="#reviews" class="menu-link nav-link">Reviews</a>
+                        </li>
+
+                    </ul>
+                    @auth
+                        <div class="nk-header-tools">
+                            <ul class="nk-quick-nav">
+                                <li class="menu-item has-sub">
+                                    {{-- <a href="#" class="menu-link menu-toggle">Landing</a> --}}
+                                    <div class="user-toggle">
+                                        <div class="user-info d-none d-md-block">
+                                            <div class="menu-link nav-link fw-bold">
+                                                Hi..!! {{ Auth::user()->name }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="menu-sub">
+                                        <ul class="menu-list">
+                                            <div class="menu-info">
+                                                @if (Auth::user()->level->level_nama == 'Administrator')
+                                                    <li class="menu-item">
+                                                        <a href="{{ route('admin.dashboard') }}" class="menu-link">
+                                                            <em class="icon ni ni-dashboard"></em>
+                                                            <span> Admin Dashboard</span>
+                                                        </a>
+                                                    </li>
+                                                @elseif (Auth::user()->level->level_nama == 'Mahasiswa')
+                                                    <li class="menu-item">
+                                                        <a href="{{ route('mahasiswa.dashboard') }}" class="menu-link">
+                                                            <em class="icon ni ni-dashboard"></em>
+                                                            <span> Mahasiswa Dashboard</span>
+                                                        </a>
+                                                    </li>
+                                                @elseif (Auth::user()->level->level_nama == 'Dosen')
+                                                    <li class="menu-item">
+                                                        <a href="{{ route('dosen.dashboard') }}" class="menu-link">
+                                                            <em class="icon ni ni-dashboard"></em>
+                                                            <span> Dosen Dashboard</span>
+                                                        </a>
+                                                    </li>
+                                                @elseif (Auth::user()->level->level_nama == 'Company')
+                                                    <li class="menu-item">
+                                                        <a href="{{ route('company.dashboard') }}" class="menu-link">
+                                                            <em class="icon ni ni-dashboard"></em>
+                                                            <span> Company Dashboard</span>
+                                                        </a>
+                                                    </li>
+                                                @endif
+                                                <li class="menu-item">
+                                                    <a href="{{ route('logout') }}" class="menu-link">
+                                                        <em class="icon ni ni-signout"></em>
+                                                        <span> Sign out</span>
+                                                    </a>
+                                                </li>
+                                            </div>
+                                        </ul>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    @else
+                        <ul class="menu-btns">
+                            <li>
+                                <a href="{{ route('login') }}" class="btn btn-primary btn-lg">Masuk</a>
+                            </li>
+                        </ul>
+                    @endauth
+                </nav>
+                <!-- .nk-nav-menu -->
+            </div>
+            <!-- .header-warp-->
+        </div>
+        <!-- .container-->
+    </div>
+    <!-- .header-main-->
+    <div class="header-content my-auto py-6 is-dark">
+        <div class="container mt-n4 mt-lg-0">
+            <div class="row flex-lg-row-reverse align-items-center justify-content-between g-gs">
+                <div class="col-lg-6 mb-lg-0">
+                    <div class="header-play text-lg-center">
+                        <a class="play popup-video" href="{{ url('https://www.youtube.com/watch?v=SSo_EIwHSd4') }}">
+                            <div class="styled-icon styled-icon-6x styled-icon-s5 text-warning">
+                                <svg x="0px" y="0px" viewBox="0 0 512 512" style="fill:currentColor"
+                                    xml:space="preserve">
+                                    <path d="M436.2,178.3c-7.5-4.7-17.4-2.4-22.1,5.1c-4.7,7.5-2.4,17.4,5.1,22.1c17.5,10.9,28,29.8,28,50.4s-10.5,39.5-28,50.4
+L155.7,470.7c-18.6,11.6-41.1,12.2-60.3,1.5c-19.2-10.6-30.6-30.1-30.6-52V91.7c0-21.9,11.4-41.3,30.6-52
+c19.1-10.6,41.7-10.1,60.3,1.5l153.4,95.6c7.5,4.7,17.4,2.4,22.1-5.1c4.7-7.5,2.4-17.4-5.1-22.1L172.7,14
+c-28.6-17.9-63.3-18.7-92.9-2.4C50.3,28.1,32.7,58,32.7,91.7v328.6c0,33.7,17.6,63.7,47.1,80c14.1,7.8,29.3,11.7,44.5,11.7
+c16.7,0,33.4-4.7,48.4-14l263.5-164.3c27-16.8,43.1-45.9,43.1-77.7S463.2,195.2,436.2,178.3z" />
+                                </svg>
+                            </div>
+                            <div class="play-text">2:58 minutes</div>
+                        </a>
+                    </div>
+                </div>
+                <!-- .col- -->
+                <div class="col-lg-6 col-md-10">
+                    <div class="header-caption">
+                        <div class="header-rating rating">
+                            <ul class="rating-stars">
+                                <li>
+                                    <em class="icon ni ni-star-fill"></em>
+                                </li>
+                                <li>
+                                    <em class="icon ni ni-star-fill"></em>
+                                </li>
+                                <li>
+                                    <em class="icon ni ni-star-fill"></em>
+                                </li>
+                                <li>
+                                    <em class="icon ni ni-star-fill"></em>
+                                </li>
+                                <li>
+                                    <em class="icon ni ni-star-fill"></em>
+                                </li>
+                            </ul>
+                            {{-- <div class="rating-text">14,252 reviews</div> --}}
+                        </div>
+                        <h1 class="header-title fw-medium">Kelola Magang Lebih Mudah, Terstruktur, dan
+                            Terintegrasi</h1>
+                        <div class="header-text">
+                            <p>Sistem Manajemen Magang modern untuk institusi, mahasiswa, dan mitra
+                                industri.
+                            </p>
+                        </div>
+                        <ul class="header-action btns-inline">
+                            <li>
+                                <a href="{{ route('login') }}" class="btn btn-primary btn-lg btn-round">
+                                    <span>Ayo Mulai!</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- .header-caption -->
+                </div>
+                <!-- .col -->
+            </div>
+            <!-- .row -->
+        </div>
+        <!-- .container -->
+    </div>
+    <!-- .header-content -->
+    <div class="bg-image bg-overlay after-bg-dark after-opacity-95">
+        <img src="{{ asset('assets/home/images/bg/a.jpg') }}" alt="">
+    </div>
+</header>

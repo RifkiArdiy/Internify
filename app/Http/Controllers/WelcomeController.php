@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Company;
+use App\Models\LowonganMagang;
+use Database\Seeders\LowonganMagangSeeder;
 use Illuminate\Http\Request;
 
 class WelcomeController extends Controller
@@ -12,6 +15,8 @@ class WelcomeController extends Controller
     public function index()
     {
         //
-        return view('welcome');
+        $companies = Company::withCount('lowongans')->get();
+        $lowongans = LowonganMagang::with('company', 'period')->get();
+        return view('home.welcome', compact('companies', 'lowongans'));
     }
 }

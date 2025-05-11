@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Company extends Model
 {
@@ -16,9 +17,9 @@ class Company extends Model
 
     protected $fillable = ['name', 'industry', 'address', 'contact'];
 
-    public function lowongans()
+    public function lowongans(): HasMany
     {
-        return $this->hasMany(LowonganMagang::class);
+        return $this->hasMany(LowonganMagang::class, 'company_id', 'company_id');
     }
 
     public function evaluasis()
