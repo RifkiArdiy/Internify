@@ -23,7 +23,7 @@ class LevelFactory extends Factory
 
         return [
             //
-            'level_nama' => $this->faker->unique()->randomElement(['admin', 'mahasiswa', 'dosen']),
+            'level_nama' => $this->faker->unique()->randomElement(['Administrator', 'Mahasiswa', 'Dosen', 'Company']),
         ];
     }
 }

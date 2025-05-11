@@ -20,20 +20,20 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
 
-        // \App\Models\Level::factory()->create(['level_nama' => 'Administrator']);
-        // \App\Models\Level::factory()->create(['level_nama' => 'Mahasiswa']);
-        // \App\Models\Level::factory()->create(['level_nama' => 'Dosen']);
-        // \App\Models\Level::factory()->create(['level_nama' => 'Company']);
+        \App\Models\Level::factory()->create(['level_nama' => 'Administrator']);
+        \App\Models\Level::factory()->create(['level_nama' => 'Mahasiswa']);
+        \App\Models\Level::factory()->create(['level_nama' => 'Dosen']);
+        \App\Models\Level::factory()->create(['level_nama' => 'Company']);
         $this->call([
-            //UserSeeder::class,
-            // ProgramStudiSeeder::class,
-            // MahasiswaSeeder::class,
-            // DosenSeeder::class,
-            // CompanySeeder::class,
-            // PeriodeMagangSeeder::class,
-            //LowonganMagangSeeder::class,
-            //MagangApplicationSeeder::class,
-            //LogSeeder::class,
+            UserSeeder::class,
+            ProgramStudiSeeder::class,
+            MahasiswaSeeder::class,
+            DosenSeeder::class,
+            CompanySeeder::class,
+            PeriodeMagangSeeder::class,
+            LowonganMagangSeeder::class,
+            MagangApplicationSeeder::class,
+            LogSeeder::class,
         ]);
     }
 }
