@@ -14,7 +14,7 @@ use App\Http\Controllers\LowonganMagangController;
 use App\Http\Controllers\MagangApplicationController;
 use App\Http\Controllers\PeriodeMagangController;
 use App\Models\MagangApplication;
-
+use App\Http\Controllers\ProfileController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -35,11 +35,13 @@ Route::post('register', [AuthController::class, 'postRegister'])->name('postRegi
 Route::get('/', [WelcomeController::class, 'index'])->name('welcome.index');
 
 Route::middleware(['auth'])->group(function () {
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-
+    
+    
     Route::prefix('admin')->middleware('role:Administrator')->group(function () {
         Route::get('/dashboard', [DashboardController::class, 'indexAdmin'])->name('admin.dashboard');
-
+        Route::get('/profile', [ProfileController::class, 'index'])->name('admin.profile');
+        Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('admin.profile.edit');
+        Route::post('/profile/update', [ProfileController::class, 'update'])->name('admin.profile.update');
         Route::prefix('prodi')->group(function () {
             Route::get('/', [ProgramStudiController::class, 'index'])->name('prodi.index');
             Route::get('/create', [ProgramStudiController::class, 'create'])->name('prodi.create');
@@ -132,6 +134,9 @@ Route::middleware(['auth'])->group(function () {
 
     Route::prefix('mahasiswa')->middleware('role:Mahasiswa')->group(function () {
         Route::get('/dashboard', [DashboardController::class, 'indexMahasiswa'])->name('mahasiswa.dashboard');
+        Route::get('/profile', [ProfileController::class, 'index'])->name('mahasiswa.profile');
+        Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('mahasiswa.profile.edit');
+        Route::post('/profile/update', [ProfileController::class, 'update'])->name('mahasiswa.profile.update');
         Route::prefix('lowongan')->group(function () {
             Route::get('/', [LowonganMagangController::class, 'indexMhs'])->name('lowonganMagang.indexMhs');
             Route::get('/show/{id}', [LowonganMagangController::class, 'show'])->name('lowongan.show');
@@ -149,11 +154,17 @@ Route::middleware(['auth'])->group(function () {
 
     Route::prefix('dosen')->middleware('role:Dosen')->group(function () {
         Route::get('/dashboard', [DashboardController::class, 'indexDosen'])->name('dosen.dashboard');
+        Route::get('/profile', [ProfileController::class, 'index'])->name('dosen.profile');
+        Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('dosen.profile.edit');
+        Route::post('/profile/update', [ProfileController::class, 'update'])->name('dosen.profile.update');
     });
 
     Route::prefix('company')->middleware('role:Company')->group(function () {
         Route::get('/dashboard', [DashboardController::class, 'indexCompany'])->name('company.dashboard');
-        Route::get('/verifikasi', [DashboardController::class, 'indexCompany'])->name('company.verifikasi');
+        Route::get('/profile', [ProfileController::class, 'index'])->name('company.profile');
+        Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('company.profile.edit');
+        Route::post('/profile/update', [ProfileController::class, 'update'])->name('company.profile.update');
+        Route::get('/verifikasi', [CompanyController::class, 'indexVerifikasi'])->name('company.verifikasi');
     });
 
     Route::get('logout', [AuthController::class, 'logout'])->name('logout');

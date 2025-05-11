@@ -30,4 +30,9 @@ class Company extends Model
     {
         return $this->belongsTo(User::class, 'user_id', 'user_id');
     }
+
+    public function logs()
+    {
+        return $this->hasMany(Log::class);
+    }
 }
