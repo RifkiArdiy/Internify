@@ -30979,6 +30979,14 @@ body.toggle-shown {
     margin-left: 0.5rem;
     display: inline-flex;
 }
+.user-card {
+    display: flex;
+    align-items: center;
+}
+.user-card-wrap {
+    padding-top: 1.125rem;
+    padding-bottom: 1.125rem;
+}
 .user-card .user-info {
     color: #8094ae;
 }
