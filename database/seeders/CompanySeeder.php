@@ -14,52 +14,44 @@ class CompanySeeder extends Seeder
     public function run(): void
     {
         Company::create([
-            'name' => 'PT. Farrel Caesarian',
-            'industry' => 'Teknologi',
-            'address' => 'Mbetek',
-            'contact' => '082132570837',
-        ]);
-
-        Company::create([
-            'name' => 'PT. ABC',
-            'industry' => 'Ekonomi',
-            'address' => 'Malang',
-            'contact' => '021-12345678',
-        ]);
-
-        Company::create([
-            'name' => 'Akademi Ulti Nolan',
-            'industry' => 'Finansial',
-            'address' => 'Jakarta',
-            'contact' => '1233213232',
-        ]);
-
-        Company::create([
-            'name' => 'PT. Kopi Skena',
-            'industry' => 'FnB',
-            'address' => 'Malang',
-            'contact' => '1242103012',
-        ]);
-
-        Company::create([
-            'name' => 'PT. Fukasaki',
-            'industry' => 'Teknologi Ai',
-            'address' => 'Jakarta',
-            'contact' => '08213288207',
-        ]);
-
-        Company::create([
-            'name' => 'PT. Omura',
-            'industry' => 'Pakan Ternak',
-            'address' => 'Blitar',
-            'contact' => '021123345658',
-        ]);
-
-        Company::create([
-            'name' => 'Akademi Nankatsu',
+            'user_id' => '20',
             'industry' => 'Football',
-            'address' => 'Jepang',
-            'contact' => '1298223232',
+        ]);
+
+        Company::create([
+            'user_id' => '21',
+            'industry' => 'Ekonomi',
+        ]);
+
+        Company::create([
+            'user_id' => '22',
+            'industry' => 'Finansial',
+        ]);
+
+        Company::create([
+            'user_id' =>  '23',
+            'industry' => 'FnB',
+        ]);
+
+        Company::create([
+            'user_id' => '24',
+            'industry' => 'Teknologi Ai',
+        ]);
+
+        Company::create([
+            'user_id' => '25',
+            'industry' => 'Pakan Ternak',
+        ]);
+
+        Company::create([
+            'user_id' => '26',
+            'industry' => 'Football',
+        ]);
+
+        Company::create([
+            'user_id' => '27',
+            'industry' => 'Football',
+
         ]);
     }
 }

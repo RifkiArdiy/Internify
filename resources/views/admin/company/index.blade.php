@@ -43,10 +43,10 @@
                             <td class="nk-tb-col">
                                 <div class="user-card">
                                     <div class="user-avatar bg-dark d-none d-sm-flex">
-                                        <span>{{ strtoupper(substr($company->name, 0, 2)) }}</span>
+                                        <span>{{ strtoupper(substr($company->user->name, 0, 2)) }}</span>
                                     </div>
                                     <div class="user-info">
-                                        <span class="tb-lead">{{ $company->name }}<span
+                                        <span class="tb-lead">{{ $company->user->name }}<span
                                                 class="dot dot-success d-md-none ms-1"></span></span>
                                     </div>
                                 </div>
@@ -55,10 +55,10 @@
                                 <span>{{ $company->industry }}</span>
                             </td>
                             <td class="nk-tb-col">
-                                <span>{{ $company->address }}</span>
+                                <span>{{ $company->user->alamat }}</span>
                             </td>
                             <td class="nk-tb-col">
-                                <span>{{ $company->contact }}</span>
+                                <span>{{ $company->user->no_telp }}</span>
                             </td>
                             <td class="nk-tb-col nk-tb-col-tools">
                                 <ul class="nk-tb-actions gx-1">
@@ -79,8 +79,8 @@
                                                     <li class="divider"></li>
 
                                                     <li><a href="{{ route('companies.destroy', $company->company_id) }}"><em
-                                                                class="icon ni ni-na"></em><span>Hapus
-                                                                User</span></a></li>
+                                                                class="icon ni ni-trash"></em><span>Hapus
+                                                                Company</span></a></li>
                                                 </ul>
                                             </div>
                                         </div>

@@ -15,7 +15,7 @@ class Company extends Model
 
     protected $primaryKey = 'company_id';
 
-    protected $fillable = ['name', 'industry', 'address', 'contact'];
+    protected $fillable = ['user_id', 'industry'];
 
     public function lowongans(): HasMany
     {

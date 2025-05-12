@@ -70,7 +70,7 @@ class MahasiswaController extends Controller
 
         ]);
 
-        return redirect()->route('mahasiswa.index')->with('success', 'Mahasiswa berhasil ditambahkan.');
+        return redirect()->route('mahasiswa.index')->with('success', 'Company berhasil ditambahkan.');
     }
 
     /**

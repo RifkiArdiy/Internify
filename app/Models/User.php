@@ -39,9 +39,9 @@ class User extends Authenticatable
 
     public function company(): HasOne
     {
-        return $this->hasOne(Company::class);
+        return $this->hasOne(Company::class, 'user_id', 'user_id');
     }
-    
+
     public function getRoleName(): string
     {
         return $this->level->level_nama;

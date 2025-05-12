@@ -15,7 +15,7 @@ class WelcomeController extends Controller
     public function index()
     {
         //
-        $companies = Company::withCount('lowongans')->get();
+        $companies = Company::withCount('lowongans', 'user')->get();
         $lowongans = LowonganMagang::with('company', 'period')->get();
         return view('home.welcome', compact('companies', 'lowongans'));
     }
