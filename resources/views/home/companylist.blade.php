@@ -1,4 +1,4 @@
-<section class="section section-service pb-6" id="companylist">
+<section class="section section-service pb-7" id="companylist">
     <div class="container">
         <div class="row justify-content-center text-center">
             <div class="col-xl-7 col-md-8">

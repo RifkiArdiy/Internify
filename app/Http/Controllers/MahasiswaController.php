@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 class MahasiswaController extends Controller
 {
@@ -43,35 +44,50 @@ class MahasiswaController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required',
-            'username' => 'required|unique:users',
-            'email' => 'required|unique:users',
-            'password' => 'required|min:6',
-            'nim' => 'required|min:10|unique:mahasiswas',
-            'no_telp' => 'required',
-            'alamat' => 'required',
-            'prodi_id' => 'required|integer'
+            'name' => 'required|string|max:255',
+            'username' => 'required|string|max:255|unique:users,username',
+            'email' => 'required|string|email|max:255|unique:users,email',
+            'password' => 'required|string|min:6',
+            'nim' => 'required|string|min:10|unique:mahasiswas,nim',
+            'no_telp' => 'nullable|string|max:20',
+            'alamat' => 'nullable|string',
+            'prodi_id' => 'required|integer|exists:program_studis,prodi_id',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
-        $user = User::create([
-            'level_id' => 2, // student
+        // Prepare user data
+        $userData = [
+            'level_id' => 2, // Mahasiswa
             'name' => $request->name,
             'username' => $request->username,
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'no_telp' => $request->no_telp,
             'alamat' => $request->alamat,
-        ]);
+        ];
 
+        // Handle uploaded image
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $imageName = time() . '.' . $image->getClientOriginalExtension();
+            $image->storeAs('public/images/users', $imageName);
+            $userData['image'] = $imageName;
+        }
+
+        // Create user and get custom primary key
+        $user = User::create($userData);
+
+        // Create Mahasiswa using custom user_id
         Mahasiswa::create([
-            'user_id' => $user->user_id,
+            'user_id' => $user->user_id, // Custom PK
             'prodi_id' => $request->prodi_id,
             'nim' => $request->nim,
-
         ]);
 
-        return redirect()->route('mahasiswa.index')->with('success', 'Company berhasil ditambahkan.');
+        return redirect()->route('mahasiswa.index')->with('success', 'Mahasiswa berhasil ditambahkan.');
     }
+
+
 
     /**
      * Display the specified resource.
@@ -110,17 +126,9 @@ class MahasiswaController extends Controller
             'email' => 'required|unique:users,email,' . $user->user_id . ',user_id',
             'nim' => 'required|unique:mahasiswas,nim,' . $mahasiswa->mahasiswa_id . ',mahasiswa_id',
             'prodi_id' => 'required|exists:program_studis,prodi_id',
-            'no_telp' => 'required',
-            'alamat' => 'required',
-        ]);
-
-        // Update user data
-        $user->update([
-            'name' => $request->name,
-            'username' => $request->username,
-            'email' => $request->email,
-            'no_telp' => $request->no_telp,
-            'alamat' => $request->alamat,
+            'no_telp' => 'nullable',
+            'alamat' => 'nullable',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
         if ($request->filled('password')) {
@@ -129,14 +137,35 @@ class MahasiswaController extends Controller
             ]);
         }
 
-        // Update mahasiswa data
+        $user->name = $request->name;
+        $user->username = $request->username;
+        $user->email = $request->email;
+        $user->no_telp = $request->no_telp;
+        $user->alamat = $request->alamat;
+
+        // Handle image upload
+        if ($request->hasFile('image')) {
+            if ($user->image) {
+                Storage::delete('public/images/users/' . $user->image);
+            }
+
+            $image = $request->file('image');
+            $imageName = time() . '.' . $image->getClientOriginalExtension();
+            $image->storeAs('public/images/users', $imageName);
+            $user->image = $imageName;
+        }
+
+        $user->save();
+
+        // Update data mahasiswa
         $mahasiswa->update([
             'nim' => $request->nim,
             'prodi_id' => $request->prodi_id,
         ]);
 
-        return redirect()->route('mahasiswa.index')->with('success', 'Mahasiswa ' . $mahasiswa->user->name . ' berhasil diperbarui.');
+        return redirect()->route('mahasiswa.index')->with('success', 'Mahasiswa ' . $user->name . ' berhasil diperbarui.');
     }
+
 
 
     /**

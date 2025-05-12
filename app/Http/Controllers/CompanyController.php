@@ -47,8 +47,8 @@ class CompanyController extends Controller
             'email' => 'required|unique:users',
             'password' => 'required|min:6',
             'industry' => 'required|string|max:255',
-            'no_telp' => 'required|string|max:255',
-            'alamat' => 'required|string|max:255',
+            'no_telp' => 'nullable|string|max:255',
+            'alamat' => 'nullable|string|max:255',
         ]);
 
         $user = User::create([
@@ -88,8 +88,8 @@ class CompanyController extends Controller
             'username' => 'required|unique:users,username,' . $user->user_id . ',user_id',
             'email' => 'required|unique:users,email,' . $user->user_id . ',user_id',
             'industry' => 'required|string|max:255',
-            'alamat' => 'required|string|max:255',
-            'no_telp' => 'required|string|max:255',
+            'alamat' => 'nullable|string|max:255',
+            'no_telp' => 'nullable|string|max:255',
         ]);
 
         $user->update([

@@ -21,7 +21,7 @@
             <span class="nk-menu-icon">
                 <em class="icon ni ni-users"></em>
             </span>
-            <span class="nk-menu-text">User</span>
+            <span class="nk-menu-text">Admins</span>
         </a>
         <!-- .nk-menu-sub -->
     </li>
@@ -30,7 +30,7 @@
             <span class="nk-menu-icon">
                 <em class="icon ni ni-users"></em>
             </span>
-            <span class="nk-menu-text">Mahasiswa</span>
+            <span class="nk-menu-text">Mahasiswas</span>
         </a>
         <!-- .nk-menu-sub -->
     </li>
@@ -39,7 +39,7 @@
             <span class="nk-menu-icon">
                 <em class="icon ni ni-users"></em>
             </span>
-            <span class="nk-menu-text">Dosen</span>
+            <span class="nk-menu-text">Dosens</span>
         </a>
         <!-- .nk-menu-sub -->
     </li>

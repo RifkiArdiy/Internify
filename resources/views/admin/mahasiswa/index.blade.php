@@ -39,14 +39,19 @@
                         <tr class="nk-tb-item">
                             <td class="nk-tb-col nk-tb-col-check">
                                 <div class="custom-control custom-control-sm custom-checkbox notext">
-                                    <input type="checkbox" class="custom-control-input" id="uid13">
-                                    <label class="custom-control-label" for="uid13"></label>
+                                    <input type="checkbox" class="custom-control-input" id="uid{{ $mhs->mahasiswa_id }}">
+                                    <label class="custom-control-label" for="uid{{ $mhs->mahasiswa_id }}"></label>
                                 </div>
                             </td>
                             <td class="nk-tb-col">
                                 <div class="user-card">
                                     <div class="user-avatar bg-dark d-none d-sm-flex">
-                                        <span>{{ strtoupper(substr($mhs->user->name, 0, 2)) }}</span>
+                                        @if ($mhs->user->image)
+                                            <img src="{{ Storage::url('images/users/' . $mhs->user->image) }}"
+                                                alt="{{ $mhs->user->name }}">
+                                        @else
+                                            <span>{{ strtoupper(substr($mhs->user->name, 0, 2)) }}</span>
+                                        @endif
                                     </div>
                                     <div class="user-info">
                                         <span class="tb-lead">{{ $mhs->user->name }}<span

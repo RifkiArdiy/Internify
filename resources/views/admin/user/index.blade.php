@@ -45,7 +45,12 @@
                             <td class="nk-tb-col">
                                 <div class="user-card">
                                     <div class="user-avatar bg-dark d-none d-sm-flex">
-                                        <span>{{ strtoupper(substr($admin->name, 0, 2)) }}</span>
+                                        @if ($admin->image)
+                                            <img src="{{ Storage::url('images/users/' . $admin->image) }}"
+                                                alt="{{ $admin->name }}">
+                                        @else
+                                            <span>{{ strtoupper(substr($admin->name, 0, 2)) }}</span>
+                                        @endif
                                     </div>
                                     <div class="user-info">
                                         <span class="tb-lead">{{ $admin->name }}<span

@@ -6,6 +6,7 @@ use App\Models\Dosen;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 class DosenController extends Controller
 {
@@ -48,11 +49,12 @@ class DosenController extends Controller
             'email' => 'required|unique:users',
             'password' => 'required|min:6',
             'nip' => 'required|unique:dosens',
-            'no_telp' => 'required',
-            'alamat' => 'required'
+            'no_telp' => 'nullable',
+            'alamat' => 'nullable',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
-        $user = User::create([
+        $userData = [
             'level_id' => 3, // dosen
             'name' => $request->name,
             'username' => $request->username,
@@ -60,7 +62,17 @@ class DosenController extends Controller
             'password' => Hash::make($request->password),
             'no_telp' => $request->no_telp,
             'alamat' => $request->alamat,
-        ]);
+        ];
+
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $imageName = time() . '.' . $image->getClientOriginalExtension();
+            $image->storeAs('public/images/users', $imageName);
+            $userData['image'] = $imageName;
+        }
+
+        // Create user and get custom primary key
+        $user = User::create($userData);
 
         Dosen::create([
             'user_id' => $user->user_id,
@@ -107,17 +119,9 @@ class DosenController extends Controller
             'username' => 'required|unique:users,username,' . $user->user_id . ',user_id',
             'email' => 'required|unique:users,email,' . $user->user_id . ',user_id',
             'nip' => 'required|unique:dosens,nip,' . $dosen->dosen_id . ',dosen_id',
-            'no_telp' => 'required',
-            'alamat' => 'required',
-        ]);
-
-        // Update user data
-        $user->update([
-            'name' => $request->name,
-            'username' => $request->username,
-            'email' => $request->email,
-            'no_telp' => $request->no_telp,
-            'alamat' => $request->alamat,
+            'no_telp' => 'nullable',
+            'alamat' => 'nullable',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
         if ($request->filled('password')) {
@@ -125,6 +129,26 @@ class DosenController extends Controller
                 'password' => Hash::make($request->password),
             ]);
         }
+
+        $user->name = $request->name;
+        $user->username = $request->username;
+        $user->email = $request->email;
+        $user->no_telp = $request->no_telp;
+        $user->alamat = $request->alamat;
+
+        // Handle image upload
+        if ($request->hasFile('image')) {
+            if ($user->image) {
+                Storage::delete('public/images/users/' . $user->image);
+            }
+
+            $image = $request->file('image');
+            $imageName = time() . '.' . $image->getClientOriginalExtension();
+            $image->storeAs('public/images/users', $imageName);
+            $user->image = $imageName;
+        }
+
+        $user->save();
 
         // Update dosen data
         $dosen->update([

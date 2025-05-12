@@ -194,7 +194,7 @@ class UserSeeder extends Seeder
 
         //Company
         User::create([
-            'level_id' => 4,
+            'level_id' => 4, //Company
             'name' => 'PT. Farrel Caesarian',
             'username' => 'ptfarel',
             'email' => 'ptfarel@gmail.com',
@@ -204,7 +204,7 @@ class UserSeeder extends Seeder
         ]);
 
         User::create([
-            'level_id' => 4,
+            'level_id' => 4, //Company
             'name' => 'PT. ABC',
             'username' => 'ptabc',
             'email' => 'ptabc@gmail.com',
@@ -214,7 +214,7 @@ class UserSeeder extends Seeder
         ]);
 
         User::create([
-            'level_id' => 4,
+            'level_id' => 4, //Company
             'name' => 'Akademi Holland',
             'username' => 'akmi.holland',
             'email' => 'holland@gmail..com',
@@ -224,7 +224,7 @@ class UserSeeder extends Seeder
         ]);
 
         User::create([
-            'level_id' => 4,
+            'level_id' => 4, //Company
             'name' => 'PT. Kopi Skena',
             'username' => 'kopi.skena',
             'email' => 'kopiskena@gmail.com',
@@ -234,7 +234,7 @@ class UserSeeder extends Seeder
         ]);
 
         User::create([
-            'level_id' => 4,
+            'level_id' => 4, //Company
             'name' => 'PT. Fukasaki',
             'username' => 'fukasaki',
             'email' => 'fukasaki@gmail.com',
@@ -244,7 +244,7 @@ class UserSeeder extends Seeder
         ]);
 
         User::create([
-            'level_id' => 4,
+            'level_id' => 4, //Company
             'name' => 'PT. Omura',
             'username' => 'omuraa',
             'email' => 'omura@gmail.com',
@@ -254,7 +254,7 @@ class UserSeeder extends Seeder
         ]);
 
         User::create([
-            'level_id' => 4,
+            'level_id' => 4, //Company
             'name' => 'Akademi Nankatsu',
             'username' => 'nankasu',
             'email' => 'nankatsu@gmail.com',
@@ -264,7 +264,7 @@ class UserSeeder extends Seeder
         ]);
 
         User::create([
-            'level_id' => 4,
+            'level_id' => 4, //Company
             'name' =>  'Caesarian',
             'username' => 'cae.rian',
             'email' => 'cae@gmail.com',

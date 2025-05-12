@@ -6,6 +6,7 @@ use App\Models\Level;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
@@ -45,11 +46,12 @@ class UserController extends Controller
             'username' => 'required|unique:users',
             'email' => 'required|unique:users',
             'password' => 'required|min:6',
-            'no_telp' => 'required',
-            'alamat' => 'required'
+            'no_telp' => 'nullable',
+            'alamat' => 'nullable',
+            'file' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
-        $request = User::create([
+        $userData = [
             'level_id' => 1,
             'name' => $request->name,
             'username' => $request->username,
@@ -57,7 +59,17 @@ class UserController extends Controller
             'password' => Hash::make($request->password),
             'no_telp' => $request->no_telp,
             'alamat' => $request->alamat,
-        ]);
+        ];
+
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $imageName = time() . '.' . $image->getClientOriginalExtension();
+            $image->storeAs('public/images/users', $imageName);
+            $userData['image'] = $imageName;
+        }
+
+        User::create($userData);
+
         return redirect()->route('user.index')->with('success', 'Admin berhasil ditambahkan.');
     }
 
@@ -90,8 +102,9 @@ class UserController extends Controller
             'name' => 'required',
             'username' => 'required|unique:users,username,' . $user->user_id . ',user_id',
             'email' => 'required|unique:users,email,' . $user->user_id . ',user_id',
-            'no_telp' => 'required',
-            'alamat' => 'required',
+            'no_telp' => 'nullable',
+            'alamat' => 'nullable',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
         if ($request->filled('password')) {
@@ -100,13 +113,27 @@ class UserController extends Controller
             ]);
         }
 
-        $user->update([
+        $userData = [
             'name' => $request->name,
             'username' => $request->username,
             'email' => $request->email,
             'no_telp' => $request->no_telp,
             'alamat' => $request->alamat,
-        ]);
+        ];
+
+        if ($request->hasFile('image')) {
+            if ($user->image) {
+                Storage::delete('public/images/users/' . $user->image);
+            }
+
+            $image = $request->file('image');
+            $imageName = time() . '.' . $image->getClientOriginalExtension();
+            $image->storeAs('public/images/users', $imageName);
+            $userData['image'] = $imageName;
+        }
+
+        $user->update($userData);
+
 
         return redirect()->route('user.index')->with('success', 'Admin ' . $user->name . ' berhasil diperbarui.');
     }

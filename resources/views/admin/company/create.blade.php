@@ -8,7 +8,7 @@
                 <div class="row g-4">
                     <div class="col-lg-6">
                         <div class="form-group">
-                            <label class="form-label" for="full-name-1">Nama Lengkap:</label>
+                            <label class="form-label" for="full-name-1">Nama Lengkap:<span class="text-danger">*</label>
                             <div class="form-control-wrap">
                                 <input type="text" class="form-control" name="name" required>
                             </div>
@@ -16,7 +16,7 @@
                     </div>
                     <div class="col-lg-6">
                         <div class="form-group">
-                            <label class="form-label" for="full-name-1">Username:</label>
+                            <label class="form-label" for="full-name-1">Username:<span class="text-danger">*</label>
                             <div class="form-control-wrap">
                                 <input type="text" class="form-control" name="username" required>
                             </div>
@@ -24,7 +24,7 @@
                     </div>
                     <div class="col-lg-6">
                         <div class="form-group">
-                            <label class="form-label" for="email-address-1">Email:</label>
+                            <label class="form-label" for="email-address-1">Email:<span class="text-danger">*</label>
                             <div class="form-control-wrap">
                                 <input type="text" class="form-control" name="email">
                             </div>
@@ -32,7 +32,7 @@
                     </div>
                     <div class="col-lg-6">
                         <div class="form-group">
-                            <label class="form-label" for="pay-amount-1">Password:</label>
+                            <label class="form-label" for="pay-amount-1">Password:<span class="text-danger">*</label>
                             <div class="form-control-wrap">
                                 <input type="password" class="form-control" name="password">
                             </div>
@@ -48,7 +48,7 @@
                     </div>
                     <div class="col-lg-6">
                         <div class="form-group">
-                            <label class="form-label">Industri:</label>
+                            <label class="form-label">Industri:<span class="text-danger">*</label>
                             <div class="form-control-wrap">
                                 <select class="form-select js-select2" data-search="on" name="industry">
                                     <option value="default_option">Default Option</option>
