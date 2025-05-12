@@ -62,24 +62,6 @@
                             </td>
                             <td class="nk-tb-col nk-tb-col-tools">
                                 <ul class="nk-tb-actions gx-1">
-                                    <li class="nk-tb-action-hidden">
-                                        <a href="#" class="btn btn-trigger btn-icon" data-bs-toggle="tooltip"
-                                            data-bs-placement="top" title="Wallet">
-                                            <em class="icon ni ni-wallet-fill"></em>
-                                        </a>
-                                    </li>
-                                    <li class="nk-tb-action-hidden">
-                                        <a href="#" class="btn btn-trigger btn-icon" data-bs-toggle="tooltip"
-                                            data-bs-placement="top" title="Send Email">
-                                            <em class="icon ni ni-mail-fill"></em>
-                                        </a>
-                                    </li>
-                                    <li class="nk-tb-action-hidden">
-                                        <a href="#" class="btn btn-trigger btn-icon" data-bs-toggle="tooltip"
-                                            data-bs-placement="top" title="Suspend">
-                                            <em class="icon ni ni-user-cross-fill"></em>
-                                        </a>
-                                    </li>
                                     <li>
                                         <div class="drodown">
                                             <a href="#" class="dropdown-toggle btn btn-icon btn-trigger"
@@ -93,15 +75,9 @@
                                                     <li><a href="{{ route('companies.edit', $company->company_id) }}"><em
                                                                 class="icon ni ni-repeat"></em><span>Edit</span></a>
                                                     </li>
-                                                    <li><a href="#"><em
-                                                                class="icon ni ni-activity-round"></em><span>Activities</span></a>
-                                                    </li>
+
                                                     <li class="divider"></li>
-                                                    <li><a href="#"><em
-                                                                class="icon ni ni-shield-star"></em><span>Reset
-                                                                Pass</span></a></li>
-                                                    <li><a href="#"><em class="icon ni ni-shield-off"></em><span>Reset
-                                                                2FA</span></a></li>
+
                                                     <li><a href="{{ route('companies.destroy', $company->company_id) }}"><em
                                                                 class="icon ni ni-na"></em><span>Hapus
                                                                 User</span></a></li>

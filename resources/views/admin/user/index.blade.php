@@ -68,19 +68,6 @@
                             </td>
                             <td class="nk-tb-col nk-tb-col-tools">
                                 <ul class="nk-tb-actions gx-1">
-                                    <li class="nk-tb-action-hidden">
-                                        <a href="#" class="btn btn-trigger btn-icon" data-bs-toggle="tooltip"
-                                            data-bs-placement="top" title="Suspend">
-                                            <em class="icon ni ni-user-cross-fill"></em>
-                                        </a>
-                                    </li>
-                                    <li class="nk-tb-action-hidden">
-                                        <a href="{{ route('user.destroy', $admin->user_id) }}"
-                                            class="btn btn-trigger btn-icon" data-bs-toggle="tooltip"
-                                            data-bs-placement="top" title="Delete">
-                                            <em class="icon ni ni-trash"></em>
-                                        </a>
-                                    </li>
                                     <li>
                                         <div class="drodown">
                                             <a href="#" class="dropdown-toggle btn btn-icon btn-trigger"
@@ -94,9 +81,7 @@
                                                     <li><a href="{{ route('user.edit', $admin->user_id) }}"><em
                                                                 class="icon ni ni-repeat"></em><span>Edit</span></a>
                                                     </li>
-                                                    <li><a href="#"><em
-                                                                class="icon ni ni-activity-round"></em><span>Activities</span></a>
-                                                    </li>
+
                                                     <li class="divider"></li>
                                                     <li><a href="{{ route('user.destroy', $admin->user_id) }}"><em
                                                                 class="icon ni ni-trash"></em><span>Hapus
