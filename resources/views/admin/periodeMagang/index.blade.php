@@ -18,29 +18,17 @@
             <table class="datatable-init-export nowrap nk-tb-list nk-tb-ulist" data-auto-responsive="false">
                 <thead>
                     <tr class="nk-tb-item nk-tb-head">
-                        <th class="nk-tb-col nk-tb-col-check">
-                            <div class="custom-control custom-control-sm custom-checkbox notext">
-                                <input type="checkbox" class="custom-control-input" id="uid">
-                                <label class="custom-control-label" for="uid"></label>
-                            </div>
-                        </th>
-                        <th class="nk-tb-col export-col"><span class="sub-text">Program Magang</span></th>
-                        <th class="nk-tb-col export-col"><span class="sub-text">Tanggal Mulai</span></th>
-                        <th class="nk-tb-col export-col"><span class="sub-text">Tanggal Berakhir</span></th>
+                        <th class="nk-tb-col tb-col-md"><span class="sub-text">Program Magang</span></th>
+                        <th class="nk-tb-col tb-col-md"><span class="sub-text">Tanggal Mulai</span></th>
+                        <th class="nk-tb-col tb-col-md"><span class="sub-text">Tanggal Berakhir</span></th>
                         <th class="nk-tb-col nk-tb-col-tools text-end"></th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($pegang as $pegangs)
                         <tr class="nk-tb-item">
-                            <td class="nk-tb-col nk-tb-col-check">
-                                <div class="custom-control custom-control-sm custom-checkbox notext">
-                                    <input type="checkbox" class="custom-control-input" id="uid{{ $pegangs->period_id }}">
-                                    <label class="custom-control-label" for="uid{{ $pegangs->period_id }}"></label>
-                                </div>
-                            </td>
                             <td class="nk-tb-col">
-                                <span>{{ $pegangs->name }}</span>
+                                <span class="tb-amount">{{ $pegangs->name }}</span>
                             </td>
                             <td class="nk-tb-col">
                                 <span>{{ $pegangs->start_date }}</span>
@@ -68,7 +56,7 @@
 
                                                     <li><a href="{{ route('periodeMagang.destroy', $pegangs->period_id) }}"><em
                                                                 class="icon ni ni-na"></em><span>Hapus
-                                                                User</span></a></li>
+                                                                Data</span></a></li>
                                                 </ul>
                                             </div>
                                         </div>
