@@ -129,6 +129,14 @@
             <span class="nk-menu-text">Lamaran Magang</span>
         </a>
     </li>
+    <li class="nk-menu-item">
+        <a href="{{ route('laporan') }}" class="nk-menu-link">
+            <span class="nk-menu-icon">
+                <em class="icon ni ni-report"></em>
+            </span>
+            <span class="nk-menu-text">Laporan Harian</span>
+        </a>
+    </li>
 @endif
 @if (Auth::user()->level->level_nama == 'Company')
     <li class="nk-menu-item">
