@@ -3,7 +3,7 @@
 @section('content')
     <div class="card card-bordered card-preview">
         <div class="card-inner">
-            <form action="{{ route('companies.store') }}" method="POST">
+            <form action="{{ route('companies.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="row g-4">
                     <div class="col-lg-6">
@@ -65,6 +65,16 @@
                             <div class="form-control-wrap">
                                 <input type="text" class="form-control" name="alamat">
                             </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="form-label" for="image">Ubah Foto Profil:</label>
+                            <div class="form-control-wrap">
+                                <input type="file" class="form-control" id="image" name="image" accept="image/*">
+                            </div>
+                            <small class="form-text text-muted">Pilih file gambar baru. Format: jpeg, png, jpg, gif. Maks:
+                                2MB.</small>
                         </div>
                     </div>
                     <div class="col-12">

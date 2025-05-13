@@ -3,7 +3,7 @@
 @section('content')
     <div class="card card-bordered card-preview">
         <div class="card-inner">
-            <form action="{{ route('companies.update', $company->company_id) }}" method="POST">
+            <form action="{{ route('companies.update', $company->company_id) }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PUT') {{-- Method spoofing untuk mengirimkan method PUT --}}
                 <div class="row g-4">
@@ -79,6 +79,16 @@
                                 <input type="text" class="form-control" id="alamat" name="alamat"
                                     value="{{ $company->user->alamat ?? '' }}">
                             </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="form-label" for="image">Ubah Foto Profil:</label>
+                            <div class="form-control-wrap">
+                                <input type="file" class="form-control" id="image" name="image" accept="image/*">
+                            </div>
+                            <small class="form-text text-muted">Pilih file gambar baru untuk mengubah foto profil. Format
+                                yang didukung: jpeg, png, jpg, gif. Maksimal 2MB .</small>
                         </div>
                     </div>
                     <div class="col-12">

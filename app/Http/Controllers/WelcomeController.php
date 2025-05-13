@@ -15,8 +15,14 @@ class WelcomeController extends Controller
     public function index()
     {
         //
-        $companies = Company::withCount('lowongans', 'user')->get();
-        $lowongans = LowonganMagang::with('company', 'period')->get();
+        $lowongans = LowonganMagang::with('company', 'period')
+            ->orderBy('created_at', 'desc')
+            ->limit(6)
+            ->get();
+        $companies = Company::withCount('lowongans', 'user')
+            ->orderBy('created_at', 'desc')
+            ->limit(8)
+            ->get();
         return view('home.welcome', compact('companies', 'lowongans'));
     }
 }

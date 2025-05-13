@@ -6,6 +6,7 @@ use App\Models\Company;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 class CompanyController extends Controller
 {
@@ -49,9 +50,10 @@ class CompanyController extends Controller
             'industry' => 'required|string|max:255',
             'no_telp' => 'nullable|string|max:255',
             'alamat' => 'nullable|string|max:255',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
-        $user = User::create([
+        $userData = [
             'level_id' => 4, // Company
             'name' => $request->name,
             'username' => $request->username,
@@ -59,7 +61,16 @@ class CompanyController extends Controller
             'password' => Hash::make($request->password),
             'no_telp' => $request->no_telp,
             'alamat' => $request->alamat,
-        ]);
+        ];
+
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $imageName = time() . '.' . $image->getClientOriginalExtension();
+            $image->storeAs('public/images/users', $imageName);
+            $userData['image'] = $imageName;
+        }
+
+        $user = User::create($userData);
 
         Company::create([
             'user_id' => $user->user_id,
@@ -90,14 +101,7 @@ class CompanyController extends Controller
             'industry' => 'required|string|max:255',
             'alamat' => 'nullable|string|max:255',
             'no_telp' => 'nullable|string|max:255',
-        ]);
-
-        $user->update([
-            'name' => $request->name,
-            'username' => $request->username,
-            'email' => $request->email,
-            'no_telp' => $request->no_telp,
-            'alamat' => $request->alamat,
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
         if ($request->filled('password')) {
@@ -105,6 +109,26 @@ class CompanyController extends Controller
                 'password' => Hash::make($request->password),
             ]);
         }
+
+        $user->name = $request->name;
+        $user->username = $request->username;
+        $user->email = $request->email;
+        $user->no_telp = $request->no_telp;
+        $user->alamat = $request->alamat;
+
+        // Handle image upload
+        if ($request->hasFile('image')) {
+            if ($user->image) {
+                Storage::delete('public/images/users/' . $user->image);
+            }
+
+            $image = $request->file('image');
+            $imageName = time() . '.' . $image->getClientOriginalExtension();
+            $image->storeAs('public/images/users', $imageName);
+            $user->image = $imageName;
+        }
+
+        $user->save();
 
         $company->update([
             'industry' => $request->industry,
