@@ -103,6 +103,14 @@
         <h6 class="overline-title text-primary-alt">User Management</h6>
     </li>
     <li class="nk-menu-item">
+        <a href="{{ route('evaluasi.index') }}" class="nk-menu-link">
+            <span class="nk-menu-icon">
+                <em class="icon ni ni-check"></em>
+            </span>
+            <span class="nk-menu-text">Evaluasi Magang</span>
+        </a>
+    </li>
+    <li class="nk-menu-item">
         <a href="{{ route('dosen.verifikasi') }}" class="nk-menu-link">
             <span class="nk-menu-icon">
                 <em class="icon ni ni-check"></em>

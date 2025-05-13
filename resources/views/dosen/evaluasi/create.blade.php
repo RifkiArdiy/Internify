@@ -2,9 +2,8 @@
 
 @section('content')
     
-    <form action="{{ route('dosen.evaluasi.store') }}" method="POST">
-        <h2>Tambah Evaluasi Magang</h2>
-       
+    <form action="{{ route('evaluasi.store') }}" method="POST"> 
+        @csrf     
         <div class="mb-3">
             <label for="mahasiswa_id" class="form-label">Mahasiswa</label>
             <select name="mahasiswa_id" class="form-control" required>
@@ -19,7 +18,7 @@
             <select name="company_id" class="form-control" required>
                 <option value="">-- Pilih Perusahaan --</option>
                 @foreach($companies as $company)
-                    <option value="{{ $company->company_id }}">{{ $company->name }}</option>
+                    <option value="{{ $company->company_id }}">{{ $company->user->name }}</option>
                 @endforeach
             </select>
         </div>
@@ -28,6 +27,6 @@
             <textarea name="evaluasi" class="form-control" rows="4" required>{{ old('evaluasi') }}</textarea>
         </div>
         <button class="btn btn-primary">Simpan</button>
-        <a href="{{ route('dosen.evaluasi.index') }}" class="btn btn-secondary">Kembali</a>
+        <a href="{{ route('evaluasi.index') }}" class="btn btn-secondary">Kembali</a>
     </form>
 @endsection

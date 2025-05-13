@@ -16,6 +16,7 @@ use App\Http\Controllers\PeriodeMagangController;
 use App\Models\MagangApplication;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\LaporanController;
+use App\Http\Controllers\EvaluasiMagangController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -166,6 +167,13 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/profile', [ProfileController::class, 'index'])->name('dosen.profile');
         Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('dosen.profile.edit');
         Route::post('/profile/update', [ProfileController::class, 'update'])->name('dosen.profile.update');
+
+        Route::get('/evaluasi', [EvaluasiMagangController::class, 'index'])->name('evaluasi.index');
+        Route::get('/evaluasi/create', [EvaluasiMagangController::class, 'create'])->name('evaluasi.create');
+        Route::post('/evaluasi/store', [EvaluasiMagangController::class, 'store'])->name('evaluasi.store');
+        Route::get('/evaluasi/{id}/edit', [EvaluasiMagangController::class, 'edit'])->name('evaluasi.edit');
+        Route::put('/evaluasi/{id}', [EvaluasiMagangController::class, 'update'])->name('evaluasi.update');
+        Route::delete('/evaluasi/{id}', [EvaluasiMagangController::class, 'destroy'])->name('evaluasi.destroy');
     });
 
     Route::prefix('company')->middleware('role:Company')->group(function () {

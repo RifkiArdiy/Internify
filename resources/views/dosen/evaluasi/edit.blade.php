@@ -1,8 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <h2>Edit Evaluasi Magang</h2>
-    <form action="{{ route('dosen.evaluasi.update', $evaluation) }}" method="POST">
+    <form action="{{ route('evaluasi.update', $evaluation) }}" method="POST">
         @csrf
         @method('PUT')
         <div class="mb-3">
@@ -20,7 +19,7 @@
             <select name="company_id" class="form-control" required>
                 @foreach($companies as $company)
                     <option value="{{ $company->company_id }}" {{ $company->company_id == $evaluation->company_id ? 'selected' : '' }}>
-                        {{ $company->name }}
+                        {{ $company->user->name }}
                     </option>
                 @endforeach
             </select>
@@ -30,6 +29,6 @@
             <textarea name="evaluasi" class="form-control" rows="4" required>{{ $evaluation->evaluasi }}</textarea>
         </div>
         <button class="btn btn-primary">Perbarui</button>
-        <a href="{{ route('dosen.evaluasi.index') }}" class="btn btn-secondary">Kembali</a>
+        <a href="{{ route('evaluasi.index') }}" class="btn btn-secondary">Kembali</a>
     </form>
 @endsection

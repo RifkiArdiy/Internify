@@ -34,14 +34,18 @@ class EvaluasiMagangController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'mahasiswa_id' => 'required|exists:mahasiswas,id',
-            'company_id' => 'required|exists:companies,id',
+            'mahasiswa_id' => 'required|exists:mahasiswas,mahasiswa_id',
+            'company_id' => 'required|exists:companies,company_id',
             'evaluasi' => 'required|string',
         ]);
 
-        EvaluasiMagang::create($request->all());
+        EvaluasiMagang::create([
+            'mahasiswa_id' => $request->mahasiswa_id,
+            'company_id' => $request->company_id,
+            'evaluasi' => $request->evaluasi,
+        ]);
 
-        return redirect()->route('dosen.evaluasi.index')->with('success', 'Evaluasi berhasil disimpan');
+        return redirect()->route('evaluasi.index')->with('success', 'Evaluasi berhasil disimpan');
     }
 
     public function edit($id)
@@ -49,10 +53,16 @@ class EvaluasiMagangController extends Controller
         $evaluation = EvaluasiMagang::findOrFail($id);
         $mahasiswas = Mahasiswa::all();
         $companies = Company::all();
+        $breadcrumb = (object) [
+            'title' => 'Edit Evaluasi Magang',
+            'subtitle' => ['Form Validation']
+        ];
+
         return view('dosen.evaluasi.edit', [
             'evaluation' => $evaluation,
             'mahasiswas' => $mahasiswas,
             'companies' => $companies,
+            'breadcrumb' => $breadcrumb
         ]);
     }
 
@@ -61,13 +71,21 @@ class EvaluasiMagangController extends Controller
         $evaluation = EvaluasiMagang::findOrFail($id);
 
         $request->validate([
-            'mahasiswa_id' => 'required|exists:mahasiswas,id',
-            'company_id' => 'required|exists:companies,id',
+            'mahasiswa_id' => 'required|exists:mahasiswas,mahasiswa_id',
+            'company_id' => 'required|exists:companies,company_id',
             'evaluasi' => 'required|string',
         ]);
 
         $evaluation->update($request->all());
 
-        return redirect()->route('dosen.evaluasi.index')->with('success', 'Evaluasi berhasil diperbarui');
+        return redirect()->route('evaluasi.index')->with('success', 'Evaluasi berhasil diperbarui');
+    }
+
+    public function destroy($id)
+    {
+        $evaluation = EvaluasiMagang::findOrFail($id);
+        $evaluation->delete();
+
+        return redirect()->route('evaluasi.index')->with('success', 'Evaluasi berhasil dihapus');
     }
 }
