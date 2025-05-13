@@ -17,6 +17,8 @@
 
     <!-- StyleSheets  -->
     <link rel="stylesheet" href="{{ asset('assets/admin/css/dashlite.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/admin/css/editors/quill.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/admin/css/editors/quill.rtl.css') }}">
     <link id="skin-default" rel="stylesheet" href="{{ asset('assets/admin/css/theme.css') }}">
     @livewireStyles
     {{-- <script src="{{ asset('js/app.js') }}" defer></script>
@@ -72,7 +74,10 @@
     <script src="{{ asset('assets/admin/js/libs/datatable-btns.js') }}"></script>
     <script src="{{ asset('assets/admin/js/example-sweetalert.js') }}"></script>
     <script src="{{ asset('assets/admin/js/example-toastr.js') }}"></script>
-
+    <link rel="stylesheet" href="{{ asset('assets/admin/css/editors/quill.css') }}">
+    <script src="{{ asset('assets/admin/js/libs/editors/quill.js') }}"></script>
+    <script src="{{ asset('assets/admin/js/editors.js') }}"></script>
+    <script src="{{ asset('assets/admin/js/libs/tagify.js') }}"></script>
     <script>
         $.ajaxSetup({
             headers: {

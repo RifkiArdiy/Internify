@@ -17,7 +17,7 @@ return new class extends Migration
             $table->unsignedBigInteger('period_id')->index();
             $table->string('title');
             $table->text('description');
-            $table->string('requirements');
+            $table->text('requirements');
             $table->string('location');
             $table->timestamps();
 

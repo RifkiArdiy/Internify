@@ -19,36 +19,34 @@
             <table class="datatable-init-export nowrap nk-tb-list nk-tb-ulist" data-auto-responsive="false">
                 <thead>
                     <tr class="nk-tb-item nk-tb-head">
-                        <th class="nk-tb-col export-col"><span class="sub-text">Perusahaan</span></th>
-                        {{-- <th class="nk-tb-col export-col"><span class="sub-text">Masa Awal</span></th>
-                        <th class="nk-tb-col export-col"><span class="sub-text">Masa Akhir</span></th> --}}
-                        <th class="nk-tb-col export-col"><span class="sub-text">Judul</span></th>
-                        <th class="nk-tb-col export-col"><span class="sub-text">Deskripsi</span></th>
-                        <th class="nk-tb-col export-col"><span class="sub-text">Kriteria</span></th>
-                        {{-- <th class="nk-tb-col export-col"><span class="sub-text">Lokasi</span></th> --}}
+                        <th class="nk-tb-col tb-col-lg"><span class="sub-text">Judul</span></th>
+                        <th class="nk-tb-col tb-col-lg"><span class="sub-text">Perusahaan</span></th>
+                        <th class="nk-tb-col tb-col-lg"><span class="sub-text">Created at</span></th>
+                        <th class="nk-tb-col tb-col-md"><span class="sub-text">Masa Awal</span></th>
+                        <th class="nk-tb-col tb-col-md"><span class="sub-text">Masa Akhir</span></th>
+                        {{-- <th class="nk-tb-col tb-col-md"><span class="sub-text">Deskripsi</span></th> --}}
+                        {{-- <th class="nk-tb-col tb-col-md"><span class="sub-text">Kriteria</span></th> --}}
+                        {{-- <th class="nk-tb-col tb-col-md"><span class="sub-text">Lokasi</span></th> --}}
                         <th class="nk-tb-col nk-tb-col-tools text-end"></th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($logang as $item)
                         <tr class="nk-tb-item">
-                            <td class="nk-tb-col">
-                                <span>{{ $item->company->name }}</span>
+                            <td class="nk-tb-col tb-col-lg">
+                                <span class="tb-amount">{{ $item->title }}</span>
                             </td>
-                            {{-- <td class="nk-tb-col">
+                            <td class="nk-tb-col tb-col-lg">
+                                <span class="tb-amount">{{ $item->company->user->name }}</span>
+                            </td>
+                            <td class="nk-tb-col tb-col-lg">
+                                <span>{{ $item->created_at }}</span>
+                            </td>
+                            <td class="nk-tb-col tb-col-md">
                                 <span>{{ $item->period->start_date }}</span>
                             </td>
-                            <td class="nk-tb-col">
+                            <td class="nk-tb-col tb-col-md">
                                 <span>{{ $item->period->end_date }}</span>
-                            </td> --}}
-                            <td class="nk-tb-col">
-                                <span>{{ $item->title }}</span>
-                            </td>
-                            <td class="nk-tb-col">
-                                <span>{{ Str::limit($item->description, 50) }}</span>
-                            </td>
-                            <td class="nk-tb-col">
-                                <span>{{ Str::limit($item->requirements, 50) }}</span>
                             </td>
                             {{-- <td class="nk-tb-col">
                                 <span>{{ $item->location }}</span>
