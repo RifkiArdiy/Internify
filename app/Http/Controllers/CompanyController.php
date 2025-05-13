@@ -24,7 +24,7 @@ class CompanyController extends Controller
         $companies = Company::all();
         $breadcrumb = (object) [
             'title' => 'Verifikasi Perusahaan Mitra',
-            'subtitle' => ['Jumlah Perusahaan Mitra : ' . $companies->count()]
+            'subtitle' => ['']
         ];
         return view('company.verifikasi', compact('companies', 'breadcrumb'));
     }

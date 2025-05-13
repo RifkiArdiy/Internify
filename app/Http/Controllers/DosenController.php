@@ -28,8 +28,8 @@ class DosenController extends Controller
     {
         $dosen = Dosen::all();
         $breadcrumb = (object) [
-            'title' => 'Verifikasi Perusahaan Mitra',
-            'subtitle' => ['Jumlah Perusahaan Mitra : ' . $dosen->count()]
+            'title' => 'Verifikasi Laporan Mahasiswa',
+            'subtitle' => ['']
         ];
         return view('dosen.verifikasi', compact('dosen', 'breadcrumb'));
     }

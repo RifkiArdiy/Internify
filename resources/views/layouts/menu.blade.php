@@ -105,7 +105,7 @@
     <li class="nk-menu-item">
         <a href="{{ route('evaluasi.index') }}" class="nk-menu-link">
             <span class="nk-menu-icon">
-                <em class="icon ni ni-check"></em>
+                <em class="icon ni ni-file-text"></em>
             </span>
             <span class="nk-menu-text">Evaluasi Magang</span>
         </a>
