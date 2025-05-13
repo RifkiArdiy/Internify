@@ -41,7 +41,7 @@
                                 <span>{{ $magang->lowongan->title }}</span>
                             </td>
                             <td class="nk-tb-col">
-                                <span>{{ $magang->lowongan->company->name }}</span>
+                                <span>{{ $magang->lowongan->company->user->name }}</span>
                             </td>
                             <td class="nk-tb-col">
                                 <span>{{ $magang->status }}</span>
