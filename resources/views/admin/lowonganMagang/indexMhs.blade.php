@@ -45,6 +45,9 @@
                                 <span>{{ $item->location }}</span>
                             </td> --}}
                             <td class="nk-tb-col">
+                                @if ($item->applications->where('status')->isNotEmpty())
+                                    <span>Sudah Melamar</span>
+                                @else
                                 <form action="{{ route('magangApplication.storeMhs', $item->lowongan_id) }}" method="POST"
                                     onsubmit="return confirm('Yakin ingin melamar lowongan ini?')">
                                     @csrf
@@ -52,6 +55,7 @@
                                     <input type="hidden" name="status" value="Pending">
                                     <button type="submit" class="btn btn-success btn-sm">Lamar</button>
                                 </form>
+                                @endif 
                             </td>
 
                             <td class="nk-tb-col nk-tb-col-tools">
