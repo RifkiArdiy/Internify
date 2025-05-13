@@ -15,12 +15,12 @@ class MagangApplication extends Model
 
     protected $fillable = ['mahasiswa_id', 'lowongan_id', 'status'];
 
-    public function student()
+    public function mahasiswas()
     {
         return $this->belongsTo(Mahasiswa::class, 'mahasiswa_id');
     }
 
-    public function lowongan()
+    public function lowongans()
     {
         return $this->belongsTo(LowonganMagang::class, 'lowongan_id');
     }

@@ -24,7 +24,7 @@
                     @foreach ($logang as $item)
                         <tr class="nk-tb-item">
                             <td class="nk-tb-col">
-                                <span>{{ $item->company->name }}</span>
+                                <span>{{ $item->company->user->name }}</span>
                             </td>
                             {{-- <td class="nk-tb-col">
                                 <span>{{ $item->period->start_date }}</span>
@@ -48,6 +48,8 @@
                                 <form action="{{ route('magangApplication.storeMhs', $item->lowongan_id) }}" method="POST"
                                     onsubmit="return confirm('Yakin ingin melamar lowongan ini?')">
                                     @csrf
+                                    <input type="hidden" name="lowongan_id" value="{{ $item->lowongan_id }}">
+                                    <input type="hidden" name="status" value="Pending">
                                     <button type="submit" class="btn btn-success btn-sm">Lamar</button>
                                 </form>
                             </td>

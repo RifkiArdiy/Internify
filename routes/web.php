@@ -157,7 +157,7 @@ Route::middleware(['auth'])->group(function () {
 
             Route::get('/{id}/lihat', [MagangApplicationController::class, 'show'])->name('lihatLamaran');
 
-            Route::post('/lamar/{id}', [MagangApplicationController::class, 'storeMhs'])->name('magangApplication.storeMhs')->middleware('auth');;
+            Route::post('/lamar/store', [MagangApplicationController::class, 'storeMhs'])->name('magangApplication.storeMhs');;
         });
     });
 
