@@ -34,7 +34,7 @@ class LowonganMagangController extends Controller
 
         $logang = LowonganMagang::all();
         $period = PeriodeMagang::all();
-
+   
         return view('admin.lowonganMagang.indexMhs', compact('logang', 'period', 'breadcrumb'));
     }
 
