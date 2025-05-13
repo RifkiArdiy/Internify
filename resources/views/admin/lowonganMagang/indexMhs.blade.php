@@ -44,10 +44,16 @@
                             {{-- <td class="nk-tb-col">
                                 <span>{{ $item->location }}</span>
                             </td> --}}
+                            @php
+                                //$mahasiswaId = Auth::user()->mahasiswa->mahasiswa_id;
+                                //$sudahMelamar = \App\Models\MagangApplication::where('mahasiswa_id', $mahasiswaId)
+                                                //  ->where('lowongan_id', $item->lowongan_id)
+                                                //  ->exists();
+                            @endphp
                             <td class="nk-tb-col">
-                                @if ($item->applications->where('status')->isNotEmpty())
+                                {{-- @if ($sudahMelamar)
                                     <span>Sudah Melamar</span>
-                                @else
+                                @else --}}
                                 <form action="{{ route('magangApplication.storeMhs', $item->lowongan_id) }}" method="POST"
                                     onsubmit="return confirm('Yakin ingin melamar lowongan ini?')">
                                     @csrf
@@ -55,7 +61,7 @@
                                     <input type="hidden" name="status" value="Pending">
                                     <button type="submit" class="btn btn-success btn-sm">Lamar</button>
                                 </form>
-                                @endif 
+                                {{-- @endif  --}}
                             </td>
 
                             <td class="nk-tb-col nk-tb-col-tools">
