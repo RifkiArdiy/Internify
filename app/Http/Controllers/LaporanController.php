@@ -99,4 +99,14 @@ class LaporanController extends Controller
 
         return redirect()->route('laporan')->with('success', 'Laporan berhasil dihapus.');
     }
+
+    public function show($id)
+    {
+        $log = Log::findOrFail($id);
+        $breadcrumb = (object) [
+            'title' => 'Detail Laporan',
+            'subtitle' => ['Detail Laporan Magang']
+        ];
+        return view('mahasiswa.laporan.show', compact('breadcrumb','log'));
+    }
 }
