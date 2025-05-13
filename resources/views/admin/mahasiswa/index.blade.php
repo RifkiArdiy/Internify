@@ -18,14 +18,8 @@
             <table class="datatable-init-export nowrap nk-tb-list nk-tb-ulist" data-auto-responsive="false">
                 <thead>
                     <tr class="nk-tb-item nk-tb-head">
-                        <th class="nk-tb-col nk-tb-col-check">
-                            <div class="custom-control custom-control-sm custom-checkbox notext">
-                                <input type="checkbox" class="custom-control-input" id="uid">
-                                <label class="custom-control-label" for="uid"></label>
-                            </div>
-                        </th>
                         <th class="nk-tb-col"><span class="sub-text">User</span></th>
-                        <th class="nk-tb-col tb-col-mb"><span class="sub-text">Nim</span></th>
+                        <th class="nk-tb-col tb-col-mb"><span class="sub-text">NIM</span></th>
                         <th class="nk-tb-col tb-col-lg"><span class="sub-text">Jurusan</span></th>
                         <th class="nk-tb-col tb-col-lg"><span class="sub-text">Alamat</span></th>
                         <th class="nk-tb-col tb-col-md"><span class="sub-text">Telepon</span></th>
@@ -37,12 +31,6 @@
                 <tbody>
                     @foreach ($mahasiswas as $mhs)
                         <tr class="nk-tb-item">
-                            <td class="nk-tb-col nk-tb-col-check">
-                                <div class="custom-control custom-control-sm custom-checkbox notext">
-                                    <input type="checkbox" class="custom-control-input" id="uid{{ $mhs->mahasiswa_id }}">
-                                    <label class="custom-control-label" for="uid{{ $mhs->mahasiswa_id }}"></label>
-                                </div>
-                            </td>
                             <td class="nk-tb-col">
                                 <div class="user-card">
                                     <div class="user-avatar bg-dark d-none d-sm-flex">
