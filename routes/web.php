@@ -142,7 +142,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/laporan/{id}/edit', [LaporanController::class, 'edit'])->name('laporan.edit');
         Route::put('/laporan/{id}', [LaporanController::class, 'update'])->name('laporan.update');
         Route::delete('/laporan/{id}', [LaporanController::class, 'destroy'])->name('laporan.destroy');
-        Route::get('/show/{id}', [LaporanController::class, 'show'])->name('laporan.show');
+        Route::get('/laporan/show/{id}', [LaporanController::class, 'show'])->name('laporan.show');
 
         Route::get('/profile', [ProfileController::class, 'index'])->name('mahasiswa.profile');
         Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('mahasiswa.profile.edit');
@@ -183,6 +183,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('company.profile.edit');
         Route::post('/profile/update', [ProfileController::class, 'update'])->name('company.profile.update');
         Route::get('/verifikasi', [CompanyController::class, 'indexVerifikasi'])->name('company.verifikasi');
+        Route::get('/verifikasi/show/{id}', [CompanyController::class, 'showLaporan'])->name('company.verifikasi.show');
     });
 
     Route::get('logout', [AuthController::class, 'logout'])->name('logout');

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Log;
 use App\Models\Company;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -21,12 +22,22 @@ class CompanyController extends Controller
 
     public function indexVerifikasi()
     {
-        $companies = Company::all();
+        $logs = Log::with(['mahasiswa.user', 'dosen.user'])->latest()->get();
         $breadcrumb = (object) [
-            'title' => 'Verifikasi Perusahaan Mitra',
-            'subtitle' => ['']
+            'title' => 'Verifikasi Laporan Mahasiswa',
+            'subtitle' => ['Laporan Harian']
         ];
-        return view('company.verifikasi', compact('companies', 'breadcrumb'));
+        return view('company.verifikasi', compact('breadcrumb','logs'));
+    }
+
+    public function showLaporan($id)
+    {
+        $log = Log::findOrFail($id);
+        $breadcrumb = (object) [
+            'title' => 'Detail Laporan',
+            'subtitle' => ['Detail Laporan Magang']
+        ];
+        return view('company.show', compact('breadcrumb','log'));
     }
 
     public function create()
