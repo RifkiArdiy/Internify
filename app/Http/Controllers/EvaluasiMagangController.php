@@ -14,7 +14,7 @@ class EvaluasiMagangController extends Controller
     {
         $breadcrumb = (object) [
             'title' => 'Evaluasi Magang',
-            'subtitle' => ['Jumlah total Evaluasi Magang ' . EvaluasiMagang::count()]
+            'subtitle' => ['Jumlah Evaluasi Magang ' . EvaluasiMagang::count()]
         ];
         $evaluations = EvaluasiMagang::with('mahasiswa', 'company')->latest()->get();
         return view('dosen.evaluasi.index', ['evaluasi' => $evaluations], compact('breadcrumb'));
