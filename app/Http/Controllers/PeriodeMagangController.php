@@ -18,7 +18,8 @@ class PeriodeMagangController extends Controller
             'subtitle' => ['Jumlah Periode Magang : ' . $pegang->count()]
         ];
 
-        return view('periodeMagang.index', compact('pegang', 'breadcrumb'));
+        $pegang = PeriodeMagang::all();
+        return view('admin.periodeMagang.index', compact('pegang', 'breadcrumb'));
     }
 
     /**
@@ -28,10 +29,10 @@ class PeriodeMagangController extends Controller
     {
         $breadcrumb = (object) [
             'title' => 'Tambah Periode Magang',
-            'subtitle' => ['Masukkan detail periode magang']
+            'subtitle' => ['Formulir Pengisian Data Periode Magang Baru']
         ];
 
-        return view('periodeMagang.create', compact('breadcrumb'));
+        return view('admin.periodeMagang.create', compact('breadcrumb'));
     }
 
     /**
@@ -64,11 +65,11 @@ class PeriodeMagangController extends Controller
 
         $breadcrumb = (object) [
             'title' => 'Edit Periode Magang',
-            'subtitle' => ['Perbarui detail periode magang']
+            'subtitle' => ['Perbarui Detail Periode Magang']
         ];
 
         $pegang = PeriodeMagang::find($id);
-        return view('periodeMagang.edit', compact('pegang', 'breadcrumb'));
+        return view('admin.periodeMagang.edit', compact('pegang', 'breadcrumb'));
     }
 
     /**

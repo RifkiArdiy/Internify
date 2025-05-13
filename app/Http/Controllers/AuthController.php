@@ -54,6 +54,11 @@ class AuthController extends Controller
                     'message' => 'Login berhasil sebagai Mahasiswa',
                     'redirect' => route('mahasiswa.dashboard')
                 ]);
+            }elseif ($user->level->level_nama === 'Company') {
+                return response()->json([
+                    'message' => 'Login berhasil sebagai Perusahaan Mitra',
+                    'redirect' => route('company.dashboard')
+                ]);
             } else {
                 Auth::logout();
                 return response()->json([

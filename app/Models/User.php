@@ -16,13 +16,13 @@ class User extends Authenticatable
 
     protected $primaryKey = 'user_id';
 
-    protected $fillable = ['level_id', 'name', 'username', 'email', 'password'];
+    protected $fillable = ['level_id', 'name', 'username', 'email', 'password', 'no_telp', 'alamat', 'image'];
 
     protected $hidden = ['password'];
 
     protected $cast = ['password' => 'hashed'];
 
-    public function level(): BelongsTo //Menunjukkan bahwa setiap user memiliki relasi belongsTo dengan tabel LevelModel, dihubungkan melalui level_id.
+    public function level(): BelongsTo
     {
         return $this->belongsTo(Level::class, 'level_id', 'level_id');
     }
@@ -35,6 +35,11 @@ class User extends Authenticatable
     public function dosen(): HasOne
     {
         return $this->hasOne(Dosen::class);
+    }
+
+    public function company(): HasOne
+    {
+        return $this->hasOne(Company::class, 'user_id', 'user_id');
     }
 
     public function getRoleName(): string

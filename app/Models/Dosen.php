@@ -14,7 +14,7 @@ class Dosen extends Model
 
     protected $primaryKey = 'dosen_id';
 
-    protected $fillable = ['user_id', 'nip', 'no_telp', 'alamat'];
+    protected $fillable = ['user_id', 'nip'];
 
     public function user(): BelongsTo
     {
@@ -23,6 +23,6 @@ class Dosen extends Model
 
     public function logs()
     {
-        return $this->hasMany(Log::class);
+        return $this->hasMany(Log::class, 'dosen_id', 'dosen_id');
     }
 }

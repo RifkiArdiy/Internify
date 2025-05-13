@@ -10,7 +10,7 @@
     <!-- Fav Icon  -->
     <link rel="shortcut icon" href="{{ asset('assets/home/images/favicon.png') }}">
     <!-- Page Title  -->
-    <title>Login | DashLite Admin Template</title>
+    <title>Login | Internify</title>
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
@@ -35,7 +35,7 @@
                             </div>
                             <div class="nk-block nk-block-middle nk-auth-body">
                                 <div class="brand-logo pb-5">
-                                    <a href="html/index.html" class="logo-link">
+                                    <a href="{{ route('welcome.index') }}" class="logo-link">
                                         <img class="logo-light logo-img logo-img-lg"
                                             src="{{ asset('assets/home/images/logo.png') }}"
                                             srcset="{{ asset('assets/home/images/logo2x.png') }}" alt="logo">
@@ -174,7 +174,7 @@
                                                     alt="">
                                             </div>
                                             <div class="nk-feature-content py-4 p-sm-5">
-                                                <h4>Dashlite</h4>
+                                                <h4>Internify</h4>
                                                 <p>You can start to create your products easily with its user-friendly
                                                     design & most completed responsive layout.</p>
                                             </div>
@@ -189,7 +189,7 @@
                                                     alt="">
                                             </div>
                                             <div class="nk-feature-content py-4 p-sm-5">
-                                                <h4>Dashlite</h4>
+                                                <h4>Internify</h4>
                                                 <p>You can start to create your products easily with its user-friendly
                                                     design & most completed responsive layout.</p>
                                             </div>
@@ -204,7 +204,7 @@
                                                     alt="">
                                             </div>
                                             <div class="nk-feature-content py-4 p-sm-5">
-                                                <h4>Dashlite</h4>
+                                                <h4>Internify</h4>
                                                 <p>You can start to create your products easily with its user-friendly
                                                     design & most completed responsive layout.</p>
                                             </div>

@@ -17,11 +17,16 @@ class Log extends Model
 
     public function mahasiswa()
     {
-        return $this->belongsTo(Mahasiswa::class);
+        return $this->belongsTo(Mahasiswa::class, 'mahasiswa_id');
     }
 
     public function dosen()
     {
-        return $this->belongsTo(Dosen::class);
+        return $this->belongsTo(Dosen::class, 'dosen_id');
+    }
+
+    public function companies()
+    {
+        return $this->belongsTo(Company::class, 'company_id');
     }
 }
