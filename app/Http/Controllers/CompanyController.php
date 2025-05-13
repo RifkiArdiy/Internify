@@ -30,6 +30,17 @@ class CompanyController extends Controller
         return view('company.verifikasi', compact('breadcrumb','logs'));
     }
 
+    public function updateVerifikasi(Request $request, string $id)
+    {
+        $logs = Log::find($id);
+
+        $logs->update([
+            'verif_company' => $request->verif_company,
+        ]);
+
+        return redirect('company/verifikasi')->with('success', 'Laporan berhasil diverifikasi');
+    }
+
     public function showLaporan($id)
     {
         $log = Log::findOrFail($id);

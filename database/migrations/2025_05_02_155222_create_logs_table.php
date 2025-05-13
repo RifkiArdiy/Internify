@@ -17,6 +17,8 @@ return new class extends Migration
             $table->unsignedBigInteger('dosen_id')->index();
             $table->text('report_text');
             $table->string('file_path')->nullable();
+            $table->string('verif_dosen')->default('pending')->nullable();
+            $table->string('verif_company')->default('pending')->nullable();
             $table->timestamps();
 
             $table->foreign('mahasiswa_id')->references('mahasiswa_id')->on('mahasiswas')->onDelete('cascade');

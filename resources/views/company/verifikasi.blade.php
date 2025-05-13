@@ -20,7 +20,7 @@
                         {{-- <th class="nk-tb-col"><span class="sub-text">Dosen Pembimbing</span></th> --}}
                         <th class="nk-tb-col"><span class="sub-text">Isi Laporan</span></th>
                         <th class="nk-tb-col"><span class="sub-text">Tanggal</span></th>
-                        <th class="nk-tb-col nk-tb-col-tools text-end"></th>
+                        <th class="nk-tb-col"><span class="sub-text">Status</span></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -45,6 +45,11 @@
                                 <span>{{ $log->created_at->format('d M Y') }}</span>
                             </td>
                             <td class="nk-tb-col nk-tb-col-tools">
+                                @if ($log->verif_company === 'Disetujui')
+                                    <span>Verified</span>
+                                @elseif ($log->verif_company === 'Ditolak')
+                                    <span>Ditolak</span>
+                                @else
                                 <ul class="nk-tb-actions gx-1">
                                     <li>
                                         <div class="drodown">
@@ -53,20 +58,12 @@
                                             <div class="dropdown-menu dropdown-menu-end">
                                                 <ul class="link-list-opt no-bdr">
                                                     <li><a href="{{ route('company.verifikasi.show', $log->log_id)}}"><em class="icon ni ni-eye"></em><span>Lihat Detail</span></a></li>
-                                                    {{-- <li><a href="{{ route('laporan.edit', $log->log_id) }}"><em class="icon ni ni-edit"></em><span>Edit</span></a></li>
-                                                    <li class="divider"></li>
-                                                    <li>
-                                                        <form action="{{ route('laporan.destroy', $log->log_id) }}" method="POST" onsubmit="return confirm('Yakin ingin menghapus laporan ini?')">
-                                                            @csrf
-                                                            @method('DELETE')
-                                                            <button type="submit" class="btn btn-link text-danger"><em class="icon ni ni-trash"></em><span>Hapus</span></button>
-                                                        </form>
-                                                    </li> --}}
                                                 </ul>
                                             </div>
                                         </div>
                                     </li>
                                 </ul>
+                                @endif
                             </td>
                         </tr>
                     @endforeach

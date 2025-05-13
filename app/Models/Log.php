@@ -13,7 +13,7 @@ class Log extends Model
 
     protected $primaryKey = 'log_id';
 
-    protected $fillable = ['mahasiswa_id', 'dosen_id', 'report_text', 'file_path'];
+    protected $fillable = ['mahasiswa_id', 'dosen_id', 'report_text', 'file_path', 'verif_dosen', 'verif_company'];
 
     public function mahasiswa()
     {

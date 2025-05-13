@@ -183,6 +183,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('company.profile.edit');
         Route::post('/profile/update', [ProfileController::class, 'update'])->name('company.profile.update');
         Route::get('/verifikasi', [CompanyController::class, 'indexVerifikasi'])->name('company.verifikasi');
+        Route::put('/verifikasi/{id}', [CompanyController::class, 'updateVerifikasi'])->name('company.verifikasi.update');
         Route::get('/verifikasi/show/{id}', [CompanyController::class, 'showLaporan'])->name('company.verifikasi.show');
     });
 
