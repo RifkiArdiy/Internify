@@ -99,6 +99,17 @@
         </a>
     </li>
     <!-- .nk-menu-item -->
+    <li class="nk-menu-heading">
+        <h6 class="overline-title text-primary-alt">User Management</h6>
+    </li>
+    <li class="nk-menu-item">
+        <a href="{{ route('dosen.verifikasi') }}" class="nk-menu-link">
+            <span class="nk-menu-icon">
+                <em class="icon ni ni-check"></em>
+            </span>
+            <span class="nk-menu-text">Verifikasi</span>
+        </a>
+    </li>
 @endif
 @if (Auth::user()->level->level_nama == 'Mahasiswa')
     <li class="nk-menu-heading">
@@ -112,6 +123,10 @@
             </span>
             <span class="nk-menu-text">Dashboard</span>
         </a>
+    </li>
+    <!-- .nk-menu-item -->
+    <li class="nk-menu-heading">
+        <h6 class="overline-title text-primary-alt">User Management</h6>
     </li>
     <li class="nk-menu-item">
         <a href="{{ route('lowonganMagang.indexMhs') }}" class="nk-menu-link">
@@ -139,6 +154,9 @@
     </li>
 @endif
 @if (Auth::user()->level->level_nama == 'Company')
+    <li class="nk-menu-heading">
+        <h6 class="overline-title text-primary-alt">Dashboards</h6>
+    </li>
     <li class="nk-menu-item">
         <a href="{{ route('company.dashboard') }}" class="nk-menu-link">
             <span class="nk-menu-icon">
@@ -146,6 +164,10 @@
             </span>
             <span class="nk-menu-text">Dashboard</span>
         </a>
+    </li>
+    <!-- .nk-menu-item -->
+    <li class="nk-menu-heading">
+        <h6 class="overline-title text-primary-alt">User Management</h6>
     </li>
     <li class="nk-menu-item">
         <a href="{{ route('company.verifikasi') }}" class="nk-menu-link">

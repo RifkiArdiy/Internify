@@ -162,6 +162,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::prefix('dosen')->middleware('role:Dosen')->group(function () {
         Route::get('/dashboard', [DashboardController::class, 'indexDosen'])->name('dosen.dashboard');
+        Route::get('/verifikasi', [DosenController::class, 'indexVerifikasi'])->name('dosen.verifikasi');
         Route::get('/profile', [ProfileController::class, 'index'])->name('dosen.profile');
         Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('dosen.profile.edit');
         Route::post('/profile/update', [ProfileController::class, 'update'])->name('dosen.profile.update');
