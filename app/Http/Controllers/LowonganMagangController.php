@@ -14,12 +14,12 @@ class LowonganMagangController extends Controller
      */
     public function index()
     {
+        $logang = LowonganMagang::all();
         $breadcrumb = (object) [
             'title' => 'Lowongan Magang',
-            'subtitle' => ['Kelola lowongan magang']
+            'subtitle' => ['Jumlah Lowongan Magang : ' . $logang->count()]
         ];
-
-        $logang = LowonganMagang::all();
+        
         $period = PeriodeMagang::all();
 
         return view('lowonganMagang.index', compact('logang', 'period', 'breadcrumb'));
@@ -45,7 +45,7 @@ class LowonganMagangController extends Controller
     {
         $breadcrumb = (object) [
             'title' => 'Tambah Lowongan Magang',
-            'subtitle' => ['Masukkan lowongan magang baru']
+            'subtitle' => ['Tambah lowongan magang baru']
         ];
 
         $companies = Company::all();
@@ -95,7 +95,7 @@ class LowonganMagangController extends Controller
     {
 
         $breadcrumb = (object) [
-            'title' => 'Lowongan Magang',
+            'title' => 'Edit Lowongan Magang',
             'subtitle' => ['Edit lowongan magang']
         ];
 
@@ -130,9 +130,9 @@ class LowonganMagangController extends Controller
     {
         try {
             LowonganMagang::destroy($id);
-            return redirect('/lowonganMagang')->with('success', 'Data lowongan berhasil dihapus');
+            return redirect()->route('lowonganMagang.index')->with('success', 'Data lowongan berhasil dihapus');
         } catch (\Illuminate\Database\QueryException $e) {
-            return redirect('/lowonganMagang')->with('error', 'Data lowongan gagal dihapus karena masih terdapat tabel lain yang terkait dengan data ini');
+            return redirect()->route('lowonganMagang.index')->with('error', 'Data lowongan gagal dihapus karena masih terdapat tabel lain yang terkait dengan data ini');
         }
     }
 }

@@ -24,10 +24,10 @@
                                 <label class="custom-control-label" for="uid"></label>
                             </div>
                         </th>
-                        <th class="nk-tb-col"><span class="sub-text">Perusahaan</span></th>
-                        <th class="nk-tb-col"><span class="sub-text">Bidang Industri</span></th>
-                        <th class="nk-tb-col"><span class="sub-text">Alamat</span></th>
-                        <th class="nk-tb-col"><span class="sub-text">Kontak</span></th>
+                        <th class="nk-tb-col export-col"><span class="sub-text">Perusahaan</span></th>
+                        <th class="nk-tb-col export-col"><span class="sub-text">Bidang Industri</span></th>
+                        <th class="nk-tb-col export-col"><span class="sub-text">Alamat</span></th>
+                        <th class="nk-tb-col export-col"><span class="sub-text">Kontak</span></th>
                         <th class="nk-tb-col nk-tb-col-tools text-end"></th>
                     </tr>
                 </thead>

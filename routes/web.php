@@ -66,7 +66,7 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/show/{id}', [LowonganMagangController::class, 'show'])->name('lowonganMagang.show');
             Route::get('/edit/{id}', [LowonganMagangController::class, 'edit'])->name('lowonganMagang.edit');
             Route::put('/{id}', [LowonganMagangController::class, 'update'])->name('lowonganMagang.update');
-            Route::get('/{id}', [LowonganMagangController::class, 'destroy'])->name('lowonganMagang.destroy');
+            Route::delete('/{id}', [LowonganMagangController::class, 'destroy'])->name('lowonganMagang.destroy');
         });
         Route::prefix('magangApplication')->group(callback: function () {
             Route::get('/', [MagangApplicationController::class, 'index'])->name('magangApplication.index');

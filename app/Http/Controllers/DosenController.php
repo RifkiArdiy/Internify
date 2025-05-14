@@ -18,7 +18,7 @@ class DosenController extends Controller
         $dosens = Dosen::with('user')->get();
         $breadcrumb = (object) [
             'title' => 'Dosen',
-            'subtitle' => ['Jumlah total Dosen ' . $dosens->count()]
+            'subtitle' => ['Jumlah Dosen : ' . $dosens->count()]
         ];
         return view('dosen.index', compact('dosens', 'breadcrumb'));
     }

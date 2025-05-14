@@ -675,7 +675,50 @@
             responsive: {
                 details: true,
             },
-            buttons: ["copy", "excel", "csv", "pdf", "colvis"],
+            buttons: [
+                {
+                    extend: 'copy',
+                    exportOptions: {
+                        columns: '.export-col'
+                    }
+                },
+                {
+                    extend: 'excel',
+                    autoWidth : true,
+                    exportOptions: {
+                        columns: '.export-col'
+                    }
+                },
+                {
+                    extend: 'csv',
+                    exportOptions: {
+                        columns: '.export-col'
+                    }
+                },
+                {
+                    extend: 'pdf',
+                    exportOptions: {
+                        columns: '.export-col'
+                    },
+                    customize: function (doc) {
+                        const colCount = doc.content[1].table.body[0].length;
+                
+                        // Set orientasi landscape jika kolom > 5
+                        if (colCount > 5) {
+                            doc.pageOrientation = 'landscape';
+                        } else {
+                            doc.pageOrientation = 'portrait';
+                        }
+                
+                        // Ubah margin & lebar kolom
+                        doc.pageMargins = [20, 20, 20, 20];
+                        doc.content[1].table.widths = Array(colCount).fill('*');
+                    }
+                },
+                {
+                    extend: 'colvis'
+                }
+            ],
         });
         $.fn.DataTable.ext.pager.numbers_length = 7;
     };
