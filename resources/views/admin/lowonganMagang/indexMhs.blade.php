@@ -4,6 +4,9 @@
     @if (session('success'))
         <div class="alert alert-success">{{ session('success') }}</div>
     @endif
+    @if (session('error'))
+        <div class="alert alert-danger">{{ session('error') }}</div>
+    @endif
     <div class="card card-bordered card-preview">
         <div class="card-inner table-responsive">
             <table class="datatable-init-export nowrap nk-tb-list nk-tb-ulist" data-auto-responsive="false">
@@ -55,7 +58,7 @@
                             <td class="nk-tb-col nk-tb-col-tools">
                                 <ul class="nk-tb-actions gx-1">
                                     <li>
-                                        <div class="dropdown">
+                                        {{-- <div class="dropdown">
                                             <a href="#" class="dropdown-toggle btn btn-icon btn-trigger"
                                                 data-bs-toggle="dropdown">
                                                 <em class="icon ni ni-more-h"></em>
@@ -81,7 +84,7 @@
                                                         </form>
                                                     </li>
                                                 </ul>
-                                            </div>
+                                            </div> --}}
                                         </div>
                                     </li>
                                 </ul>

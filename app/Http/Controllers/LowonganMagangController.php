@@ -84,7 +84,7 @@ class LowonganMagangController extends Controller
             'subtitle' => ['Detail lowongan magang']
         ];
 
-        return view('lowonganMagang.show', compact('breadcrumb', 'logang', 'period'));
+        return view('admin.lowonganMagang.show', compact('breadcrumb', 'logang', 'period'));
     }
 
     /**

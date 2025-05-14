@@ -60,8 +60,36 @@
     <th>Kriteria</th>
     <td>{{ $magang->lowongan->requirements }}</td>
 </tr>
+<tr>
+    <th>Status</th>
+    <td>{{ $magang->status }}</td>
+</tr>
 </table>
+
 @if (Auth::user()->level_id == 1)
+<form action="{{ route('magangApplication.update', $magang->magang_id) }}"
+    method="POST" style="display: inline;"
+    onsubmit="return confirm('Apakah anda yakin menyetujui lamaran ini?')">
+    @csrf
+    @method('PUT')
+    <input type="hidden" name="status" value="Disetujui">
+    <button type="submit" class="btn btn-link p-0 m-0 align-baseline text-light"
+        style="background: rgb(32, 155, 32)">
+        <span style="padding:5px;">Setuju</span></button>
+</form>
+
+<form action="{{ route('magangApplication.update', $magang->magang_id) }}"
+    method="POST" style="display: inline;"
+    onsubmit="return confirm('Apakah anda yakin menolak lamaran ini?')">
+    @csrf
+    @method('PUT')
+    <input type="hidden" name="status" value="Ditolak">
+    <button type="submit" class="btn btn-link p-0 m-0 align-baseline text-light"
+        style="background: red;">
+        <span style="padding: 5px;">Tolak</span>
+    </button>
+</form>
+
     <a href="{{ route('lowonganMagang.index') }}" class="btn btn-secondary">Kembali</a>
 @endif
 

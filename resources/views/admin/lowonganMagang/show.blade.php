@@ -44,13 +44,7 @@
 </tr>
 
 </table>
-@if (Auth::user()->level_id == 1)
-    <a href="{{ route('lowonganMagang.index') }}" class="btn btn-secondary">Kembali</a>
-@endif
-
-@if (Auth::user()->level_id == 2)
-    <a href="{{ route('lowonganMagang.indexMhs') }}" class="btn btn-secondary">Kembali</a>
-@endif
+<a href="{{ url()->previous() }}" class="btn btn-secondary">Kembali</a>
 
 
 </body>

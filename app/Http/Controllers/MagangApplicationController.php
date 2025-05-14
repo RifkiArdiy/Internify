@@ -22,7 +22,7 @@ class MagangApplicationController extends Controller
         ];
 
         $magangs = MagangApplication::all();
-        return view('mahasiswa.magangApplication.index', compact('magangs', 'breadcrumb'));
+        return view('admin.lamaranMagang.index', compact('magangs', 'breadcrumb'));
     }
     public function indexMhs()
     {
@@ -53,13 +53,22 @@ class MagangApplicationController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store($id)
     {
         $mahasiswa = Mahasiswa::where('user_id', Auth::user()->user_id)->first();
+        if (!$mahasiswa) {
+            return redirect()->back()->with('error', 'Silakan login terlebih dahulu.');
+        }
+
+        // // Cek apakah user punya role mahasiswa (opsional tapi disarankan)
+        // if ($mahasiswa->user->level->level_nama !== 'mahasiswa') {
+        //     return redirect()->back()->with('error', 'Hanya mahasiswa yang dapat melamar.');
+        // }
+
 
         // Cek apakah sudah pernah melamar untuk lowongan ini
         $existingApplication = MagangApplication::where('mahasiswa_id', $mahasiswa->mahasiswa_id)
-            ->where('lowongan_id', $request->lowongan_id)
+            ->where('lowongan_id', $id)
             ->first();
 
         if ($existingApplication) {
@@ -69,7 +78,7 @@ class MagangApplicationController extends Controller
         // Jika belum ada, buat lamaran baru
         MagangApplication::create([
             'mahasiswa_id' => $mahasiswa->mahasiswa_id,
-            'lowongan_id' => $request->lowongan_id,
+            'lowongan_id' => $id,
             'status' => 'Pending',
         ]);
 
@@ -78,7 +87,7 @@ class MagangApplicationController extends Controller
 
     public function storeMhs($id)
     {
-        $user = auth()->user();
+        $user = Mahasiswa::where('user_id', Auth::user()->user_id)->first();
 
         if (!$user) {
             return redirect()->back()->with('error', 'Silakan login terlebih dahulu.');
@@ -118,7 +127,7 @@ class MagangApplicationController extends Controller
             'subtitle' => ['Lamaran ' . $magang->student->name]
         ];
 
-        return view('magangApplication.show', compact('breadcrumb', 'magang'));
+        return view('admin.lamaranMagang.show', compact('breadcrumb', 'magang'));
     }
 
     /**

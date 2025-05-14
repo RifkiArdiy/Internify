@@ -124,10 +124,10 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/', [CompanyController::class, 'index'])->name('companies.index');
             Route::get('/create', [CompanyController::class, 'create'])->name('companies.create');
             Route::post('/store', [CompanyController::class, 'store'])->name('companies.store');
-            // Route::get('/{id}', [CompanyController::class, 'show'])->name('companies.show');
+            Route::get('/{id}', [CompanyController::class, 'show'])->name('companies.show');
             Route::get('/{id}/edit', [CompanyController::class, 'edit'])->name('companies.edit');
             Route::put('/{id}', [CompanyController::class, 'update'])->name('companies.update');
-            Route::get('/{id}', [CompanyController::class, 'destroy'])->name('companies.destroy');
+            Route::delete('/{id}', [CompanyController::class, 'destroy'])->name('companies.destroy');
         });
     });
 
@@ -147,7 +147,7 @@ Route::middleware(['auth'])->group(function () {
 
             Route::get('/{id}/lihat', [MagangApplicationController::class, 'show'])->name('lihatLamaran');
 
-            Route::post('/lamar/{id}', [MagangApplicationController::class, 'storeMhs'])->name('magangApplication.storeMhs')->middleware('auth');;
+            Route::post('/lamar/{id}', [MagangApplicationController::class, 'store'])->name('magangApplication.storeMhs')->middleware('auth');;
         });
     });
 
