@@ -22,6 +22,8 @@ class UserSeeder extends Seeder
             'username' => 'admin',
             'email' => 'admin@admin.com',
             'password' => Hash::make('password'),
+            'no_telp' => '081234567890',
+            'alamat' => 'Malang'
         ]);
 
         // Mahasiswa
@@ -31,6 +33,8 @@ class UserSeeder extends Seeder
             'username' => 'citra',
             'email' => 'citra@gmail.com',
             'password' => Hash::make('password'),
+            'no_telp' => '081234567891',
+            'alamat' => 'Bandung'
         ]);
         User::create([
             'level_id' => 2,
@@ -38,6 +42,8 @@ class UserSeeder extends Seeder
             'username' => 'bagus',
             'email' => 'bagus@gmail.com',
             'password' => Hash::make('password'),
+            'no_telp' => '081234567892',
+            'alamat' => 'Jakarta'
         ]);
         User::create([
             'level_id' => 2,
@@ -45,6 +51,8 @@ class UserSeeder extends Seeder
             'username' => 'dewi',
             'email' => 'dewi@gmail.com',
             'password' => Hash::make('password'),
+            'no_telp' => '081234567893',
+            'alamat' => 'Surabaya'
         ]);
         User::create([
             'level_id' => 2,
@@ -52,6 +60,8 @@ class UserSeeder extends Seeder
             'username' => 'fajar',
             'email' => 'fajar@gmail.com',
             'password' => Hash::make('password'),
+            'no_telp' => '081234567894',
+            'alamat' => 'Yogyakarta'
         ]);
         User::create([
             'level_id' => 2,
@@ -59,6 +69,8 @@ class UserSeeder extends Seeder
             'username' => 'gita',
             'email' => 'gita@gmail.com',
             'password' => Hash::make('password'),
+            'no_telp' => '081234567895',
+            'alamat' => 'Medan'
         ]);
         User::create([
             'level_id' => 2,
@@ -66,6 +78,8 @@ class UserSeeder extends Seeder
             'username' => 'hendra',
             'email' => 'hendra@gmail.com',
             'password' => Hash::make('password'),
+            'no_telp' => '081234567896',
+            'alamat' => 'Depok'
         ]);
         User::create([
             'level_id' => 2,
@@ -73,6 +87,8 @@ class UserSeeder extends Seeder
             'username' => 'intan',
             'email' => 'intan@gmail.com',
             'password' => Hash::make('password'),
+            'no_telp' => '081234567897',
+            'alamat' => 'Semarang'
         ]);
         User::create([
             'level_id' => 2,
@@ -80,6 +96,8 @@ class UserSeeder extends Seeder
             'username' => 'joko',
             'email' => 'joko@gmail.com',
             'password' => Hash::make('password'),
+            'no_telp' => '081234567898',
+            'alamat' => 'Palembang'
         ]);
         User::create([
             'level_id' => 2,
@@ -87,6 +105,8 @@ class UserSeeder extends Seeder
             'username' => 'kartika',
             'email' => 'kartika@gmail.com',
             'password' => Hash::make('password'),
+            'no_telp' => '081234567899',
+            'alamat' => 'Bogor'
         ]);
         User::create([
             'level_id' => 2,
@@ -94,15 +114,19 @@ class UserSeeder extends Seeder
             'username' => 'lukman',
             'email' => 'lukman@gmail.com',
             'password' => Hash::make('password'),
+            'no_telp' => '081234567800',
+            'alamat' => 'Malang'
         ]);
 
-        // Dosen
+        // // Dosen
         User::create([
             'level_id' => 3,
             'name' => 'Prof. Dr. Siti Aminah',
             'username' => 'siti',
             'email' => 'siti@gmail.com',
             'password' => Hash::make('password'),
+            'no_telp' => '081211223344',
+            'alamat' => 'Jakarta'
         ]);
         User::create([
             'level_id' => 3,
@@ -110,6 +134,8 @@ class UserSeeder extends Seeder
             'username' => 'bambang',
             'email' => 'bambang@gmail.com',
             'password' => Hash::make('password'),
+            'no_telp' => '081211223345',
+            'alamat' => 'Bandung'
         ]);
         User::create([
             'level_id' => 3,
@@ -117,6 +143,8 @@ class UserSeeder extends Seeder
             'username' => 'rina',
             'email' => 'rina@gmail.com',
             'password' => Hash::make('password'),
+            'no_telp' => '081211223346',
+            'alamat' => 'Surabaya',
         ]);
         User::create([
             'level_id' => 3,
@@ -124,6 +152,8 @@ class UserSeeder extends Seeder
             'username' => 'agus',
             'email' => 'agus@gmail.com',
             'password' => Hash::make('password'),
+            'no_telp' => '081211223347',
+            'alamat' => 'Yogyakarta',
         ]);
         User::create([
             'level_id' => 3,
@@ -131,6 +161,8 @@ class UserSeeder extends Seeder
             'username' => 'maya',
             'email' => 'maya@gmail.com',
             'password' => Hash::make('password'),
+            'no_telp' => '081211223348',
+            'alamat' => 'Depok',
         ]);
         User::create([
             'level_id' => 3,
@@ -138,6 +170,8 @@ class UserSeeder extends Seeder
             'username' => 'taufik',
             'email' => 'taufik@gmail.com',
             'password' => Hash::make('password'),
+            'no_telp' => '081211223349',
+            'alamat' => 'Medan',
         ]);
         User::create([
             'level_id' => 3,
@@ -145,6 +179,8 @@ class UserSeeder extends Seeder
             'username' => 'elisa',
             'email' => 'elisa@gmail.com',
             'password' => Hash::make('password'),
+            'no_telp' => '081211223350',
+            'alamat' => 'Bekasi',
         ]);
         User::create([
             'level_id' => 3,
@@ -152,6 +188,89 @@ class UserSeeder extends Seeder
             'username' => 'surya',
             'email' => 'surya@gmail.com',
             'password' => Hash::make('password'),
+            'no_telp' => '081211223351',
+            'alamat' => 'Palembang',
+        ]);
+
+        //Company
+        User::create([
+            'level_id' => 4, //Company
+            'name' => 'PT. Farrel Caesarian',
+            'username' => 'ptfarel',
+            'email' => 'ptfarel@gmail.com',
+            'password' => Hash::make('password'),
+            'no_telp' => '082132570837',
+            'alamat' => 'Mbetek',
+        ]);
+
+        User::create([
+            'level_id' => 4, //Company
+            'name' => 'PT. ABC',
+            'username' => 'ptabc',
+            'email' => 'ptabc@gmail.com',
+            'password' => Hash::make('password'),
+            'no_telp' => '021-12345678',
+            'alamat' => 'Malang',
+        ]);
+
+        User::create([
+            'level_id' => 4, //Company
+            'name' => 'Akademi Holland',
+            'username' => 'akmi.holland',
+            'email' => 'holland@gmail..com',
+            'password' => Hash::make('password'),
+            'no_telp' => '1233213232',
+            'alamat' => 'Jakarta',
+        ]);
+
+        User::create([
+            'level_id' => 4, //Company
+            'name' => 'PT. Kopi Skena',
+            'username' => 'kopi.skena',
+            'email' => 'kopiskena@gmail.com',
+            'password' => Hash::make('password'),
+            'no_telp' => '1242103012',
+            'alamat' => 'Malang',
+        ]);
+
+        User::create([
+            'level_id' => 4, //Company
+            'name' => 'PT. Fukasaki',
+            'username' => 'fukasaki',
+            'email' => 'fukasaki@gmail.com',
+            'password' => Hash::make('password'),
+            'no_telp' => '08213288207',
+            'alamat' => 'Jakarta',
+        ]);
+
+        User::create([
+            'level_id' => 4, //Company
+            'name' => 'PT. Omura',
+            'username' => 'omuraa',
+            'email' => 'omura@gmail.com',
+            'password' => Hash::make('password'),
+            'no_telp' => '021123345658',
+            'alamat' => 'Blitar',
+        ]);
+
+        User::create([
+            'level_id' => 4, //Company
+            'name' => 'Akademi Nankatsu',
+            'username' => 'nankasu',
+            'email' => 'nankatsu@gmail.com',
+            'password' => Hash::make('password'),
+            'no_telp' => '1298223232',
+            'alamat' => 'Jepang',
+        ]);
+
+        User::create([
+            'level_id' => 4, //Company
+            'name' =>  'Caesarian',
+            'username' => 'cae.rian',
+            'email' => 'cae@gmail.com',
+            'password' => Hash::make('password'),
+            'no_telp' => '082132570837',
+            'alamat' => 'Mbetek',
         ]);
     }
 }

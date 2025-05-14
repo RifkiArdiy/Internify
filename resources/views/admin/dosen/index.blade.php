@@ -27,8 +27,7 @@
                         <th class="nk-tb-col export-col"><span class="sub-text">User</span></th>
                         <th class="nk-tb-col tb-col-mb export-col"><span class="sub-text">NIP</span></th>
                         <th class="nk-tb-col tb-col-md export-col"><span class="sub-text">Phone</span></th>
-                        <th class="nk-tb-col tb-col-lg export-col"><span class="sub-text">Jurusan</span></th>
-                        <th class="nk-tb-col tb-col-lg export-col"><span class="sub-text">Last Login</span></th>
+                        <th class="nk-tb-col tb-col-lg export-col"><span class="sub-text">Alamat</span></th>
                         <th class="nk-tb-col tb-col-md export-col"><span class="sub-text">Status</span></th>
                         <th class="nk-tb-col nk-tb-col-tools text-end">
                         </th>
@@ -39,14 +38,19 @@
                         <tr class="nk-tb-item">
                             <td class="nk-tb-col nk-tb-col-check">
                                 <div class="custom-control custom-control-sm custom-checkbox notext">
-                                    <input type="checkbox" class="custom-control-input" id="uid13">
-                                    <label class="custom-control-label" for="uid13"></label>
+                                    <input type="checkbox" class="custom-control-input" id="uid{{ $dosen->dosen_id }}">
+                                    <label class="custom-control-label" for="uid{{ $dosen->dosen_id }}"></label>
                                 </div>
                             </td>
                             <td class="nk-tb-col">
                                 <div class="user-card">
                                     <div class="user-avatar bg-dark d-none d-sm-flex">
-                                        <img src="{{ asset('assets/home/images/team/a.jpg') }}" alt="">
+                                        @if ($dosen->user->image)
+                                            <img src="{{ Storage::url('images/users/' . $dosen->user->image) }}"
+                                                alt="{{ $dosen->user->name }}">
+                                        @else
+                                            <span>{{ strtoupper(substr($dosen->user->name, 0, 2)) }}</span>
+                                        @endif
                                     </div>
                                     <div class="user-info">
                                         <span class="tb-lead">{{ $dosen->user->name }}<span
@@ -59,37 +63,16 @@
                                 <span class="tb-amount">{{ $dosen->nip }}</span>
                             </td>
                             <td class="nk-tb-col tb-col-md">
-                                <span>{{ $dosen->no_telp }}</span>
+                                <span>{{ $dosen->user->no_telp }}</span>
                             </td>
                             <td class="nk-tb-col tb-col-lg" data-order="Email Submited - Kyc More Info">
-                                <span class="tb-amount">{{ $dosen->alamat }}</span>
-                            </td>
-                            <td class="nk-tb-col tb-col-lg">
-                                <span>18 Jan 2020</span>
+                                <span class="tb-amount">{{ $dosen->user->alamat }}</span>
                             </td>
                             <td class="nk-tb-col tb-col-md">
                                 <span class="tb-status text-info">Inactive</span>
                             </td>
                             <td class="nk-tb-col nk-tb-col-tools">
                                 <ul class="nk-tb-actions gx-1">
-                                    <li class="nk-tb-action-hidden">
-                                        <a href="#" class="btn btn-trigger btn-icon" data-bs-toggle="tooltip"
-                                            data-bs-placement="top" title="Wallet">
-                                            <em class="icon ni ni-wallet-fill"></em>
-                                        </a>
-                                    </li>
-                                    <li class="nk-tb-action-hidden">
-                                        <a href="#" class="btn btn-trigger btn-icon" data-bs-toggle="tooltip"
-                                            data-bs-placement="top" title="Send Email">
-                                            <em class="icon ni ni-mail-fill"></em>
-                                        </a>
-                                    </li>
-                                    <li class="nk-tb-action-hidden">
-                                        <a href="#" class="btn btn-trigger btn-icon" data-bs-toggle="tooltip"
-                                            data-bs-placement="top" title="Suspend">
-                                            <em class="icon ni ni-user-cross-fill"></em>
-                                        </a>
-                                    </li>
                                     <li>
                                         <div class="drodown">
                                             <a href="#" class="dropdown-toggle btn btn-icon btn-trigger"
@@ -103,15 +86,7 @@
                                                     <li><a href="{{ route('dosen.edit', $dosen->dosen_id) }}"><em
                                                                 class="icon ni ni-repeat"></em><span>Edit</span></a>
                                                     </li>
-                                                    <li><a href="#"><em
-                                                                class="icon ni ni-activity-round"></em><span>Activities</span></a>
-                                                    </li>
                                                     <li class="divider"></li>
-                                                    <li><a href="#"><em
-                                                                class="icon ni ni-shield-star"></em><span>Reset
-                                                                Pass</span></a></li>
-                                                    <li><a href="#"><em class="icon ni ni-shield-off"></em><span>Reset
-                                                                2FA</span></a></li>
                                                     <li><a href="{{ route('dosen.destroy', $dosen->dosen_id) }}"><em
                                                                 class="icon ni ni-na"></em><span>Hapus
                                                                 User</span></a></li>

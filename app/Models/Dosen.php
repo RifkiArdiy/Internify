@@ -14,7 +14,7 @@ class Dosen extends Model
 
     protected $primaryKey = 'dosen_id';
 
-    protected $fillable = ['user_id', 'nip', 'no_telp', 'alamat'];
+    protected $fillable = ['user_id', 'nip'];
 
     public function user(): BelongsTo
     {

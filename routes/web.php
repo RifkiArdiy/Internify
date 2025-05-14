@@ -14,7 +14,7 @@ use App\Http\Controllers\LowonganMagangController;
 use App\Http\Controllers\MagangApplicationController;
 use App\Http\Controllers\PeriodeMagangController;
 use App\Models\MagangApplication;
-
+use App\Http\Controllers\ProfileController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -35,11 +35,13 @@ Route::post('register', [AuthController::class, 'postRegister'])->name('postRegi
 Route::get('/', [WelcomeController::class, 'index'])->name('welcome.index');
 
 Route::middleware(['auth'])->group(function () {
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
 
     Route::prefix('admin')->middleware('role:Administrator')->group(function () {
         Route::get('/dashboard', [DashboardController::class, 'indexAdmin'])->name('admin.dashboard');
-
+        Route::get('/profile', [ProfileController::class, 'index'])->name('admin.profile');
+        Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('admin.profile.edit');
+        Route::post('/profile/update', [ProfileController::class, 'update'])->name('admin.profile.update');
         Route::prefix('prodi')->group(function () {
             Route::get('/', [ProgramStudiController::class, 'index'])->name('prodi.index');
             Route::get('/create', [ProgramStudiController::class, 'create'])->name('prodi.create');
@@ -57,7 +59,7 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/show/{id}', [PeriodeMagangController::class, 'show'])->name('periodeMagang.show');
             Route::get('/edit/{id}', [PeriodeMagangController::class, 'edit'])->name('periodeMagang.edit');
             Route::put('/{id}', [PeriodeMagangController::class, 'update'])->name('periodeMagang.update');
-            Route::delete('/{id}', [PeriodeMagangController::class, 'destroy'])->name('periodeMagang.destroy');
+            Route::get('/{id}', [PeriodeMagangController::class, 'destroy'])->name('periodeMagang.destroy');
         });
         Route::prefix('lowonganMagang')->group(callback: function () {
             Route::get('/', [LowonganMagangController::class, 'index'])->name('lowonganMagang.index');
@@ -66,7 +68,7 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/show/{id}', [LowonganMagangController::class, 'show'])->name('lowonganMagang.show');
             Route::get('/edit/{id}', [LowonganMagangController::class, 'edit'])->name('lowonganMagang.edit');
             Route::put('/{id}', [LowonganMagangController::class, 'update'])->name('lowonganMagang.update');
-            Route::delete('/{id}', [LowonganMagangController::class, 'destroy'])->name('lowonganMagang.destroy');
+            Route::get('/{id}', [LowonganMagangController::class, 'destroy'])->name('lowonganMagang.destroy');
         });
         Route::prefix('magangApplication')->group(callback: function () {
             Route::get('/', [MagangApplicationController::class, 'index'])->name('magangApplication.index');
@@ -78,6 +80,15 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/{id}', [MagangApplicationController::class, 'destroy'])->name('magangApplication.destroy');
         });
 
+        Route::prefix('user')->group(function () {
+            Route::get('/', [UserController::class, 'index'])->name('user.index');
+            Route::get('/create', [UserController::class, 'create'])->name('user.create');
+            Route::post('/store', [UserController::class, 'store'])->name('user.store');
+            Route::get('/show/{id}', [UserController::class, 'show'])->name('user.show');
+            Route::get('/edit/{id}', [UserController::class, 'edit'])->name('user.edit');
+            Route::put('/{id}', [UserController::class, 'update'])->name('user.update');
+            Route::get('/{id}', [UserController::class, 'destroy'])->name('user.destroy');
+        });
 
         Route::prefix('mahasiswa')->group(function () {
             Route::get('/', [MahasiswaController::class, 'index'])->name('mahasiswa.index');
@@ -113,30 +124,46 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/', [CompanyController::class, 'index'])->name('companies.index');
             Route::get('/create', [CompanyController::class, 'create'])->name('companies.create');
             Route::post('/store', [CompanyController::class, 'store'])->name('companies.store');
-            Route::get('/{id}', [CompanyController::class, 'show'])->name('companies.show');
+            // Route::get('/{id}', [CompanyController::class, 'show'])->name('companies.show');
             Route::get('/{id}/edit', [CompanyController::class, 'edit'])->name('companies.edit');
             Route::put('/{id}', [CompanyController::class, 'update'])->name('companies.update');
-            Route::delete('/{id}', [CompanyController::class, 'destroy'])->name('companies.destroy');
+            Route::get('/{id}', [CompanyController::class, 'destroy'])->name('companies.destroy');
         });
     });
 
     Route::prefix('mahasiswa')->middleware('role:Mahasiswa')->group(function () {
         Route::get('/dashboard', [DashboardController::class, 'indexMahasiswa'])->name('mahasiswa.dashboard');
+        Route::get('/profile', [ProfileController::class, 'index'])->name('mahasiswa.profile');
+        Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('mahasiswa.profile.edit');
+        Route::post('/profile/update', [ProfileController::class, 'update'])->name('mahasiswa.profile.update');
         Route::prefix('lowongan')->group(function () {
             Route::get('/', [LowonganMagangController::class, 'indexMhs'])->name('lowonganMagang.indexMhs');
             Route::get('/show/{id}', [LowonganMagangController::class, 'show'])->name('lowongan.show');
-
         });
         Route::prefix('lamaran')->group(function () {
             Route::get('/', [MagangApplicationController::class, 'indexMhs'])->name('lamaran');
             Route::post('/buatLamaran', [MagangApplicationController::class, 'store'])->name('buatLamaran');
             Route::delete('/{id}/hapusLamaran', [MagangApplicationController::class, 'destroy'])->name('hapusLamaran');
+
             Route::get('/{id}/lihat', [MagangApplicationController::class, 'show'])->name('lihatLamaran');
+
+            Route::post('/lamar/{id}', [MagangApplicationController::class, 'storeMhs'])->name('magangApplication.storeMhs')->middleware('auth');;
         });
     });
 
     Route::prefix('dosen')->middleware('role:Dosen')->group(function () {
         Route::get('/dashboard', [DashboardController::class, 'indexDosen'])->name('dosen.dashboard');
+        Route::get('/profile', [ProfileController::class, 'index'])->name('dosen.profile');
+        Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('dosen.profile.edit');
+        Route::post('/profile/update', [ProfileController::class, 'update'])->name('dosen.profile.update');
+    });
+
+    Route::prefix('company')->middleware('role:Company')->group(function () {
+        Route::get('/dashboard', [DashboardController::class, 'indexCompany'])->name('company.dashboard');
+        Route::get('/profile', [ProfileController::class, 'index'])->name('company.profile');
+        Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('company.profile.edit');
+        Route::post('/profile/update', [ProfileController::class, 'update'])->name('company.profile.update');
+        Route::get('/verifikasi', [CompanyController::class, 'indexVerifikasi'])->name('company.verifikasi');
     });
 
     Route::get('logout', [AuthController::class, 'logout'])->name('logout');

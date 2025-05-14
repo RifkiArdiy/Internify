@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Company;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class CompanyController extends Controller
 {
@@ -14,32 +16,54 @@ class CompanyController extends Controller
             'title' => 'Company',
             'subtitle' => ['Jumlah Perusahaan Mitra : ' . $companies->count()]
         ];
-        return view('company.index', compact('companies', 'breadcrumb'));
+        return view('admin.company.index', compact('companies', 'breadcrumb'));
+    }
+
+    public function indexVerifikasi()
+    {
+        $companies = Company::all();
+        $breadcrumb = (object) [
+            'title' => 'Verifikasi Perusahaan Mitra',
+            'subtitle' => ['Jumlah Perusahaan Mitra : ' . $companies->count()]
+        ];
+        return view('company.verifikasi', compact('companies', 'breadcrumb'));
     }
 
     public function create()
     {
+        $companies = Company::all();
         $breadcrumb = (object) [
             'title' => 'Tambah Perusahaan Mitra',
-            'subtitle' => ['Form Validation']
+            'subtitle' => ['Formulir Pengisian Data Mitra Baru']
         ];
-        return view('company.create', compact('breadcrumb'));
+        return view('admin.company.create', compact('companies', 'breadcrumb'));
     }
 
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|string|max:255',
+            'name' => 'required',
+            'username' => 'required|unique:users',
+            'email' => 'required|unique:users',
+            'password' => 'required|min:6',
             'industry' => 'required|string|max:255',
-            'address' => 'required|string|max:255',
-            'contact' => 'required|string|max:255',
+            'no_telp' => 'nullable|string|max:255',
+            'alamat' => 'nullable|string|max:255',
+        ]);
+
+        $user = User::create([
+            'level_id' => 4, // Company
+            'name' => $request->name,
+            'username' => $request->username,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'no_telp' => $request->no_telp,
+            'alamat' => $request->alamat,
         ]);
 
         Company::create([
-            'name' => $request->name,
+            'user_id' => $user->user_id,
             'industry' => $request->industry,
-            'address' => $request->address,
-            'contact' => $request->contact,
         ]);
 
         return redirect()->route('companies.index')->with('success', 'Perusahaan berhasil ditambahkan.');
@@ -50,26 +74,40 @@ class CompanyController extends Controller
         $company = Company::findOrFail($id);
         $breadcrumb = (object) [
             'title' => 'Edit Perusahaan Mitra',
-            'subtitle' => ['Form Validation']
+            'subtitle' => ['Edit Detail Mitra']
         ];
-        return view('company.edit', compact('company', 'breadcrumb'));
+        return view('admin.company.edit', compact('company', 'breadcrumb'));
     }
 
     public function update(Request $request, string $id)
     {
+        $company = Company::with('user')->findOrFail($id);
+        $user = $company->user;
         $request->validate([
             'name' => 'required|string|max:255',
+            'username' => 'required|unique:users,username,' . $user->user_id . ',user_id',
+            'email' => 'required|unique:users,email,' . $user->user_id . ',user_id',
             'industry' => 'required|string|max:255',
-            'address' => 'required|string|max:255',
-            'contact' => 'required|string|max:255',
+            'alamat' => 'nullable|string|max:255',
+            'no_telp' => 'nullable|string|max:255',
         ]);
 
-        $company = Company::findOrFail($id);
-        $company->update([
+        $user->update([
             'name' => $request->name,
+            'username' => $request->username,
+            'email' => $request->email,
+            'no_telp' => $request->no_telp,
+            'alamat' => $request->alamat,
+        ]);
+
+        if ($request->filled('password')) {
+            $user->update([
+                'password' => Hash::make($request->password),
+            ]);
+        }
+
+        $company->update([
             'industry' => $request->industry,
-            'address' => $request->address,
-            'contact' => $request->contact,
         ]);
 
         return redirect()->route('companies.index')->with('success', 'Data perusahaan diperbarui.');
@@ -77,9 +115,15 @@ class CompanyController extends Controller
 
     public function destroy(string $id)
     {
-        $company = Company::findOrFail($id);
+        $company = Company::find($id);
+        $company->user->delete();
         $company->delete();
 
-        return redirect()->route('companies.index')->with('success', 'Perusahaan berhasil dihapus.');
+        try {
+            Company::destroy($id);
+            return redirect()->route('companies.index')->with('success', 'Company ' . $company->user->name . ' berhasil dihapus');
+        } catch (\Illuminate\Database\QueryException $e) {
+            return redirect()->route('companies.index')->with('error', 'Company ' . $company->user->name . ' gagal dihapus karena masih digunakan');
+        }
     }
 }

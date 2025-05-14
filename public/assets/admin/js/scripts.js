@@ -691,6 +691,7 @@
                 },
                 {
                     extend: 'csv',
+                    autoWidth :true,
                     exportOptions: {
                         columns: '.export-col'
                     }

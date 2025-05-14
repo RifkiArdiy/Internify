@@ -13,15 +13,24 @@
     </li>
     <!-- .nk-menu-item -->
     <li class="nk-menu-heading">
-        <h6 class="overline-title text-primary-alt">Pages</h6>
+        <h6 class="overline-title text-primary-alt">User Management</h6>
     </li>
     <!-- .nk-menu-heading -->
+    <li class="nk-menu-item has-sub">
+        <a href="{{ route('user.index') }}" class="nk-menu-link">
+            <span class="nk-menu-icon">
+                <em class="icon ni ni-users"></em>
+            </span>
+            <span class="nk-menu-text">Admins</span>
+        </a>
+        <!-- .nk-menu-sub -->
+    </li>
     <li class="nk-menu-item has-sub">
         <a href="{{ route('mahasiswa.index') }}" class="nk-menu-link">
             <span class="nk-menu-icon">
                 <em class="icon ni ni-users"></em>
             </span>
-            <span class="nk-menu-text">Mahasiswa</span>
+            <span class="nk-menu-text">Mahasiswas</span>
         </a>
         <!-- .nk-menu-sub -->
     </li>
@@ -30,7 +39,7 @@
             <span class="nk-menu-icon">
                 <em class="icon ni ni-users"></em>
             </span>
-            <span class="nk-menu-text">Dosen</span>
+            <span class="nk-menu-text">Dosens</span>
         </a>
         <!-- .nk-menu-sub -->
     </li>
@@ -120,7 +129,22 @@
             <span class="nk-menu-text">Lamaran Magang</span>
         </a>
     </li>
-
-
-    <!-- .nk-menu-item -->
+@endif
+@if (Auth::user()->level->level_nama == 'Company')
+    <li class="nk-menu-item">
+        <a href="{{ route('company.dashboard') }}" class="nk-menu-link">
+            <span class="nk-menu-icon">
+                <em class="icon ni ni-dashlite"></em>
+            </span>
+            <span class="nk-menu-text">Dashboard</span>
+        </a>
+    </li>
+    <li class="nk-menu-item">
+        <a href="{{ route('company.verifikasi') }}" class="nk-menu-link">
+            <span class="nk-menu-icon">
+                <em class="icon ni ni-check"></em>
+            </span>
+            <span class="nk-menu-text">Verifikasi</span>
+        </a>
+    </li>
 @endif

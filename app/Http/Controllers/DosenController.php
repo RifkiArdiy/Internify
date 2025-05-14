@@ -6,6 +6,7 @@ use App\Models\Dosen;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 class DosenController extends Controller
 {
@@ -17,10 +18,10 @@ class DosenController extends Controller
         //
         $dosens = Dosen::with('user')->get();
         $breadcrumb = (object) [
-            'title' => 'Dosen',
-            'subtitle' => ['Jumlah Dosen : ' . $dosens->count()]
+            'title' => 'Semua Dosen',
+            'subtitle' => ['Jumlah total Dosen yang terdaftar ' . $dosens->count()]
         ];
-        return view('dosen.index', compact('dosens', 'breadcrumb'));
+        return view('admin.dosen.index', compact('dosens', 'breadcrumb'));
     }
 
     /**
@@ -31,9 +32,9 @@ class DosenController extends Controller
         //
         $breadcrumb = (object) [
             'title' => 'Tambah Dosen',
-            'subtitle' => ['Form Validation']
+            'subtitle' => ['Formulir Pengisian Data Dosen Baru']
         ];
-        return view('dosen.create', compact('breadcrumb'));
+        return view('admin.dosen.create', compact('breadcrumb'));
     }
 
     /**
@@ -48,26 +49,37 @@ class DosenController extends Controller
             'email' => 'required|unique:users',
             'password' => 'required|min:6',
             'nip' => 'required|unique:dosens',
-            'no_telp' => 'required',
-            'alamat' => 'required'
+            'no_telp' => 'nullable',
+            'alamat' => 'nullable',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
-        $user = User::create([
+        $userData = [
             'level_id' => 3, // dosen
             'name' => $request->name,
             'username' => $request->username,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-        ]);
+            'no_telp' => $request->no_telp,
+            'alamat' => $request->alamat,
+        ];
+
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $imageName = time() . '.' . $image->getClientOriginalExtension();
+            $image->storeAs('public/images/users', $imageName);
+            $userData['image'] = $imageName;
+        }
+
+        // Create user and get custom primary key
+        $user = User::create($userData);
 
         Dosen::create([
             'user_id' => $user->user_id,
             'nip' => $request->nip,
-            'no_telp' => $request->no_telp,
-            'alamat' => $request->alamat,
         ]);
 
-        return redirect()->route('dosen.index')->with('success', 'dosen berhasil ditambahkan.');
+        return redirect()->route('dosen.index')->with('success', 'Dosen berhasil ditambahkan.');
     }
 
     /**
@@ -85,7 +97,11 @@ class DosenController extends Controller
     {
         //
         $dosen = Dosen::find($id);
-        return view('dosen.edit', compact('dosen'));
+        $breadcrumb = (object) [
+            'title' => 'Edit Dosen',
+            'subtitle' => ['Edit Detail Dosen']
+        ];
+        return view('admin.dosen.edit', compact('dosen', 'breadcrumb'));
     }
 
     /**
@@ -103,14 +119,9 @@ class DosenController extends Controller
             'username' => 'required|unique:users,username,' . $user->user_id . ',user_id',
             'email' => 'required|unique:users,email,' . $user->user_id . ',user_id',
             'nip' => 'required|unique:dosens,nip,' . $dosen->dosen_id . ',dosen_id',
-            'alamat' => 'required',
-        ]);
-
-        // Update user data
-        $user->update([
-            'name' => $request->name,
-            'username' => $request->username,
-            'email' => $request->email,
+            'no_telp' => 'nullable',
+            'alamat' => 'nullable',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
         if ($request->filled('password')) {
@@ -119,13 +130,32 @@ class DosenController extends Controller
             ]);
         }
 
+        $user->name = $request->name;
+        $user->username = $request->username;
+        $user->email = $request->email;
+        $user->no_telp = $request->no_telp;
+        $user->alamat = $request->alamat;
+
+        // Handle image upload
+        if ($request->hasFile('image')) {
+            if ($user->image) {
+                Storage::delete('public/images/users/' . $user->image);
+            }
+
+            $image = $request->file('image');
+            $imageName = time() . '.' . $image->getClientOriginalExtension();
+            $image->storeAs('public/images/users', $imageName);
+            $user->image = $imageName;
+        }
+
+        $user->save();
+
         // Update dosen data
         $dosen->update([
             'nip' => $request->nip,
-            'alamat' => $request->alamat,
         ]);
 
-        return redirect()->route('dosen.index')->with('success', 'dosen berhasil diperbarui.');
+        return redirect()->route('dosen.index')->with('success', 'Dosen ' . $dosen->user->name . ' berhasil diperbarui.');
     }
 
     /**
@@ -138,7 +168,11 @@ class DosenController extends Controller
         $dosen = Dosen::find($id);
         $dosen->user->delete(); // Hapus user otomatis
         $dosen->delete();
-
-        return redirect()->route('dosen.index')->with('success', 'dosen berhasil dihapus.');
+        try {
+            Dosen::destroy($id);
+            return redirect()->route('dosen.index')->with('success', 'Dosen ' . $dosen->user->name . ' berhasil dihapus');
+        } catch (\Illuminate\Database\QueryException $e) {
+            return redirect()->route('dosen.index')->with('error', 'Dosen ' . $dosen->user->name . ' gagal dihapus karena masih digunakan');
+        }
     }
 }
