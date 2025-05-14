@@ -24,6 +24,16 @@ class DosenController extends Controller
         return view('admin.dosen.index', compact('dosens', 'breadcrumb'));
     }
 
+    public function indexVerifikasi()
+    {
+        $dosen = Dosen::all();
+        $breadcrumb = (object) [
+            'title' => 'Verifikasi Perusahaan Mitra',
+            'subtitle' => ['Jumlah Perusahaan Mitra : ' . $dosen->count()]
+        ];
+        return view('dosen.verifikasi', compact('dosen', 'breadcrumb'));
+    }
+
     /**
      * Show the form for creating a new resource.
      */

@@ -15,6 +15,7 @@ use App\Http\Controllers\MagangApplicationController;
 use App\Http\Controllers\PeriodeMagangController;
 use App\Models\MagangApplication;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\LaporanController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -133,6 +134,14 @@ Route::middleware(['auth'])->group(function () {
 
     Route::prefix('mahasiswa')->middleware('role:Mahasiswa')->group(function () {
         Route::get('/dashboard', [DashboardController::class, 'indexMahasiswa'])->name('mahasiswa.dashboard');
+
+        Route::get('/laporan', [LaporanController::class, 'index'])->name('laporan');
+        Route::get('/laporan/create', [LaporanController::class, 'create'])->name('laporan.create');
+        Route::post('/laporan/store', [LaporanController::class, 'store'])->name('laporan.store');
+        Route::get('/laporan/{id}/edit', [LaporanController::class, 'edit'])->name('laporan.edit');
+        Route::put('/laporan/{id}', [LaporanController::class, 'update'])->name('laporan.update');
+        Route::delete('/laporan/{id}', [LaporanController::class, 'destroy'])->name('laporan.destroy');
+
         Route::get('/profile', [ProfileController::class, 'index'])->name('mahasiswa.profile');
         Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('mahasiswa.profile.edit');
         Route::post('/profile/update', [ProfileController::class, 'update'])->name('mahasiswa.profile.update');
@@ -153,6 +162,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::prefix('dosen')->middleware('role:Dosen')->group(function () {
         Route::get('/dashboard', [DashboardController::class, 'indexDosen'])->name('dosen.dashboard');
+        Route::get('/verifikasi', [DosenController::class, 'indexVerifikasi'])->name('dosen.verifikasi');
         Route::get('/profile', [ProfileController::class, 'index'])->name('dosen.profile');
         Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('dosen.profile.edit');
         Route::post('/profile/update', [ProfileController::class, 'update'])->name('dosen.profile.update');
