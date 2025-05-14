@@ -175,6 +175,10 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/evaluasi/{id}/edit', [EvaluasiMagangController::class, 'edit'])->name('evaluasi.edit');
         Route::put('/evaluasi/{id}', [EvaluasiMagangController::class, 'update'])->name('evaluasi.update');
         Route::delete('/evaluasi/{id}', [EvaluasiMagangController::class, 'destroy'])->name('evaluasi.destroy');
+
+        Route::get('/verifikasi', [DosenController::class, 'indexVerifikasi'])->name('dosen.verifikasi');
+        Route::put('/verifikasi/{id}', [DosenController::class, 'updateVerifikasi'])->name('dosen.verifikasi.update');
+        Route::get('/verifikasi/show/{id}', [DosenController::class, 'showLaporan'])->name('dosen.verifikasi.show');
     });
 
     Route::prefix('company')->middleware('role:Company')->group(function () {
