@@ -14,14 +14,14 @@
         <div class="alert alert-success">{{ session('success') }}</div>
     @endif
     <div class="card card-bordered card-preview">
-        <div class="card-inner table-responsive">
+        <div class="card-inner">
             <table class="datatable-init-export nowrap nk-tb-list nk-tb-ulist" data-auto-responsive="false">
                 <thead>
                     <tr class="nk-tb-item nk-tb-head">
-                        <th class="nk-tb-col export-col"><span class="sub-text">Perusahaan</span></th>
-                        <th class="nk-tb-col export-col"><span class="sub-text">Bidang Industri</span></th>
-                        <th class="nk-tb-col export-col"><span class="sub-text">Alamat</span></th>
-                        <th class="nk-tb-col export-col"><span class="sub-text">Kontak</span></th>
+                        <th class="nk-tb-col"><span class="sub-text">Perusahaan</span></th>
+                        <th class="nk-tb-col tb-col-md"><span class="sub-text">Bidang Industri</span></th>
+                        <th class="nk-tb-col tb-col-md"><span class="sub-text">Alamat</span></th>
+                        <th class="nk-tb-col tb-col-md"><span class="sub-text">Kontak</span></th>
                         <th class="nk-tb-col nk-tb-col-tools text-end"></th>
                     </tr>
                 </thead>
@@ -44,13 +44,13 @@
                                     </div>
                                 </div>
                             </td>
-                            <td class="nk-tb-col">
+                            <td class="nk-tb-col tb-col-md">
                                 <span>{{ $company->industry }}</span>
                             </td>
-                            <td class="nk-tb-col">
+                            <td class="nk-tb-col tb-col-md">
                                 <span>{{ $company->user->alamat }}</span>
                             </td>
-                            <td class="nk-tb-col">
+                            <td class="nk-tb-col tb-col-md">
                                 <span>{{ $company->user->no_telp }}</span>
                             </td>
                             <td class="nk-tb-col nk-tb-col-tools">
@@ -66,7 +66,7 @@
                                                     <li><a href="#"><em class="icon ni ni-eye"></em><span>View
                                                                 Details</span></a></li>
                                                     <li><a href="{{ route('companies.edit', $company->company_id) }}"><em
-                                                                class="icon ni ni-repeat"></em><span>Edit</span></a>
+                                                                class="icon ni ni-edit-alt"></em><span>Edit</span></a>
                                                     </li>
 
                                                     <li class="divider"></li>

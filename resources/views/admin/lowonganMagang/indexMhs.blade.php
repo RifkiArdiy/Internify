@@ -5,18 +5,15 @@
         <div class="alert alert-success">{{ session('success') }}</div>
     @endif
     <div class="card card-bordered card-preview">
-        <div class="card-inner table-responsive">
+        <div class="card-inner">
             <table class="datatable-init-export nowrap nk-tb-list nk-tb-ulist" data-auto-responsive="false">
                 <thead>
                     <tr class="nk-tb-item nk-tb-head">
                         <th class="nk-tb-col export-col"><span class="sub-text">Perusahaan</span></th>
-                        {{-- <th class="nk-tb-col export-col"><span class="sub-text">Masa Awal</span></th>
-                        <th class="nk-tb-col export-col"><span class="sub-text">Masa Akhir</span></th> --}}
                         <th class="nk-tb-col export-col"><span class="sub-text">Judul</span></th>
                         <th class="nk-tb-col export-col"><span class="sub-text">Deskripsi</span></th>
                         <th class="nk-tb-col export-col"><span class="sub-text">Kriteria</span></th>
                         <th class="nk-tb-col export-col"><span class="sub-text">Aksi</span></th>
-                        {{-- <th class="nk-tb-col export-col"><span class="sub-text">Lokasi</span></th> --}}
                         <th class="nk-tb-col nk-tb-col-tools text-end"></th>
                     </tr>
                 </thead>
@@ -26,12 +23,7 @@
                             <td class="nk-tb-col">
                                 <span>{{ $item->company->name }}</span>
                             </td>
-                            {{-- <td class="nk-tb-col">
-                                <span>{{ $item->period->start_date }}</span>
-                            </td>
-                            <td class="nk-tb-col">
-                                <span>{{ $item->period->end_date }}</span>
-                            </td> --}}
+
                             <td class="nk-tb-col">
                                 <span>{{ $item->title }}</span>
                             </td>
@@ -41,9 +33,7 @@
                             <td class="nk-tb-col">
                                 <span>{{ Str::limit($item->requirements, 50) }}</span>
                             </td>
-                            {{-- <td class="nk-tb-col">
-                                <span>{{ $item->location }}</span>
-                            </td> --}}
+
                             <td class="nk-tb-col">
                                 <form action="{{ route('magangApplication.storeMhs', $item->lowongan_id) }}" method="POST"
                                     onsubmit="return confirm('Yakin ingin melamar lowongan ini?')">

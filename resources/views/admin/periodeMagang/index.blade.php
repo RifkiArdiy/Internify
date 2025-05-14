@@ -14,11 +14,11 @@
         <div class="alert alert-success">{{ session('success') }}</div>
     @endif
     <div class="card card-bordered card-preview">
-        <div class="card-inner table-responsive">
+        <div class="card-inner">
             <table class="datatable-init-export nowrap nk-tb-list nk-tb-ulist" data-auto-responsive="false">
                 <thead>
                     <tr class="nk-tb-item nk-tb-head">
-                        <th class="nk-tb-col tb-col-md"><span class="sub-text">Program Magang</span></th>
+                        <th class="nk-tb-col"><span class="sub-text">Program Magang</span></th>
                         <th class="nk-tb-col tb-col-md"><span class="sub-text">Tanggal Mulai</span></th>
                         <th class="nk-tb-col tb-col-md"><span class="sub-text">Tanggal Berakhir</span></th>
                         <th class="nk-tb-col nk-tb-col-tools text-end"></th>
@@ -30,10 +30,10 @@
                             <td class="nk-tb-col">
                                 <span class="tb-amount">{{ $pegangs->name }}</span>
                             </td>
-                            <td class="nk-tb-col">
+                            <td class="nk-tb-col tb-col-md">
                                 <span>{{ $pegangs->start_date }}</span>
                             </td>
-                            <td class="nk-tb-col">
+                            <td class="nk-tb-col tb-col-md">
                                 <span>{{ $pegangs->end_date }}</span>
                             </td>
                             <td class="nk-tb-col nk-tb-col-tools">
@@ -49,13 +49,13 @@
                                                     <li><a href="#"><em class="icon ni ni-eye"></em><span>View
                                                                 Details</span></a></li>
                                                     <li><a href="{{ route('periodeMagang.edit', $pegangs->period_id) }}"><em
-                                                                class="icon ni ni-repeat"></em><span>Edit</span></a>
+                                                                class="icon ni ni-edit-alt"></em><span>Edit</span></a>
                                                     </li>
 
                                                     <li class="divider"></li>
 
                                                     <li><a href="{{ route('periodeMagang.destroy', $pegangs->period_id) }}"><em
-                                                                class="icon ni ni-na"></em><span>Hapus
+                                                                class="icon ni ni-trash"></em><span>Hapus
                                                                 Data</span></a></li>
                                                 </ul>
                                             </div>

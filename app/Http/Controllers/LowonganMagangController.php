@@ -123,7 +123,7 @@ class LowonganMagangController extends Controller
         $logang = LowonganMagang::find($id);
         $validated = $request->validate([
             'company' => 'required|integer|exists:companies,company_id',
-            'period' => 'required|integer|exists:periods,period_id',
+            'period' => 'required|integer|exists:periode_magangs,period_id',
             'title' => 'required|string|max:255',
             'description' => 'nullable|string',
             'requirements' => 'nullable|string',

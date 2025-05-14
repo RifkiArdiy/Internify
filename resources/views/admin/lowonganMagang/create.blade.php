@@ -41,7 +41,7 @@
 
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label class="form-label">Judul</label>
+                            <label class="form-label">Judul: <span class="text-danger">*</label>
                             <input type="text" class="form-control" name="title" id="title"
                                 value="{{ old('title') }}" placeholder="Masukkan Judul Lowongan" required>
                         </div>
@@ -49,7 +49,7 @@
 
                     <div class="col-12">
                         <div class="form-group">
-                            <label class="form-label">Deskripsi</label>
+                            <label class="form-label">Deskripsi: <span class="text-danger">*</label>
                             <!-- Editor tampil di sini -->
                             <div id="quill-editor" style="height: 200px;">{!! old('description') !!}</div>
                             <!-- Data yang akan dikirim ke controller -->
@@ -59,7 +59,7 @@
                     <!-- Requirements (dengan Quill) -->
                     <div class="col-12">
                         <div class="form-group">
-                            <label class="form-label">Kriteria</label>
+                            <label class="form-label">Kriteria: <span class="text-danger">*</label>
                             <!-- Quill Editor -->
                             <div id="quill-requirements" style="height: 200px;">{!! old('requirements') !!}</div>
                             <!-- Hidden input to store Quill content -->

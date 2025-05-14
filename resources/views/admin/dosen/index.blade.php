@@ -72,12 +72,12 @@
                                                     <li><a href="#"><em class="icon ni ni-eye"></em><span>View
                                                                 Details</span></a></li>
                                                     <li><a href="{{ route('dosen.edit', $dosen->dosen_id) }}"><em
-                                                                class="icon ni ni-repeat"></em><span>Edit</span></a>
+                                                                class="icon ni ni-edit-alt"></em><span>Edit</span></a>
                                                     </li>
                                                     <li class="divider"></li>
                                                     <li><a href="{{ route('dosen.destroy', $dosen->dosen_id) }}"><em
-                                                                class="icon ni ni-na"></em><span>Hapus
-                                                                User</span></a></li>
+                                                                class="icon ni ni-trash"></em><span>Hapus
+                                                                Dosen</span></a></li>
                                                 </ul>
                                             </div>
                                         </div>

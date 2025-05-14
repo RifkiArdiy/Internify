@@ -18,8 +18,8 @@
             <table class="datatable-init-export nowrap nk-tb-list nk-tb-ulist" data-auto-responsive="false">
                 <thead>
                     <tr class="nk-tb-item nk-tb-head">
-                        <th class="nk-tb-col export-col"><span class="sub-text">Program Studi</span></th>
-                        <th class="nk-tb-col export-col"><span class="sub-text">Jumlah</span></th>
+                        <th class="nk-tb-col"><span class="sub-text">Program Studi</span></th>
+                        <th class="nk-tb-col tb-col-md"><span class="sub-text">Jumlah</span></th>
                         <th class="nk-tb-col nk-tb-col-tools text-end"></th>
                     </tr>
                 </thead>
@@ -37,7 +37,7 @@
                                     </div>
                                 </div>
                             </td>
-                            <td class="nk-tb-col">
+                            <td class="nk-tb-col tb-col-md">
                                 <span class="tb-lead">{{ $item->mahasiswas->count() }}</span>
                             </td>
                             <td class="nk-tb-col nk-tb-col-tools text-end">
@@ -53,13 +53,13 @@
                                                     <li><a href="#"><em class="icon ni ni-eye"></em><span>View
                                                                 Details</span></a></li>
                                                     <li><a href="{{ route('prodi.edit', $item->prodi_id) }}"><em
-                                                                class="icon ni ni-repeat"></em><span>Edit</span></a>
+                                                                class="icon ni ni-edit-alt"></em><span>Edit</span></a>
                                                     </li>
 
                                                     <li class="divider"></li>
 
                                                     <li><a href="{{ route('prodi.destroy', $item->prodi_id) }}"><em
-                                                                class="icon ni ni-na"></em><span>Hapus
+                                                                class="icon ni ni-trash"></em><span>Hapus
                                                                 User</span></a></li>
                                                 </ul>
                                             </div>
