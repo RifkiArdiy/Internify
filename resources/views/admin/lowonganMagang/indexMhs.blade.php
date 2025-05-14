@@ -17,7 +17,6 @@
                         <th class="nk-tb-col export-col"><span class="sub-text">Kriteria</span></th>
                         <th class="nk-tb-col export-col"><span class="sub-text">Aksi</span></th>
                         {{-- <th class="nk-tb-col export-col"><span class="sub-text">Lokasi</span></th> --}}
-                        <th class="nk-tb-col nk-tb-col-tools text-end"></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -46,13 +45,19 @@
                             </td> --}}
                             @php
                                 $mahasiswaId = Auth::user()->mahasiswa->mahasiswa_id ?? null;
-                                $sudahMelamar = \App\Models\MagangApplication::where('mahasiswa_id', $mahasiswaId)
-                                                 ->where('lowongan_id', $item->lowongan_id)
-                                                 ->exists();
+                                $lamaran = \App\Models\MagangApplication::where('mahasiswa_id', $mahasiswaId)
+                                                    ->where('lowongan_id', $item->lowongan_id)
+                                                    ->first();
                             @endphp
                             <td class="nk-tb-col">
-                                @if ($sudahMelamar)
-                                    <span>Sudah Melamar</span>
+                                @if ($lamaran)
+                                    @if ($lamaran->status === 'Disetujui')
+                                        <span class="badge bg-success">Diterima</span>
+                                    @elseif ($lamaran->status === 'Ditolak')
+                                        <span class="badge bg-danger">Ditolak</span>
+                                    @else
+                                        <span class="badge bg-warning text-dark">Pending</span>
+                                    @endif
                                 @else
                                 <form action="{{ route('magangApplication.storeMhs', $item->lowongan_id) }}" method="POST"
                                     onsubmit="return confirm('Yakin ingin melamar lowongan ini?')">
@@ -62,41 +67,6 @@
                                     <button type="submit" class="btn btn-success btn-sm">Lamar</button>
                                 </form>
                                 @endif 
-                            </td>
-
-                            <td class="nk-tb-col nk-tb-col-tools">
-                                <ul class="nk-tb-actions gx-1">
-                                    <li>
-                                        <div class="dropdown">
-                                            <a href="#" class="dropdown-toggle btn btn-icon btn-trigger"
-                                                data-bs-toggle="dropdown">
-                                                <em class="icon ni ni-more-h"></em>
-                                            </a>
-                                            <div class="dropdown-menu dropdown-menu-end">
-                                                <ul class="link-list-opt no-bdr">
-                                                    <li><a href="{{ route('lowonganMagang.edit', $item->lowongan_id) }}">
-                                                            <em class="icon ni ni-edit-alt"></em><span>Edit</span></a>
-                                                    </li>
-                                                    <li>
-                                                        <form
-                                                            action="{{ route('lowonganMagang.destroy', $item->lowongan_id) }}"
-                                                            method="POST"
-                                                            onsubmit="return confirm('Yakin ingin menghapus?')">
-                                                            @csrf
-                                                            @method('DELETE')
-                                                            <button type="submit"
-                                                                class="dropdown-item d-flex align-items-center"
-                                                                style="border: none; background: none;">
-                                                                <em class="icon ni ni-trash" style="margin-left:6px;"></em>
-                                                                <span class="ms-1">Hapus</span>
-                                                            </button>
-                                                        </form>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </li>
-                                </ul>
                             </td>
                         </tr>
                     @endforeach

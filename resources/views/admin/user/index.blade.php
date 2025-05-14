@@ -66,7 +66,7 @@
                                 <span>{{ $admin->no_telp }}</span>
                             </td>
                             <td class="nk-tb-col tb-col-lg" data-order="Email Submited - Kyc More Info">
-                                <span class="tb-amount">{{ $admin->level->level_nama }}</span>
+                                <span >{{ $admin->level->level_nama }}</span>
                             </td>
                             <td class="nk-tb-col tb-col-md">
                                 <span class="tb-status text-success">Active</span>

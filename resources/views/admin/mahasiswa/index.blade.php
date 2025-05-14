@@ -61,10 +61,10 @@
                                 </div>
                             </td>
                             <td class="nk-tb-col tb-col-mb">
-                                <span class="tb-amount">{{ $mhs->nim }}</span>
+                                <span>{{ $mhs->nim }}</span>
                             </td>
                             <td class="nk-tb-col tb-col-lg" data-order="Email Submited - Kyc More Info">
-                                <span class="tb-amount">{{ $mhs->prodi->name }}</span>
+                                <span>{{ $mhs->prodi->name }}</span>
                             </td>
                             <td class="nk-tb-col tb-col-lg">
                                 <span>{{ $mhs->user->alamat }}</span>

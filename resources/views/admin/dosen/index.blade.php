@@ -60,13 +60,13 @@
                                 </div>
                             </td>
                             <td class="nk-tb-col tb-col-mb">
-                                <span class="tb-amount">{{ $dosen->nip }}</span>
+                                <span>{{ $dosen->nip }}</span>
                             </td>
                             <td class="nk-tb-col tb-col-md">
                                 <span>{{ $dosen->user->no_telp }}</span>
                             </td>
                             <td class="nk-tb-col tb-col-lg" data-order="Email Submited - Kyc More Info">
-                                <span class="tb-amount">{{ $dosen->user->alamat }}</span>
+                                <span>{{ $dosen->user->alamat }}</span>
                             </td>
                             <td class="nk-tb-col tb-col-md">
                                 <span class="tb-status text-info">Inactive</span>

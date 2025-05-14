@@ -35,20 +35,22 @@
                                 </div>
                             </td>
                             <td class="nk-tb-col">
-                                {{ $magang->student->user->name }}
+                                {{ $magang->mahasiswas->user->name }}
                             </td>
                             <td class="nk-tb-col">
-                                <span>{{ $magang->lowongan->title }}</span>
+                                <span>{{ $magang->lowongans->title }}</span>
                             </td>
                             <td class="nk-tb-col">
-                                <span>{{ $magang->lowongan->company->user->name }}</span>
+                                <span>{{ $magang->lowongans->company->user->name }}</span>
                             </td>
                             <td class="nk-tb-col">
                                 <span>{{ $magang->status }}</span>
                             </td>
                             <td class="nk-tb-col nk-tb-col-tools">
-                                @if ($magang->status === 'Disetujui' || $magang->status === 'Ditolak')
-                                    <span>Reviewed</span>
+                                @if ($magang->status === 'Disetujui')
+                                    <span>Disetujui</span>
+                                @elseif ($magang->status === 'Ditolak')
+                                    <span>Ditolak</span>
                                 @else
                                     <form action="{{ route('magangApplication.update', $magang->magang_id) }}"
                                         method="POST" style="display: inline;"
