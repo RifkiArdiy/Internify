@@ -122,7 +122,7 @@ class MagangApplicationController extends Controller
         $magang = MagangApplication::find($id);
         $breadcrumb = (object) [
             'title' => 'Detail Lamaran',
-            'subtitle' => ['Lamaran ' . $magang->student->name]
+            'subtitle' => ['Lamaran ' . $magang->mahasiswas->name]
         ];
 
         return view('admin.lamaranMagang.show', compact('breadcrumb', 'magang'));
