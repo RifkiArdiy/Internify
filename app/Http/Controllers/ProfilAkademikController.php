@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\ProfilAkademik;
+use App\Models\LowonganMagang;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -35,12 +36,15 @@ class ProfilAkademikController extends Controller
      */
     public function create()
     {
+        $kriteria = LowonganMagang::select('requirements')
+            ->distinct()
+            ->pluck('requirements');
         $breadcrumb = (object) [
             'title' => 'Input Profile Akademik',
             'subtitle' => ['Formulir pengisian data profile akademik anda']
         ];
 
-        return view('mahasiswa.profilAkademik.create', compact('breadcrumb'));
+        return view('mahasiswa.profilAkademik.create', compact('breadcrumb', 'kriteria'));
     }
 
     /**
@@ -75,12 +79,15 @@ class ProfilAkademikController extends Controller
     public function edit()
     {
         $profilAkademik = ProfilAkademik::where('user_id', Auth::user()->user_id)->first();
+        $kriteria = LowonganMagang::select('requirements')
+            ->distinct()
+            ->pluck('requirements');
         $breadcrumb = (object) [
             'title' => 'Edit Profil Akademik',
             'subtitle' => ['Perbarui Profil Akademik Anda']
         ];
 
-        return view('mahasiswa.profilAkademik.edit', compact('profilAkademik', 'breadcrumb'));
+        return view('mahasiswa.profilAkademik.edit', compact('profilAkademik', 'breadcrumb', 'kriteria'));
     }
 
     /**

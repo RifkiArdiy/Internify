@@ -22,7 +22,14 @@
                     <div class="form-group">
                         <label class="form-label" for="bidang_keahlian">Bidang Keahlian: <span class="text-danger">*</span></label>
                         <div class="form-control-wrap">
-                            <input type="text" class="form-control" id="bidang_keahlian" name="bidang_keahlian" value="{{ $profilAkademik->bidang_keahlian }}" placeholder="Masukkan bidang keahlian anda" required>
+                            <select class="form-control" id="bidang_keahlian" name="bidang_keahlian" required>
+                                    <option value="">-- Pilih bidang keahlian --</option>
+                                    @foreach ($kriteria as $requirement)
+                                        <option value="{{ $requirement }}" {{ old('bidang_keahlian') == $requirement ? 'selected' : '' }}>
+                                            {{ $requirement }}
+                                        </option>
+                                    @endforeach
+                                </select>
                         </div>
                     </div>
                 </div>
