@@ -67,7 +67,7 @@
                                                         </a>
                                                     </li>
                                                     <li>
-                                                        <a href="{{ route('admin.profile') }}">
+                                                        <a href="{{ route('profile') }}">
                                                             <em class="icon ni ni-user-alt"></em>
                                                             <span>View Profile</span>
                                                         </a>
@@ -80,7 +80,7 @@
                                                         </a>
                                                     </li>
                                                     <li>
-                                                        <a href="{{ route('mahasiswa.profile') }}">
+                                                        <a href="{{ route('profile') }}">
                                                             <em class="icon ni ni-user-alt"></em>
                                                             <span>View Profile</span>
                                                         </a>
@@ -93,7 +93,7 @@
                                                         </a>
                                                     </li>
                                                     <li>
-                                                        <a href="{{ route('dosen.profile') }}">
+                                                        <a href="{{ route('profile') }}">
                                                             <em class="icon ni ni-user-alt"></em>
                                                             <span>View Profile</span>
                                                         </a>
@@ -106,7 +106,7 @@
                                                         </a>
                                                     </li>
                                                     <li>
-                                                        <a href="{{ route('company.profile') }}">
+                                                        <a href="{{ route('profile') }}">
                                                             <em class="icon ni ni-user-alt"></em>
                                                             <span>View Profile</span>
                                                         </a>

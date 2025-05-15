@@ -17,11 +17,11 @@ class MagangApplicationController extends Controller
     {
         $magangs = MagangApplication::with('mahasiswas')->get();
         $breadcrumb = (object) [
-            'title' => 'Lamaran Magang',
+            'title' => 'Pengajuan Magang',
             'subtitle' => ['Jumlah Pelamar : ' . $magangs->count()]
         ];
 
-        return view('admin.lamaranMagang.index', compact('magangs', 'breadcrumb'));
+        return view('admin.pengajuanMagang.index', compact('magangs', 'breadcrumb'));
     }
 
     public function indexMhs()
@@ -124,7 +124,7 @@ class MagangApplicationController extends Controller
             'subtitle' => ['Lamaran ' . $magang->mahasiswas->name]
         ];
 
-        return view('admin.lamaranMagang.show', compact('breadcrumb', 'magang'));
+        return view('admin.pengajuanMagang.show', compact('breadcrumb', 'magang'));
     }
 
     /**

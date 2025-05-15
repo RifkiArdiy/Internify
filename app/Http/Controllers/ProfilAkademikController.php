@@ -15,13 +15,13 @@ class ProfilAkademikController extends Controller
      */
     public function index()
     {
-        $profilAkademik = ProfilAkademik::where('user_id',Auth::user()->user_id)->first();
-        if(!$profilAkademik){
+        $profilAkademik = ProfilAkademik::where('user_id', Auth::user()->user_id)->first();
+        if (!$profilAkademik) {
             $breadcrumb = (object) [
                 'title' => 'Input Profile Akademik',
                 'subtitle' => ['Formulir pengisian data profile akademik anda']
             ];
-            return view('mahasiswa.profilAkademik.create', compact( 'breadcrumb'));
+            return view('mahasiswa.profilAkademik.create', compact('breadcrumb'));
         }
         $breadcrumb = (object) [
             'title' => 'Profil Akademik Anda',

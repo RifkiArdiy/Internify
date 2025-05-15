@@ -32,7 +32,7 @@
                         <tr class="nk-tb-item">
                             <td class="nk-tb-col">
                                 <div class="user-card">
-                                    <div class="user-avatar bg-dark d-none d-sm-flex">
+                                    <div class="user-avatar bg-primary-dim d-none d-sm-flex">
                                         @if ($admin->image)
                                             <img src="{{ Storage::url('images/users/' . $admin->image) }}"
                                                 alt="{{ $admin->name }}">
@@ -56,7 +56,7 @@
                                 <span>{{ $admin->no_telp }}</span>
                             </td>
                             <td class="nk-tb-col tb-col-lg" data-order="Email Submited - Kyc More Info">
-                                <span >{{ $admin->level->level_nama }}</span>
+                                <span>{{ $admin->level->level_nama }}</span>
                             </td>
                             <td class="nk-tb-col tb-col-md">
                                 <span class="tb-status text-success">Active</span>

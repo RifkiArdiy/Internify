@@ -3,28 +3,28 @@
 {{-- @section('action')
     @if (Auth::user()->level->level_nama == 'Administrator')
         <li>
-            <a href="{{ route('admin.profile.edit') }}" class="btn btn-primary">
+            <a href="{{ route('profile.edit') }}" class="btn btn-primary">
                 <em class="icon ni ni-edit"></em>
                 <span>Edit Profile</span>
             </a>
         </li>
     @elseif (Auth::user()->level->level_nama == 'Dosen')
         <li class="nk-block-tools-opt">
-            <a href="{{ route('dosen.profile.edit') }}" class="btn btn-primary">
+            <a href="{{ route('profile.edit') }}" class="btn btn-primary">
                 <em class="icon ni ni-edit"></em>
                 <span>Edit Profile</span>
             </a>
         </li>
     @elseif (Auth::user()->level->level_nama == 'Mahasiswa')
         <li class="nk-block-tools-opt">
-            <a href="{{ route('mahasiswa.profile.edit') }}" class="btn btn-primary">
+            <a href="{{ route('profile.edit') }}" class="btn btn-primary">
                 <em class="icon ni ni-edit"></em>
                 <span>Edit Profile</span>
             </a>
         </li>
     @else
         <li class="nk-block-tools-opt">
-            <a href="{{ route('company.profile.edit') }}" class="btn btn-primary">
+            <a href="{{ route('profile.edit') }}" class="btn btn-primary">
                 <em class="icon ni ni-edit"></em>
                 <span>Edit Profile</span>
             </a>
@@ -140,35 +140,35 @@
                                                     <span>Change Photo</span>
                                                 </a>
                                             </li>
-                                                        @if (Auth::user()->level->level_nama == 'Administrator')
-                                                        <li>
-                                                            <a href="{{ route('admin.profile.edit') }}">
-                                                                <em class="icon ni ni-edit-fill"></em>
-                                                                <span>Edit Profile</span>
-                                                            </a>
-                                                        </li>
-                                                    @elseif (Auth::user()->level->level_nama == 'Dosen')
-                                                        <li>
-                                                            <a href="{{ route('dosen.profile.edit') }}">
-                                                                <em class="icon ni ni-edit-fill"></em>
-                                                                <span>Edit Profile</span>
-                                                            </a>
-                                                        </li>
-                                                    @elseif (Auth::user()->level->level_nama == 'Mahasiswa')
-                                                        <li>
-                                                            <a href="{{ route('mahasiswa.profile.edit') }}">
-                                                                <em class="icon ni ni-edit-fill"></em>
-                                                                <span>Edit Profile</span>
-                                                            </a>
-                                                        </li>
-                                                    @else
-                                                        <li>
-                                                            <a href="{{ route('company.profile.edit') }}">
-                                                                <em class="icon ni ni-edit-fill"></em>
-                                                                <span>Edit Profile</span>
-                                                            </a>
-                                                        </li>
-                                                    @endif
+                                            @if (Auth::user()->level->level_nama == 'Administrator')
+                                                <li>
+                                                    <a href="{{ route('profile.edit') }}">
+                                                        <em class="icon ni ni-edit-fill"></em>
+                                                        <span>Edit Profile</span>
+                                                    </a>
+                                                </li>
+                                            @elseif (Auth::user()->level->level_nama == 'Dosen')
+                                                <li>
+                                                    <a href="{{ route('profile.edit') }}">
+                                                        <em class="icon ni ni-edit-fill"></em>
+                                                        <span>Edit Profile</span>
+                                                    </a>
+                                                </li>
+                                            @elseif (Auth::user()->level->level_nama == 'Mahasiswa')
+                                                <li>
+                                                    <a href="{{ route('profile.edit') }}">
+                                                        <em class="icon ni ni-edit-fill"></em>
+                                                        <span>Edit Profile</span>
+                                                    </a>
+                                                </li>
+                                            @else
+                                                <li>
+                                                    <a href="{{ route('profile.edit') }}">
+                                                        <em class="icon ni ni-edit-fill"></em>
+                                                        <span>Edit Profile</span>
+                                                    </a>
+                                                </li>
+                                            @endif
                                         </ul>
                                     </div>
                                 </div>
@@ -177,8 +177,16 @@
                     </div><!-- .card-inner -->
                     <div class="card-inner p-0">
                         <ul class="link-list-menu">
-                            <li><a class="active" href="html/user-profile-regular.html"><em
-                                        class="icon ni ni-user-fill-c"></em><span>Personal Infomation</span></a></li>
+                            <li class="nk-menu-item">
+                                <a class="nk-menu-link" href="{{ route('profile') }}"><em
+                                        class="icon ni ni-user-fill-c"></em><span>Personal Infomation</span></a>
+                            </li>
+                            @if (Auth::user()->level->level_nama == 'Mahasiswa')
+                                <li class="nk-menu-item">
+                                    <a class="nk-menu-link" href="{{ route('profilAkademik.index') }}"><em
+                                            class="icon ni ni-user-fill-c"></em><span>Profile Akademik</span></a>
+                                </li>
+                            @endif
                             {{-- <li><a href="html/user-profile-notification.html"><em
                                         class="icon ni ni-bell-fill"></em><span>Notifications</span></a></li>
                             <li><a href="html/user-profile-activity.html"><em

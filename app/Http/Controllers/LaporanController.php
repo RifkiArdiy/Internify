@@ -11,15 +11,62 @@ use Illuminate\Support\Facades\Auth;
 
 class LaporanController extends Controller
 {
+    // public function index()
+    // {
+    //     $user = auth()->user();
+
+    //     if ($user->level->level_nama === 'Mahasiswa') {
+    //         $logs = Log::with(['mahasiswa.user'])
+    //             ->whereHas('mahasiswa', function ($q) use ($user) {
+    //                 $q->where('user_id', $user->id);
+    //             })
+    //             ->latest()->get();
+    //     } elseif ($user->level->level_nama === 'Dosen') {
+    //         $logs = Log::with(['dosen.user'])
+    //             ->whereHas('dosen', function ($q) use ($user) {
+    //                 $q->where('user_id', $user->id);
+    //             })
+    //             ->latest()->get();
+    //     } else {
+    //         // Jika admin atau role lain, tampilkan semua
+    //         $logs = Log::with(['mahasiswa.user', 'dosen.user'])->latest()->get();
+    //     }
+
+    //     $breadcrumb = (object) [
+    //         'title' => 'Laporan',
+    //         'subtitle' => ['Laporan Harian']
+    //     ];
+
+    //     return view('mahasiswa.laporan.index', compact('breadcrumb', 'logs'));
+    // }
+
     public function index()
     {
-        $logs = Log::with(['mahasiswa.user', 'dosen.user'])->latest()->get();
-        $breadcrumb = (object) [
+        $user = auth()->user();
+
+        if ($user->level && $user->level->level_nama === 'Mahasiswa') {
+            $logs = Log::with(['mahasiswa.user', 'dosen.user'])
+                ->where('mahasiswa_id', $user->mahasiswa->mahasiswa_id)
+                ->latest()
+                ->get();
+        } elseif ($user->level->level_nama == 'Dosen') {
+            $dosenId = $user->dosen->dosen_id ?? null;
+            $logs = Log::with(['mahasiswa'])
+                ->where('dosen_id', $dosenId)
+                ->latest()
+                ->get();
+        } else {
+            // Admin atau role lain
+            $logs = collect(); // kosongkan atau tampilkan semua sesuai kebutuhan
+        }
+        $breadcrumb = (object)[
             'title' => 'Laporan',
             'subtitle' => ['Laporan Harian']
         ];
-        return view('mahasiswa.laporan.index', compact('breadcrumb','logs'));
+
+        return view('mahasiswa.laporan.index', compact('breadcrumb', 'logs'));
     }
+
 
     public function create()
     {
@@ -55,12 +102,13 @@ class LaporanController extends Controller
         $logs = Log::with(['mahasiswa.user', 'dosen.user'])->latest()->get();
 
         return redirect()->route('laporan')
-                        ->with('success', 'Laporan berhasil dibuat.')
-                        ->with('logs', $logs); // Pastikan logs juga dikirim
+            ->with('success', 'Laporan berhasil dibuat.')
+            ->with('logs', $logs); // Pastikan logs juga dikirim
     }
 
 
-    public function edit($id){
+    public function edit($id)
+    {
         $logs = Log::findOrFail($id);
         $mahasiswa = Mahasiswa::where('user_id', Auth::user()->user_id)->first();
         $dosen = Dosen::all();
@@ -69,7 +117,7 @@ class LaporanController extends Controller
             'title' => 'Edit Laporan',
             'subtitle' => ['Edit Laporan Magang']
         ];
-        return view('mahasiswa.laporan.edit', compact('breadcrumb','logs', 'mahasiswa', 'dosen', 'company'));
+        return view('mahasiswa.laporan.edit', compact('breadcrumb', 'logs', 'mahasiswa', 'dosen', 'company'));
     }
 
     public function update(Request $request, $id)
@@ -114,6 +162,6 @@ class LaporanController extends Controller
             'title' => 'Detail Laporan',
             'subtitle' => ['Detail Laporan Magang']
         ];
-        return view('mahasiswa.laporan.show', compact('breadcrumb','log'));
+        return view('mahasiswa.laporan.show', compact('breadcrumb', 'log'));
     }
 }

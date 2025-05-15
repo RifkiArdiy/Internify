@@ -30,7 +30,7 @@
                         <tr class="nk-tb-item">
                             <td class="nk-tb-col">
                                 <div class="user-card">
-                                    <div class="user-avatar bg-dark d-none d-sm-flex">
+                                    <div class="user-avatar bg-indigo-dim d-none d-sm-flex">
                                         @if ($company->user->image)
                                             <img src="{{ Storage::url('images/users/' . $company->user->image) }}"
                                                 alt="{{ $company->user->name }}">

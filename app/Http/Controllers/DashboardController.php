@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\MagangApplication;
 use App\Models\Company;
 use App\Models\LowonganMagang;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -17,10 +18,13 @@ class DashboardController extends Controller
             'subtitle' => ['Welcome to Dashboard Internify']
         ];
 
+        $users = User::query()
+            ->limit(5)
+            ->get();
         $unreviewedLamarans = MagangApplication::with('mahasiswas')->where('status', 'pending')->get();
         $mitras = Company::all();
         $lowongans = LowonganMagang::all();
-        return view('dashboard.admin', compact('breadcrumb', 'unreviewedLamarans', 'mitras', 'lowongans'));
+        return view('dashboard.admin', compact('users', 'breadcrumb', 'unreviewedLamarans', 'mitras', 'lowongans'));
     }
 
     public function indexMahasiswa()
