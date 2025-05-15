@@ -14,17 +14,17 @@ class CompanySeeder extends Seeder
     public function run(): void
     {
         Company::create([
-            'user_id' => '20',
+            'user_id' => 20,
             'industry' => 'Football',
         ]);
 
         Company::create([
-            'user_id' => '21',
+            'user_id' => 21,
             'industry' => 'Ekonomi',
         ]);
 
         Company::create([
-            'user_id' => '22',
+            'user_id' => 22,
             'industry' => 'Finansial',
         ]);
 
@@ -34,22 +34,22 @@ class CompanySeeder extends Seeder
         ]);
 
         Company::create([
-            'user_id' => '24',
+            'user_id' => 24,
             'industry' => 'Teknologi Ai',
         ]);
 
         Company::create([
-            'user_id' => '25',
+            'user_id' => 25,
             'industry' => 'Pakan Ternak',
         ]);
 
         Company::create([
-            'user_id' => '26',
+            'user_id' => 26,
             'industry' => 'Football',
         ]);
 
         Company::create([
-            'user_id' => '27',
+            'user_id' => 27,
             'industry' => 'Football',
 
         ]);
