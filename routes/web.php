@@ -10,6 +10,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\WelcomeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CompanyController;
+use App\Http\Controllers\ListingController;
 use App\Http\Controllers\LowonganMagangController;
 use App\Http\Controllers\MagangApplicationController;
 use App\Http\Controllers\PeriodeMagangController;
@@ -37,6 +38,8 @@ Route::post('login', [AuthController::class, 'postLogin'])->name('postLogin');
 Route::get('register', [AuthController::class, 'register'])->name('register');
 Route::post('register', [AuthController::class, 'postRegister'])->name('postRegister');
 Route::get('/', [WelcomeController::class, 'index'])->name('welcome.index');
+Route::get('/lowongan', [ListingController::class, 'lowongan'])->name('list.lowongan');
+Route::get('/perusahaan', [ListingController::class, 'perusahaan'])->name('list.perusahaan');
 
 Route::middleware(['auth'])->group(function () {
 
@@ -72,7 +75,7 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/show/{id}', [LowonganMagangController::class, 'show'])->name('lowonganMagang.show');
             Route::get('/edit/{id}', [LowonganMagangController::class, 'edit'])->name('lowonganMagang.edit');
             Route::put('/{id}', [LowonganMagangController::class, 'update'])->name('lowonganMagang.update');
-            Route::get('/{id}', [LowonganMagangController::class, 'destroy'])->name('lowonganMagang.destroy');
+            Route::delete('/{id}', [LowonganMagangController::class, 'destroy'])->name('lowonganMagang.destroy');
         });
         Route::prefix('magangApplication')->group(callback: function () {
             Route::get('/', [MagangApplicationController::class, 'index'])->name('admin.magangApplication.index');

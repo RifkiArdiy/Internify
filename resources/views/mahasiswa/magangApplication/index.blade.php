@@ -8,46 +8,73 @@
         <div class="alert alert-success">{{ session('success') }}</div>
     @endif
     <div class="card card-bordered card-preview">
-        <div class="card-inner table-responsive">
+        <div class="card-inner">
             <table class="datatable-init-export nowrap nk-tb-list nk-tb-ulist" data-auto-responsive="false">
                 <thead>
                     <tr class="nk-tb-item nk-tb-head">
-                        <th class="nk-tb-col nk-tb-col-check export-col">
-                            <div class="custom-control custom-control-sm custom-checkbox notext">
-                                <input type="checkbox" class="custom-control-input" id="uid">
-                                <label class="custom-control-label" for="uid"></label>
-                            </div>
-                        </th>
-                        <th class="nk-tb-col export-col"><span class="sub-text">Mahasiswa</span></th>
-                        <th class="nk-tb-col export-col"><span class="sub-text">Lowongan</span></th>
-                        <th class="nk-tb-col export-col"><span class="sub-text">Perusahaan</span></th>
-                        <th class="nk-tb-col export-col"><span class="sub-text">Status</span></th>
-                        <th class="nk-tb-col export-col"><span class="sub-text">Aksi</span></th>
+                        <th class="nk-tb-col"><span class="sub-text">Mahasiswa</span></th>
+                        <th class="nk-tb-col tb-col-mb"><span class="sub-text">Lowongan</span></th>
+                        <th class="nk-tb-col tb-col-mb"><span class="sub-text">Perusahaan</span></th>
+                        <th class="nk-tb-col tb-col-mb"><span class="sub-text">Status</span></th>
+                        <th class="nk-tb-col nk-tb-col-tools text-end"><span class="sub-text">Aksi</span></th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($magangs as $magang)
                         <tr class="nk-tb-item">
-                            <td class="nk-tb-col nk-tb-col-check">
-                                <div class="custom-control custom-control-sm custom-checkbox notext">
-                                    <input type="checkbox" class="custom-control-input" id="uid{{ $magang->magang_id }}">
-                                    <label class="custom-control-label" for="uid{{ $magang->magang_id }}"></label>
+                            <td class="nk-tb-col">
+                                <div class="user-card">
+                                    <div class="user-avatar bg-dark d-none d-sm-flex">
+                                        @if ($magang->mahasiswas->user->image)
+                                            <img src="{{ Storage::url('images/users/' . $magang->mahasiswas->user->image) }}"
+                                                alt="{{ $magang->mahasiswas->user->name }}">
+                                        @else
+                                            <span>{{ strtoupper(substr($magang->mahasiswas->user->name, 0, 2)) }}</span>
+                                        @endif
+                                    </div>
+                                    <div class="user-info">
+                                        <span class="tb-lead">{{ $magang->mahasiswas->user->name }}<span
+                                                class="dot dot-success d-md-none ms-1"></span></span>
+                                        <span>{{ $magang->mahasiswas->user->email }}</span>
+                                    </div>
                                 </div>
                             </td>
-                            <td class="nk-tb-col">
-                                {{ $magang->mahasiswa->user->name }}
+                            <td class="nk-tb-col tb-col-mb">
+                                <span class="tb-amount">{{ $magang->lowongan->title }}</span>
                             </td>
-                            <td class="nk-tb-col">
-                                <span>{{ $magang->lowongan->title }}</span>
+                            <td class="nk-tb-col tb-col-mb">
+                                <span>{{ $magang->lowongan->company->name }}</span>
                             </td>
-                            <td class="nk-tb-col">
-                                <span>{{ $magang->lowongan->company->user->name }}</span>
-                            </td>
-                            <td class="nk-tb-col">
+                            <td class="nk-tb-col tb-col-mb">
                                 <span>{{ $magang->status }}</span>
                             </td>
                             <td class="nk-tb-col nk-tb-col-tools">
-                                @if ($magang->status === 'Disetujui' || $magang->status === 'Ditolak')
+                                {{-- <ul class="nk-tb-actions gx-1">
+                                    <li>
+                                        <div class="drodown">
+                                            <a href="#" class="dropdown-toggle btn btn-icon btn-trigger"
+                                                data-bs-toggle="dropdown"><em class="icon ni ni-more-h"></em></a>
+                                            <div class="dropdown-menu dropdown-menu-end">
+                                                <ul class="link-list-opt no-bdr">
+                                                    <li><a href="#"><em class="icon ni ni-focus"></em><span>Quick
+                                                                View</span></a></li>
+                                                    <li><a href="#"><em class="icon ni ni-eye"></em><span>View
+                                                                Details</span></a></li>
+                                                    <li><a href="{{ route('mahasiswa.edit', $magang->mahasiswa_id) }}"><em
+                                                                class="icon ni ni-repeat"></em></span>Edit</span></a>
+                                                    </li>
+
+                                                    <li class="divider"></li>
+                                                    <li><a href="{{ route('mahasiswa.destroy', $magang->mahasiswa_id) }}"><em
+                                                                class="icon ni ni-trash"></em><span>Hapus
+                                                                Mahasiswa</span></a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul> --}}
+
+                                {{-- @if ($magang->status === 'Disetujui' || $magang->status === 'Ditolak')
                                     <span>Reviewed</span>
                                 @else
                                     <form action="{{ route('magangApplication.update', $magang->magang_id) }}"
@@ -72,7 +99,7 @@
                                             <span style="padding: 5px;">Tolak</span>
                                         </button>
                                     </form>
-                                @endif
+                                @endif --}}
                             </td>
                         </tr>
                     @endforeach

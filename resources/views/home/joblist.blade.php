@@ -27,13 +27,13 @@
                                             </div>
                                         </div>
                                         <div class="job-details">
-                                            <p>{{ Str::limit($lwg->description, 100) }}</p>
+                                            <p>{{ Str::limit(strip_tags($lwg->description), 100) }}</p>
                                         </div>
                                         <div class="job-meta">
                                             <ul class="job-users g-1">
                                                 <li>
-                                                    <span
-                                                        class="badge rounded-pill bg-outline-secondary">{{ $lwg->requirements }}</span>
+                                                    {{-- <span
+                                                        class="badge rounded-pill bg-outline-secondary">{{ $lwg->requirements }}</span> --}}
                                                 </li>
                                             </ul>
                                             <span class="badge badge-dim bg-warning"><em
