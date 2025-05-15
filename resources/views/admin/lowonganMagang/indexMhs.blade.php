@@ -27,7 +27,6 @@
                         <tr class="nk-tb-item">
                             <td class="nk-tb-col">
                                 <span>{{ $item->company->user->name }}</span>
-                                <span>{{ $item->company->user->name }}</span>
                             </td>
                             {{-- <td class="nk-tb-col">
                                 <span>{{ $item->period->start_date }}</span>

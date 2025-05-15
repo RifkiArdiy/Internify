@@ -21,8 +21,8 @@
                         <th class="nk-tb-col export-col"><span class="sub-text">Mahasiswa</span></th>
                         <th class="nk-tb-col export-col"><span class="sub-text">Lowongan</span></th>
                         <th class="nk-tb-col export-col"><span class="sub-text">Perusahaan</span></th>
+                        <th class="nk-tb-col export-col"><span class="sub-text">Status</span></th>
                         <th class="nk-tb-col export-col"><span class="sub-text">Aksi</span></th>
-                        <th class="nk-tb-col nk-tb-col-tools text-end"></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -35,21 +35,22 @@
                                 </div>
                             </td>
                             <td class="nk-tb-col">
-                                {{ $magang->mahasiswas->user->name }}
+                                {{ $magang->mahasiswa->user->name }}
                             </td>
                             <td class="nk-tb-col">
-                                <span>{{ $magang->lowongans->title }}</span>
+                                <span>{{ $magang->lowongan->title }}</span>
                             </td>
                             <td class="nk-tb-col">
-                                <span>{{ $magang->lowongans->company->user->name }}</span>
+                                <span>{{ $magang->lowongan->company->user->name }}</span>
+                            </td>
+                            <td class="nk-tb-col">
+                                <span>{{ $magang->status }}</span>
                             </td>
                             <td class="nk-tb-col nk-tb-col-tools">
-                                @if ($magang->status === 'Disetujui')
-                                    <span>Disetujui</span>
-                                @elseif ($magang->status === 'Ditolak')
-                                    <span>Ditolak</span>
+                                @if ($magang->status === 'Disetujui' || $magang->status === 'Ditolak')
+                                    <span>Reviewed</span>
                                 @else
-                                    <form action="{{ route('admin.magangApplication.update', $magang->magang_id) }}"
+                                    <form action="{{ route('magangApplication.update', $magang->magang_id) }}"
                                         method="POST" style="display: inline;"
                                         onsubmit="return confirm('Apakah anda yakin menyetujui lamaran ini?')">
                                         @csrf
@@ -60,7 +61,7 @@
                                             <span style="padding:5px;">Setuju</span></button>
                                     </form>
 
-                                    <form action="{{ route('admin.magangApplication.update', $magang->magang_id) }}"
+                                    <form action="{{ route('magangApplication.update', $magang->magang_id) }}"
                                         method="POST" style="display: inline;"
                                         onsubmit="return confirm('Apakah anda yakin menolak lamaran ini?')">
                                         @csrf
@@ -72,31 +73,6 @@
                                         </button>
                                     </form>
                                 @endif
-                            </td>
-                            <td class="nk-tb-col nk-tb-col-tools">
-                                <ul class="nk-tb-actions gx-1">
-                                    <li>
-                                        <div class="drodown">
-                                            <a href="#" class="dropdown-toggle btn btn-icon btn-trigger"
-                                                data-bs-toggle="dropdown"><em class="icon ni ni-more-h"></em></a>
-                                            <div class="dropdown-menu dropdown-menu-end">
-                                                <ul class="link-list-opt no-bdr">
-                                                    <li><a href="{{ route('admin.magangApplication.show', $magang->magang_id)}}"><em class="icon ni ni-eye"></em><span>Lihat
-                                                                Detail</span></a></li>
-                                                    <li><a href="{{ route('admin.magangApplication.edit', $magang->magang_id) }}"><em
-                                                                class="icon ni ni-repeat"></em><span>Edit</span></a>
-                                                    </li>
-
-                                                    <li class="divider"></li>
-
-                                                    <li><a href="{{ route('admin.magangApplication.destroy', $magang->magang_id) }}"><em
-                                                                class="icon ni ni-trash"></em><span>Hapus
-                                                                Lamaran</span></a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </li>
-                                </ul>
                             </td>
                         </tr>
                     @endforeach

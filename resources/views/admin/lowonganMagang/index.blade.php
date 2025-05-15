@@ -70,21 +70,6 @@
                                                     <li><a href="{{ route('lowonganMagang.edit', $item->lowongan_id) }}">
                                                             <em class="icon ni ni-edit-alt"></em><span>Edit</span></a>
                                                     </li>
-                                                    <li>
-                                                        <form
-                                                            action="{{ route('lowonganMagang.destroy', $item->lowongan_id) }}"
-                                                            method="POST"
-                                                            onsubmit="return confirm('Yakin ingin menghapus?')">
-                                                            @csrf
-                                                            @method('DELETE')
-                                                            <button type="submit"
-                                                                class="dropdown-item d-flex align-items-center"
-                                                                style="border: none; background: none;">
-                                                                <em class="icon ni ni-trash" style="margin-left:6px;"></em>
-                                                                <span class="ms-1">Hapus</span>
-                                                            </button>
-                                                        </form>
-                                                    </li>
                                                     <li><a href="{{ route('lowonganMagang.destroy', $item->lowongan_id) }}">
                                                         <em class="icon ni ni-trash"></em><span>Hapus</span></a></li>
                                                     <li><a href="{{ route('lowonganMagang.show', $item->lowongan_id) }}">
