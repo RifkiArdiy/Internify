@@ -59,16 +59,23 @@
             @endif
 
             @if (Auth::user()->level_id == 2)
-                <form action="{{ route('magangApplication.storeMhs', $logang->lowongan_id) }}" method="POST"
-                      class="ms-2"
-                      onsubmit="return confirm('Yakin ingin melamar lowongan ini?')">
-                    @csrf
-                    <input type="hidden" name="lowongan_id" value="{{ $logang->lowongan_id }}">
-                    <input type="hidden" name="status" value="Pending">
-                    <button type="submit" class="btn btn-primary">Lamar</button>
-                </form>
+                @php
+                    $lamaran = Auth::user()->mahasiswa->applications
+                                ->where('lowongan_id', $logang->lowongan_id)
+                                ->first(); // Ambil lamaran mahasiswa untuk lowongan ini
+                @endphp
+
+                @if (!$lamaran)
+                    <form action="{{ route('magangApplication.storeMhs') }}" method="POST"
+                        class="ms-2"
+                        onsubmit="return confirm('Yakin ingin melamar lowongan ini?')">
+                        @csrf
+                        <input type="hidden" name="lowongan_id" value="{{ $logang->lowongan_id }}">
+                        <input type="hidden" name="status" value="Pending">
+                        <button type="submit" class="btn btn-primary">Lamar</button>
+                    </form>
+                @endif
             @endif
         </div>
-
     </div>
 @endsection

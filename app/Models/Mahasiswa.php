@@ -28,7 +28,7 @@ class Mahasiswa extends Model
 
     public function applications()
     {
-        return $this->hasMany(MagangApplication::class);
+        return $this->hasMany(MagangApplication::class, 'mahasiswa_id', 'mahasiswa_id');
     }
 
     public function logs()

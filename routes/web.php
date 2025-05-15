@@ -165,7 +165,7 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/{id}/lihat', [MagangApplicationController::class, 'show'])->name('lihatLamaran');
 
             Route::post('/lamar/store', [MagangApplicationController::class, 'storeMhs'])->name('magangApplication.storeMhs');;
-            Route::post('/lamar/{id}', [MagangApplicationController::class, 'store'])->name('magangApplication.storeMhs')->middleware('auth');;
+            
         });
         Route::prefix('profilAkademik')->group(function () {
             Route::get('/', [ProfilAkademikController::class, 'index'])->name('profilAkademik.index');
