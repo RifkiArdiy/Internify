@@ -49,7 +49,7 @@
                                 <span>{{ $magang->status }}</span>
                             </td>
                             <td class="nk-tb-col nk-tb-col-tools">
-                                {{-- <ul class="nk-tb-actions gx-1">
+                                <ul class="nk-tb-actions gx-1">
                                     <li>
                                         <div class="drodown">
                                             <a href="#" class="dropdown-toggle btn btn-icon btn-trigger"
@@ -72,7 +72,7 @@
                                             </div>
                                         </div>
                                     </li>
-                                </ul> --}}
+                                </ul>
 
                                 {{-- @if ($magang->status === 'Disetujui' || $magang->status === 'Ditolak')
                                     <span>Reviewed</span>

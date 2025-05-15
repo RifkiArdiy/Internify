@@ -45,24 +45,25 @@
                                 <span>{{ $log->created_at->format('d M Y') }}</span>
                             </td>
                             <td class="nk-tb-col nk-tb-col-tools">
-                                @if ($log->verif_company === 'Disetujui')
-                                    <span>Verified</span>
+                                @php
+                                    $sudahDievaluasi = \App\Models\EvaluasiMagang::where('mahasiswa_id', $log->mahasiswa_id)
+                                                        ->where('log_id', $log->log_id)
+                                                        ->exists();
+                                @endphp
+                                @if ($sudahDievaluasi)
+                                    <span>Sudah dievaluasi</span>
+
+                                @elseif ($log->verif_company === 'Disetujui')
+                                    
+                                    <a href="{{ route('dosen.verifikasi.show', $log->log_id) }}" class="btn btn-sm btn-primary">
+                                        Detail
+                                    </a>
+                               
                                 @elseif ($log->verif_company === 'Ditolak')
                                     <span>Ditolak</span>
+                                
                                 @else
-                                <ul class="nk-tb-actions gx-1">
-                                    <li>
-                                        <div class="drodown">
-                                            <a href="#" class="dropdown-toggle btn btn-icon btn-trigger"
-                                                data-bs-toggle="dropdown"><em class="icon ni ni-more-h"></em></a>
-                                            <div class="dropdown-menu dropdown-menu-end">
-                                                <ul class="link-list-opt no-bdr">
-                                                    <li><a href="{{ route('company.verifikasi.show', $log->log_id)}}"><em class="icon ni ni-eye"></em><span>Lihat Detail</span></a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </li>
-                                </ul>
+                                    <span>Pending</span>
                                 @endif
                             </td>
                         </tr>

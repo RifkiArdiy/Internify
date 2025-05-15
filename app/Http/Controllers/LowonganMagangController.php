@@ -28,15 +28,15 @@ class LowonganMagangController extends Controller
 
     public function indexMhs()
     {
-        // $breadcrumb = (object) [
-        //     'title' => 'Lowongan Magang',
-        //     'subtitle' => ['Cari lowongan magang']
-        // ];
+        $breadcrumb = (object) [
+            'title' => 'Lowongan Magang',
+            'subtitle' => ['Cari lowongan magang']
+        ];
 
-        // $logang = LowonganMagang::all();
-        // $period = PeriodeMagang::all();
+        $logang = LowonganMagang::all();
+        $period = PeriodeMagang::all();
 
-        // return view('admin.lowonganMagang.indexMhs', compact('logang', 'period', 'breadcrumb'));
+        return view('admin.lowonganMagang.indexMhs', compact('logang', 'period', 'breadcrumb'));
     }
 
     /**
@@ -96,7 +96,7 @@ class LowonganMagangController extends Controller
             'subtitle' => ['Detail lowongan magang']
         ];
 
-        return view('lowonganMagang.show', compact('breadcrumb', 'logang', 'period'));
+        return view('admin.lowonganMagang.show', compact('breadcrumb', 'logang', 'period'));
     }
 
     /**

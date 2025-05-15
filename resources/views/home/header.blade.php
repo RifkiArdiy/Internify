@@ -26,7 +26,7 @@
                             <a href="#joblist" class="menu-link nav-link">Lowongan</a>
                         </li>
                         <li class="menu-item">
-                            <a href="#companylist" class="menu-link nav-link">Company</a>
+                            <a href="#companylist" class="menu-link nav-link">Mitra</a>
                         </li>
                         {{-- <li class="menu-item">
                             <a href="#team" class="menu-link nav-link">Team</a>
@@ -219,6 +219,6 @@ c16.7,0,33.4-4.7,48.4-14l263.5-164.3c27-16.8,43.1-45.9,43.1-77.7S463.2,195.2,436
     </div>
     <!-- .header-content -->
     <div class="bg-image bg-overlay after-bg-dark after-opacity-95">
-        <img src="{{ asset('assets/home/images/bg/a.jpg') }}" alt="">
+        <img src="{{ asset('assets/home/images/bg/gedungjti.png') }}" alt="">
     </div>
 </header>

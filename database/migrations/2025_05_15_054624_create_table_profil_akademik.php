@@ -11,16 +11,18 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('mahasiswas', function (Blueprint $table) {
-            $table->id('mahasiswa_id');
+        Schema::create('profil_akademik', function (Blueprint $table) {
+            $table->id('profile_id');
             $table->unsignedBigInteger('user_id')->index();
-            $table->unsignedBigInteger('prodi_id')->index();
-            $table->string('nim')->unique();
-            $table->string('status')->default('-')->nullable();
+            $table->text('bidang_keahlian');
+            $table->text('sertifikasi');
+            $table->text('lokasi');
+            $table->text('pengalaman');
+            $table->text('etika');
+            $table->float('ipk');
             $table->timestamps();
 
             $table->foreign('user_id')->references('user_id')->on('users')->onDelete('cascade');
-            $table->foreign('prodi_id')->references('prodi_id')->on('program_studis')->onDelete('cascade');
         });
     }
 
@@ -29,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('mahasiswas');
+        Schema::dropIfExists('table_profil_akademik');
     }
 };

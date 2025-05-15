@@ -1,5 +1,13 @@
 @extends('layouts.app')
 
+@section('action')
+    <li class="nk-block-tools-opt">
+        <a href="{{ route('laporan.create') }}" class="btn btn-primary">
+            <em class="icon ni ni-plus"></em>
+            <span>Tambah Laporan</span>
+        </a>
+    </li>
+@endsection
 
 @section('content')
     @if (session('success'))
@@ -17,10 +25,10 @@
                             </div>
                         </th>
                         <th class="nk-tb-col"><span class="sub-text">Mahasiswa</span></th>
-                        {{-- <th class="nk-tb-col"><span class="sub-text">Dosen Pembimbing</span></th> --}}
+                        <th class="nk-tb-col"><span class="sub-text">Dosen Pembimbing</span></th>
                         <th class="nk-tb-col"><span class="sub-text">Isi Laporan</span></th>
                         <th class="nk-tb-col"><span class="sub-text">Tanggal</span></th>
-                        <th class="nk-tb-col"><span class="sub-text">Status</span></th>
+                        <th class="nk-tb-col nk-tb-col-tools text-end"></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -35,9 +43,9 @@
                             <td class="nk-tb-col">
                                 <span>{{ $log->mahasiswa->user->name ?? '-' }}</span>
                             </td>
-                            {{-- <td class="nk-tb-col">
+                            <td class="nk-tb-col">
                                 <span>{{ $log->dosen->user->name ?? '-' }}</span>
-                            </td> --}}
+                            </td>
                             <td class="nk-tb-col">
                                 <span>{{ Str::limit($log->report_text, 50) }}</span>
                             </td>
@@ -45,11 +53,6 @@
                                 <span>{{ $log->created_at->format('d M Y') }}</span>
                             </td>
                             <td class="nk-tb-col nk-tb-col-tools">
-                                @if ($log->verif_company === 'Disetujui')
-                                    <span>Verified</span>
-                                @elseif ($log->verif_company === 'Ditolak')
-                                    <span>Ditolak</span>
-                                @else
                                 <ul class="nk-tb-actions gx-1">
                                     <li>
                                         <div class="drodown">
@@ -57,13 +60,21 @@
                                                 data-bs-toggle="dropdown"><em class="icon ni ni-more-h"></em></a>
                                             <div class="dropdown-menu dropdown-menu-end">
                                                 <ul class="link-list-opt no-bdr">
-                                                    <li><a href="{{ route('company.verifikasi.show', $log->log_id)}}"><em class="icon ni ni-eye"></em><span>Lihat Detail</span></a></li>
+                                                    <li><a href="{{ route('laporan.show', $log->log_id)}}"><em class="icon ni ni-eye"></em><span>Lihat Detail</span></a></li>
+                                                    <li><a href="{{ route('laporan.edit', $log->log_id) }}"><em class="icon ni ni-edit"></em><span>Edit</span></a></li>
+                                                    <li class="divider"></li>
+                                                    <li>
+                                                        <form action="{{ route('laporan.destroy', $log->log_id) }}" method="POST" onsubmit="return confirm('Yakin ingin menghapus laporan ini?')">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button type="submit" class="btn btn-link text-danger"><em class="icon ni ni-trash"></em><span>Hapus</span></button>
+                                                        </form>
+                                                    </li>
                                                 </ul>
                                             </div>
                                         </div>
                                     </li>
                                 </ul>
-                                @endif
                             </td>
                         </tr>
                     @endforeach

@@ -13,20 +13,26 @@ class Log extends Model
 
     protected $primaryKey = 'log_id';
 
-    protected $fillable = ['mahasiswa_id', 'dosen_id', 'report_text', 'file_path'];
+    protected $fillable = ['mahasiswa_id', 'dosen_id','company_id', 'report_text', 'file_path', 'verif_dosen', 'verif_company'];
 
     public function mahasiswa()
     {
-        return $this->belongsTo(Mahasiswa::class);
+        return $this->belongsTo(Mahasiswa::class, 'mahasiswa_id');
     }
 
     public function dosen()
     {
-        return $this->belongsTo(Dosen::class);
+        return $this->belongsTo(Dosen::class, 'dosen_id');
     }
 
     public function companies()
     {
-        return $this->belongsTo(Company::class);
+        return $this->belongsTo(Company::class, 'company_id');
     }
+
+    public function evaluasi()
+    {
+        return $this->hasOne(EvaluasiMagang::class, 'evaluasi_id', 'evaluasi_id');
+    }
+
 }

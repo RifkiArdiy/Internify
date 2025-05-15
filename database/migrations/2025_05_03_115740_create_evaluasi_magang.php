@@ -15,11 +15,13 @@ return new class extends Migration
             $table->id('evaluasi_id');
             $table->unsignedBigInteger('mahasiswa_id')->index();
             $table->unsignedBigInteger('company_id')->index();
+            $table->unsignedBigInteger('log_id')->index();
             $table->text('evaluasi');
             $table->timestamps();
 
             $table->foreign('mahasiswa_id')->references('mahasiswa_id')->on('mahasiswas')->onDelete('cascade');
             $table->foreign('company_id')->references('company_id')->on('companies')->onDelete('cascade');
+            $table->foreign('log_id')->references('log_id')->on('logs')->onDelete('cascade');
         });
     }
 
