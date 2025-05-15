@@ -43,12 +43,12 @@ Route::get('/perusahaan', [ListingController::class, 'perusahaan'])->name('list.
 
 Route::middleware(['auth'])->group(function () {
 
+    Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
+    Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::post('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
 
     Route::prefix('admin')->middleware('role:Administrator')->group(function () {
         Route::get('/dashboard', [DashboardController::class, 'indexAdmin'])->name('admin.dashboard');
-        Route::get('/profile', [ProfileController::class, 'index'])->name('admin.profile');
-        Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('admin.profile.edit');
-        Route::post('/profile/update', [ProfileController::class, 'update'])->name('admin.profile.update');
         Route::prefix('prodi')->group(function () {
             Route::get('/', [ProgramStudiController::class, 'index'])->name('prodi.index');
             Route::get('/create', [ProgramStudiController::class, 'create'])->name('prodi.create');
@@ -138,25 +138,25 @@ Route::middleware(['auth'])->group(function () {
         });
     });
 
+
     Route::prefix('mahasiswa')->middleware('role:Mahasiswa')->group(function () {
         Route::get('/dashboard', [DashboardController::class, 'indexMahasiswa'])->name('mahasiswa.dashboard');
 
-        Route::get('/laporan', [LaporanController::class, 'index'])->name('laporan');
-        Route::get('/laporan/create', [LaporanController::class, 'create'])->name('laporan.create');
-        Route::post('/laporan/store', [LaporanController::class, 'store'])->name('laporan.store');
-        Route::get('/laporan/{id}/edit', [LaporanController::class, 'edit'])->name('laporan.edit');
-        Route::put('/laporan/{id}', [LaporanController::class, 'update'])->name('laporan.update');
-        Route::delete('/laporan/{id}', [LaporanController::class, 'destroy'])->name('laporan.destroy');
-        Route::get('/laporan/show/{id}', [LaporanController::class, 'show'])->name('laporan.show');
+        Route::prefix('laporan')->group(function () {
+            Route::get('', [LaporanController::class, 'index'])->name('laporan');
+            Route::get('/create', [LaporanController::class, 'create'])->name('laporan.create');
+            Route::post('/store', [LaporanController::class, 'store'])->name('laporan.store');
+            Route::get('/{id}/edit', [LaporanController::class, 'edit'])->name('laporan.edit');
+            Route::put('/{id}', [LaporanController::class, 'update'])->name('laporan.update');
+            Route::delete('/{id}', [LaporanController::class, 'destroy'])->name('laporan.destroy');
+            Route::get('/show/{id}', [LaporanController::class, 'show'])->name('laporan.show');
+        });
 
-        
-        Route::get('/profile', [ProfileController::class, 'index'])->name('mahasiswa.profile');
-        Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('mahasiswa.profile.edit');
-        Route::post('/profile/update', [ProfileController::class, 'update'])->name('mahasiswa.profile.update');
         Route::prefix('lowongan')->group(function () {
             Route::get('/', [LowonganMagangController::class, 'indexMhs'])->name('lowonganMagang.indexMhs');
             Route::get('/show/{id}', [LowonganMagangController::class, 'show'])->name('lowongan.show');
         });
+
         Route::prefix('lamaran')->group(function () {
             Route::get('/', [MagangApplicationController::class, 'indexMhs'])->name('lamaran');
             Route::post('/buatLamaran', [MagangApplicationController::class, 'store'])->name('buatLamaran');
