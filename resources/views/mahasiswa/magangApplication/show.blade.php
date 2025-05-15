@@ -39,26 +39,26 @@
 </tr>
 <tr>
     <th>Nama Perusahaan</th>
-    <td>{{ $magang->lowongan->company->name }}</td>
+    <td>{{ $magang->lowongans->company->name }}</td>
 </tr>
 <tr>
     <th>Judul Magang</th>
-    <td>{{ $magang->lowongan->title }}</td>
+    <td>{{ $magang->lowongans->title }}</td>
 </tr>
 <tr>
     <th>Deskripsi</th>
-    <td>{{ $magang->lowongan->description }}</td>
+    <td>{{ $magang->lowongans->description }}</td>
 </tr>
 <tr>
     <th>Periode Awal</th>
-    <td>{{ $magang->lowongan->period->start_date }}</td>
+    <td>{{ $magang->lowongans->period->start_date }}</td>
 </tr>
     <th>Periode Akhir</th>
-    <td>{{ $magang->lowongan->period->end_date }}</td>
+    <td>{{ $magang->lowongans->period->end_date }}</td>
 </tr>
 <tr>
     <th>Kriteria</th>
-    <td>{{ $magang->lowongan->requirements }}</td>
+    <td>{{ $magang->lowongans->requirements }}</td>
 </tr>
 </table>
 @if (Auth::user()->level_id == 1)

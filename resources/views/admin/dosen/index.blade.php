@@ -18,12 +18,6 @@
             <table class="datatable-init-export nowrap nk-tb-list nk-tb-ulist" data-auto-responsive="false">
                 <thead>
                     <tr class="nk-tb-item nk-tb-head">
-                        <th class="nk-tb-col nk-tb-col-check">
-                            <div class="custom-control custom-control-sm custom-checkbox notext">
-                                <input type="checkbox" class="custom-control-input" id="uid">
-                                <label class="custom-control-label" for="uid"></label>
-                            </div>
-                        </th>
                         <th class="nk-tb-col export-col"><span class="sub-text">User</span></th>
                         <th class="nk-tb-col tb-col-mb export-col"><span class="sub-text">NIP</span></th>
                         <th class="nk-tb-col tb-col-md export-col"><span class="sub-text">Phone</span></th>
@@ -36,12 +30,6 @@
                 <tbody>
                     @foreach ($dosens as $dosen)
                         <tr class="nk-tb-item">
-                            <td class="nk-tb-col nk-tb-col-check">
-                                <div class="custom-control custom-control-sm custom-checkbox notext">
-                                    <input type="checkbox" class="custom-control-input" id="uid{{ $dosen->dosen_id }}">
-                                    <label class="custom-control-label" for="uid{{ $dosen->dosen_id }}"></label>
-                                </div>
-                            </td>
                             <td class="nk-tb-col">
                                 <div class="user-card">
                                     <div class="user-avatar bg-dark d-none d-sm-flex">
@@ -84,12 +72,12 @@
                                                     <li><a href="#"><em class="icon ni ni-eye"></em><span>View
                                                                 Details</span></a></li>
                                                     <li><a href="{{ route('dosen.edit', $dosen->dosen_id) }}"><em
-                                                                class="icon ni ni-repeat"></em><span>Edit</span></a>
+                                                                class="icon ni ni-edit-alt"></em><span>Edit</span></a>
                                                     </li>
                                                     <li class="divider"></li>
                                                     <li><a href="{{ route('dosen.destroy', $dosen->dosen_id) }}"><em
-                                                                class="icon ni ni-na"></em><span>Hapus
-                                                                User</span></a></li>
+                                                                class="icon ni ni-trash"></em><span>Hapus
+                                                                Dosen</span></a></li>
                                                 </ul>
                                             </div>
                                         </div>
