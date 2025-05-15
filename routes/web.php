@@ -72,7 +72,7 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/', [LowonganMagangController::class, 'index'])->name('lowonganMagang.index');
             Route::get('/create', [LowonganMagangController::class, 'create'])->name('lowonganMagang.create');
             Route::post('/store', [LowonganMagangController::class, 'store'])->name('lowonganMagang.store');
-            Route::get('/show/{id}', [LowonganMagangController::class, 'show'])->name('lowonganMagang.show');
+            Route::get('/show/{id}', [LowonganMagangController::class, 'show'])->name('admin.lowonganMagang.show');
             Route::get('/edit/{id}', [LowonganMagangController::class, 'edit'])->name('lowonganMagang.edit');
             Route::put('/{id}', [LowonganMagangController::class, 'update'])->name('lowonganMagang.update');
             Route::delete('/{id}', [LowonganMagangController::class, 'destroy'])->name('lowonganMagang.destroy');

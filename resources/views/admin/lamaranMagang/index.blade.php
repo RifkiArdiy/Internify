@@ -41,7 +41,7 @@
                                 </div>
                             </td>
                             <td class="nk-tb-col tb-col-mb">
-                                <span class="tb-amount">{{ $magang->lowongans->title }}</span>
+                                <span>{{ $magang->lowongans->title }}</span>
                             </td>
                             <td class="nk-tb-col tb-col-mb">
                                 <span>{{ $magang->lowongans->company->user->name }}</span>
@@ -88,9 +88,6 @@
                                                 <ul class="link-list-opt no-bdr">
                                                     <li><a href="{{ route('admin.magangApplication.show', $magang->magang_id)}}"><em class="icon ni ni-eye"></em><span>Lihat
                                                                 Detail</span></a></li>
-                                                    <li><a href="{{ route('admin.magangApplication.edit', $magang->magang_id) }}"><em
-                                                                class="icon ni ni-repeat"></em><span>Edit</span></a>
-                                                    </li>
 
                                                     <li class="divider"></li>
 

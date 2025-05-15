@@ -156,9 +156,9 @@ class MagangApplicationController extends Controller
     {
         try {
             MagangApplication::destroy($id);
-            return redirect('/mahasiswa/lamaran')->with('success', 'Data lamaran berhasil dihapus');
+            return redirect('admin/magangApplication')->with('success', 'Data lamaran berhasil dihapus');
         } catch (\Illuminate\Database\QueryException $e) {
-            return redirect('/mahasiswa/lamaran')->with('error', 'Data lamaran gagal dihapus karena masih terdapat tabel lain yang terkait dengan data ini');
+            return redirect('admin/magangApplication')->with('error', 'Data lamaran gagal dihapus karena masih terdapat tabel lain yang terkait dengan data ini');
         }
     }
 }

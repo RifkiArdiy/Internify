@@ -25,7 +25,7 @@
                             <td>{{ $item->mahasiswas->user->name }}</td>
                             <td>{{ $item->lowongans->title }}</td>
                             <td>
-                                <a href="{{ route('magangApplication.show', $item->magang_id) }}" class="btn btn-success btn-sm">
+                                <a href="{{ route('admin.magangApplication.show', $item->magang_id) }}" class="btn btn-success btn-sm">
                                     Lihat Detail
                                 </a>
                             </td>
@@ -68,7 +68,7 @@
                             <td>{{ $item->company->user->name }}</td>
                             <td>{{ $item->title }}</td>
                             <td>
-                                <a href="{{ route('lowonganMagang.show', $item->lowongan_id) }}" class="btn btn-success btn-sm">
+                                <a href="{{ route('admin.lowonganMagang.show', $item->lowongan_id) }}" class="btn btn-success btn-sm">
                                     Lihat Detail
                                 </a>
                             </td>
