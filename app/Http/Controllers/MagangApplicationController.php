@@ -60,10 +60,10 @@ class MagangApplicationController extends Controller
             return redirect()->back()->with('error', 'Silakan login terlebih dahulu.');
         }
 
-        // // Cek apakah user punya role mahasiswa (opsional tapi disarankan)
-        // if ($mahasiswa->user->level->level_nama !== 'mahasiswa') {
-        //     return redirect()->back()->with('error', 'Hanya mahasiswa yang dapat melamar.');
-        // }
+        // Cek apakah user punya role mahasiswa (opsional tapi disarankan)
+        if ($mahasiswa->user->level->level_nama !== 'mahasiswa') {
+            return redirect()->back()->with('error', 'Hanya mahasiswa yang dapat melamar.');
+        }
 
 
         // Cek apakah sudah pernah melamar untuk lowongan ini

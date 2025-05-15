@@ -26,7 +26,6 @@
                             <td class="nk-tb-col">
                                 <span>{{ $item->company->user->name }}</span>
                             </td>
-
                             <td class="nk-tb-col">
                                 <span>{{ $item->title }}</span>
                             </td>
