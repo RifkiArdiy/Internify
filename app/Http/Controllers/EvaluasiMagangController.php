@@ -13,12 +13,13 @@ class EvaluasiMagangController extends Controller
 
     public function index()
     {
+        $logs = Log::all();
         $breadcrumb = (object) [
             'title' => 'Evaluasi Magang',
             'subtitle' => ['Jumlah Evaluasi Magang ' . EvaluasiMagang::count()]
         ];
         $evaluations = EvaluasiMagang::with('mahasiswa', 'company')->latest()->get();
-        return view('dosen.evaluasi.index', ['evaluasi' => $evaluations], compact('breadcrumb'));
+        return view('dosen.evaluasi.index', ['evaluasi' => $evaluations], compact('breadcrumb', 'logs'));
     }  
 
     public function create(Request $request)
@@ -58,10 +59,11 @@ class EvaluasiMagangController extends Controller
 
     public function edit($id)
     {
-        $evaluation = EvaluasiMagang::findOrFail($id);
+        $evaluation = EvaluasiMagang::with('mahasiswa.user', 'company.user')->findOrFail($id);
         $mahasiswas = Mahasiswa::all();
         $companies = Company::all();
         $logs = Log::all();
+
         $breadcrumb = (object) [
             'title' => 'Edit Evaluasi Magang',
             'subtitle' => ['Form Validation']
@@ -72,9 +74,13 @@ class EvaluasiMagangController extends Controller
             'mahasiswas' => $mahasiswas,
             'companies' => $companies,
             'logs' => $logs,
-            'breadcrumb' => $breadcrumb
+            'breadcrumb' => $breadcrumb,
+            'mahasiswaId' => $evaluation->mahasiswa_id,
+            'companyId' => $evaluation->company_id,
+            'logId' => $evaluation->log_id,
         ]);
     }
+
 
     public function update(Request $request, $id)
     {
@@ -87,7 +93,12 @@ class EvaluasiMagangController extends Controller
             'evaluasi' => 'required|string',
         ]);
 
-        $evaluation->update($request->all());
+        $evaluation->update([
+            'mahasiswa_id' => $request->mahasiswa_id,
+            'company_id' => $request->company_id,
+            'log_id' => $request->log_id,
+            'evaluasi' => $request->evaluasi,
+        ]);
 
         return redirect()->route('evaluasi.index')->with('success', 'Evaluasi berhasil diperbarui');
     }

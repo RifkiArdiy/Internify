@@ -52,7 +52,14 @@
                                             <div class="dropdown-menu dropdown-menu-end">
                                                 <ul class="link-list-opt no-bdr">
                                                     <li><a href="#"><em class="icon ni ni-eye"></em><span>Lihat Detail</span></a></li>
-                                                    <li><a href="{{ route('evaluasi.edit', $e) }}"><em class="icon ni ni-edit"></em><span>Edit</span></a></li>
+                                                    <li><a href="{{ route('evaluasi.edit', $e->evaluasi_id) }}
+                                                                ?mahasiswa_id={{ $e->mahasiswa_id }}
+                                                                &company_id={{ $e->company_id }}
+                                                                &log_id={{ $e->log_id }}">
+                                                            <em class="icon ni ni-edit"></em>
+                                                            <span>Edit</span>
+                                                        </a>
+                                                    </li>
                                                     <li class="divider"></li>
                                                     <li>
                                                         <form action="{{ route('evaluasi.destroy', $e) }}" method="POST" onsubmit="return confirm('Yakin ingin menghapus laporan ini?')">
