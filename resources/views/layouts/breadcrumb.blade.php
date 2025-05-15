@@ -1,7 +1,11 @@
 <div class="nk-block-head-content">
-    <h3 class="nk-block-title page-title">{{ $evaluation->title }}</h3>
+    <h3 class="nk-block-title page-title">
+        {{ is_array($breadcrumb->title) ? implode(', ', $breadcrumb->title) : $breadcrumb->title }}
+    </h3>
     <div class="nk-block-des text-soft">
-        <p>{{ $evaluation->subtitle}}</p>
+        <p>
+            {{ is_array($breadcrumb->subtitle) ? implode(', ', $breadcrumb->subtitle) : $breadcrumb->subtitle }}
+        </p>
     </div>
 </div>
 <!-- .nk-block-head-content -->

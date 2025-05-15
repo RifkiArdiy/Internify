@@ -31,18 +31,23 @@ class EvaluasiMagangController extends Controller
         return view('dosen.evaluasi.create', compact('mahasiswas', 'companies', 'breadcrumb'));
     }
 
-    public function store(Request $request)
+        public function store(Request $request)
     {
-        $request->validate([
+        $validated = $request->validate([
             'mahasiswa_id' => 'required|exists:mahasiswas,id',
             'company_id' => 'required|exists:companies,id',
             'evaluasi' => 'required|string',
         ]);
 
-        EvaluasiMagang::create($request->all());
+        EvaluasiMagang::create([
+            'mahasiswa_id' => $validated['mahasiswa_id'],
+            'company_id' => $validated['company_id'],
+            'evaluasi' => $validated['evaluasi'],
+        ]);
 
         return redirect()->route('dosen.evaluasi.index')->with('success', 'Evaluasi berhasil disimpan');
     }
+
 
     public function edit($id)
     {
