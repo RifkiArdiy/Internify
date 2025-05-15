@@ -33,11 +33,11 @@ class Mahasiswa extends Model
 
     public function logs()
     {
-        return $this->hasMany(Log::class, 'mahasiswa_id', 'mahasiswa_id');
+        return $this->hasMany(Log::class, 'log_id', 'log_id');
     }
 
     public function evaluasi()
     {
-        return $this->hasMany(Evaluasi::class);
+        return $this->hasMany(EvaluasiMagang::class, 'evaluasi_id', 'evaluasi_id');
     }
 }

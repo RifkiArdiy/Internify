@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\EvaluasiMagang;
 use App\Models\Mahasiswa;
+use App\Models\Log;
 use App\Models\Company;
 use Illuminate\Http\Request;
 
@@ -20,15 +21,20 @@ class EvaluasiMagangController extends Controller
         return view('dosen.evaluasi.index', ['evaluasi' => $evaluations], compact('breadcrumb'));
     }  
 
-    public function create()
+    public function create(Request $request)
     {
         $mahasiswas = Mahasiswa::all();
         $companies = Company::all();
+        $logs = Log::all();
+        $mahasiswaId = $request->query('mahasiswa_id');
+        $companyId = $request->query('company_id');
+        $logId = $request->query('log_id');
+
         $breadcrumb = (object) [
             'title' => 'Tambah Evaluasi Magang',
             'subtitle' => ['Form Validation']
         ];
-        return view('dosen.evaluasi.create', compact('mahasiswas', 'companies', 'breadcrumb'));
+        return view('dosen.evaluasi.create', compact('logId','logs','mahasiswas', 'companies', 'breadcrumb', 'mahasiswaId', 'companyId'));
     }
 
     public function store(Request $request)
@@ -36,12 +42,14 @@ class EvaluasiMagangController extends Controller
         $request->validate([
             'mahasiswa_id' => 'required|exists:mahasiswas,mahasiswa_id',
             'company_id' => 'required|exists:companies,company_id',
+            'log_id' => 'required|exists:logs,log_id',
             'evaluasi' => 'required|string',
         ]);
 
         EvaluasiMagang::create([
             'mahasiswa_id' => $request->mahasiswa_id,
             'company_id' => $request->company_id,
+            'log_id' => $request->log_id,
             'evaluasi' => $request->evaluasi,
         ]);
 
@@ -53,6 +61,7 @@ class EvaluasiMagangController extends Controller
         $evaluation = EvaluasiMagang::findOrFail($id);
         $mahasiswas = Mahasiswa::all();
         $companies = Company::all();
+        $logs = Log::all();
         $breadcrumb = (object) [
             'title' => 'Edit Evaluasi Magang',
             'subtitle' => ['Form Validation']
@@ -62,6 +71,7 @@ class EvaluasiMagangController extends Controller
             'evaluation' => $evaluation,
             'mahasiswas' => $mahasiswas,
             'companies' => $companies,
+            'logs' => $logs,
             'breadcrumb' => $breadcrumb
         ]);
     }
@@ -73,6 +83,7 @@ class EvaluasiMagangController extends Controller
         $request->validate([
             'mahasiswa_id' => 'required|exists:mahasiswas,mahasiswa_id',
             'company_id' => 'required|exists:companies,company_id',
+            'log_id' => 'required|exists:logs,log_id',
             'evaluasi' => 'required|string',
         ]);
 

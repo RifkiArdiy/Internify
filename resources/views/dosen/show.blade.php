@@ -32,28 +32,15 @@
                     <p class="fw-bold">{{ $logs->created_at->format('d M Y') }}</p>
                 </div>
                 <div class="col-md-6 text-end">
-                    <form action="{{ route('dosen.verifikasi.update', $logs->log_id) }}"
-                        method="POST" style="display: inline;"
-                        onsubmit="return confirm('Apakah anda yakin menyetujui laporan ini?')">
-                        @csrf
-                        @method('PUT')
-                        <input type="hidden" name="verif_dosen" value="Disetujui">
-                        <button type="submit" class="btn btn-link p-0 m-0 align-baseline text-light"
-                            style="background: rgb(32, 155, 32)">
-                            <span style="padding:5px;">Setuju</span></button>
-                    </form>
-
-                    <form action="{{ route('dosen.verifikasi.update', $logs->log_id) }}"
-                        method="POST" style="display: inline;"
-                        onsubmit="return confirm('Apakah anda yakin menolak laporan ini?')">
-                        @csrf
-                        @method('PUT')
-                        <input type="hidden" name="verif_dosen" value="Ditolak">
-                        <button type="submit" class="btn btn-link p-0 m-0 align-baseline text-light"
-                            style="background: red;">
-                            <span style="padding: 5px;">Tolak</span>
-                        </button>
-                    </form>
+                    <li class="nk-block-tools-opt">
+                        <a href="{{ route('evaluasi.create', [
+                                'mahasiswa_id' => $logs->mahasiswa_id,
+                                'company_id' => $logs->company_id,
+                                'log_id' => $logs->log_id
+                            ]) }}" class="btn btn-sm btn-primary">
+                            Evaluasi
+                        </a>                        
+                    </li>
                 </div>
             </div>
         </div>
