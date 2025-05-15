@@ -148,4 +148,14 @@ class CompanyController extends Controller
             return redirect()->route('companies.index')->with('error', 'Company ' . $company->user->name . ' gagal dihapus karena masih digunakan');
         }
     }
+
+    public function show(string $id){
+        $comp = Company::find($id);
+        $breadcrumb = (object) [
+            'title' => $comp->user->name,
+            'subtitle' => ['Detail Perusahaan']
+        ];
+
+        return view('admin.company.show', compact('breadcrumb','comp'));
+    }
 }

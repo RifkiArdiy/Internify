@@ -13,6 +13,10 @@
     @if (session('success'))
         <div class="alert alert-success">{{ session('success') }}</div>
     @endif
+    @if (session('error'))
+        <div class="alert alert-danger">{{ session('error') }}</div>
+    @endif
+
 
     <div class="card card-bordered card-preview">
         <div class="card-inner table-responsive">
@@ -81,7 +85,11 @@
                                                             </button>
                                                         </form>
                                                     </li>
-                                                </ul>
+                                                    <li><a href="{{ route('lowonganMagang.destroy', $item->lowongan_id) }}">
+                                                        <em class="icon ni ni-trash"></em><span>Hapus</span></a></li>
+                                                    <li><a href="{{ route('lowonganMagang.show', $item->lowongan_id) }}">
+                                                        <em class="icon ni ni-eye"></em><span>Lihat Detail</span></a></li>
+                                                    </ul>
                                             </div>
                                         </div>
                                     </li>

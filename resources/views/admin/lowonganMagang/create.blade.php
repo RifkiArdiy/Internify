@@ -10,7 +10,7 @@
                 <select name="company" id="company" class="form-control" required>
                     <option value="">- Pilih Perusahaan -</option>
                     @foreach ($companies as $item)
-                        <option value="{{ $item->company_id }}">{{$item->name}}</option>
+                        <option value="{{ $item->company_id }}">{{$item->user->name}}</option>
                     @endforeach
                 </select>
             </div>

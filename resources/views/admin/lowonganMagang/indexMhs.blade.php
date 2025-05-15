@@ -4,6 +4,9 @@
     @if (session('success'))
         <div class="alert alert-success">{{ session('success') }}</div>
     @endif
+    @if (session('error'))
+        <div class="alert alert-danger">{{ session('error') }}</div>
+    @endif
     <div class="card card-bordered card-preview">
         <div class="card-inner table-responsive">
             <table class="datatable-init-export nowrap nk-tb-list nk-tb-ulist" data-auto-responsive="false">
@@ -23,6 +26,7 @@
                     @foreach ($logang as $item)
                         <tr class="nk-tb-item">
                             <td class="nk-tb-col">
+                                <span>{{ $item->company->user->name }}</span>
                                 <span>{{ $item->company->user->name }}</span>
                             </td>
                             {{-- <td class="nk-tb-col">
