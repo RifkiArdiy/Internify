@@ -15,13 +15,12 @@ class MagangApplicationController extends Controller
      */
     public function index()
     {
-        $magangs = MagangApplication::all();
+        $magangs = MagangApplication::with('mahasiswas')->get();
         $breadcrumb = (object) [
             'title' => 'Lamaran Magang',
             'subtitle' => ['Jumlah Pelamar : ' . $magangs->count()]
         ];
 
-        $magangs = MagangApplication::all();
         return view('admin.lamaranMagang.index', compact('magangs', 'breadcrumb'));
     }
 
@@ -122,7 +121,7 @@ class MagangApplicationController extends Controller
         $magang = MagangApplication::find($id);
         $breadcrumb = (object) [
             'title' => 'Detail Lamaran',
-            'subtitle' => ['Lamaran ' . $magang->student->name]
+            'subtitle' => ['Lamaran ' . $magang->mahasiswas->name]
         ];
 
         return view('admin.lamaranMagang.show', compact('breadcrumb', 'magang'));

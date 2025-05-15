@@ -40,16 +40,16 @@
                                 </div>
                             </td>
                             <td class="nk-tb-col tb-col-mb">
-                                <span class="tb-amount">{{ $magang->lowongans->title }}</span>
+                                <span class="tb-amount">{{ $magang->lowongan->title }}</span>
                             </td>
                             <td class="nk-tb-col tb-col-mb">
-                                <span>{{ $magang->lowongans->company->name }}</span>
+                                <span>{{ $magang->lowongan->company->name }}</span>
                             </td>
                             <td class="nk-tb-col tb-col-mb">
                                 <span>{{ $magang->status }}</span>
                             </td>
                             <td class="nk-tb-col nk-tb-col-tools">
-                                <ul class="nk-tb-actions gx-1">
+                                {{-- <ul class="nk-tb-actions gx-1">
                                     <li>
                                         <div class="drodown">
                                             <a href="#" class="dropdown-toggle btn btn-icon btn-trigger"
@@ -72,9 +72,9 @@
                                             </div>
                                         </div>
                                     </li>
-                                </ul>
+                                </ul> --}}
 
-                                @if ($magang->status === 'Disetujui' || $magang->status === 'Ditolak')
+                                {{-- @if ($magang->status === 'Disetujui' || $magang->status === 'Ditolak')
                                     <span>Reviewed</span>
                                 @else
                                     <form action="{{ route('magangApplication.update', $magang->magang_id) }}"
@@ -99,7 +99,7 @@
                                             <span style="padding: 5px;">Tolak</span>
                                         </button>
                                     </form>
-                                @endif
+                                @endif --}}
                             </td>
                         </tr>
                     @endforeach

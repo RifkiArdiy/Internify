@@ -25,8 +25,8 @@
             <tbody>
                 @foreach ($unreviewedLamarans as $item)
                     <tr>
-                        <td>{{ $item->student->user->name }}</td>
-                        <td>{{ $item->lowongan->title }}</td>
+                        <td>{{ $item->mahasiswas->user->name }}</td>
+                        <td>{{ $item->lowongans->title }}</td>
                         <td><button onclick="window.location.href='{{ route('magangApplication.show', $item->magang_id) }}'"
                                 class="btn btn-success btn-sm">
                                 Lihat Detail
