@@ -17,7 +17,12 @@
                             <div class="py-2">
                                 <div class="card-inner">
                                     <div class="service-icon styled-icon styled-icon-s4 styled-icon-5x text-danger">
-                                        <span>{{ Str::limit(strtoupper($company->user->name), 2, '') }}</span>
+                                        @if ($company->user->image)
+                                            <img src="{{ Storage::url('images/users/' . $company->user->image) }}"
+                                                alt="{{ $company->user->name }}">
+                                        @else
+                                            <span>{{ strtoupper(substr($company->user->name, 0, 2)) }}</span>
+                                        @endif
                                     </div>
                                     <div class="service-text">
                                         <h5 class="title">{{ $company->user->name }}</h5>

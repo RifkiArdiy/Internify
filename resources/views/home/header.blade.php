@@ -26,7 +26,7 @@
                             <a href="#joblist" class="menu-link nav-link">Lowongan</a>
                         </li>
                         <li class="menu-item">
-                            <a href="#companylist" class="menu-link nav-link">Company</a>
+                            <a href="#companylist" class="menu-link nav-link">Mitra</a>
                         </li>
                         {{-- <li class="menu-item">
                             <a href="#team" class="menu-link nav-link">Team</a>

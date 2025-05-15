@@ -12,7 +12,11 @@ class ProgramStudiController extends Controller
      */
     public function index()
     {
-        $prodi = ProgramStudi::all();
+        $prodi = ProgramStudi::with(['mahasiswas' => function ($query) {
+            $query->whereHas('user', function ($userQuery) {
+                $userQuery->where('level_id', 2); // Asumsi level_id 2 untuk mahasiswa
+            });
+        }])->get();
         $breadcrumb = (object) [
             'title' => 'Program Studi',
             'subtitle' => ['Jumlah Program Studi : ' . $prodi->count()]

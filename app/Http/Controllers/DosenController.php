@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Log;
 use App\Models\Dosen;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -26,14 +27,33 @@ class DosenController extends Controller
 
     public function indexVerifikasi()
     {
-        $dosen = Dosen::all();
+        $logs = Log::with(['mahasiswa.user', 'dosen.user'])->latest()->get();
         $breadcrumb = (object) [
-            'title' => 'Verifikasi Perusahaan Mitra',
-            'subtitle' => ['Jumlah Perusahaan Mitra : ' . $dosen->count()]
+            'title' => 'Verifikasi Laporan Mahasiswa',
+            'subtitle' => ['Laporan Harian']
         ];
-        return view('dosen.verifikasi', compact('dosen', 'breadcrumb'));
+        return view('dosen.verifikasi', compact('breadcrumb','logs'));
+    }
+    public function updateVerifikasi(Request $request, string $id)
+    {
+        $logs = Log::find($id);
+
+        $logs->update([
+            'verif_dosen' => $request->verif_dosen,
+        ]);
+
+        return redirect('dosen/verifikasi')->with('success', 'Laporan berhasil diverifikasi');
     }
 
+    public function showLaporan($id)
+    {
+        $logs = Log::findOrFail($id);
+        $breadcrumb = (object) [
+            'title' => 'Detail Laporan',
+            'subtitle' => ['Detail Laporan Magang']
+        ];
+        return view('dosen.show', compact('breadcrumb','logs'));
+    }
     /**
      * Show the form for creating a new resource.
      */

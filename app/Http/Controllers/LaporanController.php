@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Log;
 use App\Models\Mahasiswa;
 use App\Models\Dosen;
+use App\Models\Company;
 use Illuminate\Support\Facades\Auth;
 
 class LaporanController extends Controller
@@ -24,11 +25,12 @@ class LaporanController extends Controller
     {
         $mahasiswa = Mahasiswa::where('user_id', Auth::user()->user_id)->first();
         $dosen = Dosen::all();
+        $company = Company::all();
         $breadcrumb = (object) [
             'title' => 'Buat Laporan',
             'subtitle' => ['Buat Laporan Magang']
         ];
-        return view('mahasiswa.laporan.create', compact('breadcrumb', 'mahasiswa', 'dosen'));
+        return view('mahasiswa.laporan.create', compact('breadcrumb', 'mahasiswa', 'dosen', 'company'));
     }
 
     public function store(Request $request)
@@ -37,6 +39,7 @@ class LaporanController extends Controller
         $request->validate([
             'mahasiswa_id' => 'required|exists:mahasiswas,mahasiswa_id',
             'dosen_id' => 'required|exists:dosens,dosen_id',
+            'company_id' => 'required|exists:companies,company_id',
             'report_text' => 'required|string',
         ]);
 
@@ -44,6 +47,7 @@ class LaporanController extends Controller
         Log::create([
             'mahasiswa_id' => $request->mahasiswa_id,
             'dosen_id' => $request->dosen_id,
+            'company_id' => $request->company_id,
             'report_text' => $request->report_text,
         ]);
 
@@ -60,11 +64,12 @@ class LaporanController extends Controller
         $logs = Log::findOrFail($id);
         $mahasiswa = Mahasiswa::where('user_id', Auth::user()->user_id)->first();
         $dosen = Dosen::all();
+        $company = Company::all();
         $breadcrumb = (object) [
             'title' => 'Edit Laporan',
             'subtitle' => ['Edit Laporan Magang']
         ];
-        return view('mahasiswa.laporan.edit', compact('breadcrumb','logs', 'mahasiswa', 'dosen'));
+        return view('mahasiswa.laporan.edit', compact('breadcrumb','logs', 'mahasiswa', 'dosen', 'company'));
     }
 
     public function update(Request $request, $id)
@@ -73,6 +78,7 @@ class LaporanController extends Controller
         $request->validate([
             'mahasiswa_id' => 'required|exists:mahasiswas,mahasiswa_id',
             'dosen_id' => 'required|exists:dosens,dosen_id',
+            'company_id' => 'required|exists:companies,company_id',
             'report_text' => 'required|string',
         ]);
 
@@ -83,6 +89,7 @@ class LaporanController extends Controller
         $log->update([
             'mahasiswa_id' => $request->mahasiswa_id,
             'dosen_id' => $request->dosen_id,
+            'company_id' => $request->company_id,
             'report_text' => $request->report_text,
         ]);
 
@@ -98,5 +105,15 @@ class LaporanController extends Controller
         $log->delete();
 
         return redirect()->route('laporan')->with('success', 'Laporan berhasil dihapus.');
+    }
+
+    public function show($id)
+    {
+        $log = Log::findOrFail($id);
+        $breadcrumb = (object) [
+            'title' => 'Detail Laporan',
+            'subtitle' => ['Detail Laporan Magang']
+        ];
+        return view('mahasiswa.laporan.show', compact('breadcrumb','log'));
     }
 }

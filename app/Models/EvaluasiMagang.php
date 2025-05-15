@@ -12,7 +12,7 @@ class EvaluasiMagang extends Model
     protected $table = 'evaluasi_magang';
     protected $primaryKey = 'evaluasi_id';
 
-    protected $fillable = ['mahasiswa_id', 'company_id', 'evaluasi'];
+    protected $fillable = ['mahasiswa_id', 'company_id', 'evaluasi', 'log_id'];
 
     public function mahasiswa()
     {
@@ -22,5 +22,10 @@ class EvaluasiMagang extends Model
     public function company()
     {
         return $this->belongsTo(Company::class, 'company_id');
+    }
+
+    public function logs()
+    {
+        return $this->belongsTo(Log::class, 'log_id');
     }
 }

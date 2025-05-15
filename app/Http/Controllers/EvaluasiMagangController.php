@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\EvaluasiMagang;
 use App\Models\Mahasiswa;
+use App\Models\Log;
 use App\Models\Company;
 use Illuminate\Http\Request;
 
@@ -12,62 +13,101 @@ class EvaluasiMagangController extends Controller
 
     public function index()
     {
+        $logs = Log::all();
         $breadcrumb = (object) [
             'title' => 'Evaluasi Magang',
-            'subtitle' => ['Jumlah total Evaluasi Magang ' . EvaluasiMagang::count()]
+            'subtitle' => ['Jumlah Evaluasi Magang ' . EvaluasiMagang::count()]
         ];
         $evaluations = EvaluasiMagang::with('mahasiswa', 'company')->latest()->get();
-        return view('dosen.evaluasi.index', ['evaluasi' => $evaluations], compact('breadcrumb'));
+        return view('dosen.evaluasi.index', ['evaluasi' => $evaluations], compact('breadcrumb', 'logs'));
     }  
 
-    public function create()
+    public function create(Request $request)
     {
         $mahasiswas = Mahasiswa::all();
         $companies = Company::all();
+        $logs = Log::all();
+        $mahasiswaId = $request->query('mahasiswa_id');
+        $companyId = $request->query('company_id');
+        $logId = $request->query('log_id');
+
         $breadcrumb = (object) [
             'title' => 'Tambah Evaluasi Magang',
             'subtitle' => ['Form Validation']
         ];
-        return view('dosen.evaluasi.create', compact('mahasiswas', 'companies', 'breadcrumb'));
+        return view('dosen.evaluasi.create', compact('logId','logs','mahasiswas', 'companies', 'breadcrumb', 'mahasiswaId', 'companyId'));
     }
 
     public function store(Request $request)
     {
         $request->validate([
-            'mahasiswa_id' => 'required|exists:mahasiswas,id',
-            'company_id' => 'required|exists:companies,id',
+            'mahasiswa_id' => 'required|exists:mahasiswas,mahasiswa_id',
+            'company_id' => 'required|exists:companies,company_id',
+            'log_id' => 'required|exists:logs,log_id',
             'evaluasi' => 'required|string',
         ]);
 
-        EvaluasiMagang::create($request->all());
+        EvaluasiMagang::create([
+            'mahasiswa_id' => $request->mahasiswa_id,
+            'company_id' => $request->company_id,
+            'log_id' => $request->log_id,
+            'evaluasi' => $request->evaluasi,
+        ]);
 
-        return redirect()->route('dosen.evaluasi.index')->with('success', 'Evaluasi berhasil disimpan');
+        return redirect()->route('evaluasi.index')->with('success', 'Evaluasi berhasil disimpan');
     }
 
     public function edit($id)
     {
-        $evaluation = EvaluasiMagang::findOrFail($id);
+        $evaluation = EvaluasiMagang::with('mahasiswa.user', 'company.user')->findOrFail($id);
         $mahasiswas = Mahasiswa::all();
         $companies = Company::all();
+        $logs = Log::all();
+
+        $breadcrumb = (object) [
+            'title' => 'Edit Evaluasi Magang',
+            'subtitle' => ['Form Validation']
+        ];
+
         return view('dosen.evaluasi.edit', [
             'evaluation' => $evaluation,
             'mahasiswas' => $mahasiswas,
             'companies' => $companies,
+            'logs' => $logs,
+            'breadcrumb' => $breadcrumb,
+            'mahasiswaId' => $evaluation->mahasiswa_id,
+            'companyId' => $evaluation->company_id,
+            'logId' => $evaluation->log_id,
         ]);
     }
+
 
     public function update(Request $request, $id)
     {
         $evaluation = EvaluasiMagang::findOrFail($id);
 
         $request->validate([
-            'mahasiswa_id' => 'required|exists:mahasiswas,id',
-            'company_id' => 'required|exists:companies,id',
+            'mahasiswa_id' => 'required|exists:mahasiswas,mahasiswa_id',
+            'company_id' => 'required|exists:companies,company_id',
+            'log_id' => 'required|exists:logs,log_id',
             'evaluasi' => 'required|string',
         ]);
 
-        $evaluation->update($request->all());
+        $evaluation->update([
+            'mahasiswa_id' => $request->mahasiswa_id,
+            'company_id' => $request->company_id,
+            'log_id' => $request->log_id,
+            'evaluasi' => $request->evaluasi,
+        ]);
 
-        return redirect()->route('dosen.evaluasi.index')->with('success', 'Evaluasi berhasil diperbarui');
+        return redirect()->route('evaluasi.index')->with('success', 'Evaluasi berhasil diperbarui');
+    }
+
+    public function destroy($id)
+    {
+        $evaluation = EvaluasiMagang::findOrFail($id);
+        $evaluation->delete();
+
+        return redirect()->route('evaluasi.index')->with('success', 'Evaluasi berhasil dihapus');
     }
 }

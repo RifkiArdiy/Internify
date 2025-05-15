@@ -24,7 +24,7 @@ class Company extends Model
 
     public function evaluasis()
     {
-        return $this->hasMany(Evaluasi::class);
+        return $this->hasMany(EvaluasiMagang::class);
     }
 
     public function user(): BelongsTo

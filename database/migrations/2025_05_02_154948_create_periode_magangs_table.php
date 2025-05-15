@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('periode_magangs', function (Blueprint $table) {
             $table->id('period_id');
             $table->string('name');
-            $table->date('start_date');
-            $table->date('end_date');
+            $table->string('start_date');
+            $table->string('end_date');
             $table->timestamps();
         });
     }

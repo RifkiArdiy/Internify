@@ -14,13 +14,14 @@ class LowonganMagangController extends Controller
      */
     public function index()
     {
-        $logang = LowonganMagang::all();
+        $logang = LowonganMagang::with('company')->get();
+        // $companies = Company::all();
+        $period = PeriodeMagang::all();
         $breadcrumb = (object) [
             'title' => 'Lowongan Magang',
             'subtitle' => ['Jumlah Lowongan Magang : ' . $logang->count()]
         ];
 
-        $period = PeriodeMagang::all();
 
         return view('admin.lowonganMagang.index', compact('logang', 'period', 'breadcrumb'));
     }
@@ -60,17 +61,28 @@ class LowonganMagangController extends Controller
      */
     public function store(Request $request)
     {
-        LowonganMagang::create([
-            'company_id' => $request->company,
-            'period_id' => $request->period,
-            'title' => $request->title,
-            'description' => $request->description,
-            'requirements' => $request->requirements,
-            'location' => $request->location,
+        $validated = $request->validate([
+            'company' => 'required|exists:companies,company_id',
+            'period' => 'required|exists:periode_magangs,period_id',
+            'title' => 'required|string|max:255',
+            'description' => 'required|string',
+            'requirements' => 'required|string',
+            'location' => 'required|string|max:255',
         ]);
 
-        return redirect()->route('lowonganMagang.index')->with('success', 'Lowongan berhasil ditambahkan.');
+        LowonganMagang::create([
+            'company_id'   => $validated['company'],
+            'period_id'    => $validated['period'],
+            'title'        => $validated['title'],
+            'description'  => $validated['description'],
+            'requirements' => $validated['requirements'],
+            'location'     => $validated['location'],
+        ]);
+
+        return redirect()->route('lowonganMagang.index')
+            ->with('success', 'Lowongan berhasil ditambahkan.');
     }
+
 
     /**
      * Display the specified resource.
@@ -84,7 +96,7 @@ class LowonganMagangController extends Controller
             'subtitle' => ['Detail lowongan magang']
         ];
 
-        return view('lowonganMagang.show', compact('breadcrumb', 'logang', 'period'));
+        return view('admin.lowonganMagang.show', compact('breadcrumb', 'logang', 'period'));
     }
 
     /**
@@ -109,6 +121,15 @@ class LowonganMagangController extends Controller
     public function update(Request $request, string $id)
     {
         $logang = LowonganMagang::find($id);
+        $validated = $request->validate([
+            'company' => 'required|integer|exists:companies,company_id',
+            'period' => 'required|integer|exists:periode_magangs,period_id',
+            'title' => 'required|string|max:255',
+            'description' => 'nullable|string',
+            'requirements' => 'nullable|string',
+            'location' => 'required|string|max:255',
+        ]);
+
         $logang->update([
             'company_id' => $request->company,
             'period_id' => $request->period,

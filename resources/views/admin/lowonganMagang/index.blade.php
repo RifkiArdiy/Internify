@@ -13,19 +13,21 @@
     @if (session('success'))
         <div class="alert alert-success">{{ session('success') }}</div>
     @endif
+    @if (session('error'))
+        <div class="alert alert-danger">{{ session('error') }}</div>
+    @endif
+
 
     <div class="card card-bordered card-preview">
-        <div class="card-inner table-responsive">
+        <div class="card-inner">
             <table class="datatable-init-export nowrap nk-tb-list nk-tb-ulist" data-auto-responsive="false">
                 <thead>
                     <tr class="nk-tb-item nk-tb-head">
-                        <th class="nk-tb-col export-col"><span class="sub-text">Perusahaan</span></th>
-                        {{-- <th class="nk-tb-col export-col"><span class="sub-text">Masa Awal</span></th>
-                        <th class="nk-tb-col export-col"><span class="sub-text">Masa Akhir</span></th> --}}
-                        <th class="nk-tb-col export-col"><span class="sub-text">Judul</span></th>
-                        <th class="nk-tb-col export-col"><span class="sub-text">Deskripsi</span></th>
-                        <th class="nk-tb-col export-col"><span class="sub-text">Kriteria</span></th>
-                        {{-- <th class="nk-tb-col export-col"><span class="sub-text">Lokasi</span></th> --}}
+                        <th class="nk-tb-col"><span class="sub-text">Judul</span></th>
+                        <th class="nk-tb-col tb-col-lg"><span class="sub-text">Perusahaan</span></th>
+                        <th class="nk-tb-col tb-col-lg"><span class="sub-text">Created at</span></th>
+                        <th class="nk-tb-col tb-col-md"><span class="sub-text">Masa Awal</span></th>
+                        <th class="nk-tb-col tb-col-md"><span class="sub-text">Masa Akhir</span></th>
                         <th class="nk-tb-col nk-tb-col-tools text-end"></th>
                     </tr>
                 </thead>
@@ -33,26 +35,20 @@
                     @foreach ($logang as $item)
                         <tr class="nk-tb-item">
                             <td class="nk-tb-col">
-                                <span>{{ $item->company->user->name }}</span>
+                                <span class="tb-amount">{{ $item->title }}</span>
                             </td>
-                            {{-- <td class="nk-tb-col">
+                            <td class="nk-tb-col tb-col-lg">
+                                <span class="tb-amount">{{ $item->company->user->name }}</span>
+                            </td>
+                            <td class="nk-tb-col tb-col-lg">
+                                <span>{{ $item->created_at }}</span>
+                            </td>
+                            <td class="nk-tb-col tb-col-md">
                                 <span>{{ $item->period->start_date }}</span>
                             </td>
-                            <td class="nk-tb-col">
+                            <td class="nk-tb-col tb-col-md">
                                 <span>{{ $item->period->end_date }}</span>
-                            </td> --}}
-                            <td class="nk-tb-col">
-                                <span>{{ $item->title }}</span>
                             </td>
-                            <td class="nk-tb-col">
-                                <span>{{ Str::limit($item->description, 50) }}</span>
-                            </td>
-                            <td class="nk-tb-col">
-                                <span>{{ Str::limit($item->requirements, 50) }}</span>
-                            </td>
-                            {{-- <td class="nk-tb-col">
-                                <span>{{ $item->location }}</span>
-                            </td> --}}
                             <td class="nk-tb-col nk-tb-col-tools">
                                 <ul class="nk-tb-actions gx-1">
                                     <li>
@@ -63,9 +59,18 @@
                                             </a>
                                             <div class="dropdown-menu dropdown-menu-end">
                                                 <ul class="link-list-opt no-bdr">
+                                                    <li>
+                                                        <a href="#"><em class="icon ni ni-focus"></em><span>Quick
+                                                                View</span></a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#"><em class="icon ni ni-eye"></em><span>View
+                                                                Details</span></a>
+                                                    </li>
                                                     <li><a href="{{ route('lowonganMagang.edit', $item->lowongan_id) }}">
                                                             <em class="icon ni ni-edit-alt"></em><span>Edit</span></a>
                                                     </li>
+                                                    <li class="divider"></li>
                                                     <li>
                                                         <form
                                                             action="{{ route('lowonganMagang.destroy', $item->lowongan_id) }}"
@@ -73,13 +78,18 @@
                                                             onsubmit="return confirm('Yakin ingin menghapus?')">
                                                             @csrf
                                                             @method('DELETE')
-                                                            <button type="submit"
-                                                                class="dropdown-item d-flex align-items-center"
-                                                                style="border: none; background: none;">
-                                                                <em class="icon ni ni-trash" style="margin-left:6px;"></em>
-                                                                <span class="ms-1">Hapus</span>
+                                                            <button type="submit" class="btn" role="button"
+                                                                data-bs-toggle="button">
+                                                                <em class="icon ni ni-trash"></em>
+                                                                <span>Hapus</span>
                                                             </button>
                                                         </form>
+                                                    </li>
+                                                    <li><a
+                                                            href="{{ route('lowonganMagang.destroy', $item->lowongan_id) }}">
+                                                            <em class="icon ni ni-trash"></em><span>Hapus</span></a></li>
+                                                    <li><a href="{{ route('lowonganMagang.show', $item->lowongan_id) }}">
+                                                            <em class="icon ni ni-eye"></em><span>Lihat Detail</span></a>
                                                     </li>
                                                 </ul>
                                             </div>

@@ -15,15 +15,15 @@ class MagangApplicationController extends Controller
      */
     public function index()
     {
-        $magangs = MagangApplication::all();
+        $magangs = MagangApplication::with('mahasiswas')->get();
         $breadcrumb = (object) [
             'title' => 'Lamaran Magang',
             'subtitle' => ['Jumlah Pelamar : ' . $magangs->count()]
         ];
 
-        $magangs = MagangApplication::all();
-        return view('mahasiswa.magangApplication.index', compact('magangs', 'breadcrumb'));
+        return view('admin.lamaranMagang.index', compact('magangs', 'breadcrumb'));
     }
+
     public function indexMhs()
     {
         $breadcrumb = (object) [
@@ -53,13 +53,22 @@ class MagangApplicationController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store($id)
     {
         $mahasiswa = Mahasiswa::where('user_id', Auth::user()->user_id)->first();
+        if (!$mahasiswa) {
+            return redirect()->back()->with('error', 'Silakan login terlebih dahulu.');
+        }
+
+        // // Cek apakah user punya role mahasiswa (opsional tapi disarankan)
+        // if ($mahasiswa->user->level->level_nama !== 'mahasiswa') {
+        //     return redirect()->back()->with('error', 'Hanya mahasiswa yang dapat melamar.');
+        // }
+
 
         // Cek apakah sudah pernah melamar untuk lowongan ini
         $existingApplication = MagangApplication::where('mahasiswa_id', $mahasiswa->mahasiswa_id)
-            ->where('lowongan_id', $request->lowongan_id)
+            ->where('lowongan_id', $id)
             ->first();
 
         if ($existingApplication) {
@@ -69,38 +78,35 @@ class MagangApplicationController extends Controller
         // Jika belum ada, buat lamaran baru
         MagangApplication::create([
             'mahasiswa_id' => $mahasiswa->mahasiswa_id,
-            'lowongan_id' => $request->lowongan_id,
+            'lowongan_id' => $id,
             'status' => 'Pending',
         ]);
 
         return redirect(route('lamaran'))->with('success', 'Lamaran berhasil dikirim.');
     }
 
-    public function storeMhs($id)
+    public function storeMhs(Request $request)
     {
-        $user = auth()->user();
+        $user = Mahasiswa::where('user_id', Auth::user()->user_id)->first();
 
-        if (!$user) {
-            return redirect()->back()->with('error', 'Silakan login terlebih dahulu.');
-        }
+        $mahasiswa = Mahasiswa::where('user_id', Auth::user()->user_id)->first();
 
-        // Cek apakah user punya role mahasiswa (opsional tapi disarankan)
-        if ($user->level_nama !== 'mahasiswa') {
-            return redirect()->back()->with('error', 'Hanya mahasiswa yang dapat melamar.');
-        }
-        $mahasiswa = Mahasiswa::where('user_id', $user->user_id)->first();
         // Cegah duplikat lamaran
         $cek = MagangApplication::where('mahasiswa_id', $mahasiswa->mahasiswa_id)
-            ->where('lowongan_id', $id)
+            ->where('lowongan_id', $request->lowongan_id)
             ->first();
 
         if ($cek) {
             return redirect()->back()->with('success', 'Kamu sudah melamar lowongan ini.');
         }
 
+        $request->validate([
+            'lowongan_id' => 'required|exists:lowongan_magangs,lowongan_id',
+        ]);
+
         MagangApplication::create([
             'mahasiswa_id' => $mahasiswa->mahasiswa_id,
-            'lowongan_id' => $id,
+            'lowongan_id' => $request->lowongan_id,
             'status' => 'Pending',
         ]);
 
@@ -115,10 +121,10 @@ class MagangApplicationController extends Controller
         $magang = MagangApplication::find($id);
         $breadcrumb = (object) [
             'title' => 'Detail Lamaran',
-            'subtitle' => ['Lamaran ' . $magang->student->name]
+            'subtitle' => ['Lamaran ' . $magang->mahasiswas->name]
         ];
 
-        return view('magangApplication.show', compact('breadcrumb', 'magang'));
+        return view('admin.lamaranMagang.show', compact('breadcrumb', 'magang'));
     }
 
     /**

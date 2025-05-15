@@ -2,7 +2,7 @@
 
 {{-- @section('action')
     @if (Auth::user()->level->level_nama == 'Administrator')
-        <li class="nk-block-tools-opt">
+        <li>
             <a href="{{ route('admin.profile.edit') }}" class="btn btn-primary">
                 <em class="icon ni ni-edit"></em>
                 <span>Edit Profile</span>
@@ -46,10 +46,7 @@
                 <div class="nk-block-head nk-block-head-lg">
                     <div class="nk-block-between">
                         <div class="nk-block-head-content">
-                            <h4 class="nk-block-title">Personal Information</h4>
-                            <div class="nk-block-des">
-                                <p>Basic info, like your name and address, that you use on Nio Platform.</p>
-                            </div>
+                            <h4 class="nk-block-title">Biodata</h4>
                         </div>
                         <div class="nk-block-head-content align-self-start d-lg-none">
                             <a href="#" class="toggle btn btn-icon btn-trigger mt-n1" data-target="userAside"><em
@@ -60,7 +57,7 @@
                 <div class="nk-block">
                     <div class="nk-data data-list">
                         <div class="data-head">
-                            <h6 class="overline-title">Basics</h6>
+                            <h6 class="overline-title"></h6>
                         </div>
                         <div class="data-item" data-bs-toggle="modal" data-bs-target="#profile-edit">
                             <div class="data-col">
@@ -96,7 +93,7 @@
                         </div><!-- data-item -->
                         <div class="data-item" data-bs-toggle="modal" data-bs-target="#profile-edit">
                             <div class="data-col">
-                                <span class="data-label">Level</span>
+                                <span class="data-label">Role</span>
                                 <span class="data-value">{{ $user->level->level_nama }}</span>
                             </div>
                             <div class="data-col data-col-end"><span class="data-more"><em
@@ -137,10 +134,41 @@
                                             class="icon ni ni-more-v"></em></a>
                                     <div class="dropdown-menu dropdown-menu-end">
                                         <ul class="link-list-opt no-bdr">
-                                            <li><a href="#"><em class="icon ni ni-camera-fill"></em><span>Change
-                                                        Photo</span></a></li>
-                                            <li><a href="#"><em class="icon ni ni-edit-fill"></em><span>Update
-                                                        Profile</span></a></li>
+                                            <li>
+                                                <a href="#">
+                                                    <em class="icon ni ni-camera-fill"></em>
+                                                    <span>Change Photo</span>
+                                                </a>
+                                            </li>
+                                                        @if (Auth::user()->level->level_nama == 'Administrator')
+                                                        <li>
+                                                            <a href="{{ route('admin.profile.edit') }}">
+                                                                <em class="icon ni ni-edit-fill"></em>
+                                                                <span>Edit Profile</span>
+                                                            </a>
+                                                        </li>
+                                                    @elseif (Auth::user()->level->level_nama == 'Dosen')
+                                                        <li>
+                                                            <a href="{{ route('dosen.profile.edit') }}">
+                                                                <em class="icon ni ni-edit-fill"></em>
+                                                                <span>Edit Profile</span>
+                                                            </a>
+                                                        </li>
+                                                    @elseif (Auth::user()->level->level_nama == 'Mahasiswa')
+                                                        <li>
+                                                            <a href="{{ route('mahasiswa.profile.edit') }}">
+                                                                <em class="icon ni ni-edit-fill"></em>
+                                                                <span>Edit Profile</span>
+                                                            </a>
+                                                        </li>
+                                                    @else
+                                                        <li>
+                                                            <a href="{{ route('company.profile.edit') }}">
+                                                                <em class="icon ni ni-edit-fill"></em>
+                                                                <span>Edit Profile</span>
+                                                            </a>
+                                                        </li>
+                                                    @endif
                                         </ul>
                                     </div>
                                 </div>
@@ -151,14 +179,14 @@
                         <ul class="link-list-menu">
                             <li><a class="active" href="html/user-profile-regular.html"><em
                                         class="icon ni ni-user-fill-c"></em><span>Personal Infomation</span></a></li>
-                            <li><a href="html/user-profile-notification.html"><em
+                            {{-- <li><a href="html/user-profile-notification.html"><em
                                         class="icon ni ni-bell-fill"></em><span>Notifications</span></a></li>
                             <li><a href="html/user-profile-activity.html"><em
                                         class="icon ni ni-activity-round-fill"></em><span>Account Activity</span></a></li>
                             <li><a href="html/user-profile-setting.html"><em
                                         class="icon ni ni-lock-alt-fill"></em><span>Security Settings</span></a></li>
                             <li><a href="html/user-profile-social.html"><em
-                                        class="icon ni ni-grid-add-fill-c"></em><span>Connected with Social</span></a></li>
+                                        class="icon ni ni-grid-add-fill-c"></em><span>Connected with Social</span></a></li> --}}
                         </ul>
                     </div><!-- .card-inner -->
                 </div><!-- .card-inner-group -->

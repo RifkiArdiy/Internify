@@ -21,7 +21,7 @@
 </tr>
 <tr>
     <th>Nama Perusahaan</th>
-    <td>{{ $logang->company->name }}</td>
+    <td>{{ $logang->company->user->name }}</td>
 </tr>
 <tr>
     <th>Judul Magang</th>
@@ -44,13 +44,7 @@
 </tr>
 
 </table>
-@if (Auth::user()->level_id == 1)
-    <a href="{{ route('lowonganMagang.index') }}" class="btn btn-secondary">Kembali</a>
-@endif
-
-@if (Auth::user()->level_id == 2)
-    <a href="{{ route('lowonganMagang.indexMhs') }}" class="btn btn-secondary">Kembali</a>
-@endif
+<a href="{{ url()->previous() }}" class="btn btn-secondary">Kembali</a>
 
 
 </body>

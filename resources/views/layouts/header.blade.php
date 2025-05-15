@@ -25,7 +25,9 @@
                         @elseif (Auth::user()->level->level_nama == 'Dosen')
                             <li class="breadcrumb-item"><a href="{{ route('dosen.dashboard') }}">Dashboard</a></li>
                         @endif
+                        @if ($breadcrumb->title !== 'Dashboard')
                         <li class="breadcrumb-item active">{{ $breadcrumb->title }}</li>
+                        @endif
                     </ul>
                 </div>
             </div>
@@ -94,12 +96,6 @@
                                             </a>
                                         </li>
                                     @endif
-                                    <li>
-                                        <a href="html/user-profile-setting.html">
-                                            <em class="icon ni ni-setting-alt"></em>
-                                            <span>Account Setting</span>
-                                        </a>
-                                    </li>
                                     <li>
                                         <a class="dark-switch" href="#">
                                             <em class="icon ni ni-moon"></em>
