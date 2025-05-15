@@ -149,7 +149,7 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/profile/update', [ProfileController::class, 'update'])->name('mahasiswa.profile.update');
         Route::prefix('lowongan')->group(function () {
             Route::get('/', [LowonganMagangController::class, 'indexMhs'])->name('lowonganMagang.indexMhs');
-            Route::get('/show/{id}', [LowonganMagangController::class, 'show'])->name('lowongan.show');
+            Route::get('/show/{id}', [LowonganMagangController::class, 'show'])->name('lowonganMagang.show');
         });
         Route::prefix('lamaran')->group(function () {
             Route::get('/', [MagangApplicationController::class, 'indexMhs'])->name('lamaran');

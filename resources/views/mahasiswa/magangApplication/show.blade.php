@@ -10,23 +10,23 @@
 <table class="table table-bordered table-striped table-hover table-sm" style="width: 30%">
     <tr>
         <th>NIM</th>
-    <td>{{ $magang->student->nim }}</td>
+    <td>{{ $magang->mahasiswas->nim }}</td>
 </tr>
 <tr>
     <th>Nama Mahasiswa</th>
-    <td>{{ $magang->student->user->name }}</td>
+    <td>{{ $magang->mahasiswas->user->name }}</td>
 </tr>
 <tr>
     <th>Prodi</th>
-    <td>{{ $magang->student->prodi->name }}</td>
+    <td>{{ $magang->mahasiswas->prodi->name }}</td>
 </tr>
 <tr>
     <th>Alamat</th>
-    <td>{{ $magang->student->alamat }}</td>
+    <td>{{ $magang->mahasiswas->alamat }}</td>
 </tr>
 <tr>
     <th>No. Telp</th>
-    <td>{{ $magang->student->no_telp }}</td>
+    <td>{{ $magang->mahasiswas->no_telp }}</td>
 </tr>
 
 </table>
