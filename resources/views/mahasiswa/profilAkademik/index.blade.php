@@ -16,35 +16,33 @@
 @endsection --}}
 <table class="table table-bordered table-striped table-hover table-sm" style="width: 30%">
     <tr>
-        <th>ID</th>
-    <td>{{ $logang->lowongan_id }}</td>
+        <th>Bidang Keahlian</th>
+    <td>{{ $profilAkademik->bidang_keahlian }}</td>
 </tr>
 <tr>
-    <th>Nama Perusahaan</th>
-    <td>{{ $logang->company->user->name }}</td>
+    <th>Sertifikasi</th>
+    <td>{{ $profilAkademik->sertifikasi }}</td>
 </tr>
 <tr>
-    <th>Judul Magang</th>
-    <td>{{ $logang->title }}</td>
+    <th>Lokasi</th>
+    <td>{{ $profilAkademik->lokasi }}</td>
 </tr>
 <tr>
-    <th>Deskripsi</th>
-    <td>{{ $logang->description }}</td>
+    <th>Pengalaman</th>
+    <td>{{ $profilAkademik->pengalaman }}</td>
 </tr>
 <tr>
-    <th>Periode Awal</th>
-    <td>{{ $logang->period->start_date }}</td>
-</tr>
-    <th>Periode Akhir</th>
-    <td>{{ $logang->period->end_date }}</td>
+    <th>Etika</th>
+    <td>{{ $profilAkademik->etika }}</td>
 </tr>
 <tr>
-    <th>Kriteria</th>
-    <td>{{ $logang->requirements }}</td>
+    <th>IPK</th>
+    <td>{{ $profilAkademik->ipk }}</td>
 </tr>
 
 </table>
 <a href="{{ url()->previous() }}" class="btn btn-secondary">Kembali</a>
+<a href="{{ route('profilAkademik.edit') }}" class="btn btn-warning">Edit Profil Akademik</a>
 
 
 </body>

@@ -16,6 +16,8 @@ use App\Http\Controllers\PeriodeMagangController;
 use App\Models\MagangApplication;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\LaporanController;
+use App\Http\Controllers\ProfilAkademikController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -141,7 +143,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/laporan/{id}/edit', [LaporanController::class, 'edit'])->name('laporan.edit');
         Route::put('/laporan/{id}', [LaporanController::class, 'update'])->name('laporan.update');
         Route::delete('/laporan/{id}', [LaporanController::class, 'destroy'])->name('laporan.destroy');
-
+        
         Route::get('/profile', [ProfileController::class, 'index'])->name('mahasiswa.profile');
         Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('mahasiswa.profile.edit');
         Route::post('/profile/update', [ProfileController::class, 'update'])->name('mahasiswa.profile.update');
@@ -157,6 +159,18 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/{id}/lihat', [MagangApplicationController::class, 'show'])->name('lihatLamaran');
 
             Route::post('/lamar/{id}', [MagangApplicationController::class, 'store'])->name('magangApplication.storeMhs')->middleware('auth');;
+        });
+        Route::prefix('profilAkademik')->group(function () {
+            Route::get('/', [ProfilAkademikController::class, 'index'])->name('profilAkademik.index');
+            Route::get('/create', [ProfilAkademikController::class, 'create'])->name('profilAkademik.create');
+            Route::get('/edit', [ProfilAkademikController::class, 'edit'])->name('profilAkademik.edit');
+            Route::post('/store', [ProfilAkademikController::class, 'store'])->name('profilAkademik.store');
+            Route::put('/{id}', [ProfilAkademikController::class, 'update'])->name('profilAkademik.update');
+            Route::delete('/{id}/delete', [ProfilAkademikController::class, 'destroy'])->name('profilAkademik.destroy');
+
+            // Route::get('/{id}/lihat', [ProfilAkademikController::class, 'show'])->name('lihatLamaran');
+
+            // Route::post('/lamar/{id}', [ProfilAkademikController::class, 'store'])->name('magangApplication.storeMhs')->middleware('auth');;
         });
     });
 
