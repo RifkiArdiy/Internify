@@ -110,14 +110,6 @@
             <span class="nk-menu-text">Verifikasi</span>
         </a>
     </li>
-    <li class="nk-menu-item">
-        <a href="{{ route('dosen.verifikasi') }}" class="nk-menu-link">
-            <span class="nk-menu-icon">
-                <em class="icon ni ni-check"></em>
-            </span>
-            <span class="nk-menu-text">Verifikasi</span>
-        </a>
-    </li>
 @endif
 @if (Auth::user()->level->level_nama == 'Mahasiswa')
     <li class="nk-menu-heading">
