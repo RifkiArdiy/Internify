@@ -25,7 +25,7 @@
                             <select class="form-control" id="bidang_keahlian" name="bidang_keahlian" required>
                                     <option value="">-- Pilih bidang keahlian --</option>
                                     @foreach ($kriteria as $requirement)
-                                        <option value="{{ $requirement }}" {{ old('bidang_keahlian') == $requirement ? 'selected' : '' }}>
+                                        <option value="{{ $requirement }}" {{ $profilAkademik->bidang_keahlian == $requirement ? 'selected' : '' }}>
                                             {{ $requirement }}
                                         </option>
                                     @endforeach
