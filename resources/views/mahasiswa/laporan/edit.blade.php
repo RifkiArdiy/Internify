@@ -24,6 +24,20 @@
                         </div>
                     </div>
 
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label class="form-label" for="company_id">Perusahaan:<span class="text-danger">*</span></label>
+                            <div class="form-control-wrap">
+                                <select class="form-select js-select2" name="company_id" required>
+                                    <option disabled selected>Pilih Perusahaan</option>
+                                    @foreach ($company as $companies)
+                                        <option value="{{ $companies->company_id }}">{{ $companies->user->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    
                     <div class="col-12">
                         <div class="form-group">
                             <label class="form-label" for="report_text">Isi Laporan:<span class="text-danger">*</span></label>
