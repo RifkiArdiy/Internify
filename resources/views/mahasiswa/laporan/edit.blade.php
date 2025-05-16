@@ -31,18 +31,11 @@
                                 @php
                                     $application = Auth::user()->mahasiswa->applications->first();
                                 @endphp
-
-                                @if ($application && $application->lowongans && $application->lowongans->company)
-
                                     <input class="form-control" type="text"
                                         value="{{ $application->lowongans->company->user->name }}" readonly>
 
                                     <input type="hidden" name="company_id"
-                                        value="{{ $application->lowongans->company->company_id }}">
-                                @else
-                                    <input class="form-control" type="text" value="-" readonly>
-                                    <input type="hidden" name="company_id" value="">
-                                @endif
+                                        value="{{ $application->lowongans->company->company_id }}">                            
                             </div>
                         </div>
                     </div>
@@ -51,7 +44,7 @@
                         <div class="form-group">
                             <label class="form-label" for="report_text">Isi Laporan:<span class="text-danger">*</span></label>
                             <div class="form-control-wrap">
-                                <textarea class="form-control" name="report_text" rows="5" required></textarea>
+                                <textarea class="form-control" name="report_text" rows="5" required>{{ $logs->report_text }}</textarea>
                             </div>
                         </div>
                     </div>

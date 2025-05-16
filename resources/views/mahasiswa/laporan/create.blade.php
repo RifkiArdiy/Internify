@@ -29,18 +29,11 @@
                                 @php
                                     $application = Auth::user()->mahasiswa->applications->first();
                                 @endphp
-
-                                @if ($application && $application->lowongans && $application->lowongans->company)
-
                                     <input class="form-control" type="text"
                                         value="{{ $application->lowongans->company->user->name }}" readonly>
 
                                     <input type="hidden" name="company_id"
-                                        value="{{ $application->lowongans->company->company_id }}">
-                                @else
-                                    <input class="form-control" type="text" value="-" readonly>
-                                    <input type="hidden" name="company_id" value="">
-                                @endif
+                                        value="{{ $application->lowongans->company->company_id }}">  
                             </div>
                         </div>
                     </div>
