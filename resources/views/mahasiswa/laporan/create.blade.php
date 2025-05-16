@@ -26,12 +26,22 @@
                         <div class="form-group">
                             <label class="form-label" for="company_id">Perusahaan:<span class="text-danger">*</span></label>
                             <div class="form-control-wrap">
-                                <select class="form-select js-select2" name="company_id" required>
-                                    <option disabled selected>Pilih Perusahaan</option>
-                                    @foreach ($company as $companies)
-                                        <option value="{{ $companies->company_id }}">{{ $companies->user->name }}</option>
-                                    @endforeach
-                                </select>
+                                @php
+                                    $application = Auth::user()->mahasiswa->applications->first();
+                                @endphp
+
+                                @if ($application && $application->lowongans && $application->lowongans->company)
+                                    <!-- Tampilkan nama perusahaan -->
+                                    <input class="form-control" type="text"
+                                        value="{{ $application->lowongans->company->user->name }}" readonly>
+
+                                    <!-- Kirim company_id via input hidden -->
+                                    <input type="hidden" name="company_id"
+                                        value="{{ $application->lowongans->company->company_id }}">
+                                @else
+                                    <input class="form-control" type="text" value="-" readonly>
+                                    <input type="hidden" name="company_id" value="">
+                                @endif
                             </div>
                         </div>
                     </div>
