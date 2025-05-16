@@ -153,17 +153,17 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/profile', [ProfileController::class, 'index'])->name('mahasiswa.profile');
         Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('mahasiswa.profile.edit');
         Route::post('/profile/update', [ProfileController::class, 'update'])->name('mahasiswa.profile.update');
+        
         Route::prefix('lowongan')->group(function () {
             Route::get('/', [LowonganMagangController::class, 'indexMhs'])->name('lowonganMagang.indexMhs');
             Route::get('/show/{id}', [LowonganMagangController::class, 'show'])->name('lowonganMagang.show');
         });
+
         Route::prefix('lamaran')->group(function () {
             Route::get('/', [MagangApplicationController::class, 'indexMhs'])->name('lamaran');
             Route::post('/buatLamaran', [MagangApplicationController::class, 'store'])->name('buatLamaran');
             Route::delete('/{id}/hapusLamaran', [MagangApplicationController::class, 'destroy'])->name('hapusLamaran');
-
             Route::get('/{id}/lihat', [MagangApplicationController::class, 'show'])->name('lihatLamaran');
-
             Route::post('/lamar/store', [MagangApplicationController::class, 'storeMhs'])->name('magangApplication.storeMhs');;
             
         });
