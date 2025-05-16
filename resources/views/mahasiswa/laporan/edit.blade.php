@@ -33,11 +33,10 @@
                                 @endphp
 
                                 @if ($application && $application->lowongans && $application->lowongans->company)
-                                    <!-- Tampilkan nama perusahaan -->
+
                                     <input class="form-control" type="text"
                                         value="{{ $application->lowongans->company->user->name }}" readonly>
 
-                                    <!-- Kirim company_id via input hidden -->
                                     <input type="hidden" name="company_id"
                                         value="{{ $application->lowongans->company->company_id }}">
                                 @else
