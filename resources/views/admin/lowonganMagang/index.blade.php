@@ -35,10 +35,10 @@
                     @foreach ($logang as $item)
                         <tr class="nk-tb-item">
                             <td class="nk-tb-col">
-                                <span class="tb-amount">{{ $item->title }}</span>
+                                <span>{{ $item->title }}</span>
                             </td>
                             <td class="nk-tb-col tb-col-lg">
-                                <span class="tb-amount">{{ $item->company->user->name }}</span>
+                                <span>{{ $item->company->user->name }}</span>
                             </td>
                             <td class="nk-tb-col tb-col-lg">
                                 <span>{{ $item->created_at }}</span>
@@ -59,36 +59,12 @@
                                             </a>
                                             <div class="dropdown-menu dropdown-menu-end">
                                                 <ul class="link-list-opt no-bdr">
-                                                    <li>
-                                                        <a href="#"><em class="icon ni ni-focus"></em><span>Quick
-                                                                View</span></a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#"><em class="icon ni ni-eye"></em><span>View
-                                                                Details</span></a>
-                                                    </li>
                                                     <li><a href="{{ route('lowonganMagang.edit', $item->lowongan_id) }}">
                                                             <em class="icon ni ni-edit-alt"></em><span>Edit</span></a>
                                                     </li>
-                                                    <li class="divider"></li>
-                                                    <li>
-                                                        <form
-                                                            action="{{ route('lowonganMagang.destroy', $item->lowongan_id) }}"
-                                                            method="POST"
-                                                            onsubmit="return confirm('Yakin ingin menghapus?')">
-                                                            @csrf
-                                                            @method('DELETE')
-                                                            <button type="submit" class="btn" role="button"
-                                                                data-bs-toggle="button">
-                                                                <em class="icon ni ni-trash"></em>
-                                                                <span>Hapus</span>
-                                                            </button>
-                                                        </form>
-                                                    </li>
-                                                    <li><a
-                                                            href="{{ route('lowonganMagang.destroy', $item->lowongan_id) }}">
-                                                            <em class="icon ni ni-trash"></em><span>Hapus</span></a></li>
-                                                    <li><a href="{{ route('lowonganMagang.show', $item->lowongan_id) }}">
+                                                    <li><a href="{{ route('lowonganMagang.destroy', $item->lowongan_id) }}">
+                                                        <em class="icon ni ni-trash"></em><span>Hapus</span></a></li>
+                                                    <li><a href="{{ route('admin.lowonganMagang.show', $item->lowongan_id) }}">
                                                             <em class="icon ni ni-eye"></em><span>Lihat Detail</span></a>
                                                     </li>
                                                 </ul>

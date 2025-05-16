@@ -1,99 +1,100 @@
-
 @extends('layouts.app')
 
+@section('action')
+    <li class="nk-block-tools-opt">
+        <a href="{{ url()->previous() }}" class="btn btn-light">
+            <em class="icon ni ni-arrow-left"></em>
+            <span>Kembali</span>
+        </a>
+    </li>
+@endsection
+
 @section('content')
-    @if (session('success'))
-        <div class="alert alert-success">{{ session('success') }}</div>
-    @endif
+    <div class="card card-bordered">
+        <div class="card-inner">
+            <h5 class="title mb-3">Detail Mahasiswa</h5>
+            <div class="row gy-3">
+                <div class="col-md-6">
+                    <h6 class="text-soft mb-1">NIM</h6>
+                    <p class="fw-bold">{{ $magang->mahasiswas->nim }}</p>
+                </div>
+                <div class="col-md-6">
+                    <h6 class="text-soft mb-1">Nama Mahasiswa</h6>
+                    <p class="fw-bold">{{ $magang->mahasiswas->user->name }}</p>
+                </div>
+                <div class="col-md-6">
+                    <h6 class="text-soft mb-1">Program Studi</h6>
+                    <p class="fw-bold">{{ $magang->mahasiswas->prodi->name }}</p>
+                </div>
+                <div class="col-md-6">
+                    <h6 class="text-soft mb-1">Alamat</h6>
+                    <p class="fw-bold">{{ $magang->mahasiswas->alamat }}</p>
+                </div>
+                <div class="col-md-6">
+                    <h6 class="text-soft mb-1">No. Telp</h6>
+                    <p class="fw-bold">{{ $magang->mahasiswas->no_telp }}</p>
+                </div>
+            </div>
 
-    <h4>Detail Mahasiswa</h4>
-<table class="table table-bordered table-striped table-hover table-sm" style="width: 30%">
-    <tr>
-        <th>NIM</th>
-    <td>{{ $magang->student->nim }}</td>
-</tr>
-<tr>
-    <th>Nama Mahasiswa</th>
-    <td>{{ $magang->student->user->name }}</td>
-</tr>
-<tr>
-    <th>Prodi</th>
-    <td>{{ $magang->student->prodi->name }}</td>
-</tr>
-<tr>
-    <th>Alamat</th>
-    <td>{{ $magang->student->alamat }}</td>
-</tr>
-<tr>
-    <th>No. Telp</th>
-    <td>{{ $magang->student->no_telp }}</td>
-</tr>
+            <hr class="my-4">
 
-</table>
+            <h5 class="title mb-3">Detail Magang</h5>
+            <div class="row gy-3">
+                <div class="col-md-6">
+                    <h6 class="text-soft mb-1">ID Lowongan</h6>
+                    <p class="fw-bold">{{ $magang->lowongans->lowongan_id }}</p>
+                </div>
+                <div class="col-md-6">
+                    <h6 class="text-soft mb-1">Nama Perusahaan</h6>
+                    <p class="fw-bold">{{ $magang->lowongans->company->user->name }}</p>
+                </div>
+                <div class="col-md-6">
+                    <h6 class="text-soft mb-1">Judul Magang</h6>
+                    <p class="fw-bold">{{ $magang->lowongans->title }}</p>
+                </div>
+                <div class="col-md-6">
+                    <h6 class="text-soft mb-1">Kriteria</h6>
+                    <p class="fw-bold">{{ $magang->lowongans->requirements }}</p>
+                </div>
+                <div class="col-md-12">
+                    <h6 class="text-soft mb-1">Deskripsi</h6>
+                    <p class="fw-bold">{{ $magang->lowongans->description }}</p>
+                </div>
+                <div class="col-md-6">
+                    <h6 class="text-soft mb-1">Periode Awal</h6>
+                    <p class="fw-bold">{{ $magang->lowongans->period->start_date }}</p>
+                </div>
+                <div class="col-md-6">
+                    <h6 class="text-soft mb-1">Periode Akhir</h6>
+                    <p class="fw-bold">{{ $magang->lowongans->period->end_date }}</p>
+                </div>
+                <div class="col-md-6">
+                    <h6 class="text-soft mb-1">Status Lamaran</h6>
+                    <p class="fw-bold">{{ ucfirst($magang->status) }}</p>
+                </div>
+            </div>
 
-<h4>Detail Magang</h4>
-<table class="table table-bordered table-striped table-hover table-sm" style="width: 30%">
-    <tr>
-        <th>ID</th>
-    <td>{{ $magang->lowongan->lowongan_id }}</td>
-</tr>
-<tr>
-    <th>Nama Perusahaan</th>
-    <td>{{ $magang->lowongan->company->user->name }}</td>
-</tr>
-<tr>
-    <th>Judul Magang</th>
-    <td>{{ $magang->lowongan->title }}</td>
-</tr>
-<tr>
-    <th>Deskripsi</th>
-    <td>{{ $magang->lowongan->description }}</td>
-</tr>
-<tr>
-    <th>Periode Awal</th>
-    <td>{{ $magang->lowongan->period->start_date }}</td>
-</tr>
-    <th>Periode Akhir</th>
-    <td>{{ $magang->lowongan->period->end_date }}</td>
-</tr>
-<tr>
-    <th>Kriteria</th>
-    <td>{{ $magang->lowongan->requirements }}</td>
-</tr>
-<tr>
-    <th>Status</th>
-    <td>{{ $magang->status }}</td>
-</tr>
-</table>
-<a href="{{ url()->previous() }}" class="btn btn-secondary">Kembali</a>
+            @if (strtolower($magang->status) === 'pending')
+                <div class="mt-4">
+                    <form action="{{ route('admin.magangApplication.update', $magang->magang_id) }}"
+                        method="POST" class="d-inline"
+                        onsubmit="return confirm('Apakah Anda yakin menyetujui lamaran ini?')">
+                        @csrf
+                        @method('PUT')
+                        <input type="hidden" name="status" value="Disetujui">
+                        <button type="submit" class="btn btn-success">Setujui</button>
+                    </form>
 
-@if ($magang->status == 'pending' || $magang->status == 'Pending')
-<form action="{{ route('magangApplication.update', $magang->magang_id) }}"
-    method="POST" style="display: inline;"
-    onsubmit="return confirm('Apakah anda yakin menyetujui lamaran ini?')">
-    @csrf
-    @method('PUT')
-    <input type="hidden" name="status" value="Disetujui">
-    <button type="submit" class="btn btn-link p-0 m-0 align-baseline text-light"
-        style="background: rgb(32, 155, 32)">
-        <span style="padding:5px;">Setuju</span></button>
-</form>
-
-<form action="{{ route('magangApplication.update', $magang->magang_id) }}"
-    method="POST" style="display: inline;"
-    onsubmit="return confirm('Apakah anda yakin menolak lamaran ini?')">
-    @csrf
-    @method('PUT')
-    <input type="hidden" name="status" value="Ditolak">
-    <button type="submit" class="btn btn-link p-0 m-0 align-baseline text-light"
-        style="background: red;">
-        <span style="padding: 5px;">Tolak</span>
-    </button>
-</form>
-
-@endif
-
-
-
-</body>
+                    <form action="{{ route('admin.magangApplication.update', $magang->magang_id) }}"
+                        method="POST" class="d-inline"
+                        onsubmit="return confirm('Apakah Anda yakin menolak lamaran ini?')">
+                        @csrf
+                        @method('PUT')
+                        <input type="hidden" name="status" value="Ditolak">
+                        <button type="submit" class="btn btn-danger">Tolak</button>
+                    </form>
+                </div>
+            @endif
+        </div>
+    </div>
 @endsection

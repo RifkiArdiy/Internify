@@ -71,7 +71,7 @@
         </a>
     </li>
     <li class="nk-menu-item">
-        <a href="{{ route('magangApplication.index') }}" class="nk-menu-link">
+        <a href="{{ route('admin.magangApplication.index') }}" class="nk-menu-link">
             <span class="nk-menu-icon">
                 <em class="icon ni ni-file-text"></em>
             </span>
@@ -139,15 +139,27 @@
     <li class="nk-menu-heading">
         <h6 class="overline-title text-primary-alt">User Management</h6>
     </li>
+    <li class="nk-menu-item">
+        <a href="{{ route('profilAkademik.index') }}" class="nk-menu-link">
+            <span class="nk-menu-icon">
+                <em class="icon ni ni-user"></em>
+            </span>
+            <span class="nk-menu-text">Profil Akademik</span>
+        </a>
+    </li>
     @if (Auth::user()->mahasiswa->status == '-')
-        <li class="nk-menu-item">
-            <a href="{{ route('profilAkademik.index') }}" class="nk-menu-link">
-                <span class="nk-menu-icon">
-                    <em class="icon ni ni-user"></em>
-                </span>
-                <span class="nk-menu-text">Profil Akademik</span>
-            </a>
-        </li>
+    <li class="nk-menu-item">
+        <a href="{{ route('lowonganMagang.indexMhs') }}" class="nk-menu-link">
+            <span class="nk-menu-icon">
+                <em class="icon ni ni-briefcase"></em>
+            </span>
+            <span class="nk-menu-text">Lowongan Magang</span>
+        </a>
+    </li>
+    @endif 
+    {{-- <li class="nk-menu-item"> 
+    @if (Auth::user()->mahasiswa->status == '-')
+        
         <li class="nk-menu-item">
             <a href="{{ route('lowonganMagang.indexMhs') }}" class="nk-menu-link">
                 <span class="nk-menu-icon">
