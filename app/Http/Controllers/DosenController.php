@@ -26,14 +26,22 @@ class DosenController extends Controller
     }
 
     public function indexVerifikasi()
-    {
-        $logs = Log::with(['mahasiswa.user', 'dosen.user'])->latest()->get();
-        $breadcrumb = (object) [
-            'title' => 'Verifikasi Laporan Mahasiswa',
-            'subtitle' => ['Laporan Harian']
-        ];
-        return view('dosen.verifikasi', compact('breadcrumb','logs'));
-    }
+{
+    $dosen = auth()->user()->dosen;
+
+    $logs = Log::with(['mahasiswa.user', 'dosen.user'])
+        ->where('dosen_id', $dosen->dosen_id) // filter hanya laporan milik dosen tersebut
+        ->latest()
+        ->get();
+
+    $breadcrumb = (object) [
+        'title' => 'Verifikasi Laporan Mahasiswa',
+        'subtitle' => ['Laporan Harian']
+    ];
+    return view('dosen.verifikasi', compact('breadcrumb','logs'));
+}
+
+
     public function updateVerifikasi(Request $request, string $id)
     {
         $logs = Log::find($id);
