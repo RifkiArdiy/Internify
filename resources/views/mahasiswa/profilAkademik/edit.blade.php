@@ -56,7 +56,7 @@
                     <div class="form-group">
                         <label class="form-label" for="pengalaman">Pengalaman: <span class="text-danger">*</span></label>
                         <div class="form-control-wrap">
-                            <input type="text" class="form-control" id="pengalaman" name="pengalaman" value="{{ $profilAkademik->pengalaman }}" placeholder="Masukkan pengalaman anda" required>
+                            <input type="text" class="form-control" id="pengalaman" name="pengalaman" value="{{ $profilAkademik->pengalaman }}" placeholder="Masukkan pengalaman anda (bulan)" required>
                         </div>
                     </div>
                 </div>
@@ -65,7 +65,7 @@
                     <div class="form-group">
                         <label class="form-label" for="etika">Etika: <span class="text-danger">*</span></label>
                         <div class="form-control-wrap">
-                            <input type="text" class="form-control" id="etika" name="etika" value="{{ $profilAkademik->etika }}" placeholder="Masukkan etika anda" required>
+                            <input type="text" class="form-control" id="etika" name="etika" value="{{ $profilAkademik->etika }}" placeholder="Masukkan etika anda (Jumlah kumulasi Alpha Izin Sakit)" required>
                         </div>
                     </div>
                 </div>
@@ -74,7 +74,7 @@
                     <div class="form-group">
                         <label class="form-label" for="ipk">IPK: <span class="text-danger">*</span></label>
                         <div class="form-control-wrap">
-                            <input type="text" class="form-control" id="ipk" name="ipk" value="{{ $profilAkademik->ipk }}" placeholder="Masukkan Nilai IPK" required>
+                            <input type="text" class="form-control" id="ipk" name="ipk" value="{{ $profilAkademik->ipk }}" placeholder="Masukkan Nilai IPK (1-4)" required>
                         </div>
                     </div>
                 </div>
