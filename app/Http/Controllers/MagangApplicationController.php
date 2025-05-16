@@ -146,6 +146,11 @@ class MagangApplicationController extends Controller
             'status' => $request->status
         ]);
 
+        if ($request->status === 'Disetujui') {
+            Mahasiswa::where('mahasiswa_id', $lamaran->mahasiswa_id)
+                ->update(['status' => 'is_magang']);
+        }
+
         return redirect('admin/magangApplication');
     }
 
