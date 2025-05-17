@@ -30,17 +30,17 @@
         </div>
     
         {{-- Card: Rasio --}}
-        <h6 class="mb-2">Rasio Dosen : Mahasiswa</h6>
+        <h6 class="mb-2">Rasio Mahasiswa Magang : Dosen</h6>
             <div class="progress mb-3" style="height: 30px; " >
-                <div class="progress-bar bg-success" role="progressbar"
-                    style="width: {{ ($jumlahDosenPembimbing / ($jumlahMahasiswaMagang + $jumlahDosenPembimbing)) * 100 }}%;"
-                    aria-valuenow="{{ $jumlahDosenPembimbing }}" aria-valuemin="0" aria-valuemax="{{ $jumlahMahasiswaMagang + $jumlahDosenPembimbing }}">
-                    Dosen ({{ $jumlahDosenPembimbing }})
-                </div>
                 <div class="progress-bar bg-primary" role="progressbar"
                     style="width: {{ ($jumlahMahasiswaMagang / ($jumlahMahasiswaMagang + $jumlahDosenPembimbing)) * 100 }}%;"
                     aria-valuenow="{{ $jumlahMahasiswaMagang }}" aria-valuemin="0" aria-valuemax="{{ $jumlahMahasiswaMagang + $jumlahDosenPembimbing }}">
                     Mahasiswa ({{ $jumlahMahasiswaMagang }})
+                </div>
+                <div class="progress-bar bg-success" role="progressbar"
+                    style="width: {{ ($jumlahDosenPembimbing / ($jumlahMahasiswaMagang + $jumlahDosenPembimbing)) * 100 }}%;"
+                    aria-valuenow="{{ $jumlahDosenPembimbing }}" aria-valuemin="0" aria-valuemax="{{ $jumlahMahasiswaMagang + $jumlahDosenPembimbing }}">
+                    Dosen ({{ $jumlahDosenPembimbing }})
                 </div>
             </div>
     
