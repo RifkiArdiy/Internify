@@ -17,14 +17,10 @@ class DashboardController extends Controller
             'title' => 'Dashboard',
             'subtitle' => ['Welcome to Dashboard Internify']
         ];
-        $mahasiswas = Mahasiswa::all();
-        $mahasiswaMagang = (object) [
-            'lulus' => $mahasiswas->where('status', 'is_magang')->count(),
-        ];
         $unreviewedLamarans = MagangApplication::with('mahasiswas')->where('status', 'pending')->get();
         $mitras = Company::all();
         $lowongans = LowonganMagang::all();
-        return view('dashboard.admin', compact('breadcrumb', 'unreviewedLamarans', 'mitras', 'lowongans','mahasiswas','mahasiswaMagang'));
+        return view('dashboard.admin', compact('breadcrumb', 'unreviewedLamarans', 'mitras', 'lowongans'));
     }
 
     public function indexMahasiswa()

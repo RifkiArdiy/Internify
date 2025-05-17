@@ -7,7 +7,6 @@
         <div class="alert alert-success">{{ session('success') }}</div>
     @endif
 
-    <h6 class="sub-title">Jumlah Mahasiswa Sudah Diterima Magang : {{$mahasiswaMagang->lulus}}</h6>
     {{-- Lamaran yang menunggu review --}}
     <div class="card card-bordered card-preview mb-4">
         <div class="card-inner">

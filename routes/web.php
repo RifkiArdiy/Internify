@@ -19,6 +19,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\EvaluasiMagangController;
 use App\Http\Controllers\ProfilAkademikController;
+use App\Http\Controllers\MonitoringController;
 
 /*
 |--------------------------------------------------------------------------
@@ -135,6 +136,16 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/{id}/edit', [CompanyController::class, 'edit'])->name('companies.edit');
             Route::put('/{id}', [CompanyController::class, 'update'])->name('companies.update');
             Route::delete('/{id}', [CompanyController::class, 'destroy'])->name('companies.destroy');
+        });
+
+        Route::prefix('monitoring')->group(function () {
+            Route::get('/', [MonitoringController::class, 'index'])->name('monitoring.index');
+            Route::get('/create', [MonitoringController::class, 'create'])->name('monitoring.create');
+            Route::post('/store', [MonitoringController::class, 'store'])->name('monitoring.store');
+            Route::get('/show/{id}', [MonitoringController::class, 'show'])->name('monitoring.show');
+            Route::get('/{id}/edit', [MonitoringController::class, 'edit'])->name('monitoring.edit');
+            Route::put('/{id}', [MonitoringController::class, 'update'])->name('monitoring.update');
+            Route::delete('/{id}', [MonitoringController::class, 'destroy'])->name('monitoring.destroy');
         });
     });
 
