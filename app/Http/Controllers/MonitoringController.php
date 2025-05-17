@@ -11,13 +11,12 @@ class MonitoringController extends Controller
     {
         $mahasiswas = Mahasiswa::all();
         $dosens = Dosen::all();
-
         $jumlahMahasiswaMagang = $mahasiswas->where('status', 'is_magang')->count();
         $jumlahDosenPembimbing = $dosens->count();
         $rasio = $jumlahMahasiswaMagang / $jumlahDosenPembimbing;
         $breadcrumb = (object) [
             'title' => 'Monitoring',
-            'subtitle' => ['Jumlah Mahasiswa Magang : '.$jumlahMahasiswaMagang],
+            'subtitle' => ['Halaman untuk memantau proses magang mahasiswa'],
         ];
         return view('admin.monitoring.index', compact('breadcrumb', 'mahasiswas', 'dosens','rasio' ,'jumlahMahasiswaMagang', 'jumlahDosenPembimbing'));
     }
