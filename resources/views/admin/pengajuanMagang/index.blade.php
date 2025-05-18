@@ -47,7 +47,13 @@
                                 <span>{{ $magang->lowongans->company->user->name }}</span>
                             </td>
                             <td class="nk-tb-col tb-col-mb">
-                                <span>{{ $magang->status }}</span>
+                                @if ($magang->status === 'Disetujui')
+                                    <span class="tb-status text-success">{{ $magang->status }}</span>
+                                @elseif ($magang->status === 'Ditolak')
+                                    <span class="tb-status text-danger">{{ $magang->status }}</span>
+                                @else
+                                    <span class="tb-status text-warning">{{ $magang->status }}</span>
+                                @endif
                             </td>
                             <td class="nk-tb-col nk-tb-col-tools">
                                 <ul class="nk-tb-actions gx-1">
@@ -74,8 +80,8 @@
                                 @if ($magang->status === 'Disetujui' || $magang->status === 'Ditolak')
                                     <span>Reviewed</span>
                                 @else
-                                    <form action="{{ route('pengajuan-magang.update', $magang->magang_id) }}" method="POST"
-                                        style="display: inline;"
+                                    <form action="{{ route('pengajuan-magang.update', $magang->magang_id) }}"
+                                        method="POST" style="display: inline;"
                                         onsubmit="return confirm('Apakah anda yakin menyetujui lamaran ini?')">
                                         @csrf
                                         @method('PUT')

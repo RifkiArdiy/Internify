@@ -154,7 +154,7 @@ class MagangApplicationController extends Controller
         //         ->update(['status' => 'selesai_magang']);
         // }
 
-        return redirect()->back()->with('success', 'Pengajuan magang di setujui');
+        return redirect()->back()->with('success', 'Pengajuan magang Disetujui');
     }
 
     /**

@@ -190,7 +190,7 @@
             <span class="nk-menu-icon">
                 <em class="icon ni ni-file-text"></em>
             </span>
-            <span class="nk-menu-text">Lamaran Magang</span>
+            <span class="nk-menu-text">Pengajuan Magang</span>
         </a>
     </li>
     {{-- <li class="nk-menu-item">

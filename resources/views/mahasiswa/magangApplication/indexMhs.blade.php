@@ -16,6 +16,7 @@
                         <th class="nk-tb-col export-col"><span class="sub-text">Judul Lowongan</span></th>
                         <th class="nk-tb-col export-col"><span class="sub-text">Periode Awal</span></th>
                         <th class="nk-tb-col export-col"><span class="sub-text">Periode akhir</span></th>
+                        <th class="nk-tb-col export-col"><span class="sub-text">Status</span></th>
                         <th class="nk-tb-col nk-tb-col-tools text-end"></th>
                     </tr>
                 </thead>
@@ -23,13 +24,22 @@
                     @foreach ($magangs as $magang)
                         <tr class="nk-tb-item">
                             <td class="nk-tb-col">
-                                <span>{{ $magang->lowongans->title }}</span>
+                                <span class="tb-amount">{{ $magang->lowongans->title }}</span>
                             </td>
                             <td class="nk-tb-col">
                                 <span>{{ $magang->lowongans->period->start_date }}</span>
                             </td>
                             <td class="nk-tb-col">
                                 <span>{{ $magang->lowongans->period->end_date }}</span>
+                            </td>
+                            <td class="nk-tb-col">
+                                @if ($magang->status === 'Disetujui')
+                                    <span class="tb-status text-success">{{ $magang->status }}</span>
+                                @elseif ($magang->status === 'Ditolak')
+                                    <span class="tb-status text-danger">{{ $magang->status }}</span>
+                                @else
+                                    <span class="tb-status text-warning">{{ $magang->status }}</span>
+                                @endif
                             </td>
                             <td class="nk-tb-col nk-tb-col-tools">
                                 <ul class="nk-tb-actions gx-1">
@@ -44,13 +54,8 @@
                                                             <em class="icon ni ni-eye"></em><span>Lihat Detail</span>
                                                         </a>
                                                     </li>
+                                                    <li class="divider"></li>
                                                     @if (auth()->user()->hasRole('Mahasiswa'))
-                                                        {{-- <li>
-                                                            <a href="{{ route('laporan.edit', $log->log_id) }}">
-                                                                <em class="icon ni ni-edit"></em><span>Edit</span>
-                                                            </a>
-                                                        </li> --}}
-                                                        <li class="divider"></li>
                                                         <li>
                                                             <form action="{{ route('hapusLamaran', $magang->magang_id) }}"
                                                                 method="POST" style="display:inline;">

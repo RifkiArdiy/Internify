@@ -168,7 +168,7 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/show/{id}', [LowonganMagangController::class, 'show'])->name('lowonganMagang.show');
         });
 
-        Route::prefix('lamaran')->group(function () {
+        Route::prefix('pengajuan-magang')->group(function () {
             Route::get('/', [MagangApplicationController::class, 'indexMhs'])->name('lamaran');
             Route::post('/buatLamaran', [MagangApplicationController::class, 'store'])->name('buatLamaran');
             Route::delete('/{id}/hapusLamaran', [MagangApplicationController::class, 'destroy'])->name('hapusLamaran');
