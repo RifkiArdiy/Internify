@@ -2,17 +2,27 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Company;
+use App\Models\LowonganMagang;
 use Illuminate\Http\Request;
 
 class ListingController extends Controller
 {
     public function lowongan()
     {
-        return view('listing.job.index');
+        $lowongans = LowonganMagang::with('company', 'period')
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        return view('listing.job.index', compact('lowongans'));
     }
 
     public function perusahaan()
     {
-        return view('listing.company.index');
+        $companies = Company::withCount('lowongans', 'user')
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        return view('listing.company.index', compact('companies'));
     }
 }

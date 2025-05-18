@@ -1,4 +1,4 @@
-<section class="section section-service pb-7" id="joblist">
+<section class="section section-service pb-7">
     <div class="container">
         <div class="row justify-content-center text-center">
             <div class="col-xl-7 col-md-8">
@@ -47,5 +47,19 @@
                 @endforeach
             </div>
         </div>
+        <div class="row justify-content-center text-center">
+            <div class="col-lg-9 col-md-10">
+                <div class="text-block is-compact py-3">
+                    <ul class="btns-inline justify-center pt-6">
+                        <li>
+                            <a href="{{ route('list.lowongan') }}" class="btn btn-xl btn-primary btn-round">Lihat
+                                Semua</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!-- .col -->
+        </div>
+        <!-- .row -->
     </div>
 </section>

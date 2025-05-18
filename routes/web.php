@@ -38,7 +38,8 @@ Route::get('login', [AuthController::class, 'login'])->name('login');
 Route::post('login', [AuthController::class, 'postLogin'])->name('postLogin');
 Route::get('register', [AuthController::class, 'register'])->name('register');
 Route::post('register', [AuthController::class, 'postRegister'])->name('postRegister');
-Route::get('/', [WelcomeController::class, 'index'])->name('welcome.index');
+
+Route::get('/home', [WelcomeController::class, 'index'])->name('welcome.index');
 Route::get('/lowongan', [ListingController::class, 'lowongan'])->name('list.lowongan');
 Route::get('/perusahaan', [ListingController::class, 'perusahaan'])->name('list.perusahaan');
 

@@ -26,7 +26,7 @@
             <!-- .header -->
             @include('home.joblist')
             <!-- .section -->
-            <section class="section section-cta is-dark" id="cta">
+            <section class="section section-cta is-dark">
                 <div class="container">
                     <div class="row justify-content-center text-center">
                         <div class="col-lg-9 col-md-10">
