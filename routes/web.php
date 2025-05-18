@@ -174,24 +174,7 @@ Route::middleware(['auth'])->group(function () {
             Route::delete('/{id}/hapusLamaran', [MagangApplicationController::class, 'destroy'])->name('hapusLamaran');
             Route::get('/{id}/lihat', [MagangApplicationController::class, 'show'])->name('lihatLamaran');
             Route::post('/lamar/store', [MagangApplicationController::class, 'storeMhs'])->name('magangApplication.storeMhs');;
-
         });
-
-        Route::get('evaluasi', [EvaluasiMagangController::class, 'indexMhs'])->name('evaluasi-index');
-            Route::get('/evaluasi/create', [EvaluasiMagangController::class, 'create'])->name('evaluasi-create');
-            Route::post('/evaluasi/store', [EvaluasiMagangController::class, 'store'])->name('evaluasi-store');
-            Route::get('/evaluasi/show/{id}', [EvaluasiMagangController::class, 'showMhs'])->name('evaluasi-show');
-            Route::get('/evaluasi/{id}/edit', [EvaluasiMagangController::class, 'edit'])->name('evaluasi-edit');
-            Route::put('/evaluasi/{id}', [EvaluasiMagangController::class, 'update'])->name('evaluasi-update');
-            Route::delete('/evaluasi/{id}', [EvaluasiMagangController::class, 'destroy'])->name('evaluasi-destroy');
-
-        Route::prefix('profilAkademik')->group(function () {
-            Route::get('/', [ProfilAkademikController::class, 'index'])->name('profilAkademik.index');
-            Route::get('/create', [ProfilAkademikController::class, 'create'])->name('profilAkademik.create');
-            Route::get('/edit', [ProfilAkademikController::class, 'edit'])->name('profilAkademik.edit');
-            Route::post('/store', [ProfilAkademikController::class, 'store'])->name('profilAkademik.store');
-            Route::put('/{id}', [ProfilAkademikController::class, 'update'])->name('profilAkademik.update');
-            Route::delete('/{id}/delete', [ProfilAkademikController::class, 'destroy'])->name('profilAkademik.destroy');
 
         Route::prefix('profil-akademik')->group(function () {
             Route::get('/', [ProfilAkademikController::class, 'index'])->name('profil-akademik.index');
@@ -201,6 +184,25 @@ Route::middleware(['auth'])->group(function () {
             Route::put('/{id}', [ProfilAkademikController::class, 'update'])->name('profil-akademik.update');
             Route::delete('/{id}/delete', [ProfilAkademikController::class, 'destroy'])->name('profil-akademik.destroy');
         });
+
+        Route::prefix('evaluasi')->group(function () {
+            Route::get('/', [EvaluasiMagangController::class, 'indexMhs'])->name('evaluasi-index');
+            Route::get('/create', [EvaluasiMagangController::class, 'create'])->name('evaluasi-create');
+            Route::post('/store', [EvaluasiMagangController::class, 'store'])->name('evaluasi-store');
+            Route::get('/show/{id}', [EvaluasiMagangController::class, 'showMhs'])->name('evaluasi-show');
+            Route::get('/{id}/edit', [EvaluasiMagangController::class, 'edit'])->name('evaluasi-edit');
+            Route::put('/{id}', [EvaluasiMagangController::class, 'update'])->name('evaluasi-update');
+            Route::delete('/{id}', [EvaluasiMagangController::class, 'destroy'])->name('evaluasi-destroy');
+        });
+
+        // Route::prefix('profilAkademik')->group(function () {
+        //     Route::get('/', [ProfilAkademikController::class, 'index'])->name('profilAkademik.index');
+        //     Route::get('/create', [ProfilAkademikController::class, 'create'])->name('profilAkademik.create');
+        //     Route::get('/edit', [ProfilAkademikController::class, 'edit'])->name('profilAkademik.edit');
+        //     Route::post('/store', [ProfilAkademikController::class, 'store'])->name('profilAkademik.store');
+        //     Route::put('/{id}', [ProfilAkademikController::class, 'update'])->name('profilAkademik.update');
+        //     Route::delete('/{id}/delete', [ProfilAkademikController::class, 'destroy'])->name('profilAkademik.destroy');
+        // });
     });
 
     Route::prefix('dosen')->middleware('role:Dosen')->group(function () {
