@@ -24,7 +24,7 @@ class DashboardController extends Controller
         $unreviewedLamarans = MagangApplication::with('mahasiswas')->where('status', 'pending')->get();
         $mitras = Company::all();
         $lowongans = LowonganMagang::all();
-        return view('dashboard.admin', compact('users', 'breadcrumb', 'unreviewedLamarans', 'mitras', 'lowongans'));
+        return view('admin.dashboard.admin', compact('users', 'breadcrumb', 'unreviewedLamarans', 'mitras', 'lowongans'));
     }
 
     public function indexMahasiswa()
@@ -33,7 +33,7 @@ class DashboardController extends Controller
             'title' => 'Dashboard',
             'subtitle' => ['Welcome to Dashboard Internify']
         ];
-        return view('dashboard.mahasiswa', compact('breadcrumb'));
+        return view('mahasiswa.dashboard.mahasiswa', compact('breadcrumb'));
     }
 
     public function indexDosen()
@@ -42,7 +42,7 @@ class DashboardController extends Controller
             'title' => 'Dashboard',
             'subtitle' => ['Welcome to Dashboard Internify']
         ];
-        return view('dashboard.dosen', compact('breadcrumb'));
+        return view('dosen.dashboard.dosen', compact('breadcrumb'));
     }
 
     public function indexCompany()
@@ -51,6 +51,6 @@ class DashboardController extends Controller
             'title' => 'Dashboard',
             'subtitle' => ['Welcome to Dashboard Internify']
         ];
-        return view('dashboard.company', compact('breadcrumb'));
+        return view('company.dashboard.company', compact('breadcrumb'));
     }
 }
