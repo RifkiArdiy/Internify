@@ -19,7 +19,7 @@
             <table class="datatable-init-export nowrap nk-tb-list nk-tb-ulist" data-auto-responsive="false">
                 <thead>
                     <tr class="nk-tb-item nk-tb-head">
-                        <th class="nk-tb-col"><span class="sub-text">ID</span></th>
+                        <th class="nk-tb-col"><span class="sub-text">No</span></th>
                         <th class="nk-tb-col"><span class="sub-text">Mahasiswa</span></th>
                         <th class="nk-tb-col"><span class="sub-text">Perusahaan</span></th>
                         <th class="nk-tb-col"><span class="sub-text">Evaluasi</span></th>
@@ -30,7 +30,7 @@
                     @foreach($evaluasi as $e)
                         <tr class="nk-tb-item">
                             <td class="nk-tb-col">
-                                <span>{{ $e->evaluasi_id }}</span>
+                                <span>{{ $loop->iteration }}</span>
                             </td>
                             <td class="nk-tb-col">
                                 <div class="user-info">
