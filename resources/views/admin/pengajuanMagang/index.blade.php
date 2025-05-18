@@ -106,15 +106,14 @@
                                                 data-bs-toggle="dropdown"><em class="icon ni ni-more-h"></em></a>
                                             <div class="dropdown-menu dropdown-menu-end">
                                                 <ul class="link-list-opt no-bdr">
-                                                    <li><a
-                                                            href="{{ route('admin.magangApplication.show', $magang->magang_id) }}"><em
+                                                    <li><a href="{{ route('pengajuan-magang.show', $magang->magang_id) }}"><em
                                                                 class="icon ni ni-eye"></em><span>Lihat
                                                                 Detail</span></a></li>
 
                                                     <li class="divider"></li>
 
                                                     <li><a
-                                                            href="{{ route('admin.magangApplication.destroy', $magang->magang_id) }}"><em
+                                                            href="{{ route('pengajuan-magang.destroy', $magang->magang_id) }}"><em
                                                                 class="icon ni ni-trash"></em><span>Hapus
                                                                 Lamaran</span></a></li>
                                                 </ul>
