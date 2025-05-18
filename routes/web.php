@@ -178,6 +178,15 @@ Route::middleware(['auth'])->group(function () {
             Route::post('/lamar/store', [MagangApplicationController::class, 'storeMhs'])->name('magangApplication.storeMhs');;
             
         });
+        
+        Route::get('evaluasi', [EvaluasiMagangController::class, 'indexMhs'])->name('evaluasi-index');
+            Route::get('/evaluasi/create', [EvaluasiMagangController::class, 'create'])->name('evaluasi-create');
+            Route::post('/evaluasi/store', [EvaluasiMagangController::class, 'store'])->name('evaluasi-store');
+            Route::get('/evaluasi/show/{id}', [EvaluasiMagangController::class, 'showMhs'])->name('evaluasi-show');
+            Route::get('/evaluasi/{id}/edit', [EvaluasiMagangController::class, 'edit'])->name('evaluasi-edit');
+            Route::put('/evaluasi/{id}', [EvaluasiMagangController::class, 'update'])->name('evaluasi-update');
+            Route::delete('/evaluasi/{id}', [EvaluasiMagangController::class, 'destroy'])->name('evaluasi-destroy');
+
         Route::prefix('profilAkademik')->group(function () {
             Route::get('/', [ProfilAkademikController::class, 'index'])->name('profilAkademik.index');
             Route::get('/create', [ProfilAkademikController::class, 'create'])->name('profilAkademik.create');

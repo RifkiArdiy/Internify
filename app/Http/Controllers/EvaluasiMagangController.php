@@ -7,6 +7,7 @@ use App\Models\Mahasiswa;
 use App\Models\Log;
 use App\Models\Company;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class EvaluasiMagangController extends Controller
 {
@@ -21,6 +22,39 @@ class EvaluasiMagangController extends Controller
         $evaluations = EvaluasiMagang::with('mahasiswa', 'company')->latest()->get();
         return view('dosen.evaluasi.index', ['evaluasi' => $evaluations], compact('breadcrumb', 'logs'));
     }  
+
+    public function indexMhs()
+    {
+        $mahasiswa = Auth::user()->mahasiswa; // Ambil data mahasiswa dari user yang login
+
+        $breadcrumb = (object) [
+            'title' => 'Evaluasi Magang',
+            'subtitle' => ['Jumlah Evaluasi Magang: ' . EvaluasiMagang::where('mahasiswa_id', $mahasiswa->mahasiswa_id)->count()]
+        ];
+
+        $logs = Log::where('mahasiswa_id', $mahasiswa->mahasiswa_id)->get();
+
+        $evaluations = EvaluasiMagang::with(['mahasiswa', 'company'])
+            ->where('mahasiswa_id', $mahasiswa->mahasiswa_id)
+            ->latest()
+            ->get();
+
+        return view('mahasiswa.evaluasi.index', compact('evaluations', 'breadcrumb', 'logs'));
+    }
+
+    public function showMhs($id){
+        $evaluation = EvaluasiMagang::with('mahasiswa.user', 'company.user')->findOrFail($id);
+        $mahasiswas = Mahasiswa::all();
+        $companies = Company::all();
+        $logs = Log::all();
+
+        $breadcrumb = (object) [
+            'title' => 'Detail Evaluasi Magang',
+            'subtitle' => ['Form Validation']
+        ]; 
+        return view('mahasiswa.evaluasi.show', compact('evaluation', 'mahasiswas', 'companies', 'logs', 'breadcrumb'));
+
+    }
 
     public function create(Request $request)
     {

@@ -165,7 +165,7 @@
             <span class="nk-menu-text">Lowongan Magang</span>
         </a>
     </li>
-    @endif 
+    @endif
     {{-- <li class="nk-menu-item"> 
     @if (Auth::user()->mahasiswa->status == '-')
         
@@ -195,7 +195,24 @@
                 <span class="nk-menu-text">Laporan Harian</span>
             </a>
         </li>
+        
+        <li class="nk-menu-item">
+            <a href="{{ route('evaluasi-index') }}" class="nk-menu-link">
+                <span class="nk-menu-icon">
+                    <em class="icon ni ni-file-text"></em>
+                </span>
+                <span class="nk-menu-text">Evaluasi Magang</span>
+            </a>
+        </li>
     @endif
+    {{-- <li class="nk-menu-item">
+        <a href="{{ route('lihatLamaran',Auth::user()->mahasiswa->mahasiswa_id) }}" class="nk-menu-link">
+            <span class="nk-menu-icon">
+                <em class="icon ni ni-check"></em>
+            </span>
+            <span class="nk-menu-text">Selesai Magang</span>
+        </a>
+    </li> --}}
 @endif
 @if (Auth::user()->level->level_nama == 'Company')
     <li class="nk-menu-heading">
