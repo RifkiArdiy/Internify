@@ -38,14 +38,15 @@
 
                     <div class="col-12">
                         <div class="form-group">
-                            <label class="form-label" for="report_text">Isi Laporan:<span class="text-danger">*</span></label>
+                            <label class="form-label" for="report_text">Isi Laporan:<span
+                                    class="text-danger">*</span></label>
                             <div class="form-control-wrap">
                                 <textarea class="form-control" name="report_text" rows="5" required></textarea>
                             </div>
                         </div>
                     </div>
 
-                    <div class="col-12">
+                    <div class="col-12 text-end">
                         <div class="form-group">
                             <button type="submit" class="btn btn-primary">Simpan</button>
                             <a href="{{ route('laporan') }}" class="btn btn-secondary">Kembali</a>

@@ -14,35 +14,29 @@
         <div class="alert alert-success">{{ session('success') }}</div>
     @endif
     <div class="card card-bordered card-preview">
-        <div class="card-inner table-responsive">
+        <div class="card-inner">
             <table class="datatable-init-export nowrap nk-tb-list nk-tb-ulist" data-auto-responsive="false">
                 <thead>
                     <tr class="nk-tb-item nk-tb-head">
-                        <th class="nk-tb-col nk-tb-col-check">
-                            <div class="custom-control custom-control-sm custom-checkbox notext">
-                                <input type="checkbox" class="custom-control-input" id="uid">
-                                <label class="custom-control-label" for="uid"></label>
-                            </div>
-                        </th>
-                        <th class="nk-tb-col"><span class="sub-text">Mahasiswa</span></th>
-                        <th class="nk-tb-col"><span class="sub-text">Dosen Pembimbing</span></th>
-                        <th class="nk-tb-col"><span class="sub-text">Isi Laporan</span></th>
-                        <th class="nk-tb-col"><span class="sub-text">Tanggal</span></th>
+                        <th class="nk-tb-col export-col"><span class="sub-text">Dosen Pembimbing</span></th>
+                        <th class="nk-tb-col export-col"><span class="sub-text">Isi Laporan</span></th>
+                        <th class="nk-tb-col export-col"><span class="sub-text">Tanggal</span></th>
                         <th class="nk-tb-col nk-tb-col-tools text-end"></th>
                     </tr>
                 </thead>
-                <tbody>
+                {{-- <tbody>
                     @foreach ($logs as $log)
+                        @php
+                            $user = auth()->user();
+                            $isMahasiswa = $log->mahasiswa && $log->mahasiswa->user_id == $user->user_id;
+                            $isDosen = $log->dosen && $log->dosen->user_id == $user->user_id;
+                        @endphp
+
+                        @if (!($isMahasiswa || $isDosen))
+                            @continue
+                        @endif
+
                         <tr class="nk-tb-item">
-                            <td class="nk-tb-col nk-tb-col-check">
-                                <div class="custom-control custom-control-sm custom-checkbox notext">
-                                    <input type="checkbox" class="custom-control-input" id="uid{{ $log->log_id }}">
-                                    <label class="custom-control-label" for="uid{{ $log->log_id }}"></label>
-                                </div>
-                            </td>
-                            <td class="nk-tb-col">
-                                <span>{{ $log->mahasiswa->user->name ?? '-' }}</span>
-                            </td>
                             <td class="nk-tb-col">
                                 <span>{{ $log->dosen->user->name ?? '-' }}</span>
                             </td>
@@ -60,16 +54,84 @@
                                                 data-bs-toggle="dropdown"><em class="icon ni ni-more-h"></em></a>
                                             <div class="dropdown-menu dropdown-menu-end">
                                                 <ul class="link-list-opt no-bdr">
-                                                    <li><a href="{{ route('laporan.show', $log->log_id)}}"><em class="icon ni ni-eye"></em><span>Lihat Detail</span></a></li>
-                                                    <li><a href="{{ route('laporan.edit', $log->log_id) }}"><em class="icon ni ni-edit"></em><span>Edit</span></a></li>
-                                                    <li class="divider"></li>
                                                     <li>
-                                                        <form action="{{ route('laporan.destroy', $log->log_id) }}" method="POST" onsubmit="return confirm('Yakin ingin menghapus laporan ini?')">
-                                                            @csrf
-                                                            @method('DELETE')
-                                                            <button type="submit" class="btn btn-link text-danger"><em class="icon ni ni-trash"></em><span>Hapus</span></button>
-                                                        </form>
+                                                        <a href="{{ route('laporan.show', $log->log_id) }}">
+                                                            <em class="icon ni ni-eye"></em><span>Lihat Detail</span>
+                                                        </a>
                                                     </li>
+
+                                                    @if ($isMahasiswa)
+                                                        <li>
+                                                            <a href="{{ route('laporan.edit', $log->log_id) }}">
+                                                                <em class="icon ni ni-edit"></em><span>Edit</span>
+                                                            </a>
+                                                        </li>
+                                                        <li class="divider"></li>
+                                                        <li>
+                                                            <form action="{{ route('laporan.destroy', $log->log_id) }}"
+                                                                method="POST"
+                                                                onsubmit="return confirm('Yakin ingin menghapus laporan ini?')">
+                                                                @csrf
+                                                                @method('DELETE')
+                                                                <button type="submit" class="btn btn-link text-danger">
+                                                                    <em class="icon ni ni-trash"></em><span>Hapus</span>
+                                                                </button>
+                                                            </form>
+                                                        </li>
+                                                    @endif
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody> --}}
+                <tbody>
+                    @foreach ($logs as $log)
+                        <tr class="nk-tb-item">
+                            <td class="nk-tb-col">
+                                <span>{{ $log->dosen->user->name ?? '-' }}</span>
+                            </td>
+                            <td class="nk-tb-col">
+                                <span>{{ Str::limit($log->report_text, 50) }}</span>
+                            </td>
+                            <td class="nk-tb-col">
+                                <span>{{ $log->created_at->format('d M Y') }}</span>
+                            </td>
+                            <td class="nk-tb-col nk-tb-col-tools">
+                                <ul class="nk-tb-actions gx-1">
+                                    <li>
+                                        <div class="drodown">
+                                            <a href="#" class="dropdown-toggle btn btn-icon btn-trigger"
+                                                data-bs-toggle="dropdown"><em class="icon ni ni-more-h"></em></a>
+                                            <div class="dropdown-menu dropdown-menu-end">
+                                                <ul class="link-list-opt no-bdr">
+                                                    <li>
+                                                        <a href="{{ route('laporan.show', $log->log_id) }}">
+                                                            <em class="icon ni ni-eye"></em><span>Lihat Detail</span>
+                                                        </a>
+                                                    </li>
+                                                    @if (auth()->user()->hasRole('Mahasiswa'))
+                                                        <li>
+                                                            <a href="{{ route('laporan.edit', $log->log_id) }}">
+                                                                <em class="icon ni ni-edit"></em><span>Edit</span>
+                                                            </a>
+                                                        </li>
+                                                        <li class="divider"></li>
+                                                        <li>
+                                                            <form action="{{ route('laporan.destroy', $log->log_id) }}"
+                                                                method="POST"
+                                                                onsubmit="return confirm('Yakin ingin menghapus laporan ini?')">
+                                                                @csrf
+                                                                @method('DELETE')
+                                                                <button type="submit" class="btn btn-link text-danger">
+                                                                    <em class="icon ni ni-trash"></em><span>Hapus</span>
+                                                                </button>
+                                                            </form>
+                                                        </li>
+                                                    @endif
                                                 </ul>
                                             </div>
                                         </div>
