@@ -18,13 +18,10 @@
             <table class="datatable-init-export nowrap nk-tb-list nk-tb-ulist" data-auto-responsive="false">
                 <thead>
                     <tr class="nk-tb-item nk-tb-head">
-                        <th class="nk-tb-col nk-tb-col-check">
-                            <div class="custom-control custom-control-sm custom-checkbox notext">
-                                <input type="checkbox" class="custom-control-input" id="uid">
-                                <label class="custom-control-label" for="uid"></label>
-                            </div>
+                        <th class="nk-tb-col">
+                            <span class="sub-text">No</span>
                         </th>
-                        <th class="nk-tb-col"><span class="sub-text">Mahasiswa</span></th>
+                        <th class="nk-tb-col"><span class="sub-text">Perusahaan</span></th>
                         <th class="nk-tb-col"><span class="sub-text">Dosen Pembimbing</span></th>
                         <th class="nk-tb-col"><span class="sub-text">Isi Laporan</span></th>
                         <th class="nk-tb-col"><span class="sub-text">Tanggal</span></th>
@@ -35,13 +32,10 @@
                     @foreach ($logs as $log)
                         <tr class="nk-tb-item">
                             <td class="nk-tb-col nk-tb-col-check">
-                                <div class="custom-control custom-control-sm custom-checkbox notext">
-                                    <input type="checkbox" class="custom-control-input" id="uid{{ $log->log_id }}">
-                                    <label class="custom-control-label" for="uid{{ $log->log_id }}"></label>
-                                </div>
+                                <span>{{$loop->iteration}}</span>
                             </td>
                             <td class="nk-tb-col">
-                                <span>{{ $log->mahasiswa->user->name ?? '-' }}</span>
+                                <span>{{ $log->companies->user->name ?? '-' }}</span>
                             </td>
                             <td class="nk-tb-col">
                                 <span>{{ $log->dosen->user->name ?? '-' }}</span>

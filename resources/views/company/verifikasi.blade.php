@@ -10,6 +10,7 @@
             <table class="datatable-init-export nowrap nk-tb-list nk-tb-ulist" data-auto-responsive="false">
                 <thead>
                     <tr class="nk-tb-item nk-tb-head">
+                        <th class="nk-tb-col"><span class="sub-text">No</span></th>
                         <th class="nk-tb-col"><span class="sub-text">Mahasiswa</span></th>
                         {{-- <th class="nk-tb-col"><span class="sub-text">Dosen Pembimbing</span></th> --}}
                         <th class="nk-tb-col"><span class="sub-text">Isi Laporan</span></th>
@@ -20,6 +21,9 @@
                 <tbody>
                     @foreach ($logs as $log)
                         <tr class="nk-tb-item">
+                            <td class="nk-tb-col">
+                                <span>{{$loop->iteration}}</span>
+                            </td>
                             <td class="nk-tb-col">
                                 <span>{{ $log->mahasiswa->user->name ?? '-' }}</span>
                             </td>
