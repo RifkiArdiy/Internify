@@ -26,7 +26,7 @@
                             <li class="breadcrumb-item"><a href="{{ route('dosen.dashboard') }}">Dashboard</a></li>
                         @endif
                         @if ($breadcrumb->title !== 'Dashboard')
-                        <li class="breadcrumb-item active">{{ $breadcrumb->title }}</li>
+                            <li class="breadcrumb-item active">{{ $breadcrumb->title }}</li>
                         @endif
                     </ul>
                 </div>
@@ -69,28 +69,28 @@
                                 <ul class="link-list">
                                     @if (Auth::user()->level->level_nama == 'Administrator')
                                         <li>
-                                            <a href="{{ route('admin.profile') }}">
+                                            <a href="{{ route('profile') }}">
                                                 <em class="icon ni ni-user-alt"></em>
                                                 <span>View Profile</span>
                                             </a>
                                         </li>
                                     @elseif (Auth::user()->level->level_nama == 'Mahasiswa')
                                         <li>
-                                            <a href="{{ route('mahasiswa.profile') }}">
+                                            <a href="{{ route('profile') }}">
                                                 <em class="icon ni ni-user-alt"></em>
                                                 <span>View Profile</span>
                                             </a>
                                         </li>
                                     @elseif (Auth::user()->level->level_nama == 'Dosen')
                                         <li>
-                                            <a href="{{ route('dosen.profile') }}">
+                                            <a href="{{ route('profile') }}">
                                                 <em class="icon ni ni-user-alt"></em>
                                                 <span>View Profile</span>
                                             </a>
                                         </li>
                                     @elseif (Auth::user()->level->level_nama == 'Company')
                                         <li>
-                                            <a href="{{ route('company.profile') }}">
+                                            <a href="{{ route('profile') }}">
                                                 <em class="icon ni ni-user-alt"></em>
                                                 <span>View Profile</span>
                                             </a>

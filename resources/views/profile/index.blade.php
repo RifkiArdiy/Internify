@@ -183,7 +183,7 @@
                             </li>
                             @if (Auth::user()->level->level_nama == 'Mahasiswa')
                                 <li class="nk-menu-item">
-                                    <a class="nk-menu-link" href="{{ route('profilAkademik.index') }}"><em
+                                    <a class="nk-menu-link" href="{{ route('profil-akademik.index') }}"><em
                                             class="icon ni ni-user-fill-c"></em><span>Profile Akademik</span></a>
                                 </li>
                             @endif
