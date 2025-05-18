@@ -19,11 +19,11 @@
             <table class="datatable-init-export nowrap nk-tb-list nk-tb-ulist" data-auto-responsive="false">
                 <thead>
                     <tr class="nk-tb-item nk-tb-head">
-                        <th class="nk-tb-col"><span class="sub-text">User</span></th>
-                        <th class="nk-tb-col tb-col-md"><span class="sub-text">Alamat</span></th>
-                        <th class="nk-tb-col tb-col-mb"><span class="sub-text">Phone</span></th>
-                        <th class="nk-tb-col tb-col-lg"><span class="sub-text">Role</span></th>
-                        <th class="nk-tb-col tb-col-md"><span class="sub-text">Status</span></th>
+                        <th class="nk-tb-col export-col"><span class="sub-text">User</span></th>
+                        <th class="nk-tb-col tb-col-md export-col"><span class="sub-text">Alamat</span></th>
+                        <th class="nk-tb-col tb-col-mb export-col"><span class="sub-text">Phone</span></th>
+                        <th class="nk-tb-col tb-col-lg export-col"><span class="sub-text">Role</span></th>
+                        <th class="nk-tb-col tb-col-md export-col"><span class="sub-text">Status</span></th>
                         <th class="nk-tb-col nk-tb-col-tools text-end"></th>
                     </tr>
                 </thead>

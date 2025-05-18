@@ -23,11 +23,11 @@
             <table class="datatable-init-export nowrap nk-tb-list nk-tb-ulist" data-auto-responsive="false">
                 <thead>
                     <tr class="nk-tb-item nk-tb-head">
-                        <th class="nk-tb-col"><span class="sub-text">Judul</span></th>
-                        <th class="nk-tb-col tb-col-lg"><span class="sub-text">Perusahaan</span></th>
-                        <th class="nk-tb-col tb-col-lg"><span class="sub-text">Created at</span></th>
-                        <th class="nk-tb-col tb-col-md"><span class="sub-text">Masa Awal</span></th>
-                        <th class="nk-tb-col tb-col-md"><span class="sub-text">Masa Akhir</span></th>
+                        <th class="nk-tb-col export-col"><span class="sub-text">Judul</span></th>
+                        <th class="nk-tb-col tb-col-lg export-col"><span class="sub-text">Perusahaan</span></th>
+                        <th class="nk-tb-col tb-col-lg export-col"><span class="sub-text">Created at</span></th>
+                        <th class="nk-tb-col tb-col-md export-col"><span class="sub-text">Masa Awal</span></th>
+                        <th class="nk-tb-col tb-col-md export-col"><span class="sub-text">Masa Akhir</span></th>
                         <th class="nk-tb-col nk-tb-col-tools text-end"></th>
                     </tr>
                 </thead>
@@ -59,7 +59,7 @@
                                             </a>
                                             <div class="dropdown-menu dropdown-menu-end">
                                                 <ul class="link-list-opt no-bdr">
-                                                    <li><a href="{{ route('lowongan-magang.show'), $item->lowongan_id) }}">
+                                                    <li><a href="{{ route('lowongan-magang.show', $item->lowongan_id) }}">
                                                             <em class="icon ni ni-eye"></em><span>Lihat Detail</span></a>
                                                     </li>
                                                     <li><a href="{{ route('lowongan-magang.edit', $item->lowongan_id) }}">

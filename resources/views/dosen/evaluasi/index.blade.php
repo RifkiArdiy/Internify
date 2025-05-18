@@ -10,7 +10,7 @@
 @endsection
 
 @section('content')
-    @if(session('success'))
+    @if (session('success'))
         <div class="alert alert-success">{{ session('success') }}</div>
     @endif
 
@@ -19,15 +19,15 @@
             <table class="datatable-init-export nowrap nk-tb-list nk-tb-ulist" data-auto-responsive="false">
                 <thead>
                     <tr class="nk-tb-item nk-tb-head">
-                        <th class="nk-tb-col"><span class="sub-text">ID</span></th>
-                        <th class="nk-tb-col"><span class="sub-text">Mahasiswa</span></th>
-                        <th class="nk-tb-col"><span class="sub-text">Perusahaan</span></th>
-                        <th class="nk-tb-col"><span class="sub-text">Evaluasi</span></th>
+                        <th class="nk-tb-col export-col"><span class="sub-text">ID</span></th>
+                        <th class="nk-tb-col export-col"><span class="sub-text">Mahasiswa</span></th>
+                        <th class="nk-tb-col export-col"><span class="sub-text">Perusahaan</span></th>
+                        <th class="nk-tb-col export-col"><span class="sub-text">Evaluasi</span></th>
                         <th class="nk-tb-col nk-tb-col-tools text-end"><span class="sub-text">Aksi</span></th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($evaluasi as $e)
+                    @foreach ($evaluasi as $e)
                         <tr class="nk-tb-item">
                             <td class="nk-tb-col">
                                 <span>{{ $e->evaluasi_id }}</span>
@@ -51,8 +51,10 @@
                                                 data-bs-toggle="dropdown"><em class="icon ni ni-more-h"></em></a>
                                             <div class="dropdown-menu dropdown-menu-end">
                                                 <ul class="link-list-opt no-bdr">
-                                                    <li><a href="#"><em class="icon ni ni-eye"></em><span>Lihat Detail</span></a></li>
-                                                    <li><a href="{{ route('evaluasi.edit', $e->evaluasi_id) }}
+                                                    <li><a href="#"><em class="icon ni ni-eye"></em><span>Lihat
+                                                                Detail</span></a></li>
+                                                    <li><a
+                                                            href="{{ route('evaluasi.edit', $e->evaluasi_id) }}
                                                                 ?mahasiswa_id={{ $e->mahasiswa_id }}
                                                                 &company_id={{ $e->company_id }}
                                                                 &log_id={{ $e->log_id }}">
@@ -62,10 +64,12 @@
                                                     </li>
                                                     <li class="divider"></li>
                                                     <li>
-                                                        <form action="{{ route('evaluasi.destroy', $e) }}" method="POST" onsubmit="return confirm('Yakin ingin menghapus laporan ini?')">
+                                                        <form action="{{ route('evaluasi.destroy', $e) }}" method="POST"
+                                                            onsubmit="return confirm('Yakin ingin menghapus laporan ini?')">
                                                             @csrf
                                                             @method('DELETE')
-                                                            <button type="submit" class="btn btn-link text-danger"><em class="icon ni ni-trash"></em><span>Hapus</span></button>
+                                                            <button type="submit" class="btn btn-link text-danger"><em
+                                                                    class="icon ni ni-trash"></em><span>Hapus</span></button>
                                                         </form>
                                                     </li>
                                                 </ul>
