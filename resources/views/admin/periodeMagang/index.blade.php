@@ -2,7 +2,7 @@
 
 @section('action')
     <li class="nk-block-tools-opt">
-        <a href="{{ route('periodeMagang.create') }}" class="btn btn-primary">
+        <a href="{{ route('periode-magang.create') }}" class="btn btn-primary">
             <em class="icon ni ni-plus"></em>
             <span>Tambah Periode</span>
         </a>
@@ -52,13 +52,14 @@
                                                                 View</span></a></li>
                                                     <li><a href="#"><em class="icon ni ni-eye"></em><span>View
                                                                 Details</span></a></li>
-                                                    <li><a href="{{ route('periodeMagang.edit', $pegangs->period_id) }}"><em
+                                                    <li><a href="{{ route('periode-magang.edit', $pegangs->period_id) }}"><em
                                                                 class="icon ni ni-edit-alt"></em><span>Edit</span></a>
                                                     </li>
 
                                                     <li class="divider"></li>
 
-                                                    <li><a href="{{ route('periodeMagang.destroy', $pegangs->period_id) }}"><em
+                                                    <li><a
+                                                            href="{{ route('periode-magang.destroy', $pegangs->period_id) }}"><em
                                                                 class="icon ni ni-trash"></em><span>Hapus
                                                                 Data</span></a></li>
                                                 </ul>

@@ -3,7 +3,7 @@
 @section('content')
     <div class="card card-bordered card-preview">
         <div class="card-inner">
-            <form method="POST" action="{{ route('periodeMagang.update', $pegang->period_id) }}">
+            <form method="POST" action="{{ route('periode-magang.update', $pegang->period_id) }}">
                 @csrf
                 @method('PUT')
                 <div class="row g-4">
@@ -33,7 +33,7 @@
                     <div class="col-12">
                         <div class="form-group">
                             <button type="submit" class="btn btn-primary mt-3">Simpan</button>
-                            <a href="{{ route('periodeMagang.index') }}" class="btn btn-secondary mt-3">Kembali</a>
+                            <a href="{{ route('periode-magang.index') }}" class="btn btn-secondary mt-3">Kembali</a>
                         </div>
                     </div>
                 </div>

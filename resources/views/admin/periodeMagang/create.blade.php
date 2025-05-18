@@ -3,7 +3,7 @@
 @section('content')
     <div class="card card-bordered card-preview">
         <div class="card-inner">
-            <form action="{{ route('periodeMagang.store') }}" method="POST">
+            <form action="{{ route('periode-magang.store') }}" method="POST">
                 @csrf
                 <div class="row g-4">
                     <div class="col-lg-12">
@@ -41,7 +41,7 @@
                     <div class="col-12">
                         <div class="form-group">
                             <button type="submit" class="btn btn-primary mt-3">Simpan</button>
-                            <a href="{{ route('periodeMagang.index') }}" class="btn btn-secondary mt-3">Kembali</a>
+                            <a href="{{ route('periode-magang.index') }}" class="btn btn-secondary mt-3">Kembali</a>
                         </div>
                     </div>
                 </div>

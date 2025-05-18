@@ -62,7 +62,7 @@ class ProfilAkademikController extends Controller
             'ipk' => str_replace(',', '.', $request->ipk),
         ]);
 
-        return redirect(route('profilAkademik.index'))->with('success', 'Profil Akademik berhasil ditambahkan');
+        return redirect(route('profil-akademik.index'))->with('success', 'Profil Akademik berhasil ditambahkan');
     }
 
     /**
@@ -106,7 +106,7 @@ class ProfilAkademikController extends Controller
             'ipk' => str_replace(',', '.', $request->ipk),
         ]);
 
-        return redirect(route('profilAkademik.index'));
+        return redirect(route('profil-akademik.index'));
     }
 
     /**

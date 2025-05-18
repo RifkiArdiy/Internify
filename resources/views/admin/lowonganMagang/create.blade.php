@@ -12,7 +12,7 @@
                     </ul>
                 </div>
             @endif
-            <form method="POST" action="{{ route('lowonganMagang.store') }}">
+            <form method="POST" action="{{ route('lowongan-magang.store') }}">
                 @csrf
                 <div class="row g-4">
                     <div class="col-md-6">
@@ -78,7 +78,7 @@
 
                     <div class="col-12">
                         <button type="submit" class="btn btn-primary mt-3">Simpan</button>
-                        <a href="{{ route('lowonganMagang.index') }}" class="btn btn-secondary mt-3">Kembali</a>
+                        <a href="{{ route('lowongan-magang.index') }}" class="btn btn-secondary mt-3">Kembali</a>
                     </div>
                 </div>
             </form>
