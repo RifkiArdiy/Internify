@@ -127,7 +127,7 @@
             <span class="nk-menu-icon">
                 <em class="icon ni ni-check"></em>
             </span>
-            <span class="nk-menu-text">Verifikasi</span>
+            <span class="nk-menu-text">Verifikasi Laporan</span>
         </a>
     </li>
 @endif
@@ -195,7 +195,7 @@
                 <span class="nk-menu-text">Laporan Harian</span>
             </a>
         </li>
-        
+
         <li class="nk-menu-item">
             <a href="{{ route('evaluasi-index') }}" class="nk-menu-link">
                 <span class="nk-menu-icon">
@@ -235,7 +235,7 @@
             <span class="nk-menu-icon">
                 <em class="icon ni ni-check"></em>
             </span>
-            <span class="nk-menu-text">Verifikasi</span>
+            <span class="nk-menu-text">Verifikasi Laporan</span>
         </a>
     </li>
 @endif
