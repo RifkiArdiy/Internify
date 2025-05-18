@@ -7,11 +7,11 @@
                 </a>
             </div>
             <div class="nk-header-brand d-xl-none">
-                <a href="{{ route('welcome.index') }}" class="logo-link">
-                    <img class="logo-light logo-img" src="{{ asset('assets/admin/images/logo.png') }}"
-                        srcset="{{ asset('assets/admin/images/logo2x.png') }}" alt="logo">
-                    <img class="logo-dark logo-img" src="{{ asset('assets/admin/images/logo-dark.png') }}"
-                        srcset="{{ asset('assets/admin/images/logo-dark2x.png') }}" alt="logo-dark">
+                <a href="{{ route('welcome.index') }}" class="logo-link nk-sidebar-logo">
+                    <img class="logo-light logo-img" src="{{ asset('assets/home/images/logo.png') }}"
+                        srcset="{{ asset('assets/home/images/logo2x.png 2x') }}" alt="logo">
+                    <img class="logo-dark logo-img" src="{{ asset('assets/home/images/logo-dark.png') }}"
+                        srcset="{{ asset('assets/home/images/logo-dark2x.png 2x') }}" alt="logo-dark">
                 </a>
             </div>
             <!-- .nk-header-brand -->
