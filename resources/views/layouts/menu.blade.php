@@ -71,7 +71,7 @@
         </a>
     </li>
     <li class="nk-menu-item">
-        <a href="{{ route('magangApplication.index') }}" class="nk-menu-link">
+        <a href="{{ route('admin.magangApplication.index') }}" class="nk-menu-link">
             <span class="nk-menu-icon">
                 <em class="icon ni ni-file-text"></em>
             </span>
@@ -84,6 +84,15 @@
                 <em class="icon ni ni-comments"></em>
             </span>
             <span class="nk-menu-text">Program Studi</span>
+        </a>
+        <!-- .nk-menu-sub -->
+    </li>
+    <li class="nk-menu-item has-sub">
+        <a href="{{ route('monitoring.index') }}" class="nk-menu-link">
+            <span class="nk-menu-icon">
+                <em class="icon ni ni-report"></em>
+            </span>
+            <span class="nk-menu-text">Monitoring & Statistik</span>
         </a>
         <!-- .nk-menu-sub -->
     </li>
@@ -118,7 +127,7 @@
             <span class="nk-menu-icon">
                 <em class="icon ni ni-check"></em>
             </span>
-            <span class="nk-menu-text">Verifikasi</span>
+            <span class="nk-menu-text">Verifikasi Laporan</span>
         </a>
     </li>
 @endif
@@ -139,15 +148,27 @@
     <li class="nk-menu-heading">
         <h6 class="overline-title text-primary-alt">User Management</h6>
     </li>
+    <li class="nk-menu-item">
+        <a href="{{ route('profilAkademik.index') }}" class="nk-menu-link">
+            <span class="nk-menu-icon">
+                <em class="icon ni ni-user"></em>
+            </span>
+            <span class="nk-menu-text">Profil Akademik</span>
+        </a>
+    </li>
     @if (Auth::user()->mahasiswa->status == '-')
-        <li class="nk-menu-item">
-            <a href="{{ route('profilAkademik.index') }}" class="nk-menu-link">
-                <span class="nk-menu-icon">
-                    <em class="icon ni ni-user"></em>
-                </span>
-                <span class="nk-menu-text">Profil Akademik</span>
-            </a>
-        </li>
+    <li class="nk-menu-item">
+        <a href="{{ route('lowonganMagang.indexMhs') }}" class="nk-menu-link">
+            <span class="nk-menu-icon">
+                <em class="icon ni ni-briefcase"></em>
+            </span>
+            <span class="nk-menu-text">Lowongan Magang</span>
+        </a>
+    </li>
+    @endif
+    {{-- <li class="nk-menu-item"> 
+    @if (Auth::user()->mahasiswa->status == '-')
+        
         <li class="nk-menu-item">
             <a href="{{ route('lowonganMagang.indexMhs') }}" class="nk-menu-link">
                 <span class="nk-menu-icon">
@@ -174,7 +195,24 @@
                 <span class="nk-menu-text">Laporan Harian</span>
             </a>
         </li>
+
+        <li class="nk-menu-item">
+            <a href="{{ route('evaluasi-index') }}" class="nk-menu-link">
+                <span class="nk-menu-icon">
+                    <em class="icon ni ni-file-text"></em>
+                </span>
+                <span class="nk-menu-text">Evaluasi Magang</span>
+            </a>
+        </li>
     @endif
+    {{-- <li class="nk-menu-item">
+        <a href="{{ route('lihatLamaran',Auth::user()->mahasiswa->mahasiswa_id) }}" class="nk-menu-link">
+            <span class="nk-menu-icon">
+                <em class="icon ni ni-check"></em>
+            </span>
+            <span class="nk-menu-text">Selesai Magang</span>
+        </a>
+    </li> --}}
 @endif
 @if (Auth::user()->level->level_nama == 'Company')
     <li class="nk-menu-heading">
@@ -197,7 +235,7 @@
             <span class="nk-menu-icon">
                 <em class="icon ni ni-check"></em>
             </span>
-            <span class="nk-menu-text">Verifikasi</span>
+            <span class="nk-menu-text">Verifikasi Laporan</span>
         </a>
     </li>
 @endif

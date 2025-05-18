@@ -13,11 +13,22 @@ class LaporanController extends Controller
 {
     public function index()
     {
-        $logs = Log::with(['mahasiswa.user', 'dosen.user'])->latest()->get();
         $breadcrumb = (object) [
             'title' => 'Laporan',
             'subtitle' => ['Laporan Harian']
         ];
+        $user = Auth::user();
+
+        $mahasiswa = Mahasiswa::where('user_id', $user->user_id)->first();
+
+        if ($mahasiswa) {
+            $logs = Log::with(['mahasiswa.user', 'dosen.user'])
+                ->where('mahasiswa_id', $mahasiswa->mahasiswa_id)
+                ->get();
+        } else {
+            $logs = collect(); 
+        }
+        
         return view('mahasiswa.laporan.index', compact('breadcrumb','logs'));
     }
 

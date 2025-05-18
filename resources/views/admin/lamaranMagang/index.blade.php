@@ -17,6 +17,7 @@
                         <th class="nk-tb-col tb-col-mb"><span class="sub-text">Perusahaan</span></th>
                         <th class="nk-tb-col tb-col-mb"><span class="sub-text">Status</span></th>
                         <th class="nk-tb-col nk-tb-col-tools text-end"><span class="sub-text">Aksi</span></th>
+                        <th class="nk-tb-col nk-tb-col-tools text-end"></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -40,44 +41,20 @@
                                 </div>
                             </td>
                             <td class="nk-tb-col tb-col-mb">
-                                <span class="tb-amount">{{ $magang->lowongans->title }}</span>
+                                <span>{{ $magang->lowongans->title }}</span>
                             </td>
                             <td class="nk-tb-col tb-col-mb">
-                                <span>{{ $magang->lowongans->company->name }}</span>
+                                <span>{{ $magang->lowongans->company->user->name }}</span>
                             </td>
                             <td class="nk-tb-col tb-col-mb">
                                 <span>{{ $magang->status }}</span>
                             </td>
                             <td class="nk-tb-col nk-tb-col-tools">
-                                <ul class="nk-tb-actions gx-1">
-                                    <li>
-                                        <div class="drodown">
-                                            <a href="#" class="dropdown-toggle btn btn-icon btn-trigger"
-                                                data-bs-toggle="dropdown"><em class="icon ni ni-more-h"></em></a>
-                                            <div class="dropdown-menu dropdown-menu-end">
-                                                <ul class="link-list-opt no-bdr">
-                                                    <li><a href="#"><em class="icon ni ni-focus"></em><span>Quick
-                                                                View</span></a></li>
-                                                    <li><a href="#"><em class="icon ni ni-eye"></em><span>View
-                                                                Details</span></a></li>
-                                                    <li><a href="{{ route('mahasiswa.edit', $magang->mahasiswa_id) }}"><em
-                                                                class="icon ni ni-repeat"></em></span>Edit</span></a>
-                                                    </li>
-
-                                                    <li class="divider"></li>
-                                                    <li><a href="{{ route('mahasiswa.destroy', $magang->mahasiswa_id) }}"><em
-                                                                class="icon ni ni-trash"></em><span>Hapus
-                                                                Mahasiswa</span></a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </li>
-                                </ul>
-
+                                
                                 @if ($magang->status === 'Disetujui' || $magang->status === 'Ditolak')
                                     <span>Reviewed</span>
                                 @else
-                                    <form action="{{ route('magangApplication.update', $magang->magang_id) }}"
+                                    <form action="{{ route('admin.magangApplication.update', $magang->magang_id) }}"
                                         method="POST" style="display: inline;"
                                         onsubmit="return confirm('Apakah anda yakin menyetujui lamaran ini?')">
                                         @csrf
@@ -88,7 +65,7 @@
                                             <span style="padding:5px;">Setuju</span></button>
                                     </form>
 
-                                    <form action="{{ route('magangApplication.update', $magang->magang_id) }}"
+                                    <form action="{{ route('admin.magangApplication.update', $magang->magang_id) }}"
                                         method="POST" style="display: inline;"
                                         onsubmit="return confirm('Apakah anda yakin menolak lamaran ini?')">
                                         @csrf
@@ -100,6 +77,28 @@
                                         </button>
                                     </form>
                                 @endif
+                            </td>
+                            <td class="nk-tb-col nk-tb-col-tools">
+                                <ul class="nk-tb-actions gx-1">
+                                    <li>
+                                        <div class="drodown">
+                                            <a href="#" class="dropdown-toggle btn btn-icon btn-trigger"
+                                                data-bs-toggle="dropdown"><em class="icon ni ni-more-h"></em></a>
+                                            <div class="dropdown-menu dropdown-menu-end">
+                                                <ul class="link-list-opt no-bdr">
+                                                    <li><a href="{{ route('admin.magangApplication.show', $magang->magang_id)}}"><em class="icon ni ni-eye"></em><span>Lihat
+                                                                Detail</span></a></li>
+
+                                                    <li class="divider"></li>
+
+                                                    <li><a href="{{ route('admin.magangApplication.destroy', $magang->magang_id) }}"><em
+                                                                class="icon ni ni-trash"></em><span>Hapus
+                                                                Lamaran</span></a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
                             </td>
                         </tr>
                     @endforeach

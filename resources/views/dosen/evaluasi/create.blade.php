@@ -19,6 +19,11 @@
         </div>
         
         <div class="mb-3">
+            <label for="report_text" class="form-label"></label>
+            <input type="text" class="form-control" value="{{ $evaluation->logs->report_text ?? '-' }}" readonly>
+        </div>
+        
+        <div class="mb-3">
             <label for="evaluasi" class="form-label">Evaluasi</label>
             <textarea name="evaluasi" class="form-control" rows="4" required>{{ old('evaluasi') }}</textarea>
         </div>

@@ -54,7 +54,7 @@
                     <div class="form-group">
                         <label class="form-label" for="pengalaman">Pengalaman: <span class="text-danger">*</span></label>
                         <div class="form-control-wrap">
-                            <input type="text" class="form-control" id="pengalaman" name="pengalaman" value="{{ old('pengalaman') }}" placeholder="Masukkan pengalaman anda" required>
+                            <input type="text" class="form-control" id="pengalaman" name="pengalaman" value="{{ old('pengalaman') }}" placeholder="Masukkan pengalaman anda (bulan) " required>
                         </div>
                     </div>
                 </div>
@@ -63,7 +63,7 @@
                     <div class="form-group">
                         <label class="form-label" for="etika">Etika: <span class="text-danger">*</span></label>
                         <div class="form-control-wrap">
-                            <input type="text" class="form-control" id="etika" name="etika" value="{{ old('etika') }}" placeholder="Masukkan etika anda" required>
+                            <input type="text" class="form-control" id="etika" name="etika" value="{{ old('etika') }}" placeholder="Jumlah kumulasi Alfa Ijin Sakit" required>
                         </div>
                     </div>
                 </div>
@@ -72,7 +72,7 @@
                     <div class="form-group">
                         <label class="form-label" for="ipk">IPK: <span class="text-danger">*</span></label>
                         <div class="form-control-wrap">
-                            <input type="text" class="form-control" id="ipk" name="ipk" value="{{ old('ipk') }}" placeholder="Masukkan Nilai IPK" required>
+                            <input type="text" class="form-control" id="ipk" name="ipk" value="{{ old('ipk') }}" placeholder="Masukkan Nilai IPK (1-4)" required>
                         </div>
                     </div>
                 </div>

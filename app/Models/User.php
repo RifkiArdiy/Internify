@@ -34,7 +34,7 @@ class User extends Authenticatable
 
     public function dosen(): HasOne
     {
-        return $this->hasOne(Dosen::class);
+        return $this->hasOne(Dosen::class, 'user_id', 'user_id');
     }
 
     public function company(): HasOne

@@ -1,13 +1,13 @@
 @extends('layouts.app')
 
-@section('action')
+{{-- @section('action')
     <li class="nk-block-tools-opt">
         <a href="{{ route('evaluasi.create') }}" class="btn btn-primary">
             <em class="icon ni ni-plus"></em>
             <span>Tambah Evaluasi</span>
         </a>
     </li>
-@endsection
+@endsection --}}
 
 @section('content')
     @if(session('success'))
@@ -19,7 +19,7 @@
             <table class="datatable-init-export nowrap nk-tb-list nk-tb-ulist" data-auto-responsive="false">
                 <thead>
                     <tr class="nk-tb-item nk-tb-head">
-                        <th class="nk-tb-col"><span class="sub-text">ID</span></th>
+                        <th class="nk-tb-col"><span class="sub-text">No</span></th>
                         <th class="nk-tb-col"><span class="sub-text">Mahasiswa</span></th>
                         <th class="nk-tb-col"><span class="sub-text">Perusahaan</span></th>
                         <th class="nk-tb-col"><span class="sub-text">Evaluasi</span></th>
@@ -30,7 +30,7 @@
                     @foreach($evaluasi as $e)
                         <tr class="nk-tb-item">
                             <td class="nk-tb-col">
-                                <span>{{ $e->evaluasi_id }}</span>
+                                <span>{{ $loop->iteration }}</span>
                             </td>
                             <td class="nk-tb-col">
                                 <div class="user-info">
@@ -51,11 +51,7 @@
                                                 data-bs-toggle="dropdown"><em class="icon ni ni-more-h"></em></a>
                                             <div class="dropdown-menu dropdown-menu-end">
                                                 <ul class="link-list-opt no-bdr">
-                                                    <li><a href="#"><em class="icon ni ni-eye"></em><span>Lihat Detail</span></a></li>
-                                                    <li><a href="{{ route('evaluasi.edit', $e->evaluasi_id) }}
-                                                                ?mahasiswa_id={{ $e->mahasiswa_id }}
-                                                                &company_id={{ $e->company_id }}
-                                                                &log_id={{ $e->log_id }}">
+                                                    <li><a href="{{ route('evaluasi.edit', $e->evaluasi_id) }}">
                                                             <em class="icon ni ni-edit"></em>
                                                             <span>Edit</span>
                                                         </a>

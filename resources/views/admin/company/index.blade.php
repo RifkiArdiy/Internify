@@ -39,7 +39,7 @@
                                         @endif
                                     </div>
                                     <div class="user-info">
-                                        <span class="tb-lead">{{ $company->user->name }}<span
+                                        <span>{{ $company->user->name }}<span
                                                 class="dot dot-success d-md-none ms-1"></span></span>
                                     </div>
                                 </div>
@@ -61,10 +61,8 @@
                                                 data-bs-toggle="dropdown"><em class="icon ni ni-more-h"></em></a>
                                             <div class="dropdown-menu dropdown-menu-end">
                                                 <ul class="link-list-opt no-bdr">
-                                                    <li><a href="#"><em class="icon ni ni-focus"></em><span>Quick
-                                                                View</span></a></li>
-                                                    <li><a href="#"><em class="icon ni ni-eye"></em><span>View
-                                                                Details</span></a></li>
+                                                    <li><a href="{{ route('companies.show', $company->company_id)}}"><em class="icon ni ni-eye"></em><span>Lihat
+                                                                Detail</span></a></li>
                                                     <li><a href="{{ route('companies.edit', $company->company_id) }}"><em
                                                                 class="icon ni ni-edit-alt"></em><span>Edit</span></a>
                                                     </li>
