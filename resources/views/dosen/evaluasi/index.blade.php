@@ -1,13 +1,13 @@
 @extends('layouts.app')
 
-@section('action')
+{{-- @section('action')
     <li class="nk-block-tools-opt">
         <a href="{{ route('evaluasi.create') }}" class="btn btn-primary">
             <em class="icon ni ni-plus"></em>
             <span>Tambah Evaluasi</span>
         </a>
     </li>
-@endsection
+@endsection --}}
 
 @section('content')
     @if(session('success'))
@@ -52,10 +52,7 @@
                                             <div class="dropdown-menu dropdown-menu-end">
                                                 <ul class="link-list-opt no-bdr">
                                                     <li><a href="#"><em class="icon ni ni-eye"></em><span>Lihat Detail</span></a></li>
-                                                    <li><a href="{{ route('evaluasi.edit', $e->evaluasi_id) }}
-                                                                ?mahasiswa_id={{ $e->mahasiswa_id }}
-                                                                &company_id={{ $e->company_id }}
-                                                                &log_id={{ $e->log_id }}">
+                                                    <li><a href="{{ route('evaluasi.edit', $e->evaluasi_id) }}">
                                                             <em class="icon ni ni-edit"></em>
                                                             <span>Edit</span>
                                                         </a>

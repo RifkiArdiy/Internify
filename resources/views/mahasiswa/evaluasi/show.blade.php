@@ -24,6 +24,15 @@
                     </div>
                 </div>
 
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="form-label">Laporan Saya</label>
+                        <div class="form-control-wrap">
+                            <input type="text" class="form-control" value="{{ $evaluation->logs->report_text ?? '-' }}" readonly>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="col-md-12">
                     <div class="form-group">
                         <label class="form-label">Isi Evaluasi</label>
