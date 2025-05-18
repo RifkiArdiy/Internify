@@ -18,6 +18,7 @@
             <table class="datatable-init-export nowrap nk-tb-list nk-tb-ulist" data-auto-responsive="false">
                 <thead>
                     <tr class="nk-tb-item nk-tb-head">
+                        <th class="nk-tb-col export-col"><span class="sub-text">Perusahaan</span></th>
                         <th class="nk-tb-col export-col"><span class="sub-text">Dosen Pembimbing</span></th>
                         <th class="nk-tb-col export-col"><span class="sub-text">Isi Laporan</span></th>
                         <th class="nk-tb-col export-col"><span class="sub-text">Tanggal</span></th>

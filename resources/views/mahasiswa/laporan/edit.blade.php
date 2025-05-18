@@ -23,12 +23,28 @@
                         </div>
                     </div>
 
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label class="form-label" for="company_id">Perusahaan:<span class="text-danger">*</span></label>
+                            <div class="form-control-wrap">
+                                @php
+                                    $application = Auth::user()->mahasiswa->applications->first();
+                                @endphp
+                                    <input class="form-control" type="text"
+                                        value="{{ $application->lowongans->company->user->name }}" readonly>
+
+                                    <input type="hidden" name="company_id"
+                                        value="{{ $application->lowongans->company->company_id }}">                            
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="col-12">
                         <div class="form-group">
                             <label class="form-label" for="report_text">Isi Laporan:<span
                                     class="text-danger">*</span></label>
                             <div class="form-control-wrap">
-                                <textarea class="form-control" name="report_text" rows="5" required></textarea>
+                                <textarea class="form-control" name="report_text" rows="5" required>{{ $logs->report_text }}</textarea>
                             </div>
                         </div>
                     </div>

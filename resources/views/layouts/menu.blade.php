@@ -87,6 +87,15 @@
         </a>
         <!-- .nk-menu-sub -->
     </li>
+    <li class="nk-menu-item has-sub">
+        <a href="{{ route('monitoring.index') }}" class="nk-menu-link">
+            <span class="nk-menu-icon">
+                <em class="icon ni ni-report"></em>
+            </span>
+            <span class="nk-menu-text">Monitoring & Statistik</span>
+        </a>
+        <!-- .nk-menu-sub -->
+    </li>
 @endif
 @if (Auth::user()->level->level_nama == 'Dosen')
     <li class="nk-menu-heading">
@@ -118,7 +127,7 @@
             <span class="nk-menu-icon">
                 <em class="icon ni ni-check"></em>
             </span>
-            <span class="nk-menu-text">Verifikasi</span>
+            <span class="nk-menu-text">Verifikasi Laporan</span>
         </a>
     </li>
 @endif
@@ -166,6 +175,15 @@
                 <span class="nk-menu-text">Laporan Harian</span>
             </a>
         </li>
+
+        <li class="nk-menu-item">
+            <a href="{{ route('evaluasi-index') }}" class="nk-menu-link">
+                <span class="nk-menu-icon">
+                    <em class="icon ni ni-file-text"></em>
+                </span>
+                <span class="nk-menu-text">Evaluasi Magang</span>
+            </a>
+        </li>
     @endif
     <li class="nk-menu-item">
         <a href="{{ route('lamaran') }}" class="nk-menu-link">
@@ -175,6 +193,14 @@
             <span class="nk-menu-text">Lamaran Magang</span>
         </a>
     </li>
+    {{-- <li class="nk-menu-item">
+        <a href="{{ route('lihatLamaran',Auth::user()->mahasiswa->mahasiswa_id) }}" class="nk-menu-link">
+            <span class="nk-menu-icon">
+                <em class="icon ni ni-check"></em>
+            </span>
+            <span class="nk-menu-text">Selesai Magang</span>
+        </a>
+    </li> --}}
 @endif
 @if (Auth::user()->level->level_nama == 'Company')
     <li class="nk-menu-heading">
@@ -197,7 +223,7 @@
             <span class="nk-menu-icon">
                 <em class="icon ni ni-check"></em>
             </span>
-            <span class="nk-menu-text">Verifikasi</span>
+            <span class="nk-menu-text">Verifikasi Laporan</span>
         </a>
     </li>
 @endif

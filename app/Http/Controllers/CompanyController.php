@@ -23,7 +23,13 @@ class CompanyController extends Controller
 
     public function indexVerifikasi()
     {
-        $logs = Log::with(['mahasiswa.user', 'dosen.user'])->latest()->get();
+        $companies = auth()->user()->company;
+
+        $logs = Log::with(['mahasiswa.user', 'companies.user'])
+            ->where('company_id', $companies->company_id) // filter laporan
+            ->latest()
+            ->get();
+
         $breadcrumb = (object) [
             'title' => 'Verifikasi Laporan Mahasiswa',
             'subtitle' => ['Laporan Harian']

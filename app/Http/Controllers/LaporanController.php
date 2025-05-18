@@ -11,58 +11,23 @@ use Illuminate\Support\Facades\Auth;
 
 class LaporanController extends Controller
 {
-    // public function index()
-    // {
-    //     $user = auth()->user();
-
-    //     if ($user->level->level_nama === 'Mahasiswa') {
-    //         $logs = Log::with(['mahasiswa.user'])
-    //             ->whereHas('mahasiswa', function ($q) use ($user) {
-    //                 $q->where('user_id', $user->id);
-    //             })
-    //             ->latest()->get();
-    //     } elseif ($user->level->level_nama === 'Dosen') {
-    //         $logs = Log::with(['dosen.user'])
-    //             ->whereHas('dosen', function ($q) use ($user) {
-    //                 $q->where('user_id', $user->id);
-    //             })
-    //             ->latest()->get();
-    //     } else {
-    //         // Jika admin atau role lain, tampilkan semua
-    //         $logs = Log::with(['mahasiswa.user', 'dosen.user'])->latest()->get();
-    //     }
-
-    //     $breadcrumb = (object) [
-    //         'title' => 'Laporan',
-    //         'subtitle' => ['Laporan Harian']
-    //     ];
-
-    //     return view('mahasiswa.laporan.index', compact('breadcrumb', 'logs'));
-    // }
-
     public function index()
     {
-        $user = auth()->user();
-
-        if ($user->level && $user->level->level_nama === 'Mahasiswa') {
-            $logs = Log::with(['mahasiswa.user', 'dosen.user'])
-                ->where('mahasiswa_id', $user->mahasiswa->mahasiswa_id)
-                ->latest()
-                ->get();
-        } elseif ($user->level->level_nama == 'Dosen') {
-            $dosenId = $user->dosen->dosen_id ?? null;
-            $logs = Log::with(['mahasiswa'])
-                ->where('dosen_id', $dosenId)
-                ->latest()
-                ->get();
-        } else {
-            // Admin atau role lain
-            $logs = collect(); // kosongkan atau tampilkan semua sesuai kebutuhan
-        }
-        $breadcrumb = (object)[
+        $breadcrumb = (object) [
             'title' => 'Laporan',
             'subtitle' => ['Laporan Harian']
         ];
+        $user = Auth::user();
+
+        $mahasiswa = Mahasiswa::where('user_id', $user->user_id)->first();
+
+        if ($mahasiswa) {
+            $logs = Log::with(['mahasiswa.user', 'dosen.user'])
+                ->where('mahasiswa_id', $mahasiswa->mahasiswa_id)
+                ->get();
+        } else {
+            $logs = collect();
+        }
 
         return view('mahasiswa.laporan.index', compact('breadcrumb', 'logs'));
     }

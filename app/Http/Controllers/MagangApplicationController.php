@@ -60,10 +60,10 @@ class MagangApplicationController extends Controller
             return redirect()->back()->with('error', 'Silakan login terlebih dahulu.');
         }
 
-        // // Cek apakah user punya role mahasiswa (opsional tapi disarankan)
-        // if ($mahasiswa->user->level->level_nama !== 'mahasiswa') {
-        //     return redirect()->back()->with('error', 'Hanya mahasiswa yang dapat melamar.');
-        // }
+        // Cek apakah user punya role mahasiswa (opsional tapi disarankan)
+        if ($mahasiswa->user->level->level_nama !== 'mahasiswa') {
+            return redirect()->back()->with('error', 'Hanya mahasiswa yang dapat melamar.');
+        }
 
 
         // Cek apakah sudah pernah melamar untuk lowongan ini
@@ -146,6 +146,14 @@ class MagangApplicationController extends Controller
             'status' => $request->status
         ]);
 
+        if ($request->status === 'Disetujui') {
+            Mahasiswa::where('mahasiswa_id', $lamaran->mahasiswa_id)
+                ->update(['status' => 'is_magang']);
+        }//elseif($request->status === 'Selesai') {
+        //     Mahasiswa::where('mahasiswa_id', $lamaran->mahasiswa_id)
+        //         ->update(['status' => 'selesai_magang']);
+        // }
+
         return redirect('admin/magangApplication');
     }
 
@@ -156,9 +164,9 @@ class MagangApplicationController extends Controller
     {
         try {
             MagangApplication::destroy($id);
-            return redirect('/mahasiswa/lamaran')->with('success', 'Data lamaran berhasil dihapus');
+            return redirect('admin/magangApplication')->with('success', 'Data lamaran berhasil dihapus');
         } catch (\Illuminate\Database\QueryException $e) {
-            return redirect('/mahasiswa/lamaran')->with('error', 'Data lamaran gagal dihapus karena masih terdapat tabel lain yang terkait dengan data ini');
+            return redirect('admin/magangApplication')->with('error', 'Data lamaran gagal dihapus karena masih terdapat tabel lain yang terkait dengan data ini');
         }
     }
 }

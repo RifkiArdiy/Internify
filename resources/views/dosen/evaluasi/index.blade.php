@@ -1,13 +1,13 @@
 @extends('layouts.app')
 
-@section('action')
+{{-- @section('action')
     <li class="nk-block-tools-opt">
         <a href="{{ route('evaluasi.create') }}" class="btn btn-primary">
             <em class="icon ni ni-plus"></em>
             <span>Tambah Evaluasi</span>
         </a>
     </li>
-@endsection
+@endsection --}}
 
 @section('content')
     @if (session('success'))
@@ -30,7 +30,7 @@
                     @foreach ($evaluasi as $e)
                         <tr class="nk-tb-item">
                             <td class="nk-tb-col">
-                                <span>{{ $e->evaluasi_id }}</span>
+                                <span>{{ $loop->iteration }}</span>
                             </td>
                             <td class="nk-tb-col">
                                 <div class="user-info">
@@ -51,37 +51,42 @@
                                                 data-bs-toggle="dropdown"><em class="icon ni ni-more-h"></em></a>
                                             <div class="dropdown-menu dropdown-menu-end">
                                                 <ul class="link-list-opt no-bdr">
-                                                    <li><a href="#"><em class="icon ni ni-eye"></em><span>Lihat
-                                                                Detail</span></a></li>
-                                                    <li><a
-                                                            href="{{ route('evaluasi.edit', $e->evaluasi_id) }}
+                                                    <<<<<<< HEAD <li><a href="#"><em
+                                                                class="icon ni ni-eye"></em><span>Lihat
+                                                                Detail</span></a>
+                                    </li>
+                                    <li><a
+                                            href="{{ route('evaluasi.edit', $e->evaluasi_id) }}
                                                                 ?mahasiswa_id={{ $e->mahasiswa_id }}
                                                                 &company_id={{ $e->company_id }}
                                                                 &log_id={{ $e->log_id }}">
-                                                            <em class="icon ni ni-edit"></em>
-                                                            <span>Edit</span>
-                                                        </a>
-                                                    </li>
-                                                    <li class="divider"></li>
-                                                    <li>
-                                                        <form action="{{ route('evaluasi.destroy', $e) }}" method="POST"
-                                                            onsubmit="return confirm('Yakin ingin menghapus laporan ini?')">
-                                                            @csrf
-                                                            @method('DELETE')
-                                                            <button type="submit" class="btn btn-link text-danger"><em
-                                                                    class="icon ni ni-trash"></em><span>Hapus</span></button>
-                                                        </form>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
+                                            =======
+                                    <li><a href="{{ route('evaluasi.edit', $e->evaluasi_id) }}">
+                                            >>>>>>> 04c949bbf169fa4fd7dec884af75d08191270e39
+                                            <em class="icon ni ni-edit"></em>
+                                            <span>Edit</span>
+                                        </a>
+                                    </li>
+                                    <li class="divider"></li>
+                                    <li>
+                                        <form action="{{ route('evaluasi.destroy', $e) }}" method="POST"
+                                            onsubmit="return confirm('Yakin ingin menghapus laporan ini?')">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-link text-danger"><em
+                                                    class="icon ni ni-trash"></em><span>Hapus</span></button>
+                                        </form>
                                     </li>
                                 </ul>
-                            </td>
-                        </tr>
-                    @endforeach
-                </tbody>
-            </table>
         </div>
+    </div>
+    </li>
+    </ul>
+    </td>
+    </tr>
+    @endforeach
+    </tbody>
+    </table>
+    </div>
     </div>
 @endsection
