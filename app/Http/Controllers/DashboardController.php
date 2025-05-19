@@ -6,7 +6,12 @@ use App\Models\MagangApplication;
 use App\Models\Company;
 use App\Models\LowonganMagang;
 use App\Models\Mahasiswa;
+use Database\Seeders\MahasiswaSeeder;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
+
+
 
 class DashboardController extends Controller
 {
@@ -29,7 +34,20 @@ class DashboardController extends Controller
             'title' => 'Dashboard',
             'subtitle' => ['Welcome to Dashboard Internify']
         ];
-        return view('dashboard.mahasiswa', compact('breadcrumb'));
+        $mahasiswa_id = Mahasiswa::where('user_id', Auth::user()->user_id)->value('mahasiswa_id');
+        $magang = MagangApplication::where('mahasiswa_id', $mahasiswa_id)->first();
+        if($magang){
+            $today = Carbon::today();
+            $endDate = Carbon::parse($magang->lowongans->period->end_date);
+            if($today->greaterThan($endDate)){
+                $status = 'Magang Anda Selesai';
+            }else{
+                $status = 'Anda Sedang Melaksanakan Magang';
+            }
+        }else{
+            $status = 'Anda Tidak Sedang Melaksanakan Magang';
+        }
+        return view('dashboard.mahasiswa', compact('breadcrumb', 'status', 'magang'));
     }
 
     public function indexDosen()

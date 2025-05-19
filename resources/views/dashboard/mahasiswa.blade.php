@@ -68,6 +68,23 @@
                     </div>
                 </div>
             </div>
+            <div class="col-sm-6 col-lg-4 col-xxl-3">
+                <div class="card card-bordered h-100">
+                    <div class="card-inner">
+                        @if ($magang)
+                            <h4>{{$status}}</h4>
+                            <p>Tempat Magang: {{$magang->lowongans->company->user->name}}</p>
+                            <p>Judul Magang: {{$magang->lowongans->title}}</p>
+                            <p>Periode Magang: {{$magang->lowongans->period->start_date}} - {{$magang->lowongans->period->end_date}}</p>
+                        @else
+                            <h4>{{$status}}</h4> 
+                            <p>Anda dapat membuka menu lowongan magang untuk melamar</p>                           
+                        @endif
+
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
     <div class="nk-block">
