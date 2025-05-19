@@ -18,6 +18,7 @@ use App\Models\MagangApplication;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\EvaluasiMagangController;
+use App\Http\Controllers\FeedbackMagangController;
 use App\Http\Controllers\ProfilAkademikController;
 use App\Http\Controllers\MonitoringController;
 
@@ -186,6 +187,14 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/evaluasi/{id}/edit', [EvaluasiMagangController::class, 'edit'])->name('evaluasi-edit');
             Route::put('/evaluasi/{id}', [EvaluasiMagangController::class, 'update'])->name('evaluasi-update');
             Route::delete('/evaluasi/{id}', [EvaluasiMagangController::class, 'destroy'])->name('evaluasi-destroy');
+            
+        Route::get('feedback', [FeedbackMagangController::class, 'index'])->name('feedback-index');
+            Route::get('/feedback/create', [FeedbackMagangController::class, 'create'])->name('feedback-create');
+            Route::post('/feedback/store', [FeedbackMagangController::class, 'store'])->name('feedback-store');
+            Route::get('/feedback/show/{id}', [FeedbackMagangController::class, 'showMhs'])->name('feedback-show');
+            Route::get('/feedback/{id}/edit', [FeedbackMagangController::class, 'edit'])->name('feedback-edit');
+            Route::put('/feedback/{id}', [FeedbackMagangController::class, 'update'])->name('feedback-update');
+            Route::delete('/feedback/{id}', [FeedbackMagangController::class, 'destroy'])->name('feedback-destroy');
 
         Route::prefix('profilAkademik')->group(function () {
             Route::get('/', [ProfilAkademikController::class, 'index'])->name('profilAkademik.index');

@@ -32,7 +32,7 @@
                     </tr>
                     <tr>
                         <th>Deskripsi</th>
-                        <td>{{ $logang->description }}</td>
+                        <td>{!! $logang->description !!}</td>
                     </tr>
                     <tr>
                         <th>Periode Awal</th>
@@ -44,7 +44,7 @@
                     </tr>
                     <tr>
                         <th>Kriteria</th>
-                        <td>{{ $logang->requirements }}</td>
+                        <td>{!! $logang->requirements !!}</td>
                     </tr>
                 </table>
             </div>
