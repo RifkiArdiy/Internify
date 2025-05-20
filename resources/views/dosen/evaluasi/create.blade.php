@@ -18,9 +18,13 @@
             <input type="text" class="form-control" value="{{ \App\Models\Company::find($companyId)?->user->name }}" readonly>
         </div>
         
+        @php
+            $log = \App\Models\Log::find($logId);
+        @endphp
+
         <div class="mb-3">
-            <label for="report_text" class="form-label"></label>
-            <input type="text" class="form-control" value="{{ $evaluation->logs->report_text ?? '-' }}" readonly>
+            <label for="report_text" class="form-label">Laporan Mahasiswa</label>
+            <input type="text" class="form-control" value="{{ $log->report_text ?? '-' }}" readonly>
         </div>
         
         <div class="mb-3">

@@ -184,6 +184,14 @@
                 <span class="nk-menu-text">Evaluasi Magang</span>
             </a>
         </li>
+        <li class="nk-menu-item">
+            <a href="{{ route('feedback-index') }}" class="nk-menu-link">
+                <span class="nk-menu-icon">
+                    <em class="icon ni ni-comments"></em>
+                </span>
+                <span class="nk-menu-text">Feedback Magang</span>
+            </a>
+        </li>
     @endif
     <li class="nk-menu-item">
         <a href="{{ route('lamaran') }}" class="nk-menu-link">

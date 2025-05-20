@@ -27,7 +27,7 @@
                                     @foreach ($kriteria as $requirement)
                                         <option value="{{ $requirement }}"
                                             {{ old('bidang_keahlian') == $requirement ? 'selected' : '' }}>
-                                            {{ $requirement }}
+                                            {!! $requirement !!}
                                         </option>
                                     @endforeach
                                 </select>

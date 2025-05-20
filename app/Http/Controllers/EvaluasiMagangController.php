@@ -91,28 +91,23 @@ class EvaluasiMagangController extends Controller
         return redirect()->route('evaluasi.index')->with('success', 'Evaluasi berhasil disimpan');
     }
 
-    public function edit($id)
+    public function edit($id, Request $request)
     {
         $evaluation = EvaluasiMagang::with('mahasiswa.user', 'company.user')->findOrFail($id);
         $mahasiswas = Mahasiswa::all();
         $companies = Company::all();
         $logs = Log::all();
+        $mahasiswaId = $request->query('mahasiswa_id');
+        $companyId = $request->query('company_id');
+        $logId = $request->query('log_id');
 
         $breadcrumb = (object) [
             'title' => 'Edit Evaluasi Magang',
             'subtitle' => ['Form Validation']
         ];
 
-        return view('dosen.evaluasi.edit', [
-            'evaluation' => $evaluation,
-            'mahasiswas' => $mahasiswas,
-            'companies' => $companies,
-            'logs' => $logs,
-            'breadcrumb' => $breadcrumb,
-            'mahasiswaId' => $evaluation->mahasiswa_id,
-            'companyId' => $evaluation->company_id,
-            'logId' => $evaluation->log_id,
-        ]);
+        return view('dosen.evaluasi.edit', compact('evaluation','logId','logs','mahasiswas', 'companies', 'breadcrumb', 'mahasiswaId', 'companyId'));
+
     }
 
 
