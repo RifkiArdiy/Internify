@@ -70,11 +70,14 @@
             </div>
             <div class="col-sm-6 col-lg-4 col-xxl-3">
                 <div class="card card-bordered h-100">
-                    <div class="card-body d-flex flex-column justify-content-between">
-                        <div>
-                            <div class="d-flex align-items-center mb-2">
-                                <h5 class="card-title mb-0">{{ $status }}</h5>
-                            </div>
+                        <div class="card-inner">
+                            <div class="project">
+                                <div  class="project-head">
+                                    <div class="project-info">
+                                        <h6 class="title">{{$status}}</h6>
+                                        <span class="sub-text">Internify</span>
+                                    </div>
+                                </div>
                             <hr>
             
                             @if ($magang)
@@ -92,15 +95,14 @@
                                     </span>
                                 </p>
                             @else
-                                <p class="text-muted mt-3">Anda belum memiliki magang aktif.</p>
-                                <p class="small">Silakan buka menu <a href="{{ route('lowongan.index') }}">Lowongan Magang</a> untuk melamar.</p>
+                                <p class="project-details">Anda belum memiliki magang aktif.</p>
+                                <p class="project-details">Silakan buka menu <a href="{{ route('lowonganMagang.indexMhs') }}">Lowongan Magang</a> untuk melamar.</p>
                             @endif
                         </div>
                     </div>
                 </div>
             </div>
-            
-
+        </div>
         </div>
     </div>
     <div class="nk-block">

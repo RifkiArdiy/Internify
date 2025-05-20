@@ -45,7 +45,7 @@ class DashboardController extends Controller
                 $status = 'Anda Sedang Melaksanakan Magang';
             }
         }else{
-            $status = 'Anda Tidak Sedang Melaksanakan Magang';
+            $status = 'Anda Belum Magang';
         }
         return view('dashboard.mahasiswa', compact('breadcrumb', 'status', 'magang'));
     }
