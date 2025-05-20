@@ -4,7 +4,6 @@
     @if (session('success'))
         <div class="alert alert-success">{{ session('success') }}</div>
     @endif
-
     @if (session('error'))
         <div class="alert alert-danger">{{ session('error') }}</div>
     @endif
@@ -13,32 +12,45 @@
             <table class="datatable-init-export nowrap nk-tb-list nk-tb-ulist" data-auto-responsive="false">
                 <thead>
                     <tr class="nk-tb-item nk-tb-head">
-                        <th class="nk-tb-col export-col"><span class="sub-text">Judul Lowongan</span></th>
-                        <th class="nk-tb-col export-col"><span class="sub-text">Periode Awal</span></th>
-                        <th class="nk-tb-col export-col"><span class="sub-text">Periode akhir</span></th>
+                        <th class="nk-tb-col export-col"><span class="sub-text">Perusahaan</span></th>
+                        <th class="nk-tb-col export-col"><span class="sub-text">Judul</span></th>
+                        <th class="nk-tb-col export-col"><span class="sub-text">Deskripsi</span></th>
+                        <th class="nk-tb-col export-col"><span class="sub-text">Kriteria</span></th>
                         <th class="nk-tb-col export-col"><span class="sub-text">Status</span></th>
                         <th class="nk-tb-col nk-tb-col-tools text-end"></th>
+                        {{-- <th class="nk-tb-col export-col"><span class="sub-text">Lokasi</span></th> --}}
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($magangs as $magang)
+                    @foreach ($logang as $item)
                         <tr class="nk-tb-item">
                             <td class="nk-tb-col">
-                                <span class="tb-amount">{{ $magang->lowongans->title }}</span>
+                                <span>{{ $item->company->user->name }}</span>
                             </td>
                             <td class="nk-tb-col">
-                                <span>{{ $magang->lowongans->period->start_date }}</span>
+                                <span>{{ $item->title }}</span>
                             </td>
                             <td class="nk-tb-col">
-                                <span>{{ $magang->lowongans->period->end_date }}</span>
+                                <span>{{ Str::limit($item->description, 50) }}</span>
                             </td>
                             <td class="nk-tb-col">
-                                @if ($magang->status === 'Disetujui')
-                                    <span class="tb-status text-success">{{ $magang->status }}</span>
-                                @elseif ($magang->status === 'Ditolak')
-                                    <span class="tb-status text-danger">{{ $magang->status }}</span>
-                                @else
-                                    <span class="tb-status text-warning">{{ $magang->status }}</span>
+                                <span>{{ Str::limit($item->requirements, 50) }}</span>
+                            </td>
+                            @php
+                                $mahasiswaId = Auth::user()->mahasiswa->mahasiswa_id ?? null;
+                                $lamaran = \App\Models\MagangApplication::where('mahasiswa_id', $mahasiswaId)
+                                    ->where('lowongan_id', $item->lowongan_id)
+                                    ->first();
+                            @endphp
+                            <td class="nk-tb-col">
+                                @if ($lamaran)
+                                    @if ($lamaran->status === 'Disetujui')
+                                        <span class="badge bg-success">Diterima</span>
+                                    @elseif ($lamaran->status === 'Ditolak')
+                                        <span class="badge bg-danger">Ditolak</span>
+                                    @else
+                                        <span class="badge bg-warning text-dark">Pending</span>
+                                    @endif
                                 @endif
                             </td>
                             <td class="nk-tb-col nk-tb-col-tools">
@@ -49,23 +61,9 @@
                                                 data-bs-toggle="dropdown"><em class="icon ni ni-more-h"></em></a>
                                             <div class="dropdown-menu dropdown-menu-end">
                                                 <ul class="link-list-opt no-bdr">
-                                                    <li>
-                                                        <a href="{{ route('lihatLamaran', $magang->magang_id) }}">
-                                                            <em class="icon ni ni-eye"></em><span>Lihat Detail</span>
-                                                        </a>
+                                                    <li><a href="{{ route('lowongan-magang.show', $item->lowongan_id) }}"><em
+                                                                class="icon ni ni-eye"></em><span>Lihat Detail</span></a>
                                                     </li>
-                                                    <li class="divider"></li>
-                                                    @if (auth()->user()->hasRole('Mahasiswa'))
-                                                        <li>
-                                                            <form action="{{ route('hapusLamaran', $magang->magang_id) }}"
-                                                                method="POST" style="display:inline;">
-                                                                @csrf
-                                                                @method('DELETE')
-                                                                <button type="submit"
-                                                                    onclick="return confirm('Yakin ingin menghapus?')">Delete</button>
-                                                            </form>
-                                                        </li>
-                                                    @endif
                                                 </ul>
                                             </div>
                                         </div>
@@ -76,31 +74,6 @@
                     @endforeach
                 </tbody>
             </table>
-            {{-- <table border="1">
-
-                <tbody>
-                    @foreach ($magangs as $magang)
-                        <tr>
-                            <td>{{ $item->magang_id }}</td>
-                            <td>{{ $item->lowongans->title }}</td>
-                            <td>{{ $item->lowongans->period->start_date }}</td>
-                            <td>{{ $item->lowongans->period->end_date }}</td>
-                            <td>{{ $item->status }}</td>
-                            <td>{{ $item->lowongans->description }}</td>
-                            <td>
-                                <form action="{{ route('hapusLamaran', $item->magang_id) }}" method="POST"
-                                    style="display:inline;">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit"
-                                        onclick="return confirm('Yakin ingin menghapus?')">Delete</button>
-                                </form>
-                            </td>
-                        </tr>
-                    @endforeach
-                </tbody>
-            </table> --}}
         </div>
     </div>
-    </body>
 @endsection

@@ -4,8 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Company;
 use App\Models\LowonganMagang;
+use App\Models\MagangApplication;
+use App\Models\Mahasiswa;
 use App\Models\PeriodeMagang;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class LowonganMagangController extends Controller
 {
@@ -36,7 +39,7 @@ class LowonganMagangController extends Controller
         $logang = LowonganMagang::all();
         $period = PeriodeMagang::all();
 
-        return view('admin.lowonganMagang.indexMhs', compact('logang', 'period', 'breadcrumb'));
+        return view('mahasiswa.magangApplication.indexMhs', compact('logang', 'period', 'breadcrumb'));
     }
 
     /**
@@ -79,7 +82,7 @@ class LowonganMagangController extends Controller
             'location'     => $validated['location'],
         ]);
 
-        return redirect()->route('lowonganMagang.index')
+        return redirect()->route('lowongan-magang.index')
             ->with('success', 'Lowongan berhasil ditambahkan.');
     }
 
@@ -139,7 +142,7 @@ class LowonganMagangController extends Controller
             'location' => $request->location,
         ]);
 
-        return redirect()->route('lowonganMagang.index')->with('success', 'Lowongan berhasil diedit.');
+        return redirect()->route('lowongan-magang.index')->with('success', 'Lowongan berhasil diedit.');
     }
 
     /**
@@ -149,9 +152,9 @@ class LowonganMagangController extends Controller
     {
         try {
             LowonganMagang::destroy($id);
-            return redirect()->route('lowonganMagang.index')->with('success', 'Data lowongan berhasil dihapus');
+            return redirect()->route('lowongan-magang.index')->with('success', 'Data lowongan berhasil dihapus');
         } catch (\Illuminate\Database\QueryException $e) {
-            return redirect()->route('lowonganMagang.index')->with('error', 'Data lowongan gagal dihapus karena masih terdapat tabel lain yang terkait dengan data ini');
+            return redirect()->route('lowongan-magang.index')->with('error', 'Data lowongan gagal dihapus karena masih terdapat tabel lain yang terkait dengan data ini');
         }
     }
 }

@@ -53,9 +53,9 @@
         {{-- Tombol Aksi --}}
         <div class="mt-3 d-flex">
             @if (Auth::user()->level_id == 1)
-                <a href="{{ route('lowonganMagang.index') }}" class="btn btn-secondary">Kembali</a>
+                <a href="{{ route('lowongan-magang.index') }}" class="btn btn-secondary">Kembali</a>
             @elseif (Auth::user()->level_id == 2)
-                <a href="{{ route('lowonganMagang.indexMhs') }}" class="btn btn-secondary">Kembali</a>
+                <a href="{{ route('lowongan-magang.indexMhs') }}" class="btn btn-secondary">Kembali</a>
             @endif
 
             @if (Auth::user()->level_id == 2)
@@ -66,7 +66,7 @@
                 @endphp
 
                 @if (!$lamaran)
-                    <form action="{{ route('magangApplication.storeMhs') }}" method="POST" class="ms-2"
+                    <form action="{{ route('pengajuan-magang.storeMhs') }}" method="POST" class="ms-2"
                         onsubmit="return confirm('Yakin ingin melamar lowongan ini?')">
                         @csrf
                         <input type="hidden" name="lowongan_id" value="{{ $logang->lowongan_id }}">
