@@ -17,6 +17,12 @@ class ListingController extends Controller
         return view('listing.job.index', compact('lowongans'));
     }
 
+    public function showLowongan(string $id)
+    {
+        $lowongan = LowonganMagang::find($id);
+        return view('listing.job.show', compact('lowongan'));
+    }
+
     public function perusahaan()
     {
         $companies = Company::withCount('lowongans', 'user')

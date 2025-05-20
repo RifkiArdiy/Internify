@@ -4,8 +4,8 @@
     <div class="row g-gs">
         @foreach ($lowongans as $lwg)
             <div class="col-sm-6 col-lg-4">
-                <a href="#" class="card-link-wrapper">
-                    <div class="card card-bordered h-100">
+                <a href="{{ route('show.lowongan', $lwg->lowongan_id) }}" class="card-link-wrapper">
+                    <div class="card card-bordered service service-s4 h-100">
                         <div class="card-inner">
                             <div class="job">
                                 <div class="job-head">
