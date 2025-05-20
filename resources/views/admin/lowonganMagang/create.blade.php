@@ -59,7 +59,7 @@
                     <!-- Requirements (dengan Quill) -->
                     <div class="col-12">
                         <div class="form-group">
-                            <label class="form-label">Kriteria: <span class="text-danger">*</label>
+                            <label class="form-label">Syarat & Ketentuan: <span class="text-danger">*</label>
                             <!-- Quill Editor -->
                             <div id="quill-requirements" style="height: 200px;">{!! old('requirements') !!}</div>
                             <!-- Hidden input to store Quill content -->

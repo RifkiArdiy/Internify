@@ -228,10 +228,10 @@
                                     </div>
                                 </div>
 
-                                <!-- Responsibilities -->
+                                <!-- Syarat & Ketentuan -->
                                 <div class="card card-bordered mb-4">
                                     <div class="card-inner">
-                                        <h5 class="title mb-3">Key Responsibilities</h5>
+                                        <h5 class="title mb-3">Syarat & Ketentuan</h5>
                                         <div class="content-html">
                                             {!! $lowongan->requirements !!}
                                         </div>
