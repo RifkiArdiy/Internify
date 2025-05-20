@@ -36,10 +36,13 @@ class FeedbackMagangController extends Controller
         }else{
             $breadcrumb = (object) [
                 'title' => 'Feedback Magang',
-                'subtitle' => ['Anda dapat mengakses menu ini setelah periode magang anda selesai']
+                'subtitle' => ['Feedback anda terhadap pengalaman anda selama proses magang']
             ];
 
-            return view('mahasiswa.feedbackMagang.belumSaatnya', compact('breadcrumb'));
+return view('mahasiswa.feedbackMagang.belumSaatnya', [
+    'breadcrumb' => $breadcrumb,
+    'error' => 'Anda dapat mengakses menu ini setelah periode magang anda selesai'
+]);
         }
 
     }
