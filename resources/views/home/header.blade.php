@@ -203,8 +203,17 @@ c16.7,0,33.4-4.7,48.4-14l263.5-164.3c27-16.8,43.1-45.9,43.1-77.7S463.2,195.2,436
                         </div>
                         <ul class="header-action btns-inline">
                             <li>
-                                <a href="{{ route('login') }}" class="btn btn-primary btn-lg btn-round">
-                                    <span>Ayo Mulai!</span>
+                                @php
+                                    if (Auth::check()) {
+                                        $levelNama = strtolower(Auth::user()->level->level_nama ?? '');
+                                        $route = $levelNama === 'administrator' ? route('admin.dashboard') : route($levelNama . '.dashboard');
+                                    } else {
+                                        $route = route('login');
+                                    }
+                                @endphp
+
+                                <a href="{{ $route }}" class="btn btn-primary btn-lg btn-round">
+                                    Ayo Mulai!
                                 </a>
                             </li>
                         </ul>
