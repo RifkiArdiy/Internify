@@ -70,20 +70,36 @@
             </div>
             <div class="col-sm-6 col-lg-4 col-xxl-3">
                 <div class="card card-bordered h-100">
-                    <div class="card-inner">
-                        @if ($magang)
-                            <h4>{{$status}}</h4>
-                            <p>Tempat Magang: {{$magang->lowongans->company->user->name}}</p>
-                            <p>Judul Magang: {{$magang->lowongans->title}}</p>
-                            <p>Periode Magang: {{$magang->lowongans->period->start_date}} - {{$magang->lowongans->period->end_date}}</p>
-                        @else
-                            <h4>{{$status}}</h4> 
-                            <p>Anda dapat membuka menu lowongan magang untuk melamar</p>                           
-                        @endif
-
+                    <div class="card-body d-flex flex-column justify-content-between">
+                        <div>
+                            <div class="d-flex align-items-center mb-2">
+                                <h5 class="card-title mb-0">{{ $status }}</h5>
+                            </div>
+                            <hr>
+            
+                            @if ($magang)
+                                <p class="mb-1 text-muted">Tempat Magang:</p>
+                                <p class="fw-semibold">{{ $magang->lowongans->company->user->name }}</p>
+            
+                                <p class="mb-1 text-muted">Judul Magang:</p>
+                                <p class="fw-semibold">{{ $magang->lowongans->title }}</p>
+            
+                                <p class="mb-1 text-muted">Periode:</p>
+                                <p>
+                                    <span class="fw-semibold">
+                                        {{ \Carbon\Carbon::parse($magang->lowongans->period->start_date)->translatedFormat('d M Y') }} -
+                                        {{ \Carbon\Carbon::parse($magang->lowongans->period->end_date)->translatedFormat('d M Y') }}
+                                    </span>
+                                </p>
+                            @else
+                                <p class="text-muted mt-3">Anda belum memiliki magang aktif.</p>
+                                <p class="small">Silakan buka menu <a href="{{ route('lowongan.index') }}">Lowongan Magang</a> untuk melamar.</p>
+                            @endif
+                        </div>
                     </div>
                 </div>
             </div>
+            
 
         </div>
     </div>
