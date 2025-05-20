@@ -16,7 +16,7 @@
                         <div class="card service service-s4 card-bordered h-100">
                             <div class="py-2">
                                 <div class="card-inner">
-                                    <div class="service-icon styled-icon styled-icon-s4 styled-icon-5x text-danger">
+                                    <div class="service-icon styled-icon styled-icon-s4 styled-icon-5x text-indigo">
                                         @if ($company->user->image)
                                             <img src="{{ Storage::url('images/users/' . $company->user->image) }}"
                                                 alt="{{ $company->user->name }}">
