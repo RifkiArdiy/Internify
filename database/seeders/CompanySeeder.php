@@ -15,42 +15,42 @@ class CompanySeeder extends Seeder
     {
         Company::create([
             'user_id' => 20,
-            'industry' => 'Football',
+            'about_company' => 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Id repellendus dolor, dignissimos saepe ducimus beatae facilis et, dolorum tenetur officiis consequuntur sed inventore fuga sequi. Tempora ullam quis unde natus.',
         ]);
 
         Company::create([
             'user_id' => 21,
-            'industry' => 'Ekonomi',
+            'about_company' => 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Id repellendus dolor, dignissimos saepe ducimus beatae facilis et, dolorum tenetur officiis consequuntur sed inventore fuga sequi. Tempora ullam quis unde natus.',
         ]);
 
         Company::create([
             'user_id' => 22,
-            'industry' => 'Finansial',
+            'about_company' => 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Id repellendus dolor, dignissimos saepe ducimus beatae facilis et, dolorum tenetur officiis consequuntur sed inventore fuga sequi. Tempora ullam quis unde natus.',
         ]);
 
         Company::create([
             'user_id' =>  '23',
-            'industry' => 'FnB',
+            'about_company' => 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Id repellendus dolor, dignissimos saepe ducimus beatae facilis et, dolorum tenetur officiis consequuntur sed inventore fuga sequi. Tempora ullam quis unde natus.',
         ]);
 
         Company::create([
             'user_id' => 24,
-            'industry' => 'Teknologi Ai',
+            'about_company' => 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Id repellendus dolor, dignissimos saepe ducimus beatae facilis et, dolorum tenetur officiis consequuntur sed inventore fuga sequi. Tempora ullam quis unde natus.',
         ]);
 
         Company::create([
             'user_id' => 25,
-            'industry' => 'Pakan Ternak',
+            'about_company' => 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Id repellendus dolor, dignissimos saepe ducimus beatae facilis et, dolorum tenetur officiis consequuntur sed inventore fuga sequi. Tempora ullam quis unde natus.',
         ]);
 
         Company::create([
             'user_id' => 26,
-            'industry' => 'Football',
+            'about_company' => 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Id repellendus dolor, dignissimos saepe ducimus beatae facilis et, dolorum tenetur officiis consequuntur sed inventore fuga sequi. Tempora ullam quis unde natus.',
         ]);
 
         Company::create([
             'user_id' => 27,
-            'industry' => 'Football',
+            'about_company' => 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Id repellendus dolor, dignissimos saepe ducimus beatae facilis et, dolorum tenetur officiis consequuntur sed inventore fuga sequi. Tempora ullam quis unde natus.',
 
         ]);
     }

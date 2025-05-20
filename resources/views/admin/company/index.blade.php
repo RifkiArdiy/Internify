@@ -19,7 +19,6 @@
                 <thead>
                     <tr class="nk-tb-item nk-tb-head">
                         <th class="nk-tb-col export-col"><span class="sub-text">Perusahaan</span></th>
-                        <th class="nk-tb-col tb-col-md export-col"><span class="sub-text">Bidang Industri</span></th>
                         <th class="nk-tb-col tb-col-md export-col"><span class="sub-text">Alamat</span></th>
                         <th class="nk-tb-col tb-col-md export-col"><span class="sub-text">Kontak</span></th>
                         <th class="nk-tb-col nk-tb-col-tools text-end"></th>
@@ -39,19 +38,17 @@
                                         @endif
                                     </div>
                                     <div class="user-info">
-                                        <span>{{ $company->user->name }}<span
+                                        <span class="tb-lead">{{ $company->user->name }}<span
                                                 class="dot dot-success d-md-none ms-1"></span></span>
+                                        <span>{{ $company->user->email }}</span>
                                     </div>
                                 </div>
                             </td>
                             <td class="nk-tb-col tb-col-md">
-                                <span>{{ $company->industry }}</span>
+                                <span>{{ $company->user->alamat ?? 'N/A' }}</span>
                             </td>
                             <td class="nk-tb-col tb-col-md">
-                                <span>{{ $company->user->alamat }}</span>
-                            </td>
-                            <td class="nk-tb-col tb-col-md">
-                                <span>{{ $company->user->no_telp }}</span>
+                                <span>{{ $company->user->no_telp ?? 'N/A' }}</span>
                             </td>
                             <td class="nk-tb-col nk-tb-col-tools">
                                 <ul class="nk-tb-actions gx-1">
@@ -61,7 +58,8 @@
                                                 data-bs-toggle="dropdown"><em class="icon ni ni-more-h"></em></a>
                                             <div class="dropdown-menu dropdown-menu-end">
                                                 <ul class="link-list-opt no-bdr">
-                                                    <li><a href="{{ route('companies.show', $company->company_id)}}"><em class="icon ni ni-eye"></em><span>Lihat
+                                                    <li><a href="{{ route('companies.show', $company->company_id) }}"><em
+                                                                class="icon ni ni-eye"></em><span>Lihat
                                                                 Detail</span></a></li>
                                                     <li><a href="{{ route('companies.edit', $company->company_id) }}"><em
                                                                 class="icon ni ni-edit-alt"></em><span>Edit</span></a>
