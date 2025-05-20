@@ -109,9 +109,6 @@ class EvaluasiMagangController extends Controller
             'companies' => $companies,
             'logs' => $logs,
             'breadcrumb' => $breadcrumb,
-            'mahasiswaId' => $evaluation->mahasiswa_id,
-            'companyId' => $evaluation->company_id,
-            'logId' => $evaluation->log_id,
         ]);
     }
 
