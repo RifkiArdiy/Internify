@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\BenefitController;
 use App\Http\Controllers\ProgramStudiController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DosenController;
@@ -19,6 +20,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\EvaluasiMagangController;
 use App\Http\Controllers\FeedbackMagangController;
+use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\ProfilAkademikController;
 use App\Http\Controllers\MonitoringController;
 
@@ -81,6 +83,15 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/edit/{id}', [LowonganMagangController::class, 'edit'])->name('lowongan-magang.edit');
             Route::put('/{id}', [LowonganMagangController::class, 'update'])->name('lowongan-magang.update');
             Route::delete('/{id}', [LowonganMagangController::class, 'destroy'])->name('lowongan-magang.destroy');
+        });
+
+        Route::prefix('benefit')->group(callback: function () {
+            Route::get('/create', [BenefitController::class, 'create'])->name('benefits.create');
+            Route::post('/benefits/ajax-store', [BenefitController::class, 'store'])->name('benefits.store');
+        });
+        Route::prefix('kategori')->group(callback: function () {
+            Route::get('/create', [KategoriController::class, 'create'])->name('kategoris.create');
+            Route::post('/kategoris/ajax-store', [KategoriController::class, 'store'])->name('kategoris.store');
         });
 
         Route::prefix('pengajuan-magang')->group(callback: function () {
