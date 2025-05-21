@@ -17,7 +17,7 @@ class ProfilAkademikController extends Controller
     {
         $profilAkademik = ProfilAkademik::where('user_id', Auth::user()->user_id)->first();
         if (!$profilAkademik) {
-            return redirect()->route('profilAkademik.create');
+            return redirect()->route('profil-akademik.create');
         }
         $breadcrumb = (object) [
             'title' => 'Profil Akademik Anda',

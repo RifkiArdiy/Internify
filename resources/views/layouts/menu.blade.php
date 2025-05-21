@@ -193,14 +193,6 @@
             </a>
         </li>
     @endif
-    <li class="nk-menu-item">
-        <a href="{{ route('lamaran') }}" class="nk-menu-link">
-            <span class="nk-menu-icon">
-                <em class="icon ni ni-file-text"></em>
-            </span>
-            <span class="nk-menu-text">Pengajuan Magang</span>
-        </a>
-    </li>
     {{-- <li class="nk-menu-item">
         <a href="{{ route('lihatLamaran',Auth::user()->mahasiswa->mahasiswa_id) }}" class="nk-menu-link">
             <span class="nk-menu-icon">
