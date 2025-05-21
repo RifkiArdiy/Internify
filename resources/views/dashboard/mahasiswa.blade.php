@@ -70,26 +70,39 @@
             </div>
             <div class="col-sm-6 col-lg-4 col-xxl-3">
                 <div class="card card-bordered h-100">
-                    <div class="card-inner">
-                        @if ($magang)
-                            <h4>{{$status}}</h4>
-                            @if ($mahasiswa->status==='is_magang')
-                                <p>Tempat Magang: {{$magang->lowongans->company->user->name}}</p>
-                                <p>Judul Magang: {{$magang->lowongans->title}}</p>
-                                <p>Periode Magang: {{$magang->lowongans->period->start_date}} - {{$magang->lowongans->period->end_date}}</p>
+                        <div class="card-inner">
+                            <div class="project">
+                                <div  class="project-head">
+                                    <div class="project-info">
+                                        <h6 class="title">{{$status}}</h6>
+                                        <span class="sub-text">Internify</span>
+                                    </div>
+                                </div>
+                            <hr>
+            
+                            @if ($magang)
+                                <p class="mb-1 text-muted">Tempat Magang:</p>
+                                <p class="fw-semibold">{{ $magang->lowongans->company->user->name }}</p>
+            
+                                <p class="mb-1 text-muted">Judul Magang:</p>
+                                <p class="fw-semibold">{{ $magang->lowongans->title }}</p>
+            
+                                <p class="mb-1 text-muted">Periode:</p>
+                                <p>
+                                    <span class="fw-semibold">
+                                        {{ \Carbon\Carbon::parse($magang->lowongans->period->start_date)->translatedFormat('d M Y') }} -
+                                        {{ \Carbon\Carbon::parse($magang->lowongans->period->end_date)->translatedFormat('d M Y') }}
+                                    </span>
+                                </p>
                             @else
-                                <a href={{ route('lowonganMagang.indexMhs') }} class="btn btn-success">Buka Halaman Lowongan Magang</a>
-                                @endif
-                                @else
-                                <h4>{{$status}}</h4> 
-                                <p>Anda dapat membuka menu lowongan magang untuk melamar</p>                           
-                                <a href={{ route('lowonganMagang.indexMhs') }} class="btn btn-success">Buka Halaman Lowongan Magang</a>
-                        @endif
-
+                                <p class="project-details">Anda belum memiliki magang aktif.</p>
+                                <p class="project-details">Silakan buka menu <a href="{{ route('lowonganMagang.indexMhs') }}">Lowongan Magang</a> untuk melamar.</p>
+                            @endif
+                        </div>
                     </div>
                 </div>
             </div>
-
+        </div>
         </div>
     </div>
     <div class="nk-block">

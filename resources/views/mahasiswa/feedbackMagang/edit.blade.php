@@ -54,7 +54,7 @@
                     </div>
                 </div>
 
-                <div class="col-12">
+                <div class="col-12 mt-3">
                     <div class="form-group">
                         <button type="submit" class="btn btn-primary">Simpan</button>
                         <a href="{{ route('feedback-index') }}" class="btn btn-secondary">Kembali</a>
