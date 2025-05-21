@@ -7,7 +7,7 @@
         <div class="alert alert-success">{{ session('success') }}</div>
     @endif
     <div class="row">
-        {{-- Card: Jumlah Mahasiswa Magang --}}
+
         <div class="col-md-4">
             <div class="card text-white bg-primary mb-3">
                 <div class="card-header">Mahasiswa Magang</div>
@@ -17,8 +17,7 @@
                 </div>
             </div>
         </div>
-    
-        {{-- Card: Jumlah Dosen Pembimbing --}}
+
         <div class="col-md-4">
             <div class="card text-white bg-success mb-3">
                 <div class="card-header">Dosen Pembimbing</div>
@@ -28,8 +27,7 @@
                 </div>
             </div>
         </div>
-    
-        {{-- Card: Rasio --}}
+
         <h6 class="mb-2">Rasio Mahasiswa Magang : Dosen</h6>
             <div class="progress mb-3" style="height: 30px; " >
                 <div class="progress-bar bg-primary" role="progressbar"

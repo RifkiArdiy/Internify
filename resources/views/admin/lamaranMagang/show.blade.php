@@ -54,11 +54,11 @@
                 </div>
                 <div class="col-md-6">
                     <h6 class="text-soft mb-1">Kriteria</h6>
-                    <p class="fw-bold">{{ $magang->lowongans->requirements }}</p>
+                    <p class="fw-bold">{!! $magang->lowongans->requirements !!}</p>
                 </div>
                 <div class="col-md-12">
                     <h6 class="text-soft mb-1">Deskripsi</h6>
-                    <p class="fw-bold">{{ $magang->lowongans->description }}</p>
+                    <p class="fw-bold">{!! $magang->lowongans->description !!}</p>
                 </div>
                 <div class="col-md-6">
                     <h6 class="text-soft mb-1">Periode Awal</h6>

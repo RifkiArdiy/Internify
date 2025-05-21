@@ -6,18 +6,18 @@
         @csrf     
         @method('PUT')
 
-        <input type="hidden" name="mahasiswa_id" value="{{ $mahasiswaId }}">
-        <input type="hidden" name="company_id" value="{{ $companyId }}">
-        <input type="hidden" name="log_id" value="{{ $logId }}">
+        <input type="hidden" name="mahasiswa_id" value="{{ $evaluation->mahasiswa_id }}">
+        <input type="hidden" name="company_id" value="{{ $evaluation->company_id }}">
+        <input type="hidden" name="log_id" value="{{ $evaluation->log_id }}">
 
         <div class="mb-3">
             <label for="mahasiswa_id" class="form-label">Mahasiswa</label>
-            <input type="text" class="form-control" value="{{ \App\Models\Mahasiswa::find($mahasiswaId)?->user->name }}" readonly>
+            <input type="text" class="form-control" value="{{ $evaluation->mahasiswa->user->name }}" readonly>        
         </div>
 
         <div class="mb-3">
             <label for="company_id" class="form-label">Perusahaan</label>
-            <input type="text" class="form-control" value="{{ \App\Models\Company::find($companyId)?->user->name }}" readonly>
+            <input type="text" class="form-control" value="{{ $evaluation->company->user->name }}" readonly>
         </div>
 
         <div class="mb-3">

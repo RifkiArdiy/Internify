@@ -31,10 +31,10 @@
                                 <span>{{ $item->title }}</span>
                             </td>
                             <td class="nk-tb-col">
-                                <span>{{ Str::limit($item->description, 50) }}</span>
+                                <span>{!! Str::limit($item->description, 50) !!}</span>
                             </td>
                             <td class="nk-tb-col">
-                                <span>{{ Str::limit($item->requirements, 50) }}</span>
+                                <span>{!! Str::limit($item->requirements, 50) !!}</span>
                             </td>
                             @php
                                 $mahasiswaId = Auth::user()->mahasiswa->mahasiswa_id ?? null;
