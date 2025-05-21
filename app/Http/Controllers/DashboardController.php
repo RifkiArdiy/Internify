@@ -67,6 +67,15 @@ class DashboardController extends Controller
             'title' => 'Dashboard',
             'subtitle' => ['Welcome to Dashboard Internify']
         ];
-        return view('dashboard.company', compact('breadcrumb'));
+        $companyId = Company::where('user_id', Auth::user()->user_id)->value('company_id');
+
+        $unreviewedLamarans = MagangApplication::with(['mahasiswas', 'lowongans'])
+            ->where('status', 'pending')
+            ->whereHas('lowongans', function ($query) use ($companyId) {
+                $query->where('company_id', $companyId);
+            })
+            ->get();
+
+        return view('dashboard.company', compact('breadcrumb', 'unreviewedLamarans'));
     }
 }

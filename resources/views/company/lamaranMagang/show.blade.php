@@ -76,7 +76,7 @@
 
             @if (strtolower($magang->status) === 'pending')
                 <div class="mt-4">
-                    <form action="{{ route('admin.magangApplication.update', $magang->magang_id) }}"
+                    <form action="{{ route('company.magangApplication.update', $magang->magang_id) }}"
                         method="POST" class="d-inline"
                         onsubmit="return confirm('Apakah Anda yakin menyetujui lamaran ini?')">
                         @csrf
@@ -85,7 +85,7 @@
                         <button type="submit" class="btn btn-success">Setujui</button>
                     </form>
 
-                    <form action="{{ route('admin.magangApplication.update', $magang->magang_id) }}"
+                    <form action="{{ route('company.magangApplication.update', $magang->magang_id) }}"
                         method="POST" class="d-inline"
                         onsubmit="return confirm('Apakah Anda yakin menolak lamaran ini?')">
                         @csrf
