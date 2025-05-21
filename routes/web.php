@@ -168,7 +168,7 @@ Route::middleware(['auth'])->group(function () {
 
         Route::prefix('lowongan')->group(function () {
             Route::get('/', [LowonganMagangController::class, 'indexMhs'])->name('lowongan-magang.indexMhs');
-            Route::get('/show/{id}', [LowonganMagangController::class, 'show'])->name('lowonganMagang.show');
+            Route::get('/show/{id}', [LowonganMagangController::class, 'showMhs'])->name('lowongan-magang.show');
         });
 
         Route::prefix('pengajuan-magang')->group(function () {

@@ -39,7 +39,7 @@ class LowonganMagangController extends Controller
         $logang = LowonganMagang::all();
         $period = PeriodeMagang::all();
 
-        return view('mahasiswa.magangApplication.indexMhs', compact('logang', 'period', 'breadcrumb'));
+        return view('mahasiswa.lowongan.index', compact('logang', 'period', 'breadcrumb'));
     }
 
     /**
@@ -100,6 +100,18 @@ class LowonganMagangController extends Controller
         ];
 
         return view('admin.lowonganMagang.show', compact('breadcrumb', 'logang', 'period'));
+    }
+
+    public function showMhs(string $id)
+    {
+        $logang = LowonganMagang::find($id);
+        $period = PeriodeMagang::all();
+        $breadcrumb = (object) [
+            'title' => 'Detail Lowongan Magang',
+            'subtitle' => ['Detail lowongan magang']
+        ];
+
+        return view('mahasiswa.lowongan.show', compact('breadcrumb', 'logang', 'period'));
     }
 
     /**
