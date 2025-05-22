@@ -14,6 +14,7 @@ use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\CompanyMagangApplicationController;
 use App\Http\Controllers\ListingController;
 use App\Http\Controllers\LowonganMagangController;
+use App\Http\Controllers\CompanyLowonganMagangController;
 use App\Http\Controllers\MagangApplicationController;
 use App\Http\Controllers\PeriodeMagangController;
 use App\Models\MagangApplication;
@@ -269,15 +270,28 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/verifikasi', [CompanyController::class, 'indexVerifikasi'])->name('company.verifikasi');
         Route::put('/verifikasi/{id}', [CompanyController::class, 'updateVerifikasi'])->name('company.verifikasi.update');
         Route::get('/verifikasi/show/{id}', [CompanyController::class, 'showLaporan'])->name('company.verifikasi.show');
+
         Route::prefix('magangApplication')->group(callback: function () {
-            Route::get('/', [CompanyMagangApplicationController::class, 'index'])->name('company.magangApplication.index');
-            Route::get('/create', [CompanyMagangApplicationController::class, 'create'])->name('company.magangApplication.create');
-            Route::post('/store', [CompanyMagangApplicationController::class, 'store'])->name('company.magangApplication.store');
-            Route::get('/show/{id}', [CompanyMagangApplicationController::class, 'show'])->name('company.magangApplication.show');
-            Route::get('/edit/{id}', [CompanyMagangApplicationController::class, 'edit'])->name('company.magangApplication.edit');
-            Route::put('/{id}', [CompanyMagangApplicationController::class, 'update'])->name('company.magangApplication.update');
-            Route::get('/{id}', [CompanyMagangApplicationController::class, 'destroy'])->name('company.magangApplication.destroy');
+            Route::get('/', [MagangApplicationController::class, 'index'])->name('company.magangApplication.index');
+            Route::get('/create', [MagangApplicationController::class, 'create'])->name('company.magangApplication.create');
+            Route::post('/store', [MagangApplicationController::class, 'store'])->name('company.magangApplication.store');
+            Route::get('/show/{id}', [MagangApplicationController::class, 'show'])->name('company.magangApplication.show');
+            Route::get('/edit/{id}', [MagangApplicationController::class, 'edit'])->name('company.magangApplication.edit');
+            Route::put('/{id}', [MagangApplicationController::class, 'update'])->name('company.magangApplication.update');
+            Route::get('/{id}', [MagangApplicationController::class, 'destroy'])->name('company.magangApplication.destroy');
         });
+
+        Route::prefix('lowongan-magang')->group(callback: function () {
+            Route::get('/', [CompanyLowonganMagangController::class, 'index'])->name('companys-lowongan-magang.index');
+            Route::get('/create', [CompanyLowonganMagangController::class, 'create'])->name('companys-lowongan-magang.create');
+            Route::post('/store', [CompanyLowonganMagangController::class, 'store'])->name('companys-lowongan-magang.store');
+            Route::get('/show/{id}', [CompanyLowonganMagangController::class, 'show'])->name('companys-lowongan-magang.show');
+            Route::get('/edit/{id}', [CompanyLowonganMagangController::class, 'edit'])->name('companys-lowongan-magang.edit');
+            Route::put('/{id}', [CompanyLowonganMagangController::class, 'update'])->name('companys-lowongan-magang.update');
+            Route::delete('/{id}', [CompanyLowonganMagangController::class, 'destroy'])->name('companys-lowongan-magang.destroy');
+            Route::get('/{id}', [CompanyLowonganMagangController::class, 'pelamars'])->name('companys-lowongan-magang.pelamars');
+        });
+
 
     });
 

@@ -15,11 +15,7 @@
                         <th class="nk-tb-col"><span class="sub-text">Mahasiswa</span></th>
                         <th class="nk-tb-col tb-col-mb"><span class="sub-text">Lowongan</span></th>
                         <th class="nk-tb-col tb-col-mb"><span class="sub-text">Status</span></th>
-                        <th class="nk-tb-col export-col"><span class="sub-text">Mahasiswa</span></th>
-                        <th class="nk-tb-col tb-col-mb export-col"><span class="sub-text">Lowongan</span></th>
-                        <th class="nk-tb-col tb-col-mb export-col"><span class="sub-text">Perusahaan</span></th>
-                        <th class="nk-tb-col tb-col-mb export-col"><span class="sub-text">Status</span></th>
-                        <th class="nk-tb-col nk-tb-col-tools text-end"><span class="sub-text">Aksi</span></th>
+                        <th class="nk-tb-col tb-col-mb"><span class="sub-text">Status</span></th>
                         <th class="nk-tb-col nk-tb-col-tools text-end"></th>
                     </tr>
                 </thead>
@@ -47,10 +43,6 @@
                                 <span>{{ $magang->lowongans->title }}</span>
                             </td>
                             <td class="nk-tb-col tb-col-mb">
-                                <span>{{ $magang->status }}</span>
-                                <span>{{ $magang->lowongans->company->user->name }}</span>
-                            </td>
-                            <td class="nk-tb-col tb-col-mb">
                                 @if ($magang->status === 'Disetujui')
                                     <span class="tb-status text-success">{{ $magang->status }}</span>
                                 @elseif ($magang->status === 'Ditolak')
@@ -60,31 +52,12 @@
                                 @endif
                             </td>
                             <td class="nk-tb-col nk-tb-col-tools">
-                                <ul class="nk-tb-actions gx-1">
-                                    <li>
-                                        <div class="drodown">
-                                            <a href="#" class="dropdown-toggle btn btn-icon btn-trigger"
-                                                data-bs-toggle="dropdown"><em class="icon ni ni-more-h"></em></a>
-                                            <div class="dropdown-menu dropdown-menu-end">
-                                                <ul class="link-list-opt no-bdr">
-                                                    <li>
-                                                        <a href="#"><em class="icon ni ni-focus"></em><span>Quick
-                                                                View</span></a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#"><em class="icon ni ni-eye"></em><span>View
-                                                                Details</span></a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </li>
-                                </ul>
+                               
 
                                 @if ($magang->status === 'Disetujui' || $magang->status === 'Ditolak')
                                     <span>Reviewed</span>
                                 @else
-                                    <form action="{{ route('pengajuan-magang.update', $magang->magang_id) }}"
+                                    <form action="{{ route('company.magangApplication.update', $magang->magang_id) }}"
                                         method="POST" style="display: inline;"
                                         onsubmit="return confirm('Apakah anda yakin menyetujui lamaran ini?')">
                                         @csrf
@@ -95,7 +68,7 @@
                                             <span style="padding:5px;">Setuju</span></button>
                                     </form>
 
-                                    <form action="{{ route('pengajuan-magang.update', $magang->magang_id) }}"
+                                    <form action="{{ route('company.magangApplication.update', $magang->magang_id) }}"
                                         method="POST" style="display: inline;"
                                         onsubmit="return confirm('Apakah anda yakin menolak lamaran ini?')">
                                         @csrf
@@ -116,14 +89,14 @@
                                                 data-bs-toggle="dropdown"><em class="icon ni ni-more-h"></em></a>
                                             <div class="dropdown-menu dropdown-menu-end">
                                                 <ul class="link-list-opt no-bdr">
-                                                    <li><a href="{{ route('pengajuan-magang.show', $magang->magang_id) }}"><em
+                                                    <li><a href="{{ route('company.magangApplication.show', $magang->magang_id) }}"><em
                                                                 class="icon ni ni-eye"></em><span>Lihat
                                                                 Detail</span></a></li>
 
                                                     <li class="divider"></li>
 
                                                     <li><a
-                                                            href="{{ route('pengajuan-magang.destroy', $magang->magang_id) }}"><em
+                                                            href="{{ route('company.magangApplication.destroy', $magang->magang_id) }}"><em
                                                                 class="icon ni ni-trash"></em><span>Hapus
                                                                 Lamaran</span></a></li>
                                                 </ul>

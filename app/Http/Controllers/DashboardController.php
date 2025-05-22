@@ -54,7 +54,7 @@ class DashboardController extends Controller
         } else {
             $status = 'Anda Belum Magang';
         }
-        return view('dashboard.mahasiswa', compact('breadcrumb', 'status', 'magang', 'mahasiswa'));
+        return view('mahasiswa.dashboard.mahasiswa', compact('breadcrumb', 'status', 'magang', 'mahasiswa'));
     }
 
     public function indexDosen()
@@ -81,6 +81,6 @@ class DashboardController extends Controller
             })
             ->get();
 
-        return view('dashboard.company', compact('breadcrumb', 'unreviewedLamarans'));
+        return view('company.dashboard.company', compact('breadcrumb', 'unreviewedLamarans'));
     }
 }
