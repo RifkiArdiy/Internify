@@ -23,8 +23,7 @@
                                 <div class="job-meta">
                                     <ul class="job-users g-1">
                                         <li>
-                                            {{-- <span
-                                                        class="badge rounded-pill bg-outline-secondary">{{ $lwg->requirements }}</span> --}}
+                                            <span class="badge badge-dim bg-primary">{{ $lwg->kategori->name }}</span>
                                         </li>
                                     </ul>
                                     <span class="badge badge-dim bg-warning"><em

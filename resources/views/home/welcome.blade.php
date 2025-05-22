@@ -35,18 +35,11 @@
                                 <p>Daftar sekarang dan rasakan kemudahan manajemen magang digital bersama Internify.</p>
                                 <ul class="btns-inline justify-center pt-2">
                                     <li>
-                                        @php
-                                            if (Auth::check()) {
-                                                $levelNama = strtolower(Auth::user()->level->level_nama ?? '');
-                                                $route = $levelNama === 'administrator' ? route('admin.dashboard') : route($levelNama . '.dashboard');
-                                            } else {
-                                                $route = route('login');
-                                            }
-                                        @endphp
-
-                                        <a href="{{ $route }}" class="btn btn-xl btn-primary btn-round">Coba
-                                            Gratis
-                                            Sekarang</a>
+                                        @guest {{-- Ini akan merender konten di dalamnya HANYA jika pengguna BELUM login --}}
+                                            <a href="{{ route('login') }}" class="btn btn-xl btn-primary btn-round">
+                                                Coba Gratis Sekarang
+                                            </a>
+                                        @endguest
                                     </li>
                                 </ul>
                             </div>

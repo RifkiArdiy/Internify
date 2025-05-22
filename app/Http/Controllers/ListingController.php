@@ -19,8 +19,17 @@ class ListingController extends Controller
 
     public function showLowongan(string $id)
     {
-        $lowongan = LowonganMagang::find($id);
-        return view('listing.job.show', compact('lowongan'));
+        $lowongan = LowonganMagang::with(['company.user']) // Memuat company dan user di dalamnya
+            ->findOrFail($id);
+
+        $jobcount = $lowongan->company->lowongans()->count(); // Ini yang benar
+
+        $recent = LowonganMagang::where('kategori_id', $lowongan->kategori_id)
+            ->where('lowongan_id', '!=', $lowongan->lowongan_id)
+            ->latest()
+            ->take(3)
+            ->get();
+        return view('listing.job.show', compact('lowongan', 'jobcount', 'recent'));
     }
 
     public function perusahaan()
