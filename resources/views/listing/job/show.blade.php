@@ -187,7 +187,8 @@
                                     <div>
                                         <h4 class="mb-1">{{ $lowongan->title }}</h4>
                                         <ul class="list-inline fs-13px text-soft">
-                                            <li class="list-inline-item"><em class="icon ni ni-hash"></em> Programming
+                                            <li class="list-inline-item"><em class="icon ni ni-hash"></em>
+                                                {{ $lowongan->kategori->name }}
                                             </li>
                                             <li class="list-inline-item">{{ $lowongan->created_at->diffForHumans() }}
                                             </li>
@@ -238,16 +239,15 @@
                                     </div>
                                 </div>
 
-                                <!-- Skills -->
+                                <!-- Benefits -->
                                 <div class="card card-bordered mb-4">
                                     <div class="card-inner">
-                                        <h5 class="title mb-3">Skill & Experience</h5>
+                                        <h5 class="title mb-3">Benefit</h5>
                                         <ul class="list list-sm text-soft">
-                                            <li>Computer Skill</li>
-                                            <li>Communication Skill</li>
-                                            <li>Leadership Skill</li>
-                                            <li>Management Skill</li>
-                                            <li>Problem-solving Skill</li>
+                                            @foreach ($lowongan->benefits as $benefit)
+                                                {{-- <span class="badge badge-outline-primary">{{ $benefit->name }}</span> --}}
+                                                <li>{{ $benefit->name }}</li>
+                                            @endforeach
                                         </ul>
                                     </div>
                                 </div>
@@ -262,13 +262,11 @@
                                         <ul class="gy-2">
                                             <li><strong>Date Posted:</strong> 30th Apr, 2025</li>
                                             <li><strong>Expiration Date:</strong> 1st May, 2026</li>
-                                            <li><strong>Location:</strong> Gandhinagar, Gujarat, India</li>
-                                            <li><strong>Job Type:</strong> IT</li>
-                                            <li><strong>Functional Areas:</strong> IT Support</li>
-                                            <li><strong>Positions:</strong> 5</li>
-                                            <li><strong>Job Experience:</strong> 3 Year</li>
-                                            <li><strong>Salary Period:</strong> Monthly Pay</li>
-                                            <li><strong>Is Freelance:</strong> No</li>
+                                            <li><strong>Lokasi:</strong> {{ $lowongan->village->name }},
+                                                {{ $lowongan->district->name }}, {{ $lowongan->regency->name }},
+                                                {{ $lowongan->province->name }}
+                                            </li>
+                                            <li><strong>Job Type:</strong> {{ $lowongan->kategori->name }}</li>
                                         </ul>
                                     </div>
                                 </div>
@@ -286,7 +284,7 @@
                                         <ul class="list list-sm text-soft mt-3">
                                             <li><strong>Founded:</strong>{{ $lowongan->company->created_at }}</li>
                                             <li><strong>Phone:</strong> {{ $lowongan->company->user->no_telp }}</li>
-                                            <li><strong>Location:</strong> {{ $lowongan->company->user->alamat }}</li>
+                                            <li><strong>Lokasi:</strong> {{ $lowongan->company->user->alamat }}</li>
                                         </ul>
                                         <a href="#" class="btn btn-outline-primary btn-block mt-3">Open Jobs
                                             :
