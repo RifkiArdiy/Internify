@@ -23,11 +23,37 @@ class CompanyMagangApplicationController extends Controller
             })
             ->get();
         $breadcrumb = (object) [
-            'title' => 'Lamaran Magang',
+            'title' => 'Pengajuan Magang',
             'subtitle' => ['Jumlah Pelamar : ' . $magangs->count()]
         ];
 
-        return view('company.lamaranMagang.index', compact('magangs', 'breadcrumb'));
+        return view('admin.pengajuanMagang.index', compact('magangs', 'breadcrumb'));
+    }
+
+    public function indexMhs()
+    {
+        $breadcrumb = (object) [
+            'title' => 'Lamaran Magang',
+            'subtitle' => ['Review lamaran magang anda']
+        ];
+
+        $mahasiswa = Mahasiswa::where('user_id', Auth::user()->user_id)->first();
+
+        if ($mahasiswa) {
+            $magangs = MagangApplication::where('mahasiswa_id', $mahasiswa->mahasiswa_id)->get();
+        } else {
+            $magangs = collect(); // or handle error appropriately
+        }
+
+        return view('mahasiswa.magangApplication.indexMhs', compact('magangs', 'breadcrumb'));
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
+    {
+        //
     }
 
     /**
@@ -90,7 +116,7 @@ class CompanyMagangApplicationController extends Controller
             'status' => 'Pending',
         ]);
 
-        return redirect()->back()->with('success', 'Lamaran berhasil dikirim.');
+        return redirect()->back()->with('success', 'Pengajuan berhasil dikirim.');
     }
 
     /**
@@ -129,12 +155,12 @@ class CompanyMagangApplicationController extends Controller
         if ($request->status === 'Disetujui') {
             Mahasiswa::where('mahasiswa_id', $lamaran->mahasiswa_id)
                 ->update(['status' => 'is_magang']);
-        }//elseif($request->status === 'Selesai') {
+        } //elseif($request->status === 'Selesai') {
         //     Mahasiswa::where('mahasiswa_id', $lamaran->mahasiswa_id)
         //         ->update(['status' => 'selesai_magang']);
         // }
 
-        return redirect('company/magangApplication');
+        return redirect()->back()->with('success', 'Pengajuan magang Disetujui');
     }
 
     /**

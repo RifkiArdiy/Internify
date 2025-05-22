@@ -1,4 +1,4 @@
-<section class="section section-service pb-7" id="joblist">
+<section class="section section-service pb-7">
     <div class="container">
         <div class="row justify-content-center text-center">
             <div class="col-xl-7 col-md-8">
@@ -13,13 +13,14 @@
             <div class="row g-gs">
                 @foreach ($lowongans as $lwg)
                     <div class="col-sm-6 col-lg-4">
-                        <a href="#" class="card-link-wrapper">
-                            <div class="card card-bordered h-100">
+                        <a href="{{ route('show.lowongan', $lwg->lowongan_id) }}" class="card-link-wrapper">
+                            <div class="card card-bordered service service-s4 h-100">
                                 <div class="card-inner">
                                     <div class="job">
                                         <div class="job-head">
                                             <div class="job-title">
-                                                <div class="user-avatar sq bg-purple"><span>DD</span></div>
+                                                <div class="user-avatar sq bg-purple"><span>DD</span>
+                                                </div>
                                                 <div class="job-info">
                                                     <h6 class="title">{{ $lwg->title }}</h6>
                                                     <span class="sub-text">{{ $lwg->period->name }}</span>
@@ -47,5 +48,19 @@
                 @endforeach
             </div>
         </div>
+        <div class="row justify-content-center text-center">
+            <div class="col-lg-9 col-md-10">
+                <div class="text-block is-compact py-3">
+                    <ul class="btns-inline justify-center pt-6">
+                        <li>
+                            <a href="{{ route('list.lowongan') }}" class="btn btn-xl btn-primary btn-round">Lihat
+                                Semua</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!-- .col -->
+        </div>
+        <!-- .row -->
     </div>
 </section>

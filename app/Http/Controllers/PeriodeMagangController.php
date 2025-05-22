@@ -46,7 +46,7 @@ class PeriodeMagangController extends Controller
             'end_date' => $request->end_date,
         ]);
 
-        return redirect(route('periodeMagang.index'))->with('success', 'Periode berhasil ditambahkan');
+        return redirect(route('periode-magang.index'))->with('success', 'Periode berhasil ditambahkan');
     }
 
     /**
@@ -84,7 +84,7 @@ class PeriodeMagangController extends Controller
             'end_date' => $request->end_date,
         ]);
 
-        return redirect(route('periodeMagang.index'));
+        return redirect(route('periode-magang.index'));
     }
 
     /**
@@ -95,6 +95,6 @@ class PeriodeMagangController extends Controller
         $pegang = PeriodeMagang::find($id);
         $pegang->delete();
 
-        return redirect(route('periodeMagang.index'))->with('success', 'Periode berhasil dihapus');
+        return redirect(route('periode-magang.index'))->with('success', 'Periode berhasil dihapus');
     }
 }

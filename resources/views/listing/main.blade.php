@@ -22,9 +22,16 @@
     <div class="nk-app-root">
         <!-- main @s -->
         <div class="nk-main ">
+            <!-- .header-main-->
             @include('listing.header')
             <!-- .header -->
-            @yield('main')
+            <section class="section section-service pb-7">
+                <div class="container">
+                    <div class="section-content">
+                        @yield('main')
+                    </div><!-- .section-content -->
+                </div><!-- .container -->
+            </section><!-- .section -->
             <!-- .section -->
             @include('listing.footer')
             <!-- .footer -->

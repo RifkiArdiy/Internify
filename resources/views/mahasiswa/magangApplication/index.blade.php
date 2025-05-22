@@ -12,10 +12,10 @@
             <table class="datatable-init-export nowrap nk-tb-list nk-tb-ulist" data-auto-responsive="false">
                 <thead>
                     <tr class="nk-tb-item nk-tb-head">
-                        <th class="nk-tb-col"><span class="sub-text">Mahasiswa</span></th>
-                        <th class="nk-tb-col tb-col-mb"><span class="sub-text">Lowongan</span></th>
-                        <th class="nk-tb-col tb-col-mb"><span class="sub-text">Perusahaan</span></th>
-                        <th class="nk-tb-col tb-col-mb"><span class="sub-text">Status</span></th>
+                        <th class="nk-tb-col export-col"><span class="sub-text">Mahasiswa</span></th>
+                        <th class="nk-tb-col tb-col-mb export-col"><span class="sub-text">Lowongan</span></th>
+                        <th class="nk-tb-col tb-col-mb export-col"><span class="sub-text">Perusahaan</span></th>
+                        <th class="nk-tb-col tb-col-mb export-col"><span class="sub-text">Status</span></th>
                         <th class="nk-tb-col nk-tb-col-tools text-end"><span class="sub-text">Aksi</span></th>
                     </tr>
                 </thead>
@@ -24,7 +24,7 @@
                         <tr class="nk-tb-item">
                             <td class="nk-tb-col">
                                 <div class="user-card">
-                                    <div class="user-avatar bg-dark d-none d-sm-flex">
+                                    <div class="user-avatar bg-teal-dim d-none d-sm-flex">
                                         @if ($magang->mahasiswas->user->image)
                                             <img src="{{ Storage::url('images/users/' . $magang->mahasiswas->user->image) }}"
                                                 alt="{{ $magang->mahasiswas->user->name }}">
@@ -49,7 +49,7 @@
                                 <span>{{ $magang->status }}</span>
                             </td>
                             <td class="nk-tb-col nk-tb-col-tools">
-                                {{-- <ul class="nk-tb-actions gx-1">
+                                <ul class="nk-tb-actions gx-1">
                                     <li>
                                         <div class="drodown">
                                             <a href="#" class="dropdown-toggle btn btn-icon btn-trigger"
@@ -72,7 +72,7 @@
                                             </div>
                                         </div>
                                     </li>
-                                </ul> --}}
+                                </ul>
 
                                 {{-- @if ($magang->status === 'Disetujui' || $magang->status === 'Ditolak')
                                     <span>Reviewed</span>

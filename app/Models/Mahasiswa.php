@@ -14,7 +14,7 @@ class Mahasiswa extends Model
 
     protected $primaryKey = 'mahasiswa_id';
 
-    protected $fillable = ['user_id', 'prodi_id', 'nim','status'];
+    protected $fillable = ['user_id', 'prodi_id', 'nim', 'status'];
 
     public function user(): BelongsTo
     {
@@ -33,7 +33,7 @@ class Mahasiswa extends Model
 
     public function logs()
     {
-        return $this->hasMany(Log::class, 'log_id', 'log_id');
+        return $this->hasMany(Log::class, 'mahasiswa_id', 'mahasiswa_id');
     }
 
     public function evaluasi()

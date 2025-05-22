@@ -30,6 +30,16 @@
                         <th>Judul Magang</th>
                         <td>{{ $logang->title }}</td>
                     </tr>
+                    @if ($logang->benefits->count())
+                        <tr class="list list-sm">
+                            @foreach ($logang->benefits as $benefit)
+                                <th>BENEFIT</th>
+                                <TD>{{ $benefit->name }}</TD>
+                            @endforeach
+                        </tr>
+                    @else
+                        <p class="text-soft">Tidak ada benefit terdaftar.</p>
+                    @endif
                     <tr>
                         <th>Deskripsi</th>
                         <td>{!! $logang->description !!}</td>
@@ -53,21 +63,20 @@
         {{-- Tombol Aksi --}}
         <div class="mt-3 d-flex">
             @if (Auth::user()->level_id == 1)
-                <a href="{{ route('lowonganMagang.index') }}" class="btn btn-secondary">Kembali</a>
+                <a href="{{ route('lowongan-magang.index') }}" class="btn btn-secondary">Kembali</a>
             @elseif (Auth::user()->level_id == 2)
-                <a href="{{ route('lowonganMagang.indexMhs') }}" class="btn btn-secondary">Kembali</a>
+                <a href="{{ route('lowongan-magang.indexMhs') }}" class="btn btn-secondary">Kembali</a>
             @endif
 
             @if (Auth::user()->level_id == 2)
                 @php
-                    $lamaran = Auth::user()->mahasiswa->applications
-                                ->where('lowongan_id', $logang->lowongan_id)
-                                ->first(); // Ambil lamaran mahasiswa untuk lowongan ini
+                    $lamaran = Auth::user()
+                        ->mahasiswa->applications->where('lowongan_id', $logang->lowongan_id)
+                        ->first(); // Ambil lamaran mahasiswa untuk lowongan ini
                 @endphp
 
                 @if (!$lamaran)
-                    <form action="{{ route('magangApplication.storeMhs') }}" method="POST"
-                        class="ms-2"
+                    <form action="{{ route('pengajuan-magang.storeMhs') }}" method="POST" class="ms-2"
                         onsubmit="return confirm('Yakin ingin melamar lowongan ini?')">
                         @csrf
                         <input type="hidden" name="lowongan_id" value="{{ $logang->lowongan_id }}">

@@ -26,11 +26,12 @@ class LaporanController extends Controller
                 ->where('mahasiswa_id', $mahasiswa->mahasiswa_id)
                 ->get();
         } else {
-            $logs = collect(); 
+            $logs = collect();
         }
-        
-        return view('mahasiswa.laporan.index', compact('breadcrumb','logs'));
+
+        return view('mahasiswa.laporan.index', compact('breadcrumb', 'logs'));
     }
+
 
     public function create()
     {
@@ -66,12 +67,13 @@ class LaporanController extends Controller
         $logs = Log::with(['mahasiswa.user', 'dosen.user'])->latest()->get();
 
         return redirect()->route('laporan')
-                        ->with('success', 'Laporan berhasil dibuat.')
-                        ->with('logs', $logs); // Pastikan logs juga dikirim
+            ->with('success', 'Laporan berhasil dibuat.')
+            ->with('logs', $logs); // Pastikan logs juga dikirim
     }
 
 
-    public function edit($id){
+    public function edit($id)
+    {
         $logs = Log::findOrFail($id);
         $mahasiswa = Mahasiswa::where('user_id', Auth::user()->user_id)->first();
         $dosen = Dosen::all();
@@ -80,7 +82,7 @@ class LaporanController extends Controller
             'title' => 'Edit Laporan',
             'subtitle' => ['Edit Laporan Magang']
         ];
-        return view('mahasiswa.laporan.edit', compact('breadcrumb','logs', 'mahasiswa', 'dosen', 'company'));
+        return view('mahasiswa.laporan.edit', compact('breadcrumb', 'logs', 'mahasiswa', 'dosen', 'company'));
     }
 
     public function update(Request $request, $id)
@@ -125,6 +127,6 @@ class LaporanController extends Controller
             'title' => 'Detail Laporan',
             'subtitle' => ['Detail Laporan Magang']
         ];
-        return view('mahasiswa.laporan.show', compact('breadcrumb','log'));
+        return view('mahasiswa.laporan.show', compact('breadcrumb', 'log'));
     }
 }

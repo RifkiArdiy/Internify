@@ -18,8 +18,8 @@
             <table class="datatable-init-export nowrap nk-tb-list nk-tb-ulist" data-auto-responsive="false">
                 <thead>
                     <tr class="nk-tb-item nk-tb-head">
-                        <th class="nk-tb-col"><span class="sub-text">Program Studi</span></th>
-                        <th class="nk-tb-col tb-col-md"><span class="sub-text">Jumlah</span></th>
+                        <th class="nk-tb-col export-col"><span class="sub-text">Program Studi</span></th>
+                        <th class="nk-tb-col tb-col-md export-col"><span class="sub-text">Jumlah</span></th>
                         <th class="nk-tb-col nk-tb-col-tools text-end"></th>
                     </tr>
                 </thead>

@@ -19,18 +19,15 @@
                 <!-- .header-nav-toggle -->
                 <nav class="header-menu" data-content="mainNav">
                     <ul class="menu-list ms-lg-auto">
-                        <li class="menu-item">
-                            <a href="#home" class="menu-link nav-link">Home</a>
+                        <li class="menu-item {{ request()->routeIs('welcome.index') ? 'active' : '' }}">
+                            <a href="{{ route('welcome.index') }}" class="menu-link nav-link">Home</a>
                         </li>
-                        <li class="menu-item">
-                            <a href="#joblist" class="menu-link nav-link">Lowongan</a>
+                        <li class="menu-item {{ request()->routeIs('list.lowongan') ? 'active' : '' }}">
+                            <a href="{{ route('list.lowongan') }}" class="menu-link nav-link">Lowongan</a>
                         </li>
-                        <li class="menu-item">
-                            <a href="#companylist" class="menu-link nav-link">Mitra</a>
+                        <li class="menu-item ">
+                            <a href="{{ route('list.perusahaan') }}" class="menu-link nav-link">Company</a>
                         </li>
-                        {{-- <li class="menu-item">
-                            <a href="#team" class="menu-link nav-link">Team</a>
-                        </li> --}}
                     </ul>
                     @auth
                         <div class="nk-header-tools">
@@ -67,7 +64,7 @@
                                                         </a>
                                                     </li>
                                                     <li>
-                                                        <a href="{{ route('admin.profile') }}">
+                                                        <a href="{{ route('profile') }}">
                                                             <em class="icon ni ni-user-alt"></em>
                                                             <span>View Profile</span>
                                                         </a>
@@ -80,7 +77,7 @@
                                                         </a>
                                                     </li>
                                                     <li>
-                                                        <a href="{{ route('mahasiswa.profile') }}">
+                                                        <a href="{{ route('profile') }}">
                                                             <em class="icon ni ni-user-alt"></em>
                                                             <span>View Profile</span>
                                                         </a>
@@ -93,7 +90,7 @@
                                                         </a>
                                                     </li>
                                                     <li>
-                                                        <a href="{{ route('dosen.profile') }}">
+                                                        <a href="{{ route('profile') }}">
                                                             <em class="icon ni ni-user-alt"></em>
                                                             <span>View Profile</span>
                                                         </a>
@@ -106,7 +103,7 @@
                                                         </a>
                                                     </li>
                                                     <li>
-                                                        <a href="{{ route('company.profile') }}">
+                                                        <a href="{{ route('profile') }}">
                                                             <em class="icon ni ni-user-alt"></em>
                                                             <span>View Profile</span>
                                                         </a>

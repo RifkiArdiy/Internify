@@ -3,6 +3,15 @@
 @section('content')
     <div class="card card-bordered card-preview">
         <div class="card-inner">
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
             <form action="{{ route('companies.update', $company->company_id) }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PUT') {{-- Method spoofing untuk mengirimkan method PUT --}}
@@ -56,29 +65,20 @@
                     </div>
                     <div class="col-lg-6">
                         <div class="form-group">
-                            <label class="form-label">Industri:</label>
-                            <div class="form-control-wrap">
-                                <select class="form-select js-select2" data-search="on" name="industry" id="industry">
-                                    <option value="default_option"
-                                        {{ $company->industry == 'default_option' ? 'selected' : '' }}>Default Option
-                                    </option>
-                                    <option value="Sales" {{ $company->industry == 'Sales' ? 'selected' : '' }}>Sales
-                                    </option>
-                                    <option value="Marketing" {{ $company->industry == 'Marketing' ? 'selected' : '' }}>
-                                        Marketing</option>
-                                    <option value="Teknologi" {{ $company->industry == 'Teknologi' ? 'selected' : '' }}>
-                                        Teknologi</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="form-group">
                             <label class="form-label" for="alamat">Alamat:</label>
                             <div class="form-control-wrap">
                                 <input type="text" class="form-control" id="alamat" name="alamat"
                                     value="{{ $company->user->alamat ?? '' }}">
                             </div>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label class="form-label">Tentang Perusahaan: <span class="text-danger">*</span></label>
+                            <!-- Editor tampil di sini -->
+                            <div id="quill-editor" style="height: 200px;">{!! old('about_company', $company->about_company) !!}</div>
+                            <!-- Data yang akan dikirim ke controller -->
+                            <input type="hidden" name="about_company" id="about_company">
                         </div>
                     </div>
                     <div class="col-sm-6">
@@ -91,7 +91,7 @@
                                 yang didukung: jpeg, png, jpg, gif. Maksimal 2MB .</small>
                         </div>
                     </div>
-                    <div class="col-12">
+                    <div class="col-12 text-end">
                         <div class="form-group">
                             <button type="submit" class="btn btn-primary">Update</button>
                             <a href="{{ route('companies.index') }}" class="btn btn-secondary">Kembali</a>
@@ -102,3 +102,31 @@
         </div>
     </div>
 @endsection
+@push('js')
+    <script>
+        // Inisialisasi Quill untuk Deskripsi
+        const quillAboutComp = new Quill('#quill-editor', {
+            theme: 'snow',
+            placeholder: 'Masukkan Deskripsi Perusahaan',
+            modules: {
+                toolbar: [
+                    ['bold', 'italic', 'underline', 'strike'],
+                    [{
+                        'list': 'ordered'
+                    }, {
+                        'list': 'bullet'
+                    }],
+                    ['clean']
+                ]
+            }
+        });
+
+        const form = document.querySelector('form');
+        form.addEventListener('submit', function(e) {
+            const html = quillAboutComp.root.innerHTML.trim();
+            // Remove if only contains empty line
+            const cleanHTML = html === '<p><br></p>' ? '' : html;
+            document.querySelector('input[name=about_company]').value = cleanHTML;
+        });
+    </script>
+@endpush

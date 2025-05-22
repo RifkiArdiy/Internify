@@ -14,31 +14,25 @@
         <div class="alert alert-success">{{ session('success') }}</div>
     @endif
     <div class="card card-bordered card-preview">
-        <div class="card-inner table-responsive">
+        <div class="card-inner">
             <table class="datatable-init-export nowrap nk-tb-list nk-tb-ulist" data-auto-responsive="false">
                 <thead>
                     <tr class="nk-tb-item nk-tb-head">
-                        <th class="nk-tb-col">
-                            <span class="sub-text">No</span>
-                        </th>
-                        <th class="nk-tb-col"><span class="sub-text">Perusahaan</span></th>
-                        <th class="nk-tb-col"><span class="sub-text">Dosen Pembimbing</span></th>
-                        <th class="nk-tb-col"><span class="sub-text">Isi Laporan</span></th>
-                        <th class="nk-tb-col"><span class="sub-text">Tanggal</span></th>
+                        <th class="nk-tb-col export-col"><span class="sub-text">Perusahaan</span></th>
+                        <th class="nk-tb-col export-col"><span class="sub-text">Dosen Pembimbing</span></th>
+                        <th class="nk-tb-col export-col"><span class="sub-text">Isi Laporan</span></th>
+                        <th class="nk-tb-col export-col"><span class="sub-text">Tanggal</span></th>
                         <th class="nk-tb-col nk-tb-col-tools text-end"></th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($logs as $log)
                         <tr class="nk-tb-item">
-                            <td class="nk-tb-col nk-tb-col-check">
-                                <span>{{$loop->iteration}}</span>
+                            <td class="nk-tb-col">
+                                <span class="tb-amount">{{ $log->companies->user->name ?? '-' }}</span>
                             </td>
                             <td class="nk-tb-col">
-                                <span>{{ $log->companies->user->name ?? '-' }}</span>
-                            </td>
-                            <td class="nk-tb-col">
-                                <span>{{ $log->dosen->user->name ?? '-' }}</span>
+                                <span class="tb-amount">{{ $log->dosen->user->name ?? '-' }}</span>
                             </td>
                             <td class="nk-tb-col">
                                 <span>{{ Str::limit($log->report_text, 50) }}</span>
@@ -54,16 +48,30 @@
                                                 data-bs-toggle="dropdown"><em class="icon ni ni-more-h"></em></a>
                                             <div class="dropdown-menu dropdown-menu-end">
                                                 <ul class="link-list-opt no-bdr">
-                                                    <li><a href="{{ route('laporan.show', $log->log_id)}}"><em class="icon ni ni-eye"></em><span>Lihat Detail</span></a></li>
-                                                    <li><a href="{{ route('laporan.edit', $log->log_id) }}"><em class="icon ni ni-edit"></em><span>Edit</span></a></li>
-                                                    <li class="divider"></li>
                                                     <li>
-                                                        <form action="{{ route('laporan.destroy', $log->log_id) }}" method="POST" onsubmit="return confirm('Yakin ingin menghapus laporan ini?')">
-                                                            @csrf
-                                                            @method('DELETE')
-                                                            <button type="submit" class="btn btn-link text-danger"><em class="icon ni ni-trash"></em><span>Hapus</span></button>
-                                                        </form>
+                                                        <a href="{{ route('laporan.show', $log->log_id) }}">
+                                                            <em class="icon ni ni-eye"></em><span>Lihat Detail</span>
+                                                        </a>
                                                     </li>
+                                                    @if (auth()->user()->hasRole('Mahasiswa'))
+                                                        <li>
+                                                            <a href="{{ route('laporan.edit', $log->log_id) }}">
+                                                                <em class="icon ni ni-edit"></em><span>Edit</span>
+                                                            </a>
+                                                        </li>
+                                                        <li class="divider"></li>
+                                                        <li>
+                                                            <form action="{{ route('laporan.destroy', $log->log_id) }}"
+                                                                method="POST"
+                                                                onsubmit="return confirm('Yakin ingin menghapus laporan ini?')">
+                                                                @csrf
+                                                                @method('DELETE')
+                                                                <button type="submit" class="btn btn-link text-danger">
+                                                                    <em class="icon ni ni-trash"></em><span>Hapus</span>
+                                                                </button>
+                                                            </form>
+                                                        </li>
+                                                    @endif
                                                 </ul>
                                             </div>
                                         </div>

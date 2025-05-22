@@ -14,7 +14,7 @@ class PeriodeMagangSeeder extends Seeder
     public function run(): void
     {
         $PeriodeMagangData = [
-            ['name' => 'Full time', 'start_date' => '2025-03-27', 'end_date' => '2025-04-30'],
+            ['name' => 'Gelombang I', 'start_date' => '2025-03-27', 'end_date' => '2025-04-30'],
         ];
 
         foreach ($PeriodeMagangData as $data) {
