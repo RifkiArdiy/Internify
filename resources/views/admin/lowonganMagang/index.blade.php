@@ -25,9 +25,7 @@
                     <tr class="nk-tb-item nk-tb-head">
                         <th class="nk-tb-col export-col"><span class="sub-text">Judul</span></th>
                         <th class="nk-tb-col tb-col-lg export-col"><span class="sub-text">Perusahaan</span></th>
-                        <th class="nk-tb-col tb-col-lg export-col"><span class="sub-text">Created at</span></th>
-                        <th class="nk-tb-col tb-col-md export-col"><span class="sub-text">Masa Awal</span></th>
-                        <th class="nk-tb-col tb-col-md export-col"><span class="sub-text">Masa Akhir</span></th>
+                        <th class="nk-tb-col tb-col-md export-col"><span class="sub-text">Pelamar</span></th>
                         <th class="nk-tb-col nk-tb-col-tools text-end"></th>
                     </tr>
                 </thead>
@@ -35,20 +33,21 @@
                     @foreach ($logang as $item)
                         <tr class="nk-tb-item">
                             <td class="nk-tb-col">
-                                <span class="tb-amount">{{ $item->title }}</span>
+                                <div class="user-info">
+                                    <span class="tb-lead">
+                                        {{ $item->title }}
+                                        {{-- <span class="dot dot-success d-md-none ms-1"></span> --}}
+                                    </span>
+                                    <span>{{ $item->period->name }} | {{ $item->created_at->diffForHumans() }} </span>
+                                </div>
                             </td>
                             <td class="nk-tb-col tb-col-lg">
                                 <span class="tb-amount">{{ $item->company->user->name }}</span>
                             </td>
-                            <td class="nk-tb-col tb-col-lg">
-                                <span>{{ $item->created_at }}</span>
-                            </td>
                             <td class="nk-tb-col tb-col-md">
-                                <span>{{ $item->period->start_date }}</span>
+                                <span><em class="icon ni ni-users"></em> {{ $item->applications->count() }} Pelamar</span>
                             </td>
-                            <td class="nk-tb-col tb-col-md">
-                                <span>{{ $item->period->end_date }}</span>
-                            </td>
+
                             <td class="nk-tb-col nk-tb-col-tools">
                                 <ul class="nk-tb-actions gx-1">
                                     <li>

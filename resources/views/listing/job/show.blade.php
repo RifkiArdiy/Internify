@@ -198,7 +198,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="d-flex gap g-2 mt-3 mt-md-0">
+                        <div class="d-flex g-2 mt-3 mt-md-0">
                             <a href="#" class="btn btn-lg btn-outline-primary">Masuk</a>
                             <a href="#" class="btn btn-lg btn-primary">Apply Lowongan</a>
                         </div>

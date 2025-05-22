@@ -38,7 +38,8 @@
                                 </div>
                             </td>
                             <td class="nk-tb-col tb-col-md">
-                                <span class="tb-lead">{{ $item->mahasiswas->count() }}</span>
+                                <span><em class="icon ni ni-users"></em> {{ $item->mahasiswas->count() }}
+                                    Mahasiswa</span>
                             </td>
                             <td class="nk-tb-col nk-tb-col-tools text-end">
                                 <ul class="nk-tb-actions gx-1">
