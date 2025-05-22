@@ -23,6 +23,7 @@ use App\Http\Controllers\FeedbackMagangController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\ProfilAkademikController;
 use App\Http\Controllers\MonitoringController;
+use App\Http\Controllers\WilayahController;
 
 /*
 |--------------------------------------------------------------------------
@@ -84,6 +85,11 @@ Route::middleware(['auth'])->group(function () {
             Route::put('/{id}', [LowonganMagangController::class, 'update'])->name('lowongan-magang.update');
             Route::delete('/{id}', [LowonganMagangController::class, 'destroy'])->name('lowongan-magang.destroy');
         });
+
+        Route::get('/get-regencies', [WilayahController::class, 'getRegencies']);
+        Route::get('/get-districts', [WilayahController::class, 'getDistricts']);
+        Route::get('/get-villages', [WilayahController::class, 'getVillages']);
+
 
         Route::prefix('benefit')->group(callback: function () {
             Route::get('/create', [BenefitController::class, 'create'])->name('benefits.create');
