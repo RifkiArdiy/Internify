@@ -52,7 +52,7 @@ class DashboardController extends Controller
         } else {
             $status = 'Anda Belum Magang';
         }
-        return view('dashboard.mahasiswa', compact('breadcrumb', 'status', 'magang'));
+        return view('mahasiswa.dashboard.mahasiswa', compact('breadcrumb', 'status', 'magang'));
     }
 
     public function indexDosen()

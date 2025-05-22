@@ -198,8 +198,14 @@
                                 </div>
                             </div>
                             <div class="d-flex g-2 mt-3 mt-md-0">
-                                <a href="#" class="btn btn-lg btn-outline-primary">Masuk</a>
-                                <a href="#" class="btn btn-lg btn-primary">Apply Lowongan</a>
+                                @guest
+                                    {{-- <a href="{{ route('register') }}" class="btn btn-lg btn-primary">Daftar Akun untuk
+                                        melamar</a> --}}
+                                    <a href="{{ route('login') }}" class="btn btn-lg btn-primary">Lamar Cepat</a>
+                                @endguest
+                                @auth
+                                    <a href="#" class="btn btn-lg btn-primary">Lamar Cepat</a>
+                                @endauth
                             </div>
                         </div>
                     </div>
@@ -259,15 +265,16 @@
                                 <div class="card card-bordered mb-4">
                                     <div class="card-inner">
                                         <h6 class="title">Job Overview</h6>
-                                        <ul class="gy-2">
+                                        <ul class="gy-2 mt-3">
                                             <li class="d-flex justify-content-between"><strong>Date Posted:</strong>
                                                 {{ $lowongan->created_at->diffForHumans() }}</li>
                                             <li class="d-flex justify-content-between"><strong>Expiration
                                                     Date:</strong> {{ $lowongan->period->end_date }}
                                             </li>
                                             <li class="d-flex justify-content-between">
-                                                <strong>Lokasi:</strong>{{ $lowongan->province->name }},
-                                                {{ $lowongan->regency->name }}
+                                                <strong>Lokasi:</strong>{{ $lowongan->regency->name }}
+                                                ({{ $lowongan->province->name }})
+
                                             </li>
                                             <li class="d-flex justify-content-between"><strong>Job Type:</strong>
                                                 {{ $lowongan->kategori->name }}</li>
@@ -286,10 +293,15 @@
                                         <h6 class="title mb-1">{{ $lowongan->company->user->name }}</h6>
                                         <a href="{{ route('show.perusahaan', $lowongan->company->company_id) }}"
                                             class="text-primary small">View company profile</a>
-                                        <ul class="list list-sm text-soft mt-3">
-                                            <li><strong>Founded:</strong>{{ $lowongan->company->created_at }}</li>
-                                            <li><strong>Phone:</strong> {{ $lowongan->company->user->no_telp }}</li>
-                                            <li><strong>Lokasi:</strong> {{ $lowongan->company->user->alamat }}</li>
+                                        {{-- <ul class="list list-sm text-soft mt-3"> --}}
+                                        <ul class="gy-2 mt-3">
+                                            <li class="d-flex justify-content-between">
+                                                <strong>Founded:</strong>{{ $lowongan->company->created_at }}
+                                            </li>
+                                            <li class="d-flex justify-content-between"><strong>Phone:</strong>
+                                                {{ $lowongan->company->user->no_telp }}</li>
+                                            <li class="d-flex justify-content-between"><strong>Lokasi:</strong>
+                                                {{ $lowongan->company->user->alamat }}</li>
                                         </ul>
                                         <a href="{{ route('show.perusahaan', $lowongan->company->company_id) }}"
                                             class="btn btn-outline-primary btn-block mt-3">Membuka
