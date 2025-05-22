@@ -199,8 +199,8 @@
                             </div>
                         </div>
                         <div class="d-flex gap g-2 mt-3 mt-md-0">
-                            <a href="#" class="btn btn-outline-primary">Register to Apply</a>
-                            <a href="#" class="btn btn-primary">Apply For Job</a>
+                            <a href="#" class="btn btn-lg btn-outline-primary">Masuk</a>
+                            <a href="#" class="btn btn-lg btn-primary">Apply Lowongan</a>
                         </div>
                     </div>
                     <!-- .container -->
@@ -260,11 +260,13 @@
                                     <div class="card-inner">
                                         <h6 class="title">Job Overview</h6>
                                         <ul class="gy-2">
-                                            <li><strong>Date Posted:</strong> 30th Apr, 2025</li>
-                                            <li><strong>Expiration Date:</strong> 1st May, 2026</li>
-                                            <li><strong>Lokasi:</strong> {{ $lowongan->village->name }},
-                                                {{ $lowongan->district->name }}, {{ $lowongan->regency->name }},
-                                                {{ $lowongan->province->name }}
+                                            <li><strong>Date Posted:</strong>
+                                                {{ $lowongan->created_at->diffForHumans() }}</li>
+                                            <li><strong>Expiration Date:</strong> {{ $lowongan->period->end_date }}
+                                            </li>
+                                            <li><strong>Lokasi:</strong>{{ $lowongan->province->name }},
+                                                {{ $lowongan->regency->name }},
+                                                {{ $lowongan->district->name }},
                                             </li>
                                             <li><strong>Job Type:</strong> {{ $lowongan->kategori->name }}</li>
                                         </ul>
@@ -286,37 +288,63 @@
                                             <li><strong>Phone:</strong> {{ $lowongan->company->user->no_telp }}</li>
                                             <li><strong>Lokasi:</strong> {{ $lowongan->company->user->alamat }}</li>
                                         </ul>
-                                        <a href="#" class="btn btn-outline-primary btn-block mt-3">Open Jobs
-                                            :
-                                            1</a>
+                                        <a href="#" class="btn btn-outline-primary btn-block mt-3">Membuka
+                                            Lowongan
+                                            : {{ $jobcount }}</a>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
                         <!-- Related Jobs -->
-                        <div class="mt-5">
-                            <h5 class="title mb-4">Related Jobs</h5>
-                            <div class="row g-gs">
-                                @foreach ([['Laravel & MySQL Expert', 'andrew moonga'], ['Node.js & MongoDB Specialist', 'FutureWave IT'], ['MERN STACK Developer', 'ABISHek']] as [$title, $company])
-                                    <div class="col-md-4">
-                                        <div class="card card-bordered">
-                                            <div class="card-inner">
-                                                <h6 class="title">{{ $title }}</h6>
-                                                <span class="small text-soft">{{ $company }}</span>
-                                                <ul class="list-inline mt-2 fs-12px text-soft">
-                                                    <li class="list-inline-item">💻 Programming</li>
-                                                    <li class="list-inline-item">Gandhinagar, Gujarat</li>
-                                                </ul>
-                                            </div>
+                        @if ($recent->count())
+                            <div class="mt-5">
+                                <h5 class="mb-3">Lowongan Serupa</h5>
+                                <div class="row g-4">
+                                    @foreach ($recent as $job)
+                                        <div class="col-sm-6 col-lg-4">
+                                            <a href="{{ route('show.lowongan', $job->lowongan_id) }}"
+                                                class="card-link-wrapper">
+                                                <div class="card card-bordered service service-s4 h-100">
+                                                    <div class="card-inner">
+                                                        <div class="job">
+                                                            <div class="job-head">
+                                                                <div class="job-title">
+                                                                    <div class="user-avatar sq bg-purple">
+                                                                        <span>DD</span>
+                                                                    </div>
+                                                                    <div class="job-info">
+                                                                        <h6 class="title">{{ $job->title }}</h6>
+                                                                        <span
+                                                                            class="sub-text">{{ $job->period->name }}</span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="job-details">
+                                                                <p>{{ Str::limit(strip_tags($job->description), 80) }}
+                                                                </p>
+                                                            </div>
+                                                            <div class="job-meta">
+                                                                <ul class="job-users g-1">
+                                                                    <li>
+                                                                        <span
+                                                                            class="badge badge-dim bg-primary">{{ $job->kategori->name }}</span>
+                                                                    </li>
+                                                                </ul>
+                                                                <span class="badge badge-dim bg-warning">
+                                                                    <em class="icon ni ni-clock"></em>
+                                                                    <span>{{ $job->created_at->diffForHumans() }}</span>
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </a>
                                         </div>
-                                    </div>
-                                @endforeach
+                                    @endforeach
+                                </div>
                             </div>
-                            <div class="text-center mt-4">
-                                <a href="#" class="btn btn-primary">Show All</a>
-                            </div>
-                        </div>
+                        @endif
                     </div><!-- .section-content -->
                 </div><!-- .container -->
             </section><!-- .section -->
