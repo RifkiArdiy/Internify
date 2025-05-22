@@ -18,7 +18,7 @@
                                 </div>
                                 <div class="service-text">
                                     <h5 class="title">{{ $company->user->name }}</h5>
-                                    <p>{{ $company->lowongans_count }} lowongan tersedia</p>
+                                    <p class="text-indigo">Membuka Lowongan : {{ $company->lowongans_count }}</p>
                                 </div>
                             </div>
                         </div>

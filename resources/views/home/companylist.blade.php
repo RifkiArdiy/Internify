@@ -26,7 +26,7 @@
                                     </div>
                                     <div class="service-text">
                                         <h5 class="title">{{ $company->user->name }}</h5>
-                                        <p>{{ $company->lowongans_count }} lowongan tersedia</p>
+                                        <p class="text-indigo">Membuka Lowongan : {{ $company->lowongans_count }}</p>
                                     </div>
                                 </div>
                             </div>
@@ -41,7 +41,7 @@
                     <ul class="btns-inline justify-center pt-6">
                         <li>
                             <a href="{{ route('list.perusahaan') }}" class="btn btn-xl btn-primary btn-round">Lihat
-                                Semua</a>
+                                lebih banyak</a>
                         </li>
                     </ul>
                 </div>

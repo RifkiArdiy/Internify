@@ -54,7 +54,7 @@
                     <ul class="btns-inline justify-center pt-6">
                         <li>
                             <a href="{{ route('list.lowongan') }}" class="btn btn-xl btn-primary btn-round">Lihat
-                                Semua</a>
+                                lebih banyak</a>
                         </li>
                     </ul>
                 </div>
