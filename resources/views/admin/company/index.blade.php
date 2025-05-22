@@ -39,7 +39,7 @@
                                     </div>
                                     <div class="user-info">
                                         <span class="tb-lead">{{ $company->user->name }}<span
-                                                class="dot dot-success d-md-none ms-1"></span></span>
+                                                class="dot dot-secondary d-md-none ms-1"></span></span>
                                         <span>{{ $company->user->email }}</span>
                                     </div>
                                 </div>

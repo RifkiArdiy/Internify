@@ -42,7 +42,8 @@
                                 </div>
                             </td>
                             <td class="nk-tb-col tb-col-lg">
-                                <span class="tb-amount">{{ $item->company->user->name }}</span>
+                                <span><em class="icon ni ni-building"></em>
+                                    {{ $item->company->user->name }}</span>
                             </td>
                             <td class="nk-tb-col tb-col-md">
                                 <span><em class="icon ni ni-users"></em> {{ $item->applications->count() }} Pelamar</span>

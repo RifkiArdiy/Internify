@@ -40,10 +40,11 @@
                                 </div>
                             </td>
                             <td class="nk-tb-col tb-col-mb">
-                                <span>{{ $magang->lowongans->title }}</span>
+                                <span><em class="icon ni ni-briefcase"></em> {{ $magang->lowongans->title }}</span>
                             </td>
                             <td class="nk-tb-col tb-col-mb">
-                                <span>{{ $magang->lowongans->company->user->name }}</span>
+                                <span><em class="icon ni ni-building"></em>
+                                    {{ $magang->lowongans->company->user->name }}</span>
                             </td>
                             <td class="nk-tb-col tb-col-mb">
                                 @if ($magang->status === 'Disetujui')

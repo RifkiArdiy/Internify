@@ -33,7 +33,7 @@
                                     </div>
                                     <div class="user-info">
                                         <span class="tb-lead">{{ $item->name }}<span
-                                                class="dot dot-success d-md-none ms-1"></span></span>
+                                                class="dot dot-dark d-md-none ms-1"></span></span>
                                     </div>
                                 </div>
                             </td>
