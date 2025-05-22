@@ -40,6 +40,7 @@ Route::post('login', [AuthController::class, 'postLogin'])->name('postLogin');
 Route::get('register', [AuthController::class, 'register'])->name('register');
 Route::post('register', [AuthController::class, 'postRegister'])->name('postRegister');
 
+Route::get('/', [WelcomeController::class, 'index']);
 Route::get('/home', [WelcomeController::class, 'index'])->name('welcome.index');
 Route::get('/lowongan', [ListingController::class, 'lowongan'])->name('list.lowongan');
 Route::get('/{id}/lowongan', [ListingController::class, 'showLowongan'])->name('show.lowongan');
