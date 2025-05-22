@@ -35,10 +35,10 @@
                     @foreach ($logang as $item)
                         <tr class="nk-tb-item">
                             <td class="nk-tb-col">
-                                <span>{{ $item->title }}</span>
+                                <span class="tb-amount">{{ $item->title }}</span>
                             </td>
                             <td class="nk-tb-col tb-col-lg">
-                                <span>{{ $item->company->user->name }}</span>
+                                <span class="tb-amount">{{ $item->company->user->name }}</span>
                             </td>
                             <td class="nk-tb-col tb-col-lg">
                                 <span>{{ $item->created_at }}</span>
