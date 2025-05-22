@@ -177,29 +177,28 @@
                 </div>
                 <div class="header-content py-6 is-dark mt-lg-n1 mt-n3">
                     <div class="container">
-                        <!-- Job Title and Action Buttons -->
+                        <!-- Company and Action Buttons -->
                         <div class="d-flex flex-wrap align-items-center justify-content-between">
                             <div class="d-flex align-items-center">
                                 <div class="user-avatar sq lg bg-primary me-3">
-                                    @if ($lowongan->company->user->image)
-                                        <img src="{{ Storage::url('images/users/' . $lowongan->company->user->image) }}"
-                                            alt="{{ $lowongan->company->user->name }}">
+                                    @if ($company->user->image)
+                                        <img src="{{ Storage::url('images/users/' . $company->user->image) }}"
+                                            alt="{{ $company->user->name }}">
                                     @else
-                                        <span>{{ strtoupper(substr($lowongan->company->user->name, 0, 2)) }}</span>
+                                        <span>{{ strtoupper(substr($company->user->name, 0, 2)) }}</span>
                                     @endif
                                 </div>
                                 <div>
-                                    <h4 class="mb-1">{{ $lowongan->title }}</h4>
+                                    <h4 class="mb-1">{{ $company->user->name }}</h4>
                                     <ul class="list-inline list-split fs-14px text-soft">
-                                        <li><em class="icon ni ni-hash"></em> {{ $lowongan->kategori->name }}</li>
-                                        <li><em class="icon ni ni-clock"></em>
-                                            {{ $lowongan->created_at->diffForHumans() }}</li>
+                                        <li><em class="icon ni ni-briefcase"></em> Technology</li>
+                                        <li><em class="icon ni ni-map-pin"></em>
+                                            {{ $company->user->alamat ?? 'N/A' }}</li>
+                                        <li><em class="icon ni ni-call"></em>
+                                            {{ $company->user->no_telp ?? '-' }}</li>
+                                        <li><em class="icon ni ni-mail"></em> {{ $company->user->email }}</li>
                                     </ul>
                                 </div>
-                            </div>
-                            <div class="d-flex g-2 mt-3 mt-md-0">
-                                <a href="#" class="btn btn-lg btn-outline-primary">Masuk</a>
-                                <a href="#" class="btn btn-lg btn-primary">Apply Lowongan</a>
                             </div>
                         </div>
                     </div>
@@ -210,103 +209,51 @@
             <!-- .header-content -->
             <!-- .header -->
 
-
             <!-- .section -->
             <section class="section section-detail pb-7">
                 <div class="container">
                     <div class="section-content">
                         <!-- Grid Layout -->
-                        <div class="row g-gs">
-                            <!-- Left Content -->
-                            <div class="col-lg-8">
-                                <!-- Job Description -->
-                                <div class="card card-bordered mb-4">
-                                    <div class="card-inner">
-                                        <h5 class="title mb-3">Deskripsi Lowongan</h5>
-                                        <div class="text-base">
-                                            {!! $lowongan->description !!}
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Syarat & Ketentuan -->
-                                <div class="card card-bordered mb-4">
-                                    <div class="card-inner">
-                                        <h5 class="title mb-3">Syarat & Ketentuan</h5>
-                                        <div class="content-html">
-                                            {!! $lowongan->requirements !!}
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Benefits -->
-                                <div class="card card-bordered mb-4">
-                                    <div class="card-inner">
-                                        <h5 class="title mb-3">Benefit</h5>
-                                        <ul class="list list-sm text-soft">
-                                            @foreach ($lowongan->benefits as $benefit)
-                                                {{-- <span class="badge badge-outline-primary">{{ $benefit->name }}</span> --}}
-                                                <li>{{ $benefit->name }}</li>
-                                            @endforeach
-                                        </ul>
-                                    </div>
+                        <div class="row g-4">
+                            <div class="col-md-8">
+                                <h5 class="title mb-3">Tentang Perusahaan</h5>
+                                <div class="text-soft">
+                                    {!! $company->about_company !!}
                                 </div>
                             </div>
-
-                            <!-- Right Sidebar -->
-                            <div class="col-lg-4">
-                                <!-- Job Overview -->
-                                <div class="card card-bordered mb-4">
-                                    <div class="card-inner">
-                                        <h6 class="title">Job Overview</h6>
-                                        <ul class="gy-2">
-                                            <li class="d-flex justify-content-between"><strong>Date Posted:</strong>
-                                                {{ $lowongan->created_at->diffForHumans() }}</li>
-                                            <li class="d-flex justify-content-between"><strong>Expiration
-                                                    Date:</strong> {{ $lowongan->period->end_date }}
-                                            </li>
-                                            <li class="d-flex justify-content-between">
-                                                <strong>Lokasi:</strong>{{ $lowongan->province->name }},
-                                                {{ $lowongan->regency->name }}
-                                            </li>
-                                            <li class="d-flex justify-content-between"><strong>Job Type:</strong>
-                                                {{ $lowongan->kategori->name }}</li>
-                                        </ul>
-                                    </div>
-                                </div>
-
-                                <!-- Company Info -->
+                            <div class="col-md-4">
                                 <div class="card card-bordered">
-                                    <div class="card-inner text-center">
-                                        <div class="d-flex justify-content-center mb-3">
-                                            <div class="user-avatar sq lg bg-indigo-dim">
-                                                <span>👤</span>
-                                            </div>
-                                        </div>
-                                        <h6 class="title mb-1">{{ $lowongan->company->user->name }}</h6>
-                                        <a href="{{ route('show.perusahaan', $lowongan->company->company_id) }}"
-                                            class="text-primary small">View company profile</a>
-                                        <ul class="list list-sm text-soft mt-3">
-                                            <li><strong>Founded:</strong>{{ $lowongan->company->created_at }}</li>
-                                            <li><strong>Phone:</strong> {{ $lowongan->company->user->no_telp }}</li>
-                                            <li><strong>Lokasi:</strong> {{ $lowongan->company->user->alamat }}</li>
+                                    <div class="card-inner">
+                                        <ul class="gy-2">
+                                            <li class="d-flex justify-content-between"><span
+                                                    class="fw-bold">Ownership:</span> <span
+                                                    class="text-soft">Private</span></li>
+                                            <li class="d-flex justify-content-between"><span class="fw-bold">Company
+                                                    size:</span> <span class="text-soft">11-20</span></li>
+                                            <li class="d-flex justify-content-between"><span class="fw-bold">Founded
+                                                    in:</span> <span
+                                                    class="text-soft">{{ $company->user->created_at->format('Y') }}</span>
+                                            </li>
+                                            <li class="d-flex justify-content-between"><span
+                                                    class="fw-bold">Email:</span> <span
+                                                    class="text-soft">{{ $company->user->email }}</span></li>
+                                            <li class="d-flex justify-content-between"><span
+                                                    class="fw-bold">Location:</span> <span
+                                                    class="text-soft">{{ $company->user->alamat ?? '-' }}</span>
+                                            </li>
                                         </ul>
-                                        <a href="{{ route('show.perusahaan', $lowongan->company->company_id) }}"
-                                            class="btn btn-outline-primary btn-block mt-3">Membuka
-                                            Lowongan
-                                            : {{ $jobcount }}</a>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Related Jobs -->
-                        @if ($recent->count())
-                            <div class="mt-5">
-                                <h5 class="mb-3">Lowongan Serupa</h5>
+                        {{-- Latest Jobs --}}
+                        <div class="mt-5">
+                            <h5 class="mb-3">Lowongan Terakhir</h5>
+                            @if ($company->lowongans->count())
                                 <div class="row g-4">
-                                    @foreach ($recent as $job)
-                                        <div class="col-sm-6 col-lg-4">
+                                    @foreach ($company->lowongans->take(3) as $job)
+                                        <div class="col-md-6 col-lg-4">
                                             <a href="{{ route('show.lowongan', $job->lowongan_id) }}"
                                                 class="card-link-wrapper">
                                                 <div class="card card-bordered service service-s4 h-100">
@@ -347,8 +294,10 @@
                                         </div>
                                     @endforeach
                                 </div>
-                            </div>
-                        @endif
+                            @else
+                                <p class="text-danger">The Latest Job not available.</p>
+                            @endif
+                        </div>
                     </div><!-- .section-content -->
                 </div><!-- .container -->
             </section><!-- .section -->

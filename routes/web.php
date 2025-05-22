@@ -47,6 +47,7 @@ Route::get('/home', [WelcomeController::class, 'index'])->name('welcome.index');
 Route::get('/lowongan', [ListingController::class, 'lowongan'])->name('list.lowongan');
 Route::get('/{id}/lowongan', [ListingController::class, 'showLowongan'])->name('show.lowongan');
 Route::get('/perusahaan', [ListingController::class, 'perusahaan'])->name('list.perusahaan');
+Route::get('/{id}/perusahaan', [ListingController::class, 'showPerusahaan'])->name('show.perusahaan');
 
 Route::middleware(['auth'])->group(function () {
 

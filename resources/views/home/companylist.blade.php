@@ -12,7 +12,7 @@
         <div class="row g-gs justify-content-center text-center">
             @foreach ($companies as $company)
                 <div class="col-sm-6 col-lg-3">
-                    <a href="#" class="card-link-wrapper">
+                    <a href="{{ route('show.perusahaan', $company->company_id) }}" class="card-link-wrapper">
                         <div class="card service service-s4 card-bordered h-100">
                             <div class="py-2">
                                 <div class="card-inner">

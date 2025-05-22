@@ -40,4 +40,11 @@ class ListingController extends Controller
 
         return view('listing.company.index', compact('companies'));
     }
+
+    public function showPerusahaan($id)
+    {
+        $company = Company::with(['user', 'lowongans.kategori'])->findOrFail($id);
+
+        return view('listing.company.show', compact('company'));
+    }
 }
