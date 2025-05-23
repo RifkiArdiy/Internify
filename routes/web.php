@@ -288,8 +288,8 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/show/{id}', [CompanyLowonganMagangController::class, 'show'])->name('companys-lowongan-magang.show');
             Route::get('/edit/{id}', [CompanyLowonganMagangController::class, 'edit'])->name('companys-lowongan-magang.edit');
             Route::put('/{id}', [CompanyLowonganMagangController::class, 'update'])->name('companys-lowongan-magang.update');
-            Route::delete('/{id}', [CompanyLowonganMagangController::class, 'destroy'])->name('companys-lowongan-magang.destroy');
             Route::get('/{id}', [CompanyLowonganMagangController::class, 'pelamars'])->name('companys-lowongan-magang.pelamars');
+            Route::delete('/destroy/{id}', [CompanyLowonganMagangController::class, 'destroy'])->name('companys-lowongan-magang.destroy');
         });
 
 
