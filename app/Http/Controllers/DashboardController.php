@@ -39,12 +39,14 @@ class DashboardController extends Controller
             'title' => 'Dashboard',
             'subtitle' => ['Welcome to Dashboard Internify']
         ];
-        $mahasiswa_id = Mahasiswa::where('user_id', Auth::user()->user_id)->value('mahasiswa_id');
-        $magang = MagangApplication::where('mahasiswa_id', $mahasiswa_id)->first();
+        $mahasiswa = Mahasiswa::where('user_id', Auth::user()->user_id)->first();
+        $magang = MagangApplication::where('mahasiswa_id', $mahasiswa->mahasiswa_id)->first();
         if ($magang) {
             $today = Carbon::today();
             $endDate = Carbon::parse($magang->lowongans->period->end_date);
-            if ($today->greaterThan($endDate)) {
+            if ($mahasiswa->status !== 'is_magang') {
+                $status = 'Lamaran Anda Sedang Diproses...';
+            } elseif ($today->greaterThan($endDate)) {
                 $status = 'Magang Anda Selesai';
             } else {
                 $status = 'Anda Sedang Melaksanakan Magang';
@@ -52,7 +54,7 @@ class DashboardController extends Controller
         } else {
             $status = 'Anda Belum Magang';
         }
-        return view('mahasiswa.dashboard.mahasiswa', compact('breadcrumb', 'status', 'magang'));
+        return view('mahasiswa.dashboard.mahasiswa', compact('breadcrumb', 'status', 'magang', 'mahasiswa'));
     }
 
     public function indexDosen()
@@ -70,6 +72,15 @@ class DashboardController extends Controller
             'title' => 'Dashboard',
             'subtitle' => ['Welcome to Dashboard Internify']
         ];
-        return view('company.dashboard.company', compact('breadcrumb'));
+        $companyId = Company::where('user_id', Auth::user()->user_id)->value('company_id');
+
+        $unreviewedLamarans = MagangApplication::with(['mahasiswas', 'lowongans'])
+            ->where('status', 'pending')
+            ->whereHas('lowongans', function ($query) use ($companyId) {
+                $query->where('company_id', $companyId);
+            })
+            ->get();
+
+        return view('company.dashboard.company', compact('breadcrumb', 'unreviewedLamarans'));
     }
 }

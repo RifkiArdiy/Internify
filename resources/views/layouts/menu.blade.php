@@ -234,4 +234,13 @@
             <span class="nk-menu-text">Verifikasi Laporan</span>
         </a>
     </li>
+    <li class="nk-menu-item">
+        <a href="{{ route('companys-lowongan-magang.index') }}" class="nk-menu-link">
+            <span class="nk-menu-icon">
+                <em class="icon ni ni-briefcase"></em>
+            </span>
+            <span class="nk-menu-text">Lowongan Magang</span>
+        </a>
+    </li>
+
 @endif

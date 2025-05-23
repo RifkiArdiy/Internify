@@ -96,7 +96,7 @@
                                 </p>
                             @else
                                 <p class="project-details">Anda belum memiliki magang aktif.</p>
-                                <p class="project-details">Silakan buka menu <a href="{{ route('lowonganMagang.indexMhs') }}">Lowongan Magang</a> untuk melamar.</p>
+                                <p class="project-details">Silakan buka menu <a href="{{ route('lowongan-magang.indexMhs') }}">Lowongan Magang</a> untuk melamar.</p>
                             @endif
                         </div>
                     </div>
