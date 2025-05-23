@@ -101,7 +101,7 @@
                                 @endif
                             </div>
                             <div class="nk-activity-data">
-                                <div class="label">{{ $item->mahasiswas->user->name }} menunggu di unboxing</div>
+                                <div class="label"><span>{{ $item->mahasiswas->user->name }}</span> menunggu di review</div>
                                 <span class="time">{{ $item->created_at->diffForHumans() }}</span>
                             </div>
                         </li>
