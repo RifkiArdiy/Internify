@@ -13,15 +13,15 @@ use App\Models\Province;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class LowonganMagangController extends Controller
+class CompanyLowonganMagangController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $logang = LowonganMagang::with('company')->get();
-        // $companies = Company::all();
+        $company_id = Company::where('user_id', Auth::user()->user_id)->value('company_id');
+        $logang = LowonganMagang::where('company_id', $company_id)->get();
         $period = PeriodeMagang::all();
         $breadcrumb = (object) [
             'title' => 'Lowongan Magang',
@@ -29,21 +29,9 @@ class LowonganMagangController extends Controller
         ];
 
 
-        return view('admin.lowonganMagang.index', compact('logang', 'period', 'breadcrumb'));
+        return view('company.lowonganMagang.index', compact('logang', 'period', 'breadcrumb'));
     }
 
-    public function indexMhs()
-    {
-        $breadcrumb = (object) [
-            'title' => 'Lowongan Magang',
-            'subtitle' => ['Cari lowongan magang']
-        ];
-
-        $logang = LowonganMagang::all();
-        $period = PeriodeMagang::all();
-
-        return view('mahasiswa.lowongan.index', compact('logang', 'period', 'breadcrumb'));
-    }
 
     /**
      * Show the form for creating a new resource.
@@ -57,13 +45,12 @@ class LowonganMagangController extends Controller
         ];
 
         $provinces = Province::all();
-        $companies = Company::all();
         $periode = PeriodeMagang::all();
         $lowongan = LowonganMagang::all();
         $benefits = Benefit::all();
         $kategoris = Kategori::all();
 
-        return view('admin.lowonganMagang.create', compact('provinces', 'companies', 'periode', 'lowongan', 'benefits', 'kategoris', 'breadcrumb'));
+        return view('company.lowonganMagang.create', compact('provinces', 'periode', 'lowongan', 'benefits', 'kategoris', 'breadcrumb'));
     }
 
     /**
@@ -72,7 +59,6 @@ class LowonganMagangController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'company' => 'required|exists:companies,company_id',
             'period' => 'required|exists:periode_magangs,period_id',
             'kategori' => 'required|exists:kategoris,kategori_id',
             'title' => 'required|string|max:255',
@@ -86,7 +72,7 @@ class LowonganMagangController extends Controller
         ]);
 
         $lowongan = LowonganMagang::create([
-            'company_id'   => $validated['company'],
+            'company_id'   => Company::where('user_id', Auth::user()->user_id)->value('company_id'),
             'period_id'    => $validated['period'],
             'kategori_id'    => $validated['kategori'],
             'title'        => $validated['title'],
@@ -102,7 +88,7 @@ class LowonganMagangController extends Controller
             $lowongan->benefits()->attach($request->benefits); // relasi many-to-many
         }
 
-        return redirect()->route('lowongan-magang.index')
+        return redirect()->route('companys-lowongan-magang.index')
             ->with('success', 'Lowongan berhasil ditambahkan.');
     }
 
@@ -114,24 +100,14 @@ class LowonganMagangController extends Controller
     {
         $logang = LowonganMagang::with('benefits', 'kategori')->findOrFail($id);
         $period = PeriodeMagang::all();
+        $mahasiswa_ids = MagangApplication::where('lowongan_id', $id)->pluck('mahasiswa_id')->toArray();
+        $mahasiswas = Mahasiswa::whereIn('mahasiswa_id', $mahasiswa_ids)->get();
         $breadcrumb = (object) [
             'title' => $logang->title,
             'subtitle' => ['Detail lowongan magang']
         ];
 
-        return view('admin.lowonganMagang.show', compact('breadcrumb', 'logang', 'period'));
-    }
-
-    public function showMhs(string $id)
-    {
-        $logang = LowonganMagang::find($id);
-        $period = PeriodeMagang::all();
-        $breadcrumb = (object) [
-            'title' => 'Detail Lowongan Magang',
-            'subtitle' => ['Detail lowongan magang']
-        ];
-
-        return view('mahasiswa.lowongan.show', compact('breadcrumb', 'logang', 'period'));
+        return view('company.lowonganMagang.show', compact('breadcrumb', 'logang', 'period', 'mahasiswas'));
     }
 
     /**
@@ -149,7 +125,7 @@ class LowonganMagangController extends Controller
         $kategoris = Kategori::all();
         $companies = Company::all();
         $periode = PeriodeMagang::all();
-        return view('admin.lowonganMagang.edit', compact('logang', 'provinces', 'benefits', 'kategoris', 'companies', 'periode', 'breadcrumb'));
+        return view('company.lowonganMagang.edit', compact('logang', 'provinces', 'benefits', 'kategoris', 'companies', 'periode', 'breadcrumb'));
     }
 
     /**
@@ -159,7 +135,6 @@ class LowonganMagangController extends Controller
     {
         $logang = LowonganMagang::find($id);
         $request->validate([
-            'company' => 'required|integer|exists:companies,company_id',
             'period' => 'required|integer|exists:periode_magangs,period_id',
             'kategori' => 'required|integer|exists:kategoris,kategori_id',
             'title' => 'required|string|max:255',
@@ -172,7 +147,6 @@ class LowonganMagangController extends Controller
         ]);
 
         $logang->update([
-            'company_id' => $request->company,
             'period_id' => $request->period,
             'kategori_id' => $request->kategori,
             'title' => $request->title,
@@ -184,7 +158,7 @@ class LowonganMagangController extends Controller
             'village_id'  => $request->village_id,
         ]);
 
-        return redirect()->route('lowongan-magang.index')->with('success', 'Lowongan berhasil diedit.');
+        return redirect()->route('companys-lowongan-magang.index')->with('success', 'Lowongan berhasil diedit.');
     }
 
     /**
@@ -194,9 +168,33 @@ class LowonganMagangController extends Controller
     {
         try {
             LowonganMagang::destroy($id);
-            return redirect()->route('lowongan-magang.index')->with('success', 'Data lowongan berhasil dihapus');
+            return redirect()->route('companys-lowongan-magang.index')->with('success', 'Data lowongan berhasil dihapus');
         } catch (\Illuminate\Database\QueryException $e) {
-            return redirect()->route('lowongan-magang.index')->with('error', 'Data lowongan gagal dihapus karena masih terdapat tabel lain yang terkait dengan data ini');
+            return redirect()->route('companys-lowongan-magang.index')->with('error', 'Data lowongan gagal dihapus karena masih terdapat tabel lain yang terkait dengan data ini');
         }
     }
+
+public function pelamars(string $id)
+{
+    // Get the company ID for the authenticated user
+    $companyId = Company::where('user_id', Auth::user()->user_id)->value('company_id');
+
+    // Get all MagangApplication entries for this lowongan and company, eager loading relations
+    $magangs = MagangApplication::with(['mahasiswas', 'lowongans'])
+        ->whereHas('lowongans', function ($query) use ($companyId, $id) {
+            $query->where('company_id', $companyId)
+                  ->where('lowongan_id', $id);
+        })
+        ->get();
+
+    // Build breadcrumb object
+    $breadcrumb = (object) [
+        'title' => 'Pengajuan Magang',
+        'subtitle' => ['Jumlah Pelamar: ' . $magangs->count()]
+    ];
+
+    return view('company.lowonganMagang.pelamars', compact('magangs', 'breadcrumb'));
+}
+
+
 }

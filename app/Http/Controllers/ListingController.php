@@ -10,11 +10,11 @@ class ListingController extends Controller
 {
     public function lowongan()
     {
-        $lowongans = LowonganMagang::with('company', 'period')
+        $lowongan = LowonganMagang::with('company', 'period')
             ->orderBy('created_at', 'desc')
             ->get();
 
-        return view('listing.job.index', compact('lowongans'));
+        return view('listing.job.index', compact('lowongan'));
     }
 
     public function showLowongan(string $id)

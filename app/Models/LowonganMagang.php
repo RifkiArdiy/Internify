@@ -71,4 +71,10 @@ class LowonganMagang extends Model
     {
         return $this->belongsTo(Village::class);
     }
+    
+    public function jumlahPelamar()
+{
+    return $this->applications()->count();
+}
+
 }
