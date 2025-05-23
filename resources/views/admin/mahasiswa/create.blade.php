@@ -67,7 +67,7 @@
                             <label class="form-label" for="no_telp">No Telepon</label>
                             <div class="form-control-wrap">
                                 <input type="text" class="form-control" id="no_telp" name="no_telp"
-                                    value="{{ old('no_telp') }}" placeholder="Masukkan Nomor Telepon (Contoh: 08123456789)">
+                                    value="{{ old('no_telp') }}" placeholder="Masukkan dengan awalan +62 (Contoh: 628123456789)">
                             </div>
                         </div>
                     </div>
@@ -95,7 +95,7 @@
                     </div>
                     <div class="col-sm-6">
                         <div class="form-group">
-                            <label class="form-label" for="image">Ubah Foto Profil:</label>
+                            <label class="form-label" for="image">Foto Profil:</label>
                             <div class="form-control-wrap">
                                 <input type="file" class="form-control" id="image" name="image"
                                     accept="image/*">
