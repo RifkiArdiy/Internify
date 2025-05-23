@@ -30,6 +30,16 @@
                         <th>Judul Magang</th>
                         <td>{{ $logang->title }}</td>
                     </tr>
+                    @if ($logang->benefits->count())
+                        <tr class="list list-sm">
+                            @foreach ($logang->benefits as $benefit)
+                                <th>BENEFIT</th>
+                                <TD>{{ $benefit->name }}</TD>
+                            @endforeach
+                        </tr>
+                    @else
+                        <p class="text-soft">Tidak ada benefit terdaftar.</p>
+                    @endif
                     <tr>
                         <th>Deskripsi</th>
                         <td>{!! $logang->description !!}</td>

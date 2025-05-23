@@ -14,7 +14,18 @@ class LowonganMagang extends Model
 
     protected $primaryKey = 'lowongan_id';
 
-    protected $fillable = ['company_id', 'period_id', 'title', 'description', 'requirements', 'location'];
+    protected $fillable = [
+        'company_id',
+        'period_id',
+        'kategori_id',
+        'title',
+        'description',
+        'requirements',
+        'province_id',
+        'regency_id',
+        'district_id',
+        'village_id',
+    ];
 
     public function company(): BelongsTo
     {
@@ -29,5 +40,35 @@ class LowonganMagang extends Model
     public function applications()
     {
         return $this->hasMany(MagangApplication::class, 'lowongan_id');
+    }
+
+    public function benefits()
+    {
+        return $this->belongsToMany(Benefit::class, 'lowongan_benefit', 'lowongan_id', 'benefit_id');
+    }
+
+    public function kategori(): BelongsTo
+    {
+        return $this->belongsTo(Kategori::class, 'kategori_id', 'kategori_id');
+    }
+
+    public function province()
+    {
+        return $this->belongsTo(Province::class);
+    }
+
+    public function regency()
+    {
+        return $this->belongsTo(Regency::class);
+    }
+
+    public function district()
+    {
+        return $this->belongsTo(District::class);
+    }
+
+    public function village()
+    {
+        return $this->belongsTo(Village::class);
     }
 }

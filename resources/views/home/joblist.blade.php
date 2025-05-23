@@ -33,8 +33,8 @@
                                         <div class="job-meta">
                                             <ul class="job-users g-1">
                                                 <li>
-                                                    {{-- <span
-                                                        class="badge rounded-pill bg-outline-secondary">{{ $lwg->requirements }}</span> --}}
+                                                    <span
+                                                        class="badge badge-dim bg-primary">{{ $lwg->kategori->name }}</span>
                                                 </li>
                                             </ul>
                                             <span class="badge badge-dim bg-warning"><em
@@ -54,7 +54,7 @@
                     <ul class="btns-inline justify-center pt-6">
                         <li>
                             <a href="{{ route('list.lowongan') }}" class="btn btn-xl btn-primary btn-round">Lihat
-                                Semua</a>
+                                lebih banyak</a>
                         </li>
                     </ul>
                 </div>

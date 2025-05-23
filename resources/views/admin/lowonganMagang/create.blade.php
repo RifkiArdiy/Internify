@@ -39,11 +39,52 @@
                         </div>
                     </div>
 
-                    <div class="col-md-6">
+                    <div class="col-12">
                         <div class="form-group">
                             <label class="form-label">Judul: <span class="text-danger">*</label>
                             <input type="text" class="form-control" name="title" id="title"
                                 value="{{ old('title') }}" placeholder="Masukkan Judul Lowongan" required>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="form-label d-flex justify-content-between align-items-center">
+                                <span>Kategori Lowongan: <span class="text-danger">*</span></span>
+                                <!-- Button to trigger modal -->
+                                <a href="#" class="btn btn-sm btn-light" data-bs-toggle="modal"
+                                    data-bs-target="#addKategoriModal">
+                                    <em class="icon ni ni-plus"></em>
+                                </a>
+                            </label>
+                            <select class="form-control js-select2 d-none" name="kategori" required
+                                data-placeholder="Pilih kategori Dibutuhkan">
+                                @foreach ($kategoris as $item)
+                                    <option value="{{ $item->kategori_id }}">{{ $item->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="form-label d-flex justify-content-between align-items-center">
+                                <span>Benefit: <span class="text-danger">*</span></span>
+                                <!-- Button to trigger modal -->
+                                <a href="#" class="btn btn-sm btn-light" data-bs-toggle="modal"
+                                    data-bs-target="#addBenefitModal">
+                                    <em class="icon ni ni-plus"></em>
+                                </a>
+                            </label>
+                            <select class="form-control js-select2 d-none" name="benefits[]" multiple="multiple" required
+                                data-placeholder="Pilih Benefit">
+                                @foreach ($benefits as $benefit)
+                                    <option value="{{ $benefit->benefit_id }}"
+                                        {{ collect(old('benefits'))->contains($benefit->benefit_id) ? 'selected' : '' }}>
+                                        {{ $benefit->name }}
+                                    </option>
+                                @endforeach
+                            </select>
                         </div>
                     </div>
 
@@ -53,7 +94,7 @@
                             <!-- Editor tampil di sini -->
                             <div id="quill-editor" style="height: 200px;">{!! old('description') !!}</div>
                             <!-- Data yang akan dikirim ke controller -->
-                            <input type="hidden" name="description" id="description">
+                            <input type="hidden" name="description" id="description" value="{!! old('description') !!}">
                         </div>
                     </div>
                     <!-- Requirements (dengan Quill) -->
@@ -63,16 +104,47 @@
                             <!-- Quill Editor -->
                             <div id="quill-requirements" style="height: 200px;">{!! old('requirements') !!}</div>
                             <!-- Hidden input to store Quill content -->
-                            <input type="hidden" name="requirements" id="requirements">
+                            <input type="hidden" name="requirements" id="requirements" value="{!! old('requirements') !!}">
                         </div>
                     </div>
 
 
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label class="form-label">Lokasi</label>
-                            <input type="text" name="location" class="form-control" placeholder="Masukkan Lokasi Magang"
-                                value="{{ old('location') }}" required>
+                            <label class="form-label">Provinsi</label>
+                            <select name="province_id" id="province" class="form-control" data-search="on" required>
+                                <option value="">- Pilih Provinsi -</option>
+                                @foreach ($provinces as $provinsi)
+                                    <option value="{{ $provinsi->id }}">{{ $provinsi->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="form-label">Kabupaten/Kota</label>
+                            <select name="regency_id" id="regency" class="form-control" required>
+                                <option value="">- Pilih Kabupaten -</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="form-label">Kecamatan</label>
+                            <select name="district_id" id="district" class="form-control" required>
+                                <option value="">- Pilih Kecamatan -</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="form-label">Kelurahan/Desa</label>
+                            <select name="village_id" id="village" class="form-control" required>
+                                <option value="">- Pilih Kelurahan -</option>
+                            </select>
                         </div>
                     </div>
 
@@ -85,55 +157,24 @@
 
         </div>
     </div>
+    <!-- Modal Add (Centered & Styled) -->
+    <div class="modal fade" id="addBenefitModal" tabindex="-1" aria-labelledby="addBenefitModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-sm"> <!-- ✅ modal-sm + centered -->
+            <div class="modal-content">
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="addKategoriModal" tabindex="-1" aria-labelledby="addKategoriModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-sm"> <!-- ✅ modal-sm + centered -->
+            <div class="modal-content">
+            </div>
+        </div>
+    </div>
 @endsection
 
-@push('css')
-    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
-@endpush
-{{-- @push('js')
-    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
-
-    <script>
-        const quill = new Quill('#quill-editor', {
-            theme: 'snow',
-            placeholder: 'Masukkan Deskripsi Lowongan',
-            modules: {
-                toolbar: [
-                    ['bold', 'italic', 'underline', 'strike'],
-                    [{
-                        'list': 'ordered'
-                    }, {
-                        'list': 'bullet'
-                    }],
-                    ['clean']
-                ]
-            }
-        });
-
-        // Saat form disubmit, simpan isi editor ke dalam input hidden
-        const form = document.querySelector('form');
-        form.onsubmit = function() {
-            const descriptionInput = document.querySelector('input[name=description]');
-            descriptionInput.value = quill.root.innerHTML;
-        };
-    </script>
-    <script>
-        // Initialize Quill for Requirements
-        var quillRequirements = new Quill('#quill-requirements', {
-            theme: 'snow'
-        });
-
-        // Sync Quill content to hidden input on submit
-        const form = document.querySelector('form');
-        form.onsubmit = function() {
-            const requirementsInput = document.querySelector('input[name=requirements]');
-            requirementsInput.value = quillRequirements.root.innerHTML;
-        }
-    </script>
-@endpush --}}
 @push('js')
-    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
-
     <script>
         // Inisialisasi Quill untuk Deskripsi
         const quillDescription = new Quill('#quill-editor', {
@@ -175,5 +216,158 @@
             document.querySelector('input[name=description]').value = quillDescription.root.innerHTML;
             document.querySelector('input[name=requirements]').value = quillRequirements.root.innerHTML;
         };
+    </script>
+    <script>
+        $(document).ready(function() {
+            $('#addBenefitModal').on('show.bs.modal', function() {
+                let modal = $(this);
+                let modalContent = modal.find('.modal-content');
+
+                // Load konten dari route
+                $.ajax({
+                    url: "{{ route('benefits.create') }}",
+                    type: 'GET',
+                    success: function(response) {
+                        modalContent.html(response);
+                    },
+                    error: function() {
+                        modalContent.html(
+                            '<div class="modal-body text-center text-danger p-4">Gagal memuat data.</div>'
+                        );
+                    }
+                });
+            });
+        });
+    </script>
+    <script>
+        $(document).ready(function() {
+            $('#addKategoriModal').on('show.bs.modal', function() {
+                let modal = $(this);
+                let modalContent = modal.find('.modal-content');
+
+                // Load konten dari route
+                $.ajax({
+                    url: "{{ route('kategoris.create') }}",
+                    type: 'GET',
+                    success: function(response) {
+                        modalContent.html(response);
+                    },
+                    error: function() {
+                        modalContent.html(
+                            '<div class="modal-body text-center text-danger p-4">Gagal memuat data.</div>'
+                        );
+                    }
+                });
+            });
+        });
+    </script>
+    {{-- <script>
+        $(document).ready(function() {
+            $('#province').change(function() {
+                let provinceID = $(this).val();
+                $.get('/get-regencies', {
+                    province_id: provinceID
+                }, function(data) {
+                    $('#regency').html('<option value="">- Pilih Kabupaten -</option>');
+                    data.forEach(function(item) {
+                        $('#regency').append(
+                            `<option value="${item.id}">${item.name}</option>`);
+                    });
+                    $('#district').html('<option value="">- Pilih Kecamatan -</option>');
+                    $('#village').html('<option value="">- Pilih Kelurahan -</option>');
+                });
+            });
+
+            $('#regency').change(function() {
+                let regencyID = $(this).val();
+                $.get('/get-districts', {
+                    regency_id: regencyID
+                }, function(data) {
+                    $('#district').html('<option value="">- Pilih Kecamatan -</option>');
+                    data.forEach(function(item) {
+                        $('#district').append(
+                            `<option value="${item.id}">${item.name}</option>`);
+                    });
+                    $('#village').html('<option value="">- Pilih Kelurahan -</option>');
+                });
+            });
+
+            $('#district').change(function() {
+                let districtID = $(this).val();
+                $.get('/get-villages', {
+                    district_id: districtID
+                }, function(data) {
+                    $('#village').html('<option value="">- Pilih Kelurahan -</option>');
+                    data.forEach(function(item) {
+                        $('#village').append(
+                            `<option value="${item.id}">${item.name}</option>`);
+                    });
+                });
+            });
+        });
+    </script> --}}
+    <script>
+        $(document).ready(function() {
+            // Inisialisasi awal Select2
+            $('#province, #regency, #district, #village').select2({
+                width: '100%',
+                placeholder: 'Pilih opsi',
+                allowClear: true
+            });
+
+            $('#province').on('change', function() {
+                let provinceID = $(this).val();
+                $('#regency').html('<option value="">Memuat...</option>').trigger('change');
+
+                $.get('/admin/get-regencies', {
+                    province_id: provinceID
+                }, function(data) {
+                    let regencyOptions = '<option value="">- Pilih Kabupaten -</option>';
+                    data.forEach(function(item) {
+                        regencyOptions +=
+                            `<option value="${item.id}">${item.name}</option>`;
+                    });
+                    $('#regency').html(regencyOptions).trigger('change');
+                    $('#district').html('<option value="">- Pilih Kecamatan -</option>').trigger(
+                        'change');
+                    $('#village').html('<option value="">- Pilih Kelurahan -</option>').trigger(
+                        'change');
+                });
+            });
+
+            $('#regency').on('change', function() {
+                let regencyID = $(this).val();
+                $('#district').html('<option value="">Memuat...</option>').trigger('change');
+
+                $.get('/admin/get-districts', {
+                    regency_id: regencyID
+                }, function(data) {
+                    let districtOptions = '<option value="">- Pilih Kecamatan -</option>';
+                    data.forEach(function(item) {
+                        districtOptions +=
+                            `<option value="${item.id}">${item.name}</option>`;
+                    });
+                    $('#district').html(districtOptions).trigger('change');
+                    $('#village').html('<option value="">- Pilih Kelurahan -</option>').trigger(
+                        'change');
+                });
+            });
+
+            $('#district').on('change', function() {
+                let districtID = $(this).val();
+                $('#village').html('<option value="">Memuat...</option>').trigger('change');
+
+                $.get('/admin/get-villages', {
+                    district_id: districtID
+                }, function(data) {
+                    let villageOptions = '<option value="">- Pilih Kelurahan -</option>';
+                    data.forEach(function(item) {
+                        villageOptions +=
+                            `<option value="${item.id}">${item.name}</option>`;
+                    });
+                    $('#village').html(villageOptions).trigger('change');
+                });
+            });
+        });
     </script>
 @endpush

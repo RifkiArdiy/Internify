@@ -12,7 +12,7 @@
         <div class="row g-gs justify-content-center text-center">
             @foreach ($companies as $company)
                 <div class="col-sm-6 col-lg-3">
-                    <a href="#" class="card-link-wrapper">
+                    <a href="{{ route('show.perusahaan', $company->company_id) }}" class="card-link-wrapper">
                         <div class="card service service-s4 card-bordered h-100">
                             <div class="py-2">
                                 <div class="card-inner">
@@ -26,7 +26,7 @@
                                     </div>
                                     <div class="service-text">
                                         <h5 class="title">{{ $company->user->name }}</h5>
-                                        <p>{{ $company->lowongans_count }} lowongan tersedia</p>
+                                        <p class="text-indigo">Membuka Lowongan : {{ $company->lowongans_count }}</p>
                                     </div>
                                 </div>
                             </div>
@@ -41,7 +41,7 @@
                     <ul class="btns-inline justify-center pt-6">
                         <li>
                             <a href="{{ route('list.perusahaan') }}" class="btn btn-xl btn-primary btn-round">Lihat
-                                Semua</a>
+                                lebih banyak</a>
                         </li>
                     </ul>
                 </div>
