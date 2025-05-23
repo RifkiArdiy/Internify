@@ -21,7 +21,7 @@ class MagangApplication extends Model
         return $this->belongsTo(Mahasiswa::class, 'mahasiswa_id', 'mahasiswa_id');
     }
 
-    public function lowongans()
+    public function lowongans(): BelongsTo
     {
         return $this->belongsTo(LowonganMagang::class, 'lowongan_id');
     }

@@ -34,7 +34,7 @@ class CompanyController extends Controller
             'title' => 'Verifikasi Laporan Mahasiswa',
             'subtitle' => ['Laporan Harian']
         ];
-        return view('company.verifikasi', compact('breadcrumb','logs'));
+        return view('company.verifikasi', compact('breadcrumb', 'logs'));
     }
 
     public function updateVerifikasi(Request $request, string $id)
@@ -55,7 +55,7 @@ class CompanyController extends Controller
             'title' => 'Detail Laporan',
             'subtitle' => ['Detail Laporan Magang']
         ];
-        return view('company.show', compact('breadcrumb','log'));
+        return view('company.show', compact('breadcrumb', 'log'));
     }
 
     public function create()
@@ -75,7 +75,7 @@ class CompanyController extends Controller
             'username' => 'required|unique:users',
             'email' => 'required|unique:users',
             'password' => 'required|min:6',
-            'industry' => 'required|string|max:255',
+            'about_company' => 'required|string|max:65535',
             'no_telp' => 'nullable|string|max:255',
             'alamat' => 'nullable|string|max:255',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
@@ -102,7 +102,7 @@ class CompanyController extends Controller
 
         Company::create([
             'user_id' => $user->user_id,
-            'industry' => $request->industry,
+            'about_company' => $request->about_company,
         ]);
 
         return redirect()->route('companies.index')->with('success', 'Perusahaan berhasil ditambahkan.');
@@ -126,7 +126,7 @@ class CompanyController extends Controller
             'name' => 'required|string|max:255',
             'username' => 'required|unique:users,username,' . $user->user_id . ',user_id',
             'email' => 'required|unique:users,email,' . $user->user_id . ',user_id',
-            'industry' => 'required|string|max:255',
+            'about_company' => 'required|string|max:65535',
             'alamat' => 'nullable|string|max:255',
             'no_telp' => 'nullable|string|max:255',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
@@ -159,7 +159,7 @@ class CompanyController extends Controller
         $user->save();
 
         $company->update([
-            'industry' => $request->industry,
+            'about_company' => $request->about_company,
         ]);
 
         return redirect()->route('companies.index')->with('success', 'Data perusahaan diperbarui.');
@@ -179,13 +179,14 @@ class CompanyController extends Controller
         }
     }
 
-    public function show(string $id){
+    public function show(string $id)
+    {
         $comp = Company::find($id);
         $breadcrumb = (object) [
             'title' => $comp->user->name,
             'subtitle' => ['Detail Perusahaan']
         ];
 
-        return view('admin.company.show', compact('breadcrumb','comp'));
+        return view('admin.company.show', compact('breadcrumb', 'comp'));
     }
 }

@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Company;
 use App\Models\LowonganMagang;
-use Database\Seeders\LowonganMagangSeeder;
 use Illuminate\Http\Request;
 
 class WelcomeController extends Controller

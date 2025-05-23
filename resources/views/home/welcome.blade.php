@@ -26,7 +26,7 @@
             <!-- .header -->
             @include('home.joblist')
             <!-- .section -->
-            <section class="section section-cta is-dark" id="cta">
+            <section class="section section-cta is-dark">
                 <div class="container">
                     <div class="row justify-content-center text-center">
                         <div class="col-lg-9 col-md-10">
@@ -35,18 +35,11 @@
                                 <p>Daftar sekarang dan rasakan kemudahan manajemen magang digital bersama Internify.</p>
                                 <ul class="btns-inline justify-center pt-2">
                                     <li>
-                                        @php
-                                            if (Auth::check()) {
-                                                $levelNama = strtolower(Auth::user()->level->level_nama ?? '');
-                                                $route = $levelNama === 'administrator' ? route('admin.dashboard') : route($levelNama . '.dashboard');
-                                            } else {
-                                                $route = route('login');
-                                            }
-                                        @endphp
-
-                                        <a href="{{ $route }}" class="btn btn-xl btn-primary btn-round">Coba
-                                            Gratis
-                                            Sekarang</a>
+                                        @guest {{-- Ini akan merender konten di dalamnya HANYA jika pengguna BELUM login --}}
+                                            <a href="{{ route('login') }}" class="btn btn-xl btn-primary btn-round">
+                                                Coba Gratis Sekarang
+                                            </a>
+                                        @endguest
                                     </li>
                                 </ul>
                             </div>

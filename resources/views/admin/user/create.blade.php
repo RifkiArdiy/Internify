@@ -79,7 +79,7 @@
                                 <br>Maksimal 2MB.</small>
                         </div>
                     </div>
-                    <div class="col-12">
+                    <div class="col-12 text-end">
                         <div class="form-group">
                             <button type="submit" class="btn btn-primary">Simpan</button>
                             <a href="{{ route('user.index') }}" class="btn btn-secondary">Kembali</a>

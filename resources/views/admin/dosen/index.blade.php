@@ -22,7 +22,6 @@
                         <th class="nk-tb-col tb-col-mb export-col"><span class="sub-text">NIP</span></th>
                         <th class="nk-tb-col tb-col-md export-col"><span class="sub-text">Phone</span></th>
                         <th class="nk-tb-col tb-col-lg export-col"><span class="sub-text">Alamat</span></th>
-                        <th class="nk-tb-col tb-col-md export-col"><span class="sub-text">Status</span></th>
                         <th class="nk-tb-col nk-tb-col-tools text-end">
                         </th>
                     </tr>
@@ -32,7 +31,7 @@
                         <tr class="nk-tb-item">
                             <td class="nk-tb-col">
                                 <div class="user-card">
-                                    <div class="user-avatar bg-dark d-none d-sm-flex">
+                                    <div class="user-avatar bg-orange-dim d-none d-sm-flex">
                                         @if ($dosen->user->image)
                                             <img src="{{ Storage::url('images/users/' . $dosen->user->image) }}"
                                                 alt="{{ $dosen->user->name }}">
@@ -42,7 +41,7 @@
                                     </div>
                                     <div class="user-info">
                                         <span class="tb-lead">{{ $dosen->user->name }}<span
-                                                class="dot dot-success d-md-none ms-1"></span></span>
+                                                class="dot dot-warning d-md-none ms-1"></span></span>
                                         <span>{{ $dosen->user->email }}</span>
                                     </div>
                                 </div>
@@ -55,9 +54,6 @@
                             </td>
                             <td class="nk-tb-col tb-col-lg" data-order="Email Submited - Kyc More Info">
                                 <span>{{ $dosen->user->alamat }}</span>
-                            </td>
-                            <td class="nk-tb-col tb-col-md">
-                                <span class="tb-status text-info">Inactive</span>
                             </td>
                             <td class="nk-tb-col nk-tb-col-tools">
                                 <ul class="nk-tb-actions gx-1">

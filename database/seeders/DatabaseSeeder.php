@@ -3,6 +3,8 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+use App\Models\Benefit;
 use Illuminate\Database\Seeder;
 use Database\Factories;
 
@@ -31,7 +33,12 @@ class DatabaseSeeder extends Seeder
             DosenSeeder::class,
             CompanySeeder::class,
             PeriodeMagangSeeder::class,
+            // ProvinceSeeder::class,
+            // RegencySeeder::class,
+            // DistrictSeeder::class,
+            // VillageSeeder::class,
             LowonganMagangSeeder::class,
+            BenefitSeeder::class,
             MagangApplicationSeeder::class,
             LogSeeder::class,
             ProfilAkademikSeeder::class

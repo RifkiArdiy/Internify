@@ -15,10 +15,10 @@ class ProfilAkademikController extends Controller
      */
     public function index()
     {
-        $profilAkademik = ProfilAkademik::where('user_id',Auth::user()->user_id)->first();
-        if(!$profilAkademik){
-            return redirect()->route('profilAkademik.create');
-        }   
+        $profilAkademik = ProfilAkademik::where('user_id', Auth::user()->user_id)->first();
+        if (!$profilAkademik) {
+            return redirect()->route('profil-akademik.create');
+        }
         $breadcrumb = (object) [
             'title' => 'Profil Akademik Anda',
             'subtitle' => ['Lihat detail profil akademik anda']
@@ -58,7 +58,7 @@ class ProfilAkademikController extends Controller
             'ipk' => str_replace(',', '.', $request->ipk),
         ]);
 
-        return redirect(route('profilAkademik.index'))->with('success', 'Profil Akademik berhasil ditambahkan');
+        return redirect(route('profil-akademik.index'))->with('success', 'Profil Akademik berhasil ditambahkan');
     }
 
     /**
@@ -102,7 +102,7 @@ class ProfilAkademikController extends Controller
             'ipk' => str_replace(',', '.', $request->ipk),
         ]);
 
-        return redirect(route('profilAkademik.index'));
+        return redirect(route('profil-akademik.index'));
     }
 
     /**

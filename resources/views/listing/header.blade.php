@@ -1,5 +1,5 @@
-<header class="header has-header-main-s1 bg-white" id="home">
-    <div class="header-main header-main-s1 is-sticky is-transparent on-white">
+<header class="header header-32 has-header-main-s1 bg-dark">
+    <div class="header-main header-main-s1 is-sticky is-transparent on-dark">
         <div class="container header-container">
             <div class="header-wrap">
                 <div class="header-logo">
@@ -20,17 +20,14 @@
                 <nav class="header-menu" data-content="mainNav">
                     <ul class="menu-list ms-lg-auto">
                         <li class="menu-item">
-                            <a href="#home" class="menu-link nav-link">Home</a>
+                            <a href="{{ route('welcome.index') }}" class="menu-link nav-link ">Home</a>
                         </li>
-                        <li class="menu-item">
-                            <a href="#joblist" class="menu-link nav-link">Lowongan</a>
+                        <li class="menu-item {{ request()->routeIs('list.lowongan') ? 'active' : '' }}">
+                            <a href="{{ route('list.lowongan') }}" class="menu-link nav-link">Lowongan</a>
                         </li>
-                        <li class="menu-item">
-                            <a href="#companylist" class="menu-link nav-link">Company</a>
+                        <li class="menu-item ">
+                            <a href="{{ route('list.perusahaan') }}" class="menu-link nav-link">Company</a>
                         </li>
-                        {{-- <li class="menu-item">
-                            <a href="#team" class="menu-link nav-link">Team</a>
-                        </li> --}}
                     </ul>
                     @auth
                         <div class="nk-header-tools">
@@ -67,7 +64,7 @@
                                                         </a>
                                                     </li>
                                                     <li>
-                                                        <a href="{{ route('admin.profile') }}">
+                                                        <a href="{{ route('profile') }}">
                                                             <em class="icon ni ni-user-alt"></em>
                                                             <span>View Profile</span>
                                                         </a>
@@ -80,7 +77,7 @@
                                                         </a>
                                                     </li>
                                                     <li>
-                                                        <a href="{{ route('mahasiswa.profile') }}">
+                                                        <a href="{{ route('profile') }}">
                                                             <em class="icon ni ni-user-alt"></em>
                                                             <span>View Profile</span>
                                                         </a>
@@ -93,7 +90,7 @@
                                                         </a>
                                                     </li>
                                                     <li>
-                                                        <a href="{{ route('dosen.profile') }}">
+                                                        <a href="{{ route('profile') }}">
                                                             <em class="icon ni ni-user-alt"></em>
                                                             <span>View Profile</span>
                                                         </a>
@@ -106,7 +103,7 @@
                                                         </a>
                                                     </li>
                                                     <li>
-                                                        <a href="{{ route('company.profile') }}">
+                                                        <a href="{{ route('profile') }}">
                                                             <em class="icon ni ni-user-alt"></em>
                                                             <span>View Profile</span>
                                                         </a>
@@ -147,12 +144,19 @@
                 <!-- .nk-nav-menu -->
             </div>
             <!-- .header-warp-->
-        </div>
-        <!-- .container-->
-    </div>
-    <!-- .header-main-->
-    <!-- .header-content -->
-    {{-- <div class="bg-image bg-overlay after-bg-dark after-opacity-95">
-        <img src="{{ asset('assets/home/images/bg/a.jpg') }}" alt="">
-    </div> --}}
+        </div><!-- .container-->
+    </div><!-- .header-main-->
+    <div class="header-content py-6 is-dark mt-lg-n1 mt-n3">
+        <div class="container">
+            <div class="row flex-row-reverse justify-content-center text-center g-gs">
+                <div class="col-lg-6 col-md-7">
+                    <div class="header-caption">
+                        <h1 class="header-title">Powelful Tool To Represent Your Dashboard.</h1>
+                        <p>A powerful admin dashboard template that especially build for developers and programmers.
+                            DashLite comes with all kind of components.</p>
+                    </div><!-- .header-caption -->
+                </div><!-- .col -->
+            </div><!-- .row -->
+        </div><!-- .container -->
+    </div><!-- .header-content -->
 </header>

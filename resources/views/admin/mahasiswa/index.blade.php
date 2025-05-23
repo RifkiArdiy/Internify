@@ -18,12 +18,11 @@
             <table class="datatable-init-export nowrap nk-tb-list nk-tb-ulist" data-auto-responsive="false">
                 <thead>
                     <tr class="nk-tb-item nk-tb-head">
-                        <th class="nk-tb-col"><span class="sub-text">User</span></th>
-                        <th class="nk-tb-col tb-col-mb"><span class="sub-text">NIM</span></th>
-                        <th class="nk-tb-col tb-col-lg"><span class="sub-text">Jurusan</span></th>
-                        <th class="nk-tb-col tb-col-lg"><span class="sub-text">Alamat</span></th>
-                        <th class="nk-tb-col tb-col-md"><span class="sub-text">Telepon</span></th>
-                        <th class="nk-tb-col tb-col-md"><span class="sub-text">Status</span></th>
+                        <th class="nk-tb-col export-col"><span class="sub-text">User</span></th>
+                        <th class="nk-tb-col tb-col-mb export-col"><span class="sub-text">NIM</span></th>
+                        <th class="nk-tb-col tb-col-lg export-col"><span class="sub-text">Jurusan</span></th>
+                        <th class="nk-tb-col tb-col-lg export-col"><span class="sub-text">Alamat</span></th>
+                        <th class="nk-tb-col tb-col-md export-col"><span class="sub-text">Telepon</span></th>
                         <th class="nk-tb-col nk-tb-col-tools text-end">
                         </th>
                     </tr>
@@ -33,7 +32,7 @@
                         <tr class="nk-tb-item">
                             <td class="nk-tb-col">
                                 <div class="user-card">
-                                    <div class="user-avatar bg-dark d-none d-sm-flex">
+                                    <div class="user-avatar bg-teal-dim d-none d-sm-flex">
                                         @if ($mhs->user->image)
                                             <img src="{{ Storage::url('images/users/' . $mhs->user->image) }}"
                                                 alt="{{ $mhs->user->name }}">
@@ -59,9 +58,6 @@
                             </td>
                             <td class="nk-tb-col tb-col-md">
                                 <span>{{ $mhs->user->no_telp }}</span>
-                            </td>
-                            <td class="nk-tb-col tb-col-md">
-                                <span class="tb-status text-success">Active</span>
                             </td>
                             <td class="nk-tb-col nk-tb-col-tools">
                                 <ul class="nk-tb-actions gx-1">

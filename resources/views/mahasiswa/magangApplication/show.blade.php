@@ -1,74 +1,80 @@
-
 @extends('layouts.app')
 
 @section('content')
-    @if (session('success'))
-        <div class="alert alert-success">{{ session('success') }}</div>
-    @endif
+    <div class="container mt-4">
 
-    <h4>Detail Mahasiswa</h4>
-<table class="table table-bordered table-striped table-hover table-sm" style="width: 30%">
-    <tr>
-        <th>NIM</th>
-    <td>{{ $magang->mahasiswas->nim }}</td>
-</tr>
-<tr>
-    <th>Nama Mahasiswa</th>
-    <td>{{ $magang->mahasiswas->user->name }}</td>
-</tr>
-<tr>
-    <th>Prodi</th>
-    <td>{{ $magang->mahasiswas->prodi->name }}</td>
-</tr>
-<tr>
-    <th>Alamat</th>
-    <td>{{ $magang->mahasiswas->alamat }}</td>
-</tr>
-<tr>
-    <th>No. Telp</th>
-    <td>{{ $magang->mahasiswas->no_telp }}</td>
-</tr>
+        {{-- Flash Messages --}}
+        @if (session('success'))
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                {{ session('success') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @endif
 
-</table>
+        {{-- Detail Lowongan --}}
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0">Detail Lowongan Magang</h5>
+            </div>
+            <div class="card-body">
+                <table class="table table-bordered table-hover">
+                    <tr>
+                        <th style="width: 200px;">ID</th>
+                        <td>{{ $logang->lowongan_id }}</td>
+                    </tr>
+                    <tr>
+                        <th>Nama Perusahaan</th>
+                        <td>{{ $logang->company->user->name }}</td>
+                    </tr>
+                    <tr>
+                        <th>Judul Magang</th>
+                        <td>{{ $logang->title }}</td>
+                    </tr>
+                    <tr>
+                        <th>Deskripsi</th>
+                        <td>{{ $logang->description }}</td>
+                    </tr>
+                    <tr>
+                        <th>Periode Awal</th>
+                        <td>{{ $logang->period->start_date }}</td>
+                    </tr>
+                    <tr>
+                        <th>Periode Akhir</th>
+                        <td>{{ $logang->period->end_date }}</td>
+                    </tr>
+                    <tr>
+                        <th>Kriteria</th>
+                        <td>{{ $logang->requirements }}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
 
-<h4>Detail Magang</h4>
-<table class="table table-bordered table-striped table-hover table-sm" style="width: 30%">
-    <tr>
-        <th>ID</th>
-    <td>{{ $magang->lowongan->lowongan_id }}</td>
-</tr>
-<tr>
-    <th>Nama Perusahaan</th>
-    <td>{{ $magang->lowongans->company->name }}</td>
-</tr>
-<tr>
-    <th>Judul Magang</th>
-    <td>{{ $magang->lowongans->title }}</td>
-</tr>
-<tr>
-    <th>Deskripsi</th>
-    <td>{{ $magang->lowongans->description }}</td>
-</tr>
-<tr>
-    <th>Periode Awal</th>
-    <td>{{ $magang->lowongans->period->start_date }}</td>
-</tr>
-    <th>Periode Akhir</th>
-    <td>{{ $magang->lowongans->period->end_date }}</td>
-</tr>
-<tr>
-    <th>Kriteria</th>
-    <td>{{ $magang->lowongans->requirements }}</td>
-</tr>
-</table>
-@if (Auth::user()->level_id == 1)
-    <a href="{{ route('lowonganMagang.index') }}" class="btn btn-secondary">Kembali</a>
-@endif
+        {{-- Tombol Aksi --}}
+        <div class="mt-3 d-flex">
+            @if (Auth::user()->level_id == 1)
+                <a href="{{ route('lowongan-magang.index') }}" class="btn btn-secondary">Kembali</a>
+            @elseif (Auth::user()->level_id == 2)
+                <a href="{{ route('lowongan-magang.indexMhs') }}" class="btn btn-secondary">Kembali</a>
+            @endif
 
-@if (Auth::user()->level_id == 2)
-    <a href="{{ route('lowonganMagang.indexMhs') }}" class="btn btn-secondary">Kembali</a>
-@endif
+            @if (Auth::user()->level_id == 2)
+                @php
+                    $lamaran = Auth::user()
+                        ->mahasiswa->applications->where('lowongan_id', $logang->lowongan_id)
+                        ->first(); // Ambil lamaran mahasiswa untuk lowongan ini
+                @endphp
 
-
-</body>
+                @if (!$lamaran)
+                    <form action="{{ route('magangApplication.storeMhs') }}" method="POST" class="ms-2"
+                        onsubmit="return confirm('Yakin ingin melamar lowongan ini?')">
+                        @csrf
+                        <input type="hidden" name="lowongan_id" value="{{ $logang->lowongan_id }}">
+                        <input type="hidden" name="status" value="Pending">
+                        <button type="submit" class="btn btn-primary">Lamar</button>
+                    </form>
+                @endif
+            @endif
+        </div>
+    </div>
 @endsection

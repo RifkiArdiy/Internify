@@ -7,11 +7,11 @@
                 </a>
             </div>
             <div class="nk-header-brand d-xl-none">
-                <a href="{{ route('welcome.index') }}" class="logo-link">
-                    <img class="logo-light logo-img" src="{{ asset('assets/admin/images/logo.png') }}"
-                        srcset="{{ asset('assets/admin/images/logo2x.png') }}" alt="logo">
-                    <img class="logo-dark logo-img" src="{{ asset('assets/admin/images/logo-dark.png') }}"
-                        srcset="{{ asset('assets/admin/images/logo-dark2x.png') }}" alt="logo-dark">
+                <a href="{{ route('welcome.index') }}" class="logo-link nk-sidebar-logo">
+                    <img class="logo-light logo-img" src="{{ asset('assets/home/images/logo.png') }}"
+                        srcset="{{ asset('assets/home/images/logo2x.png 2x') }}" alt="logo">
+                    <img class="logo-dark logo-img" src="{{ asset('assets/home/images/logo-dark.png') }}"
+                        srcset="{{ asset('assets/home/images/logo-dark2x.png 2x') }}" alt="logo-dark">
                 </a>
             </div>
             <!-- .nk-header-brand -->
@@ -26,7 +26,7 @@
                             <li class="breadcrumb-item"><a href="{{ route('dosen.dashboard') }}">Dashboard</a></li>
                         @endif
                         @if ($breadcrumb->title !== 'Dashboard')
-                        <li class="breadcrumb-item active">{{ $breadcrumb->title }}</li>
+                            <li class="breadcrumb-item active">{{ $breadcrumb->title }}</li>
                         @endif
                     </ul>
                 </div>
@@ -69,28 +69,28 @@
                                 <ul class="link-list">
                                     @if (Auth::user()->level->level_nama == 'Administrator')
                                         <li>
-                                            <a href="{{ route('admin.profile') }}">
+                                            <a href="{{ route('profile') }}">
                                                 <em class="icon ni ni-user-alt"></em>
                                                 <span>View Profile</span>
                                             </a>
                                         </li>
                                     @elseif (Auth::user()->level->level_nama == 'Mahasiswa')
                                         <li>
-                                            <a href="{{ route('mahasiswa.profile') }}">
+                                            <a href="{{ route('profile') }}">
                                                 <em class="icon ni ni-user-alt"></em>
                                                 <span>View Profile</span>
                                             </a>
                                         </li>
                                     @elseif (Auth::user()->level->level_nama == 'Dosen')
                                         <li>
-                                            <a href="{{ route('dosen.profile') }}">
+                                            <a href="{{ route('profile') }}">
                                                 <em class="icon ni ni-user-alt"></em>
                                                 <span>View Profile</span>
                                             </a>
                                         </li>
                                     @elseif (Auth::user()->level->level_nama == 'Company')
                                         <li>
-                                            <a href="{{ route('company.profile') }}">
+                                            <a href="{{ route('profile') }}">
                                                 <em class="icon ni ni-user-alt"></em>
                                                 <span>View Profile</span>
                                             </a>

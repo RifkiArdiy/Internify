@@ -14,9 +14,9 @@ class MagangApplicationSeeder extends Seeder
     public function run(): void
     {
         $MagangApplicationData = [
-            ['mahasiswa_id' => '1', 'lowongan_id' => '1', 'status' => 'pending'],
-            ['mahasiswa_id' => '2', 'lowongan_id' => '1', 'status' => 'pending'],
-            ['mahasiswa_id' => '3', 'lowongan_id' => '1', 'status' => 'pending'],
+            ['mahasiswa_id' => 1, 'lowongan_id' => 1, 'status' => 'Disetujui'],
+            ['mahasiswa_id' => 2, 'lowongan_id' => 1, 'status' => 'Disetujui'],
+            ['mahasiswa_id' => 3, 'lowongan_id' => 1, 'status' => 'pending'],
         ];
 
         foreach ($MagangApplicationData as $data) {

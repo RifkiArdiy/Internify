@@ -6,6 +6,7 @@ use App\Models\MagangApplication;
 use App\Models\Company;
 use App\Models\LowonganMagang;
 use App\Models\Mahasiswa;
+use App\Models\User;
 use Database\Seeders\MahasiswaSeeder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -22,10 +23,14 @@ class DashboardController extends Controller
             'title' => 'Dashboard',
             'subtitle' => ['Welcome to Dashboard Internify']
         ];
+
+        $users = User::query()
+            ->limit(5)
+            ->get();
         $unreviewedLamarans = MagangApplication::with('mahasiswas')->where('status', 'pending')->get();
         $mitras = Company::all();
         $lowongans = LowonganMagang::all();
-        return view('dashboard.admin', compact('breadcrumb', 'unreviewedLamarans', 'mitras', 'lowongans'));
+        return view('admin.dashboard.admin', compact('users', 'breadcrumb', 'unreviewedLamarans', 'mitras', 'lowongans'));
     }
 
     public function indexMahasiswa()
@@ -43,13 +48,13 @@ class DashboardController extends Controller
                 $status = 'Lamaran Anda Sedang Diproses...';
             }elseif($today->greaterThan($endDate)){
                 $status = 'Magang Anda Selesai';
-            }else{
+            } else {
                 $status = 'Anda Sedang Melaksanakan Magang';
             }
-        }else{
+        } else {
             $status = 'Anda Belum Magang';
         }
-        return view('dashboard.mahasiswa', compact('breadcrumb', 'status', 'magang', 'mahasiswa'));
+        return view('mahasiswa.dashboard.mahasiswa', compact('breadcrumb', 'status', 'magang', 'mahasiswa'));
     }
 
     public function indexDosen()
@@ -58,7 +63,7 @@ class DashboardController extends Controller
             'title' => 'Dashboard',
             'subtitle' => ['Welcome to Dashboard Internify']
         ];
-        return view('dashboard.dosen', compact('breadcrumb'));
+        return view('dosen.dashboard.dosen', compact('breadcrumb'));
     }
 
     public function indexCompany()
@@ -67,6 +72,15 @@ class DashboardController extends Controller
             'title' => 'Dashboard',
             'subtitle' => ['Welcome to Dashboard Internify']
         ];
-        return view('dashboard.company', compact('breadcrumb'));
+        $companyId = Company::where('user_id', Auth::user()->user_id)->value('company_id');
+
+        $unreviewedLamarans = MagangApplication::with(['mahasiswas', 'lowongans'])
+            ->where('status', 'pending')
+            ->whereHas('lowongans', function ($query) use ($companyId) {
+                $query->where('company_id', $companyId);
+            })
+            ->get();
+
+        return view('company.dashboard.company', compact('breadcrumb', 'unreviewedLamarans'));
     }
 }
