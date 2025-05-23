@@ -2,7 +2,7 @@
 
 @section('main')
     <div class="row g-gs">
-        @foreach ($lowongans as $lwg)
+        @foreach ($lowongan as $lwg)
             <div class="col-sm-6 col-lg-4">
                 <a href="{{ route('show.lowongan', $lwg->lowongan_id) }}" class="card-link-wrapper">
                     <div class="card card-bordered service service-s4 h-100">
