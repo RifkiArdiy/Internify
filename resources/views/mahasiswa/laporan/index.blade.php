@@ -29,10 +29,10 @@
                     @foreach ($logs as $log)
                         <tr class="nk-tb-item">
                             <td class="nk-tb-col">
-                                <span class="tb-amount">{{ $log->companies->user->name ?? '-' }}</span>
+                                <span>{{ $log->companies->user->name ?? '-' }}</span>
                             </td>
                             <td class="nk-tb-col">
-                                <span class="tb-amount">{{ $log->dosen->user->name ?? '-' }}</span>
+                                <span>{{ $log->dosen->user->name ?? '-' }}</span>
                             </td>
                             <td class="nk-tb-col">
                                 <span>{{ Str::limit($log->report_text, 50) }}</span>
