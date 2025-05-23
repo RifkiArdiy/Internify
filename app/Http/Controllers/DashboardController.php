@@ -41,12 +41,12 @@ class DashboardController extends Controller
         ];
         $mahasiswa = Mahasiswa::where('user_id', Auth::user()->user_id)->first();
         $magang = MagangApplication::where('mahasiswa_id', $mahasiswa->mahasiswa_id)->first();
-        if($magang){
+        if ($magang) {
             $today = Carbon::today();
             $endDate = Carbon::parse($magang->lowongans->period->end_date);
-            if($mahasiswa->status!=='is_magang'){
+            if ($mahasiswa->status !== 'is_magang') {
                 $status = 'Lamaran Anda Sedang Diproses...';
-            }elseif($today->greaterThan($endDate)){
+            } elseif ($today->greaterThan($endDate)) {
                 $status = 'Magang Anda Selesai';
             } else {
                 $status = 'Anda Sedang Melaksanakan Magang';
