@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+@php use Illuminate\Support\Str; @endphp
 @section('action')
     <li class="nk-block-tools-opt">
         <a href="{{ route('laporan.create') }}" class="btn btn-primary">
@@ -37,7 +37,7 @@
                                 <span>{{ $log->dosen->user->name ?? '-' }}</span>
                             </td>
                             <td class="nk-tb-col">
-                                {!! $log->report_text !!}
+                                <span>{!! Str::limit(strip_tags($log->report_text), 50) !!}</span>
                             </td>                            
                             <td class="nk-tb-col">
                                 <span>{{ $log->created_at->format('d M Y') }}</span>
