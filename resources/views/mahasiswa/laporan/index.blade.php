@@ -37,8 +37,8 @@
                                 <span>{{ $log->dosen->user->name ?? '-' }}</span>
                             </td>
                             <td class="nk-tb-col">
-                                <span>{{ Str::limit($log->report_text, 50) }}</span>
-                            </td>
+                                {!! $log->report_text !!}
+                            </td>                            
                             <td class="nk-tb-col">
                                 <span>{{ $log->created_at->format('d M Y') }}</span>
                             </td>

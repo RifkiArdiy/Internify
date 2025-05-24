@@ -39,7 +39,7 @@
                         </div>
                     </div>
 
-                    <div class="col-12">
+                    {{-- <div class="col-12">
                         <div class="form-group">
                             <label class="form-label" for="report_text">Isi Laporan:<span
                                     class="text-danger">*</span></label>
@@ -47,7 +47,17 @@
                                 <textarea class="form-control" name="report_text" rows="5" required>{{ $logs->report_text }}</textarea>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
+
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label class="form-label" for="report_text">Isi Laporan:<span class="text-danger">*</span></label>
+                            <!-- Editor tampil di sini -->
+                            <div id="quill-report" style="height: 200px;">{!! old('report_text', $logs->report_text) !!}</div>
+                            <!-- Data yang akan dikirim ke controller -->
+                            <input type="hidden" name="report_text" id="report_text">
+                        </div>
+                    </div>  
 
                     <div class="col-12 text-end">
                         <div class="form-group">
@@ -60,3 +70,23 @@
         </div>
     </div>
 @endsection
+@push('js')
+<script>
+    const quillReport = new Quill('#quill-report', {
+        theme: 'snow',
+        modules: {
+            toolbar: [
+                ['bold', 'italic', 'underline', 'strike'],
+                [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+                ['clean']
+            ]
+        }
+    });
+
+    const form = document.querySelector('form');
+    form.onsubmit = function () {
+        document.querySelector('input[name=report_text]').value = quillReport.root.innerHTML;
+    };
+</script>
+
+@endpush
