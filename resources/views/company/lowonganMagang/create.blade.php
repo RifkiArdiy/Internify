@@ -319,7 +319,7 @@
                 let provinceID = $(this).val();
                 $('#regency').html('<option value="">Memuat...</option>').trigger('change');
 
-                $.get('/admin/get-regencies', {
+                $.get('/company/get-regencies', {
                     province_id: provinceID
                 }, function(data) {
                     let regencyOptions = '<option value="">- Pilih Kabupaten -</option>';
@@ -339,7 +339,7 @@
                 let regencyID = $(this).val();
                 $('#district').html('<option value="">Memuat...</option>').trigger('change');
 
-                $.get('/admin/get-districts', {
+                $.get('/company/get-districts', {
                     regency_id: regencyID
                 }, function(data) {
                     let districtOptions = '<option value="">- Pilih Kecamatan -</option>';
@@ -357,7 +357,7 @@
                 let districtID = $(this).val();
                 $('#village').html('<option value="">Memuat...</option>').trigger('change');
 
-                $.get('/admin/get-villages', {
+                $.get('/company/get-villages', {
                     district_id: districtID
                 }, function(data) {
                     let villageOptions = '<option value="">- Pilih Kelurahan -</option>';

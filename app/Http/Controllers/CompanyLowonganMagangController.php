@@ -10,6 +10,9 @@ use App\Models\MagangApplication;
 use App\Models\Mahasiswa;
 use App\Models\PeriodeMagang;
 use App\Models\Province;
+use App\Models\Regency;
+use App\Models\District;
+use App\Models\Village;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -45,12 +48,15 @@ class CompanyLowonganMagangController extends Controller
         ];
 
         $provinces = Province::all();
+        $regencies = Regency::all();
+        $districts = District::all();
+        $villages = Village::all();
         $periode = PeriodeMagang::all();
         $lowongan = LowonganMagang::all();
         $benefits = Benefit::all();
         $kategoris = Kategori::all();
 
-        return view('company.lowonganMagang.create', compact('provinces', 'periode', 'lowongan', 'benefits', 'kategoris', 'breadcrumb'));
+        return view('company.lowonganMagang.create', compact('provinces', 'periode', 'lowongan', 'benefits', 'kategoris', 'breadcrumb', 'regencies', 'districts', 'villages'));
     }
 
     /**

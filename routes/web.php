@@ -26,6 +26,7 @@ use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\ProfilAkademikController;
 use App\Http\Controllers\MonitoringController;
 use App\Http\Controllers\WilayahController;
+use App\Http\Controllers\SertifikatMagangController;
 
 /*
 |--------------------------------------------------------------------------
@@ -192,6 +193,11 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/show/{id}', [LowonganMagangController::class, 'showMhs'])->name('lowongan-magang.show');
         });
 
+        Route::prefix('sertifikatMagang')->group(callback: function () {
+            Route::get('/', [SertifikatMagangController::class, 'indexMhs'])->name('sertifikatMagang.index');
+            Route::get('/sertifikat/download/{id}', [SertifikatMagangController::class, 'downloadMhs'])->name('sertifikat.downloadMhs');
+        });
+
         Route::prefix('pengajuan-magang')->group(function () {
             Route::get('/', [MagangApplicationController::class, 'indexMhs'])->name('lamaran');
             Route::post('/buatLamaran', [MagangApplicationController::class, 'store'])->name('buatLamaran');
@@ -273,6 +279,9 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/verifikasi', [CompanyController::class, 'indexVerifikasi'])->name('company.verifikasi');
         Route::put('/verifikasi/{id}', [CompanyController::class, 'updateVerifikasi'])->name('company.verifikasi.update');
         Route::get('/verifikasi/show/{id}', [CompanyController::class, 'showLaporan'])->name('company.verifikasi.show');
+        Route::get('/get-regencies', [WilayahController::class, 'getRegencies']);
+        Route::get('/get-districts', [WilayahController::class, 'getDistricts']);
+        Route::get('/get-villages', [WilayahController::class, 'getVillages']);
 
         Route::prefix('magangApplication')->group(callback: function () {
             Route::get('/', [MagangApplicationController::class, 'index'])->name('company.magangApplication.index');
@@ -282,6 +291,17 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/edit/{id}', [MagangApplicationController::class, 'edit'])->name('company.magangApplication.edit');
             Route::put('/{id}', [MagangApplicationController::class, 'update'])->name('company.magangApplication.update');
             Route::get('/{id}', [MagangApplicationController::class, 'destroy'])->name('company.magangApplication.destroy');
+        });
+
+        Route::prefix('sertifikatMagang')->group(callback: function () {
+            Route::get('/', [SertifikatMagangController::class, 'index'])->name('company.sertifikatMagang.index');
+            Route::get('/create', [SertifikatMagangController::class, 'create'])->name('company.sertifikatMagang.create');
+            Route::post('/store', [SertifikatMagangController::class, 'store'])->name('company.sertifikatMagang.store');
+            Route::get('/show/{id}', [SertifikatMagangController::class, 'show'])->name('company.sertifikatMagang.show');
+            Route::get('/edit/{id}', [SertifikatMagangController::class, 'edit'])->name('company.sertifikatMagang.edit');
+            Route::put('/{id}', [SertifikatMagangController::class, 'update'])->name('company.sertifikatMagang.update');
+            Route::get('/{id}', [SertifikatMagangController::class, 'destroy'])->name('company.sertifikatMagang.destroy');
+            Route::get('/sertifikat/download/{id}', [SertifikatMagangController::class, 'download'])->name('sertifikat.download');
         });
 
         Route::prefix('lowongan-magang')->group(callback: function () {
