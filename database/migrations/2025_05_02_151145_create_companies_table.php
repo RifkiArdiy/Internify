@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('companies', function (Blueprint $table) {
             $table->id('company_id');
             $table->unsignedBigInteger('user_id')->index();
-            $table->string('industry');
+            $table->text('about_company')->nullable();
             $table->timestamps();
 
             $table->foreign('user_id')->references('user_id')->on('users')->onDelete('cascade');

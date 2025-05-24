@@ -14,7 +14,7 @@ class Mahasiswa extends Model
 
     protected $primaryKey = 'mahasiswa_id';
 
-    protected $fillable = ['user_id', 'prodi_id', 'nim'];
+    protected $fillable = ['user_id', 'prodi_id', 'nim', 'status'];
 
     public function user(): BelongsTo
     {
@@ -28,7 +28,7 @@ class Mahasiswa extends Model
 
     public function applications()
     {
-        return $this->hasMany(MagangApplication::class);
+        return $this->hasMany(MagangApplication::class, 'mahasiswa_id', 'mahasiswa_id');
     }
 
     public function logs()
@@ -38,6 +38,6 @@ class Mahasiswa extends Model
 
     public function evaluasi()
     {
-        return $this->hasMany(Evaluasi::class);
+        return $this->hasMany(EvaluasiMagang::class, 'evaluasi_id', 'evaluasi_id');
     }
 }

@@ -1,35 +1,37 @@
 @extends('layouts.app')
 
 @section('content')
-    <h2>Edit Evaluasi Magang</h2>
-    <form action="{{ route('dosen.evaluasi.update', $evaluation) }}" method="POST">
-        @csrf
+    
+    <form action="{{ route('evaluasi.update', $evaluation->evaluasi_id) }}" method="POST"> 
+        @csrf     
         @method('PUT')
+
+        <input type="hidden" name="mahasiswa_id" value="{{ $evaluation->mahasiswa_id }}">
+        <input type="hidden" name="company_id" value="{{ $evaluation->company_id }}">
+        <input type="hidden" name="log_id" value="{{ $evaluation->log_id }}">
+
         <div class="mb-3">
             <label for="mahasiswa_id" class="form-label">Mahasiswa</label>
-            <select name="mahasiswa_id" class="form-control" required>
-                @foreach($mahasiswas as $mhs)
-                    <option value="{{ $mhs->mahasiswa_id }}" {{ $mhs->mahasiswa_id == $evaluation->mahasiswa_id ? 'selected' : '' }}>
-                        {{ $mhs->user->name ?? '-' }}
-                    </option>
-                @endforeach
-            </select>
+            <input type="text" class="form-control" value="{{ $evaluation->mahasiswa->user->name }}" readonly>        
         </div>
+
         <div class="mb-3">
             <label for="company_id" class="form-label">Perusahaan</label>
-            <select name="company_id" class="form-control" required>
-                @foreach($companies as $company)
-                    <option value="{{ $company->company_id }}" {{ $company->company_id == $evaluation->company_id ? 'selected' : '' }}>
-                        {{ $company->name }}
-                    </option>
-                @endforeach
-            </select>
+            <input type="text" class="form-control" value="{{ $evaluation->company->user->name }}" readonly>
         </div>
+
+        <div class="mb-3">
+            <label for="report_text" class="form-label">Laporan Mahasiswa</label>
+            <input type="text" class="form-control" value="{{ $evaluation->logs->report_text ?? '-' }}" readonly>
+        </div>
+
         <div class="mb-3">
             <label for="evaluasi" class="form-label">Evaluasi</label>
-            <textarea name="evaluasi" class="form-control" rows="4" required>{{ $evaluation->evaluasi }}</textarea>
+            <textarea name="evaluasi" class="form-control" rows="4" required>{{ old('evaluasi', $evaluation->evaluasi) }}</textarea>
         </div>
+        
         <button class="btn btn-primary">Perbarui</button>
-        <a href="{{ route('dosen.evaluasi.index') }}" class="btn btn-secondary">Kembali</a>
+        <a href="{{ route('evaluasi.index') }}" class="btn btn-secondary">Kembali</a>
     </form>
+
 @endsection

@@ -56,7 +56,7 @@
                             <label for="no_telp" class="form-label">No Telepon:</label>
                             <div class="form-control-wrap">
                                 <input type="text" class="form-control" id="no_telp" name="no_telp"
-                                    value="{{ old('no_telp') }}" placeholder="Masukkan Nomor Telepon (Contoh: 08123456789)">
+                                    value="{{ old('no_telp') }}" placeholder="Masukkan dengan awalan +62 (Contoh: 628123456789)>
                             </div>
                         </div>
                     </div>
@@ -79,7 +79,7 @@
                                 <br>Maksimal 2MB.</small>
                         </div>
                     </div>
-                    <div class="col-12">
+                    <div class="col-12 text-end">
                         <div class="form-group">
                             <button type="submit" class="btn btn-primary">Simpan</button>
                             <a href="{{ route('user.index') }}" class="btn btn-secondary">Kembali</a>

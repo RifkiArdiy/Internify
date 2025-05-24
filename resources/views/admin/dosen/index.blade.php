@@ -18,17 +18,10 @@
             <table class="datatable-init-export nowrap nk-tb-list nk-tb-ulist" data-auto-responsive="false">
                 <thead>
                     <tr class="nk-tb-item nk-tb-head">
-                        <th class="nk-tb-col nk-tb-col-check">
-                            <div class="custom-control custom-control-sm custom-checkbox notext">
-                                <input type="checkbox" class="custom-control-input" id="uid">
-                                <label class="custom-control-label" for="uid"></label>
-                            </div>
-                        </th>
                         <th class="nk-tb-col export-col"><span class="sub-text">User</span></th>
                         <th class="nk-tb-col tb-col-mb export-col"><span class="sub-text">NIP</span></th>
                         <th class="nk-tb-col tb-col-md export-col"><span class="sub-text">Phone</span></th>
                         <th class="nk-tb-col tb-col-lg export-col"><span class="sub-text">Alamat</span></th>
-                        <th class="nk-tb-col tb-col-md export-col"><span class="sub-text">Status</span></th>
                         <th class="nk-tb-col nk-tb-col-tools text-end">
                         </th>
                     </tr>
@@ -36,15 +29,9 @@
                 <tbody>
                     @foreach ($dosens as $dosen)
                         <tr class="nk-tb-item">
-                            <td class="nk-tb-col nk-tb-col-check">
-                                <div class="custom-control custom-control-sm custom-checkbox notext">
-                                    <input type="checkbox" class="custom-control-input" id="uid{{ $dosen->dosen_id }}">
-                                    <label class="custom-control-label" for="uid{{ $dosen->dosen_id }}"></label>
-                                </div>
-                            </td>
                             <td class="nk-tb-col">
                                 <div class="user-card">
-                                    <div class="user-avatar bg-dark d-none d-sm-flex">
+                                    <div class="user-avatar bg-orange-dim d-none d-sm-flex">
                                         @if ($dosen->user->image)
                                             <img src="{{ Storage::url('images/users/' . $dosen->user->image) }}"
                                                 alt="{{ $dosen->user->name }}">
@@ -54,22 +41,19 @@
                                     </div>
                                     <div class="user-info">
                                         <span class="tb-lead">{{ $dosen->user->name }}<span
-                                                class="dot dot-success d-md-none ms-1"></span></span>
+                                                class="dot dot-warning d-md-none ms-1"></span></span>
                                         <span>{{ $dosen->user->email }}</span>
                                     </div>
                                 </div>
                             </td>
                             <td class="nk-tb-col tb-col-mb">
-                                <span class="tb-amount">{{ $dosen->nip }}</span>
+                                <span>{{ $dosen->nip }}</span>
                             </td>
                             <td class="nk-tb-col tb-col-md">
                                 <span>{{ $dosen->user->no_telp }}</span>
                             </td>
                             <td class="nk-tb-col tb-col-lg" data-order="Email Submited - Kyc More Info">
-                                <span class="tb-amount">{{ $dosen->user->alamat }}</span>
-                            </td>
-                            <td class="nk-tb-col tb-col-md">
-                                <span class="tb-status text-info">Inactive</span>
+                                <span>{{ $dosen->user->alamat }}</span>
                             </td>
                             <td class="nk-tb-col nk-tb-col-tools">
                                 <ul class="nk-tb-actions gx-1">
@@ -79,17 +63,15 @@
                                                 data-bs-toggle="dropdown"><em class="icon ni ni-more-h"></em></a>
                                             <div class="dropdown-menu dropdown-menu-end">
                                                 <ul class="link-list-opt no-bdr">
-                                                    <li><a href="#"><em class="icon ni ni-focus"></em><span>Quick
-                                                                View</span></a></li>
-                                                    <li><a href="#"><em class="icon ni ni-eye"></em><span>View
-                                                                Details</span></a></li>
+                                                    <li><a href="#"><em class="icon ni ni-eye"></em><span>Lihat
+                                                                Detail</span></a></li>
                                                     <li><a href="{{ route('dosen.edit', $dosen->dosen_id) }}"><em
-                                                                class="icon ni ni-repeat"></em><span>Edit</span></a>
+                                                                class="icon ni ni-edit-alt"></em><span>Edit</span></a>
                                                     </li>
                                                     <li class="divider"></li>
                                                     <li><a href="{{ route('dosen.destroy', $dosen->dosen_id) }}"><em
-                                                                class="icon ni ni-na"></em><span>Hapus
-                                                                User</span></a></li>
+                                                                class="icon ni ni-trash"></em><span>Hapus
+                                                                Dosen</span></a></li>
                                                 </ul>
                                             </div>
                                         </div>

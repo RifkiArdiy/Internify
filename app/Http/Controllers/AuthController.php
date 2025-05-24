@@ -52,9 +52,9 @@ class AuthController extends Controller
             } elseif ($user->level->level_nama === 'Mahasiswa') {
                 return response()->json([
                     'message' => 'Login berhasil sebagai Mahasiswa',
-                    'redirect' => route('mahasiswa.dashboard')
+                    'redirect' => route('welcome.index')
                 ]);
-            }elseif ($user->level->level_nama === 'Company') {
+            } elseif ($user->level->level_nama === 'Company') {
                 return response()->json([
                     'message' => 'Login berhasil sebagai Perusahaan Mitra',
                     'redirect' => route('company.dashboard')
@@ -106,6 +106,6 @@ class AuthController extends Controller
 
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-        return redirect('/');
+        return redirect('/home');
     }
 }

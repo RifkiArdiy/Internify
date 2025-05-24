@@ -9,38 +9,12 @@
             </a>
         </div>
         <div class="nk-sidebar-brand">
-            @if (Auth::user()->level->level_nama == 'Administrator')
-                <a href="{{ route('admin.dashboard') }}" class="logo-link nk-sidebar-logo">
-                    <img class="logo-light logo-img" src="{{ asset('assets/home/images/logo.png') }}"
-                        srcset="{{ asset('assets/home/images/logo2x.png 2x') }}" alt="logo">
-                    <img class="logo-dark logo-img" src="{{ asset('assets/home/images/logo-dark.png') }}"
-                        srcset="{{ asset('assets/home/images/logo-dark2x.png 2x') }}" alt="logo-dark">
-                </a>
-            @endif
-            @if (Auth::user()->level->level_nama == 'Dosen')
-                <a href="{{ route('dosen.dashboard') }}" class="logo-link nk-sidebar-logo">
-                    <img class="logo-light logo-img" src="{{ asset('assets/home/images/logo.png') }}"
-                        srcset="{{ asset('assets/home/images/logo2x.png 2x') }}" alt="logo">
-                    <img class="logo-dark logo-img" src="{{ asset('assets/home/images/logo-dark.png') }}"
-                        srcset="{{ asset('assets/home/images/logo-dark2x.png 2x') }}" alt="logo-dark">
-                </a>
-            @endif
-            @if (Auth::user()->level->level_nama == 'Mahasiswa')
-                <a href="{{ route('mahasiswa.dashboard') }}" class="logo-link nk-sidebar-logo">
-                    <img class="logo-light logo-img" src="{{ asset('assets/home/images/logo.png') }}"
-                        srcset="{{ asset('assets/home/images/logo2x.png 2x') }}" alt="logo">
-                    <img class="logo-dark logo-img" src="{{ asset('assets/home/images/logo-dark.png') }}"
-                        srcset="{{ asset('assets/home/images/logo-dark2x.png 2x') }}" alt="logo-dark">
-                </a>
-            @endif
-            @if (Auth::user()->level->level_nama == 'Company')
-                <a href="{{ route('company.dashboard') }}" class="logo-link nk-sidebar-logo">
-                    <img class="logo-light logo-img" src="{{ asset('assets/home/images/logo.png') }}"
-                        srcset="{{ asset('assets/home/images/logo2x.png 2x') }}" alt="logo">
-                    <img class="logo-dark logo-img" src="{{ asset('assets/home/images/logo-dark.png') }}"
-                        srcset="{{ asset('assets/home/images/logo-dark2x.png 2x') }}" alt="logo-dark">
-                </a>
-            @endif
+            <a href="{{ route('welcome.index') }}" class="logo-link nk-sidebar-logo">
+                <img class="logo-light logo-img" src="{{ asset('assets/home/images/logo.png') }}"
+                    srcset="{{ asset('assets/home/images/logo2x.png 2x') }}" alt="logo">
+                <img class="logo-dark logo-img" src="{{ asset('assets/home/images/logo-dark.png') }}"
+                    srcset="{{ asset('assets/home/images/logo-dark2x.png 2x') }}" alt="logo-dark">
+            </a>
         </div>
     </div>
     <!-- .nk-sidebar-element -->

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Log;
 use App\Models\Dosen;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -25,15 +26,42 @@ class DosenController extends Controller
     }
 
     public function indexVerifikasi()
+{
+    $dosen = auth()->user()->dosen;
+
+    $logs = Log::with(['mahasiswa.user', 'dosen.user'])
+        ->where('dosen_id', $dosen->dosen_id) // filter hanya laporan milik dosen tersebut
+        ->latest()
+        ->get();
+
+    $breadcrumb = (object) [
+        'title' => 'Verifikasi Laporan Mahasiswa',
+        'subtitle' => ['Laporan Harian']
+    ];
+    return view('dosen.verifikasi', compact('breadcrumb','logs'));
+}
+
+
+    public function updateVerifikasi(Request $request, string $id)
     {
-        $dosen = Dosen::all();
-        $breadcrumb = (object) [
-            'title' => 'Verifikasi Perusahaan Mitra',
-            'subtitle' => ['Jumlah Perusahaan Mitra : ' . $dosen->count()]
-        ];
-        return view('dosen.verifikasi', compact('dosen', 'breadcrumb'));
+        $logs = Log::find($id);
+
+        $logs->update([
+            'verif_dosen' => $request->verif_dosen,
+        ]);
+
+        return redirect('dosen.verifikasi')->with('success', 'Laporan berhasil diverifikasi');
     }
 
+    public function showLaporan($id)
+    {
+        $logs = Log::findOrFail($id);
+        $breadcrumb = (object) [
+            'title' => 'Detail Laporan',
+            'subtitle' => ['Detail Laporan Magang']
+        ];
+        return view('dosen.show', compact('breadcrumb','logs'));
+    }
     /**
      * Show the form for creating a new resource.
      */
@@ -91,7 +119,7 @@ class DosenController extends Controller
 
         return redirect()->route('dosen.index')->with('success', 'Dosen berhasil ditambahkan.');
     }
-
+    
     /**
      * Display the specified resource.
      */

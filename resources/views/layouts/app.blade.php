@@ -17,10 +17,35 @@
 
     <!-- StyleSheets  -->
     <link rel="stylesheet" href="{{ asset('assets/admin/css/dashlite.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/admin/css/editors/quill.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/admin/css/editors/quill.rtl.css') }}">
     <link id="skin-default" rel="stylesheet" href="{{ asset('assets/admin/css/theme.css') }}">
     @livewireStyles
     {{-- <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/turbolinks@5.2.0/dist/turbolinks.min.js"></script> --}}
+
+    <style>
+        .star-rating {
+            direction: rtl;
+            font-size: 1.8rem;
+            unicode-bidi: bidi-override;
+            display: inline-flex;
+        }
+        .star-rating input[type="radio"] {
+            display: none;
+        }
+        .star-rating label {
+            color: #ddd;
+            cursor: pointer;
+            padding: 0 5px;
+            transition: color 0.2s;
+        }
+        .star-rating input[type="radio"]:checked ~ label,
+        .star-rating label:hover,
+        .star-rating label:hover ~ label {
+            color: #f5b301;
+        }
+    </style>
 
     @stack('css')
 </head>
@@ -72,7 +97,10 @@
     <script src="{{ asset('assets/admin/js/libs/datatable-btns.js') }}"></script>
     <script src="{{ asset('assets/admin/js/example-sweetalert.js') }}"></script>
     <script src="{{ asset('assets/admin/js/example-toastr.js') }}"></script>
-
+    <link rel="stylesheet" href="{{ asset('assets/admin/css/editors/quill.css') }}">
+    <script src="{{ asset('assets/admin/js/libs/editors/quill.js') }}"></script>
+    <script src="{{ asset('assets/admin/js/editors.js') }}"></script>
+    <script src="{{ asset('assets/admin/js/libs/tagify.js') }}"></script>
     <script>
         $.ajaxSetup({
             headers: {

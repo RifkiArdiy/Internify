@@ -15,7 +15,7 @@ class Company extends Model
 
     protected $primaryKey = 'company_id';
 
-    protected $fillable = ['user_id', 'industry'];
+    protected $fillable = ['user_id', 'about_company'];
 
     public function lowongans(): HasMany
     {
@@ -24,7 +24,7 @@ class Company extends Model
 
     public function evaluasis()
     {
-        return $this->hasMany(Evaluasi::class);
+        return $this->hasMany(EvaluasiMagang::class);
     }
 
     public function user(): BelongsTo

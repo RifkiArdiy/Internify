@@ -18,18 +18,11 @@
             <table class="datatable-init-export nowrap nk-tb-list nk-tb-ulist" data-auto-responsive="false">
                 <thead>
                     <tr class="nk-tb-item nk-tb-head">
-                        <th class="nk-tb-col nk-tb-col-check">
-                            <div class="custom-control custom-control-sm custom-checkbox notext">
-                                <input type="checkbox" class="custom-control-input" id="uid">
-                                <label class="custom-control-label" for="uid"></label>
-                            </div>
-                        </th>
-                        <th class="nk-tb-col"><span class="sub-text">User</span></th>
-                        <th class="nk-tb-col tb-col-mb"><span class="sub-text">Nim</span></th>
-                        <th class="nk-tb-col tb-col-lg"><span class="sub-text">Jurusan</span></th>
-                        <th class="nk-tb-col tb-col-lg"><span class="sub-text">Alamat</span></th>
-                        <th class="nk-tb-col tb-col-md"><span class="sub-text">Telepon</span></th>
-                        <th class="nk-tb-col tb-col-md"><span class="sub-text">Status</span></th>
+                        <th class="nk-tb-col export-col"><span class="sub-text">User</span></th>
+                        <th class="nk-tb-col tb-col-mb export-col"><span class="sub-text">NIM</span></th>
+                        <th class="nk-tb-col tb-col-lg export-col"><span class="sub-text">Jurusan</span></th>
+                        <th class="nk-tb-col tb-col-lg export-col"><span class="sub-text">Alamat</span></th>
+                        <th class="nk-tb-col tb-col-md export-col"><span class="sub-text">Telepon</span></th>
                         <th class="nk-tb-col nk-tb-col-tools text-end">
                         </th>
                     </tr>
@@ -37,15 +30,9 @@
                 <tbody>
                     @foreach ($mahasiswas as $mhs)
                         <tr class="nk-tb-item">
-                            <td class="nk-tb-col nk-tb-col-check">
-                                <div class="custom-control custom-control-sm custom-checkbox notext">
-                                    <input type="checkbox" class="custom-control-input" id="uid{{ $mhs->mahasiswa_id }}">
-                                    <label class="custom-control-label" for="uid{{ $mhs->mahasiswa_id }}"></label>
-                                </div>
-                            </td>
                             <td class="nk-tb-col">
                                 <div class="user-card">
-                                    <div class="user-avatar bg-dark d-none d-sm-flex">
+                                    <div class="user-avatar bg-teal-dim d-none d-sm-flex">
                                         @if ($mhs->user->image)
                                             <img src="{{ Storage::url('images/users/' . $mhs->user->image) }}"
                                                 alt="{{ $mhs->user->name }}">
@@ -61,19 +48,16 @@
                                 </div>
                             </td>
                             <td class="nk-tb-col tb-col-mb">
-                                <span class="tb-amount">{{ $mhs->nim }}</span>
+                                <span>{{ $mhs->nim }}</span>
                             </td>
                             <td class="nk-tb-col tb-col-lg" data-order="Email Submited - Kyc More Info">
-                                <span class="tb-amount">{{ $mhs->prodi->name }}</span>
+                                <span>{{ $mhs->prodi->name }}</span>
                             </td>
                             <td class="nk-tb-col tb-col-lg">
                                 <span>{{ $mhs->user->alamat }}</span>
                             </td>
                             <td class="nk-tb-col tb-col-md">
                                 <span>{{ $mhs->user->no_telp }}</span>
-                            </td>
-                            <td class="nk-tb-col tb-col-md">
-                                <span class="tb-status text-success">Active</span>
                             </td>
                             <td class="nk-tb-col nk-tb-col-tools">
                                 <ul class="nk-tb-actions gx-1">
@@ -83,10 +67,8 @@
                                                 data-bs-toggle="dropdown"><em class="icon ni ni-more-h"></em></a>
                                             <div class="dropdown-menu dropdown-menu-end">
                                                 <ul class="link-list-opt no-bdr">
-                                                    <li><a href="#"><em class="icon ni ni-focus"></em><span>Quick
-                                                                View</span></a></li>
-                                                    <li><a href="#"><em class="icon ni ni-eye"></em><span>View
-                                                                Details</span></a></li>
+                                                    <li><a href="#"><em class="icon ni ni-eye"></em><span>Lihat
+                                                                Detail</span></a></li>
                                                     <li><a href="{{ route('mahasiswa.edit', $mhs->mahasiswa_id) }}"><em
                                                                 class="icon ni ni-repeat"></em><span>Edit</span></a>
                                                     </li>

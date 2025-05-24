@@ -15,8 +15,8 @@ class MahasiswaSeeder extends Seeder
     public function run(): void
     {
         $mahasiswaData = [
-            ['user_id' => 2, 'prodi_id' => 1, 'nim' => '2510876349'],
-            ['user_id' => 3, 'prodi_id' => 2, 'nim' => '1892305716'],
+            ['user_id' => 2, 'prodi_id' => 1, 'nim' => '2510876349', 'status' => 'is_magang'],
+            ['user_id' => 3, 'prodi_id' => 2, 'nim' => '1892305716', 'status' => 'is_magang'],
             ['user_id' => 4, 'prodi_id' => 1, 'nim' => '3367912045'],
             ['user_id' => 5, 'prodi_id' => 2, 'nim' => '0945287136'],
             ['user_id' => 6, 'prodi_id' => 1, 'nim' => '4178569203'],
