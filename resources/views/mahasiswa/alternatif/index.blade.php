@@ -125,7 +125,6 @@
                 let modalContent = modal.find('.modal-content');
 
                 $.ajax({
-                    // url: "{{ route('nilai.create', $alt->alternatif_id) }}",
                     url: "/mahasiswa/alternatif/nilai/" + alternatifId,
                     method: 'GET',
                     success: function(response) {
