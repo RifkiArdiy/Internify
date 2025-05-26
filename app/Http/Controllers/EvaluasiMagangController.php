@@ -139,4 +139,18 @@ class EvaluasiMagangController extends Controller
 
         return redirect()->route('evaluasi.index')->with('success', 'Evaluasi berhasil dihapus');
     }
+
+    public function verifikasiDosenDanRedirect($log_id)
+    {
+        $log = Log::findOrFail($log_id);
+        $log->verif_dosen = 'Disetujui';
+        $log->save();
+
+        return redirect()->route('evaluasi.create', [
+            'mahasiswa_id' => $log->mahasiswa_id,
+            'company_id' => $log->company_id,
+            'log_id' => $log->log_id,
+        ]);
+    }
+
 }

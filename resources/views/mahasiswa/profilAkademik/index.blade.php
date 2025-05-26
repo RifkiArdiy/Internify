@@ -6,7 +6,7 @@
         <div class="alert alert-success">{{ session('success') }}</div>
     @endif
 
-    <div class="row justify-content-center" style="margin-top: -20px;">
+    <div class="row justify-content-center">
         <div class="col-md-8 col-lg-6" style="width: 80%; height: 100%;">
             <div class="card card-bordered card-preview">
                 <div class="card-inner">

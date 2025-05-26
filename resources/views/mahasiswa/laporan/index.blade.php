@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+@php use Illuminate\Support\Str; @endphp
 @section('action')
     <li class="nk-block-tools-opt">
         <a href="{{ route('laporan.create') }}" class="btn btn-primary">
@@ -22,6 +22,8 @@
                         <th class="nk-tb-col export-col"><span class="sub-text">Dosen Pembimbing</span></th>
                         <th class="nk-tb-col export-col"><span class="sub-text">Isi Laporan</span></th>
                         <th class="nk-tb-col export-col"><span class="sub-text">Tanggal</span></th>
+                        <th class="nk-tb-col export-col d-none"><span class="sub-text">Verif Perusahaan</span></th>
+                        <th class="nk-tb-col export-col d-none"><span class="sub-text">Verif Dosen</span></th>
                         <th class="nk-tb-col nk-tb-col-tools text-end"></th>
                     </tr>
                 </thead>
@@ -35,10 +37,16 @@
                                 <span>{{ $log->dosen->user->name ?? '-' }}</span>
                             </td>
                             <td class="nk-tb-col">
-                                <span>{{ Str::limit($log->report_text, 50) }}</span>
-                            </td>
+                                <span>{!! Str::limit(strip_tags($log->report_text), 50) !!}</span>
+                            </td>                            
                             <td class="nk-tb-col">
                                 <span>{{ $log->created_at->format('d M Y') }}</span>
+                            </td>
+                            <td class="nk-tb-col d-none">
+                                <span>{{ $log->verif_company }}</span>
+                            </td>
+                            <td class="nk-tb-col d-none">
+                                <span>{{ $log->verif_dosen }}</span>
                             </td>
                             <td class="nk-tb-col nk-tb-col-tools">
                                 <ul class="nk-tb-actions gx-1">

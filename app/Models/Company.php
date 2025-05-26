@@ -36,4 +36,9 @@ class Company extends Model
     {
         return $this->hasMany(Log::class);
     }
+
+    public function sertifikat()
+    {
+        return $this->hasMany(SertifikatMagang::class, 'company_id', 'company_id');
+    }
 }

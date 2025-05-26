@@ -50,7 +50,7 @@ class DosenController extends Controller
             'verif_dosen' => $request->verif_dosen,
         ]);
 
-        return redirect('dosen/verifikasi')->with('success', 'Laporan berhasil diverifikasi');
+        return redirect('dosen.verifikasi')->with('success', 'Laporan berhasil diverifikasi');
     }
 
     public function showLaporan($id)
@@ -119,7 +119,7 @@ class DosenController extends Controller
 
         return redirect()->route('dosen.index')->with('success', 'Dosen berhasil ditambahkan.');
     }
-
+    
     /**
      * Display the specified resource.
      */

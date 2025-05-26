@@ -8,7 +8,7 @@
         </a>
     </li>
 @endsection --}}
-
+@php use Illuminate\Support\Str; @endphp
 @section('content')
     @if (session('success'))
         <div class="alert alert-success">{{ session('success') }}</div>
@@ -41,7 +41,7 @@
                                 <span>{{ $e->company->user->name ?? '-' }}</span>
                             </td>
                             <td class="nk-tb-col">
-                                <span>{{ $e->evaluasi }}</span>
+                                <span>{!! Str::limit(strip_tags($e->evaluasi), 50) !!}</span>
                             </td>
                             <td class="nk-tb-col nk-tb-col-tools">
                                 <ul class="nk-tb-actions gx-1">
@@ -51,18 +51,7 @@
                                                 data-bs-toggle="dropdown"><em class="icon ni ni-more-h"></em></a>
                                             <div class="dropdown-menu dropdown-menu-end">
                                                 <ul class="link-list-opt no-bdr">
-                                                    <<<<<<< HEAD <li><a href="#"><em
-                                                                class="icon ni ni-eye"></em><span>Lihat
-                                                                Detail</span></a>
-                                    </li>
-                                    <li><a
-                                            href="{{ route('evaluasi.edit', $e->evaluasi_id) }}
-                                                                ?mahasiswa_id={{ $e->mahasiswa_id }}
-                                                                &company_id={{ $e->company_id }}
-                                                                &log_id={{ $e->log_id }}">
-                                            =======
                                     <li><a href="{{ route('evaluasi.edit', $e->evaluasi_id) }}">
-                                            >>>>>>> 04c949bbf169fa4fd7dec884af75d08191270e39
                                             <em class="icon ni ni-edit"></em>
                                             <span>Edit</span>
                                         </a>
