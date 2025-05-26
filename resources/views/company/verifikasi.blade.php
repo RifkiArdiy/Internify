@@ -11,11 +11,11 @@
                 <thead>
                     <tr class="nk-tb-item nk-tb-head">
                         <th class="nk-tb-col"><span class="sub-text">No</span></th>
-                        <th class="nk-tb-col"><span class="sub-text">Mahasiswa</span></th>
+                        <th class="nk-tb-col export-col"><span class="sub-text">Mahasiswa</span></th>
                         {{-- <th class="nk-tb-col"><span class="sub-text">Dosen Pembimbing</span></th> --}}
-                        <th class="nk-tb-col"><span class="sub-text">Isi Laporan</span></th>
-                        <th class="nk-tb-col"><span class="sub-text">Tanggal</span></th>
-                        <th class="nk-tb-col"><span class="sub-text">Status</span></th>
+                        <th class="nk-tb-col export-col"><span class="sub-text">Isi Laporan</span></th>
+                        <th class="nk-tb-col export-col"><span class="sub-text">Tanggal</span></th>
+                        <th class="nk-tb-col export-col"><span class="sub-text">Status</span></th>
                     </tr>
                 </thead>
                 <tbody>

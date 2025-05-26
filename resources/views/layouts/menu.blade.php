@@ -200,15 +200,16 @@
                 <span class="nk-menu-text">Feedback Magang</span>
             </a>
         </li>
+        {{-- ntar ini dikasi status selesai_magang --}}
+        <li class="nk-menu-item">
+            <a href="{{ route('sertifikatMagang.index') }}" class="nk-menu-link">
+                <span class="nk-menu-icon">
+                    <em class="icon ni ni-notes-alt"></em>
+                </span>
+                <span class="nk-menu-text">Sertifikat Magang</span>
+            </a>
+        </li>
     @endif
-    <li class="nk-menu-item">
-        <a href="{{ route('lamaran') }}" class="nk-menu-link">
-            <span class="nk-menu-icon">
-                <em class="icon ni ni-file-text"></em>
-            </span>
-            <span class="nk-menu-text">Pengajuan Magang</span>
-        </a>
-    </li>
     {{-- <li class="nk-menu-item">
         <a href="{{ route('lihatLamaran',Auth::user()->mahasiswa->mahasiswa_id) }}" class="nk-menu-link">
             <span class="nk-menu-icon">
@@ -248,6 +249,14 @@
                 <em class="icon ni ni-briefcase"></em>
             </span>
             <span class="nk-menu-text">Lowongan Magang</span>
+        </a>
+    </li>
+    <li class="nk-menu-item">
+        <a href="{{ route('company.sertifikatMagang.index') }}" class="nk-menu-link">
+            <span class="nk-menu-icon">
+                <em class="icon ni ni-notes-alt"></em>
+            </span>
+            <span class="nk-menu-text">Sertifikat Magang</span>
         </a>
     </li>
 @endif

@@ -12,9 +12,9 @@
             <table class="datatable-init-export nowrap nk-tb-list nk-tb-ulist" data-auto-responsive="false">
                 <thead>
                     <tr class="nk-tb-item nk-tb-head">
-                        <th class="nk-tb-col"><span class="sub-text">Mahasiswa</span></th>
-                        <th class="nk-tb-col tb-col-mb"><span class="sub-text">Lowongan</span></th>
-                        <th class="nk-tb-col tb-col-mb"><span class="sub-text">Status</span></th>
+                        <th class="nk-tb-col export-col"><span class="sub-text">Mahasiswa</span></th>
+                        <th class="nk-tb-col tb-col-mb export-col"><span class="sub-text">Lowongan</span></th>
+                        <th class="nk-tb-col tb-col-mb export-col"><span class="sub-text">Proses</span></th>
                         <th class="nk-tb-col tb-col-mb"><span class="sub-text">Status</span></th>
                         <th class="nk-tb-col nk-tb-col-tools text-end"></th>
                     </tr>

@@ -118,7 +118,7 @@ class MagangApplicationController extends Controller
             'status' => 'Pending',
         ]);
 
-        return redirect()->back()->with('success', 'Pengajuan berhasil dikirim.');
+        return redirect (route('lowongan-magang.indexMhs'))->with('success', 'Pengajuan berhasil dikirim.');
     }
 
     /**

@@ -33,6 +33,14 @@
                 </div>
                 <div class="col-md-6 text-end">
                     <li class="nk-block-tools-opt">
+                        <a href="{{ route('evaluasi.verifikasi', $logs->log_id) }}" class="btn btn-sm btn-primary">
+                            Evaluasi
+                        </a>
+                    </li>
+                    
+                    
+                    {{-- @if ($log->verif_dosen === 'Disetujui')
+                    <li class="nk-block-tools-opt">
                         <a href="{{ route('evaluasi.create', [
                                 'mahasiswa_id' => $logs->mahasiswa_id,
                                 'company_id' => $logs->company_id,
@@ -41,6 +49,9 @@
                             Evaluasi
                         </a>                        
                     </li>
+                    @elseif ($log->verif_dosen === 'pending')
+                        <span class="badge badge-danger">Ditolak</span>
+                    @endif --}}
                 </div>
             </div>
         </div>

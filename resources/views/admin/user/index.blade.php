@@ -68,12 +68,8 @@
                                             <div class="dropdown-menu dropdown-menu-end">
                                                 <ul class="link-list-opt no-bdr">
                                                     <li>
-                                                        <a href="#"><em class="icon ni ni-focus"></em><span>Quick
-                                                                View</span></a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#"><em class="icon ni ni-eye"></em><span>View
-                                                                Details</span></a>
+                                                        <a href="#"><em class="icon ni ni-eye"></em><span>Lihat
+                                                                Detail</span></a>
                                                     </li>
                                                     <li>
                                                         <a href="{{ route('user.edit', $admin->user_id) }}">
