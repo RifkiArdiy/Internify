@@ -13,6 +13,16 @@
             </div>
         @endif
 
+        <style>
+            #quill-feedback{
+                overflow-x: auto;
+                word-wrap: break-word;
+            }
+            .ql-editor {
+                word-break: break-word;
+            }
+        </style>
+
         <form method="POST" action="{{ route('feedback-store') }}" enctype="multipart/form-data" class="form-validate is-alter">
             @csrf
             <div class="row g-4">

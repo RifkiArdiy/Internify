@@ -3,6 +3,18 @@
 @section('content')
     <div class="card card-bordered card-preview">
         <div class="card-inner">
+            
+            <style>
+                #quill-editor{
+                    overflow-x: auto;
+                    word-wrap: break-word;
+                }
+                .ql-editor {
+                    word-break: break-word;
+                }
+            </style>
+
+
             <form action="{{ route('laporan.store') }}" method="POST">
                 @csrf
                 <div class="row g-4">
