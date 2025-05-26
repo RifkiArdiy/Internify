@@ -16,7 +16,7 @@ class SertifikatMahasiswa extends Model
         'sertifikat_id',
         'mahasiswa_id',
         'nama_mahasiswa',
-        'tanggal_diunduh',
+        'downloaded_at',
     ];
 
     // Relasi ke SertifikatMagang

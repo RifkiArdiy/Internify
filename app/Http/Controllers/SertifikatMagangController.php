@@ -118,27 +118,27 @@ class SertifikatMagangController extends Controller
     }
 
     // Download dan generate PDF dengan nama mahasiswa
-    public function download($id)
-    {
-        $sertifikat = SertifikatMagang::findOrFail($id);
-        $mahasiswa = Auth::user()->mahasiswa;
+    // public function download($id)
+    // {
+    //     $sertifikat = SertifikatMagang::findOrFail($id);
+    //     $mahasiswa = Auth::user()->mahasiswa;
 
-        // Simpan catatan unduhan
-        SertifikatMahasiswa::create([
-            'sertifikat_id' => $sertifikat->sertifikat_id,
-            'mahasiswa_id' => $mahasiswa->mahasiswa_id,
-            'nama_mahasiswa' => $mahasiswa->user->name,
-            'tanggal_diunduh' => now(),
-        ]);
+    //     // Simpan catatan unduhan
+    //     SertifikatMahasiswa::create([
+    //         'sertifikat_id' => $sertifikat->sertifikat_id,
+    //         'mahasiswa_id' => $mahasiswa->mahasiswa_id,
+    //         'nama_mahasiswa' => $mahasiswa->user->name,
+    //         'donwloaded_at' => now(),
+    //     ]);
 
-        $pdf = Pdf::loadView('sertifikat.template', [
-            'judul' => $sertifikat->judul,
-            'nama_mahasiswa' => $mahasiswa->user->name,
-            'tanggal' => now()->format('d F Y')
-        ]);
+    //     $pdf = Pdf::loadView('sertifikat.template', [
+    //         'judul' => $sertifikat->judul,
+    //         'nama_mahasiswa' => $mahasiswa->user->name,
+    //         'tanggal' => now()->format('d F Y')
+    //     ]);
 
-        return $pdf->download('sertifikat_'.$mahasiswa->user->name.'.pdf');
-    }
+    //     return $pdf->download('sertifikat_'.$mahasiswa->user->name.'.pdf');
+    // }
 
     public function downloadMhs($id)
     {
@@ -150,6 +150,7 @@ class SertifikatMagangController extends Controller
         SertifikatMahasiswa::create([
             'sertifikat_id' => $sertifikat->sertifikat_id,
             'mahasiswa_id' => $mahasiswa->mahasiswa_id,
+            'nama_mahasiswa' => $mahasiswa->user->name,
             'downloaded_at' => now(),
         ]);
 

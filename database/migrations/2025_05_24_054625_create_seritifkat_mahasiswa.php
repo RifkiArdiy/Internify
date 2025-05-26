@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id('sertifikat_mahasiswa_id');
             $table->unsignedBigInteger('sertifikat_id');
             $table->unsignedBigInteger('mahasiswa_id');
+            $table->string('nama_mahasiswa')->nullable();
             $table->timestamp('downloaded_at')->nullable();
             $table->timestamps();
 
