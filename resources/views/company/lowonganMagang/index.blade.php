@@ -26,7 +26,7 @@
                         <th class="nk-tb-col export-col"><span class="sub-text">Judul</span></th>
                         <th class="nk-tb-col tb-col-lg export-col"><span class="sub-text">Created at</span></th>
                         <th class="nk-tb-col tb-col-md export-col"><span class="sub-text">Jumlah Pelamar</span></th>
-                        <th class="nk-tb-col tb-col-md export-col"><span class="sub-text">Aksi</span></th>
+                        <th class="nk-tb-col tb-col-md"><span class="sub-text">Aksi</span></th>
                         <th class="nk-tb-col nk-tb-col-tools text-end"></th>
                     </tr>
                 </thead>
