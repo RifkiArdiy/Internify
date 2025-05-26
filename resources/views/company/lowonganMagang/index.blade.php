@@ -61,10 +61,11 @@
                                                     <li><a href="{{ route('companys-lowongan-magang.edit', $item->lowongan_id) }}">
                                                             <em class="icon ni ni-edit-alt"></em><span>Edit</span></a>
                                                     </li>
+                                                    <hr>
                                                     <li><form action="{{ route('companys-lowongan-magang.destroy', $item->lowongan_id) }}" method="POST" style="display:inline;">
                                                         @csrf
                                                         @method('DELETE')
-                                                        <button type="submit" class="btn btn-link p-0" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">
+                                                        <button type="submit" class="btn btn-link text-danger" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">
                                                             <em class="icon ni ni-trash"></em><span>Hapus</span>
                                                         </button>
                                                     </form>

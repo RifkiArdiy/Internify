@@ -12,6 +12,16 @@
                     </ul>
                 </div>
             @endif
+
+            <style>
+                #quill-editor, #quill-requirements {
+                    overflow-x: auto;
+                    word-wrap: break-word;
+                }
+                .ql-editor {
+                    word-break: break-word;
+                }
+            </style>
             <form method="POST" action="{{ route('companys-lowongan-magang.store') }}">
                 @csrf
                 <div class="row g-4">
@@ -150,7 +160,7 @@
 
                     <div class="col-12">
                         <button type="submit" class="btn btn-primary mt-3">Simpan</button>
-                        <a href="{{ route('lowongan-magang.index') }}" class="btn btn-secondary mt-3">Kembali</a>
+                        <a href="{{ route('companys-lowongan-magang.index') }}" class="btn btn-secondary mt-3">Kembali</a>
                     </div>
                 </div>
             </form>
