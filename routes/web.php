@@ -300,7 +300,7 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/show/{id}', [SertifikatMagangController::class, 'show'])->name('company.sertifikatMagang.show');
             Route::get('/edit/{id}', [SertifikatMagangController::class, 'edit'])->name('company.sertifikatMagang.edit');
             Route::put('/{id}', [SertifikatMagangController::class, 'update'])->name('company.sertifikatMagang.update');
-            Route::get('/{id}', [SertifikatMagangController::class, 'destroy'])->name('company.sertifikatMagang.destroy');
+            Route::delete('/{id}', [SertifikatMagangController::class, 'destroy'])->name('company.sertifikatMagang.destroy');
             Route::get('/sertifikat/download/{id}', [SertifikatMagangController::class, 'download'])->name('sertifikat.download');
         });
 
