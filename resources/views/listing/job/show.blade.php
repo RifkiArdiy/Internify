@@ -73,7 +73,9 @@
                                                     <div class="dropdown-inner user-card-wrap bg-lighter d-none d-md-block">
                                                         <div class="user-card">
                                                             <div class="user-avatar">
-                                                                <span>{{ strtoupper(substr(Auth::user()->name, 0, 2)) }}</span>
+                                                                <span>
+                                                                    {{ strtoupper(collect(explode(' ', Auth::user()->name))->map(fn($word) => $word[0])->take(2)->implode('')) }}
+                                                                </span>
                                                             </div>
                                                             <div class="user-info">
                                                                 <span

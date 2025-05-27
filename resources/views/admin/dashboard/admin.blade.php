@@ -97,11 +97,14 @@
                                     <img src="{{ Storage::url('images/users/' . $item->mahasiswas->user->image) }}"
                                         alt="{{ $item->mahasiswas->user->name }}">
                                 @else
-                                    <span>{{ strtoupper(substr($item->mahasiswas->user->name, 0, 2)) }}</span>
+                                    <span>
+                                        {{ strtoupper(collect(explode(' ', $item->mahasiswa->user->name))->map(fn($word) => $word[0])->take(2)->implode('')) }}
+                                    </span>
                                 @endif
                             </div>
                             <div class="nk-activity-data">
-                                <div class="label"><span>{{ $item->mahasiswas->user->name }}</span> menunggu di review</div>
+                                <div class="label"><span>{{ $item->mahasiswas->user->name }}</span> menunggu di review
+                                </div>
                                 <span class="time">{{ $item->created_at->diffForHumans() }}</span>
                             </div>
                         </li>
