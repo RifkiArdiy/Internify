@@ -148,15 +148,20 @@
     </div><!-- .header-main-->
     <div class="header-content py-6 is-dark mt-lg-n1 mt-n3">
         <div class="container">
-            <div class="row flex-row-reverse justify-content-center text-center g-gs">
-                <div class="col-lg-6 col-md-7">
+            <div class="row justify-content-center text-center g-gs">
+                <div class="col-lg-8 col-md-10">
                     <div class="header-caption">
-                        <h1 class="header-title">Powelful Tool To Represent Your Dashboard.</h1>
-                        <p>A powerful admin dashboard template that especially build for developers and programmers.
-                            DashLite comes with all kind of components.</p>
+                        <h1 class="header-title">Cari Lowongan Pekerjaan</h1>
+                        <p class="lead-text">Temukan lowongan kerja yang sesuai dengan keahlian dan minatmu.</p>
+                        @yield('header')
+                        <!-- Optional: Quick links -->
+                        <div class="mt-3">
+                            <span class="text-light small">Contoh: Programmer, Admin, Jakarta</span>
+                        </div>
                     </div><!-- .header-caption -->
                 </div><!-- .col -->
             </div><!-- .row -->
         </div><!-- .container -->
     </div><!-- .header-content -->
+
 </header>

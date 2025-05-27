@@ -55,6 +55,9 @@ Route::get('/lowongan', [ListingController::class, 'lowongan'])->name('list.lowo
 Route::get('/{id}/lowongan', [ListingController::class, 'showLowongan'])->name('show.lowongan');
 Route::get('/perusahaan', [ListingController::class, 'perusahaan'])->name('list.perusahaan');
 Route::get('/{id}/perusahaan', [ListingController::class, 'showPerusahaan'])->name('show.perusahaan');
+Route::get('/lowongan/search', [ListingController::class, 'searchLowongan'])->name('lowongan.search');
+Route::get('/perusahaan/search', [ListingController::class, 'searchCompany'])->name('perusahaan.search');
+
 
 Route::middleware(['auth'])->group(function () {
 
