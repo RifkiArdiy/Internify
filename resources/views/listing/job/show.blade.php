@@ -180,14 +180,18 @@
                         <!-- Job Title and Action Buttons -->
                         <div class="d-flex flex-wrap align-items-center justify-content-between">
                             <div class="d-flex align-items-center">
-                                <div class="user-avatar sq lg bg-primary me-3">
-                                    @if ($lowongan->company->user->image)
+                                @if ($lowongan->company->user->image)
+                                    <div class="user-avatar lg me-3">
                                         <img src="{{ Storage::url('images/users/' . $lowongan->company->user->image) }}"
                                             alt="{{ $lowongan->company->user->name }}">
-                                    @else
-                                        <span>{{ strtoupper(substr($lowongan->company->user->name, 0, 2)) }}</span>
-                                    @endif
-                                </div>
+                                    </div>
+                                @else
+                                    <div class="user-avatar sq lg bg-primary me-3">
+                                        <span>
+                                            {{ strtoupper(collect(explode(' ', $lowongan->company->user->name))->map(fn($word) => $word[0])->take(2)->implode('')) }}
+                                        </span>
+                                    </div>
+                                @endif
                                 <div>
                                     <h4 class="mb-1">{{ $lowongan->title }}</h4>
                                     <ul class="list-inline list-split fs-14px text-soft">
@@ -286,9 +290,18 @@
                                 <div class="card card-bordered">
                                     <div class="card-inner text-center">
                                         <div class="d-flex justify-content-center mb-3">
-                                            <div class="user-avatar sq lg bg-indigo-dim">
-                                                <span>👤</span>
-                                            </div>
+                                            @if ($lowongan->company->user->image)
+                                                <div class="user-avatar lg">
+                                                    <img src="{{ Storage::url('images/users/' . $lowongan->company->user->image) }}"
+                                                        alt="{{ $lowongan->company->user->name }}">
+                                                </div>
+                                            @else
+                                                <div class="user-avatar lg bg-indigo">
+                                                    <span>
+                                                        {{ strtoupper(collect(explode(' ', $lowongan->company->user->name))->map(fn($word) => $word[0])->take(2)->implode('')) }}
+                                                    </span>
+                                                </div>
+                                            @endif
                                         </div>
                                         <h6 class="title mb-1">{{ $lowongan->company->user->name }}</h6>
                                         <a href="{{ route('show.perusahaan', $lowongan->company->company_id) }}"
@@ -326,9 +339,18 @@
                                                         <div class="job">
                                                             <div class="job-head">
                                                                 <div class="job-title">
-                                                                    <div class="user-avatar sq bg-purple">
-                                                                        <span>DD</span>
-                                                                    </div>
+                                                                    @if ($job->company->user->image)
+                                                                        <div class="user-avatar">
+                                                                            <img src="{{ Storage::url('images/users/' . $job->company->user->image) }}"
+                                                                                alt="{{ $job->company->user->name }}">
+                                                                        </div>
+                                                                    @else
+                                                                        <div class="user-avatar sq">
+                                                                            <span>
+                                                                                {{ strtoupper(collect(explode(' ', $job->company->user->name))->map(fn($word) => $word[0])->take(2)->implode('')) }}
+                                                                            </span>
+                                                                        </div>
+                                                                    @endif
                                                                     <div class="job-info">
                                                                         <h6 class="title">{{ $job->title }}</h6>
                                                                         <span

@@ -16,14 +16,18 @@
                         <div class="card service service-s4 card-bordered h-100">
                             <div class="py-2">
                                 <div class="card-inner">
-                                    <div class="service-icon styled-icon styled-icon-s4 styled-icon-5x text-indigo">
-                                        @if ($company->user->image)
+                                    @if ($company->user->image)
+                                        <div class="service-icon styled-icon styled-icon-6x">
                                             <img src="{{ Storage::url('images/users/' . $company->user->image) }}"
                                                 alt="{{ $company->user->name }}">
-                                        @else
-                                            <span>{{ strtoupper(substr($company->user->name, 0, 2)) }}</span>
-                                        @endif
-                                    </div>
+                                        </div>
+                                    @else
+                                        <div class="service-icon styled-icon styled-icon-s5 styled-icon-6x text-indigo">
+                                            <span>
+                                                {{ strtoupper(collect(explode(' ', $company->user->name))->map(fn($word) => $word[0])->take(2)->implode('')) }}
+                                            </span>
+                                        </div>
+                                    @endif
                                     <div class="service-text">
                                         <h5 class="title">{{ $company->user->name }}</h5>
                                         <p class="text-indigo">Membuka Lowongan : {{ $company->lowongans_count }}</p>
