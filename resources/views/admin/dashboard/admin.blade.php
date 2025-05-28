@@ -91,14 +91,13 @@
                 @foreach ($unreviewedLamarans as $item)
                     <ul class="nk-activity">
                         <li class="nk-activity-item">
-                            <div class="nk-activity-media user-avatar bg-teal-dim"><img src="./images/avatar/c-sm.jpg"
-                                    alt="">
+                            <div class="nk-activity-media user-avatar bg-teal-dim"><img src="./images/avatar/c-sm.jpg" alt="">
                                 @if ($item->mahasiswas->user->image)
                                     <img src="{{ Storage::url('images/users/' . $item->mahasiswas->user->image) }}"
                                         alt="{{ $item->mahasiswas->user->name }}">
                                 @else
                                     <span>
-                                        {{ strtoupper(collect(explode(' ', $item->mahasiswa->user->name))->map(fn($word) => $word[0])->take(2)->implode('')) }}
+                                        {{ strtoupper(collect(explode(' ', $item->mahasiswas->user->name))->map(fn($word) => $word[0])->take(2)->implode('')) }}
                                     </span>
                                 @endif
                             </div>
@@ -113,6 +112,45 @@
             </div><!-- .card -->
         </div><!-- .col -->
 
+        <div class="col-md-6 col-xxl-4">
+            <div class="card card-bordered card-full">
+                <div class="card-inner border-bottom">
+                    <div class="card-title-group">
+                        <div class="card-title">
+                            <h6 class="title">Perusahaan dengan rating</h6>
+                        </div>
+                    </div>
+                </div>
+                @foreach ($mitras as $mitra)
+                    @if ($mitra->getRating($mitra->company_id) != '0.0')
+
+                        <ul class="nk-activity">
+                            <li class="nk-activity-item">
+                                <div class="nk-activity-media user-avatar bg-teal-dim"><img src="./images/avatar/c-sm.jpg" alt="">
+                                    @if ($mitra->user->image)
+                                        <img src="{{ Storage::url('images/users/' . $mitra->user->image) }}"
+                                            alt="{{ $mitra->user->name }}">
+                                    @else
+                                        <span>
+                                            {{ strtoupper(collect(explode(' ', $mitra->user->name))->map(fn($word) => $word[0])->take(2)->implode('')) }}
+                                        </span>
+                                    @endif
+                                </div>
+                                <div class="user-info">
+                                    <span class="lead-text">{{ $mitra->user->name }}</span>
+                                    <span>
+                                        @for ($i = 0; $i < $mitra->getRating($mitra->company_id); $i++)
+                                            <i class="icon ni ni-star-fill" style="font-size: 24px; color: gold;"></i>
+                                        @endfor
+                                    </span>
+                                </div>
+
+                            </li>
+                        </ul>
+                    @endif
+                @endforeach
+            </div><!-- .card -->
+        </div><!-- .col -->
     </div>
     {{-- <div class="card card-bordered card-preview">
         <h4>Lamaran yang menunggu review</h4>
@@ -126,14 +164,14 @@
             </thead>
             <tbody>
                 @foreach ($unreviewedLamarans as $item)
-                    <tr>
-                        <td>{{ $item->mahasiswas->user->name }}</td>
-                        <td>{{ $item->lowongans->title }}</td>
-                        <td><button onclick="window.location.href='{{ route('magangApplication.show', $item->magang_id) }}'"
-                                class="btn btn-success btn-sm">
-                                Lihat Detail
-                            </button></td>
-                    </tr>
+                <tr>
+                    <td>{{ $item->mahasiswas->user->name }}</td>
+                    <td>{{ $item->lowongans->title }}</td>
+                    <td><button onclick="window.location.href='{{ route('magangApplication.show', $item->magang_id) }}'"
+                            class="btn btn-success btn-sm">
+                            Lihat Detail
+                        </button></td>
+                </tr>
                 @endforeach
             </tbody>
         </table>
@@ -142,7 +180,7 @@
     {{-- <div class="card card-bordered card-preview">
         <h4>Daftar Perusahaan yang Bermitra</h4>
         @foreach ($mitras as $item)
-            <a href={{ route('companies.show', $item->company_id) }}>{{ $item->user->name }}</a>
+        <a href={{ route('companies.show', $item->company_id) }}>{{ $item->user->name }}</a>
         @endforeach
     </div> --}}
 
@@ -158,14 +196,14 @@
             </thead>
             <tbody>
                 @foreach ($lowongans as $item)
-                    <tr>
-                        <td>{{ $item->company->user->name }}</td>
-                        <td>{{ $item->title }}</td>
-                        <td><button onclick="window.location.href='{{ route('pengajuan-magang.show', $item->lowongan_id) }}'"
-                                class="btn btn-success btn-sm">
-                                Lihat Detail
-                            </button></td>
-                    </tr>
+                <tr>
+                    <td>{{ $item->company->user->name }}</td>
+                    <td>{{ $item->title }}</td>
+                    <td><button onclick="window.location.href='{{ route('pengajuan-magang.show', $item->lowongan_id) }}'"
+                            class="btn btn-success btn-sm">
+                            Lihat Detail
+                        </button></td>
+                </tr>
                 @endforeach
             </tbody>
         </table>

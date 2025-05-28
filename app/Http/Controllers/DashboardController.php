@@ -28,7 +28,9 @@ class DashboardController extends Controller
             ->limit(5)
             ->get();
         $unreviewedLamarans = MagangApplication::with('mahasiswas')->where('status', 'pending')->get();
-        $mitras = Company::all();
+        $mitras = Company::all()->sortByDesc(function ($mitra) {
+            return $mitra->getRating($mitra->company_id);
+        });
         $lowongans = LowonganMagang::all();
         return view('admin.dashboard.admin', compact('users', 'breadcrumb', 'unreviewedLamarans', 'mitras', 'lowongans'));
     }

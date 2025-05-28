@@ -19,7 +19,6 @@
                 <thead>
                     <tr class="nk-tb-item nk-tb-head">
                         <th class="nk-tb-col export-col"><span class="sub-text">Perusahaan</span></th>
-                        <th class="nk-tb-col tb-col-md export-col"><span class="sub-text">Rating</span></th>
                         <th class="nk-tb-col tb-col-md export-col"><span class="sub-text">Alamat</span></th>
                         <th class="nk-tb-col tb-col-md export-col"><span class="sub-text">Kontak</span></th>
                         <th class="nk-tb-col nk-tb-col-tools text-end"></th>
@@ -46,19 +45,6 @@
                                         <span>{{ $company->user->email }}</span>
                                     </div>
                                 </div>
-                            </td>
-                            <td class="nk-tb-col tb-col-md">
-                                @php
-                                    $rating = $company->getRating($company->company_id);
-                                @endphp
-                                @if ($rating == '0.00')
-                                    <p>Belum ada rating</p>
-                                @else
-                                    @for ($i = 0; $i < $rating; $i++)
-                                        <i class="icon ni ni-star-fill" style="font-size: 24px; color: gold;"></i>
-                                    @endfor
-                                @endif
-
                             </td>
                             <td class="nk-tb-col tb-col-md">
                                 <span>{{ $company->user->alamat ?? 'N/A' }}</span>
