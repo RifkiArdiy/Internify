@@ -80,6 +80,7 @@ class DashboardController extends Controller
                 $query->where('company_id', $companyId);
             })
             ->get();
+            
 
         return view('company.dashboard.company', compact('breadcrumb', 'unreviewedLamarans'));
     }

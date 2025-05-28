@@ -34,10 +34,13 @@ class ListingController extends Controller
         
         $logang = LowonganMagang::with('benefits', 'kategori')->findOrFail($id);
 
-        $magangs = MagangApplication::where('lowongan_id', $id)->get();
+        $company = Company::with(['user', 'lowongans.kategori'])->findOrFail($id);
+        $lowongans = LowonganMagang::where('company_id', $company->company_id)->get();
+        $lowonganIds = $lowongans->pluck('lowongan_id');
+        $magangs = MagangApplication::whereIn('lowongan_id', $lowonganIds)->get();
         $magangIds = $magangs->pluck('magang_id');
         $ratings = FeedbackMagang::whereIn('magang_id', $magangIds)->get();
-        $averageRating = $ratings->avg('rating');
+        $averageRating = number_format($ratings->avg('rating') ?? 0, 2);
 
 
         return view('listing.job.show', compact('lowongan', 'jobcount', 'recent', 'logang', 'ratings', 'averageRating'));
