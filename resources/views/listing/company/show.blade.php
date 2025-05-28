@@ -14,7 +14,8 @@
     <title>Home | Internify</title>
     <!-- StyleSheets  -->
     <link rel="stylesheet" href="{{ asset('assets/home/css/dashlite.css') }}">
-    {{-- <link rel="stylesheet" href="{{ asset('assets/admin/css/dashlite.css') }}"> --}}
+    {{--
+    <link rel="stylesheet" href="{{ asset('assets/admin/css/dashlite.css') }}"> --}}
     <link id="skin-default" rel="stylesheet" href="{{ asset('assets/home/css/theme.css') }}">
 </head>
 
@@ -63,7 +64,7 @@
                                                     <div class="user-toggle">
                                                         <div class="user-info d-none d-md-block">
                                                             <div class="menu-link nav-link">
-                                                                Hi..!! {{ Auth::user()->name }}
+                                                                Hello, {{ Auth::user()->name }}
                                                             </div>
                                                         </div>
                                                     </div>
@@ -216,6 +217,14 @@
                         <!-- Grid Layout -->
                         <div class="row g-4">
                             <div class="col-md-8">
+                                <h5 class="title mb-3">Rating Perusahaan</h5>
+                                <div class="text-soft">
+                                    @for ($i = 0; $i < $averageRating; $i++)
+                                        <i class="icon ni ni-star-fill" style="font-size: 24px; color: gold;"></i>
+                                    @endfor
+                                </div>
+                            </div>
+                            <div class="col-md-8">
                                 <h5 class="title mb-3">Tentang Perusahaan</h5>
                                 <div class="text-soft">
                                     {!! $company->about_company !!}
@@ -254,8 +263,7 @@
                                 <div class="row g-4">
                                     @foreach ($company->lowongans->take(3) as $job)
                                         <div class="col-md-6 col-lg-4">
-                                            <a href="{{ route('show.lowongan', $job->lowongan_id) }}"
-                                                class="card-link-wrapper">
+                                            <a href="{{ route('show.lowongan', $job->lowongan_id) }}" class="card-link-wrapper">
                                                 <div class="card card-bordered service service-s4 h-100">
                                                     <div class="card-inner">
                                                         <div class="job">
@@ -266,8 +274,7 @@
                                                                     </div>
                                                                     <div class="job-info">
                                                                         <h6 class="title">{{ $job->title }}</h6>
-                                                                        <span
-                                                                            class="sub-text">{{ $job->period->name }}</span>
+                                                                        <span class="sub-text">{{ $job->period->name }}</span>
                                                                     </div>
                                                                 </div>
                                                             </div>

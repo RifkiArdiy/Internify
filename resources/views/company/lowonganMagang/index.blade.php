@@ -43,7 +43,8 @@
                                 <span> {{ $item->jumlahPelamar() }} Pelamar</span>
                             </td>
                             <td class="nk-tb-col tb-col-md">
-                                <span><a href="{{ route('companys-lowongan-magang.pelamars', $item->lowongan_id) }}" class="btn btn-primary">Lihat Daftar Pelamar</a></span>
+                                <span><a href="{{ route('companys-lowongan-magang.pelamars', $item->lowongan_id) }}"
+                                        class="btn btn-primary">Lihat Daftar Pelamar</a></span>
                             </td>
                             <td class="nk-tb-col nk-tb-col-tools">
                                 <ul class="nk-tb-actions gx-1">
@@ -58,16 +59,21 @@
                                                     <li><a href="{{ route('show.lowongan', $item->lowongan_id) }}">
                                                             <em class="icon ni ni-eye"></em><span>Lihat Detail</span></a>
                                                     </li>
-                                                    <li><a href="{{ route('companys-lowongan-magang.edit', $item->lowongan_id) }}">
+                                                    <li><a
+                                                            href="{{ route('companys-lowongan-magang.edit', $item->lowongan_id) }}">
                                                             <em class="icon ni ni-edit-alt"></em><span>Edit</span></a>
                                                     </li>
-                                                    <li><form action="{{ route('companys-lowongan-magang.destroy', $item->lowongan_id) }}" method="POST" style="display:inline;">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button type="submit" class="btn btn-link p-0" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">
-                                                            <em class="icon ni ni-trash"></em><span>Hapus</span>
-                                                        </button>
-                                                    </form>
+                                                    <li>
+                                                        <form
+                                                            action="{{ route('companys-lowongan-magang.destroy', $item->lowongan_id) }}"
+                                                            method="POST" style="display:inline;">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button type="submit" class="btn btn-link p-0"
+                                                                onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">
+                                                                <em class="icon ni ni-trash"></em><span>Hapus</span>
+                                                            </button>
+                                                        </form>
                                                     </li>
                                                 </ul>
                                             </div>

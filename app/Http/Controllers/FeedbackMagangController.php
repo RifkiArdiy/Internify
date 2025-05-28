@@ -49,7 +49,9 @@ class FeedbackMagangController extends Controller
 
     public function store(Request $request){
         $mahasiswa_id = Mahasiswa::where('user_id', Auth::user()->user_id)->value('mahasiswa_id');
-        $magang_id = MagangApplication::where('mahasiswa_id', $mahasiswa_id)->value('magang_id');
+        $magang_id = MagangApplication::where('mahasiswa_id', $mahasiswa_id)
+            ->where('status', 'Disetujui')
+            ->value('magang_id');
         FeedbackMagang::create([
             'mahasiswa_id' => $mahasiswa_id,
             'magang_id' => $magang_id,

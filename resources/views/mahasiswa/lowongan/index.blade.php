@@ -41,7 +41,7 @@
                             <td class="nk-tb-col" style="white-space: normal; word-wrap: break-word; max-width: 250px;">
                                 <span>{{ Str::limit($item->requirements, 30) }}</span>
                             </td>
-                            
+
                             <td class="nk-tb-col">
                                 @if ($lamaran)
                                     @if ($lamaran->status === 'Disetujui')
@@ -62,7 +62,7 @@
                                             <div class="dropdown-menu dropdown-menu-end">
                                                 <ul class="link-list-opt no-bdr">
                                                     <li>
-                                                        <a href="{{ route('lowongan-magang.show', $item->lowongan_id) }}">
+                                                        <a href="{{ route('show.lowongan', $item->lowongan_id) }}">
                                                             <em class="icon ni ni-eye"></em><span>Lihat Detail</span>
                                                         </a>
                                                     </li>
