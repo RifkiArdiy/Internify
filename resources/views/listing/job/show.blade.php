@@ -242,12 +242,6 @@
                         <div class="row g-gs">
                             <!-- Left Content -->
                             <div class="col-lg-8">
-
-                                <h5>Overall rating</h5>
-                                @for ($i = 0; $i < $averageRating; $i++)
-                                    <i class="icon ni ni-star-fill" style="font-size: 24px; color: gold;"></i>
-                                @endfor
-
                                 <!-- Job Description -->
                                 <div class="card card-bordered mb-4">
                                     <div class="card-inner">
@@ -283,132 +277,115 @@
                                 </div>
                             </div>
 
-                            <!-- Rating -->
-                            <div class="card card-bordered mb-4">
-                                <div class="card-inner">
-                                    <h5 class="title mb-3">Rating</h5>
-                                    @foreach ($ratings as $rating)
-                                        <div class="card-inner">
-                                            <h6>{{$rating->judul_feedback}}</h6>
-                                            @for ($i = 0; $i < $rating->rating; $i++)
-                                                <i class="icon ni ni-star-fill"></i>
-                                            @endfor
+                            <!-- Right Sidebar -->
+                            <div class="col-lg-4">
+                                <!-- Job Overview -->
+                                <div class="card card-bordered mb-4">
+                                    <div class="card-inner">
+                                        <h6 class="title">Job Overview</h6>
+                                        <ul class="gy-2 mt-3">
+                                            <li class="d-flex justify-content-between"><strong>Date Posted:</strong>
+                                                {{ $lowongan->created_at->diffForHumans() }}</li>
+                                            <li class="d-flex justify-content-between"><strong>Expiration
+                                                    Date:</strong> {{ $lowongan->period->end_date }}
+                                            </li>
+                                            <li class="d-flex justify-content-between">
+                                                <strong>Lokasi:</strong>{{ $lowongan->regency->name }}
+                                                ({{ $lowongan->province->name }})
 
-                                            <p>{!!$rating->feedback!!}</p>
+                                            </li>
+                                            <li class="d-flex justify-content-between"><strong>Job Type:</strong>
+                                                {{ $lowongan->kategori->name }}</li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                                <!-- Company Info -->
+                                <div class="card card-bordered">
+                                    <div class="card-inner text-center">
+                                        <div class="d-flex justify-content-center mb-3">
+                                            <div class="user-avatar sq lg bg-indigo-dim">
+                                                <span>👤</span>
+                                            </div>
+                                        </div>
+                                        <h6 class="title mb-1">{{ $lowongan->company->user->name }}</h6>
+                                        <a href="{{ route('show.perusahaan', $lowongan->company->company_id) }}"
+                                            class="text-primary small">View company profile</a>
+                                        {{-- <ul class="list list-sm text-soft mt-3"> --}}
+                                            <ul class="gy-2 mt-3">
+                                                <li class="d-flex justify-content-between">
+                                                    <strong>Founded:</strong>{{ $lowongan->company->created_at }}
+                                                </li>
+                                                <li class="d-flex justify-content-between"><strong>Phone:</strong>
+                                                    {{ $lowongan->company->user->no_telp }}</li>
+                                                <li class="d-flex justify-content-between"><strong>Lokasi:</strong>
+                                                    {{ $lowongan->company->user->alamat }}</li>
+                                            </ul>
+                                            <a href="{{ route('show.perusahaan', $lowongan->company->company_id) }}"
+                                                class="btn btn-outline-primary btn-block mt-3">Membuka
+                                                Lowongan
+                                                : {{ $jobcount }}</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Related Jobs -->
+                        @if ($recent->count())
+                            <div class="mt-5">
+                                <h5 class="mb-3">Lowongan Serupa</h5>
+                                <div class="row g-4">
+                                    @foreach ($recent as $job)
+                                        <div class="col-sm-6 col-lg-4">
+                                            <a href="{{ route('show.lowongan', $job->lowongan_id) }}" class="card-link-wrapper">
+                                                <div class="card card-bordered service service-s4 h-100">
+                                                    <div class="card-inner">
+                                                        <div class="job">
+                                                            <div class="job-head">
+                                                                <div class="job-title">
+                                                                    <div class="user-avatar sq bg-purple">
+                                                                        <span>DD</span>
+                                                                    </div>
+                                                                    <div class="job-info">
+                                                                        <h6 class="title">{{ $job->title }}</h6>
+                                                                        <span class="sub-text">{{ $job->period->name }}</span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="job-details">
+                                                                <p>{{ Str::limit(strip_tags($job->description), 80) }}
+                                                                </p>
+                                                            </div>
+                                                            <div class="job-meta">
+                                                                <ul class="job-users g-1">
+                                                                    <li>
+                                                                        <span
+                                                                            class="badge badge-dim bg-primary">{{ $job->kategori->name }}</span>
+                                                                    </li>
+                                                                </ul>
+                                                                <span class="badge badge-dim bg-warning">
+                                                                    <em class="icon ni ni-clock"></em>
+                                                                    <span>{{ $job->created_at->diffForHumans() }}</span>
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </a>
                                         </div>
                                     @endforeach
                                 </div>
                             </div>
-                        </div>
-                        <!-- Right Sidebar -->
-                        <div class="col-lg-4">
-                            <!-- Job Overview -->
-                            <div class="card card-bordered mb-4">
-                                <div class="card-inner">
-                                    <h6 class="title">Job Overview</h6>
-                                    <ul class="gy-2 mt-3">
-                                        <li class="d-flex justify-content-between"><strong>Date Posted:</strong>
-                                            {{ $lowongan->created_at->diffForHumans() }}</li>
-                                        <li class="d-flex justify-content-between"><strong>Expiration
-                                                Date:</strong> {{ $lowongan->period->end_date }}
-                                        </li>
-                                        <li class="d-flex justify-content-between">
-                                            <strong>Lokasi:</strong>{{ $lowongan->regency->name }}
-                                            ({{ $lowongan->province->name }})
+                        @endif
+                    </div><!-- .section-content -->
+                </div><!-- .container -->
+            </section><!-- .section -->
 
-                                        </li>
-                                        <li class="d-flex justify-content-between"><strong>Job Type:</strong>
-                                            {{ $lowongan->kategori->name }}</li>
-                                    </ul>
-                                </div>
-                            </div>
-
-                            <!-- Company Info -->
-                            <div class="card card-bordered">
-                                <div class="card-inner text-center">
-                                    <div class="d-flex justify-content-center mb-3">
-                                        <div class="user-avatar sq lg bg-indigo-dim">
-                                            <span>👤</span>
-                                        </div>
-                                    </div>
-                                    <h6 class="title mb-1">{{ $lowongan->company->user->name }}</h6>
-                                    <a href="{{ route('show.perusahaan', $lowongan->company->company_id) }}"
-                                        class="text-primary small">View company profile</a>
-                                    {{-- <ul class="list list-sm text-soft mt-3"> --}}
-                                        <ul class="gy-2 mt-3">
-                                            <li class="d-flex justify-content-between">
-                                                <strong>Founded:</strong>{{ $lowongan->company->created_at }}
-                                            </li>
-                                            <li class="d-flex justify-content-between"><strong>Phone:</strong>
-                                                {{ $lowongan->company->user->no_telp }}</li>
-                                            <li class="d-flex justify-content-between"><strong>Lokasi:</strong>
-                                                {{ $lowongan->company->user->alamat }}</li>
-                                        </ul>
-                                        <a href="{{ route('show.perusahaan', $lowongan->company->company_id) }}"
-                                            class="btn btn-outline-primary btn-block mt-3">Membuka
-                                            Lowongan
-                                            : {{ $jobcount }}</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Related Jobs -->
-                    @if ($recent->count())
-                        <div class="mt-5">
-                            <h5 class="mb-3">Lowongan Serupa</h5>
-                            <div class="row g-4">
-                                @foreach ($recent as $job)
-                                    <div class="col-sm-6 col-lg-4">
-                                        <a href="{{ route('show.lowongan', $job->lowongan_id) }}" class="card-link-wrapper">
-                                            <div class="card card-bordered service service-s4 h-100">
-                                                <div class="card-inner">
-                                                    <div class="job">
-                                                        <div class="job-head">
-                                                            <div class="job-title">
-                                                                <div class="user-avatar sq bg-purple">
-                                                                    <span>DD</span>
-                                                                </div>
-                                                                <div class="job-info">
-                                                                    <h6 class="title">{{ $job->title }}</h6>
-                                                                    <span class="sub-text">{{ $job->period->name }}</span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="job-details">
-                                                            <p>{{ Str::limit(strip_tags($job->description), 80) }}
-                                                            </p>
-                                                        </div>
-                                                        <div class="job-meta">
-                                                            <ul class="job-users g-1">
-                                                                <li>
-                                                                    <span
-                                                                        class="badge badge-dim bg-primary">{{ $job->kategori->name }}</span>
-                                                                </li>
-                                                            </ul>
-                                                            <span class="badge badge-dim bg-warning">
-                                                                <em class="icon ni ni-clock"></em>
-                                                                <span>{{ $job->created_at->diffForHumans() }}</span>
-                                                            </span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </div>
-                                @endforeach
-                            </div>
-                        </div>
-                    @endif
-                </div><!-- .section-content -->
-        </div><!-- .container -->
-        </section><!-- .section -->
-
-        <!-- .section -->
-        @include('listing.footer')
-        <!-- .footer -->
-    </div>
-    <!-- main @e -->
+            <!-- .section -->
+            @include('listing.footer')
+            <!-- .footer -->
+        </div>
+        <!-- main @e -->
     </div>
     <!-- app-root @e -->
     <!-- JavaScript -->

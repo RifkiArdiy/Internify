@@ -61,7 +61,6 @@ class ListingController extends Controller
         $magangIds = $magangs->pluck('magang_id');
         $ratings = FeedbackMagang::whereIn('magang_id', $magangIds)->get();
         $averageRating = number_format($ratings->avg('rating') ?? 0, 2);
-        // dd($magangIds->toArray());
 
 
         return view('listing.company.show', compact('company', 'averageRating'));

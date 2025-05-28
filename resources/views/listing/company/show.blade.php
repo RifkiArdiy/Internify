@@ -191,6 +191,10 @@
                                 </div>
                                 <div>
                                     <h4 class="mb-1">{{ $company->user->name }}</h4>
+                                    @for ($i = 0; $i < $averageRating; $i++)
+                                        <i class="icon ni ni-star-fill" style="font-size: 24px; color: gold;"></i>
+                                    @endfor
+
                                     <ul class="list-inline list-split fs-14px text-soft">
                                         <li><em class="icon ni ni-briefcase"></em> Technology</li>
                                         <li><em class="icon ni ni-map-pin"></em>
@@ -216,14 +220,6 @@
                     <div class="section-content">
                         <!-- Grid Layout -->
                         <div class="row g-4">
-                            <div class="col-md-8">
-                                <h5 class="title mb-3">Rating Perusahaan</h5>
-                                <div class="text-soft">
-                                    @for ($i = 0; $i < $averageRating; $i++)
-                                        <i class="icon ni ni-star-fill" style="font-size: 24px; color: gold;"></i>
-                                    @endfor
-                                </div>
-                            </div>
                             <div class="col-md-8">
                                 <h5 class="title mb-3">Tentang Perusahaan</h5>
                                 <div class="text-soft">
