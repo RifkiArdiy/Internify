@@ -165,6 +165,14 @@
                 <span class="nk-menu-text">Lowongan Magang</span>
             </a>
         </li>
+        <li class="nk-menu-item">
+            <a href="{{ url('mahasiswa/alternatif') }}" class="nk-menu-link">
+                <span class="nk-menu-icon">
+                    <em class="icon ni ni-briefcase"></em>
+                </span>
+                <span class="nk-menu-text">Rekomendasi Lowongan</span>
+            </a>
+        </li>
     @endif
     @if (Auth::user()->mahasiswa->status == 'is_magang')
         <li class="nk-menu-item">
@@ -251,5 +259,4 @@
             <span class="nk-menu-text">Sertifikat Magang</span>
         </a>
     </li>
-
 @endif

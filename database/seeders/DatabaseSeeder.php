@@ -33,13 +33,14 @@ class DatabaseSeeder extends Seeder
             DosenSeeder::class,
             CompanySeeder::class,
             PeriodeMagangSeeder::class,
-            // ProvinceSeeder::class,
-            // RegencySeeder::class,
-            // DistrictSeeder::class,
-            // VillageSeeder::class,
+            ProvinceSeeder::class,
+            RegencySeeder::class,
+            DistrictSeeder::class,
+            VillageSeeder::class,
             LowonganMagangSeeder::class,
             BenefitSeeder::class,
             MagangApplicationSeeder::class,
+            KriteriaSeeder::class,
             LogSeeder::class,
             ProfilAkademikSeeder::class
         ]);

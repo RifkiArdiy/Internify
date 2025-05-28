@@ -1,8 +1,20 @@
 @extends('listing.main')
-
+@section('header')
+    <form action="{{ route('lowongan.search') }}" method="GET" class="mt-4">
+        <div class="form-group">
+            <div class="form-control-wrap d-flex flex-wrap justify-content-center">
+                <input type="text" name="q" class="form-control form-control-lg w-75 me-2"
+                    placeholder="Cari berdasarkan jabatan, perusahaan, atau lokasi..." required>
+                <button type="submit" class="btn btn-primary btn-lg">
+                    <em class="icon ni ni-search"></em> Cari
+                </button>
+            </div>
+        </div>
+    </form>
+@endsection
 @section('main')
     <div class="row g-gs">
-        @foreach ($lowongans as $lwg)
+        @foreach ($lowongan as $lwg)
             <div class="col-sm-6 col-lg-4">
                 <a href="{{ route('show.lowongan', $lwg->lowongan_id) }}" class="card-link-wrapper">
                     <div class="card card-bordered service service-s4 h-100">
@@ -10,7 +22,18 @@
                             <div class="job">
                                 <div class="job-head">
                                     <div class="job-title">
-                                        <div class="user-avatar sq bg-purple"><span>DD</span></div>
+                                        @if ($lwg->company->user->image)
+                                            <div class="user-avatar">
+                                                <img src="{{ Storage::url('images/users/' . $lwg->company->user->image) }}"
+                                                    alt="{{ $lwg->company->user->name }}">
+                                            </div>
+                                        @else
+                                            <div class="user-avatar sq">
+                                                <span>
+                                                    {{ strtoupper(collect(explode(' ', $lwg->company->user->name))->map(fn($word) => $word[0])->take(2)->implode('')) }}
+                                                </span>
+                                            </div>
+                                        @endif
                                         <div class="job-info">
                                             <h6 class="title">{{ $lwg->title }}</h6>
                                             <span class="sub-text">{{ $lwg->period->name }}</span>

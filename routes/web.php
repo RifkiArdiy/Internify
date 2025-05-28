@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AlternatifController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BenefitController;
 use App\Http\Controllers\ProgramStudiController;
@@ -17,14 +18,16 @@ use App\Http\Controllers\LowonganMagangController;
 use App\Http\Controllers\CompanyLowonganMagangController;
 use App\Http\Controllers\MagangApplicationController;
 use App\Http\Controllers\PeriodeMagangController;
-use App\Models\MagangApplication;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\EvaluasiMagangController;
 use App\Http\Controllers\FeedbackMagangController;
 use App\Http\Controllers\KategoriController;
+use App\Http\Controllers\KriteriaController;
 use App\Http\Controllers\ProfilAkademikController;
 use App\Http\Controllers\MonitoringController;
+use App\Http\Controllers\NilaiAlternatifController;
+use App\Http\Controllers\SpkController;
 use App\Http\Controllers\WilayahController;
 use App\Http\Controllers\SertifikatMagangController;
 
@@ -52,6 +55,9 @@ Route::get('/lowongan', [ListingController::class, 'lowongan'])->name('list.lowo
 Route::get('/{id}/lowongan', [ListingController::class, 'showLowongan'])->name('show.lowongan');
 Route::get('/perusahaan', [ListingController::class, 'perusahaan'])->name('list.perusahaan');
 Route::get('/{id}/perusahaan', [ListingController::class, 'showPerusahaan'])->name('show.perusahaan');
+Route::get('/lowongan/search', [ListingController::class, 'searchLowongan'])->name('lowongan.search');
+Route::get('/perusahaan/search', [ListingController::class, 'searchCompany'])->name('perusahaan.search');
+
 
 Route::middleware(['auth'])->group(function () {
 
@@ -241,14 +247,16 @@ Route::middleware(['auth'])->group(function () {
             Route::delete('/{id}', [EvaluasiMagangController::class, 'destroy'])->name('evaluasi-destroy');
         });
 
-        // Route::prefix('profilAkademik')->group(function () {
-        //     Route::get('/', [ProfilAkademikController::class, 'index'])->name('profilAkademik.index');
-        //     Route::get('/create', [ProfilAkademikController::class, 'create'])->name('profilAkademik.create');
-        //     Route::get('/edit', [ProfilAkademikController::class, 'edit'])->name('profilAkademik.edit');
-        //     Route::post('/store', [ProfilAkademikController::class, 'store'])->name('profilAkademik.store');
-        //     Route::put('/{id}', [ProfilAkademikController::class, 'update'])->name('profilAkademik.update');
-        //     Route::delete('/{id}/delete', [ProfilAkademikController::class, 'destroy'])->name('profilAkademik.destroy');
-        // });
+        Route::resource('kriteria', KriteriaController::class);
+
+        Route::resource('alternatif', AlternatifController::class);
+
+        Route::get('/alternatif/nilai/{id}', [NilaiAlternatifController::class, 'create'])->name('nilai.create');
+        Route::post('/alternatif/nilai/{id}', [NilaiAlternatifController::class, 'store'])->name('nilai.store');
+        // Route::get('/alternatif/{alternatif}/nilai', [NilaiAlternatifController::class, 'edit'])->name('nilai.edit');
+        // Route::post('/alternatif/{alternatif}/nilai', [NilaiAlternatifController::class, 'update'])->name('nilai.update');
+
+        Route::get('/spk/perhitungan', [SPKController::class, 'index'])->name('spk.index');
     });
 
     Route::prefix('dosen')->middleware('role:Dosen')->group(function () {
@@ -314,8 +322,6 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/{id}', [CompanyLowonganMagangController::class, 'pelamars'])->name('companys-lowongan-magang.pelamars');
             Route::delete('/destroy/{id}', [CompanyLowonganMagangController::class, 'destroy'])->name('companys-lowongan-magang.destroy');
         });
-
-
     });
 
     Route::get('logout', [AuthController::class, 'logout'])->name('logout');

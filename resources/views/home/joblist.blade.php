@@ -19,8 +19,18 @@
                                     <div class="job">
                                         <div class="job-head">
                                             <div class="job-title">
-                                                <div class="user-avatar sq bg-purple"><span>DD</span>
-                                                </div>
+                                                @if ($lwg->company->user->image)
+                                                    <div class="user-avatar">
+                                                        <img src="{{ Storage::url('images/users/' . $lwg->company->user->image) }}"
+                                                            alt="{{ $lwg->company->user->name }}">
+                                                    </div>
+                                                @else
+                                                    <div class="user-avatar sq">
+                                                        <span>
+                                                            {{ strtoupper(collect(explode(' ', $lwg->company->user->name))->map(fn($word) => $word[0])->take(2)->implode('')) }}
+                                                        </span>
+                                                    </div>
+                                                @endif
                                                 <div class="job-info">
                                                     <h6 class="title">{{ $lwg->title }}</h6>
                                                     <span class="sub-text">{{ $lwg->period->name }}</span>

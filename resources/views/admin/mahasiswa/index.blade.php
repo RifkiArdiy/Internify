@@ -37,7 +37,9 @@
                                             <img src="{{ Storage::url('images/users/' . $mhs->user->image) }}"
                                                 alt="{{ $mhs->user->name }}">
                                         @else
-                                            <span>{{ strtoupper(substr($mhs->user->name, 0, 2)) }}</span>
+                                            <span>
+                                                {{ strtoupper(collect(explode(' ', $mhs->user->name))->map(fn($word) => $word[0])->take(2)->implode('')) }}
+                                            </span>
                                         @endif
                                     </div>
                                     <div class="user-info">
