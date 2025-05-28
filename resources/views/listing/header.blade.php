@@ -165,9 +165,5 @@
             </div><!-- .row -->
         </div><!-- .container -->
     </div><!-- .header-content -->
-<<<<<<< HEAD
-</header>
-=======
 
 </header>
->>>>>>> 7d705c80d1b5dbc5adb33f81d279704420421591
