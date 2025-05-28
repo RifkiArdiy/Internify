@@ -12,6 +12,16 @@
                     </ul>
                 </div>
             @endif
+
+            <style>
+                #quill-editor, #quill-requirements {
+                    overflow-x: auto;
+                    word-wrap: break-word;
+                }
+                .ql-editor {
+                    word-break: break-word;
+                }
+            </style>
             <form method="POST" action="{{ route('companys-lowongan-magang.store') }}">
                 @csrf
                 <div class="row g-4">
@@ -150,7 +160,7 @@
 
                     <div class="col-12">
                         <button type="submit" class="btn btn-primary mt-3">Simpan</button>
-                        <a href="{{ route('lowongan-magang.index') }}" class="btn btn-secondary mt-3">Kembali</a>
+                        <a href="{{ route('companys-lowongan-magang.index') }}" class="btn btn-secondary mt-3">Kembali</a>
                     </div>
                 </div>
             </form>
@@ -319,7 +329,7 @@
                 let provinceID = $(this).val();
                 $('#regency').html('<option value="">Memuat...</option>').trigger('change');
 
-                $.get('/admin/get-regencies', {
+                $.get('/company/get-regencies', {
                     province_id: provinceID
                 }, function(data) {
                     let regencyOptions = '<option value="">- Pilih Kabupaten -</option>';
@@ -339,7 +349,7 @@
                 let regencyID = $(this).val();
                 $('#district').html('<option value="">Memuat...</option>').trigger('change');
 
-                $.get('/admin/get-districts', {
+                $.get('/company/get-districts', {
                     regency_id: regencyID
                 }, function(data) {
                     let districtOptions = '<option value="">- Pilih Kecamatan -</option>';
@@ -357,7 +367,7 @@
                 let districtID = $(this).val();
                 $('#village').html('<option value="">Memuat...</option>').trigger('change');
 
-                $.get('/admin/get-villages', {
+                $.get('/company/get-villages', {
                     district_id: districtID
                 }, function(data) {
                     let villageOptions = '<option value="">- Pilih Kelurahan -</option>';

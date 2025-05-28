@@ -14,6 +14,16 @@
             </div>
         @endif
 
+        <style>
+            #quill-feedback{
+                overflow-x: auto;
+                word-wrap: break-word;
+            }
+            .ql-editor {
+                word-break: break-word;
+            }
+        </style>
+
         <form method="POST" action="{{ route('feedback-update', $feedback->feedback_id) }}" enctype="multipart/form-data" class="form-validate is-alter" id="feedbackForm">
             @csrf
             @method('PUT')

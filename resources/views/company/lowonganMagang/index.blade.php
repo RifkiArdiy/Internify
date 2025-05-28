@@ -26,7 +26,7 @@
                         <th class="nk-tb-col export-col"><span class="sub-text">Judul</span></th>
                         <th class="nk-tb-col tb-col-lg export-col"><span class="sub-text">Created at</span></th>
                         <th class="nk-tb-col tb-col-md export-col"><span class="sub-text">Jumlah Pelamar</span></th>
-                        <th class="nk-tb-col tb-col-md export-col"><span class="sub-text">Aksi</span></th>
+                        <th class="nk-tb-col tb-col-md"><span class="sub-text">Aksi</span></th>
                         <th class="nk-tb-col nk-tb-col-tools text-end"></th>
                     </tr>
                 </thead>
@@ -63,13 +63,14 @@
                                                             href="{{ route('companys-lowongan-magang.edit', $item->lowongan_id) }}">
                                                             <em class="icon ni ni-edit-alt"></em><span>Edit</span></a>
                                                     </li>
+                                                    <hr>
                                                     <li>
                                                         <form
                                                             action="{{ route('companys-lowongan-magang.destroy', $item->lowongan_id) }}"
                                                             method="POST" style="display:inline;">
                                                             @csrf
                                                             @method('DELETE')
-                                                            <button type="submit" class="btn btn-link p-0"
+                                                            <button type="submit" class="btn btn-link text-danger"
                                                                 onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">
                                                                 <em class="icon ni ni-trash"></em><span>Hapus</span>
                                                             </button>

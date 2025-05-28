@@ -29,9 +29,34 @@
         
         <div class="mb-3">
             <label for="evaluasi" class="form-label">Evaluasi</label>
-            <textarea name="evaluasi" class="form-control" rows="4" required>{{ old('evaluasi') }}</textarea>
+            <div id="quill-editor" style="height: 200px;">{!! old('evaluasi') !!}</div>
+            <input type="hidden" name="evaluasi" id="evaluasi">
         </div>
+
         <button class="btn btn-primary">Simpan</button>
         <a href="{{ route('evaluasi.index') }}" class="btn btn-secondary">Kembali</a>
     </form>
 @endsection
+
+@push('js')
+<script>
+    const toolbarOptions = [
+        ['bold', 'italic', 'underline'],
+        ['link'],
+        [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+        ['clean']  // remove formatting
+    ];
+
+    const quill = new Quill('#quill-editor', {
+        theme: 'snow',
+        modules: {
+            toolbar: toolbarOptions
+        }
+    });
+
+    const form = document.querySelector('form');
+    form.onsubmit = function () {
+        document.querySelector('#evaluasi').value = quill.root.innerHTML;
+    };
+</script>
+@endpush
