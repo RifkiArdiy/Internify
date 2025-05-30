@@ -73,7 +73,9 @@
                                                     <div class="dropdown-inner user-card-wrap bg-lighter d-none d-md-block">
                                                         <div class="user-card">
                                                             <div class="user-avatar">
-                                                                <span>{{ strtoupper(substr(Auth::user()->name, 0, 2)) }}</span>
+                                                                <span>
+                                                                    {{ strtoupper(collect(explode(' ', Auth::user()->name))->map(fn($word) => $word[0])->take(2)->implode('')) }}
+                                                                </span>
                                                             </div>
                                                             <div class="user-info">
                                                                 <span
@@ -180,14 +182,18 @@
                         <!-- Company and Action Buttons -->
                         <div class="d-flex flex-wrap align-items-center justify-content-between">
                             <div class="d-flex align-items-center">
-                                <div class="user-avatar sq lg bg-primary me-3">
-                                    @if ($company->user->image)
+                                @if ($company->user->image)
+                                    <div class="user-avatar lg me-3">
                                         <img src="{{ Storage::url('images/users/' . $company->user->image) }}"
                                             alt="{{ $company->user->name }}">
-                                    @else
-                                        <span>{{ strtoupper(substr($company->user->name, 0, 2)) }}</span>
-                                    @endif
-                                </div>
+                                    </div>
+                                @else
+                                    <div class="user-avatar sq lg bg-primary me-3">
+                                        <span>
+                                            {{ strtoupper(collect(explode(' ', $company->user->name))->map(fn($word) => $word[0])->take(2)->implode('')) }}
+                                        </span>
+                                    </div>
+                                @endif
                                 <div>
                                     <h4 class="mb-1">{{ $company->user->name }}</h4>
                                     <ul class="list-inline list-split fs-14px text-soft">
@@ -261,9 +267,18 @@
                                                         <div class="job">
                                                             <div class="job-head">
                                                                 <div class="job-title">
-                                                                    <div class="user-avatar sq bg-purple">
-                                                                        <span>DD</span>
-                                                                    </div>
+                                                                    @if ($job->company->user->image)
+                                                                        <div class="user-avatar">
+                                                                            <img src="{{ Storage::url('images/users/' . $job->company->user->image) }}"
+                                                                                alt="{{ $job->company->user->name }}">
+                                                                        </div>
+                                                                    @else
+                                                                        <div class="user-avatar sq">
+                                                                            <span>
+                                                                                {{ strtoupper(collect(explode(' ', $job->company->user->name))->map(fn($word) => $word[0])->take(2)->implode('')) }}
+                                                                            </span>
+                                                                        </div>
+                                                                    @endif
                                                                     <div class="job-info">
                                                                         <h6 class="title">{{ $job->title }}</h6>
                                                                         <span

@@ -29,7 +29,9 @@
                                             <img src="{{ Storage::url('images/users/' . $magang->mahasiswas->user->image) }}"
                                                 alt="{{ $magang->mahasiswas->user->name }}">
                                         @else
-                                            <span>{{ strtoupper(substr($magang->mahasiswas->user->name, 0, 2)) }}</span>
+                                            <span>
+                                                {{ strtoupper(collect(explode(' ', $magang->mahasiswas->user->name))->map(fn($word) => $word[0])->take(2)->implode('')) }}
+                                            </span>
                                         @endif
                                     </div>
                                     <div class="user-info">

@@ -21,18 +21,6 @@ class LowonganMagangSeeder extends Seeder
             Kategori::firstOrCreate(['name' => $name]);
         }
 
-        // $LowonganMagangData = [
-        //     ['company_id' => '1', 'period_id' => '1', 'kategori_id' => 1, 'title' => 'MSIB BATCH 1', 'description' => 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Id repellendus dolor, dignissimos saepe ducimus beatae facilis et, dolorum tenetur officiis consequuntur sed inventore fuga sequi. Tempora ullam quis unde natus.', 'requirements' => 'Programming', 'location' => 'Malang'],
-        //     ['company_id' => '2', 'period_id' => '1', 'kategori_id' => 2, 'title' => 'MSIB BATCH 2', 'description' => 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Id repellendus dolor, dignissimos saepe ducimus beatae facilis et, dolorum tenetur officiis consequuntur sed inventore fuga sequi. Tempora ullam quis unde natus.', 'requirements' => 'Programming', 'location' => 'Malang'],
-        //     ['company_id' => '3', 'period_id' => '1', 'kategori_id' => 3, 'title' => 'MSIB BATCH 3', 'description' => 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Id repellendus dolor, dignissimos saepe ducimus beatae facilis et, dolorum tenetur officiis consequuntur sed inventore fuga sequi. Tempora ullam quis unde natus.', 'requirements' => 'Programming', 'location' => 'Malang'],
-        //     ['company_id' => '1', 'period_id' => '1', 'kategori_id' => 4, 'title' => 'MSIB BATCH 4', 'description' => 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Id repellendus dolor, dignissimos saepe ducimus beatae facilis et, dolorum tenetur officiis consequuntur sed inventore fuga sequi. Tempora ullam quis unde natus.', 'requirements' => 'Programming', 'location' => 'Malang'],
-        //     ['company_id' => '4', 'period_id' => '1', 'kategori_id' => 5, 'title' => 'MSIB BATCH 5', 'description' => 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Id repellendus dolor, dignissimos saepe ducimus beatae facilis et, dolorum tenetur officiis consequuntur sed inventore fuga sequi. Tempora ullam quis unde natus.', 'requirements' => 'Programming', 'location' => 'Malang'],
-        // ];
-
-        // foreach ($LowonganMagangData as $data) {
-        //     LowonganMagang::create($data);
-        // }
-
         $provinsi = Province::inRandomOrder()->first();
         $kabupaten = $provinsi->regencies()->inRandomOrder()->first();
         $kecamatan = $kabupaten->districts()->inRandomOrder()->first();
@@ -44,7 +32,7 @@ class LowonganMagangSeeder extends Seeder
                 'company_id' => 1,
                 'period_id' => 1,
                 'kategori_id' => 1,
-                'title' => 'MSIB BATCH 1',
+                'title' => 'Junior Developer with Laravel MySQL',
                 'description' => 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Id repellendus dolor, dignissimos saepe ducimus beatae facilis et, dolorum tenetur officiis consequuntur sed inventore fuga sequi. Tempora ullam quis unde natus.',
                 'requirements' => 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Id repellendus dolor, dignissimos saepe ducimus beatae facilis et, dolorum tenetur officiis consequuntur sed inventore fuga sequi. Tempora ullam quis unde natus.',
             ],
@@ -52,7 +40,7 @@ class LowonganMagangSeeder extends Seeder
                 'company_id' => 2,
                 'period_id' => 1,
                 'kategori_id' => 2,
-                'title' => 'MSIB BATCH 2',
+                'title' => 'UI UX Desainer Creative Studio',
                 'description' => 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Id repellendus dolor, dignissimos saepe ducimus beatae facilis et, dolorum tenetur officiis consequuntur sed inventore fuga sequi. Tempora ullam quis unde natus.',
                 'requirements' => 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Id repellendus dolor, dignissimos saepe ducimus beatae facilis et, dolorum tenetur officiis consequuntur sed inventore fuga sequi. Tempora ullam quis unde natus.',
             ],
@@ -60,7 +48,7 @@ class LowonganMagangSeeder extends Seeder
                 'company_id' => 3,
                 'period_id' => 1,
                 'kategori_id' => 3,
-                'title' => 'MSIB BATCH 3',
+                'title' => 'SEO Specialist',
                 'description' => 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Id repellendus dolor, dignissimos saepe ducimus beatae facilis et, dolorum tenetur officiis consequuntur sed inventore fuga sequi. Tempora ullam quis unde natus.',
                 'requirements' => 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Id repellendus dolor, dignissimos saepe ducimus beatae facilis et, dolorum tenetur officiis consequuntur sed inventore fuga sequi. Tempora ullam quis unde natus.',
             ],
@@ -68,7 +56,7 @@ class LowonganMagangSeeder extends Seeder
                 'company_id' => 1,
                 'period_id' => 1,
                 'kategori_id' => 4,
-                'title' => 'MSIB BATCH 4',
+                'title' => 'Accounting Manager',
                 'description' => 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Id repellendus dolor, dignissimos saepe ducimus beatae facilis et, dolorum tenetur officiis consequuntur sed inventore fuga sequi. Tempora ullam quis unde natus.',
                 'requirements' => 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Id repellendus dolor, dignissimos saepe ducimus beatae facilis et, dolorum tenetur officiis consequuntur sed inventore fuga sequi. Tempora ullam quis unde natus.',
             ],
@@ -76,7 +64,7 @@ class LowonganMagangSeeder extends Seeder
                 'company_id' => 4,
                 'period_id' => 1,
                 'kategori_id' => 5,
-                'title' => 'MSIB BATCH 5',
+                'title' => 'Lowongan Staf Administrasi Keuangan SDM (Sumber Daya Manusia)',
                 'description' => 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Id repellendus dolor, dignissimos saepe ducimus beatae facilis et, dolorum tenetur officiis consequuntur sed inventore fuga sequi. Tempora ullam quis unde natus.',
                 'requirements' => 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Id repellendus dolor, dignissimos saepe ducimus beatae facilis et, dolorum tenetur officiis consequuntur sed inventore fuga sequi. Tempora ullam quis unde natus.',
             ],
@@ -84,7 +72,7 @@ class LowonganMagangSeeder extends Seeder
                 'company_id' => 5,
                 'period_id' => 1,
                 'kategori_id' => 1,
-                'title' => 'MSIB BATCH 6',
+                'title' => 'Internship Data Analyst (SQL, Python)',
                 'description' => 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Id repellendus dolor, dignissimos saepe ducimus beatae facilis et, dolorum tenetur officiis consequuntur sed inventore fuga sequi. Tempora ullam quis unde natus.',
                 'requirements' => 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Id repellendus dolor, dignissimos saepe ducimus beatae facilis et, dolorum tenetur officiis consequuntur sed inventore fuga sequi. Tempora ullam quis unde natus.',
             ],
