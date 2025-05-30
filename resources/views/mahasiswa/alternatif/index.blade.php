@@ -36,7 +36,17 @@
                                 @php
                                     $nilai = $alt->nilaiAlternatif->firstWhere('kriteria_id', $kriteria->kriteria_id);
                                 @endphp
-                                <td>{{ $nilai->nilai ?? 0 }}</td>
+                                <td>
+                                    @if ($nilai && $nilai->nilai > 0)
+                                        {{
+                                            $nilai->kriteria->skorKriterias
+                                                ->firstWhere('nilai', $nilai->nilai)?->parameter ?? 'Parameter tidak ditemukan'
+                                        }}
+                                    @else
+                                        <span class="text-danger">Belum ada nilai</span>
+                                    @endif
+                                </td>
+                                
                             @endforeach
                             <td class="nk-tb-col nk-tb-col-tools">
                                 <ul class="nk-tb-actions gx-1">
