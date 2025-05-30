@@ -15,7 +15,7 @@ class BenefitSeeder extends Seeder
     public function run(): void
     {
         //
-        $benefitNames = ['Asuransi', 'Uang Makan', 'Transport', 'Laptop Kerja', 'Fleksibel Jam'];
+        $benefitNames = ['Asuransi', 'Uang Makan', 'Transport', 'Laptop Kerja', 'Jam Kerja Fleksibel', 'Cuti Tahunan'];
 
         foreach ($benefitNames as $name) {
             Benefit::firstOrCreate(['name' => $name]);
