@@ -41,11 +41,11 @@ use Illuminate\Support\Str;
                                                             <em class="icon ni ni-edit-alt"></em><span>Edit</span>
                                                         </a>
                                                     </li>
-                                                    <li>
+                                                    {{-- <li>
                                                         <a href="{{ route('company.sertifikatMagang.show', $sertifikat->sertifikat_id) }}">
                                                             <em class="icon ni ni-eye"></em><span>Detail</span>
                                                         </a>
-                                                    </li>
+                                                    </li> --}}
                                                     <li class="divider"></li>
                                                     <li>
                                                         <form action="{{ route('company.sertifikatMagang.destroy', $sertifikat->sertifikat_id) }}"
