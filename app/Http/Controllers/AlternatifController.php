@@ -14,7 +14,7 @@ class AlternatifController extends Controller
     public function index()
     {
         $breadcrumb = (object) [
-            'title' => 'Tambah Alternatif Magang',
+            'title' => 'List Alternatif Magang',
             'subtitle' => ['Data Alternatif yang dipilih']
         ];
 

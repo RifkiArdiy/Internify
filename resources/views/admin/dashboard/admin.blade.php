@@ -98,7 +98,7 @@
                                         alt="{{ $item->mahasiswas->user->name }}">
                                 @else
                                     <span>
-                                        {{ strtoupper(collect(explode(' ', $item->mahasiswa->user->name))->map(fn($word) => $word[0])->take(2)->implode('')) }}
+                                        {{ strtoupper(collect(explode(' ', $item->mahasiswas->user->name))->map(fn($word) => $word[0])->take(2)->implode('')) }}
                                     </span>
                                 @endif
                             </div>
