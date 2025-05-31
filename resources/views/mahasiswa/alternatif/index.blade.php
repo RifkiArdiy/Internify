@@ -30,7 +30,7 @@
                     @foreach ($alternatifs as $alt)
                         <tr>
                             <td class="nk-tb-col tb-col-md">
-                                <span class="tb-amount">{{ $alt->lowongan->title }}</span>
+                                <span>{{ $alt->lowongan->title }}</span>
                             </td>
                             @foreach ($kriterias as $kriteria)
                                 @php
