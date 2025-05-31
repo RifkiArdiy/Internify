@@ -1,7 +1,7 @@
 <div class="nk-block-head-content">
-    <h3 class="nk-block-title page-title">{{ $evaluation->title }}</h3>
+    <h3 class="nk-block-title page-title">{{ $breadcrumb->title }}</h3>
     <div class="nk-block-des text-soft">
-        <p>{{ $evaluation->subtitle}}</p>
+        <p>{{ $breadcrumb->subtitle[0]}}</p>
     </div>
 </div>
 <!-- .nk-block-head-content -->

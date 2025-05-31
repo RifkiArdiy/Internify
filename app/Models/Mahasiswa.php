@@ -40,4 +40,10 @@ class Mahasiswa extends Model
     {
         return $this->hasMany(EvaluasiMagang::class, 'evaluasi_id', 'evaluasi_id');
     }
+
+    public function manajemenBimbingan()
+    {
+    return $this->hasOne(ManajemenBimbingan::class, 'mahasiswa_id', 'mahasiswa_id');
+    }
+
 }

@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BenefitController;
+use App\Http\Controllers\BimbinganController;
 use App\Http\Controllers\ProgramStudiController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DosenController;
@@ -26,6 +27,8 @@ use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\ProfilAkademikController;
 use App\Http\Controllers\MonitoringController;
 use App\Http\Controllers\WilayahController;
+use App\Http\Controllers\Dosen\ManajemenBimbinganController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -263,8 +266,10 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/verifikasi', [DosenController::class, 'indexVerifikasi'])->name('dosen.verifikasi');
         Route::put('/verifikasi/{id}', [DosenController::class, 'updateVerifikasi'])->name('dosen.verifikasi.update');
         Route::get('/verifikasi/show/{id}', [DosenController::class, 'showLaporan'])->name('dosen.verifikasi.show');
+       
+        Route::get('/bimbingan', [BimbinganController::class, 'index'])->name('dosen.bimbingan');        
     });
-
+    
     Route::prefix('company')->middleware('role:Company')->group(function () {
         Route::get('/dashboard', [DashboardController::class, 'indexCompany'])->name('company.dashboard');
         Route::get('/profile', [ProfileController::class, 'index'])->name('company.profile');
@@ -294,7 +299,6 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/{id}', [CompanyLowonganMagangController::class, 'pelamars'])->name('companys-lowongan-magang.pelamars');
             Route::delete('/destroy/{id}', [CompanyLowonganMagangController::class, 'destroy'])->name('companys-lowongan-magang.destroy');
         });
-
 
     });
 

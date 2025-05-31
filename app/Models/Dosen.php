@@ -25,4 +25,9 @@ class Dosen extends Model
     {
         return $this->hasMany(Log::class, 'dosen_id', 'dosen_id');
     }
+
+    public function mahasiswas()
+    {
+        return $this->hasMany(Mahasiswa::class, 'dosen_id', 'dosen_id');
+    }
 }
