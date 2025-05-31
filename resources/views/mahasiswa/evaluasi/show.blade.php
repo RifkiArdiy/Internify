@@ -28,7 +28,7 @@
                     <div class="form-group">
                         <label class="form-label">Laporan Saya</label>
                         <div class="form-control-wrap">
-                            <input type="text" class="form-control" value="{{ $evaluation->logs->report_text ?? '-' }}" readonly>
+                            <textarea type="text" class="form-control"readonly> {{ strip_tags($evaluation->logs->report_text) }}</textarea>
                         </div>
                     </div>
                 </div>
@@ -37,7 +37,7 @@
                     <div class="form-group">
                         <label class="form-label">Isi Evaluasi</label>
                         <div class="form-control-wrap">
-                            <textarea class="form-control" rows="5" readonly>{{ $evaluation->evaluasi }}</textarea>
+                            <textarea class="form-control" rows="5" readonly>{{ strip_tags($evaluation->evaluasi) }}</textarea>
                         </div>
                     </div>
                 </div>
