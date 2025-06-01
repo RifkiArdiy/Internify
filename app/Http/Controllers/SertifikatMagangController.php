@@ -16,11 +16,11 @@ class SertifikatMagangController extends Controller
     public function index()
     {
         $sertifikats = SertifikatMagang::where('company_id', Auth::user()->company->company_id)
-                ->latest()
-                ->get();
+            ->latest()
+            ->get();
         $breadcrumb = (object) [
             'title' => 'Sertifikat Magang',
-            'subtitle' => ['Daftar Sertifikat Magang'],
+            'subtitle' => 'Daftar Sertifikat Magang'
         ];
         return view('company.sertifikatMagang.index', compact('sertifikats', 'breadcrumb'));
     }
@@ -31,7 +31,7 @@ class SertifikatMagangController extends Controller
 
         $breadcrumb = (object) [
             'title' => 'Sertifikat Magang',
-            'subtitle' => ['Daftar Sertifikat Magang'],
+            'subtitle' => 'Daftar Sertifikat Magang'
         ];
         return view('mahasiswa.sertifikatMahasiswa.index', compact('sertifikats', 'breadcrumb'));
     }
@@ -40,11 +40,11 @@ class SertifikatMagangController extends Controller
     public function create()
     {
         $lowongans = LowonganMagang::where('company_id', Auth::user()->company->company_id)
-                    ->latest()
-                    ->get();
+            ->latest()
+            ->get();
         $breadcrumb = (object) [
             'title' => 'Sertifikat Magang',
-            'subtitle' => ['Unggah Sertifikat Magang'],
+            'subtitle' => 'Unggah Sertifikat Magang'
         ];
         return view('company.sertifikatMagang.create', compact('breadcrumb', 'lowongans'));
     }
@@ -75,7 +75,7 @@ class SertifikatMagangController extends Controller
     {
         $breadcrumb = (object) [
             'title' => 'Sertifikat Magang',
-            'subtitle' => ['Detail Sertifikat Magang'],
+            'subtitle' => 'Detail Sertifikat Magang'
         ];
         $sertifikat = SertifikatMagang::findOrFail($id);
         return view('company.sertifikatMagang.show', compact('sertifikat', 'breadcrumb'));
@@ -86,7 +86,7 @@ class SertifikatMagangController extends Controller
     {
         $breadcrumb = (object) [
             'title' => 'Sertifikat Magang',
-            'subtitle' => ['Edit Sertifikat Magang'],
+            'subtitle' => 'Edit Sertifikat Magang'
         ];
         $sertifikat = SertifikatMagang::findOrFail($id);
         return view('company.sertifikatMagang.edit', compact('sertifikat', 'breadcrumb'));
@@ -107,7 +107,7 @@ class SertifikatMagangController extends Controller
 
         if ($request->hasFile('sertifikat')) {
             $file = $request->file('sertifikat');
-            $filename = time().'_'.$file->getClientOriginalName();
+            $filename = time() . '_' . $file->getClientOriginalName();
             $path = $file->storeAs('public/sertifikat', $filename);
             $data['path'] = $path;
         }
@@ -165,7 +165,7 @@ class SertifikatMagangController extends Controller
             'lowongan' => $lowongan->title,
         ])->setPaper('A4', 'landscape');
 
-        return $pdf->download('sertifikat_'.$mahasiswa->user->name.'.pdf');
+        return $pdf->download('sertifikat_' . $mahasiswa->user->name . '.pdf');
     }
 
     public function destroy($id)

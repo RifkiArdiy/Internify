@@ -15,7 +15,7 @@ class AlternatifController extends Controller
     {
         $breadcrumb = (object) [
             'title' => 'Tambah Alternatif Magang',
-            'subtitle' => ['Data Alternatif yang dipilih']
+            'subtitle' => 'Data Alternatif yang dipilih'
         ];
 
         $user = Auth::user();

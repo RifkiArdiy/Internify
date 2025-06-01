@@ -25,7 +25,7 @@ class LowonganMagangController extends Controller
         $period = PeriodeMagang::all();
         $breadcrumb = (object) [
             'title' => 'Lowongan Magang',
-            'subtitle' => ['Jumlah Lowongan Magang : ' . $logang->count()]
+            'subtitle' => 'Jumlah Lowongan Magang : ' . $logang->count()
         ];
 
 
@@ -36,7 +36,7 @@ class LowonganMagangController extends Controller
     {
         $breadcrumb = (object) [
             'title' => 'Lowongan Magang',
-            'subtitle' => ['Cari lowongan magang']
+            'subtitle' => 'Cari lowongan magang'
         ];
 
         $logang = LowonganMagang::all();
@@ -53,7 +53,7 @@ class LowonganMagangController extends Controller
         $breadcrumb = (object) [
 
             'title' => 'Tambah Lowongan Magang',
-            'subtitle' => ['Tambah lowongan magang baru']
+            'subtitle' => 'Tambah lowongan magang'
         ];
 
         $provinces = Province::all();
@@ -116,7 +116,7 @@ class LowonganMagangController extends Controller
         $period = PeriodeMagang::all();
         $breadcrumb = (object) [
             'title' => $logang->title,
-            'subtitle' => ['Detail lowongan magang']
+            'subtitle' => 'Detail lowongan magang'
         ];
 
         return view('admin.lowonganMagang.show', compact('breadcrumb', 'logang', 'period'));
@@ -128,7 +128,7 @@ class LowonganMagangController extends Controller
         $period = PeriodeMagang::all();
         $breadcrumb = (object) [
             'title' => 'Detail Lowongan Magang',
-            'subtitle' => ['Detail lowongan magang']
+            'subtitle' => 'Detail lowongan magang'
         ];
 
         return view('mahasiswa.lowongan.show', compact('breadcrumb', 'logang', 'period'));
@@ -141,7 +141,7 @@ class LowonganMagangController extends Controller
     {
         $breadcrumb = (object) [
             'title' => 'Edit Lowongan Magang',
-            'subtitle' => ['Edit lowongan magang']
+            'subtitle' => 'Edit lowongan magang'
         ];
         $logang = LowonganMagang::with(['benefits'])->findOrFail($id);
         $provinces = Province::all();

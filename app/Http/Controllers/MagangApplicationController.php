@@ -25,7 +25,7 @@ class MagangApplicationController extends Controller
             ->get();
         $breadcrumb = (object) [
             'title' => 'Pengajuan Magang',
-            'subtitle' => ['Jumlah Pelamar : ' . $magangs->count()]
+            'subtitle' => 'Jumlah Pelamar : ' . $magangs->count()
         ];
 
         return view('company.lamaranMagang.index', compact('magangs', 'breadcrumb'));
@@ -35,9 +35,9 @@ class MagangApplicationController extends Controller
     {
         $breadcrumb = (object) [
             'title' => 'Lamaran Magang',
-            'subtitle' => ['Review lamaran magang anda']
+            'subtitle' => 'Review lamaran magang anda'
         ];
-        
+
         $logang = LowonganMagang::all();
         $mahasiswa = Mahasiswa::where('user_id', Auth::user()->user_id)->first();
 
@@ -118,7 +118,7 @@ class MagangApplicationController extends Controller
             'status' => 'Pending',
         ]);
 
-        return redirect (route('lowongan-magang.indexMhs'))->with('success', 'Pengajuan berhasil dikirim.');
+        return redirect(route('lowongan-magang.indexMhs'))->with('success', 'Pengajuan berhasil dikirim.');
     }
 
     /**
@@ -129,7 +129,7 @@ class MagangApplicationController extends Controller
         $magang = MagangApplication::find($id);
         $breadcrumb = (object) [
             'title' => 'Detail Lamaran',
-            'subtitle' => ['Lamaran ' . $magang->mahasiswas->name]
+            'subtitle' => 'Lamaran ' . $magang->mahasiswas->name
         ];
 
         return view('company.lamaranMagang.show', compact('breadcrumb', 'magang'));

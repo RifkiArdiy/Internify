@@ -28,9 +28,8 @@ class CompanyLowonganMagangController extends Controller
         $period = PeriodeMagang::all();
         $breadcrumb = (object) [
             'title' => 'Lowongan Magang',
-            'subtitle' => ['Jumlah Lowongan Magang : ' . $logang->count()]
+            'subtitle' => 'Jumlah Lowongan Magang : ' . $logang->count()
         ];
-
 
         return view('company.lowonganMagang.index', compact('logang', 'period', 'breadcrumb'));
     }
@@ -44,7 +43,7 @@ class CompanyLowonganMagangController extends Controller
         $breadcrumb = (object) [
 
             'title' => 'Tambah Lowongan Magang',
-            'subtitle' => ['Tambah lowongan magang baru']
+            'subtitle' => 'Tambah lowongan magang baru'
         ];
 
         $provinces = Province::all();
@@ -110,7 +109,7 @@ class CompanyLowonganMagangController extends Controller
         $mahasiswas = Mahasiswa::whereIn('mahasiswa_id', $mahasiswa_ids)->get();
         $breadcrumb = (object) [
             'title' => $logang->title,
-            'subtitle' => ['Detail lowongan magang']
+            'subtitle' => 'Detail lowongan magang'
         ];
 
         return view('company.lowonganMagang.show', compact('breadcrumb', 'logang', 'period', 'mahasiswas'));
@@ -123,7 +122,7 @@ class CompanyLowonganMagangController extends Controller
     {
         $breadcrumb = (object) [
             'title' => 'Edit Lowongan Magang',
-            'subtitle' => ['Edit lowongan magang']
+            'subtitle' => 'Edit lowongan magang'
         ];
         $logang = LowonganMagang::with(['benefits'])->findOrFail($id);
         $provinces = Province::all();
@@ -180,27 +179,25 @@ class CompanyLowonganMagangController extends Controller
         }
     }
 
-public function pelamars(string $id)
-{
-    // Get the company ID for the authenticated user
-    $companyId = Company::where('user_id', Auth::user()->user_id)->value('company_id');
+    public function pelamars(string $id)
+    {
+        // Get the company ID for the authenticated user
+        $companyId = Company::where('user_id', Auth::user()->user_id)->value('company_id');
 
-    // Get all MagangApplication entries for this lowongan and company, eager loading relations
-    $magangs = MagangApplication::with(['mahasiswas', 'lowongans'])
-        ->whereHas('lowongans', function ($query) use ($companyId, $id) {
-            $query->where('company_id', $companyId)
-                  ->where('lowongan_id', $id);
-        })
-        ->get();
+        // Get all MagangApplication entries for this lowongan and company, eager loading relations
+        $magangs = MagangApplication::with(['mahasiswas', 'lowongans'])
+            ->whereHas('lowongans', function ($query) use ($companyId, $id) {
+                $query->where('company_id', $companyId)
+                    ->where('lowongan_id', $id);
+            })
+            ->get();
 
-    // Build breadcrumb object
-    $breadcrumb = (object) [
-        'title' => 'Pengajuan Magang',
-        'subtitle' => ['Jumlah Pelamar: ' . $magangs->count()]
-    ];
+        // Build breadcrumb object
+        $breadcrumb = (object) [
+            'title' => 'Pengajuan Magang',
+            'subtitle' => 'Jumlah Pelamar: ' . $magangs->count()
+        ];
 
-    return view('company.lowonganMagang.pelamars', compact('magangs', 'breadcrumb'));
-}
-
-
+        return view('company.lowonganMagang.pelamars', compact('magangs', 'breadcrumb'));
+    }
 }

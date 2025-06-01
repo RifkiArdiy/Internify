@@ -20,7 +20,7 @@ class MahasiswaController extends Controller
         $mahasiswas = Mahasiswa::with('user', 'prodi')->get();
         $breadcrumb = (object) [
             'title' => 'Mahasiswa',
-            'subtitle' => ['Jumlah total Mahasiswa ' . $mahasiswas->count()]
+            'subtitle' => 'Jumlah total Mahasiswa ' . $mahasiswas->count()
         ];
         return view('admin.mahasiswa.index', compact('mahasiswas', 'breadcrumb'));
     }
@@ -33,7 +33,7 @@ class MahasiswaController extends Controller
         $prodis = ProgramStudi::all();
         $breadcrumb = (object) [
             'title' => 'Tambah Mahasiswa',
-            'subtitle' => ['Formulir Pengisian Data Mahasiswa Baru']
+            'subtitle' => 'Formulir Pengisian Data Mahasiswa Baru'
         ];
         return view('admin.mahasiswa.create', compact('prodis', 'breadcrumb'));
     }
@@ -106,7 +106,7 @@ class MahasiswaController extends Controller
         $mahasiswa = Mahasiswa::find($id);
         $breadcrumb = (object) [
             'title' => 'Edit Mahasiswa',
-            'subtitle' => ['Edit Detail Mahasiswa']
+            'subtitle' => 'Edit Detail Mahasiswa'
         ];
         return view('admin.mahasiswa.edit', compact('mahasiswa', 'prodis', 'breadcrumb'));
     }
