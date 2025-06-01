@@ -140,12 +140,12 @@
                                                                     </a>
                                                                 </li>
                                                             @endif
-                                                            <li>
+                                                            {{-- <li>
                                                                 <a href="html/user-profile-setting.html">
                                                                     <em class="icon ni ni-setting-alt"></em>
                                                                     <span>Account Setting</span>
                                                                 </a>
-                                                            </li>
+                                                            </li> --}}
                                                         </ul>
                                                     </div>
                                                     <div class="dropdown-inner py-3">
