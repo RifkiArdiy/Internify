@@ -194,11 +194,6 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/show/{id}', [LaporanController::class, 'show'])->name('laporan.show');
         });
 
-        Route::prefix('lowongan')->group(function () {
-            Route::get('/', [LowonganMagangController::class, 'indexMhs'])->name('lowongan-magang.indexMhs');
-            Route::get('/show/{id}', [LowonganMagangController::class, 'showMhs'])->name('lowongan-magang.show');
-        });
-
         Route::prefix('sertifikatMagang')->group(callback: function () {
             Route::get('/', [SertifikatMagangController::class, 'indexMhs'])->name('sertifikatMagang.index');
             Route::get('/sertifikat/download/{id}', [SertifikatMagangController::class, 'downloadMhs'])->name('sertifikat.downloadMhs');

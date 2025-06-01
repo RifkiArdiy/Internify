@@ -32,19 +32,6 @@ class LowonganMagangController extends Controller
         return view('admin.lowonganMagang.index', compact('logang', 'period', 'breadcrumb'));
     }
 
-    public function indexMhs()
-    {
-        $breadcrumb = (object) [
-            'title' => 'Lowongan Magang',
-            'subtitle' => 'Cari lowongan magang'
-        ];
-
-        $logang = LowonganMagang::all();
-        $period = PeriodeMagang::all();
-
-        return view('mahasiswa.lowongan.index', compact('logang', 'period', 'breadcrumb'));
-    }
-
     /**
      * Show the form for creating a new resource.
      */
@@ -120,18 +107,6 @@ class LowonganMagangController extends Controller
         ];
 
         return view('admin.lowonganMagang.show', compact('breadcrumb', 'logang', 'period'));
-    }
-
-    public function showMhs(string $id)
-    {
-        $logang = LowonganMagang::find($id);
-        $period = PeriodeMagang::all();
-        $breadcrumb = (object) [
-            'title' => 'Detail Lowongan Magang',
-            'subtitle' => 'Detail lowongan magang'
-        ];
-
-        return view('mahasiswa.lowongan.show', compact('breadcrumb', 'logang', 'period'));
     }
 
     /**

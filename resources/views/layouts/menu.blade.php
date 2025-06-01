@@ -158,14 +158,6 @@
     </li>
     @if (Auth::user()->mahasiswa->status == '-')
         <li class="nk-menu-item">
-            <a href="{{ route('lowongan-magang.indexMhs') }}" class="nk-menu-link">
-                <span class="nk-menu-icon">
-                    <em class="icon ni ni-briefcase"></em>
-                </span>
-                <span class="nk-menu-text">Lowongan Magang</span>
-            </a>
-        </li>
-        <li class="nk-menu-item">
             <a href="{{ url('mahasiswa/alternatif') }}" class="nk-menu-link">
                 <span class="nk-menu-icon">
                     <em class="icon ni ni-briefcase"></em>
