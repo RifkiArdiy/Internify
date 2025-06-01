@@ -9,11 +9,12 @@
                     <img class="logo-dark logo-img" src="{{ asset('assets/home/images/logo-dark.png') }}"
                         srcset="{{ asset('assets/home/images/logo-dark2x.png 2x') }}" alt="logo-dark">
                     </a>
-                    <p>Solusi manajemen magang digital untuk mahasiswa, institusi, dan mitra industri.</p>
+                    <p class="mt-3">Solusi manajemen magang digital untuk mahasiswa, institusi, dan mitra industri.
+                    </p>
                 </div>
             </div>
             <!-- .col -->
-            <div class="col-lg-6 col-12">
+            {{-- <div class="col-lg-6 col-12">
                 <div class="widget">
                     <h6 class="widget-title">Ressources</h6>
                     <ul class="widget-link link-inline link-inline-2col link-inline-md-3col g-2 py-1">
@@ -43,7 +44,7 @@
                         </li>
                     </ul>
                 </div>
-            </div>
+            </div> --}}
             <!-- .col -->
         </div>
         <!-- .row -->
@@ -59,11 +60,11 @@
             <div class="col-md-4 d-flex justify-content-md-end">
                 <ul class="social">
                     <li>
-                        <a href="#">
-                            <em class="icon ni ni-twitter"></em>
+                        <a href="https://github.com/RifkiArdiy/Internify">
+                            <em class="icon ni ni-github"></em>
                         </a>
                     </li>
-                    <li>
+                    {{-- <li>
                         <a href="#">
                             <em class="icon ni ni-facebook-f"></em>
                         </a>
@@ -77,7 +78,7 @@
                         <a href="#">
                             <em class="icon ni ni-pinterest"></em>
                         </a>
-                    </li>
+                    </li> --}}
                 </ul>
                 <!-- .footer-icon -->
             </div>

@@ -111,12 +111,12 @@
                                                         </a>
                                                     </li>
                                                 @endif
-                                                <li>
+                                                {{-- <li>
                                                     <a href="html/user-profile-setting.html">
                                                         <em class="icon ni ni-setting-alt"></em>
                                                         <span>Account Setting</span>
                                                     </a>
-                                                </li>
+                                                </li> --}}
                                             </ul>
                                         </div>
                                         <div class="dropdown-inner py-3">
@@ -153,13 +153,7 @@
             <div class="row justify-content-center text-center g-gs">
                 <div class="col-lg-8 col-md-10">
                     <div class="header-caption">
-                        <h1 class="header-title">Cari Lowongan Pekerjaan</h1>
-                        <p class="lead-text">Temukan lowongan kerja yang sesuai dengan keahlian dan minatmu.</p>
                         @yield('header')
-                        <!-- Optional: Quick links -->
-                        <div class="mt-3">
-                            <span class="text-light small">Contoh: Programmer, Admin, Jakarta</span>
-                        </div>
                     </div><!-- .header-caption -->
                 </div><!-- .col -->
             </div><!-- .row -->
