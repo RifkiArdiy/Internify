@@ -16,6 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('mahasiswa_id')->index();
             $table->unsignedBigInteger('dosen_id')->index();
             $table->unsignedBigInteger('company_id')->index();
+            $table->text('report_title');
             $table->text('report_text');
             $table->string('file_path')->nullable();
             $table->string('verif_dosen')->default('Pending')->nullable();

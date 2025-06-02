@@ -52,6 +52,7 @@ class LaporanController extends Controller
             'mahasiswa_id' => 'required|exists:mahasiswas,mahasiswa_id',
             'dosen_id' => 'required|exists:dosens,dosen_id',
             'company_id' => 'required|exists:companies,company_id',
+            'report_title' => 'required|string',
             'report_text' => 'required|string',
         ]);
 
@@ -60,6 +61,7 @@ class LaporanController extends Controller
             'mahasiswa_id' => $request->mahasiswa_id,
             'dosen_id' => $request->dosen_id,
             'company_id' => $request->company_id,
+            'report_title' => $request->report_title,
             'report_text' => $request->report_text,
         ]);
 
@@ -92,6 +94,7 @@ class LaporanController extends Controller
             'mahasiswa_id' => 'required|exists:mahasiswas,mahasiswa_id',
             'dosen_id' => 'required|exists:dosens,dosen_id',
             'company_id' => 'required|exists:companies,company_id',
+            'report_title' => 'required|string',
             'report_text' => 'required|string',
         ]);
 
@@ -103,6 +106,7 @@ class LaporanController extends Controller
             'mahasiswa_id' => $request->mahasiswa_id,
             'dosen_id' => $request->dosen_id,
             'company_id' => $request->company_id,
+            'report_title' => $request->report_title,
             'report_text' => $request->report_text,
         ]);
 

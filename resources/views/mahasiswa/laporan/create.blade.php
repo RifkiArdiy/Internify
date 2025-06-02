@@ -3,12 +3,13 @@
 @section('content')
     <div class="card card-bordered card-preview">
         <div class="card-inner">
-            
+
             <style>
-                #quill-editor{
+                #quill-editor {
                     overflow-x: auto;
                     word-wrap: break-word;
                 }
+
                 .ql-editor {
                     word-break: break-word;
                 }
@@ -41,29 +42,30 @@
                                 @php
                                     $application = Auth::user()->mahasiswa->applications->first();
                                 @endphp
-                                    <input class="form-control" type="text"
-                                        value="{{ $application->lowongans->company->user->name }}" readonly>
+                                <input class="form-control" type="text"
+                                    value="{{ $application->lowongans->company->user->name }}" readonly>
 
-                                    <input type="hidden" name="company_id"
-                                        value="{{ $application->lowongans->company->company_id }}">  
+                                <input type="hidden" name="company_id"
+                                    value="{{ $application->lowongans->company->company_id }}">
                             </div>
                         </div>
                     </div>
 
-                    {{-- <div class="col-12">
+                    <div class="col-lg-6">
                         <div class="form-group">
-                            <label class="form-label" for="report_text">Isi Laporan:<span
+                            <label for="report_title" class="form-label">Judul Laporan: <span
                                     class="text-danger">*</span></label>
                             <div class="form-control-wrap">
-                                <textarea class="form-control" name="report_text" rows="5" required></textarea>
+                                <input type="text" class="form-control" id="report_title" name="report_title"
+                                    value="{{ old('report_title') }}" placeholder="Contoh: Laporan Hari ke 1" required>
                             </div>
                         </div>
-                    </div> --}}
+                    </div>
 
                     <div class="col-12">
                         <div class="form-group">
                             <label class="form-label" for="report_text">Isi Laporan:<span
-                                class="text-danger">*</span></label>
+                                    class="text-danger">*</span></label>
                             <!-- Editor tampil di sini -->
                             <div id="quill-editor" style="height: 200px;">{!! old('report_text') !!}</div>
                             <!-- Data yang akan dikirim ke controller -->
