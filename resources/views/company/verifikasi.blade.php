@@ -10,7 +10,6 @@
             <table class="datatable-init-export nowrap nk-tb-list nk-tb-ulist" data-auto-responsive="false">
                 <thead>
                     <tr class="nk-tb-item nk-tb-head">
-                        <th class="nk-tb-col"><span class="sub-text">No</span></th>
                         <th class="nk-tb-col export-col"><span class="sub-text">Mahasiswa</span></th>
                         {{-- <th class="nk-tb-col"><span class="sub-text">Dosen Pembimbing</span></th> --}}
                         <th class="nk-tb-col export-col"><span class="sub-text">Isi Laporan</span></th>
@@ -23,10 +22,23 @@
                     @foreach ($logs as $log)
                         <tr class="nk-tb-item">
                             <td class="nk-tb-col">
-                                <span>{{ $loop->iteration }}</span>
-                            </td>
-                            <td class="nk-tb-col">
-                                <span>{{ $log->mahasiswa->user->name ?? '-' }}</span>
+                                <div class="user-card">
+                                    <div class="user-avatar bg-teal-dim d-none d-sm-flex">
+                                        @if ($log->mahasiswa->user->image)
+                                            <img src="{{ Storage::url('images/users/' . $log->mahasiswa->user->image) }}"
+                                                alt="{{ $log->mahasiswa->user->name }}">
+                                        @else
+                                            <span>
+                                                {{ strtoupper(collect(explode(' ', $log->mahasiswa->user->name))->map(fn($word) => $word[0])->take(2)->implode('')) }}
+                                            </span>
+                                        @endif
+                                    </div>
+                                    <div class="user-info">
+                                        <span class="tb-lead">{{ $log->mahasiswa->user->name }}<span
+                                                class="dot dot-success d-md-none ms-1"></span></span>
+                                        <span>{{ $log->mahasiswa->user->email }}</span>
+                                    </div>
+                                </div>
                             </td>
                             <td class="nk-tb-col">
                                 <span>{!! Str::limit(strip_tags($log->report_text), 50) !!}</span>
@@ -36,9 +48,9 @@
                             </td>
                             <td class="nk-tb-col">
                                 @if ($log->verif_company === 'Disetujui')
-                                    <span>Verified</span>
+                                    <span class="tb-status text-success">Verified</span>
                                 @elseif ($log->verif_company === 'Ditolak')
-                                    <span>Ditolak</span>
+                                    <span class="tb-status text-danger">Ditolak</span>
                                 @elseif ($log->verif_company === 'Pending')
                                     <span class="tb-status text-warning">Pending</span>
                                 @endif
