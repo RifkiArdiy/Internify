@@ -197,9 +197,9 @@
                                 @endif
                                 <div>
                                     <h4 class="mb-1">{{ $company->user->name }}</h4>
-                                    @for ($i = 0; $i < $averageRating; $i++)
+                                    {{-- @for ($i = 0; $i < $averageRating; $i++)
                                         <i class="icon ni ni-star-fill" style="font-size: 24px; color: gold;"></i>
-                                    @endfor
+                                    @endfor --}}
 
                                     <ul class="list-inline list-split fs-14px text-soft">
                                         <li><em class="icon ni ni-briefcase"></em> Technology</li>
@@ -265,7 +265,8 @@
                                 <div class="row g-4">
                                     @foreach ($company->lowongans->take(3) as $job)
                                         <div class="col-md-6 col-lg-4">
-                                            <a href="{{ route('show.lowongan', $job->lowongan_id) }}" class="card-link-wrapper">
+                                            <a href="{{ route('show.lowongan', $job->lowongan_id) }}"
+                                                class="card-link-wrapper">
                                                 <div class="card card-bordered service service-s4 h-100">
                                                     <div class="card-inner">
                                                         <div class="job">
@@ -285,7 +286,8 @@
                                                                     @endif
                                                                     <div class="job-info">
                                                                         <h6 class="title">{{ $job->title }}</h6>
-                                                                        <span class="sub-text">{{ $job->period->name }}</span>
+                                                                        <span
+                                                                            class="sub-text">{{ $job->period->name }}</span>
                                                                     </div>
                                                                 </div>
                                                             </div>
