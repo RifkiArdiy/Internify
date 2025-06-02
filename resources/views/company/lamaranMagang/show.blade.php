@@ -80,63 +80,66 @@
             </table>
         </div>
     </div>
-    <div class="card card-bordered card-preview mb-4">
-        <div class="card-inner">
-            <h5 class="mb-3">Profil Akademik</h5>
-            <table class="table table-bordered table-striped table-hover table-sm mb-3">
-                <tr>
-                    <th>Bidang Keahlian</th>
-                    <td>{{ $profilAkademik->bidang_keahlian ?? '-' }}</td>
-                    <td>
-                        @if ($profilAkademik?->bidang_keahlian)
-                            <a href="{{ asset('storage/profil-akademik/bidang_keahlian/' . $profilAkademik->bidang_keahlian) }}"
-                                download class="btn btn-sm btn-outline-primary">Download</a>
-                        @endif
-                    </td>
-                </tr>
-                <tr>
-                    <th>Sertifikasi</th>
-                    <td>{{ $profilAkademik->sertifikasi ?? '-' }}</td>
-                    <td>
-                        @if ($profilAkademik?->sertifikasi)
-                            <a href="{{ asset('storage/profil-akademik/sertifikasi/' . $profilAkademik->sertifikasi) }}"
-                                download class="btn btn-sm btn-outline-primary">Download</a>
-                        @endif
-                    </td>
-                </tr>
-                <tr>
-                    <th>Pengalaman</th>
-                    <td>{{ $profilAkademik->pengalaman ?? '-' }}</td>
-                    <td>
-                        @if ($profilAkademik?->pengalaman)
-                            <a href="{{ asset('storage/profil-akademik/pengalaman/' . $profilAkademik->pengalaman) }}"
-                                download class="btn btn-sm btn-outline-primary">Download</a>
-                        @endif
-                    </td>
-                </tr>
-                <tr>
-                    <th>Etika</th>
-                    <td>{{ $profilAkademik->etika ?? '-' }}</td>
-                    <td>
-                        @if ($profilAkademik?->etika)
-                            <a href="{{ asset('storage/profil-akademik/etika/' . $profilAkademik->etika) }}" download
-                                class="btn btn-sm btn-outline-primary">Download</a>
-                        @endif
-                    </td>
-                </tr>
-                <tr>
-                    <th>IPK</th>
-                    <td>{{ $profilAkademik->ipk ?? '-' }}</td>
-                    <td>
-                        @if ($profilAkademik?->ipk)
-                            <a href="{{ asset('storage/profil-akademik/ipk/' . $profilAkademik->ipk) }}" download
-                                class="btn btn-sm btn-outline-primary">Download</a>
-                        @endif
-                    </td>
-                </tr>
-            </table>
+    @if ($profilAkademik)
+        <div class="card card-bordered card-preview mb-4">
+            <div class="card-inner">
+                <h5 class="mb-3">Profil Akademik</h5>
+                <table class="table table-bordered table-striped table-hover table-sm mb-3">
+                    <tr>
+                        <th>Bidang Keahlian</th>
+                        <td>{{ $profilAkademik->bidang_keahlian ?? '-' }}</td>
+                        <td>
+                            @if ($profilAkademik?->bidang_keahlian)
+                                <a href="{{ asset('storage/profil-akademik/bidang_keahlian/' . $profilAkademik->bidang_keahlian) }}"
+                                    download class="btn btn-sm btn-outline-primary">Download</a>
+                            @endif
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Sertifikasi</th>
+                        <td>{{ $profilAkademik->sertifikasi ?? '-' }}</td>
+                        <td>
+                            @if ($profilAkademik?->sertifikasi)
+                                <a href="{{ asset('storage/profil-akademik/sertifikasi/' . $profilAkademik->sertifikasi) }}"
+                                    download class="btn btn-sm btn-outline-primary">Download</a>
+                            @endif
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Pengalaman</th>
+                        <td>{{ $profilAkademik->pengalaman ?? '-' }}</td>
+                        <td>
+                            @if ($profilAkademik?->pengalaman)
+                                <a href="{{ asset('storage/profil-akademik/pengalaman/' . $profilAkademik->pengalaman) }}"
+                                    download class="btn btn-sm btn-outline-primary">Download</a>
+                            @endif
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Etika</th>
+                        <td>{{ $profilAkademik->etika ?? '-' }}</td>
+                        <td>
+                            @if ($profilAkademik?->etika)
+                                <a href="{{ asset('storage/profil-akademik/etika/' . $profilAkademik->etika) }}" download
+                                    class="btn btn-sm btn-outline-primary">Download</a>
+                            @endif
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>IPK</th>
+                        <td>{{ $profilAkademik->ipk ?? '-' }}</td>
+                        <td>
+                            @if ($profilAkademik?->ipk)
+                                <a href="{{ asset('storage/profil-akademik/ipk/' . $profilAkademik->ipk) }}" download
+                                    class="btn btn-sm btn-outline-primary">Download</a>
+                            @endif
+                        </td>
+                    </tr>
+                </table>
+            </div>
         </div>
-    </div>
+    @endif
+
     <div class="col-12 text-end">
         <a href="{{ url()->previous() }}" class="btn btn-secondary">Kembali</a>
     </div>
