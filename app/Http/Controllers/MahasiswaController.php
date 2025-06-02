@@ -94,7 +94,12 @@ class MahasiswaController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $mahasiswa = Mahasiswa::with('user', 'prodi')->findOrFail($id);
+        $breadcrumb = (object) [
+            'title' => 'Detail Mahasiswa',
+            'subtitle' => 'Informasi Lengkap Mahasiswa'
+        ];
+        return view('admin.mahasiswa.show', compact('mahasiswa', 'breadcrumb'));
     }
 
     /**
