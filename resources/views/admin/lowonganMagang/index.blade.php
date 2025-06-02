@@ -42,7 +42,7 @@
                                 </div>
                             </td>
                             <td class="nk-tb-col tb-col-lg">
-                                <span><em class="icon ni ni-building"></em>
+                                <span class="tb-amount"><em class="icon ni ni-building"></em>
                                     {{ $item->company->user->name }}</span>
                             </td>
                             <td class="nk-tb-col tb-col-md">
