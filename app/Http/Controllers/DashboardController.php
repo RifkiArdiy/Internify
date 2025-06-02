@@ -75,16 +75,38 @@ class DashboardController extends Controller
             'title' => 'Dashboard',
             'subtitle' => 'Welcome to Dashboard Internify'
         ];
-        $companyId = Company::where('user_id', Auth::user()->user_id)->value('company_id');
 
+        $company = Company::where('user_id', Auth::id())->first();
+
+        // Data untuk cards dashboard
+        $openJobs = LowonganMagang::where('company_id', $company->company_id)->count();
+
+        $savedCandidates = MagangApplication::whereHas('lowongans', function ($query) use ($company) {
+            $query->where('company_id', $company->company_id);
+        })->where('status', 'Disetujui')->count();
+
+        $pendingJobs = MagangApplication::whereHas('lowongans', function ($query) use ($company) {
+            $query->where('company_id', $company->company_id);
+        })->where('status', 'Pending')->count();
+
+        // Data tambahan
         $unreviewedLamarans = MagangApplication::with(['mahasiswas', 'lowongans'])
             ->where('status', 'pending')
-            ->whereHas('lowongans', function ($query) use ($companyId) {
-                $query->where('company_id', $companyId);
-            })
+            ->whereHas('lowongans', fn($q) => $q->where('company_id', $company->company_id))
             ->get();
 
+        $logang = LowonganMagang::where('company_id', $company->company_id)
+            ->latest()
+            ->limit(5)
+            ->get();
 
-        return view('company.dashboard.company', compact('breadcrumb', 'unreviewedLamarans'));
+        return view('company.dashboard.company', compact(
+            'breadcrumb',
+            'unreviewedLamarans',
+            'logang',
+            'openJobs',
+            'savedCandidates',
+            'pendingJobs'
+        ));
     }
 }
