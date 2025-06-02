@@ -32,7 +32,7 @@
                     @foreach ($pegang as $pegangs)
                         <tr class="nk-tb-item">
                             <td class="nk-tb-col">
-                                <span>{{ $pegangs->name }}</span>
+                                <span class="tb-amount">{{ $pegangs->name }}</span>
                             </td>
                             <td class="nk-tb-col tb-col-md">
                                 <span>{{ $pegangs->start_date }}</span>

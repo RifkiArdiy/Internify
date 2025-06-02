@@ -205,13 +205,19 @@
                             </div>
                             <div class="d-flex g-2 mt-3 mt-md-0">
                                 @guest
-                                    {{-- <a href="{{ route('register') }}" class="btn btn-lg btn-primary">Daftar Akun untuk
-                                        melamar</a> --}}
                                     <a href="{{ route('login') }}" class="btn btn-lg btn-primary">Lamar Cepat</a>
                                 @endguest
+
                                 @auth
-                                    <a href="#" class="btn btn-lg btn-primary">Lamar Cepat</a>
+                                    @if (Auth::user()->level && Auth::user()->level->level_nama === 'Mahasiswa')
+                                        <form action="{{ route('buatLamaran', ['id' => $lowongan->lowongan_id]) }}"
+                                            method="POST" onsubmit="return confirm('Yakin ingin melamar lowongan ini?')">
+                                            @csrf
+                                            <button type="submit" class="btn btn-lg btn-primary">Lamar Cepat</button>
+                                        </form>
+                                    @endif
                                 @endauth
+
                             </div>
                         </div>
                     </div>

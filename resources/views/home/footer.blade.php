@@ -9,7 +9,8 @@
                     <img class="logo-dark logo-img" src="{{ asset('assets/home/images/logo-dark.png') }}"
                         srcset="{{ asset('assets/home/images/logo-dark2x.png 2x') }}" alt="logo-dark">
                     </a>
-                    <p class="mt-3">Solusi manajemen magang digital untuk mahasiswa, institusi, dan mitra industri.</p>
+                    <p class="mt-3">Solusi manajemen magang digital untuk mahasiswa, institusi, dan mitra industri.
+                    </p>
                 </div>
             </div>
             <!-- .col -->

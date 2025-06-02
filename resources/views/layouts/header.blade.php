@@ -24,6 +24,8 @@
                             <li class="breadcrumb-item"><a href="{{ route('mahasiswa.dashboard') }}">Dashboard</a></li>
                         @elseif (Auth::user()->level->level_nama == 'Dosen')
                             <li class="breadcrumb-item"><a href="{{ route('dosen.dashboard') }}">Dashboard</a></li>
+                        @elseif (Auth::user()->level->level_nama == 'Company')
+                            <li class="breadcrumb-item"><a href="{{ route('company.dashboard') }}">Dashboard</a></li>
                         @endif
                         @if ($breadcrumb->title !== 'Dashboard')
                             <li class="breadcrumb-item active">{{ $breadcrumb->title }}</li>

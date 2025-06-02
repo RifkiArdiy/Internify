@@ -25,24 +25,11 @@ class LowonganMagangController extends Controller
         $period = PeriodeMagang::all();
         $breadcrumb = (object) [
             'title' => 'Lowongan Magang',
-            'subtitle' => ['Jumlah Lowongan Magang : ' . $logang->count()]
+            'subtitle' => 'Jumlah Lowongan Magang : ' . $logang->count()
         ];
 
 
         return view('admin.lowonganMagang.index', compact('logang', 'period', 'breadcrumb'));
-    }
-
-    public function indexMhs()
-    {
-        $breadcrumb = (object) [
-            'title' => 'Lowongan Magang',
-            'subtitle' => ['Cari lowongan magang']
-        ];
-
-        $logang = LowonganMagang::all();
-        $period = PeriodeMagang::all();
-
-        return view('mahasiswa.lowongan.index', compact('logang', 'period', 'breadcrumb'));
     }
 
     /**
@@ -53,7 +40,7 @@ class LowonganMagangController extends Controller
         $breadcrumb = (object) [
 
             'title' => 'Tambah Lowongan Magang',
-            'subtitle' => ['Tambah lowongan magang baru']
+            'subtitle' => 'Tambah lowongan magang'
         ];
 
         $provinces = Province::all();
@@ -116,22 +103,10 @@ class LowonganMagangController extends Controller
         $period = PeriodeMagang::all();
         $breadcrumb = (object) [
             'title' => $logang->title,
-            'subtitle' => ['Detail lowongan magang']
+            'subtitle' => 'Detail lowongan magang'
         ];
 
         return view('admin.lowonganMagang.show', compact('breadcrumb', 'logang', 'period'));
-    }
-
-    public function showMhs(string $id)
-    {
-        $logang = LowonganMagang::find($id);
-        $period = PeriodeMagang::all();
-        $breadcrumb = (object) [
-            'title' => 'Detail Lowongan Magang',
-            'subtitle' => ['Detail lowongan magang']
-        ];
-
-        return view('mahasiswa.lowongan.show', compact('breadcrumb', 'logang', 'period'));
     }
 
     /**
@@ -141,7 +116,7 @@ class LowonganMagangController extends Controller
     {
         $breadcrumb = (object) [
             'title' => 'Edit Lowongan Magang',
-            'subtitle' => ['Edit lowongan magang']
+            'subtitle' => 'Edit lowongan magang'
         ];
         $logang = LowonganMagang::with(['benefits'])->findOrFail($id);
         $provinces = Province::all();

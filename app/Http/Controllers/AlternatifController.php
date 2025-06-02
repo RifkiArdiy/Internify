@@ -14,8 +14,8 @@ class AlternatifController extends Controller
     public function index()
     {
         $breadcrumb = (object) [
-            'title' => 'List Alternatif Magang',
-            'subtitle' => ['Data Alternatif yang dipilih']
+            'title' => 'Tambah Alternatif Magang',
+            'subtitle' => 'Data Alternatif yang dipilih'
         ];
 
         $user = Auth::user();

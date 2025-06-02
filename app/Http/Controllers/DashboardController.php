@@ -21,7 +21,7 @@ class DashboardController extends Controller
     {
         $breadcrumb = (object) [
             'title' => 'Dashboard',
-            'subtitle' => ['Welcome to Dashboard Internify']
+            'subtitle' => 'Welcome to Dashboard Internify'
         ];
 
         $users = User::query()
@@ -37,7 +37,7 @@ class DashboardController extends Controller
     {
         $breadcrumb = (object) [
             'title' => 'Dashboard',
-            'subtitle' => ['Welcome to Dashboard Internify']
+            'subtitle' => 'Welcome to Dashboard Internify'
         ];
         $mahasiswa = Mahasiswa::where('user_id', Auth::user()->user_id)->first();
         $magang = MagangApplication::where('mahasiswa_id', $mahasiswa->mahasiswa_id)->first();
@@ -61,7 +61,7 @@ class DashboardController extends Controller
     {
         $breadcrumb = (object) [
             'title' => 'Dashboard',
-            'subtitle' => ['Welcome to Dashboard Internify']
+            'subtitle' => 'Welcome to Dashboard Internify'
         ];
         return view('dosen.dashboard.dosen', compact('breadcrumb'));
     }
@@ -70,7 +70,7 @@ class DashboardController extends Controller
     {
         $breadcrumb = (object) [
             'title' => 'Dashboard',
-            'subtitle' => ['Welcome to Dashboard Internify']
+            'subtitle' => 'Welcome to Dashboard Internify'
         ];
         $companyId = Company::where('user_id', Auth::user()->user_id)->value('company_id');
 
