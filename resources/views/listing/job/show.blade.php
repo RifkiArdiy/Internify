@@ -314,10 +314,10 @@
                                             @endif
                                         </div>
                                         <h6 class="title mb-1">{{ $lowongan->company->user->name }}</h6>
-                                        @for ($i = 0; $i < $averageRating; $i++)
+                                        {{-- @for ($i = 0; $i < $averageRating; $i++)
                                             <i class="icon ni ni-star-fill"></i>
                                         @endfor
-                                        <br>
+                                        <br> --}}
 
                                         <a href="{{ route('show.perusahaan', $lowongan->company->company_id) }}"
                                             class="text-primary small">View company profile</a>
