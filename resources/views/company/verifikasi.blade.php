@@ -16,32 +16,34 @@
                         <th class="nk-tb-col export-col"><span class="sub-text">Isi Laporan</span></th>
                         <th class="nk-tb-col export-col"><span class="sub-text">Tanggal</span></th>
                         <th class="nk-tb-col export-col"><span class="sub-text">Status</span></th>
+                        <th class="nk-tb-col nk-tb-col-tools text-end"></th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($logs as $log)
                         <tr class="nk-tb-item">
                             <td class="nk-tb-col">
-                                <span>{{$loop->iteration}}</span>
+                                <span>{{ $loop->iteration }}</span>
                             </td>
                             <td class="nk-tb-col">
                                 <span>{{ $log->mahasiswa->user->name ?? '-' }}</span>
                             </td>
-                            {{-- <td class="nk-tb-col">
-                                <span>{{ $log->dosen->user->name ?? '-' }}</span>
-                            </td> --}}
                             <td class="nk-tb-col">
                                 <span>{!! Str::limit(strip_tags($log->report_text), 50) !!}</span>
                             </td>
                             <td class="nk-tb-col">
                                 <span>{{ $log->created_at->format('d M Y') }}</span>
                             </td>
-                            <td class="nk-tb-col nk-tb-col-tools">
+                            <td class="nk-tb-col">
                                 @if ($log->verif_company === 'Disetujui')
                                     <span>Verified</span>
                                 @elseif ($log->verif_company === 'Ditolak')
                                     <span>Ditolak</span>
-                                @else
+                                @elseif ($log->verif_company === 'Pending')
+                                    <span class="tb-status text-warning">Pending</span>
+                                @endif
+                            </td>
+                            <td class="nk-tb-col nk-tb-col-tools">
                                 <ul class="nk-tb-actions gx-1">
                                     <li>
                                         <div class="drodown">
@@ -49,13 +51,14 @@
                                                 data-bs-toggle="dropdown"><em class="icon ni ni-more-h"></em></a>
                                             <div class="dropdown-menu dropdown-menu-end">
                                                 <ul class="link-list-opt no-bdr">
-                                                    <li><a href="{{ route('company.verifikasi.show', $log->log_id)}}"><em class="icon ni ni-eye"></em><span>Lihat Detail</span></a></li>
+                                                    <li><a href="{{ route('company.verifikasi.show', $log->log_id) }}"><em
+                                                                class="icon ni ni-eye"></em><span>Lihat
+                                                                Detail</span></a></li>
                                                 </ul>
                                             </div>
                                         </div>
                                     </li>
                                 </ul>
-                                @endif
                             </td>
                         </tr>
                     @endforeach
