@@ -70,14 +70,6 @@
             <span class="nk-menu-text">Lowongan Magang</span>
         </a>
     </li>
-    <li class="nk-menu-item">
-        <a href="{{ route('pengajuan-magang.index') }}" class="nk-menu-link">
-            <span class="nk-menu-icon">
-                <em class="icon ni ni-file-text"></em>
-            </span>
-            <span class="nk-menu-text">Pengajuan Magang</span>
-        </a>
-    </li>
     <li class="nk-menu-item has-sub">
         <a href="{{ route('prodi.index') }}" class="nk-menu-link">
             <span class="nk-menu-icon">
@@ -163,6 +155,14 @@
                     <em class="icon ni ni-briefcase"></em>
                 </span>
                 <span class="nk-menu-text">Rekomendasi Lowongan</span>
+            </a>
+        </li>
+        <li class="nk-menu-item">
+            <a href="{{ route('lamaran') }}" class="nk-menu-link">
+                <span class="nk-menu-icon">
+                    <em class="icon ni ni-file-text"></em>
+                </span>
+                <span class="nk-menu-text">Pengajuan Magang</span>
             </a>
         </li>
     @endif
