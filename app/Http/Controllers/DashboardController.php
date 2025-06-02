@@ -28,10 +28,11 @@ class DashboardController extends Controller
             ->limit(5)
             ->get();
         $unreviewedLamarans = MagangApplication::with('mahasiswas')->where('status', 'pending')->get();
-        $mitras = Company::all()->sortByDesc(function ($mitra) {
-            return $mitra->getRating($mitra->company_id);
-        });
-        $lowongans = LowonganMagang::all();
+        // $mitras = Company::all()->sortByDesc(function ($mitra) {
+        //     return $mitra->getRating($mitra->company_id);
+        // });
+        $mitras = Company::all();
+        $lowongans = LowonganMagang::query()->limit(5)->get();
         return view('admin.dashboard.admin', compact('users', 'breadcrumb', 'unreviewedLamarans', 'mitras', 'lowongans'));
     }
 
@@ -82,7 +83,7 @@ class DashboardController extends Controller
                 $query->where('company_id', $companyId);
             })
             ->get();
-            
+
 
         return view('company.dashboard.company', compact('breadcrumb', 'unreviewedLamarans'));
     }
