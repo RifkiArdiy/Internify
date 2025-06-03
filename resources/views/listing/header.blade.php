@@ -152,30 +152,10 @@
         <div class="container">
             <div class="row justify-content-center text-center g-gs">
                 <div class="col-lg-8 col-md-10">
-                    @if ($currPage == 'lowongan')
-
-                        <div class="header-caption">
-                            <h1 class="header-title">Cari Lowongan Pekerjaan</h1>
-                            <p class="lead-text">Temukan lowongan kerja yang sesuai dengan keahlian dan minatmu.</p>
-                            @yield('header')
-                            <!-- Optional: Quick links -->
-                            <div class="mt-3">
-                                <span class="text-light small">Contoh: Programmer, Admin, Jakarta</span>
-                            </div>
-                    @elseif ($currPage == 'perusahaan')
-                            <div class="header-caption">
-                                <h1 class="header-title">Cari Perusahaan</h1>
-                                <p class="lead-text">Temukan Perusahaan yang sesuai dengan kebutuhanmu</p>
-                                @yield('header')
-                                <!-- Optional: Quick links -->
-                                <div class="mt-3">
-                                    <span class="text-light small">Contoh: PT. ABC, Jakarta</span>
-                                </div>
-                            </div><!-- .header-caption -->
-                        @endif
-                    </div><!-- .col -->
-                </div><!-- .row -->
-            </div><!-- .container -->
-        </div><!-- .header-content -->
+                    @yield('header')
+                </div><!-- .col -->
+            </div><!-- .row -->
+        </div><!-- .container -->
+    </div><!-- .header-content -->
 
 </header>
