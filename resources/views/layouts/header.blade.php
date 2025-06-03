@@ -62,7 +62,12 @@
                                 <div class="user-card">
                                     <div class="user-avatar">
                                         <span>
-                                            {{ strtoupper(collect(explode(' ', Auth::user()->name))->map(fn($word) => $word[0])->take(2)->implode('')) }}
+                                            @if (auth()->check() && auth()->user()->image)
+                                                <img src="{{ Storage::url('images/users/' . auth()->user()->image) }}"
+                                                    alt="{{ auth()->user()->name }}">
+                                            @else
+                                                {{ strtoupper(collect(explode(' ', Auth::user()->name))->map(fn($word) => $word[0])->take(2)->implode('')) }}
+                                            @endif
                                         </span>
                                     </div>
                                     <div class="user-info">
