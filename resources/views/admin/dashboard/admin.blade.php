@@ -97,11 +97,14 @@
                                     <img src="{{ Storage::url('images/users/' . $item->mahasiswas->user->image) }}"
                                         alt="{{ $item->mahasiswas->user->name }}">
                                 @else
-                                    <span>{{ strtoupper(substr($item->mahasiswas->user->name, 0, 2)) }}</span>
+                                    <span>
+                                        {{ strtoupper(collect(explode(' ', $item->mahasiswas->user->name))->map(fn($word) => $word[0])->take(2)->implode('')) }}
+                                    </span>
                                 @endif
                             </div>
                             <div class="nk-activity-data">
-                                <div class="label"><span>{{ $item->mahasiswas->user->name }}</span> menunggu di review</div>
+                                <div class="label"><span>{{ $item->mahasiswas->user->name }}</span> menunggu di review
+                                </div>
                                 <span class="time">{{ $item->created_at->diffForHumans() }}</span>
                             </div>
                         </li>
@@ -109,7 +112,99 @@
                 @endforeach
             </div><!-- .card -->
         </div><!-- .col -->
+        <div class="col-12">
+            <div class="card card-bordered card-preview">
+                <table class="table table-tranx">
+                    <thead>
+                        <tr class="tb-tnx-head">
+                            <th class="tb-tnx-info">
+                                <span class="tb-tnx-desc d-none d-sm-inline-block">
+                                    <span>Lowongan</span>
+                                </span>
+                                <span class="tb-tnx-date d-md-inline-block d-none">
+                                    <span class="d-none d-md-block">
+                                        <span>Perusahaan</span>
+                                        <span>Create at</span>
+                                    </span>
+                                </span>
+                            </th>
+                            <th class="tb-tnx-amount">
+                                <span class="tb-tnx-status d-none d-md-inline-block">Bidang</span>
+                            </th>
+                            <th class="tb-odr-action">&nbsp;</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($lowongans as $lowongan)
+                            <tr class="tb-tnx-item">
+                                <td class="tb-tnx-info">
+                                    <div class="tb-tnx-desc"><em class="icon ni ni-briefcase"></em>
+                                        <span class="title">{{ $lowongan->title }}</span>
+                                    </div>
+                                    <div class="tb-tnx-date">
+                                        <span class="date"><em class="icon ni ni-building-fill"></em>
+                                            {{ $lowongan->company->user->name }}
+                                        </span>
+                                        <span class="date">{{ $lowongan->created_at->diffForHumans() }}</span>
+                                    </div>
+                                </td>
+                                <td class="tb-tnx-amount">
+                                    <div class="tb-tnx-status">
+                                        <span>{{ $lowongan->kategori->name }}</span>
+                                    </div>
+                                </td>
+                                <td class="tb-odr-action">
+                                    <div class="tb-odr-btns d-none d-md-inline">
+                                        <a href="{{ route('show.lowongan', $lowongan->lowongan_id) }}"
+                                            class="btn btn-sm btn-primary">View</a>
+                                    </div>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    {{-- <div class="col-md-6 col-xxl-4">
+            <div class="card card-bordered card-full">
+                <div class="card-inner border-bottom">
+                    <div class="card-title-group">
+                        <div class="card-title">
+                            <h6 class="title">Perusahaan dengan rating</h6>
+                        </div>
+                    </div>
+                </div>
+                @foreach ($mitras as $mitra)
+                    @if ($mitra->getRating($mitra->company_id) != '0.0')
 
+                        <ul class="nk-activity">
+                            <li class="nk-activity-item">
+                                <div class="nk-activity-media user-avatar bg-teal-dim"><img src="./images/avatar/c-sm.jpg" alt="">
+                                    @if ($mitra->user->image)
+                                        <img src="{{ Storage::url('images/users/' . $mitra->user->image) }}"
+                                            alt="{{ $mitra->user->name }}">
+                                    @else
+                                        <span>
+                                            {{ strtoupper(collect(explode(' ', $mitra->user->name))->map(fn($word) => $word[0])->take(2)->implode('')) }}
+                                        </span>
+                                    @endif
+                                </div>
+                                <div class="user-info">
+                                    <span class="lead-text">{{ $mitra->user->name }}</span>
+                                    <span>
+                                        @for ($i = 0; $i < $mitra->getRating($mitra->company_id); $i++)
+                                            <i class="icon ni ni-star-fill" style="font-size: 24px; color: gold;"></i>
+                                        @endfor
+                                    </span>
+                                </div>
+
+                            </li>
+                        </ul>
+                    @endif
+                @endforeach
+            </div><!-- .card -->
+        </div><!-- .col --> --}}
     </div>
     {{-- <div class="card card-bordered card-preview">
         <h4>Lamaran yang menunggu review</h4>
@@ -123,14 +218,14 @@
             </thead>
             <tbody>
                 @foreach ($unreviewedLamarans as $item)
-                    <tr>
-                        <td>{{ $item->mahasiswas->user->name }}</td>
-                        <td>{{ $item->lowongans->title }}</td>
-                        <td><button onclick="window.location.href='{{ route('magangApplication.show', $item->magang_id) }}'"
-                                class="btn btn-success btn-sm">
-                                Lihat Detail
-                            </button></td>
-                    </tr>
+                <tr>
+                    <td>{{ $item->mahasiswas->user->name }}</td>
+                    <td>{{ $item->lowongans->title }}</td>
+                    <td><button onclick="window.location.href='{{ route('magangApplication.show', $item->magang_id) }}'"
+                            class="btn btn-success btn-sm">
+                            Lihat Detail
+                        </button></td>
+                </tr>
                 @endforeach
             </tbody>
         </table>
@@ -139,7 +234,7 @@
     {{-- <div class="card card-bordered card-preview">
         <h4>Daftar Perusahaan yang Bermitra</h4>
         @foreach ($mitras as $item)
-            <a href={{ route('companies.show', $item->company_id) }}>{{ $item->user->name }}</a>
+        <a href={{ route('companies.show', $item->company_id) }}>{{ $item->user->name }}</a>
         @endforeach
     </div> --}}
 
@@ -155,14 +250,14 @@
             </thead>
             <tbody>
                 @foreach ($lowongans as $item)
-                    <tr>
-                        <td>{{ $item->company->user->name }}</td>
-                        <td>{{ $item->title }}</td>
-                        <td><button onclick="window.location.href='{{ route('pengajuan-magang.show', $item->lowongan_id) }}'"
-                                class="btn btn-success btn-sm">
-                                Lihat Detail
-                            </button></td>
-                    </tr>
+                <tr>
+                    <td>{{ $item->company->user->name }}</td>
+                    <td>{{ $item->title }}</td>
+                    <td><button onclick="window.location.href='{{ route('pengajuan-magang.show', $item->lowongan_id) }}'"
+                            class="btn btn-success btn-sm">
+                            Lihat Detail
+                        </button></td>
+                </tr>
                 @endforeach
             </tbody>
         </table>

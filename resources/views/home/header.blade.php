@@ -37,7 +37,7 @@
                                         <div class="user-toggle">
                                             <div class="user-info d-none d-md-block">
                                                 <div class="menu-link nav-link">
-                                                    Hi..!! {{ Auth::user()->name }}
+                                                    Hello, {{ Auth::user()->name }}
                                                 </div>
                                             </div>
                                         </div>
@@ -46,7 +46,9 @@
                                         <div class="dropdown-inner user-card-wrap bg-lighter d-none d-md-block">
                                             <div class="user-card">
                                                 <div class="user-avatar">
-                                                    <span>{{ strtoupper(substr(Auth::user()->name, 0, 2)) }}</span>
+                                                    <span>
+                                                        {{ strtoupper(collect(explode(' ', Auth::user()->name))->map(fn($word) => $word[0])->take(2)->implode('')) }}
+                                                    </span>
                                                 </div>
                                                 <div class="user-info">
                                                     <span class="lead-text">{{ Auth::user()->name ?? 'Guest' }}</span>
@@ -109,12 +111,12 @@
                                                         </a>
                                                     </li>
                                                 @endif
-                                                <li>
+                                                {{-- <li>
                                                     <a href="html/user-profile-setting.html">
                                                         <em class="icon ni ni-setting-alt"></em>
                                                         <span>Account Setting</span>
                                                     </a>
-                                                </li>
+                                                </li> --}}
                                             </ul>
                                         </div>
                                         <div class="dropdown-inner py-3">
@@ -152,7 +154,7 @@
         <div class="container mt-n4 mt-lg-0">
             <div class="row flex-lg-row-reverse align-items-center justify-content-between g-gs">
                 <div class="col-lg-6 mb-lg-0">
-                    <div class="header-play text-lg-center">
+                    {{-- <div class="header-play text-lg-center">
                         <a class="play popup-video" href="{{ url('https://www.youtube.com/watch?v=SSo_EIwHSd4') }}">
                             <div class="styled-icon styled-icon-6x styled-icon-s5 text-warning">
                                 <svg x="0px" y="0px" viewBox="0 0 512 512" style="fill:currentColor"
@@ -166,7 +168,7 @@ c16.7,0,33.4-4.7,48.4-14l263.5-164.3c27-16.8,43.1-45.9,43.1-77.7S463.2,195.2,436
                             </div>
                             <div class="play-text">2:58 minutes</div>
                         </a>
-                    </div>
+                    </div> --}}
                 </div>
                 <!-- .col- -->
                 <div class="col-lg-6 col-md-10">

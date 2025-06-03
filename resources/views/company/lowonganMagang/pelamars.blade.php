@@ -12,9 +12,9 @@
             <table class="datatable-init-export nowrap nk-tb-list nk-tb-ulist" data-auto-responsive="false">
                 <thead>
                     <tr class="nk-tb-item nk-tb-head">
-                        <th class="nk-tb-col"><span class="sub-text">Mahasiswa</span></th>
-                        <th class="nk-tb-col tb-col-mb"><span class="sub-text">Lowongan</span></th>
-                        <th class="nk-tb-col tb-col-mb"><span class="sub-text">Proses</span></th>
+                        <th class="nk-tb-col export-col"><span class="sub-text">Mahasiswa</span></th>
+                        <th class="nk-tb-col tb-col-mb export-col"><span class="sub-text">Lowongan</span></th>
+                        <th class="nk-tb-col tb-col-mb export-col"><span class="sub-text">Proses</span></th>
                         <th class="nk-tb-col tb-col-mb"><span class="sub-text">Status</span></th>
                         <th class="nk-tb-col nk-tb-col-tools text-end"></th>
                     </tr>
@@ -29,7 +29,9 @@
                                             <img src="{{ Storage::url('images/users/' . $magang->mahasiswas->user->image) }}"
                                                 alt="{{ $magang->mahasiswas->user->name }}">
                                         @else
-                                            <span>{{ strtoupper(substr($magang->mahasiswas->user->name, 0, 2)) }}</span>
+                                            <span>
+                                                {{ strtoupper(collect(explode(' ', $magang->mahasiswas->user->name))->map(fn($word) => $word[0])->take(2)->implode('')) }}
+                                            </span>
                                         @endif
                                     </div>
                                     <div class="user-info">
@@ -52,7 +54,7 @@
                                 @endif
                             </td>
                             <td class="nk-tb-col nk-tb-col-tools">
-                               
+
 
                                 @if ($magang->status === 'Disetujui' || $magang->status === 'Ditolak')
                                     <span>Reviewed</span>
@@ -63,9 +65,8 @@
                                         @csrf
                                         @method('PUT')
                                         <input type="hidden" name="status" value="Disetujui">
-                                        <button type="submit" class="btn btn-link p-0 m-0 align-baseline text-light"
-                                            style="background: rgb(32, 155, 32)">
-                                            <span style="padding:5px;">Setuju</span></button>
+                                        <button type="submit" class="btn btn-sm btn-success">
+                                            <span>Setuju</span></button>
                                     </form>
 
                                     <form action="{{ route('company.magangApplication.update', $magang->magang_id) }}"
@@ -74,10 +75,10 @@
                                         @csrf
                                         @method('PUT')
                                         <input type="hidden" name="status" value="Ditolak">
-                                        <button type="submit" class="btn btn-link p-0 m-0 align-baseline text-light"
-                                            style="background: red;">
-                                            <span style="padding: 5px;">Tolak</span>
+                                        <button type="submit" class="btn btn-sm btn-danger">
+                                            <span>Tolak</span>
                                         </button>
+
                                     </form>
                                 @endif
                             </td>
@@ -89,7 +90,8 @@
                                                 data-bs-toggle="dropdown"><em class="icon ni ni-more-h"></em></a>
                                             <div class="dropdown-menu dropdown-menu-end">
                                                 <ul class="link-list-opt no-bdr">
-                                                    <li><a href="{{ route('company.magangApplication.show', $magang->magang_id) }}"><em
+                                                    <li><a
+                                                            href="{{ route('company.magangApplication.show', $magang->magang_id) }}"><em
                                                                 class="icon ni ni-eye"></em><span>Lihat
                                                                 Detail</span></a></li>
 

@@ -29,10 +29,12 @@
                             <td class="nk-tb-col">
                                 <div class="user-card">
                                     <div class="user-avatar bg-dark d-none d-sm-flex">
-                                        <span>{{ strtoupper(substr($item->name, 0, 2)) }}</span>
+                                        <span>
+                                            {{ strtoupper(collect(explode(' ', $item->name))->map(fn($word) => $word[0])->take(2)->implode('')) }}
+                                        </span>
                                     </div>
                                     <div class="user-info">
-                                        <span class="tb-lead">{{ $item->name }}<span
+                                        <span>{{ $item->name }}<span
                                                 class="dot dot-dark d-md-none ms-1"></span></span>
                                     </div>
                                 </div>

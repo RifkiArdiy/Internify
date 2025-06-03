@@ -13,7 +13,7 @@ class ProfileController extends Controller
         $user = auth()->user();
         $breadcrumb = (object) [
             'title' => 'Profile',
-            'subtitle' => ['Selamat datang di halaman profil ' . $user->name]
+            'subtitle' => 'Selamat datang di halaman profil ' . $user->name
         ];
 
         return view('profile.index', compact('user', 'breadcrumb'));

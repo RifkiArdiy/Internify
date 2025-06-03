@@ -17,11 +17,11 @@ class EvaluasiMagangController extends Controller
         $logs = Log::all();
         $breadcrumb = (object) [
             'title' => 'Evaluasi Magang',
-            'subtitle' => ['Jumlah Evaluasi Magang ' . EvaluasiMagang::count()]
+            'subtitle' => 'Jumlah Evaluasi Magang ' . EvaluasiMagang::count()
         ];
         $evaluations = EvaluasiMagang::with('mahasiswa', 'company')->latest()->get();
         return view('dosen.evaluasi.index', ['evaluasi' => $evaluations], compact('breadcrumb', 'logs'));
-    }  
+    }
 
     public function indexMhs()
     {
@@ -29,7 +29,7 @@ class EvaluasiMagangController extends Controller
 
         $breadcrumb = (object) [
             'title' => 'Evaluasi Magang',
-            'subtitle' => ['Jumlah Evaluasi Magang: ' . EvaluasiMagang::where('mahasiswa_id', $mahasiswa->mahasiswa_id)->count()]
+            'subtitle' => 'Jumlah Evaluasi Magang: ' . EvaluasiMagang::where('mahasiswa_id', $mahasiswa->mahasiswa_id)->count()
         ];
 
         $logs = Log::where('mahasiswa_id', $mahasiswa->mahasiswa_id)->get();
@@ -42,7 +42,8 @@ class EvaluasiMagangController extends Controller
         return view('mahasiswa.evaluasi.index', compact('evaluations', 'breadcrumb', 'logs'));
     }
 
-    public function showMhs($id){
+    public function showMhs($id)
+    {
         $evaluation = EvaluasiMagang::with('mahasiswa.user', 'company.user')->findOrFail($id);
         $mahasiswas = Mahasiswa::all();
         $companies = Company::all();
@@ -50,10 +51,9 @@ class EvaluasiMagangController extends Controller
 
         $breadcrumb = (object) [
             'title' => 'Detail Evaluasi Magang',
-            'subtitle' => ['Form Validation']
-        ]; 
+            'subtitle' => 'Form Validation'
+        ];
         return view('mahasiswa.evaluasi.show', compact('evaluation', 'mahasiswas', 'companies', 'logs', 'breadcrumb'));
-
     }
 
     public function create(Request $request)
@@ -67,9 +67,9 @@ class EvaluasiMagangController extends Controller
 
         $breadcrumb = (object) [
             'title' => 'Tambah Evaluasi Magang',
-            'subtitle' => ['Form Validation']
+            'subtitle' => 'Form Validation'
         ];
-        return view('dosen.evaluasi.create', compact('logId','logs','mahasiswas', 'companies', 'breadcrumb', 'mahasiswaId', 'companyId'));
+        return view('dosen.evaluasi.create', compact('logId', 'logs', 'mahasiswas', 'companies', 'breadcrumb', 'mahasiswaId', 'companyId'));
     }
 
         public function store(Request $request)
@@ -98,11 +98,10 @@ class EvaluasiMagangController extends Controller
 
         $breadcrumb = (object) [
             'title' => 'Edit Evaluasi Magang',
-            'subtitle' => ['Form Validation']
+            'subtitle' => 'Form Validation'
         ];
 
-        return view('dosen.evaluasi.edit', compact('evaluation','logId','logs','mahasiswas', 'companies', 'breadcrumb', 'mahasiswaId', 'companyId'));
-
+        return view('dosen.evaluasi.edit', compact('evaluation', 'logId', 'logs', 'mahasiswas', 'companies', 'breadcrumb', 'mahasiswaId', 'companyId'));
     }
 
 
@@ -147,5 +146,4 @@ class EvaluasiMagangController extends Controller
             'log_id' => $log->log_id,
         ]);
     }
-
 }

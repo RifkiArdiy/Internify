@@ -70,14 +70,6 @@
             <span class="nk-menu-text">Lowongan Magang</span>
         </a>
     </li>
-    <li class="nk-menu-item">
-        <a href="{{ route('pengajuan-magang.index') }}" class="nk-menu-link">
-            <span class="nk-menu-icon">
-                <em class="icon ni ni-file-text"></em>
-            </span>
-            <span class="nk-menu-text">Pengajuan Magang</span>
-        </a>
-    </li>
     <li class="nk-menu-item has-sub">
         <a href="{{ route('prodi.index') }}" class="nk-menu-link">
             <span class="nk-menu-icon">
@@ -166,11 +158,19 @@
     </li>
     @if (Auth::user()->mahasiswa->status == '-')
         <li class="nk-menu-item">
-            <a href="{{ route('lowongan-magang.indexMhs') }}" class="nk-menu-link">
+            <a href="{{ url('mahasiswa/alternatif') }}" class="nk-menu-link">
                 <span class="nk-menu-icon">
                     <em class="icon ni ni-briefcase"></em>
                 </span>
-                <span class="nk-menu-text">Lowongan Magang</span>
+                <span class="nk-menu-text">Rekomendasi Lowongan</span>
+            </a>
+        </li>
+        <li class="nk-menu-item">
+            <a href="{{ route('lamaran') }}" class="nk-menu-link">
+                <span class="nk-menu-icon">
+                    <em class="icon ni ni-file-text"></em>
+                </span>
+                <span class="nk-menu-text">Pengajuan Magang</span>
             </a>
         </li>
     @endif
@@ -198,6 +198,15 @@
                     <em class="icon ni ni-comments"></em>
                 </span>
                 <span class="nk-menu-text">Feedback Magang</span>
+            </a>
+        </li>
+        {{-- ntar ini dikasi status selesai_magang --}}
+        <li class="nk-menu-item">
+            <a href="{{ route('sertifikatMagang.index') }}" class="nk-menu-link">
+                <span class="nk-menu-icon">
+                    <em class="icon ni ni-notes-alt"></em>
+                </span>
+                <span class="nk-menu-text">Sertifikat Magang</span>
             </a>
         </li>
     @endif
@@ -242,5 +251,12 @@
             <span class="nk-menu-text">Lowongan Magang</span>
         </a>
     </li>
-
+    <li class="nk-menu-item">
+        <a href="{{ route('company.sertifikatMagang.index') }}" class="nk-menu-link">
+            <span class="nk-menu-icon">
+                <em class="icon ni ni-notes-alt"></em>
+            </span>
+            <span class="nk-menu-text">Sertifikat Magang</span>
+        </a>
+    </li>
 @endif

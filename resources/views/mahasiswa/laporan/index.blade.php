@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+@php use Illuminate\Support\Str; @endphp
 @section('action')
     <li class="nk-block-tools-opt">
         <a href="{{ route('laporan.create') }}" class="btn btn-primary">
@@ -20,7 +20,7 @@
                     <tr class="nk-tb-item nk-tb-head">
                         <th class="nk-tb-col export-col"><span class="sub-text">Perusahaan</span></th>
                         <th class="nk-tb-col export-col"><span class="sub-text">Dosen Pembimbing</span></th>
-                        <th class="nk-tb-col export-col"><span class="sub-text">Isi Laporan</span></th>
+                        <th class="nk-tb-col export-col"><span class="sub-text">Judul Laporan</span></th>
                         <th class="nk-tb-col export-col"><span class="sub-text">Tanggal</span></th>
                         <th class="nk-tb-col export-col d-none"><span class="sub-text">Verif Perusahaan</span></th>
                         <th class="nk-tb-col export-col d-none"><span class="sub-text">Verif Dosen</span></th>
@@ -31,13 +31,15 @@
                     @foreach ($logs as $log)
                         <tr class="nk-tb-item">
                             <td class="nk-tb-col">
-                                <span>{{ $log->companies->user->name ?? '-' }}</span>
+                                <span class="tb-amount"><em class="icon ni ni-building-fill"></em>
+                                    {{ $log->companies->user->name ?? '-' }}
+                                </span>
                             </td>
                             <td class="nk-tb-col">
-                                <span>{{ $log->dosen->user->name ?? '-' }}</span>
+                                <span class="tb-amount">{{ $log->dosen->user->name ?? '-' }}</span>
                             </td>
                             <td class="nk-tb-col">
-                                <span>{{ Str::limit($log->report_text, 50) }}</span>
+                                <span class="tb-amount">{{ $log->report_title }}</span>
                             </td>
                             <td class="nk-tb-col">
                                 <span>{{ $log->created_at->format('d M Y') }}</span>

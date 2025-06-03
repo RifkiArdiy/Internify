@@ -20,26 +20,27 @@ class DosenController extends Controller
         $dosens = Dosen::with('user')->get();
         $breadcrumb = (object) [
             'title' => 'Semua Dosen',
-            'subtitle' => ['Jumlah total Dosen yang terdaftar ' . $dosens->count()]
+            'subtitle' => 'Jumlah total Dosen yang terdaftar: ' . $dosens->count()
         ];
+
         return view('admin.dosen.index', compact('dosens', 'breadcrumb'));
     }
 
     public function indexVerifikasi()
-{
-    $dosen = auth()->user()->dosen;
+    {
+        $dosen = auth()->user()->dosen;
 
-    $logs = Log::with(['mahasiswa.user', 'dosen.user'])
-        ->where('dosen_id', $dosen->dosen_id) // filter hanya laporan milik dosen tersebut
-        ->latest()
-        ->get();
+        $logs = Log::with(['mahasiswa.user', 'dosen.user'])
+            ->where('dosen_id', $dosen->dosen_id) // filter hanya laporan milik dosen tersebut
+            ->latest()
+            ->get();
 
-    $breadcrumb = (object) [
-        'title' => 'Verifikasi Laporan Mahasiswa',
-        'subtitle' => ['Laporan Harian']
-    ];
-    return view('dosen.verifikasi', compact('breadcrumb','logs'));
-}
+        $breadcrumb = (object) [
+            'title' => 'Verifikasi Laporan Mahasiswa',
+            'subtitle' => 'Laporan Harian'
+        ];
+        return view('dosen.verifikasi', compact('breadcrumb', 'logs'));
+    }
 
 
     public function updateVerifikasi(Request $request, string $id)
@@ -58,9 +59,9 @@ class DosenController extends Controller
         $logs = Log::findOrFail($id);
         $breadcrumb = (object) [
             'title' => 'Detail Laporan',
-            'subtitle' => ['Detail Laporan Magang']
+            'subtitle' => 'Detail Laporan Magang'
         ];
-        return view('dosen.show', compact('breadcrumb','logs'));
+        return view('dosen.show', compact('breadcrumb', 'logs'));
     }
     /**
      * Show the form for creating a new resource.
@@ -70,7 +71,7 @@ class DosenController extends Controller
         //
         $breadcrumb = (object) [
             'title' => 'Tambah Dosen',
-            'subtitle' => ['Formulir Pengisian Data Dosen Baru']
+            'subtitle' => 'Formulir Pengisian Data Dosen Baru'
         ];
         return view('admin.dosen.create', compact('breadcrumb'));
     }
@@ -119,7 +120,7 @@ class DosenController extends Controller
 
         return redirect()->route('dosen.index')->with('success', 'Dosen berhasil ditambahkan.');
     }
-    
+
     /**
      * Display the specified resource.
      */
@@ -137,7 +138,7 @@ class DosenController extends Controller
         $dosen = Dosen::find($id);
         $breadcrumb = (object) [
             'title' => 'Edit Dosen',
-            'subtitle' => ['Edit Detail Dosen']
+            'subtitle' => 'Edit Detail Dosen'
         ];
         return view('admin.dosen.edit', compact('dosen', 'breadcrumb'));
     }

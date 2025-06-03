@@ -16,7 +16,7 @@ class CompanyController extends Controller
         $companies = Company::all();
         $breadcrumb = (object) [
             'title' => 'Company',
-            'subtitle' => ['Jumlah Perusahaan Mitra : ' . $companies->count()]
+            'subtitle' => 'Jumlah Perusahaan Mitra : ' . $companies->count()
         ];
         return view('admin.company.index', compact('companies', 'breadcrumb'));
     }
@@ -32,7 +32,7 @@ class CompanyController extends Controller
 
         $breadcrumb = (object) [
             'title' => 'Verifikasi Laporan Mahasiswa',
-            'subtitle' => ['Laporan Harian']
+            'subtitle' => 'Laporan Harian'
         ];
         return view('company.verifikasi', compact('breadcrumb', 'logs'));
     }
@@ -53,7 +53,7 @@ class CompanyController extends Controller
         $log = Log::findOrFail($id);
         $breadcrumb = (object) [
             'title' => 'Detail Laporan',
-            'subtitle' => ['Detail Laporan Magang']
+            'subtitle' => 'Detail Laporan Magang'
         ];
         return view('company.show', compact('breadcrumb', 'log'));
     }
@@ -63,7 +63,7 @@ class CompanyController extends Controller
         $companies = Company::all();
         $breadcrumb = (object) [
             'title' => 'Tambah Perusahaan Mitra',
-            'subtitle' => ['Formulir Pengisian Data Mitra Baru']
+            'subtitle' => 'Formulir Pengisian Data Mitra Baru'
         ];
         return view('admin.company.create', compact('companies', 'breadcrumb'));
     }
@@ -113,7 +113,7 @@ class CompanyController extends Controller
         $company = Company::findOrFail($id);
         $breadcrumb = (object) [
             'title' => 'Edit Perusahaan Mitra',
-            'subtitle' => ['Edit Detail Mitra']
+            'subtitle' => 'Edit Detail Mitra'
         ];
         return view('admin.company.edit', compact('company', 'breadcrumb'));
     }
@@ -184,7 +184,7 @@ class CompanyController extends Controller
         $comp = Company::find($id);
         $breadcrumb = (object) [
             'title' => $comp->user->name,
-            'subtitle' => ['Detail Perusahaan']
+            'subtitle' => 'Detail Perusahaan'
         ];
 
         return view('admin.company.show', compact('breadcrumb', 'comp'));

@@ -1,7 +1,11 @@
 <div class="nk-block-head-content">
     <h3 class="nk-block-title page-title">{{ $breadcrumb->title }}</h3>
     <div class="nk-block-des text-soft">
+<<<<<<< HEAD
         <p>{{ $breadcrumb->subtitle[0]}}</p>
+=======
+        <p>{{ $breadcrumb->subtitle }}</p>
+>>>>>>> 10eec9551813a6c8ca89cdf63cbebbf1af298bb2
     </div>
 </div>
 <!-- .nk-block-head-content -->

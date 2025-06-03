@@ -19,7 +19,7 @@ class UserController extends Controller
         $users = User::where('level_id', 1)->get();
         $breadcrumb = (object) [
             'title' => 'Semua Admin',
-            'subtitle' => ['Jumlah total Admin yang terdaftar ' . $users->where('level_id', 1)->count()]
+            'subtitle' => 'Jumlah total Admin yang terdaftar ' . $users->where('level_id', 1)->count()
         ];
         return view('admin.user.index', compact('levels', 'users', 'breadcrumb'));
     }
@@ -31,7 +31,7 @@ class UserController extends Controller
     {
         $breadcrumb = (object) [
             'title' => 'Tambah Admin',
-            'subtitle' => ['Formulir Pengisian Data Admin Baru']
+            'subtitle' => 'Formulir Pengisian Data Admin Baru'
         ];
         return view('admin.user.create', compact('breadcrumb'));
     }
@@ -87,7 +87,7 @@ class UserController extends Controller
         $user = User::find($id);
         $breadcrumb = (object) [
             'title' => 'Tambah Admin',
-            'subtitle' => ['Formulir Pengisian Data Admin Baru']
+            'subtitle' => 'Formulir Pengisian Data Admin Baru'
         ];
         return view('admin.user.edit', compact('user', 'breadcrumb'));
     }

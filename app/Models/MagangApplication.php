@@ -23,6 +23,6 @@ class MagangApplication extends Model
 
     public function lowongans(): BelongsTo
     {
-        return $this->belongsTo(LowonganMagang::class, 'lowongan_id');
+        return $this->belongsTo(LowonganMagang::class, 'lowongan_id', 'lowongan_id');
     }
 }

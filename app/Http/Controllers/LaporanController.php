@@ -15,7 +15,7 @@ class LaporanController extends Controller
     {
         $breadcrumb = (object) [
             'title' => 'Laporan',
-            'subtitle' => ['Laporan Harian']
+            'subtitle' => 'Laporan Harian'
         ];
         $user = Auth::user();
 
@@ -40,7 +40,7 @@ class LaporanController extends Controller
         $company = Company::all();
         $breadcrumb = (object) [
             'title' => 'Buat Laporan',
-            'subtitle' => ['Buat Laporan Magang']
+            'subtitle' => 'Buat Laporan Magang'
         ];
         return view('mahasiswa.laporan.create', compact('breadcrumb', 'mahasiswa', 'dosen', 'company'));
     }
@@ -52,6 +52,7 @@ class LaporanController extends Controller
             'mahasiswa_id' => 'required|exists:mahasiswas,mahasiswa_id',
             'dosen_id' => 'required|exists:dosens,dosen_id',
             'company_id' => 'required|exists:companies,company_id',
+            'report_title' => 'required|string',
             'report_text' => 'required|string',
         ]);
 
@@ -60,6 +61,7 @@ class LaporanController extends Controller
             'mahasiswa_id' => $request->mahasiswa_id,
             'dosen_id' => $request->dosen_id,
             'company_id' => $request->company_id,
+            'report_title' => $request->report_title,
             'report_text' => $request->report_text,
         ]);
 
@@ -80,7 +82,7 @@ class LaporanController extends Controller
         $company = Company::all();
         $breadcrumb = (object) [
             'title' => 'Edit Laporan',
-            'subtitle' => ['Edit Laporan Magang']
+            'subtitle' => 'Edit Laporan Magang'
         ];
         return view('mahasiswa.laporan.edit', compact('breadcrumb', 'logs', 'mahasiswa', 'dosen', 'company'));
     }
@@ -92,6 +94,7 @@ class LaporanController extends Controller
             'mahasiswa_id' => 'required|exists:mahasiswas,mahasiswa_id',
             'dosen_id' => 'required|exists:dosens,dosen_id',
             'company_id' => 'required|exists:companies,company_id',
+            'report_title' => 'required|string',
             'report_text' => 'required|string',
         ]);
 
@@ -103,6 +106,7 @@ class LaporanController extends Controller
             'mahasiswa_id' => $request->mahasiswa_id,
             'dosen_id' => $request->dosen_id,
             'company_id' => $request->company_id,
+            'report_title' => $request->report_title,
             'report_text' => $request->report_text,
         ]);
 
@@ -125,7 +129,7 @@ class LaporanController extends Controller
         $log = Log::findOrFail($id);
         $breadcrumb = (object) [
             'title' => 'Detail Laporan',
-            'subtitle' => ['Detail Laporan Magang']
+            'subtitle' => 'Detail Laporan Magang'
         ];
         return view('mahasiswa.laporan.show', compact('breadcrumb', 'log'));
     }

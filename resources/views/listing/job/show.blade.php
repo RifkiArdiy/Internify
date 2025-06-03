@@ -14,7 +14,8 @@
     <title>Home | Internify</title>
     <!-- StyleSheets  -->
     <link rel="stylesheet" href="{{ asset('assets/home/css/dashlite.css') }}">
-    {{-- <link rel="stylesheet" href="{{ asset('assets/admin/css/dashlite.css') }}"> --}}
+    {{--
+    <link rel="stylesheet" href="{{ asset('assets/admin/css/dashlite.css') }}"> --}}
     <link id="skin-default" rel="stylesheet" href="{{ asset('assets/home/css/theme.css') }}">
 </head>
 
@@ -63,7 +64,7 @@
                                                     <div class="user-toggle">
                                                         <div class="user-info d-none d-md-block">
                                                             <div class="menu-link nav-link">
-                                                                Hi..!! {{ Auth::user()->name }}
+                                                                Hello, {{ Auth::user()->name }}
                                                             </div>
                                                         </div>
                                                     </div>
@@ -73,7 +74,9 @@
                                                     <div class="dropdown-inner user-card-wrap bg-lighter d-none d-md-block">
                                                         <div class="user-card">
                                                             <div class="user-avatar">
-                                                                <span>{{ strtoupper(substr(Auth::user()->name, 0, 2)) }}</span>
+                                                                <span>
+                                                                    {{ strtoupper(collect(explode(' ', Auth::user()->name))->map(fn($word) => $word[0])->take(2)->implode('')) }}
+                                                                </span>
                                                             </div>
                                                             <div class="user-info">
                                                                 <span
@@ -138,12 +141,12 @@
                                                                     </a>
                                                                 </li>
                                                             @endif
-                                                            <li>
+                                                            {{-- <li>
                                                                 <a href="html/user-profile-setting.html">
                                                                     <em class="icon ni ni-setting-alt"></em>
                                                                     <span>Account Setting</span>
                                                                 </a>
-                                                            </li>
+                                                            </li> --}}
                                                         </ul>
                                                     </div>
                                                     <div class="dropdown-inner py-3">
@@ -180,14 +183,18 @@
                         <!-- Job Title and Action Buttons -->
                         <div class="d-flex flex-wrap align-items-center justify-content-between">
                             <div class="d-flex align-items-center">
-                                <div class="user-avatar sq lg bg-primary me-3">
-                                    @if ($lowongan->company->user->image)
+                                @if ($lowongan->company->user->image)
+                                    <div class="user-avatar lg me-3">
                                         <img src="{{ Storage::url('images/users/' . $lowongan->company->user->image) }}"
                                             alt="{{ $lowongan->company->user->name }}">
-                                    @else
-                                        <span>{{ strtoupper(substr($lowongan->company->user->name, 0, 2)) }}</span>
-                                    @endif
-                                </div>
+                                    </div>
+                                @else
+                                    <div class="user-avatar sq lg bg-primary me-3">
+                                        <span>
+                                            {{ strtoupper(collect(explode(' ', $lowongan->company->user->name))->map(fn($word) => $word[0])->take(2)->implode('')) }}
+                                        </span>
+                                    </div>
+                                @endif
                                 <div>
                                     <h4 class="mb-1">{{ $lowongan->title }}</h4>
                                     <ul class="list-inline list-split fs-14px text-soft">
@@ -199,13 +206,19 @@
                             </div>
                             <div class="d-flex g-2 mt-3 mt-md-0">
                                 @guest
-                                    {{-- <a href="{{ route('register') }}" class="btn btn-lg btn-primary">Daftar Akun untuk
-                                        melamar</a> --}}
                                     <a href="{{ route('login') }}" class="btn btn-lg btn-primary">Lamar Cepat</a>
                                 @endguest
+
                                 @auth
-                                    <a href="#" class="btn btn-lg btn-primary">Lamar Cepat</a>
+                                    @if (Auth::user()->level && Auth::user()->level->level_nama === 'Mahasiswa')
+                                        <form action="{{ route('buatLamaran', ['id' => $lowongan->lowongan_id]) }}"
+                                            method="POST" onsubmit="return confirm('Yakin ingin melamar lowongan ini?')">
+                                            @csrf
+                                            <button type="submit" class="btn btn-lg btn-primary">Lamar Cepat</button>
+                                        </form>
+                                    @endif
                                 @endauth
+
                             </div>
                         </div>
                     </div>
@@ -251,7 +264,8 @@
                                         <h5 class="title mb-3">Benefit</h5>
                                         <ul class="list list-sm text-soft">
                                             @foreach ($lowongan->benefits as $benefit)
-                                                {{-- <span class="badge badge-outline-primary">{{ $benefit->name }}</span> --}}
+                                                {{-- <span class="badge badge-outline-primary">{{ $benefit->name }}</span>
+                                                --}}
                                                 <li>{{ $benefit->name }}</li>
                                             @endforeach
                                         </ul>
@@ -286,11 +300,25 @@
                                 <div class="card card-bordered">
                                     <div class="card-inner text-center">
                                         <div class="d-flex justify-content-center mb-3">
-                                            <div class="user-avatar sq lg bg-indigo-dim">
-                                                <span>👤</span>
-                                            </div>
+                                            @if ($lowongan->company->user->image)
+                                                <div class="user-avatar lg">
+                                                    <img src="{{ Storage::url('images/users/' . $lowongan->company->user->image) }}"
+                                                        alt="{{ $lowongan->company->user->name }}">
+                                                </div>
+                                            @else
+                                                <div class="user-avatar lg bg-indigo">
+                                                    <span>
+                                                        {{ strtoupper(collect(explode(' ', $lowongan->company->user->name))->map(fn($word) => $word[0])->take(2)->implode('')) }}
+                                                    </span>
+                                                </div>
+                                            @endif
                                         </div>
                                         <h6 class="title mb-1">{{ $lowongan->company->user->name }}</h6>
+                                        {{-- @for ($i = 0; $i < $averageRating; $i++)
+                                            <i class="icon ni ni-star-fill"></i>
+                                        @endfor
+                                        <br> --}}
+
                                         <a href="{{ route('show.perusahaan', $lowongan->company->company_id) }}"
                                             class="text-primary small">View company profile</a>
                                         {{-- <ul class="list list-sm text-soft mt-3"> --}}
@@ -326,9 +354,18 @@
                                                         <div class="job">
                                                             <div class="job-head">
                                                                 <div class="job-title">
-                                                                    <div class="user-avatar sq bg-purple">
-                                                                        <span>DD</span>
-                                                                    </div>
+                                                                    @if ($job->company->user->image)
+                                                                        <div class="user-avatar">
+                                                                            <img src="{{ Storage::url('images/users/' . $job->company->user->image) }}"
+                                                                                alt="{{ $job->company->user->name }}">
+                                                                        </div>
+                                                                    @else
+                                                                        <div class="user-avatar sq">
+                                                                            <span>
+                                                                                {{ strtoupper(collect(explode(' ', $job->company->user->name))->map(fn($word) => $word[0])->take(2)->implode('')) }}
+                                                                            </span>
+                                                                        </div>
+                                                                    @endif
                                                                     <div class="job-info">
                                                                         <h6 class="title">{{ $job->title }}</h6>
                                                                         <span

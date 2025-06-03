@@ -8,7 +8,9 @@
         </a>
     </li>
 @endsection --}}
-
+@php
+    use Illuminate\Support\Str;
+@endphp
 @section('content')
     @if(session('success'))
         <div class="alert alert-success">{{ session('success') }}</div>
@@ -41,8 +43,8 @@
                                 <span>{{ $e->company->user->name ?? '-' }}</span>
                             </td>
                             <td class="nk-tb-col">
-                                <span>{{ $e->evaluasi }}</span>
-                            </td>
+                                <span>{!! Str::limit(strip_tags($e->evaluasi), 50) !!}</span>
+                            </td>                            
                             <td class="nk-tb-col nk-tb-col-tools">
                                 <ul class="nk-tb-actions gx-1">
                                     <li>

@@ -13,6 +13,16 @@
                 </div>
             @endif
 
+            <style>
+                #quill-editor, #quill-requirements {
+                    overflow-x: auto;
+                    word-wrap: break-word;
+                }
+                .ql-editor {
+                    word-break: break-word;
+                }
+            </style>
+
             <form method="POST" action="{{ route('companys-lowongan-magang.update', $logang->lowongan_id) }}">
                 @csrf
                 @method('PUT')
@@ -177,7 +187,7 @@
 
                     <div class="col-12">
                         <button type="submit" class="btn btn-primary mt-3">Update</button>
-                        <a href="{{ route('lowongan-magang.index') }}" class="btn btn-secondary mt-3">Kembali</a>
+                        <a href="{{ route('companys-lowongan-magang.index') }}" class="btn btn-secondary mt-3">Kembali</a>
                     </div>
                 </div>
             </form>
