@@ -141,12 +141,12 @@
                                                                     </a>
                                                                 </li>
                                                             @endif
-                                                            <li>
+                                                            {{-- <li>
                                                                 <a href="html/user-profile-setting.html">
                                                                     <em class="icon ni ni-setting-alt"></em>
                                                                     <span>Account Setting</span>
                                                                 </a>
-                                                            </li>
+                                                            </li> --}}
                                                         </ul>
                                                     </div>
                                                     <div class="dropdown-inner py-3">
@@ -206,29 +206,19 @@
                             </div>
                             <div class="d-flex g-2 mt-3 mt-md-0">
                                 @guest
-                                    {{-- <a href="{{ route('register') }}" class="btn btn-lg btn-primary">Daftar Akun untuk
-                                        melamar</a> --}}
                                     <a href="{{ route('login') }}" class="btn btn-lg btn-primary">Lamar Cepat</a>
                                 @endguest
-                                @auth
-                                    @if (Auth::user()->level_id == 2)
-                                        @php
-                                            $lamaran = Auth::user()
-                                                ->mahasiswa->applications->where('lowongan_id', $logang->lowongan_id)
-                                                ->first(); // Ambil lamaran mahasiswa untuk lowongan ini
-                                        @endphp
 
-                                        @if (!$lamaran)
-                                            <form action="{{ route('pengajuan-magang.storeMhs') }}" method="POST" class="ms-2"
-                                                onsubmit="return confirm('Yakin ingin melamar lowongan ini?')">
-                                                @csrf
-                                                <input type="hidden" name="lowongan_id" value="{{ $logang->lowongan_id }}">
-                                                <input type="hidden" name="status" value="Pending">
-                                                <button type="submit" class="btn btn-lg btn-primary">Lamar Cepat</button>
-                                            </form>
-                                        @endif
+                                @auth
+                                    @if (Auth::user()->level && Auth::user()->level->level_nama === 'Mahasiswa')
+                                        <form action="{{ route('buatLamaran', ['id' => $lowongan->lowongan_id]) }}"
+                                            method="POST" onsubmit="return confirm('Yakin ingin melamar lowongan ini?')">
+                                            @csrf
+                                            <button type="submit" class="btn btn-lg btn-primary">Lamar Cepat</button>
+                                        </form>
                                     @endif
                                 @endauth
+
                             </div>
                         </div>
                     </div>

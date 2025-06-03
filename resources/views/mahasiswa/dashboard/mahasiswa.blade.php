@@ -70,40 +70,44 @@
             </div>
             <div class="col-sm-6 col-lg-4 col-xxl-3">
                 <div class="card card-bordered h-100">
-                        <div class="card-inner">
-                            <div class="project">
-                                <div  class="project-head">
-                                    <div class="project-info">
-                                        <h6 class="title">{{$status}}</h6>
-                                        <span class="sub-text">Internify</span>
-                                    </div>
+                    <div class="card-inner">
+                        <div class="project">
+                            <div class="project-head">
+                                <div class="project-info">
+                                    <h6 class="title">{{ $status }}</h6>
+                                    <span class="sub-text">Internify</span>
                                 </div>
+                            </div>
                             <hr>
-            
+
                             @if ($magang)
                                 <p class="mb-1 text-muted">Tempat Magang:</p>
                                 <p class="fw-semibold">{{ $magang->lowongans->company->user->name }}</p>
-            
+
                                 <p class="mb-1 text-muted">Judul Magang:</p>
                                 <p class="fw-semibold">{{ $magang->lowongans->title }}</p>
-            
+
                                 <p class="mb-1 text-muted">Periode:</p>
                                 <p>
                                     <span class="fw-semibold">
-                                        {{ \Carbon\Carbon::parse($magang->lowongans->period->start_date)->translatedFormat('d M Y') }} -
+                                        {{ \Carbon\Carbon::parse($magang->lowongans->period->start_date)->translatedFormat('d M Y') }}
+                                        -
                                         {{ \Carbon\Carbon::parse($magang->lowongans->period->end_date)->translatedFormat('d M Y') }}
                                     </span>
                                 </p>
                             @else
                                 <p class="project-details">Anda belum memiliki magang aktif.</p>
-                                <p class="project-details">Silakan buka menu <a href="{{ route('lowongan-magang.indexMhs') }}">Lowongan Magang</a> untuk melamar.</p>
+                                <p class="project-details">Silakan buka menu Lowongan Magang untuk melamar.</p>
+                                <div class="text-end">
+                                    <a href="{{ route('list.lowongan') }}" class="btn btn-sm btn-primary">Cari Lowongan</a>
+                                </div>
                             @endif
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        </div>
+    </div>
     </div>
     <div class="nk-block">
         <div class="data-head">

@@ -43,7 +43,7 @@
                                 <span>{{ $e->company->user->name ?? '-' }}</span>
                             </td>
                             <td class="nk-tb-col">
-                                <span>{{ Str::limit($e->evaluasi, 50) }}</span>
+                                <span>{!! Str::limit(strip_tags($e->evaluasi), 50) !!}</span>
                             </td>                            
                             <td class="nk-tb-col nk-tb-col-tools">
                                 <ul class="nk-tb-actions gx-1">

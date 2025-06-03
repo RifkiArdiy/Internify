@@ -4,9 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\ProfilAkademik;
 use App\Models\LowonganMagang;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Support\Facades\Storage;
 
 class ProfilAkademikController extends Controller
 {
@@ -15,16 +16,14 @@ class ProfilAkademikController extends Controller
      */
     public function index()
     {
+        $user = auth()->user();
         $profilAkademik = ProfilAkademik::where('user_id', Auth::user()->user_id)->first();
         if (!$profilAkademik) {
             return redirect()->route('profil-akademik.create');
         }
-        $breadcrumb = (object) [
-            'title' => 'Profil Akademik Anda',
-            'subtitle' => ['Lihat detail profil akademik anda']
-        ];
+        $breadcrumb = (object) ['title' => null, 'subtitle' => null];
 
-        return view('mahasiswa.profilAkademik.index', compact('profilAkademik', 'breadcrumb'));
+        return view('mahasiswa.profilAkademik.index', compact('user', 'profilAkademik', 'breadcrumb'));
     }
 
     /**
@@ -32,15 +31,12 @@ class ProfilAkademikController extends Controller
      */
     public function create()
     {
-        $kriteria = LowonganMagang::select('requirements')
-            ->distinct()
-            ->pluck('requirements');
         $breadcrumb = (object) [
             'title' => 'Input Profile Akademik',
-            'subtitle' => ['Formulir pengisian data profile akademik anda']
+            'subtitle' => 'Formulir pengisian data profile akademik anda'
         ];
 
-        return view('mahasiswa.profilAkademik.create', compact('breadcrumb', 'kriteria'));
+        return view('mahasiswa.profilAkademik.create', compact('breadcrumb'));
     }
 
     /**
@@ -48,18 +44,35 @@ class ProfilAkademikController extends Controller
      */
     public function store(Request $request)
     {
-        ProfilAkademik::create([
-            'user_id' => Auth::user()->user_id,
-            'bidang_keahlian' => $request->bidang_keahlian,
-            'sertifikasi' => $request->sertifikasi,
-            'lokasi' => $request->lokasi,
-            'pengalaman' => $request->pengalaman,
-            'etika' => $request->etika,
-            'ipk' => str_replace(',', '.', $request->ipk),
+        $request->validate([
+            'ipk' => 'required|file|mimes:jpg,jpeg,png,pdf|max:2048',
+            'etika' => 'required|file|mimes:jpg,jpeg,png,pdf|max:2048',
+            'bidang_keahlian' => 'nullable|file|mimes:jpg,jpeg,png,pdf|max:2048',
+            'sertifikasi' => 'nullable|file|mimes:jpg,jpeg,png,pdf|max:2048',
+            'pengalaman' => 'nullable|file|mimes:jpg,jpeg,png,pdf|max:2048',
         ]);
+
+        $fields = ['bidang_keahlian', 'sertifikasi', 'pengalaman', 'etika', 'ipk'];
+        $data = ['user_id' => Auth::user()->user_id];
+
+        foreach ($fields as $field) {
+            if ($request->hasFile($field)) {
+                $file = $request->file($field);
+
+                // Simpan file ke storage
+                $filename = $file->getClientOriginalName();
+                $file->storeAs("profil-akademik/$field", $filename, 'public');
+
+                // Simpan hanya nama file ke database
+                $data[$field] = $filename;
+            }
+        }
+
+        ProfilAkademik::create($data);
 
         return redirect(route('profil-akademik.index'))->with('success', 'Profil Akademik berhasil ditambahkan');
     }
+
 
     /**
      * Display the specified resource.
@@ -74,36 +87,55 @@ class ProfilAkademikController extends Controller
      */
     public function edit()
     {
-        $profilAkademik = ProfilAkademik::where('user_id', Auth::user()->user_id)->first();
-        $kriteria = LowonganMagang::select('requirements')
-            ->distinct()
-            ->pluck('requirements');
+        $profil = ProfilAkademik::where('user_id', Auth::user()->user_id)->first();
         $breadcrumb = (object) [
             'title' => 'Edit Profil Akademik',
-            'subtitle' => ['Perbarui Profil Akademik Anda']
+            'subtitle' => 'Perbarui Profil Akademik Anda'
         ];
-
-        return view('mahasiswa.profilAkademik.edit', compact('profilAkademik', 'breadcrumb', 'kriteria'));
+        return view('mahasiswa.profilAkademik.edit', compact('profil', 'breadcrumb'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id)
     {
-        $profilAkademik = ProfilAkademik::find($id);
-        $profilAkademik->update([
-            'user_id' => Auth::user()->user_id,
-            'bidang_keahlian' => $request->bidang_keahlian,
-            'sertifikasi' => $request->sertifikasi,
-            'lokasi' => $request->lokasi,
-            'pengalaman' => $request->pengalaman,
-            'etika' => $request->etika,
-            'ipk' => str_replace(',', '.', $request->ipk),
+        $request->validate([
+            'bidang_keahlian' => 'nullable|file|mimes:jpg,jpeg,png,pdf|max:2048',
+            'sertifikasi'     => 'nullable|file|mimes:jpg,jpeg,png,pdf|max:2048',
+            'pengalaman'      => 'nullable|file|mimes:jpg,jpeg,png,pdf|max:2048',
+            'etika'           => 'nullable|file|mimes:jpg,jpeg,png,pdf|max:2048',
+            'ipk'             => 'nullable|file|mimes:jpg,jpeg,png,pdf|max:2048',
         ]);
 
-        return redirect(route('profil-akademik.index'));
+        $profil = ProfilAkademik::findOrFail($id);
+        $fields = ['bidang_keahlian', 'sertifikasi', 'pengalaman', 'etika', 'ipk'];
+
+        foreach ($fields as $field) {
+            if ($request->hasFile($field)) {
+                // Simpan file baru
+                $file = $request->file($field);
+                $filename = $file->getClientOriginalName();
+
+                $file->storeAs("profil-akademik/$field", $filename, 'public');
+
+                // Hapus file lama
+                if ($profil->$field) {
+                    Storage::disk('public')->delete("profil-akademik/$field/" . $profil->$field);
+                }
+
+                $profil->$field = $filename;
+            } else {
+                // Tidak upload baru, pakai file lama
+                $profil->$field = $request->input("old_$field");
+            }
+        }
+
+        $profil->save();
+
+        return redirect()->route('profil-akademik.index')->with('success', 'Profil berhasil diperbarui.');
     }
+
 
     /**
      * Remove the specified resource from storage.

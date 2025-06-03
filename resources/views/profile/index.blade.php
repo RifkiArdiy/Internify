@@ -55,7 +55,7 @@
                     </div>
                 </div><!-- .nk-block-head -->
                 <div class="nk-block">
-                    <div class="nk-data data-list">
+                    <div class="nk-data data-list row gy-3 gx-4">
                         <div class="data-head">
                             <h6 class="overline-title"></h6>
                         </div>
@@ -189,14 +189,6 @@
                                             class="icon ni ni-user-fill-c"></em><span>Profile Akademik</span></a>
                                 </li>
                             @endif
-                            {{-- <li><a href="html/user-profile-notification.html"><em
-                                        class="icon ni ni-bell-fill"></em><span>Notifications</span></a></li>
-                            <li><a href="html/user-profile-activity.html"><em
-                                        class="icon ni ni-activity-round-fill"></em><span>Account Activity</span></a></li>
-                            <li><a href="html/user-profile-setting.html"><em
-                                        class="icon ni ni-lock-alt-fill"></em><span>Security Settings</span></a></li>
-                            <li><a href="html/user-profile-social.html"><em
-                                        class="icon ni ni-grid-add-fill-c"></em><span>Connected with Social</span></a></li> --}}
                         </ul>
                     </div><!-- .card-inner -->
                 </div><!-- .card-inner-group -->

@@ -25,7 +25,7 @@ class MagangApplicationController extends Controller
             ->get();
         $breadcrumb = (object) [
             'title' => 'Pengajuan Magang',
-            'subtitle' => ['Jumlah Pelamar : ' . $magangs->count()]
+            'subtitle' => 'Jumlah Pelamar : ' . $magangs->count()
         ];
 
         return view('company.lamaranMagang.index', compact('magangs', 'breadcrumb'));
@@ -35,10 +35,10 @@ class MagangApplicationController extends Controller
     {
         $breadcrumb = (object) [
             'title' => 'Lamaran Magang',
-            'subtitle' => ['Review lamaran magang anda']
+            'subtitle' => 'Review lamaran magang anda'
         ];
-        
-        $logang = LowonganMagang::all();
+
+        $logangs = LowonganMagang::all();
         $mahasiswa = Mahasiswa::where('user_id', Auth::user()->user_id)->first();
 
         if ($mahasiswa) {
@@ -47,7 +47,7 @@ class MagangApplicationController extends Controller
             $magangs = collect(); // or handle error appropriately
         }
 
-        return view('mahasiswa.magangApplication.indexMhs', compact('magangs', 'breadcrumb', 'logang'));
+        return view('mahasiswa.pengajuanMagang.index', compact('magangs', 'breadcrumb', 'logangs'));
     }
 
     /**
@@ -69,7 +69,7 @@ class MagangApplicationController extends Controller
         }
 
         // Cek apakah user punya role mahasiswa (opsional tapi disarankan)
-        if ($mahasiswa->user->level->level_nama !== 'mahasiswa') {
+        if ($mahasiswa->user->level->level_nama !== 'Mahasiswa') {
             return redirect()->back()->with('error', 'Hanya mahasiswa yang dapat melamar.');
         }
 
@@ -93,34 +93,6 @@ class MagangApplicationController extends Controller
         return redirect(route('lamaran'))->with('success', 'Lamaran berhasil dikirim.');
     }
 
-    public function storeMhs(Request $request)
-    {
-        $user = Mahasiswa::where('user_id', Auth::user()->user_id)->first();
-
-        $mahasiswa = Mahasiswa::where('user_id', Auth::user()->user_id)->first();
-
-        // Cegah duplikat lamaran
-        $cek = MagangApplication::where('mahasiswa_id', $mahasiswa->mahasiswa_id)
-            ->where('lowongan_id', $request->lowongan_id)
-            ->first();
-
-        if ($cek) {
-            return redirect()->back()->with('success', 'Kamu sudah melamar lowongan ini.');
-        }
-
-        $request->validate([
-            'lowongan_id' => 'required|exists:lowongan_magangs,lowongan_id',
-        ]);
-
-        MagangApplication::create([
-            'mahasiswa_id' => $mahasiswa->mahasiswa_id,
-            'lowongan_id' => $request->lowongan_id,
-            'status' => 'Pending',
-        ]);
-
-        return redirect (route('lowongan-magang.indexMhs'))->with('success', 'Pengajuan berhasil dikirim.');
-    }
-
     /**
      * Display the specified resource.
      */
@@ -129,7 +101,7 @@ class MagangApplicationController extends Controller
         $magang = MagangApplication::find($id);
         $breadcrumb = (object) [
             'title' => 'Detail Lamaran',
-            'subtitle' => ['Lamaran ' . $magang->mahasiswas->name]
+            'subtitle' => 'Lamaran ' . $magang->mahasiswas->user->name
         ];
 
         return view('company.lamaranMagang.show', compact('breadcrumb', 'magang'));
@@ -172,9 +144,9 @@ class MagangApplicationController extends Controller
     {
         try {
             MagangApplication::destroy($id);
-            return redirect('company/magangApplication')->with('success', 'Data lamaran berhasil dihapus');
+            return redirect()->back()->with('success', 'Data lamaran berhasil dihapus');
         } catch (\Illuminate\Database\QueryException $e) {
-            return redirect('company/magangApplication')->with('error', 'Data lamaran gagal dihapus karena masih terdapat tabel lain yang terkait dengan data ini');
+            return redirect()->back()->with('error', 'Data lamaran gagal dihapus karena masih terkait dengan data lain');
         }
     }
 }

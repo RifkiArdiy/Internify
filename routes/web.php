@@ -111,14 +111,6 @@ Route::middleware(['auth'])->group(function () {
             Route::post('/kategoris/ajax-store', [KategoriController::class, 'store'])->name('kategoris.store');
         });
 
-        Route::prefix('pengajuan-magang')->group(callback: function () {
-            Route::get('/', [MagangApplicationController::class, 'index'])->name('pengajuan-magang.index');
-            Route::get('/show/{id}', [MagangApplicationController::class, 'show'])->name('pengajuan-magang.show');
-            Route::get('/edit/{id}', [MagangApplicationController::class, 'edit'])->name('pengajuan-magang.edit');
-            Route::put('/{id}', [MagangApplicationController::class, 'update'])->name('pengajuan-magang.update');
-            Route::get('/{id}', [MagangApplicationController::class, 'destroy'])->name('pengajuan-magang.destroy');
-        });
-
         Route::prefix('user')->group(function () {
             Route::get('/', [UserController::class, 'index'])->name('user.index');
             Route::get('/create', [UserController::class, 'create'])->name('user.create');
@@ -194,11 +186,6 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/show/{id}', [LaporanController::class, 'show'])->name('laporan.show');
         });
 
-        Route::prefix('lowongan')->group(function () {
-            Route::get('/', [LowonganMagangController::class, 'indexMhs'])->name('lowongan-magang.indexMhs');
-            Route::get('/show/{id}', [LowonganMagangController::class, 'showMhs'])->name('lowongan-magang.show');
-        });
-
         Route::prefix('sertifikatMagang')->group(callback: function () {
             Route::get('/', [SertifikatMagangController::class, 'indexMhs'])->name('sertifikatMagang.index');
             Route::get('/sertifikat/download/{id}', [SertifikatMagangController::class, 'downloadMhs'])->name('sertifikat.downloadMhs');
@@ -206,10 +193,8 @@ Route::middleware(['auth'])->group(function () {
 
         Route::prefix('pengajuan-magang')->group(function () {
             Route::get('/', [MagangApplicationController::class, 'indexMhs'])->name('lamaran');
-            Route::post('/buatLamaran', [MagangApplicationController::class, 'store'])->name('buatLamaran');
+            Route::post('/buatLamaran/{id}', [MagangApplicationController::class, 'store'])->name('buatLamaran');
             Route::delete('/{id}/hapusLamaran', [MagangApplicationController::class, 'destroy'])->name('hapusLamaran');
-            Route::get('/{id}/lihat', [MagangApplicationController::class, 'show'])->name('lihatLamaran');
-            Route::post('/lamar/store', [MagangApplicationController::class, 'storeMhs'])->name('pengajuan-magang.storeMhs');;
         });
 
         Route::get('evaluasi', [EvaluasiMagangController::class, 'indexMhs'])->name('evaluasi-index');
@@ -291,17 +276,13 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/get-districts', [WilayahController::class, 'getDistricts']);
         Route::get('/get-villages', [WilayahController::class, 'getVillages']);
 
-        Route::prefix('magangApplication')->group(callback: function () {
-            Route::get('/', [MagangApplicationController::class, 'index'])->name('company.magangApplication.index');
-            Route::get('/create', [MagangApplicationController::class, 'create'])->name('company.magangApplication.create');
-            Route::post('/store', [MagangApplicationController::class, 'store'])->name('company.magangApplication.store');
+        Route::prefix('pengajuan-magang')->group(callback: function () {
             Route::get('/show/{id}', [MagangApplicationController::class, 'show'])->name('company.magangApplication.show');
-            Route::get('/edit/{id}', [MagangApplicationController::class, 'edit'])->name('company.magangApplication.edit');
             Route::put('/{id}', [MagangApplicationController::class, 'update'])->name('company.magangApplication.update');
             Route::get('/{id}', [MagangApplicationController::class, 'destroy'])->name('company.magangApplication.destroy');
         });
 
-        Route::prefix('sertifikatMagang')->group(callback: function () {
+        Route::prefix('sertifikat-magang')->group(callback: function () {
             Route::get('/', [SertifikatMagangController::class, 'index'])->name('company.sertifikatMagang.index');
             Route::get('/create', [SertifikatMagangController::class, 'create'])->name('company.sertifikatMagang.create');
             Route::post('/store', [SertifikatMagangController::class, 'store'])->name('company.sertifikatMagang.store');

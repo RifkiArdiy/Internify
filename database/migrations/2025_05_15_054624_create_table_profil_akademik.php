@@ -14,12 +14,11 @@ return new class extends Migration
         Schema::create('profil_akademik', function (Blueprint $table) {
             $table->id('profile_id');
             $table->unsignedBigInteger('user_id')->index();
-            $table->text('bidang_keahlian');
-            $table->text('sertifikasi');
-            $table->text('lokasi');
-            $table->text('pengalaman');
-            $table->text('etika');
-            $table->float('ipk');
+            $table->string('bidang_keahlian')->nullable();
+            $table->string('sertifikasi')->nullable();
+            $table->string('pengalaman')->nullable();
+            $table->string('etika');
+            $table->string('ipk');
             $table->timestamps();
 
             $table->foreign('user_id')->references('user_id')->on('users')->onDelete('cascade');

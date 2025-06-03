@@ -15,7 +15,7 @@ class LaporanController extends Controller
     {
         $breadcrumb = (object) [
             'title' => 'Laporan',
-            'subtitle' => ['Laporan Harian']
+            'subtitle' => 'Laporan Harian'
         ];
         $user = Auth::user();
 
@@ -40,7 +40,7 @@ class LaporanController extends Controller
         $company = Company::all();
         $breadcrumb = (object) [
             'title' => 'Buat Laporan',
-            'subtitle' => ['Buat Laporan Magang']
+            'subtitle' => 'Buat Laporan Magang'
         ];
         return view('mahasiswa.laporan.create', compact('breadcrumb', 'mahasiswa', 'dosen', 'company'));
     }
@@ -80,7 +80,7 @@ class LaporanController extends Controller
         $company = Company::all();
         $breadcrumb = (object) [
             'title' => 'Edit Laporan',
-            'subtitle' => ['Edit Laporan Magang']
+            'subtitle' => 'Edit Laporan Magang'
         ];
         return view('mahasiswa.laporan.edit', compact('breadcrumb', 'logs', 'mahasiswa', 'dosen', 'company'));
     }
@@ -125,7 +125,7 @@ class LaporanController extends Controller
         $log = Log::findOrFail($id);
         $breadcrumb = (object) [
             'title' => 'Detail Laporan',
-            'subtitle' => ['Detail Laporan Magang']
+            'subtitle' => 'Detail Laporan Magang'
         ];
         return view('mahasiswa.laporan.show', compact('breadcrumb', 'log'));
     }

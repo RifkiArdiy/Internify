@@ -1,5 +1,7 @@
 @extends('listing.main')
 @section('header')
+    <h1 class="header-title">Cari Lowongan Pekerjaan</h1>
+    <p class="lead-text">Temukan lowongan kerja yang sesuai dengan keahlian dan minatmu.</p>
     <form action="{{ route('lowongan.search') }}" method="GET" class="mt-4">
         <div class="form-group">
             <div class="form-control-wrap d-flex flex-wrap justify-content-center">
@@ -11,6 +13,9 @@
             </div>
         </div>
     </form>
+    <div class="mt-3">
+        <span class="text-light small">Contoh: Programmer, Admin, Jakarta</span>
+    </div>
 @endsection
 @section('main')
     <div class="row g-gs">

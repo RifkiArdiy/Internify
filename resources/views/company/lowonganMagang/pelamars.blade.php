@@ -65,9 +65,8 @@
                                         @csrf
                                         @method('PUT')
                                         <input type="hidden" name="status" value="Disetujui">
-                                        <button type="submit" class="btn btn-link p-0 m-0 align-baseline text-light"
-                                            style="background: rgb(32, 155, 32)">
-                                            <span style="padding:5px;">Setuju</span></button>
+                                        <button type="submit" class="btn btn-sm btn-success">
+                                            <span>Setuju</span></button>
                                     </form>
 
                                     <form action="{{ route('company.magangApplication.update', $magang->magang_id) }}"
@@ -76,10 +75,10 @@
                                         @csrf
                                         @method('PUT')
                                         <input type="hidden" name="status" value="Ditolak">
-                                        <button type="submit" class="btn btn-link p-0 m-0 align-baseline text-light"
-                                            style="background: red;">
-                                            <span style="padding: 5px;">Tolak</span>
+                                        <button type="submit" class="btn btn-sm btn-danger">
+                                            <span>Tolak</span>
                                         </button>
+
                                     </form>
                                 @endif
                             </td>

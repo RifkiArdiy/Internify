@@ -24,8 +24,9 @@
 
         <div class="mb-3">
             <label for="report_text" class="form-label">Laporan Mahasiswa</label>
-            <input type="text" class="form-control" value="{{ $log->report_text ?? '-' }}" readonly>
+            <textarea class="form-control" rows="4" readonly>{{ strip_tags($log->report_text) }}</textarea>
         </div>
+
         
         <div class="mb-3">
             <label for="evaluasi" class="form-label">Evaluasi</label>

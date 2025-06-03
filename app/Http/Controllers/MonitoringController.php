@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Mahasiswa;
 use App\Models\Dosen;
+
 class MonitoringController extends Controller
 {
     public function index()
@@ -16,8 +17,8 @@ class MonitoringController extends Controller
         $rasio = $jumlahMahasiswaMagang / $jumlahDosenPembimbing;
         $breadcrumb = (object) [
             'title' => 'Monitoring',
-            'subtitle' => ['Halaman untuk memantau proses magang mahasiswa'],
+            'subtitle' => 'Halaman untuk memantau proses magang mahasiswa'
         ];
-        return view('admin.monitoring.index', compact('breadcrumb', 'mahasiswas', 'dosens','rasio' ,'jumlahMahasiswaMagang', 'jumlahDosenPembimbing'));
+        return view('admin.monitoring.index', compact('breadcrumb', 'mahasiswas', 'dosens', 'rasio', 'jumlahMahasiswaMagang', 'jumlahDosenPembimbing'));
     }
 }

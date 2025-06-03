@@ -15,7 +15,7 @@ class PeriodeMagangController extends Controller
         $pegang = PeriodeMagang::all();
         $breadcrumb = (object) [
             'title' => 'Periode Magang',
-            'subtitle' => ['Jumlah Periode Magang : ' . $pegang->count()]
+            'subtitle' => 'Jumlah Periode Magang : ' . $pegang->count()
         ];
 
         $pegang = PeriodeMagang::all();
@@ -29,7 +29,7 @@ class PeriodeMagangController extends Controller
     {
         $breadcrumb = (object) [
             'title' => 'Tambah Periode Magang',
-            'subtitle' => ['Formulir Pengisian Data Periode Magang Baru']
+            'subtitle' => 'Formulir Pengisian Data Periode Magang Baru'
         ];
 
         return view('admin.periodeMagang.create', compact('breadcrumb'));
@@ -65,7 +65,7 @@ class PeriodeMagangController extends Controller
 
         $breadcrumb = (object) [
             'title' => 'Edit Periode Magang',
-            'subtitle' => ['Perbarui Detail Periode Magang']
+            'subtitle' => 'Perbarui Detail Periode Magang'
         ];
 
         $pegang = PeriodeMagang::find($id);

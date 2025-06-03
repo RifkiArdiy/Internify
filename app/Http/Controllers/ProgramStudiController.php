@@ -19,7 +19,7 @@ class ProgramStudiController extends Controller
         }])->get();
         $breadcrumb = (object) [
             'title' => 'Program Studi',
-            'subtitle' => ['Jumlah Program Studi : ' . $prodi->count()]
+            'subtitle' => 'Jumlah Program Studi : ' . $prodi->count()
         ];
         return view('admin.prodi.index', compact('prodi', 'breadcrumb'));
     }
@@ -31,7 +31,7 @@ class ProgramStudiController extends Controller
     {
         $breadcrumb = (object) [
             'title' => 'Tambah Program Studi',
-            'subtitle' => ['Formulir Pengisian Data Program Studi Baru']
+            'subtitle' => 'Formulir Pengisian Data Program Studi Baru'
         ];
         return view('admin.prodi.create', compact('breadcrumb'));
     }
@@ -64,7 +64,7 @@ class ProgramStudiController extends Controller
         $prodi = ProgramStudi::find($id);
         $breadcrumb = (object) [
             'title' => 'Edit Program Studi',
-            'subtitle' => ['Edit Detail Program Studi']
+            'subtitle' => 'Edit Detail Program Studi'
         ];
         return view('admin.prodi.edit', compact('prodi', 'breadcrumb'));
     }

@@ -92,7 +92,7 @@ class SPKController extends Controller
 
         $breadcrumb = (object) [
             'title' => 'Rekomendasi Magang',
-            'subtitle' => ['Tabel Rekomendasi']
+            'subtitle' => 'Tabel Rekomendasi'
         ];
 
         return view('mahasiswa.spk.index', compact('results', 'kriterias', 'alternatifs', 'matrix', 'normal', 'breadcrumb'));

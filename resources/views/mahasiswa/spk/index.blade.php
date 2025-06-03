@@ -7,8 +7,7 @@
             <h4 class="mb-3">Matriks Awal (Nilai Alternatif)</h4>
             <table class="datatable-init-export nowrap nk-tb-list nk-tb-ulist" data-auto-responsive="false">
                 <thead>
-                    <tr>
-                        <th>Nama Mahasiswa</th>
+                    <tr>      
                         <th>Lowongan</th>
                         @foreach ($kriterias as $kriteria)
                             <th>{{ $kriteria->nama }}</th>
@@ -18,7 +17,6 @@
                 <tbody>
                     @foreach ($alternatifs as $alt)
                         <tr>
-                            <td>{{ $alt->mahasiswa->user->name }}</td>
                             <td>{{ $alt->lowongan->title }}</td>
                             @foreach ($kriterias as $kriteria)
                                 <td>{{ $matrix[$alt->alternatif_id][$kriteria->kriteria_id] }}</td>
@@ -36,8 +34,7 @@
             <h4 class="mb-3">Tabel Normalisasi</h4>
             <table class="datatable-init-export nowrap nk-tb-list nk-tb-ulist" data-auto-responsive="false">
                 <thead>
-                    <tr>
-                        <th>Nama Mahasiswa</th>
+                    <tr> 
                         <th>Lowongan</th>
                         @foreach ($kriterias as $kriteria)
                             <th>{{ $kriteria->nama }}</th>
@@ -47,7 +44,6 @@
                 <tbody>
                     @foreach ($alternatifs as $alt)
                         <tr>
-                            <td>{{ $alt->mahasiswa->user->name }}</td>
                             <td>{{ $alt->lowongan->title }}</td>
                             @foreach ($kriterias as $kriteria)
                                 <td>{{ number_format($normal[$alt->alternatif_id][$kriteria->kriteria_id], 4) }}</td>
@@ -67,7 +63,6 @@
                 <thead>
                     <tr>
                         <th>Peringkat</th>
-                        <th>Nama Mahasiswa</th>
                         <th>Lowongan</th>
                         <th>Total Skor</th>
                     </tr>
@@ -76,7 +71,6 @@
                     @foreach ($results as $index => $result)
                         <tr>
                             <td>{{ $index + 1 }}</td>
-                            <td>{{ $result['alternatif']->mahasiswa->user->name }}</td>
                             <td>{{ $result['alternatif']->lowongan->title }}</td>
                             <td>{{ number_format($result['total'], 4) }}</td>
                         </tr>
