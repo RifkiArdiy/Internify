@@ -4,7 +4,7 @@
     <div class="card card-bordered card-preview mb-4">
         <div class="card-inner">
             <h4 class="mb-3">Matriks Awal (Nilai Alternatif)</h4>
-            <table class="datatable-init table table-bordered">
+            <table class="datatable-init-export table table-bordered">
                 <thead>
                     <tr>
                         <th>Lowongan</th>
@@ -30,7 +30,7 @@
     <div class="card card-bordered card-preview mb-4">
         <div class="card-inner">
             <h4 class="mb-3">Normalisasi</h4>
-            <table class="datatable-init table table-bordered">
+            <table class="datatable-init-export table table-bordered">
                 <thead>
                     <tr>
                         <th>Lowongan</th>
@@ -56,7 +56,7 @@
     <div class="card card-bordered card-preview mb-4">
         <div class="card-inner">
             <h4 class="mb-3">Delta (|x* - x|)</h4>
-            <table class="datatable-init table table-bordered">
+            <table class="datatable-init-export table table-bordered">
                 <thead>
                     <tr>
                         <th>Lowongan</th>
@@ -82,7 +82,7 @@
     <div class="card card-bordered card-preview mb-4">
         <div class="card-inner">
             <h4 class="mb-3">Grey Relational Coefficient (GRC)</h4>
-            <table class="datatable-init table table-bordered">
+            <table class="datatable-init-export table table-bordered">
                 <thead>
                     <tr>
                         <th>Lowongan</th>
