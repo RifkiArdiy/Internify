@@ -21,10 +21,14 @@
                     <h6 class="mb-1 text-soft">Dosen Pembimbing</h6>
                     <p class="fw-bold">{{ $log->dosen->user->name ?? '-' }}</p>
                 </div>
+                <div class="col-md-6">
+                    <h6 class="mb-1 text-soft">Judul Laporan</h6>
+                    <p class="fw-bold">{{ $log->report_title ?? '-' }}</p>
+                </div>
                 <div class="col-12">
                     <h6 class="mb-1 text-soft">Laporan</h6>
                     <div class="border rounded p-3 bg-light">
-                        <div id="quill-report" style="height: 100px;">{!! old('report_text', $log->report_text) !!}</div>
+                        <div id="quill-report" style="height: 150px;">{!! old('report_text', $log->report_text) !!}</div>
                     </div>
                 </div>
                 <div class="col-md-6">
