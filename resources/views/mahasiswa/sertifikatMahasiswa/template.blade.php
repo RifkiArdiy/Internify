@@ -70,7 +70,7 @@
                 {{-- <p style="margin-top: 15px;">{{$deskripsi}}</p> --}}
                 <p style="margin-top: 20px;">Tanggal Diterbitkan: {{ $tanggal }}</p>
             </div>
-            <div class="footer">
+            <div class="footer" style="margin-top: -30px;">
                 &copy; {{ date('Y') }} Internify
             </div>
         </div>
