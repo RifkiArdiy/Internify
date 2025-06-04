@@ -24,7 +24,7 @@
                 <div class="col-12">
                     <h6 class="mb-1 text-soft">Laporan</h6>
                     <div class="border rounded p-3 bg-light">
-                        {!! nl2br(e($log->report_text)) !!}
+                        <div id="quill-report" style="height: 100px;">{!! old('report_text', $log->report_text) !!}</div>
                     </div>
                 </div>
                 <div class="col-md-6">

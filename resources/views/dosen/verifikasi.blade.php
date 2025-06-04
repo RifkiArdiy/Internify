@@ -15,7 +15,7 @@
                         </th>
                         <th class="nk-tb-col"><span class="sub-text">Mahasiswa</span></th>
                         {{-- <th class="nk-tb-col"><span class="sub-text">Dosen Pembimbing</span></th> --}}
-                        <th class="nk-tb-col"><span class="sub-text">Isi Laporan</span></th>
+                        <th class="nk-tb-col"><span class="sub-text">Judul Laporan</span></th>
                         <th class="nk-tb-col"><span class="sub-text">Tanggal</span></th>
                         <th class="nk-tb-col"><span class="sub-text">Status</span></th>
                     </tr>
@@ -33,7 +33,7 @@
                                 <span>{{ $log->dosen->user->name ?? '-' }}</span>
                             </td> --}}
                             <td class="nk-tb-col">
-                                <span>{{ Str::limit(Strip_tags($log->report_text, 50)) }}</span>
+                                <span>{{ Str::limit(Strip_tags($log->report_title, 50)) }}</span>
                             </td>
                             <td class="nk-tb-col">
                                 <span>{{ $log->created_at->format('d M Y') }}</span>
