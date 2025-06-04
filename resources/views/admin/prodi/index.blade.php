@@ -34,7 +34,7 @@
                                         </span>
                                     </div>
                                     <div class="user-info">
-                                        <span class="tb-lead">{{ $item->name }}<span
+                                        <span>{{ $item->name }}<span
                                                 class="dot dot-dark d-md-none ms-1"></span></span>
                                     </div>
                                 </div>

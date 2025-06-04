@@ -33,7 +33,7 @@
                                 <span>{{ $log->dosen->user->name ?? '-' }}</span>
                             </td> --}}
                             <td class="nk-tb-col">
-                                <span>{{ Str::limit($log->report_text, 50) }}</span>
+                                <span>{{ Str::limit(Strip_tags($log->report_text, 50)) }}</span>
                             </td>
                             <td class="nk-tb-col">
                                 <span>{{ $log->created_at->format('d M Y') }}</span>

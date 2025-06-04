@@ -156,7 +156,7 @@
                                 </span>
                             </th>
                             <th class="tb-tnx-amount">
-                                <span class="tb-tnx-status d-none d-md-inline-block">Status</span>
+                                <span class="tb-tnx-status d-none d-md-inline-block">Bidang</span>
                             </th>
                             <th class="tb-odr-action">&nbsp;</th>
                         </tr>
@@ -176,7 +176,7 @@
                                     </div>
                                 </td>
                                 <td class="tb-tnx-amount">
-                                    <div class="tb-tnx-total">
+                                    <div class="tb-tnx-status">
                                         <span>{{ $lowongan->kategori->name }}</span>
                                     </div>
                                 </td>

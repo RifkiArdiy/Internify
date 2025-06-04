@@ -167,6 +167,12 @@
         </li>
     @endif
     @if (Auth::user()->mahasiswa->status == 'is_magang')
+    @php
+        $application = Auth::user()->mahasiswa->applications->first(); // atau pakai filter jika perlu
+        $lowongan = $application ? $application->lowongans : null;
+    @endphp
+
+    @if($lowongan && $lowongan->period && $lowongan->period->end_date <= now())
         <li class="nk-menu-item">
             <a href="{{ route('laporan') }}" class="nk-menu-link">
                 <span class="nk-menu-icon">
@@ -184,23 +190,27 @@
                 <span class="nk-menu-text">Evaluasi Magang</span>
             </a>
         </li>
-        <li class="nk-menu-item">
-            <a href="{{ route('feedback-index') }}" class="nk-menu-link">
-                <span class="nk-menu-icon">
-                    <em class="icon ni ni-comments"></em>
-                </span>
-                <span class="nk-menu-text">Feedback Magang</span>
-            </a>
-        </li>
-        {{-- ntar ini dikasi status selesai_magang --}}
-        <li class="nk-menu-item">
-            <a href="{{ route('sertifikatMagang.index') }}" class="nk-menu-link">
-                <span class="nk-menu-icon">
-                    <em class="icon ni ni-notes-alt"></em>
-                </span>
-                <span class="nk-menu-text">Sertifikat Magang</span>
-            </a>
-        </li>
+        
+        @elseif ($lowongan && $lowongan->period && $lowongan->period->end_date >= now())
+            <li class="nk-menu-item">
+                <a href="{{ route('feedback-index') }}" class="nk-menu-link">
+                    <span class="nk-menu-icon">
+                        <em class="icon ni ni-comments"></em>
+                    </span>
+                    <span class="nk-menu-text">Feedback Magang</span>
+                </a>
+            </li>
+
+            <li class="nk-menu-item">
+                <a href="{{ route('sertifikatMagang.index') }}" class="nk-menu-link">
+                    <span class="nk-menu-icon">
+                        <em class="icon ni ni-notes-alt"></em>
+                    </span>
+                    <span class="nk-menu-text">Sertifikat Magang</span>
+                </a>
+            </li>
+        @endif
+
     @endif
     {{-- <li class="nk-menu-item">
         <a href="{{ route('lihatLamaran',Auth::user()->mahasiswa->mahasiswa_id) }}" class="nk-menu-link">
