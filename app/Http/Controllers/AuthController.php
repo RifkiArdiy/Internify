@@ -90,7 +90,7 @@ class AuthController extends Controller
             case 'Mahasiswa':
                 return response()->json([
                     'message' => 'Login berhasil sebagai Mahasiswa',
-                    'redirect' => route('welcome.index')
+                    'redirect' => route('mahasiswa.dashboard')
                 ]);
             case 'Company':
                 return response()->json([

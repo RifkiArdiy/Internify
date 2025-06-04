@@ -37,7 +37,7 @@
                                         <div class="user-toggle">
                                             <div class="user-info d-none d-md-block">
                                                 <div class="menu-link nav-link">
-                                                    Hi..!! {{ Auth::user()->name }}
+                                                    Hello, {{ Auth::user()->name }}
                                                 </div>
                                             </div>
                                         </div>

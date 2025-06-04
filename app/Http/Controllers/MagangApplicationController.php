@@ -98,14 +98,18 @@ class MagangApplicationController extends Controller
      */
     public function show(string $id)
     {
-        $magang = MagangApplication::find($id);
+        $magang = MagangApplication::findOrFail($id);
+
+        $profilAkademik = $magang->mahasiswas->user->profilAkademik;
+
         $breadcrumb = (object) [
             'title' => 'Detail Lamaran',
             'subtitle' => 'Lamaran ' . $magang->mahasiswas->user->name
         ];
 
-        return view('company.lamaranMagang.show', compact('breadcrumb', 'magang'));
+        return view('company.lamaranMagang.show', compact('breadcrumb', 'magang', 'profilAkademik'));
     }
+
 
     /**
      * Show the form for editing the specified resource.

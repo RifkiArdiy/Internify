@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @php
-use Illuminate\Support\Str;
+    use Illuminate\Support\Str;
 @endphp
 
 @section('action')
@@ -11,22 +11,28 @@ use Illuminate\Support\Str;
 @section('content')
     <div class="card card-bordered">
         <div class="card-inner">
-            <table class="table table-bordered">
+            <table class="datatable-init nowrap nk-tb-list nk-tb-ulist" data-auto-responsive="false">
                 <thead>
-                    <tr>
-                        <th>No</th>
-                        <th>Judul</th>
-                        <th>Deskripsi</th>
-                        <th>Aksi</th>
+                    <tr class="nk-tb-item nk-tb-head">
+                        <th class="nk-tb-col tb-col-md"><span class="sub-text">No</span></th>
+                        <th class="nk-tb-col tb-col-md"><span class="sub-text">Judul</span></th>
+                        <th class="nk-tb-col tb-col-md"><span class="sub-text">Deskripsi</span></th>
+                        <th class="nk-tb-col nk-tb-col-tools text-end"></th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($sertifikats as $index => $sertifikat)
-                        <tr>
-                            <td>{{ $index + 1 }}</td>
-                            <td>{{ $sertifikat->judul }}</td>
-                            <td>{{ Str::limit(strip_tags($sertifikat->deskripsi), 50) }}</td>
-                            <td>
+                    @foreach ($sertifikats as $index => $sertifikat)
+                        <tr class="nk-tb-item">
+                            <td class="nk-tb-col tb-col-md">
+                                <span class="tb-amount"> {{ $index + 1 }}</span>
+                            </td>
+                            <td class="nk-tb-col tb-col-md">
+                                <span class="tb-amount"> {{ $sertifikat->judul }}</span>
+                            </td>
+                            <td class="nk-tb-col tb-col-md"><span class="tb-amount">
+                                    {{ Str::limit(strip_tags($sertifikat->deskripsi), 50) }}</span>
+                            </td>
+                            <td class="nk-tb-col nk-tb-col-tools">
                                 <ul class="nk-tb-actions gx-1">
                                     <li>
                                         <div class="dropdown">
@@ -37,7 +43,8 @@ use Illuminate\Support\Str;
                                             <div class="dropdown-menu dropdown-menu-end">
                                                 <ul class="link-list-opt no-bdr">
                                                     <li>
-                                                        <a href="{{ route('company.sertifikatMagang.edit', $sertifikat->sertifikat_id) }}">
+                                                        <a
+                                                            href="{{ route('company.sertifikatMagang.edit', $sertifikat->sertifikat_id) }}">
                                                             <em class="icon ni ni-edit-alt"></em><span>Edit</span>
                                                         </a>
                                                     </li>
@@ -48,7 +55,8 @@ use Illuminate\Support\Str;
                                                     </li> --}}
                                                     <li class="divider"></li>
                                                     <li>
-                                                        <form action="{{ route('company.sertifikatMagang.destroy', $sertifikat->sertifikat_id) }}"
+                                                        <form
+                                                            action="{{ route('company.sertifikatMagang.destroy', $sertifikat->sertifikat_id) }}"
                                                             method="POST" style="display:inline;">
                                                             @csrf
                                                             @method('DELETE')

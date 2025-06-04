@@ -12,18 +12,15 @@ class SPKController extends Controller
     public function index()
     {
         $user = auth()->user();
-
-        // Ambil data mahasiswa yang sedang login
         $mahasiswa = $user->mahasiswa;
 
-        // Ambil hanya alternatif milik mahasiswa yang sedang login
         $alternatifs = Alternatif::with('mahasiswa.user', 'lowongan')
             ->where('mahasiswa_id', $mahasiswa->mahasiswa_id)
             ->get();
 
         $kriterias = Kriteria::all();
 
-        // Buat matriks nilai awal
+        // Matriks awal
         $matrix = [];
         foreach ($alternatifs as $alt) {
             foreach ($kriterias as $krit) {
@@ -34,67 +31,88 @@ class SPKController extends Controller
             }
         }
 
-        // Normalisasi nilai
-        // $normal = [];
-        // foreach ($kriterias as $krit) {
-        //     $col = array_column($matrix, $krit->kriteria_id);
-
-        //     $max = max($col);
-        //     $min = min($col);
-
-        //     foreach ($alternatifs as $alt) {
-        //         $value = $matrix[$alt->alternatif_id][$krit->kriteria_id];
-        //         if ($krit->jenis == 'benefit') {
-        //             $normal[$alt->alternatif_id][$krit->kriteria_id] = $max > 0 ? $value / $max : 0;
-        //         } else { // cost
-        //             $normal[$alt->alternatif_id][$krit->kriteria_id] = $value > 0 ? $min / $value : 0;
-        //         }
-        //     }
-        // }
-        // Normalisasi nilai
-        $normal = [];
+        // Normalisasi min-max (0-1)
+        $normalized = [];
         foreach ($kriterias as $krit) {
-            $col = array_column($matrix, $krit->kriteria_id);
-
-            if (empty($col)) {
-                continue; // lewati kriteria ini jika tidak ada datanya
-            }
-
-            $max = max($col);
-            $min = min($col);
+            $values = array_column($matrix, $krit->kriteria_id);
+            $min = min($values);
+            $max = max($values);
 
             foreach ($alternatifs as $alt) {
-                $value = $matrix[$alt->alternatif_id][$krit->kriteria_id] ?? 0;
-                if ($krit->jenis == 'benefit') {
-                    $normal[$alt->alternatif_id][$krit->kriteria_id] = $max > 0 ? $value / $max : 0;
+                $v = $matrix[$alt->alternatif_id][$krit->kriteria_id];
+                if ($max != $min) {
+                    if ($krit->jenis == 'benefit') {
+                        $normalized[$alt->alternatif_id][$krit->kriteria_id] = ($v - $min) / ($max - $min);
+                    } else { // cost
+                        $normalized[$alt->alternatif_id][$krit->kriteria_id] = ($max - $v) / ($max - $min);
+                    }
                 } else {
-                    $normal[$alt->alternatif_id][$krit->kriteria_id] = $value > 0 ? $min / $value : 0;
+                    $normalized[$alt->alternatif_id][$krit->kriteria_id] = 0;
                 }
             }
         }
 
+        // Ideal Reference: semua = 1
+        $reference = [];
+        foreach ($kriterias as $krit) {
+            $reference[$krit->kriteria_id] = 1;
+        }
 
-        // Hitung total skor akhir
-        $results = [];
+        // Hitung delta dan GRC
+        $zeta = 0.5;
+        $grc = [];
+        $deltas = [];
+
+        $allDeltas = [];
+        foreach ($alternatifs as $alt) {
+            foreach ($kriterias as $krit) {
+                $val = $normalized[$alt->alternatif_id][$krit->kriteria_id];
+                $ref = $reference[$krit->kriteria_id];
+                $delta = abs($ref - $val);
+                $allDeltas[] = $delta;
+            }
+        }
+
+        $deltaMin = min($allDeltas);
+        $deltaMax = max($allDeltas);
+
+        $grg = [];
         foreach ($alternatifs as $alt) {
             $total = 0;
             foreach ($kriterias as $krit) {
-                $total += $normal[$alt->alternatif_id][$krit->kriteria_id] * $krit->weight;
+                $val = $normalized[$alt->alternatif_id][$krit->kriteria_id];
+                $ref = $reference[$krit->kriteria_id];
+                $delta = abs($ref - $val);
+                $deltas[$alt->alternatif_id][$krit->kriteria_id] = $delta;
+
+                $grcVal = ($deltaMin + $zeta * $deltaMax) / ($delta + $zeta * $deltaMax);
+                $grc[$alt->alternatif_id][$krit->kriteria_id] = $grcVal;
+
+                $total += $grcVal * $krit->weight;
             }
-            $results[] = [
+
+            $grg[] = [
                 'alternatif' => $alt,
                 'total' => $total,
             ];
         }
 
-        // Urutkan dari skor tertinggi
-        usort($results, fn($a, $b) => $b['total'] <=> $a['total']);
+        usort($grg, fn($a, $b) => $b['total'] <=> $a['total']);
 
-        $breadcrumb = (object) [
+        $breadcrumb = (object)[
             'title' => 'Rekomendasi Magang',
-            'subtitle' => 'Tabel Rekomendasi'
+            'subtitle' => 'Perhitungan Metode GRA'
         ];
 
-        return view('mahasiswa.spk.index', compact('results', 'kriterias', 'alternatifs', 'matrix', 'normal', 'breadcrumb'));
+        return view('mahasiswa.spk.index', compact(
+            'alternatifs',
+            'kriterias',
+            'matrix',
+            'normalized',
+            'deltas',
+            'grc',
+            'grg',
+            'breadcrumb'
+        ));
     }
 }
