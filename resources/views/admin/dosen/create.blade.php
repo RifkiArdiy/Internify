@@ -57,7 +57,7 @@
                             <label class="form-label" for="nip">NIP:<span class="text-danger">*</span></label>
                             <div class="form-control-wrap">
                                 <input type="text" class="form-control" id="nip" name="nip"
-                                    placeholder="Masukkan Nomor Induk Pegawai (NIP)" required> value="{{ old('nip') }}"
+                                    placeholder="Masukkan Nomor Induk Pegawai (NIP)" required>{{ old('nip') }}
                             </div>
                         </div>
                     </div>

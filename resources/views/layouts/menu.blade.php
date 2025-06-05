@@ -1,3 +1,6 @@
+@php
+    use Carbon\Carbon;
+@endphp
 @if (Auth::user()->level->level_nama == 'Administrator')
     <li class="nk-menu-heading">
         <h6 class="overline-title text-primary-alt">Dashboards</h6>
@@ -167,12 +170,15 @@
         </li>
     @endif
     @if (Auth::user()->mahasiswa->status == 'is_magang')
-        @php
-            $application = Auth::user()->mahasiswa->applications->first(); // atau pakai filter jika perlu
+        {{-- @php
+            $application = Auth::user()->mahasiswa->applications->first();
             $lowongan = $application ? $application->lowongans : null;
+
+            $endDate = $lowongan && $lowongan->period ? Carbon::parse($lowongan->period->end_date) : null;
+
         @endphp
 
-        @if ($lowongan && $lowongan->period && $lowongan->period->end_date <= now())
+        @if ($endDate && $endDate <= now()) --}}
             <li class="nk-menu-item">
                 <a href="{{ route('laporan') }}" class="nk-menu-link">
                     <span class="nk-menu-icon">
@@ -190,7 +196,7 @@
                     <span class="nk-menu-text">Evaluasi Magang</span>
                 </a>
             </li>
-        @elseif ($lowongan && $lowongan->period && $lowongan->period->end_date >= now())
+        {{-- @elseif ($endDate && $endDate > now()) --}}
             <li class="nk-menu-item">
                 <a href="{{ route('feedback-index') }}" class="nk-menu-link">
                     <span class="nk-menu-icon">
@@ -208,7 +214,7 @@
                     <span class="nk-menu-text">Sertifikat Magang</span>
                 </a>
             </li>
-        @endif
+        {{-- @endif --}}
 
     @endif
 @endif
