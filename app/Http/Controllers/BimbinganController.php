@@ -54,8 +54,8 @@ class BimbinganController extends Controller
         ];
 
         $mahasiswa = Auth::user()->mahasiswa;
-        if (!$mahasiswa->profil_akademik || !$mahasiswa->profil_akademik->is_valid) {
-            return redirect()->route('dashboard')->with('error', 'Selesaikan Pendataan terlebih dahulu.');
+        if (!$mahasiswa->profil_akademik || !$mahasiswa->profil_akademik->isProfilLengkap) {
+            return redirect()->route('mahasiswa.dashboard')->with('error', 'Selesaikan Pendataan terlebih dahulu.');
         }
 
         $magang = MagangApplication::with('lowongans.company')->where('mahasiswa_id', auth()->user()->mahasiswa->mahasiswa_id)->where('status', 'Disetujui')->first();
