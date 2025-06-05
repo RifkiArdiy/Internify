@@ -76,7 +76,14 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id) {}
+    public function show(string $id) {
+        $user = User::findOrFail($id);
+        $breadcrumb = (object) [
+            'title' => 'Detail Admin',
+            'subtitle' => 'Detail Informasi Admin ' . $user->name
+        ];
+        return view('admin.user.show', compact('user', 'breadcrumb'));
+    }
 
     /**
      * Show the form for editing the specified resource.

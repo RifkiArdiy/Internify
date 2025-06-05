@@ -126,7 +126,12 @@ class DosenController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $dosen = Dosen::with('user')->findOrFail($id);
+        $breadcrumb = (object) [
+            'title' => 'Detail Dosen',
+            'subtitle' => 'Detail Informasi Dosen ' . $dosen->user->name
+        ];
+        return view('admin.dosen.show', compact('dosen', 'breadcrumb'));
     }
 
     /**
