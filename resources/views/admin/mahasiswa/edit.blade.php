@@ -59,7 +59,7 @@
                         <div class="form-group">
                             <label class="form-label" for="nim">NIM:<span class="text-danger">*</span></label>
                             <div class="form-control-wrap">
-                                <input type="text" class="form-control" id="nim" name="nim"
+                                <input type="number" class="form-control" id="nim" name="nim"
                                     value="{{ $mahasiswa->nim }}" required>
                             </div>
                         </div>
@@ -68,7 +68,7 @@
                         <div class="form-group">
                             <label class="form-label" for="no_telp">No Telepon:</label>
                             <div class="form-control-wrap">
-                                <input type="text" class="form-control" id="no_telp" name="no_telp"
+                                <input type="number" class="form-control" id="no_telp" name="no_telp"
                                     value="{{ $mahasiswa->user->no_telp }}">
                             </div>
                         </div>

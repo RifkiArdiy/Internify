@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AlternatifController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BenefitController;
+use App\Http\Controllers\BimbinganController;
 use App\Http\Controllers\ProgramStudiController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DosenController;
@@ -186,6 +187,12 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/show/{id}', [LaporanController::class, 'show'])->name('laporan.show');
         });
 
+        Route::prefix('bimbingan')->group(callback: function () {
+            Route::get('/', [BimbinganController::class, 'index'])->name('bimbingan.index');
+            Route::get('/create', [BimbinganController::class, 'create'])->name('bimbingan.create');
+            Route::post('/store', [BimbinganController::class, 'store'])->name('bimbingan.store');
+        });
+
         Route::prefix('sertifikatMagang')->group(callback: function () {
             Route::get('/', [SertifikatMagangController::class, 'indexMhs'])->name('sertifikatMagang.index');
             Route::get('/sertifikat/download/{id}', [SertifikatMagangController::class, 'downloadMhs'])->name('sertifikat.downloadMhs');
@@ -262,6 +269,12 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/verifikasi', [DosenController::class, 'indexVerifikasi'])->name('dosen.verifikasi');
         Route::put('/verifikasi/{id}', [DosenController::class, 'updateVerifikasi'])->name('dosen.verifikasi.update');
         Route::get('/verifikasi/show/{id}', [DosenController::class, 'showLaporan'])->name('dosen.verifikasi.show');
+
+        Route::prefix('bimbingan')->group(callback: function () {
+            Route::get('/list', [BimbinganController::class, 'list'])->name('bimbingan.list');
+            Route::get('/show/{id}', [BimbinganController::class, 'show'])->name('bimbingan.show');
+            Route::put('/status/{id}', [BimbinganController::class, 'updateStatus'])->name('bimbingan.updateStatus');
+        });
     });
 
     Route::prefix('company')->middleware('role:Company')->group(function () {

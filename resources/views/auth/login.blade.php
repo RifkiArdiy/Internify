@@ -58,8 +58,6 @@
                                     <div class="form-group">
                                         <div class="form-label-group">
                                             <label class="form-label" for="username">Email or Username</label>
-                                            <a class="link link-primary link-sm" tabindex="-1" href="#">Need
-                                                Help?</a>
                                         </div>
                                         <div class="form-control-wrap">
                                             <input autocomplete="off" type="text" name="username" id="username"
@@ -70,8 +68,6 @@
                                     <div class="form-group">
                                         <div class="form-label-group">
                                             <label class="form-label" for="password">Password</label>
-                                            <a class="link link-primary link-sm" tabindex="-1"
-                                                href="html/pages/auths/auth-reset.html">Forgot Code?</a>
                                         </div>
                                         <div class="form-control-wrap">
                                             <a tabindex="-1" href="#"
@@ -89,74 +85,13 @@
                                         <button class="btn btn-lg btn-primary btn-block">Sign in</button>
                                     </div>
                                 </form><!-- form -->
-                                <div class="form-note-s2 pt-4"> New on our platform? <a
+                                <div class="form-note-s2 pt-4"> New on our App? <a
                                         href="{{ route('register') }}">Create an account</a>
-                                </div>
-                                <div class="text-center pt-4 pb-3">
-                                    <h6 class="overline-title overline-title-sap"><span>OR</span></h6>
-                                </div>
-                                <ul class="nav justify-center gx-4">
-                                    <li class="nav-item"><a class="nav-link" href="#">Facebook</a></li>
-                                    <li class="nav-item"><a class="nav-link" href="#">Google</a></li>
-                                </ul>
-                                <div class="text-center mt-5">
-                                    <span class="fw-500">I don't have an account? <a href="#">Try 15 days
-                                            free</a></span>
                                 </div>
                             </div><!-- .nk-block -->
                             <div class="nk-block nk-auth-footer">
-                                <div class="nk-block-between">
-                                    <ul class="nav nav-sm">
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="#">Terms & Condition</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="#">Privacy Policy</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="#">Help</a>
-                                        </li>
-                                        <li class="nav-item dropup">
-                                            <a class="dropdown-toggle dropdown-indicator has-indicator nav-link text-base"
-                                                data-bs-toggle="dropdown"
-                                                data-offset="0,10"><small>English</small></a>
-                                            <div class="dropdown-menu dropdown-menu-sm dropdown-menu-right">
-                                                <ul class="language-list">
-                                                    <li>
-                                                        <a href="#" class="language-item">
-                                                            <img src="{{ asset('assets/home/images/flags/english.png') }}"
-                                                                alt="" class="language-flag">
-                                                            <span class="language-name">English</span>
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#" class="language-item">
-                                                            <img src="{{ asset('assets/home/images/flags/spanish.png') }}"
-                                                                alt="" class="language-flag">
-                                                            <span class="language-name">Español</span>
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#" class="language-item">
-                                                            <img src="{{ asset('assets/home/images/flags/french.png') }}"
-                                                                alt="" class="language-flag">
-                                                            <span class="language-name">Français</span>
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#" class="language-item">
-                                                            <img src="{{ asset('assets/home/images/flags/turkey.png') }}"
-                                                                alt="" class="language-flag">
-                                                            <span class="language-name">Türkçe</span>
-                                                        </a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </li>
-                                    </ul><!-- .nav -->
-                                </div>
-                                <div class="mt-3">
-                                    <p>&copy; 2023 DashLite. All Rights Reserved.</p>
+                                <div>
+                                    <p>&copy; 2025 Internify. All Rights Reserved.</p>
                                 </div>
                             </div><!-- .nk-block -->
                         </div><!-- .nk-split-content -->
@@ -164,55 +99,23 @@
                             data-toggle-body="true" data-content="athPromo" data-toggle-screen="lg"
                             data-toggle-overlay="true">
                             <div class="slider-wrap w-100 w-max-550px p-3 p-sm-5 m-auto">
-                                <div class="slider-init" data-slick='{"dots":true, "arrows":false}'>
+                                {{-- <div class="slider-init" data-slick='{"dots":true, "arrows":false}'> --}}
                                     <div class="slider-item">
                                         <div class="nk-feature nk-feature-center">
                                             <div class="nk-feature-img">
-                                                <img class="round"
-                                                    src="{{ asset('assets/home/images/slides/promo-a.png') }}"
-                                                    srcset="{{ asset('assets/home/images/slides/promo-a2x.png') }}"
+                                                <img class="round" style="width: 100%; height: auto;"
+                                                    src="{{ asset('storage/images/dashboard/image.png') }}"
+                                                    srcset="{{ asset('storage/images/dashboard/image.png') }}"
                                                     alt="">
                                             </div>
                                             <div class="nk-feature-content py-4 p-sm-5">
                                                 <h4>Internify</h4>
-                                                <p>You can start to create your products easily with its user-friendly
-                                                    design & most completed responsive layout.</p>
+                                                <p>Sistem Manajemen Magang modern untuk institusi, mahasiswa, dan mitra industri.</p>
                                             </div>
                                         </div>
                                     </div><!-- .slider-item -->
-                                    <div class="slider-item">
-                                        <div class="nk-feature nk-feature-center">
-                                            <div class="nk-feature-img">
-                                                <img class="round"
-                                                    src="{{ asset('assets/home/images/slides/promo-b.png') }}"
-                                                    srcset="{{ asset('assets/home/images/slides/promo-b2x.png') }}"
-                                                    alt="">
-                                            </div>
-                                            <div class="nk-feature-content py-4 p-sm-5">
-                                                <h4>Internify</h4>
-                                                <p>You can start to create your products easily with its user-friendly
-                                                    design & most completed responsive layout.</p>
-                                            </div>
-                                        </div>
-                                    </div><!-- .slider-item -->
-                                    <div class="slider-item">
-                                        <div class="nk-feature nk-feature-center">
-                                            <div class="nk-feature-img">
-                                                <img class="round"
-                                                    src="{{ asset('assets/home/images/slides/promo-c.png') }}"
-                                                    srcset="{{ asset('assets/home/images/slides/promo-c2x.png') }}"
-                                                    alt="">
-                                            </div>
-                                            <div class="nk-feature-content py-4 p-sm-5">
-                                                <h4>Internify</h4>
-                                                <p>You can start to create your products easily with its user-friendly
-                                                    design & most completed responsive layout.</p>
-                                            </div>
-                                        </div>
-                                    </div><!-- .slider-item -->
+                                    {{-- </div><!-- .slider-item --> --}}
                                 </div><!-- .slider-init -->
-                                <div class="slider-dots"></div>
-                                <div class="slider-arrows"></div>
                             </div><!-- .slider-wrap -->
                         </div><!-- .nk-split-content -->
                     </div><!-- .nk-split -->

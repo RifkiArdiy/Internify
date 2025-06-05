@@ -49,8 +49,8 @@ class MahasiswaController extends Controller
             'email' => 'required|string|email|max:255|unique:users,email',
             'password' => 'required|string|min:6',
             'nim' => 'required|string|min:10|unique:mahasiswas,nim',
-            'no_telp' => 'nullable|string|max:20',
-            'alamat' => 'nullable|string',
+            'no_telp' => 'nullable|string|max:15',
+            'alamat' => 'nullable|string|max:100|min:10',
             'prodi_id' => 'required|integer|exists:program_studis,prodi_id',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
@@ -94,7 +94,12 @@ class MahasiswaController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $mahasiswa = Mahasiswa::with('user', 'prodi')->findOrFail($id);
+        $breadcrumb = (object) [
+            'title' => 'Detail Mahasiswa',
+            'subtitle' => 'Detail Informasi Mahasiswa ' . $mahasiswa->user->name
+        ];
+        return view('admin.mahasiswa.show', compact('mahasiswa', 'breadcrumb'));
     }
 
     /**
@@ -126,8 +131,8 @@ class MahasiswaController extends Controller
             'email' => 'required|unique:users,email,' . $user->user_id . ',user_id',
             'nim' => 'required|unique:mahasiswas,nim,' . $mahasiswa->mahasiswa_id . ',mahasiswa_id',
             'prodi_id' => 'required|exists:program_studis,prodi_id',
-            'no_telp' => 'nullable',
-            'alamat' => 'nullable',
+            'no_telp' => 'nullable|max:15',
+            'alamat' => 'nullable|min:10|max:100',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
@@ -183,4 +188,5 @@ class MahasiswaController extends Controller
             return redirect()->route('mahasiswa.index')->with('error', 'Mahasiswa ' . $mahasiswa->user->name . ' gagal dihapus karena masih digunakan');
         }
     }
+    
 }

@@ -70,7 +70,7 @@
                                             <div class="dropdown-menu dropdown-menu-end">
                                                 <ul class="link-list-opt no-bdr">
                                                     <li>
-                                                        <a href="#"><em class="icon ni ni-eye"></em><span>Lihat
+                                                        <a href="{{ route('user.show', $admin->user_id) }}"><em class="icon ni ni-eye"></em><span>Lihat
                                                                 Detail</span></a>
                                                     </li>
                                                     <li>

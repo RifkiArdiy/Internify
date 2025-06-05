@@ -50,15 +50,16 @@
                         </div>
                     </div>
 
-                    {{-- <div class="col-12">
+                    <div class="col-lg-6">
                         <div class="form-group">
-                            <label class="form-label" for="report_text">Isi Laporan:<span
+                            <label for="report_title" class="form-label">Judul Laporan: <span
                                     class="text-danger">*</span></label>
                             <div class="form-control-wrap">
-                                <textarea class="form-control" name="report_text" rows="5" required>{{ $logs->report_text }}</textarea>
+                                <input type="text" class="form-control" id="report_title" name="report_title"
+                                    value="{{ old('report_title', $logs->report_title) }}" placeholder="Contoh: Laporan Hari ke 1" required>
                             </div>
                         </div>
-                    </div> --}}
+                    </div>
 
                     <div class="col-12">
                         <div class="form-group">

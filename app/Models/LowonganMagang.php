@@ -73,8 +73,12 @@ class LowonganMagang extends Model
     }
     
     public function jumlahPelamar()
-{
-    return $this->applications()->count();
-}
+    {
+        return $this->applications()->count();
+    }
 
+    public function sertifikats()
+    {
+        return $this->hasOne(SertifikatMagang::class, 'lowongan_id', 'lowongan_id');
+    }
 }

@@ -31,15 +31,15 @@
                     @foreach ($logs as $log)
                         <tr class="nk-tb-item">
                             <td class="nk-tb-col">
-                                <span class="tb-amount"><em class="icon ni ni-building-fill"></em>
+                                <span><em class="icon ni ni-building-fill"></em>
                                     {{ $log->companies->user->name ?? '-' }}
                                 </span>
                             </td>
                             <td class="nk-tb-col">
-                                <span class="tb-amount">{{ $log->dosen->user->name ?? '-' }}</span>
+                                <span>{{ $log->dosen->user->name ?? '-' }}</span>
                             </td>
                             <td class="nk-tb-col">
-                                <span class="tb-amount">{{ $log->report_title }}</span>
+                                <span>{{ $log->report_title }}</span>
                             </td>
                             <td class="nk-tb-col">
                                 <span>{{ $log->created_at->format('d M Y') }}</span>
