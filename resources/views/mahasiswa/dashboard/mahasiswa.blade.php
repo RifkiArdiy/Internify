@@ -1,6 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
+    @if (session('success'))
+        <div class="alert alert-success">{{ session('success') }}</div>
+    @endif
+    @if (session('error'))
+        <div class="alert alert-danger">{{ session('error') }}</div>
+    @endif
     <div class="nk-block">
         <div class="data-head">
             <h6 class="overline-title">Progress Pengajuan</h6>
@@ -98,12 +104,18 @@
                             <div class="project-details">
                                 <p>Pada tahap ini Mahasiswa diwajibkan mengunggah dan melengkapi data profil akademik
                                     mahasiswa untuk
-                                    keperluan administrasi
-                                    magang.</p>
+                                    keperluan administrasi magang.</p>
                             </div>
                             <div class="divider"></div>
-                            <div class="project-meta">
+                            <div class="project-meta d-flex align-items-center justify-content-between">
                                 <a href="{{ route('profil-akademik.index') }}" class="btn btn-md btn-primary">Lihat</a>
+
+                                @if ($isProfilLengkap)
+                                    <div class="d-flex align-items-center ms-2">
+                                        <em class="ni ni-file-check text-success fs-4 me-1"></em>
+                                        <small class="text-success fw-bold">Valid</small>
+                                    </div>
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -116,30 +128,41 @@
                     <div class="card-inner">
                         <div class="project">
                             <div class="project-head">
-                                <a href="#" class="project-title">
-                                    <div class="user-avatar sq bg-purple ">
+                                <a href="#" class="project-title"
+                                    onclick="{{ !$isProfilLengkap ? 'event.preventDefault();' : '' }}">
+                                    <div class="user-avatar sq bg-purple {{ !$isProfilLengkap ? 'opacity-50' : '' }}">
                                         <em class="ni ni-file-check-fill"></em>
                                     </div>
                                     <div class="project-info">
-                                        <h6 class="title">Pengajuan</h6>
+                                        <h6 class="title mb-0">Pengajuan</h6>
                                         <span class="sub-text">Bimbingan</span>
                                     </div>
                                 </a>
                             </div>
                             <div class="project-details">
-                                <p>Pada tahap ini Mahasiswa diwajibkan untuk mengunggah pengajuan dan persetujuan pembimbing
-                                    magang
-                                    dari dosen
-                                    atau pihak kampus.</p>
+                                <p>
+                                    Pada tahap ini Mahasiswa diwajibkan untuk mengunggah pengajuan dan persetujuan
+                                    pembimbing magang
+                                    dari dosen atau pihak kampus.
+                                </p>
                             </div>
                             <div class="divider"></div>
                             <div class="project-meta">
-                                <a href="{{ route('bimbingan.create') }}" class="btn btn-md btn-primary ">
+                                <a href="{{ $isProfilLengkap ? route('bimbingan.create') : '#' }}"
+                                    class="btn btn-md btn-primary {{ !$isProfilLengkap ? 'disabled' : '' }}"
+                                    {{ !$isProfilLengkap ? 'onclick=event.preventDefault();' : '' }}>
                                     Lihat
                                 </a>
-                                {{-- @if (!$isProfilLengkap)
-                                    <small class="text-danger">Selesaikan Pendataan terlebih dahulu</small>
-                                @endif --}}
+                                @if ($bimbinganDisetujui)
+                                    <div class="d-flex align-items-center ms-2">
+                                        <em class="ni ni-file-check text-success fs-4 me-1"></em>
+                                        <small class="text-success fw-bold">Bimbingan Disetujui</small>
+                                    </div>
+                                @endif
+                                @if (!$isProfilLengkap)
+                                    <small class="text-danger d-block mt-1">Lengkapi profil akademik terlebih
+                                        dahulu.</small>
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -186,6 +209,12 @@
                                     class="btn btn-md btn-primary {{ !$bimbinganDisetujui ? 'disabled opacity-50 pointer-events-none' : '' }}">
                                     Lihat
                                 </a>
+                                @if ($isAkhirPeriode)
+                                    <div class="d-flex align-items-center ms-2">
+                                        <em class="ni ni-file-check text-success fs-4 me-1"></em>
+                                        <small class="text-success fw-bold">Magang berakhir</small>
+                                    </div>
+                                @endif
                                 @if (!$bimbinganDisetujui)
                                     <small class="text-danger d-block mt-1">Ajukan bimbingan terlebih dahulu.</small>
                                 @endif

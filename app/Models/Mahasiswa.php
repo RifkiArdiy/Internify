@@ -47,4 +47,9 @@ class Mahasiswa extends Model
             ->withPivot('value')
             ->withTimestamps();
     }
+
+    public function profil_akademik()
+    {
+        return $this->hasOne(ProfilAkademik::class, 'user_id', 'user_id');
+    }
 }
