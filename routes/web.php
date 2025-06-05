@@ -58,6 +58,7 @@ Route::get('/perusahaan', [ListingController::class, 'perusahaan'])->name('list.
 Route::get('/{id}/perusahaan', [ListingController::class, 'showPerusahaan'])->name('show.perusahaan');
 Route::get('/lowongan/search', [ListingController::class, 'searchLowongan'])->name('lowongan.search');
 Route::get('/perusahaan/search', [ListingController::class, 'searchCompany'])->name('perusahaan.search');
+Route::get('/notification', [ProfileController::class, 'viewNotif'])->name('notif');
 
 
 Route::middleware(['auth'])->group(function () {

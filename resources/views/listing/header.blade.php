@@ -152,9 +152,7 @@
         <div class="container">
             <div class="row justify-content-center text-center g-gs">
                 <div class="col-lg-8 col-md-10">
-                    <div class="header-caption">
-                        @yield('header')
-                    </div><!-- .header-caption -->
+                    @yield('header')
                 </div><!-- .col -->
             </div><!-- .row -->
         </div><!-- .container -->

@@ -16,7 +16,9 @@ class ListingController extends Controller
             ->orderBy('created_at', 'desc')
             ->get();
 
-        return view('listing.job.index', compact('lowongan'));
+        $currPage = 'lowongan';
+
+        return view('listing.job.index', compact('lowongan', 'currPage'));
     }
 
     public function showLowongan(string $id)
@@ -52,7 +54,9 @@ class ListingController extends Controller
             ->orderBy('created_at', 'desc')
             ->get();
 
-        return view('listing.company.index', compact('companies'));
+        $currPage = 'perusahaan';
+
+        return view('listing.company.index', compact('companies', 'currPage'));
     }
 
     public function showPerusahaan($id)
@@ -89,7 +93,9 @@ class ListingController extends Controller
 
         $lowongan = $query->latest()->get();
 
-        return view('listing.job.index', compact('lowongan'));
+        $currPage = 'lowongan';
+
+        return view('listing.job.index', compact('lowongan', 'currPage'));
     }
 
     public function searchCompany(Request $request)
@@ -108,6 +114,8 @@ class ListingController extends Controller
 
         $companies = $query->latest()->get();
 
-        return view('listing.company.index', compact('companies'));
+        $currPage = 'perusahaan';
+
+        return view('listing.company.index', compact('companies', 'currPage'));
     }
 }
