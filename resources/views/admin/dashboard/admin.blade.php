@@ -33,19 +33,47 @@
                             <div class="user-card">
                                 @if ($user->level->level_nama == 'Administrator')
                                     <div class="user-avatar bg-primary-dim">
-                                        <span>AB</span>
+                                        @if ($user->image)
+                                            <img src="{{ Storage::url('images/users/' . $user->image) }}"
+                                                alt="{{ $user->name }}">
+                                        @else
+                                            <span>
+                                                {{ strtoupper(collect(explode(' ', $user->name))->map(fn($word) => $word[0])->take(2)->implode('')) }}
+                                            </span>
+                                        @endif
                                     </div>
                                 @elseif ($user->level->level_nama == 'Mahasiswa')
                                     <div class="user-avatar bg-teal-dim">
-                                        <span>AB</span>
+                                        @if ($user->image)
+                                            <img src="{{ Storage::url('images/users/' . $user->image) }}"
+                                                alt="{{ $user->name }}">
+                                        @else
+                                            <span>
+                                                {{ strtoupper(collect(explode(' ', $user->name))->map(fn($word) => $word[0])->take(2)->implode('')) }}
+                                            </span>
+                                        @endif
                                     </div>
                                 @elseif ($user->level->level_nama == 'Dosen')
                                     <div class="user-avatar bg-orange-dim">
-                                        <span>AB</span>
+                                        @if ($user->image)
+                                            <img src="{{ Storage::url('images/users/' . $user->image) }}"
+                                                alt="{{ $user->name }}">
+                                        @else
+                                            <span>
+                                                {{ strtoupper(collect(explode(' ', $user->name))->map(fn($word) => $word[0])->take(2)->implode('')) }}
+                                            </span>
+                                        @endif
                                     </div>
                                 @elseif ($user->level->level_nama == 'Company')
                                     <div class="user-avatar bg-indigo-dim">
-                                        <span>AB</span>
+                                        @if ($user->image)
+                                            <img src="{{ Storage::url('images/users/' . $user->image) }}"
+                                                alt="{{ $user->name }}">
+                                        @else
+                                            <span>
+                                                {{ strtoupper(collect(explode(' ', $user->name))->map(fn($word) => $word[0])->take(2)->implode('')) }}
+                                            </span>
+                                        @endif
                                     </div>
                                 @endif
                                 <div class="user-info">
@@ -91,8 +119,7 @@
                 @foreach ($unreviewedLamarans as $item)
                     <ul class="nk-activity">
                         <li class="nk-activity-item">
-                            <div class="nk-activity-media user-avatar bg-teal-dim"><img src="./images/avatar/c-sm.jpg"
-                                    alt="">
+                            <div class="nk-activity-media user-avatar bg-teal-dim">
                                 @if ($item->mahasiswas->user->image)
                                     <img src="{{ Storage::url('images/users/' . $item->mahasiswas->user->image) }}"
                                         alt="{{ $item->mahasiswas->user->name }}">
@@ -206,61 +233,4 @@
             </div><!-- .card -->
         </div><!-- .col --> --}}
     </div>
-    {{-- <div class="card card-bordered card-preview">
-        <h4>Lamaran yang menunggu review</h4>
-        <table border="1" cellpadding="8" cellspacing="0" style="width: 100%;">
-            <thead>
-                <tr>
-                    <th>Nama Mahasiswa</th>
-                    <th>Judul Lowongan</th>
-                    <th>Aksi</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($unreviewedLamarans as $item)
-                <tr>
-                    <td>{{ $item->mahasiswas->user->name }}</td>
-                    <td>{{ $item->lowongans->title }}</td>
-                    <td><button onclick="window.location.href='{{ route('magangApplication.show', $item->magang_id) }}'"
-                            class="btn btn-success btn-sm">
-                            Lihat Detail
-                        </button></td>
-                </tr>
-                @endforeach
-            </tbody>
-        </table>
-    </div> --}}
-
-    {{-- <div class="card card-bordered card-preview">
-        <h4>Daftar Perusahaan yang Bermitra</h4>
-        @foreach ($mitras as $item)
-        <a href={{ route('companies.show', $item->company_id) }}>{{ $item->user->name }}</a>
-        @endforeach
-    </div> --}}
-
-    {{-- <div class="card card-bordered card-preview">
-        <h4>Daftar Lowongan yang tersedia</h4>
-        <table border="1" cellpadding="8" cellspacing="0" style="width: 100%;">
-            <thead>
-                <tr>
-                    <th>Nama Perusahaan</th>
-                    <th>Judul Magang</th>
-                    <th>Aksi</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($lowongans as $item)
-                <tr>
-                    <td>{{ $item->company->user->name }}</td>
-                    <td>{{ $item->title }}</td>
-                    <td><button onclick="window.location.href='{{ route('pengajuan-magang.show', $item->lowongan_id) }}'"
-                            class="btn btn-success btn-sm">
-                            Lihat Detail
-                        </button></td>
-                </tr>
-                @endforeach
-            </tbody>
-        </table>
-
-    </div> --}}
 @endsection
