@@ -14,7 +14,8 @@
     <title>Home | Internify</title>
     <!-- StyleSheets  -->
     <link rel="stylesheet" href="{{ asset('assets/home/css/dashlite.css') }}">
-    {{-- <link rel="stylesheet" href="{{ asset('assets/admin/css/dashlite.css') }}"> --}}
+    {{--
+    <link rel="stylesheet" href="{{ asset('assets/admin/css/dashlite.css') }}"> --}}
     <link id="skin-default" rel="stylesheet" href="{{ asset('assets/home/css/theme.css') }}">
 </head>
 
@@ -63,7 +64,7 @@
                                                     <div class="user-toggle">
                                                         <div class="user-info d-none d-md-block">
                                                             <div class="menu-link nav-link">
-                                                                Hi..!! {{ Auth::user()->name }}
+                                                                Hello, {{ Auth::user()->name }}
                                                             </div>
                                                         </div>
                                                     </div>
@@ -196,6 +197,10 @@
                                 @endif
                                 <div>
                                     <h4 class="mb-1">{{ $company->user->name }}</h4>
+                                    {{-- @for ($i = 0; $i < $averageRating; $i++)
+                                        <i class="icon ni ni-star-fill" style="font-size: 24px; color: gold;"></i>
+                                    @endfor --}}
+
                                     <ul class="list-inline list-split fs-14px text-soft">
                                         <li><em class="icon ni ni-briefcase"></em> Technology</li>
                                         <li><em class="icon ni ni-map-pin"></em>
