@@ -59,7 +59,6 @@ class DashboardController extends Controller
             $isProfilLengkap = !empty($profilAkademik->etika) && !empty($profilAkademik->ipk);
         }
 
-        // ✅ Cek bimbingan disetujui
         $bimbinganDisetujui = false;
         if ($magang) {
             $bimbinganDisetujui = Bimbingan::where('magang_id', $magang->magang_id)
@@ -67,8 +66,6 @@ class DashboardController extends Controller
                 ->exists();
         }
 
-
-        // ✅ Hitung periode dan status magang
         if ($magang && $magang->lowongans && $magang->lowongans->period) {
             $startDate = Carbon::parse($magang->lowongans->period->start_date);
             $endDate = Carbon::parse($magang->lowongans->period->end_date);
@@ -88,7 +85,7 @@ class DashboardController extends Controller
 
             $isAkhirPeriode = $today->greaterThanOrEqualTo($endDate);
 
-            if ($mahasiswa->status !== 'is_magang') {
+            if ($magang->status !== 'Disetujui') {
                 $status = 'Lamaran Anda Sedang Diproses...';
             } elseif ($today->greaterThan($endDate)) {
                 $status = 'Magang Anda Selesai';
@@ -97,7 +94,6 @@ class DashboardController extends Controller
             }
         }
 
-        // ✅ Hitung progress dashboard
         $completedSteps = 0;
         $totalSteps = 4;
         if ($isProfilLengkap) $completedSteps++;

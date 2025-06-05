@@ -60,7 +60,7 @@
                                     </div>
                                     <div class="project-info">
                                         <h6 class="title">Progress Magang</h6>
-                                        <span class="sub-text">Softnio</span>
+                                        <span class="sub-text">Persentase saat ini</span>
                                     </div>
                                 </a>
                             </div>
