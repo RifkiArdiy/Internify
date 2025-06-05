@@ -47,4 +47,13 @@ class ProfileController extends Controller
     //     return redirect()->route('profile.index')->with('success', 'Profil berhasil diperbarui');
     // }
 
+    public function viewNotif(){
+        $breadcrumb = (object) [
+            'title' => 'Notifikasi',
+            'subtitle' => 'Pemberitahuan untuk anda'
+        ];
+
+        return view('notif.index', compact('breadcrumb'));
+    }
+
 }

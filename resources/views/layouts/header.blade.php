@@ -137,85 +137,80 @@
                         <div class="dropdown-menu dropdown-menu-xl dropdown-menu-end dropdown-menu-s1">
                             <div class="dropdown-head">
                                 <span class="sub-title nk-dropdown-title">Notifications</span>
-                                <a href="#">Mark All as Read</a>
                             </div>
                             <div class="dropdown-body">
                                 <div class="nk-notification">
-                                    <div class="nk-notification-item dropdown-inner">
-                                        <div class="nk-notification-icon">
-                                            <em class="icon icon-circle bg-warning-dim ni ni-curve-down-right"></em>
-                                        </div>
-                                        <div class="nk-notification-content">
-                                            <div class="nk-notification-text">
-                                                You have requested to <span>Widthdrawl</span>
+                                    @if(Auth::user()->getRole() === 'Mahasiswa')
+                                        @if ($notif_magang_list->isEmpty())
+                                            <div class="nk-notification-item">
+                                                <div class="nk-notification-content">
+                                                    <div class="nk-notification-text">
+                                                        Belum ada notifikasi terbaru
+                                                    </div>
+                                                </div>
                                             </div>
-                                            <div class="nk-notification-time">2 hrs ago</div>
-                                        </div>
-                                    </div>
-                                    <div class="nk-notification-item dropdown-inner">
-                                        <div class="nk-notification-icon">
-                                            <em class="icon icon-circle bg-success-dim ni ni-curve-down-left"></em>
-                                        </div>
-                                        <div class="nk-notification-content">
-                                            <div class="nk-notification-text">
-                                                Your <span>Deposit Order</span>
-                                                is placed
+                                        @else
+                                            @foreach ($notif_magang_list as $notif)
+                                                <div class="nk-notification-item d-flex align-items-start mb-2">
+                                                    <div class="nk-notification-icon me-3">
+                                                        @if ($notif['m_status'] === 'Ditolak')
+                                                            <em class="icon icon-circle bg-danger-dim ni ni-cross"></em>
+                                                        @elseif ($notif['m_status'] === 'Disetujui')
+                                                            <em class="icon icon-circle bg-success-dim ni ni-check"></em>
+                                                        @elseif ($notif['m_status'] === 'Pending')
+                                                            <em class="icon icon-circle bg-warning-dim ni ni-clock"></em>
+                                                        @else
+                                                            <em class="icon icon-circle bg-secondary-dim ni ni-info"></em>
+                                                        @endif
+                                                    </div>
+                                                    <div class="nk-notification-content">
+                                                        <div class="nk-notification-text">
+                                                            Lamaran magang anda di {{ $notif['m_company_name'] }}
+                                                            @if ($notif['m_status'] !== 'Pending')
+                                                                telah {{ strtolower($notif['m_status']) }}
+                                                            @else
+                                                                sedang diproses
+                                                            @endif
+                                                        </div>
+                                                        <div class="nk-notification-time">{{ $notif['m_time'] }}</div>
+                                                    </div>
+                                                </div>
+                                            @endforeach
+                                        @endif
+                                    @elseif(Auth::user()->getRole() === 'Company')
+                                        @if ($notif_pending_list->isEmpty())
+                                            <div class="nk-notification-item">
+                                                <div class="nk-notification-content">
+                                                    <div class="nk-notification-text">
+                                                        Belum ada notifikasi terbaru
+                                                    </div>
+                                                </div>
                                             </div>
-                                            <div class="nk-notification-time">2 hrs ago</div>
-                                        </div>
-                                    </div>
-                                    <div class="nk-notification-item dropdown-inner">
-                                        <div class="nk-notification-icon">
-                                            <em class="icon icon-circle bg-warning-dim ni ni-curve-down-right"></em>
-                                        </div>
-                                        <div class="nk-notification-content">
-                                            <div class="nk-notification-text">
-                                                You have requested to <span>Widthdrawl</span>
-                                            </div>
-                                            <div class="nk-notification-time">2 hrs ago</div>
-                                        </div>
-                                    </div>
-                                    <div class="nk-notification-item dropdown-inner">
-                                        <div class="nk-notification-icon">
-                                            <em class="icon icon-circle bg-success-dim ni ni-curve-down-left"></em>
-                                        </div>
-                                        <div class="nk-notification-content">
-                                            <div class="nk-notification-text">
-                                                Your <span>Deposit Order</span>
-                                                is placed
-                                            </div>
-                                            <div class="nk-notification-time">2 hrs ago</div>
-                                        </div>
-                                    </div>
-                                    <div class="nk-notification-item dropdown-inner">
-                                        <div class="nk-notification-icon">
-                                            <em class="icon icon-circle bg-warning-dim ni ni-curve-down-right"></em>
-                                        </div>
-                                        <div class="nk-notification-content">
-                                            <div class="nk-notification-text">
-                                                You have requested to <span>Widthdrawl</span>
-                                            </div>
-                                            <div class="nk-notification-time">2 hrs ago</div>
-                                        </div>
-                                    </div>
-                                    <div class="nk-notification-item dropdown-inner">
-                                        <div class="nk-notification-icon">
-                                            <em class="icon icon-circle bg-success-dim ni ni-curve-down-left"></em>
-                                        </div>
-                                        <div class="nk-notification-content">
-                                            <div class="nk-notification-text">
-                                                Your <span>Deposit Order</span>
-                                                is placed
-                                            </div>
-                                            <div class="nk-notification-time">2 hrs ago</div>
-                                        </div>
-                                    </div>
+                                        @else
+                                            @foreach ($notif_pending_list as $item)
+
+                                                <div class="nk-notification-item d-flex align-items-start mb-2">
+                                                    <div class="nk-notification-icon me-3">
+                                                        <em class="icon icon-circle bg-warning-dim ni ni-clock"></em>
+                                                    </div>
+                                                    <div class="nk-notification-content">
+                                                        <div class="nk-notification-text">
+                                                            {{ $item['c_mahasiswa_name'] }} menunggu review magang di bagian
+                                                            {{ $item['c_lowongan_title'] }}
+                                                        </div>
+                                                        <div class="nk-notification-time">{{ $item['c_created_at'] }}</div>
+                                                    </div>
+                                                </div>
+
+                                            @endforeach
+                                        @endif
+                                    @endif
                                 </div>
                                 <!-- .nk-notification -->
                             </div>
                             <!-- .nk-dropdown-body -->
                             <div class="dropdown-foot center">
-                                <a href="#">View All</a>
+                                <a href="{{ route('notif') }}">View All</a>
                             </div>
                         </div>
                     </li>
