@@ -111,14 +111,13 @@
             </div>
 
             <!-- Pengajuan -->
-            {{-- <div class="col-sm-6 col-lg-4 col-xxl-3">
+            <div class="col-sm-6 col-lg-4 col-xxl-3">
                 <div class="card card-bordered">
                     <div class="card-inner">
                         <div class="project">
                             <div class="project-head">
                                 <a href="#" class="project-title">
-                                    <div
-                                        class="user-avatar sq bg-purple {{ !$isProfilLengkap ? 'disabled opacity-50 pointer-events-none' : '' }}">
+                                    <div class="user-avatar sq bg-purple ">
                                         <em class="ni ni-file-check-fill"></em>
                                     </div>
                                     <div class="project-info">
@@ -135,54 +134,12 @@
                             </div>
                             <div class="divider"></div>
                             <div class="project-meta">
-                                <a href="{{ route('bimbingan.create') }}"
-                                    class="btn btn-md btn-primary {{ !$isProfilLengkap ? 'disabled opacity-50 pointer-events-none' : '' }}">
+                                <a href="{{ route('bimbingan.create') }}" class="btn btn-md btn-primary ">
                                     Lihat
                                 </a>
-                                @if (!$isProfilLengkap)
+                                {{-- @if (!$isProfilLengkap)
                                     <small class="text-danger">Selesaikan Pendataan terlebih dahulu</small>
-                                @endif
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div> --}}
-            @php
-                // Tombol disabled jika profil tidak lengkap atau magang sudah disetujui
-                $btnDisabled = !$isProfilLengkap || $magangDisetujui;
-            @endphp
-
-            <div class="col-sm-6 col-lg-4 col-xxl-3">
-                <div class="card card-bordered">
-                    <div class="card-inner">
-                        <div class="project">
-                            <div class="project-head">
-                                <a href="#" class="project-title">
-                                    <div
-                                        class="user-avatar sq bg-purple {{ $btnDisabled ? 'disabled opacity-50 pointer-events-none' : '' }}">
-                                        <em class="ni ni-file-check-fill"></em>
-                                    </div>
-                                    <div class="project-info">
-                                        <h6 class="title">Pengajuan</h6>
-                                        <span class="sub-text">Bimbingan</span>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="project-details">
-                                <p>Pada tahap ini Mahasiswa diwajibkan untuk mengunggah pengajuan dan persetujuan pembimbing
-                                    magang dari dosen atau pihak kampus.</p>
-                            </div>
-                            <div class="divider"></div>
-                            <div class="project-meta">
-                                <a href="{{ route('bimbingan.create') }}"
-                                    class="btn btn-md btn-primary {{ $btnDisabled ? 'disabled opacity-50 pointer-events-none' : '' }}">
-                                    Lihat
-                                </a>
-                                @if (!$isProfilLengkap)
-                                    <small class="text-danger">Selesaikan Pendataan terlebih dahulu</small>
-                                @elseif ($magangDisetujui)
-                                    <small class="text-success">Magang sudah disetujui perusahaan.</small>
-                                @endif
+                                @endif --}}
                             </div>
                         </div>
                     </div>

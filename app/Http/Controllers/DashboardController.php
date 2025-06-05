@@ -113,20 +113,6 @@ class DashboardController extends Controller
         $isAkhirPeriode = false;
         $status = 'Anda Belum Magang';
 
-        // Cek profil akademik
-        $profilAkademik = $mahasiswa->profil_akademik;
-        $isProfilLengkap = false;
-
-        if ($profilAkademik) {
-            $isProfilLengkap = !empty($profilAkademik->etika) && !empty($profilAkademik->ipk);
-        }
-
-        // Cek apakah magang sudah disetujui perusahaan (misalnya status 'Disetujui' di model MagangApplication)
-        $magangDisetujui = false;
-        if ($magang) {
-            $magangDisetujui = $magang->status === 'Disetujui';  // sesuaikan nama field statusnya
-        }
-
 
         // ✅ Cek bimbingan disetujui
         $bimbinganDisetujui = Bimbingan::where('magang_id', $mahasiswa->mahasiswa_id)
@@ -164,9 +150,8 @@ class DashboardController extends Controller
 
         // ✅ Hitung progress dashboard
         $completedSteps = 0;
-        $totalSteps = 4;
+        $totalSteps = 3;
 
-        if ($isProfilLengkap) $completedSteps++;
         if ($bimbinganDisetujui) $completedSteps++;
         if ($sisaWaktuMagang) $completedSteps++;
         if ($isAkhirPeriode) $completedSteps++;
@@ -178,13 +163,11 @@ class DashboardController extends Controller
             'status',
             'magang',
             'mahasiswa',
-            // 'isProfilValid',
-            'isProfilLengkap',
             'periodeMagang',
             'sisaWaktuMagang',
             'isAkhirPeriode',
             'progressPercent',
-            'bimbinganDisetujui' // ⬅️ tambahkan ini ke blade
+            'bimbinganDisetujui'
         ));
     }
 
