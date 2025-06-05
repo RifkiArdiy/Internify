@@ -42,15 +42,15 @@ class Company extends Model
         return $this->hasMany(SertifikatMagang::class, 'company_id', 'company_id');
     }
 
-    public function getRating(string $id){
-        $company = Company::with(['user', 'lowongans.kategori'])->findOrFail($id);
-        $lowongans = LowonganMagang::where('company_id', $company->company_id)->get();
-        $lowonganIds = $lowongans->pluck('lowongan_id');
-        $magangs = MagangApplication::whereIn('lowongan_id', $lowonganIds)->get();
-        $magangIds = $magangs->pluck('magang_id');
-        $ratings = FeedbackMagang::whereIn('magang_id', $magangIds)->get();
-        $averageRating = number_format($ratings->avg('rating') ?? 0, 2);
+    // public function getRating(string $id){
+    //     $company = Company::with(['user', 'lowongans.kategori'])->findOrFail($id);
+    //     $lowongans = LowonganMagang::where('company_id', $company->company_id)->get();
+    //     $lowonganIds = $lowongans->pluck('lowongan_id');
+    //     $magangs = MagangApplication::whereIn('lowongan_id', $lowonganIds)->get();
+    //     $magangIds = $magangs->pluck('magang_id');
+    //     $ratings = FeedbackMagang::whereIn('magang_id', $magangIds)->get();
+    //     $averageRating = number_format($ratings->avg('rating') ?? 0, 2);
 
-        return $averageRating;
-    }
+    //     return $averageRating;
+    // }
 }

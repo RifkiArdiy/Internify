@@ -314,27 +314,27 @@
                                             @endif
                                         </div>
                                         <h6 class="title mb-1">{{ $lowongan->company->user->name }}</h6>
-                                        @for ($i = 0; $i < $averageRating; $i++)
+                                        {{-- @for ($i = 0; $i < $averageRating; $i++)
                                             <i class="icon ni ni-star-fill"></i>
                                         @endfor
-                                        <br>
+                                        <br> --}}
 
                                         <a href="{{ route('show.perusahaan', $lowongan->company->company_id) }}"
                                             class="text-primary small">View company profile</a>
                                         {{-- <ul class="list list-sm text-soft mt-3"> --}}
-                                            <ul class="gy-2 mt-3">
-                                                <li class="d-flex justify-content-between">
-                                                    <strong>Founded:</strong>{{ $lowongan->company->created_at }}
-                                                </li>
-                                                <li class="d-flex justify-content-between"><strong>Phone:</strong>
-                                                    {{ $lowongan->company->user->no_telp }}</li>
-                                                <li class="d-flex justify-content-between"><strong>Lokasi:</strong>
-                                                    {{ $lowongan->company->user->alamat }}</li>
-                                            </ul>
-                                            <a href="{{ route('show.perusahaan', $lowongan->company->company_id) }}"
-                                                class="btn btn-outline-primary btn-block mt-3">Membuka
-                                                Lowongan
-                                                : {{ $jobcount }}</a>
+                                        <ul class="gy-2 mt-3">
+                                            <li class="d-flex justify-content-between">
+                                                <strong>Founded:</strong>{{ $lowongan->company->created_at }}
+                                            </li>
+                                            <li class="d-flex justify-content-between"><strong>Phone:</strong>
+                                                {{ $lowongan->company->user->no_telp }}</li>
+                                            <li class="d-flex justify-content-between"><strong>Lokasi:</strong>
+                                                {{ $lowongan->company->user->alamat }}</li>
+                                        </ul>
+                                        <a href="{{ route('show.perusahaan', $lowongan->company->company_id) }}"
+                                            class="btn btn-outline-primary btn-block mt-3">Membuka
+                                            Lowongan
+                                            : {{ $jobcount }}</a>
                                     </div>
                                 </div>
                             </div>
@@ -347,7 +347,8 @@
                                 <div class="row g-4">
                                     @foreach ($recent as $job)
                                         <div class="col-sm-6 col-lg-4">
-                                            <a href="{{ route('show.lowongan', $job->lowongan_id) }}" class="card-link-wrapper">
+                                            <a href="{{ route('show.lowongan', $job->lowongan_id) }}"
+                                                class="card-link-wrapper">
                                                 <div class="card card-bordered service service-s4 h-100">
                                                     <div class="card-inner">
                                                         <div class="job">
@@ -367,7 +368,8 @@
                                                                     @endif
                                                                     <div class="job-info">
                                                                         <h6 class="title">{{ $job->title }}</h6>
-                                                                        <span class="sub-text">{{ $job->period->name }}</span>
+                                                                        <span
+                                                                            class="sub-text">{{ $job->period->name }}</span>
                                                                     </div>
                                                                 </div>
                                                             </div>

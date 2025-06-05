@@ -14,7 +14,7 @@ class Log extends Model
 
     protected $primaryKey = 'log_id';
 
-    protected $fillable = ['mahasiswa_id', 'dosen_id', 'company_id', 'report_text', 'file_path', 'verif_dosen', 'verif_company'];
+    protected $fillable = ['mahasiswa_id', 'dosen_id', 'company_id', 'report_title', 'report_text', 'file_path', 'verif_dosen', 'verif_company'];
 
     public function mahasiswa(): BelongsTo
     {
