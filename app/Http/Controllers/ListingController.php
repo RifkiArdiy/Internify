@@ -33,19 +33,19 @@ class ListingController extends Controller
             ->latest()
             ->take(3)
             ->get();
-        
-        $logang = LowonganMagang::with('benefits', 'kategori')->findOrFail($id);
 
-        $company = Company::with(['user', 'lowongans.kategori'])->findOrFail($id);
-        $lowongans = LowonganMagang::where('company_id', $company->company_id)->get();
-        $lowonganIds = $lowongans->pluck('lowongan_id');
-        $magangs = MagangApplication::whereIn('lowongan_id', $lowonganIds)->get();
-        $magangIds = $magangs->pluck('magang_id');
-        $ratings = FeedbackMagang::whereIn('magang_id', $magangIds)->get();
-        $averageRating = number_format($ratings->avg('rating') ?? 0, 2);
+        // $logang = LowonganMagang::with('benefits', 'kategori')->findOrFail($id);
+
+        // $company = Company::with(['user', 'lowongans.kategori'])->findOrFail($id);
+        // $lowongans = LowonganMagang::where('company_id', $company->company_id)->get();
+        // $lowonganIds = $lowongans->pluck('lowongan_id');
+        // $magangs = MagangApplication::whereIn('lowongan_id', $lowonganIds)->get();
+        // $magangIds = $magangs->pluck('magang_id');
+        // $ratings = FeedbackMagang::whereIn('magang_id', $magangIds)->get();
+        // $averageRating = number_format($ratings->avg('rating') ?? 0, 2);
 
 
-        return view('listing.job.show', compact('lowongan', 'jobcount', 'recent', 'logang', 'ratings', 'averageRating'));
+        return view('listing.job.show', compact('lowongan', 'jobcount', 'recent'));
     }
 
     public function perusahaan()
@@ -62,15 +62,15 @@ class ListingController extends Controller
     public function showPerusahaan($id)
     {
         $company = Company::with(['user', 'lowongans.kategori'])->findOrFail($id);
-        $lowongans = LowonganMagang::where('company_id', $company->company_id)->get();
-        $lowonganIds = $lowongans->pluck('lowongan_id');
-        $magangs = MagangApplication::whereIn('lowongan_id', $lowonganIds)->get();
-        $magangIds = $magangs->pluck('magang_id');
-        $ratings = FeedbackMagang::whereIn('magang_id', $magangIds)->get();
-        $averageRating = number_format($ratings->avg('rating') ?? 0, 2);
+        // $lowongans = LowonganMagang::where('company_id', $company->company_id)->get();
+        // $lowonganIds = $lowongans->pluck('lowongan_id');
+        // $magangs = MagangApplication::whereIn('lowongan_id', $lowonganIds)->get();
+        // $magangIds = $magangs->pluck('magang_id');
+        // $ratings = FeedbackMagang::whereIn('magang_id', $magangIds)->get();
+        // $averageRating = number_format($ratings->avg('rating') ?? 0, 2);
 
 
-        return view('listing.company.show', compact('company', 'averageRating'));
+        return view('listing.company.show', compact('company'));
     }
 
     public function searchLowongan(Request $request)

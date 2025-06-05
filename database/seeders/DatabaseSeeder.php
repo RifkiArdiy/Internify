@@ -41,8 +41,7 @@ class DatabaseSeeder extends Seeder
             BenefitSeeder::class,
             MagangApplicationSeeder::class,
             KriteriaSeeder::class,
-            LogSeeder::class,
-            ProfilAkademikSeeder::class
+            LogSeeder::class
         ]);
     }
 }

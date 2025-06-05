@@ -13,7 +13,7 @@ class ProfilAkademik extends Model
 
     protected $primaryKey = 'profile_id';
 
-    protected $fillable = ['user_id', 'bidang_keahlian', 'sertifikasi','lokasi', 'pengalaman', 'etika', 'ipk'];
+    protected $fillable = ['user_id', 'bidang_keahlian', 'sertifikasi', 'lokasi', 'pengalaman', 'etika', 'ipk'];
 
     public function user()
     {

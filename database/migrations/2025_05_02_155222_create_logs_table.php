@@ -16,10 +16,11 @@ return new class extends Migration
             $table->unsignedBigInteger('mahasiswa_id')->index();
             $table->unsignedBigInteger('dosen_id')->index();
             $table->unsignedBigInteger('company_id')->index();
+            $table->text('report_title');
             $table->text('report_text');
             $table->string('file_path')->nullable();
-            $table->string('verif_dosen')->default('pending')->nullable();
-            $table->string('verif_company')->default('pending')->nullable();
+            $table->string('verif_dosen')->default('Pending')->nullable();
+            $table->string('verif_company')->default('Pending')->nullable();
             $table->timestamps();
 
             $table->foreign('mahasiswa_id')->references('mahasiswa_id')->on('mahasiswas')->onDelete('cascade');

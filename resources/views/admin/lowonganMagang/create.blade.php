@@ -3,6 +3,17 @@
 @section('content')
     <div class="card card-bordered card-preview">
         <div class="card-inner">
+            <style>
+                #quill-editor,
+                #quill-requirements {
+                    overflow-x: auto;
+                    word-wrap: break-word;
+                }
+
+                .ql-editor {
+                    word-break: break-word;
+                }
+            </style>
             @if ($errors->any())
                 <div class="alert alert-danger">
                     <ul>
@@ -148,7 +159,7 @@
                         </div>
                     </div>
 
-                    <div class="col-12">
+                    <div class="col-12 text-end">
                         <button type="submit" class="btn btn-primary mt-3">Simpan</button>
                         <a href="{{ route('lowongan-magang.index') }}" class="btn btn-secondary mt-3">Kembali</a>
                     </div>
