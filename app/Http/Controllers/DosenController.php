@@ -88,8 +88,8 @@ class DosenController extends Controller
             'email' => 'required|unique:users',
             'password' => 'required|min:6',
             'nip' => 'required|unique:dosens',
-            'no_telp' => 'nullable',
-            'alamat' => 'nullable',
+            'no_telp' => 'nullable|max:15',
+            'alamat' => 'nullable|min:10',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
@@ -158,8 +158,8 @@ class DosenController extends Controller
             'username' => 'required|unique:users,username,' . $user->user_id . ',user_id',
             'email' => 'required|unique:users,email,' . $user->user_id . ',user_id',
             'nip' => 'required|unique:dosens,nip,' . $dosen->dosen_id . ',dosen_id',
-            'no_telp' => 'nullable',
-            'alamat' => 'nullable',
+            'no_telp' => 'nullable|max:15',
+            'alamat' => 'nullable|min:10|max:100',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 

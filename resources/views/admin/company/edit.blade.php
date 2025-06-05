@@ -58,7 +58,7 @@
                         <div class="form-group">
                             <label class="form-label" for="no_telp">No Telepon:</label>
                             <div class="form-control-wrap">
-                                <input type="text" class="form-control" id="no_telp" name="no_telp"
+                                <input type="number" class="form-control" id="no_telp" name="no_telp"
                                     value="{{ $company->user->no_telp ?? '' }}">
                             </div>
                         </div>

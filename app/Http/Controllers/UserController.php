@@ -46,8 +46,8 @@ class UserController extends Controller
             'username' => 'required|unique:users',
             'email' => 'required|unique:users',
             'password' => 'required|min:6',
-            'no_telp' => 'nullable',
-            'alamat' => 'nullable',
+            'no_telp' => 'nullable|max:15',
+            'alamat' => 'nullable|min:10',
             'file' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
@@ -102,8 +102,8 @@ class UserController extends Controller
             'name' => 'required',
             'username' => 'required|unique:users,username,' . $user->user_id . ',user_id',
             'email' => 'required|unique:users,email,' . $user->user_id . ',user_id',
-            'no_telp' => 'nullable',
-            'alamat' => 'nullable',
+            'no_telp' => 'nullable|max:15',
+            'alamat' => 'nullable|min:10|max:100',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 

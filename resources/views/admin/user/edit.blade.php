@@ -60,7 +60,7 @@
                         <div class="form-group">
                             <label for="no_telp" class="form-label">No Telepon:</label>
                             <div class="form-control-wrap">
-                                <input type="text" class="form-control" id="no_telp" name="no_telp"
+                                <input type="number" class="form-control" id="no_telp" name="no_telp"
                                     value="{{ old('no_telp', $user->no_telp) }}"
                                     placeholder="Masukkan Nomor Telepon (Contoh: 08123456789)">
                             </div>

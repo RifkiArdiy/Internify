@@ -55,7 +55,7 @@
                         <div class="form-group">
                             <label for="no_telp" class="form-label">No Telepon:</label>
                             <div class="form-control-wrap">
-                                <input type="text" class="form-control" id="no_telp" name="no_telp"
+                                <input type="number" class="form-control" id="no_telp" name="no_telp"
                                     value="{{ old('no_telp') }}"
                                     placeholder="Masukkan dengan awalan +62 (Contoh: 628123456789)">
                             </div>
@@ -66,7 +66,7 @@
                             <label for="alamat" class="form-label">Alamat:</label>
                             <div class="form-control-wrap">
                                 <input type="text" class="form-control" id="alamat" name="alamat"
-                                    value="{{ old('alamat') }}" placeholder="Masukkan Alamat Lengkap">
+                                    value="{{ old('alamat') }}" placeholder="Masukkan Alamat (Minimal 10 Karakter)">
                             </div>
                         </div>
                     </div>
