@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Validation\Rule;
 
 class MahasiswaController extends Controller
 {
@@ -48,9 +49,9 @@ class MahasiswaController extends Controller
             'username' => 'required|string|max:255|unique:users,username',
             'email' => 'required|string|email|max:255|unique:users,email',
             'password' => 'required|string|min:6',
-            'nim' => 'required|string|min:10|unique:mahasiswas,nim',
-            'no_telp' => 'nullable|string|max:20',
-            'alamat' => 'nullable|string',
+            'nim' => 'required|string|min:10|unique:mahasiswas,nim|regex:/^[0-9]+$/',
+            'no_telp' => 'nullable|string|regex:/^\+?[0-9]{10,15}$/',
+            'alamat' => 'nullable|string|min:4|max:255',
             'prodi_id' => 'required|integer|exists:program_studis,prodi_id',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
@@ -129,10 +130,14 @@ class MahasiswaController extends Controller
             'name' => 'required',
             'username' => 'required|unique:users,username,' . $user->user_id . ',user_id',
             'email' => 'required|unique:users,email,' . $user->user_id . ',user_id',
-            'nim' => 'required|unique:mahasiswas,nim,' . $mahasiswa->mahasiswa_id . ',mahasiswa_id',
+            'nip' => [
+                'required',
+                'regex:/^[0-9]+$/',
+                Rule::unique('mahasiswas', 'nim')->ignore($mahasiswa->mahasiswa_id, 'mahasiswa_id'),
+            ],
             'prodi_id' => 'required|exists:program_studis,prodi_id',
-            'no_telp' => 'nullable',
-            'alamat' => 'nullable',
+            'no_telp' => 'nullable|string|regex:/^\+?[0-9]{10,15}$/',
+            'alamat' => 'nullable|string|min:4|max:255',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
