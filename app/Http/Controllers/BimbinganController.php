@@ -54,11 +54,25 @@ class BimbinganController extends Controller
         ];
 
         $mahasiswa = Auth::user()->mahasiswa;
-        if (!$mahasiswa->profil_akademik || !$mahasiswa->profil_akademik->isProfilLengkap) {
+        $profilAkademik = $mahasiswa->profil_akademik;
+
+        // ✅ Cek jika belum ada data atau salah satu file kosong
+        if (
+            !$profilAkademik ||
+            empty($profilAkademik->etika) ||
+            empty($profilAkademik->ipk)
+        ) {
             return redirect()->route('mahasiswa.dashboard')->with('error', 'Selesaikan Pendataan terlebih dahulu.');
         }
 
-        $magang = MagangApplication::with('lowongans.company')->where('mahasiswa_id', auth()->user()->mahasiswa->mahasiswa_id)->where('status', 'Disetujui')->first();
+        $magang = MagangApplication::with('lowongans.company')
+            ->where('mahasiswa_id', $mahasiswa->mahasiswa_id)
+            ->where('status', 'Disetujui')
+            ->first();
+
+        if (!$magang) {
+            return redirect()->route('mahasiswa.dashboard')->with('error', 'Anda belum memiliki tempat magang.');
+        }
 
         return view('mahasiswa.bimbingan.create', compact('breadcrumb', 'mahasiswa', 'magang'));
     }

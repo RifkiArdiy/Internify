@@ -15,21 +15,27 @@
         </div>
     @endif
 
-    <div class="card card-bordered card-preview mb-4">
-        {{-- ✅ Informasi Magang --}}
-        <div class="card-inner">
-            <h5 class="card-title mb-3">Informasi Magang</h5>
-            <p><strong>Judul Lowongan:</strong> {{ $magang->lowongans->title }}</p>
-            <p><strong>Perusahaan:</strong> {{ $magang->lowongans->company->user->name }}</p>
-            <p><strong>Alamat:</strong> {{ $magang->lowongans->province->name }}, {{ $magang->lowongans->regency->name }}
-            </p>
-            <p><strong>Status Magang:</strong>
-                <span class="badge bg-{{ $magang->status === 'Disetujui' ? 'success' : 'warning' }}">
-                    {{ $magang->status }}
-                </span>
-            </p>
+    @if ($magang)
+        <div class="card card-bordered card-preview mb-4">
+            <div class="card-inner">
+                <h5 class="card-title mb-3">Informasi Magang</h5>
+                <p><strong>Judul Lowongan:</strong> {{ $magang->lowongans->title }}</p>
+                <p><strong>Perusahaan:</strong> {{ $magang->lowongans->company->user->name }}</p>
+                <p><strong>Alamat:</strong> {{ $magang->lowongans->province->name }},
+                    {{ $magang->lowongans->regency->name }}</p>
+                <p><strong>Status Magang:</strong>
+                    <span class="badge bg-{{ $magang->status === 'Disetujui' ? 'success' : 'warning' }}">
+                        {{ $magang->status }}
+                    </span>
+                </p>
+            </div>
         </div>
-    </div>
+    @else
+        <div class="alert alert-warning">
+            Anda belum memiliki magang yang disetujui.
+        </div>
+    @endif
+
 
     <div class="card card-bordered card-preview">
         <div class="card-inner">

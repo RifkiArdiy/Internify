@@ -37,67 +37,6 @@ class DashboardController extends Controller
         return view('admin.dashboard.admin', compact('users', 'breadcrumb', 'unreviewedLamarans', 'mitras', 'lowongans'));
     }
 
-    // public function indexMahasiswa()
-    // {
-    //     $breadcrumb = (object) [
-    //         'title' => 'Dashboard',
-    //         'subtitle' => 'Welcome to Dashboard Internify'
-    //     ];
-
-    //     $mahasiswa = Mahasiswa::where('user_id', Auth::user()->user_id)->first();
-    //     $magang = MagangApplication::with('lowongans.period')->where('mahasiswa_id', $mahasiswa->mahasiswa_id)->first();
-
-    //     $isProfilValid = $mahasiswa->profil_akademik->is_valid ?? false;
-
-    //     $periodeMagang = null;
-    //     $sisaWaktuMagang = null;
-    //     $isAkhirPeriode = false;
-    //     $status = 'Anda Belum Magang';
-
-    //     if ($magang && $magang->lowongans && $magang->lowongans->period) {
-    //         $startDate = Carbon::parse($magang->lowongans->period->start_date);
-    //         $endDate = Carbon::parse($magang->lowongans->period->end_date);
-    //         $today = Carbon::today();
-
-    //         // Sisa Waktu Magang
-    //         if ($today->lessThanOrEqualTo($endDate)) {
-    //             $diff = $today->diff($endDate);
-    //             $sisaWaktuMagang = 'Kurang ' . $diff->m . ' bulan ' . $diff->d . ' hari';
-    //         } else {
-    //             $sisaWaktuMagang = 'Periode magang telah berakhir';
-    //         }
-
-    //         // Periode Magang
-    //         $periodeMagang = [
-    //             'start' => $startDate->format('Y-m-d'),
-    //             'end' => $endDate->format('Y-m-d'),
-    //         ];
-
-    //         // Akhir Periode
-    //         $isAkhirPeriode = $today->greaterThanOrEqualTo($endDate);
-
-    //         // Status Magang
-    //         if ($mahasiswa->status !== 'is_magang') {
-    //             $status = 'Lamaran Anda Sedang Diproses...';
-    //         } elseif ($today->greaterThan($endDate)) {
-    //             $status = 'Magang Anda Selesai';
-    //         } else {
-    //             $status = 'Anda Sedang Melaksanakan Magang';
-    //         }
-    //     }
-
-    //     return view('mahasiswa.dashboard.mahasiswa', compact(
-    //         'breadcrumb',
-    //         'status',
-    //         'magang',
-    //         'mahasiswa',
-    //         'isProfilValid',
-    //         'periodeMagang',
-    //         'sisaWaktuMagang',
-    //         'isAkhirPeriode'
-    //     ));
-    // }
-
     public function indexMahasiswa()
     {
         $breadcrumb = (object) [
@@ -113,7 +52,6 @@ class DashboardController extends Controller
         $isAkhirPeriode = false;
         $status = 'Anda Belum Magang';
 
-        // Cek profil akademik
         $profilAkademik = $mahasiswa->profil_akademik;
         $isProfilLengkap = false;
 
@@ -121,19 +59,13 @@ class DashboardController extends Controller
             $isProfilLengkap = !empty($profilAkademik->etika) && !empty($profilAkademik->ipk);
         }
 
-        // Cek apakah magang sudah disetujui perusahaan (misalnya status 'Disetujui' di model MagangApplication)
-        $magangDisetujui = false;
+        $bimbinganDisetujui = false;
         if ($magang) {
-            $magangDisetujui = $magang->status === 'Disetujui';  // sesuaikan nama field statusnya
+            $bimbinganDisetujui = Bimbingan::where('magang_id', $magang->magang_id)
+                ->where('status', 'Disetujui')
+                ->exists();
         }
 
-
-        // ✅ Cek bimbingan disetujui
-        $bimbinganDisetujui = Bimbingan::where('magang_id', $mahasiswa->mahasiswa_id)
-            ->where('status', 'Disetujui') // pastikan field 'status' sesuai database Anda
-            ->exists();
-
-        // ✅ Hitung periode dan status magang
         if ($magang && $magang->lowongans && $magang->lowongans->period) {
             $startDate = Carbon::parse($magang->lowongans->period->start_date);
             $endDate = Carbon::parse($magang->lowongans->period->end_date);
@@ -153,7 +85,7 @@ class DashboardController extends Controller
 
             $isAkhirPeriode = $today->greaterThanOrEqualTo($endDate);
 
-            if ($mahasiswa->status !== 'is_magang') {
+            if ($magang->status !== 'Disetujui') {
                 $status = 'Lamaran Anda Sedang Diproses...';
             } elseif ($today->greaterThan($endDate)) {
                 $status = 'Magang Anda Selesai';
@@ -162,10 +94,8 @@ class DashboardController extends Controller
             }
         }
 
-        // ✅ Hitung progress dashboard
         $completedSteps = 0;
         $totalSteps = 4;
-
         if ($isProfilLengkap) $completedSteps++;
         if ($bimbinganDisetujui) $completedSteps++;
         if ($sisaWaktuMagang) $completedSteps++;
@@ -178,13 +108,12 @@ class DashboardController extends Controller
             'status',
             'magang',
             'mahasiswa',
-            // 'isProfilValid',
             'isProfilLengkap',
             'periodeMagang',
             'sisaWaktuMagang',
             'isAkhirPeriode',
             'progressPercent',
-            'bimbinganDisetujui' // ⬅️ tambahkan ini ke blade
+            'bimbinganDisetujui'
         ));
     }
 

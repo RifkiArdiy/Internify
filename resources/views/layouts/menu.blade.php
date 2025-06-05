@@ -126,98 +126,84 @@
         </a>
     </li>
 @endif
+
 @if (Auth::user()->level->level_nama == 'Mahasiswa')
+    @php
+        $mahasiswa = Auth::user()->mahasiswa;
+
+        // Ambil aplikasi magang yang disetujui
+        $magangDisetujui = $mahasiswa->applications()->where('status', 'Disetujui')->latest()->first();
+
+        $hasApprovedMagang = $magangDisetujui !== null;
+    @endphp
+
+    {{-- Menu Heading --}}
     <li class="nk-menu-heading">
         <h6 class="overline-title text-primary-alt">Dashboards</h6>
     </li>
-    <!-- .nk-menu-heading -->
     <li class="nk-menu-item">
         <a href="{{ route('mahasiswa.dashboard') }}" class="nk-menu-link">
-            <span class="nk-menu-icon">
-                <em class="icon ni ni-dashlite"></em>
-            </span>
+            <span class="nk-menu-icon"><em class="icon ni ni-dashlite"></em></span>
             <span class="nk-menu-text">Dashboard</span>
         </a>
     </li>
-    <!-- .nk-menu-item -->
+
     <li class="nk-menu-heading">
         <h6 class="overline-title text-primary-alt">User Management</h6>
     </li>
     <li class="nk-menu-item">
         <a href="{{ route('profil-akademik.index') }}" class="nk-menu-link">
-            <span class="nk-menu-icon">
-                <em class="icon ni ni-user"></em>
-            </span>
+            <span class="nk-menu-icon"><em class="icon ni ni-user"></em></span>
             <span class="nk-menu-text">Profil Akademik</span>
         </a>
     </li>
-    @if (Auth::user()->mahasiswa->status == '-')
+
+    {{-- Jika belum ada magang disetujui --}}
+    @unless ($hasApprovedMagang)
         <li class="nk-menu-item">
             <a href="{{ url('mahasiswa/alternatif') }}" class="nk-menu-link">
-                <span class="nk-menu-icon">
-                    <em class="icon ni ni-briefcase"></em>
-                </span>
+                <span class="nk-menu-icon"><em class="icon ni ni-briefcase"></em></span>
                 <span class="nk-menu-text">Rekomendasi Lowongan</span>
             </a>
         </li>
         <li class="nk-menu-item">
             <a href="{{ route('lamaran') }}" class="nk-menu-link">
-                <span class="nk-menu-icon">
-                    <em class="icon ni ni-file-text"></em>
-                </span>
+                <span class="nk-menu-icon"><em class="icon ni ni-file-text"></em></span>
                 <span class="nk-menu-text">Pengajuan Magang</span>
             </a>
         </li>
-    @endif
-    @if (Auth::user()->mahasiswa->status == 'is_magang')
-        {{-- @php
-            $application = Auth::user()->mahasiswa->applications->first();
-            $lowongan = $application ? $application->lowongans : null;
+    @endunless
 
-            $endDate = $lowongan && $lowongan->period ? Carbon::parse($lowongan->period->end_date) : null;
-
-        @endphp
-
-        @if ($endDate && $endDate <= now()) --}}
-            <li class="nk-menu-item">
-                <a href="{{ route('laporan') }}" class="nk-menu-link">
-                    <span class="nk-menu-icon">
-                        <em class="icon ni ni-report"></em>
-                    </span>
-                    <span class="nk-menu-text">Laporan Harian</span>
-                </a>
-            </li>
-
-            <li class="nk-menu-item">
-                <a href="{{ route('evaluasi-index') }}" class="nk-menu-link">
-                    <span class="nk-menu-icon">
-                        <em class="icon ni ni-file-text"></em>
-                    </span>
-                    <span class="nk-menu-text">Evaluasi Magang</span>
-                </a>
-            </li>
-        {{-- @elseif ($endDate && $endDate > now()) --}}
-            <li class="nk-menu-item">
-                <a href="{{ route('feedback-index') }}" class="nk-menu-link">
-                    <span class="nk-menu-icon">
-                        <em class="icon ni ni-comments"></em>
-                    </span>
-                    <span class="nk-menu-text">Feedback Magang</span>
-                </a>
-            </li>
-
-            <li class="nk-menu-item">
-                <a href="{{ route('sertifikatMagang.index') }}" class="nk-menu-link">
-                    <span class="nk-menu-icon">
-                        <em class="icon ni ni-notes-alt"></em>
-                    </span>
-                    <span class="nk-menu-text">Sertifikat Magang</span>
-                </a>
-            </li>
-        {{-- @endif --}}
-
+    {{-- Jika sudah disetujui magangnya --}}
+    @if ($hasApprovedMagang)
+        <li class="nk-menu-item">
+            <a href="{{ route('laporan') }}" class="nk-menu-link">
+                <span class="nk-menu-icon"><em class="icon ni ni-report"></em></span>
+                <span class="nk-menu-text">Laporan Harian</span>
+            </a>
+        </li>
+        <li class="nk-menu-item">
+            <a href="{{ route('evaluasi-index') }}" class="nk-menu-link">
+                <span class="nk-menu-icon"><em class="icon ni ni-file-text"></em></span>
+                <span class="nk-menu-text">Evaluasi Magang</span>
+            </a>
+        </li>
+        <li class="nk-menu-item">
+            <a href="{{ route('feedback-index') }}" class="nk-menu-link">
+                <span class="nk-menu-icon"><em class="icon ni ni-comments"></em></span>
+                <span class="nk-menu-text">Feedback Magang</span>
+            </a>
+        </li>
+        <li class="nk-menu-item">
+            <a href="{{ route('sertifikatMagang.index') }}" class="nk-menu-link">
+                <span class="nk-menu-icon"><em class="icon ni ni-notes-alt"></em></span>
+                <span class="nk-menu-text">Sertifikat Magang</span>
+            </a>
+        </li>
     @endif
 @endif
+
+
 @if (Auth::user()->level->level_nama == 'Company')
     <li class="nk-menu-heading">
         <h6 class="overline-title text-primary-alt">Dashboards</h6>
