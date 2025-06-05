@@ -167,30 +167,29 @@
         </li>
     @endif
     @if (Auth::user()->mahasiswa->status == 'is_magang')
-    @php
-        $application = Auth::user()->mahasiswa->applications->first(); // atau pakai filter jika perlu
-        $lowongan = $application ? $application->lowongans : null;
-    @endphp
+        @php
+            $application = Auth::user()->mahasiswa->applications->first(); // atau pakai filter jika perlu
+            $lowongan = $application ? $application->lowongans : null;
+        @endphp
 
-    @if($lowongan && $lowongan->period && $lowongan->period->end_date <= now())
-        <li class="nk-menu-item">
-            <a href="{{ route('laporan') }}" class="nk-menu-link">
-                <span class="nk-menu-icon">
-                    <em class="icon ni ni-report"></em>
-                </span>
-                <span class="nk-menu-text">Laporan Harian</span>
-            </a>
-        </li>
+        @if ($lowongan && $lowongan->period && $lowongan->period->end_date <= now())
+            <li class="nk-menu-item">
+                <a href="{{ route('laporan') }}" class="nk-menu-link">
+                    <span class="nk-menu-icon">
+                        <em class="icon ni ni-report"></em>
+                    </span>
+                    <span class="nk-menu-text">Laporan Harian</span>
+                </a>
+            </li>
 
-        <li class="nk-menu-item">
-            <a href="{{ route('evaluasi-index') }}" class="nk-menu-link">
-                <span class="nk-menu-icon">
-                    <em class="icon ni ni-file-text"></em>
-                </span>
-                <span class="nk-menu-text">Evaluasi Magang</span>
-            </a>
-        </li>
-        
+            <li class="nk-menu-item">
+                <a href="{{ route('evaluasi-index') }}" class="nk-menu-link">
+                    <span class="nk-menu-icon">
+                        <em class="icon ni ni-file-text"></em>
+                    </span>
+                    <span class="nk-menu-text">Evaluasi Magang</span>
+                </a>
+            </li>
         @elseif ($lowongan && $lowongan->period && $lowongan->period->end_date >= now())
             <li class="nk-menu-item">
                 <a href="{{ route('feedback-index') }}" class="nk-menu-link">
@@ -212,14 +211,6 @@
         @endif
 
     @endif
-    {{-- <li class="nk-menu-item">
-        <a href="{{ route('lihatLamaran',Auth::user()->mahasiswa->mahasiswa_id) }}" class="nk-menu-link">
-            <span class="nk-menu-icon">
-                <em class="icon ni ni-check"></em>
-            </span>
-            <span class="nk-menu-text">Selesai Magang</span>
-        </a>
-    </li> --}}
 @endif
 @if (Auth::user()->level->level_nama == 'Company')
     <li class="nk-menu-heading">
