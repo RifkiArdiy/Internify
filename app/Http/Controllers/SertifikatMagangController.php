@@ -9,6 +9,7 @@ use App\Models\SertifikatMahasiswa;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Carbon\Carbon;
 
 class SertifikatMagangController extends Controller
 {
@@ -27,14 +28,35 @@ class SertifikatMagangController extends Controller
 
     public function indexMhs()
     {
-        $sertifikats = SertifikatMagang::with('sertifikatMahasiswa')->latest()->get();
+        $user = auth()->user();
+        $mahasiswa = $user->mahasiswa;
+
+        // Ambil aplikasi magang mahasiswa yang statusnya sedang dijalani
+        $magangBerlangsung = $mahasiswa->applications()
+            ->where('status', 'Disetujui') // atau 'berlangsung' jika ada
+            ->first();
+
+        if ($magangBerlangsung) {
+            $lowonganId = $magangBerlangsung->lowongan_id;
+
+            // Ambil sertifikat yang berkaitan dengan lowongan tersebut
+            $sertifikats = SertifikatMagang::where('lowongan_id', $lowonganId)
+                ->with('sertifikatMahasiswa')
+                ->latest()
+                ->get();
+        } else {
+            // Tidak ada magang aktif
+            $sertifikats = collect(); // kosongkan koleksi
+        }
 
         $breadcrumb = (object) [
             'title' => 'Sertifikat Magang',
             'subtitle' => 'Daftar Sertifikat Magang'
         ];
+
         return view('mahasiswa.sertifikatMahasiswa.index', compact('sertifikats', 'breadcrumb'));
     }
+
 
     // Form create untuk perusahaan
     public function create()
@@ -53,17 +75,20 @@ class SertifikatMagangController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'judul' => 'required|string|max:255',
-            'deskripsi' => 'nullable|string',
+            'company_id' => 'required|exists:companies,company_id',
+            'lowongan_id' => 'required|exists:lowongan_magangs,lowongan_id',
+            'deskripsi' => 'required|string',
         ]);
 
         // $file = $request->file('sertifikat');
         // $filename = time().'_'.$file->getClientOriginalName();
         // $path = $file->storeAs('public/sertifikat', $filename);
+        $lowongan = LowonganMagang::findOrFail($request->lowongan_id);
 
         SertifikatMagang::create([
             'company_id' => Auth::user()->company->company_id,
-            'judul' => $request->judul,
+            'lowongan_id' => $request->lowongan_id,
+            'judul' => $lowongan->title,
             'deskripsi' => $request->deskripsi,
         ]);
 
@@ -142,6 +167,8 @@ class SertifikatMagangController extends Controller
 
     public function downloadMhs($id)
     {
+        Carbon::setLocale('id');
+
         $sertifikat = SertifikatMagang::findOrFail($id);
         $mahasiswa = Auth::user()->mahasiswa;
         $periode = PeriodeMagang::latest()->first();
@@ -158,7 +185,7 @@ class SertifikatMagangController extends Controller
             'judul' => $sertifikat->judul,
             'nama_mahasiswa' => $mahasiswa->user->name,
             'deskripsi' => $sertifikat->deskripsi,
-            'tanggal' => now()->format('d F Y'),
+            'tanggal' => Carbon::now()->translatedFormat('d F Y'),
             'nama_perusahaan' => $sertifikat->company->user->name,
             'mulai' => $periode->start_date,
             'selesai' => $periode->end_date,

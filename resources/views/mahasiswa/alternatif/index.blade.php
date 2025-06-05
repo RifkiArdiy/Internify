@@ -67,12 +67,12 @@
 
                                                     <li class="divider"></li>
                                                     <li>
-                                                        <form
-                                                            action="{{ route('alternatif.destroy', $alt->alternatif_id) }}"
-                                                            method="POST">
-                                                            @csrf @method('DELETE')
-                                                            <button type="submit" class="btn btn-link p-0"><em
-                                                                    class="icon ni ni-trash"></em><span>Hapus</span></button>
+                                                        <form action="{{ route('alternatif.destroy', $alt->alternatif_id) }}" method="POST" onsubmit="return confirm('Yakin ingin menghapus alternatif ini?')" style="display:inline;">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button type="submit" class="dropdown-item">
+                                                                <em class="icon ni ni-trash"></em><span>Hapus</span>
+                                                            </button>
                                                         </form>
                                                     </li>
                                                 </ul>

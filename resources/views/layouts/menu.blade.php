@@ -1,3 +1,6 @@
+@php
+    use Carbon\Carbon;
+@endphp
 @if (Auth::user()->level->level_nama == 'Administrator')
     <li class="nk-menu-heading">
         <h6 class="overline-title text-primary-alt">Dashboards</h6>
@@ -167,49 +170,53 @@
         </li>
     @endif
     @if (Auth::user()->mahasiswa->status == 'is_magang')
-        <li class="nk-menu-item">
-            <a href="{{ route('laporan') }}" class="nk-menu-link">
-                <span class="nk-menu-icon">
-                    <em class="icon ni ni-report"></em>
-                </span>
-                <span class="nk-menu-text">Laporan Harian</span>
-            </a>
-        </li>
+        {{-- @php
+            $application = Auth::user()->mahasiswa->applications->first();
+            $lowongan = $application ? $application->lowongans : null;
 
-        <li class="nk-menu-item">
-            <a href="{{ route('evaluasi-index') }}" class="nk-menu-link">
-                <span class="nk-menu-icon">
-                    <em class="icon ni ni-file-text"></em>
-                </span>
-                <span class="nk-menu-text">Evaluasi Magang</span>
-            </a>
-        </li>
-        <li class="nk-menu-item">
-            <a href="{{ route('feedback-index') }}" class="nk-menu-link">
-                <span class="nk-menu-icon">
-                    <em class="icon ni ni-comments"></em>
-                </span>
-                <span class="nk-menu-text">Feedback Magang</span>
-            </a>
-        </li>
-        {{-- ntar ini dikasi status selesai_magang --}}
-        <li class="nk-menu-item">
-            <a href="{{ route('sertifikatMagang.index') }}" class="nk-menu-link">
-                <span class="nk-menu-icon">
-                    <em class="icon ni ni-notes-alt"></em>
-                </span>
-                <span class="nk-menu-text">Sertifikat Magang</span>
-            </a>
-        </li>
+            $endDate = $lowongan && $lowongan->period ? Carbon::parse($lowongan->period->end_date) : null;
+
+        @endphp
+
+        @if ($endDate && $endDate <= now()) --}}
+            <li class="nk-menu-item">
+                <a href="{{ route('laporan') }}" class="nk-menu-link">
+                    <span class="nk-menu-icon">
+                        <em class="icon ni ni-report"></em>
+                    </span>
+                    <span class="nk-menu-text">Laporan Harian</span>
+                </a>
+            </li>
+
+            <li class="nk-menu-item">
+                <a href="{{ route('evaluasi-index') }}" class="nk-menu-link">
+                    <span class="nk-menu-icon">
+                        <em class="icon ni ni-file-text"></em>
+                    </span>
+                    <span class="nk-menu-text">Evaluasi Magang</span>
+                </a>
+            </li>
+        {{-- @elseif ($endDate && $endDate > now()) --}}
+            <li class="nk-menu-item">
+                <a href="{{ route('feedback-index') }}" class="nk-menu-link">
+                    <span class="nk-menu-icon">
+                        <em class="icon ni ni-comments"></em>
+                    </span>
+                    <span class="nk-menu-text">Feedback Magang</span>
+                </a>
+            </li>
+
+            <li class="nk-menu-item">
+                <a href="{{ route('sertifikatMagang.index') }}" class="nk-menu-link">
+                    <span class="nk-menu-icon">
+                        <em class="icon ni ni-notes-alt"></em>
+                    </span>
+                    <span class="nk-menu-text">Sertifikat Magang</span>
+                </a>
+            </li>
+        {{-- @endif --}}
+
     @endif
-    {{-- <li class="nk-menu-item">
-        <a href="{{ route('lihatLamaran',Auth::user()->mahasiswa->mahasiswa_id) }}" class="nk-menu-link">
-            <span class="nk-menu-icon">
-                <em class="icon ni ni-check"></em>
-            </span>
-            <span class="nk-menu-text">Selesai Magang</span>
-        </a>
-    </li> --}}
 @endif
 @if (Auth::user()->level->level_nama == 'Company')
     <li class="nk-menu-heading">

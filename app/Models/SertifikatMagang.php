@@ -14,6 +14,7 @@ class SertifikatMagang extends Model
 
     protected $fillable = [
         'company_id',
+        'lowongan_id',
         'judul',
         'deskripsi',
     ];
@@ -28,5 +29,11 @@ class SertifikatMagang extends Model
     public function sertifikatMahasiswa()
     {
         return $this->hasMany(SertifikatMahasiswa::class, 'sertifikat_id');
+    }
+
+    // Relasi ke lowongan magang
+    public function lowongans()
+    {
+        return $this->belongsTo(LowonganMagang::class, 'lowongan_id', 'lowongan_id');
     }
 }

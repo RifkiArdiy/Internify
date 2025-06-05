@@ -6,34 +6,31 @@
             <form method="POST" action="{{ route('company.sertifikatMagang.store') }}" enctype="multipart/form-data">
                 @csrf
 
-                <input type="text" name="company_id" value="{{ Auth::user()->company->company_id }}" hidden>
+                {{-- Kirim ID perusahaan --}}
+                <input type="hidden" name="company_id" value="{{ Auth::user()->company->company_id }}">
 
-                {{-- <div class="form-group">
-                <label for="judul">Judul Sertifikat</label>
-                <input type="text" name="judul" class="form-control" required>
-            </div> --}}
-
+                {{-- Pilih lowongan --}}
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label class="form-label">Judul Sertifikat</label>
-                        <select name="judul" id="judul" class="form-control" data-search="on" required>
+                        <label class="form-label">Lowongan</label>
+                        <select name="lowongan_id" id="lowongan_id" class="form-control" data-search="on" required>
                             <option value="">- Pilih Lowongan -</option>
                             @foreach ($lowongans as $lowongan)
-                                <option value="{{ $lowongan->title }}">{{ $lowongan->title }}</option>
+                                <option value="{{ $lowongan->lowongan_id }}">{{ $lowongan->title }}</option>
                             @endforeach
                         </select>
                     </div>
                 </div>
+
                 <br>
+
+                {{-- Deskripsi --}}
                 <div class="form-group">
                     <label for="deskripsi">Deskripsi</label>
                     <textarea name="deskripsi" class="form-control"></textarea>
                 </div>
 
-                {{-- <div class="form-group">
-                <label for="sertifikat">Upload PDF Sertifikat</label>
-                <input type="file" name="sertifikat" class="form-control" accept="application/pdf" required>
-            </div> --}}
+                {{-- Tombol --}}
                 <div class="col-12 text-end">
                     <div class="form-group">
                         <button type="submit" class="btn btn-primary">Upload</button>

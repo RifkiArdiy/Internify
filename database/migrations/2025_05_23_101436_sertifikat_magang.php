@@ -14,11 +14,13 @@ return new class extends Migration
         Schema::create('sertifikat_magangs', function (Blueprint $table) {
             $table->id('sertifikat_id');
             $table->unsignedBigInteger('company_id');
+            $table->unsignedBigInteger('lowongan_id');
             $table->string('judul');
             $table->string('deskripsi')->nullable();
             $table->timestamps();
 
             $table->foreign('company_id')->references('company_id')->on('companies')->onDelete('cascade');
+            $table->foreign('lowongan_id')->references('lowongan_id')->on('lowongan_magangs')->onDelete('cascade');
         });
     }
 

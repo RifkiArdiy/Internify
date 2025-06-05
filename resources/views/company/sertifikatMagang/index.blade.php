@@ -24,12 +24,12 @@
                     @foreach ($sertifikats as $index => $sertifikat)
                         <tr class="nk-tb-item">
                             <td class="nk-tb-col tb-col-md">
-                                <span class="tb-amount"> {{ $index + 1 }}</span>
+                                <span > {{ $index + 1 }}</span>
                             </td>
                             <td class="nk-tb-col tb-col-md">
-                                <span class="tb-amount"> {{ $sertifikat->judul }}</span>
+                                <span > {{ $sertifikat->judul }}</span>
                             </td>
-                            <td class="nk-tb-col tb-col-md"><span class="tb-amount">
+                            <td class="nk-tb-col tb-col-md"><span >
                                     {{ Str::limit(strip_tags($sertifikat->deskripsi), 50) }}</span>
                             </td>
                             <td class="nk-tb-col nk-tb-col-tools">
