@@ -86,10 +86,10 @@ class ListingController extends Controller
         
         if ($request->filled('q')) {
             $q = $request->q;
-            $periodeBerjalan = PeriodeMagang::whereDate('end_date', '>', Carbon::today())->pluck('period_id');
+            // $periodeBerjalan = PeriodeMagang::whereDate('end_date', '>', Carbon::today())->pluck('period_id');
 
-            $query->whereIn('period_id', $periodeBerjalan)
-                ->where(function ($sub) use ($q) {
+            // $query->whereIn('period_id', $periodeBerjalan)
+                $query->where(function ($sub) use ($q) {
                     $sub->where('title', 'like', '%' . $q . '%')
                         ->orWhereHas('company.user', function ($user) use ($q) {
                             $user->where('name', 'like', '%' . $q . '%');
