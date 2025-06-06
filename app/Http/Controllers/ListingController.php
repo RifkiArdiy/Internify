@@ -36,7 +36,7 @@ class ListingController extends Controller
 
         $recent = LowonganMagang::where('kategori_id', $lowongan->kategori_id)
             ->where('lowongan_id', '!=', $lowongan->lowongan_id)
-            ->whereIn('periode_id', $periodeBerjalan)
+            ->whereIn('period_id', $periodeBerjalan)
             ->latest()
             ->take(3)
             ->get();
