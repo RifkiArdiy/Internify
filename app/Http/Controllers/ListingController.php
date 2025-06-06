@@ -6,13 +6,17 @@ use App\Models\Company;
 use App\Models\FeedbackMagang;
 use App\Models\LowonganMagang;
 use App\Models\MagangApplication;
+use App\Models\PeriodeMagang;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 class ListingController extends Controller
 {
     public function lowongan()
     {
+        $periodeBerjalan = PeriodeMagang::whereDate('end_date', '>', Carbon::today())->pluck('period_id');
         $lowongan = LowonganMagang::with('company', 'period')
+            ->whereIn('period_id', $periodeBerjalan)
             ->orderBy('created_at', 'desc')
             ->get();
 
@@ -27,9 +31,12 @@ class ListingController extends Controller
             ->findOrFail($id);
 
         $jobcount = $lowongan->company->lowongans()->count(); // Ini yang benar
+        $periodeBerjalan = PeriodeMagang::whereDate('end_date', '>', Carbon::today())->pluck('period_id');
+
 
         $recent = LowonganMagang::where('kategori_id', $lowongan->kategori_id)
             ->where('lowongan_id', '!=', $lowongan->lowongan_id)
+            ->whereIn('periode_id', $periodeBerjalan)
             ->latest()
             ->take(3)
             ->get();
@@ -76,15 +83,18 @@ class ListingController extends Controller
     public function searchLowongan(Request $request)
     {
         $query = LowonganMagang::with(['company.user', 'period', 'kategori']);
-
+        
         if ($request->filled('q')) {
             $q = $request->q;
-            $query->where(function ($sub) use ($q) {
-                $sub->where('title', 'like', '%' . $q . '%')
-                    ->orWhereHas('company.user', function ($user) use ($q) {
-                        $user->where('name', 'like', '%' . $q . '%');
-                    });
-            });
+            $periodeBerjalan = PeriodeMagang::whereDate('end_date', '>', Carbon::today())->pluck('period_id');
+
+            $query->whereIn('period_id', $periodeBerjalan)
+                ->where(function ($sub) use ($q) {
+                    $sub->where('title', 'like', '%' . $q . '%')
+                        ->orWhereHas('company.user', function ($user) use ($q) {
+                            $user->where('name', 'like', '%' . $q . '%');
+                        });
+                });
         }
 
         if ($request->filled('perusahaan_id')) {
