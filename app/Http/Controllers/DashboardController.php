@@ -98,7 +98,7 @@ class DashboardController extends Controller
         $totalSteps = 4;
         if ($isProfilLengkap) $completedSteps++;
         if ($bimbinganDisetujui) $completedSteps++;
-        if ($sisaWaktuMagang) $completedSteps++;
+        if ($magang && $magang->status === 'Disetujui' && !$isAkhirPeriode) $completedSteps++;
         if ($isAkhirPeriode) $completedSteps++;
 
         $progressPercent = round(($completedSteps / $totalSteps) * 100);

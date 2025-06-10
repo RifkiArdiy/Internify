@@ -211,14 +211,21 @@
 
                                 @auth
                                     @if (Auth::user()->level && Auth::user()->level->level_nama === 'Mahasiswa')
-                                        <form action="{{ route('buatLamaran', ['id' => $lowongan->lowongan_id]) }}"
-                                            method="POST" onsubmit="return confirm('Yakin ingin melamar lowongan ini?')">
-                                            @csrf
-                                            <button type="submit" class="btn btn-lg btn-primary">Lamar Cepat</button>
-                                        </form>
+                                        @if ($hasProfilAkademik)
+                                            <form action="{{ route('buatLamaran', ['id' => $lowongan->lowongan_id]) }}"
+                                                method="POST"
+                                                onsubmit="return confirm('Yakin ingin melamar lowongan ini?')">
+                                                @csrf
+                                                <button type="submit" class="btn btn-lg btn-primary">Lamar Cepat</button>
+                                            </form>
+                                        @else
+                                            <a href="{{ route('profil-akademik.index') }}"
+                                                class="btn btn-lg btn-warning">
+                                                Lengkapi Profil Akademik
+                                            </a>
+                                        @endif
                                     @endif
                                 @endauth
-
                             </div>
                         </div>
                     </div>

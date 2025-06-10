@@ -9,6 +9,7 @@ use App\Models\MagangApplication;
 use App\Models\PeriodeMagang;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 class ListingController extends Controller
 {
@@ -50,7 +51,11 @@ class ListingController extends Controller
         // $averageRating = number_format($ratings->avg('rating') ?? 0, 2);
 
 
-        return view('listing.job.show', compact('lowongan', 'jobcount', 'recent'));
+        $mahasiswa = Auth::user()->mahasiswa;
+
+        $hasProfilAkademik = optional($mahasiswa)->profil_akademik()->exists();
+
+        return view('listing.job.show', compact('lowongan', 'jobcount', 'recent', 'hasProfilAkademik'));
     }
 
     public function perusahaan()
