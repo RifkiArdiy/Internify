@@ -83,7 +83,7 @@ class DosenController extends Controller
     {
         //
         $request->validate([
-            'name' => 'required',
+            'name' => 'required|min:3',
             'username' => 'required|unique:users',
             'email' => 'required|unique:users',
             'password' => 'required|min:6',

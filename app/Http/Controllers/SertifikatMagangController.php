@@ -77,7 +77,7 @@ class SertifikatMagangController extends Controller
         $request->validate([
             'company_id' => 'required|exists:companies,company_id',
             'lowongan_id' => 'required|exists:lowongan_magangs,lowongan_id',
-            'deskripsi' => 'required|string',
+            'deskripsi' => 'required|string|min:10',
         ]);
 
         // $file = $request->file('sertifikat');

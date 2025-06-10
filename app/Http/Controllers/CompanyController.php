@@ -75,7 +75,7 @@ class CompanyController extends Controller
             'username' => 'required|unique:users',
             'email' => 'required|unique:users',
             'password' => 'required|min:6',
-            'about_company' => 'required|string|max:65535',
+            'about_company' => 'required|string|max:65535|min:25',
             'no_telp' => 'nullable|string|min:10|max:15',
             'alamat' => 'nullable|string|min:10|max:100',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
