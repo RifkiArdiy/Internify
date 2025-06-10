@@ -59,7 +59,7 @@
 
                                                     <li><a href="{{ route('prodi.destroy', $item->prodi_id) }}"><em
                                                                 class="icon ni ni-trash"></em><span>Hapus
-                                                                User</span></a></li>
+                                                                </span></a></li>
                                                 </ul>
                                             </div>
                                         </div>

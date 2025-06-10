@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\PeriodeMagang;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 class PeriodeMagangController extends Controller
 {
@@ -40,6 +41,10 @@ class PeriodeMagangController extends Controller
      */
     public function store(Request $request)
     {
+        // $start = Carbon::createFromFormat('m/d/Y', $request->start_date)->format('d-m-Y');
+        // $end = Carbon::createFromFormat('m/d/Y', $request->end_date)->format('d-m-Y');
+
+
         PeriodeMagang::create([
             'name' => $request->name,
             'start_date' => $request->start_date,
@@ -77,6 +82,9 @@ class PeriodeMagangController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        // $start = Carbon::createFromFormat('d/m/Y', $request->start_date)->format('d-m-Y');
+        // $end = Carbon::createFromFormat('d/m/Y', $request->end_date)->format('d-m-Y');
+
         $pegang = PeriodeMagang::find($id);
         $pegang->update([
             'name' => $request->name,

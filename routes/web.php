@@ -96,7 +96,7 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/show/{id}', [LowonganMagangController::class, 'show'])->name('lowongan-magang.show');
             Route::get('/edit/{id}', [LowonganMagangController::class, 'edit'])->name('lowongan-magang.edit');
             Route::put('/{id}', [LowonganMagangController::class, 'update'])->name('lowongan-magang.update');
-            Route::delete('/{id}', [LowonganMagangController::class, 'destroy'])->name('lowongan-magang.destroy');
+            Route::get('/{id}', [LowonganMagangController::class, 'destroy'])->name('lowongan-magang.destroy');
         });
 
         Route::get('/get-regencies', [WilayahController::class, 'getRegencies']);
