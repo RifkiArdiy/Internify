@@ -32,7 +32,8 @@
                                                     </div>
                                                 @endif
                                                 <div class="job-info">
-                                                    <h6 class="title">{{ $lwg->title }}</h6>
+                                                    <h6 class="title">{{ Str::limit(strip_tags($lwg->title), 30) }}
+                                                    </h6>
                                                     <span class="sub-text">{{ $lwg->period->name }}</span>
                                                 </div>
                                             </div>
