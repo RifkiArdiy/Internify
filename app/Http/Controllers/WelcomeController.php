@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Company;
 use App\Models\LowonganMagang;
+use App\Models\PeriodeMagang;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class WelcomeController extends Controller
@@ -13,8 +15,9 @@ class WelcomeController extends Controller
      */
     public function index()
     {
-        //
+        $periodeBerjalan = PeriodeMagang::whereDate('end_date', '>', Carbon::today())->pluck('period_id');
         $lowongans = LowonganMagang::with('company', 'period')
+            ->whereIn('period_id', $periodeBerjalan)
             ->orderBy('created_at', 'desc')
             ->limit(6)
             ->get();

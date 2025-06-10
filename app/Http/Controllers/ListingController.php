@@ -20,9 +20,7 @@ class ListingController extends Controller
             ->orderBy('created_at', 'desc')
             ->get();
 
-        $currPage = 'lowongan';
-
-        return view('listing.job.index', compact('lowongan', 'currPage'));
+        return view('listing.job.index', compact('lowongan'));
     }
 
     public function showLowongan(string $id)
@@ -83,7 +81,7 @@ class ListingController extends Controller
     public function searchLowongan(Request $request)
     {
         $query = LowonganMagang::with(['company.user', 'period', 'kategori']);
-        
+
         if ($request->filled('q')) {
             $q = $request->q;
             $periodeBerjalan = PeriodeMagang::whereDate('end_date', '>', Carbon::today())->pluck('period_id');
