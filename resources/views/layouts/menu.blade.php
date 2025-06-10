@@ -133,7 +133,7 @@
 
         // Ambil aplikasi magang yang disetujui
         $magangDisetujui = $mahasiswa->applications()->where('status', 'Disetujui')->latest()->first();
-
+        
         $hasApprovedMagang = $magangDisetujui !== null;
     @endphp
 
@@ -194,12 +194,17 @@
                 <span class="nk-menu-text">Feedback Magang</span>
             </a>
         </li>
+        @php
+            $hasFeedbackMagang = $mahasiswa->feedbacks !== null;
+        @endphp
+        @if ($hasFeedbackMagang)
         <li class="nk-menu-item">
             <a href="{{ route('sertifikatMagang.index') }}" class="nk-menu-link">
                 <span class="nk-menu-icon"><em class="icon ni ni-notes-alt"></em></span>
                 <span class="nk-menu-text">Sertifikat Magang</span>
             </a>
         </li>
+        @endif
     @endif
 @endif
 

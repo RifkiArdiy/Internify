@@ -52,4 +52,9 @@ class Mahasiswa extends Model
     {
         return $this->hasOne(ProfilAkademik::class, 'user_id', 'user_id');
     }
+
+    public function feedbacks()
+    {
+        return $this->hasOne(FeedbackMagang::class, 'mahasiswa_id', 'mahasiswa_id');
+    }
 }
