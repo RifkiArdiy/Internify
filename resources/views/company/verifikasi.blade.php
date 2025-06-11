@@ -41,10 +41,10 @@
                                 </div>
                             </td>
                             <td class="nk-tb-col">
-                                <span>{{ $log->report_title}}</span>
+                                <span>{{ $log->report_title }}</span>
                             </td>
                             <td class="nk-tb-col">
-                                <span>{{ $log->created_at->format('d M Y') }}</span>
+                                <span>{{ \Carbon\Carbon::parse($log->created_at)->format('d/m/Y') }}</span>
                             </td>
                             <td class="nk-tb-col">
                                 @if ($log->verif_company === 'Disetujui')

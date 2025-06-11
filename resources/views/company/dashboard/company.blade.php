@@ -172,7 +172,7 @@
                                 </div>
                             </div>
                             <div class="nk-tb-col tb-col-lg">
-                                <span class="tb-sub">{{ $item->created_at->format('d/m/Y') }}</span>
+                                <span class="tb-sub">{{ \Carbon\Carbon::parse($item->created_at)->format('d/m/Y') }}</span>
                             </div>
                             <div class="nk-tb-col tb-col-md">
                                 <a href="{{ route('company.magangApplication.show', $item->magang_id) }}"

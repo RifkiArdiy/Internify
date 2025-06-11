@@ -36,26 +36,27 @@
                                 <span>{{ Str::limit(Strip_tags($log->report_title, 50)) }}</span>
                             </td>
                             <td class="nk-tb-col">
-                                <span>{{ $log->created_at->format('d M Y') }}</span>
+                                <span>{{ \Carbon\Carbon::parse($log->created_at)->format('d/m/Y') }}</span>
                             </td>
-                            <td class="nk-tb-col nk-tb-col-tools" style="white-space: nowrap; max-width: 150px; word-wrap: break-word;">
+                            <td class="nk-tb-col nk-tb-col-tools"
+                                style="white-space: nowrap; max-width: 150px; word-wrap: break-word;">
                                 @php
-                                    $sudahDievaluasi = \App\Models\EvaluasiMagang::where('mahasiswa_id', $log->mahasiswa_id)
-                                                        ->where('log_id', $log->log_id)
-                                                        ->exists();
+                                    $sudahDievaluasi = \App\Models\EvaluasiMagang::where(
+                                        'mahasiswa_id',
+                                        $log->mahasiswa_id,
+                                    )
+                                        ->where('log_id', $log->log_id)
+                                        ->exists();
                                 @endphp
                                 @if ($sudahDievaluasi)
                                     <span>Sudah dievaluasi</span>
-
                                 @elseif ($log->verif_company === 'Disetujui')
-                                    
-                                    <a href="{{ route('dosen.verifikasi.show', $log->log_id) }}" class="btn btn-sm btn-primary">
+                                    <a href="{{ route('dosen.verifikasi.show', $log->log_id) }}"
+                                        class="btn btn-sm btn-primary">
                                         Detail
                                     </a>
-                               
                                 @elseif ($log->verif_company === 'Ditolak')
                                     <span>Ditolak</span>
-                                
                                 @else
                                     <span>Pending</span>
                                 @endif

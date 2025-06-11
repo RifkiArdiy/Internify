@@ -243,7 +243,7 @@
                                                     size:</span> <span class="text-soft">11-20</span></li>
                                             <li class="d-flex justify-content-between"><span class="fw-bold">Founded
                                                     in:</span> <span
-                                                    class="text-soft">{{ $company->user->created_at->format('Y') }}</span>
+                                                    class="text-soft">{{ \Carbon\Carbon::parse($company->user->created_at)->format('d/m/Y') }}</span>
                                             </li>
                                             <li class="d-flex justify-content-between"><span
                                                     class="fw-bold">Email:</span> <span

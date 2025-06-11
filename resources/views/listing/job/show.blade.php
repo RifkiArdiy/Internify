@@ -290,7 +290,8 @@
                                             <li class="d-flex justify-content-between"><strong>Date Posted:</strong>
                                                 {{ $lowongan->created_at->diffForHumans() }}</li>
                                             <li class="d-flex justify-content-between"><strong>Expiration
-                                                    Date:</strong> {{ $lowongan->period->end_date }}
+                                                    Date:</strong>
+                                                {{ \Carbon\Carbon::parse($lowongan->period->end_date)->format('d/m/Y') }}
                                             </li>
                                             <li class="d-flex justify-content-between">
                                                 <strong>Lokasi:</strong>{{ $lowongan->regency->name }}
@@ -331,7 +332,7 @@
                                         {{-- <ul class="list list-sm text-soft mt-3"> --}}
                                         <ul class="gy-2 mt-3">
                                             <li class="d-flex justify-content-between">
-                                                <strong>Founded:</strong>{{ $lowongan->company->created_at }}
+                                                <strong>Founded:</strong>{{ \Carbon\Carbon::parse($lowongan->company->created_at)->format('d/m/Y') }}
                                             </li>
                                             <li class="d-flex justify-content-between"><strong>Phone:</strong>
                                                 {{ $lowongan->company->user->no_telp }}</li>

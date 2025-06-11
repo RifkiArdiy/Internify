@@ -14,7 +14,7 @@
         <div class="card-inner">
             <div class="row">
                 <div class="col-md-4 text-center">
-                    @if($mahasiswa->user->image)
+                    @if ($mahasiswa->user->image)
                         <img src="{{ Storage::url('images/users/' . $mahasiswa->user->image) }}"
                             alt="{{ $mahasiswa->user->name }}" class="img-thumbnail rounded-circle"
                             style="width: 200px; height: 200px;">
@@ -65,7 +65,7 @@
                         </tr>
                         <tr>
                             <th>Tanggal Dibuat</th>
-                            <td>{{ $mahasiswa->user->created_at->format('d F Y H:i') }}</td>
+                            <td>{{ \Carbon\Carbon::parse($mahasiswa->user->created_at)->format('d/m/Y') }}</td>
                         </tr>
                     </table>
                 </div>

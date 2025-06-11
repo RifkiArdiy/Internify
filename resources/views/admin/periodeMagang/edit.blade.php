@@ -16,17 +16,31 @@
 
                     <div class="col-6">
                         <div class="form-group">
-                            <label class="form-label">Masa Awal</label>
-                            <input type="date" name="start_date" value="{{ $pegang->start_date }}" class="form-control"
-                                required>
+                            <label class="form-label">Tanggal Mulai</label>
+                            <div class="form-control-wrap">
+                                <div class="form-icon form-icon-right">
+                                    <em class="icon ni ni-calendar-alt"></em>
+                                </div>
+                                <input type="text" name="start_date" class="form-control date-picker"
+                                    value="{{ \Carbon\Carbon::parse($pegang->start_date)->format('d/m/Y') }}"
+                                    placeholder="dd/mm/yyyy" required>
+                            </div>
+                            <div class="form-note">Date format <code>dd/mm/yyyy</code></div>
                         </div>
                     </div>
 
                     <div class="col-6">
                         <div class="form-group">
-                            <label class="form-label">Masa Akhir</label>
-                            <input type="date" name="end_date" value="{{ $pegang->end_date }}" class="form-control"
-                                required>
+                            <label class="form-label">Tanggal Berakhir</label>
+                            <div class="form-control-wrap">
+                                <div class="form-icon form-icon-right">
+                                    <em class="icon ni ni-calendar-alt"></em>
+                                </div>
+                                <input type="text" name="end_date" class="form-control date-picker"
+                                    value="{{ \Carbon\Carbon::parse($pegang->end_date)->format('d/m/Y') }}"
+                                    placeholder="dd/mm/yyyy" required>
+                            </div>
+                            <div class="form-note">Date format <code>dd/mm/yyyy</code></div>
                         </div>
                     </div>
 

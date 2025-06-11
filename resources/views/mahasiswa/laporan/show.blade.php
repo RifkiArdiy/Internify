@@ -1,15 +1,16 @@
 @extends('layouts.app')
 
 @section('action')
-<style>
-    #quill-editor{
-        overflow-x: auto;
-        word-wrap: break-word;
-    }
-    .ql-editor {
-        word-break: break-word;
-    }
-</style>
+    <style>
+        #quill-editor {
+            overflow-x: auto;
+            word-wrap: break-word;
+        }
+
+        .ql-editor {
+            word-break: break-word;
+        }
+    </style>
 
     <li class="nk-block-tools-opt">
         <a href="{{ route('laporan') }}" class="btn btn-light">
@@ -39,7 +40,7 @@
                 </div>
                 <div class="col-md-6">
                     <h6 class="mb-1 text-soft">Tanggal Dibuat</h6>
-                    <p class="fw-bold">{{ $log->created_at->format('d M Y') }}</p>
+                    <p class="fw-bold">{{ \Carbon\Carbon::parse($log->created_at)->format('d/m/Y') }}</p>
                 </div>
             </div>
         </div>
