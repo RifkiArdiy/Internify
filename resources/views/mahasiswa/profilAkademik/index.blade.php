@@ -227,12 +227,12 @@
                                             class="icon ni ni-more-v"></em></a>
                                     <div class="dropdown-menu dropdown-menu-end">
                                         <ul class="link-list-opt no-bdr">
-                                            <li>
+                                            {{-- <li>
                                                 <a href="#">
                                                     <em class="icon ni ni-camera-fill"></em>
                                                     <span>Change Photo</span>
                                                 </a>
-                                            </li>
+                                            </li> --}}
                                             @if (Auth::user()->level->level_nama == 'Administrator')
                                                 <li>
                                                     <a href="{{ route('profile.edit') }}">

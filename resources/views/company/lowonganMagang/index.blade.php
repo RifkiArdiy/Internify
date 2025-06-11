@@ -57,7 +57,7 @@
                                             </a>
                                             <div class="dropdown-menu dropdown-menu-end">
                                                 <ul class="link-list-opt no-bdr">
-                                                    <li><a href="{{ route('show.lowongan', $item->lowongan_id) }}">
+                                                    <li><a href="{{ route('companys-lowongan-magang.show', $item->lowongan_id) }}">
                                                             <em class="icon ni ni-eye"></em><span>Lihat Detail</span></a>
                                                     </li>
                                                     <li><a

@@ -16,6 +16,7 @@
 @section('content')
     <div class="card card-bordered card-preview">
         <div class="card-inner">
+            <div class="table-responsive">
             <table class="datatable-init-export nowrap nk-tb-list nk-tb-ulist" data-auto-responsive="false">
                 <thead>
                     <tr class="nk-tb-item nk-tb-head">
@@ -86,6 +87,7 @@
                 </tbody>
             </table>
         </div>
+    </div>
     </div>
     <div class="modal fade" id="tambahAlternatifModal" tabindex="-1" aria-labelledby="tambahAlternatifModalLabel"
         aria-hidden="true">
