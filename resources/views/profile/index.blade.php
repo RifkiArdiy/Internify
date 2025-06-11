@@ -195,4 +195,12 @@
             </div><!-- card-aside -->
         </div><!-- .card-aside-wrap -->
     </div>
+    <div class="modal fade" role="dialog" id="profile-edit">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content">
+                {{-- profil.edit.blade.php --}}
+                @include('profile.edit')
+            </div><!-- .modal-content -->
+        </div><!-- .modal-dialog -->
+    </div><!-- .modal -->
 @endsection
