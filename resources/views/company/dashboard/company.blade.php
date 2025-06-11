@@ -50,7 +50,7 @@
             </div>
         </div>
 
-        <div class="col-xl-12 col-xxl-8">
+        <div class="col-xl-12 col-xxl-12">
             <div class="card card-bordered card-full">
                 <div class="card-inner border-bottom">
                     <div class="card-title-group">
@@ -132,7 +132,7 @@
             </div>
         </div>
 
-        <div class="col-xl-12 col-xxl-8">
+        <div class="col-xl-12 col-xxl-12">
             <div class="card card-bordered card-full">
                 <div class="card-inner border-bottom">
                     <div class="card-title-group">
