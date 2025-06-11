@@ -43,6 +43,28 @@ class BimbinganController extends Controller
             ->orderByDesc('created_at')
             ->get();
 
+        $bimbingans->map(function ($bimbingan) {
+            $mhs = $bimbingan->magang->mahasiswas ?? null;
+            $profil = $mhs?->profil_akademik;
+            $magang = $bimbingan->magang;
+
+            $completed = 0;
+            if ($profil && !empty($profil->etika) && !empty($profil->ipk)) $completed++; // 1
+            if ($bimbingan->status === 'Disetujui') $completed++; // 2
+            if ($magang && $magang->status === 'Disetujui') $completed++; // 3
+
+            $periode = $magang->lowongans->period ?? null;
+            $isAkhirPeriode = false;
+            if ($periode) {
+                $end = \Carbon\Carbon::parse($periode->end_date);
+                $isAkhirPeriode = now()->greaterThanOrEqualTo($end);
+            }
+            if ($isAkhirPeriode) $completed++; // 4
+
+            $bimbingan->progress = round(($completed / 4) * 100);
+            return $bimbingan;
+        });
+
         return view('dosen.bimbingan.index', compact('breadcrumb', 'bimbingans'));
     }
 
@@ -117,7 +139,7 @@ class BimbinganController extends Controller
     {
         $breadcrumb = (object)[
             'title' => 'Detail Bimbingan',
-            'subtitle' => 'Data Pengajuan'
+            'subtitle' => 'Informasi lengkap mengenai pengajuan bimbingan mahasiswa'
         ];
 
         $bimbingan = Bimbingan::with('magang.lowongans.company.user', 'magang.mahasiswas.user')->findOrFail($id);

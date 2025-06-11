@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Bimbingan;
 use App\Models\MagangApplication;
 use App\Models\Company;
+use App\Models\FeedbackMagang;
 use App\Models\LowonganMagang;
 use App\Models\Mahasiswa;
 use App\Models\User;
@@ -94,12 +95,19 @@ class DashboardController extends Controller
             }
         }
 
-        $completedSteps = 0;
+        $feedbackDikirim = false;
+        if ($magang) {
+            $feedbackDikirim = FeedbackMagang::where('magang_id', $magang->magang_id)->exists();
+        }
+
         $totalSteps = 4;
+        $completedSteps = 0;
+
         if ($isProfilLengkap) $completedSteps++;
         if ($bimbinganDisetujui) $completedSteps++;
         if ($magang && $magang->status === 'Disetujui' && !$isAkhirPeriode) $completedSteps++;
         if ($isAkhirPeriode) $completedSteps++;
+        if ($feedbackDikirim) $completedSteps++; // ✅ tambahkan progress jika feedback dikirim
 
         $progressPercent = round(($completedSteps / $totalSteps) * 100);
 
@@ -113,7 +121,8 @@ class DashboardController extends Controller
             'sisaWaktuMagang',
             'isAkhirPeriode',
             'progressPercent',
-            'bimbinganDisetujui'
+            'bimbinganDisetujui',
+            'feedbackDikirim' // ✅ tambahkan ini
         ));
     }
 
@@ -123,7 +132,48 @@ class DashboardController extends Controller
             'title' => 'Dashboard',
             'subtitle' => 'Welcome to Dashboard Internify'
         ];
-        return view('dosen.dashboard.dosen', compact('breadcrumb'));
+        $userId = Auth::id();
+
+        $bimbingans = Bimbingan::with(['magang.mahasiswas.profil_akademik', 'magang.lowongans.period', 'magang.lowongans.company', 'magang.mahasiswas.user'])
+            ->where('dosen_id', $userId)
+            ->orderByDesc('created_at')
+            ->get();
+
+        // Hitung progress per mahasiswa
+        $bimbingans->map(function ($bimbingan) {
+            $mhs = $bimbingan->magang->mahasiswas ?? null;
+            $profil = $mhs?->profil_akademik;
+            $magang = $bimbingan->magang;
+
+            $completed = 0;
+            if ($profil && !empty($profil->etika) && !empty($profil->ipk)) $completed++; // 1
+            if ($bimbingan->status === 'Disetujui') $completed++; // 2
+            if ($magang && $magang->status === 'Disetujui') $completed++; // 3
+
+            $periode = $magang->lowongans->period ?? null;
+            $isAkhirPeriode = false;
+            if ($periode) {
+                $end = \Carbon\Carbon::parse($periode->end_date);
+                $isAkhirPeriode = now()->greaterThanOrEqualTo($end);
+            }
+            if ($isAkhirPeriode) $completed++; // 4
+
+            $bimbingan->progress = round(($completed / 4) * 100);
+            return $bimbingan;
+        });
+
+        $totalMahasiswa = $bimbingans->count();
+
+        $belumReview = $bimbingans->filter(function ($item) {
+            return $item->status === 'Pending';
+        })->count();
+
+        $selesaiMagang = $bimbingans->filter(function ($item) {
+            $periode = $item->magang->lowongans->period ?? null;
+            return $periode && \Carbon\Carbon::parse($periode->end_date)->isPast();
+        })->count();
+
+        return view('dosen.dashboard.dosen', compact('breadcrumb', 'bimbingans', 'totalMahasiswa', 'belumReview', 'selesaiMagang'));
     }
 
     public function indexCompany()
