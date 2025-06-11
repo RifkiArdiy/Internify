@@ -10,8 +10,24 @@
                             <h6 class="mb-0 text-white">Lowongan dibuka</h6>
                             <h3 class="text-white mt-1">{{ $openJobs }}</h3>
                         </div>
-                        <div class="icon icon-lg">
-                            <em class="icon ni ni-briefcase-fill"></em>
+                        <div class="icon icon-circle bg-white text-success">
+                            <em class="icon ni ni-briefcase"></em>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card card-bordered bg-primary">
+                <div class="card-inner">
+                    <div class="d-flex align-items-center justify-content-between">
+                        <div>
+                            <h6 class="mb-0 text-white">Mahasiswa Magang</h6>
+                            <h3 class="text-white mt-1">{{ $savedCandidates }}</h3>
+                        </div>
+                        <div class="icon icon-circle bg-white text-primary">
+                            <em class="icon ni ni-user-check-fill"></em>
                         </div>
                     </div>
                 </div>
@@ -23,26 +39,10 @@
                 <div class="card-inner">
                     <div class="d-flex align-items-center justify-content-between">
                         <div>
-                            <h6 class="mb-0 text-white">Mahasiswa Magang</h6>
-                            <h3 class="text-white mt-1">{{ $savedCandidates }}</h3>
-                        </div>
-                        <div class="icon icon-lg text-white">
-                            <em class="icon ni ni-user-check-fill"></em>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-4">
-            <div class="card card-bordered bg-danger">
-                <div class="card-inner">
-                    <div class="d-flex align-items-center justify-content-between">
-                        <div>
-                            <h6 class="mb-0 text-white">Pengajuan Pending</h6>
+                            <h6 class="mb-0 text-white">Belum Direview</h6>
                             <h3 class="text-white mt-1">{{ $pendingJobs }}</h3>
                         </div>
-                        <div class="icon icon-lg text-white">
+                        <div class="icon icon-circle bg-white text-warning">
                             <em class="icon ni ni-briefcase"></em>
                         </div>
                     </div>

@@ -26,12 +26,11 @@ class ListingController extends Controller
 
     public function showLowongan(string $id)
     {
-        $lowongan = LowonganMagang::with(['company.user']) // Memuat company dan user di dalamnya
-            ->findOrFail($id);
+        $lowongan = LowonganMagang::with(['company.user'])->findOrFail($id);
 
-        $jobcount = $lowongan->company->lowongans()->count(); // Ini yang benar
+        $jobcount = optional($lowongan->company)->lowongans()->count() ?? 0;
+
         $periodeBerjalan = PeriodeMagang::whereDate('end_date', '>', Carbon::today())->pluck('period_id');
-
 
         $recent = LowonganMagang::where('kategori_id', $lowongan->kategori_id)
             ->where('lowongan_id', '!=', $lowongan->lowongan_id)
@@ -40,20 +39,16 @@ class ListingController extends Controller
             ->take(3)
             ->get();
 
-        // $logang = LowonganMagang::with('benefits', 'kategori')->findOrFail($id);
+        $hasProfilAkademik = false;
 
-        // $company = Company::with(['user', 'lowongans.kategori'])->findOrFail($id);
-        // $lowongans = LowonganMagang::where('company_id', $company->company_id)->get();
-        // $lowonganIds = $lowongans->pluck('lowongan_id');
-        // $magangs = MagangApplication::whereIn('lowongan_id', $lowonganIds)->get();
-        // $magangIds = $magangs->pluck('magang_id');
-        // $ratings = FeedbackMagang::whereIn('magang_id', $magangIds)->get();
-        // $averageRating = number_format($ratings->avg('rating') ?? 0, 2);
+        if (Auth::check()) {
+            $user = Auth::user();
+            $mahasiswa = $user->mahasiswa;
 
-
-        $mahasiswa = Auth::user()->mahasiswa;
-
-        $hasProfilAkademik = optional($mahasiswa)->profil_akademik()->exists();
+            if ($mahasiswa && $mahasiswa->profil_akademik) {
+                $hasProfilAkademik = !empty($mahasiswa->profil_akademik->ipk) && !empty($mahasiswa->profil_akademik->etika);
+            }
+        }
 
         return view('listing.job.show', compact('lowongan', 'jobcount', 'recent', 'hasProfilAkademik'));
     }
