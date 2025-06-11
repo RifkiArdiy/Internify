@@ -703,14 +703,14 @@
                     },
                     customize: function (doc) {
                         const colCount = doc.content[1].table.body[0].length;
-                
+
                         // Set orientasi landscape jika kolom > 5
                         if (colCount > 5) {
                             doc.pageOrientation = 'landscape';
                         } else {
                             doc.pageOrientation = 'portrait';
                         }
-                
+
                         // Ubah margin & lebar kolom
                         doc.pageMargins = [20, 20, 20, 20];
                         doc.content[1].table.widths = Array(colCount).fill('*');
@@ -1131,8 +1131,28 @@
     };
 
     // Picker Init @v1.0
+    // NioApp.Picker.init = function () {
+    //     NioApp.Picker.date(".date-picker");
+    //     NioApp.Picker.dob(".date-picker-alt");
+    //     NioApp.Picker.time(".time-picker");
+    //     NioApp.Picker.date(".date-picker-range", {
+    //         todayHighlight: false,
+    //         autoclose: false,
+    //     });
+    //     NioApp.Picker.date(".date-picker-ym", {
+    //         format: "dd/mm/yyyy",
+    //         startView: 2,
+    //         autoclose: true,
+    //         maxViewMode: 2,
+    //         minViewMode: 1,
+    //     });
+    // };
     NioApp.Picker.init = function () {
-        NioApp.Picker.date(".date-picker");
+        NioApp.Picker.date(".date-picker", {
+            format: "dd/mm/yyyy",
+            autoclose: true,
+            todayHighlight: true,
+        });
         NioApp.Picker.dob(".date-picker-alt");
         NioApp.Picker.time(".time-picker");
         NioApp.Picker.date(".date-picker-range", {
@@ -1147,6 +1167,7 @@
             minViewMode: 1,
         });
     };
+
 
     // Addons @v1
     NioApp.Addons.Init = function () {

@@ -70,7 +70,8 @@
                                             <div class="dropdown-menu dropdown-menu-end">
                                                 <ul class="link-list-opt no-bdr">
                                                     <li>
-                                                        <a href="{{ route('user.show', $admin->user_id) }}"><em class="icon ni ni-eye"></em><span>Lihat
+                                                        <a href="{{ route('user.show', $admin->user_id) }}"><em
+                                                                class="icon ni ni-eye"></em><span>Lihat
                                                                 Detail</span></a>
                                                     </li>
                                                     <li>
@@ -94,6 +95,12 @@
                     @endforeach
                 </tbody>
             </table>
+        </div>
+    </div>
+    <div class="modal fade" id="showAdmin" tabindex="-1" aria-labelledby="showAdminLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-sm"> <!-- ✅ modal-sm + centered -->
+            <div class="modal-content">
+            </div>
         </div>
     </div>
 @endsection
