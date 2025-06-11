@@ -16,7 +16,6 @@
 @section('content')
     <div class="card card-bordered card-preview">
         <div class="card-inner">
-            <div class="table-responsive">
             <table class="datatable-init-export nowrap nk-tb-list nk-tb-ulist" data-auto-responsive="false">
                 <thead>
                     <tr class="nk-tb-item nk-tb-head">
@@ -39,15 +38,12 @@
                                 @endphp
                                 <td>
                                     @if ($nilai && $nilai->nilai > 0)
-                                        {{
-                                            $nilai->kriteria->skorKriterias
-                                                ->firstWhere('nilai', $nilai->nilai)?->parameter ?? 'Parameter tidak ditemukan'
-                                        }}
+                                        {{ $nilai->kriteria->skorKriterias->firstWhere('nilai', $nilai->nilai)?->parameter ??
+                                            'Parameter tidak ditemukan' }}
                                     @else
                                         <span class="text-danger">Belum ada nilai</span>
                                     @endif
                                 </td>
-                                
                             @endforeach
                             <td class="nk-tb-col nk-tb-col-tools">
                                 <ul class="nk-tb-actions gx-1">
@@ -68,7 +64,11 @@
 
                                                     <li class="divider"></li>
                                                     <li>
-                                                        <form action="{{ route('alternatif.destroy', $alt->alternatif_id) }}" method="POST" onsubmit="return confirm('Yakin ingin menghapus alternatif ini?')" style="display:inline;">
+                                                        <form
+                                                            action="{{ route('alternatif.destroy', $alt->alternatif_id) }}"
+                                                            method="POST"
+                                                            onsubmit="return confirm('Yakin ingin menghapus alternatif ini?')"
+                                                            style="display:inline;">
                                                             @csrf
                                                             @method('DELETE')
                                                             <button type="submit" class="dropdown-item">
@@ -87,7 +87,6 @@
                 </tbody>
             </table>
         </div>
-    </div>
     </div>
     <div class="modal fade" id="tambahAlternatifModal" tabindex="-1" aria-labelledby="tambahAlternatifModalLabel"
         aria-hidden="true">

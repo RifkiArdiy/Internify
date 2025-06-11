@@ -186,9 +186,6 @@
                                             @if ($periodeMagang)
                                                 <span class="badge bg-light text-dark small ms-2">Sisa:
                                                     {{ $sisaWaktuMagang }}</span>
-                                            @else
-                                                <span class="badge bg-light text-muted small ms-2">Periode tidak
-                                                    tersedia</span>
                                             @endif
                                         </div>
                                         <span class="sub-text">Magang</span>
@@ -209,12 +206,12 @@
                                     class="btn btn-md btn-primary {{ !$bimbinganDisetujui ? 'disabled opacity-50 pointer-events-none' : '' }}">
                                     Lihat
                                 </a>
-                                @if ($isAkhirPeriode)
+                                {{-- @if ($isAkhirPeriode)
                                     <div class="d-flex align-items-center ms-2">
                                         <em class="ni ni-file-check text-success fs-4 me-1"></em>
                                         <small class="text-success fw-bold">Magang berakhir</small>
                                     </div>
-                                @endif
+                                @endif --}}
                                 @if (!$bimbinganDisetujui)
                                     <small class="text-danger d-block mt-1">Ajukan bimbingan terlebih dahulu.</small>
                                 @endif
@@ -253,7 +250,7 @@
                             <div class="divider"></div>
                             <div class="project-meta">
                                 {{-- BUTTON DISABLED --}}
-                                <a href="#"
+                                <a href="{{ route('feedback-index') }}"
                                     class="btn btn-md btn-primary {{ !$isAkhirPeriode ? 'disabled opacity-50 pointer-events-none' : '' }}"
                                     {{ !$isAkhirPeriode ? 'onclick=event.preventDefault();' : '' }}>
                                     Lihat
@@ -262,6 +259,12 @@
                                     <small class="text-danger d-block mt-1">Tersedia setelah periode magang
                                         selesai.</small>
                                 @endif
+                                @if ($feedbackDikirim)
+                                    <small class="text-success d-block mt-1">Feedback telah dikirim.</small>
+                                @else
+                                    <small class="text-warning d-block mt-1">Belum mengirim feedback.</small>
+                                @endif
+
                             </div>
                         </div>
                     </div>

@@ -110,6 +110,14 @@
         <h6 class="overline-title text-primary-alt">User Management</h6>
     </li>
     <li class="nk-menu-item">
+        <a href="{{ route('bimbingan.list') }}" class="nk-menu-link">
+            <span class="nk-menu-icon">
+                <em class="icon ni ni-contact"></em>
+            </span>
+            <span class="nk-menu-text">Mahasiswa Bimbingan</span>
+        </a>
+    </li>
+    <li class="nk-menu-item">
         <a href="{{ route('evaluasi.index') }}" class="nk-menu-link">
             <span class="nk-menu-icon">
                 <em class="icon ni ni-file-text"></em>
@@ -133,7 +141,7 @@
 
         // Ambil aplikasi magang yang disetujui
         $magangDisetujui = $mahasiswa->applications()->where('status', 'Disetujui')->latest()->first();
-        
+
         $hasApprovedMagang = $magangDisetujui !== null;
     @endphp
 
@@ -198,12 +206,12 @@
             $hasFeedbackMagang = $mahasiswa->feedbacks !== null;
         @endphp
         @if ($hasFeedbackMagang)
-        <li class="nk-menu-item">
-            <a href="{{ route('sertifikatMagang.index') }}" class="nk-menu-link">
-                <span class="nk-menu-icon"><em class="icon ni ni-notes-alt"></em></span>
-                <span class="nk-menu-text">Sertifikat Magang</span>
-            </a>
-        </li>
+            <li class="nk-menu-item">
+                <a href="{{ route('sertifikatMagang.index') }}" class="nk-menu-link">
+                    <span class="nk-menu-icon"><em class="icon ni ni-notes-alt"></em></span>
+                    <span class="nk-menu-text">Sertifikat Magang</span>
+                </a>
+            </li>
         @endif
     @endif
 @endif
