@@ -17,26 +17,6 @@ use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
 {
-    //
-    // public function indexAdmin()
-    // {
-    //     $breadcrumb = (object) [
-    //         'title' => 'Dashboard',
-    //         'subtitle' => 'Welcome to Dashboard Internify'
-    //     ];
-
-    //     $users = User::query()
-    //         ->limit(5)
-    //         ->get();
-    //     $unreviewedLamarans = MagangApplication::with('mahasiswas')->where('status', 'pending')->get();
-    //     // $mitras = Company::all()->sortByDesc(function ($mitra) {
-    //     //     return $mitra->getRating($mitra->company_id);
-    //     // });
-
-    //     $mitras = Company::all();
-    //     $lowongans = LowonganMagang::query()->limit(5)->get();
-    //     return view('admin.dashboard.admin', compact('users', 'breadcrumb', 'unreviewedLamarans', 'mitras', 'lowongans'));
-    // }
     public function indexAdmin()
     {
         $breadcrumb = (object) [
@@ -63,12 +43,43 @@ class DashboardController extends Controller
 
         $lowongans = LowonganMagang::query()->limit(5)->get();
 
+        $lowonganCounts = LowonganMagang::withCount('applications')->get();
+
+        $magangStatusCounts = [];
+
+        foreach ($lowonganCounts as $lowongan) {
+            $magangStatusCounts[$lowongan->title] = $lowongan->applications_count;
+        }
+
+        $totalMahasiswa = Mahasiswa::count();
+
+        $magangStatusCounts = LowonganMagang::withCount('applications')
+            ->orderByDesc('applications_count')
+            ->limit(5)
+            ->get()
+            ->pluck('applications_count', 'title')
+            ->toArray();
+
+        $trendData = MagangApplication::select(
+            DB::raw("DATE(created_at) as date"),
+            DB::raw("count(*) as total")
+        )
+            ->groupBy('date')
+            ->orderBy('date')
+            ->get();
+
+        $trendLabels = $trendData->pluck('date')->toArray();
+        $trendCounts = $trendData->pluck('total')->toArray();
+
         return view('admin.dashboard.admin', compact(
             'users',
             'breadcrumb',
             'unreviewedLamarans',
             'mitras',
-            'lowongans'
+            'lowongans',
+            'magangStatusCounts',
+            'trendLabels',
+            'trendCounts'
         ));
     }
 

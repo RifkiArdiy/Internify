@@ -2,19 +2,46 @@
 
 @section('content')
     <div class="row g-4">
-        <div class="col-12">
-            <div class="card card-bordered card-preview">
+        {{-- <div class="col-12">
+            <div class="card card-bordered ">
                 <div class="card-inner">
-                    <p>Halaman ini menampilkan rekap dari semua data seperti lowangan magang, user, aktivitas, dll</h3>
-                    <div class="example-alert">
-                        <div class="alert alert-warning alert-icon">
-                            <em class="icon ni ni-alert-circle"></em> Halaman ini masih dalam tahap pengembanagan.
-                            Fitur Dashboard akan segera tersedia.
-                        </div>
-                    </div>
+                    <h6 class="title mb-4">Tren Pendaftaran Magang</h6>
+                    <canvas id="magangTrendChart"></canvas>
                 </div>
             </div>
         </div>
+
+        <div class="col-md-6 col-xxl-4">
+            <div class="card card-bordered ">
+                <div class="card-inner">
+                    <h6 class="title">Distribusi Magang Berdasarkan Status</h6>
+                    <canvas id="magangStatusChart"></canvas>
+                </div>
+            </div>
+        </div> --}}
+        <div class="col-12">
+            <div class="card card-bordered">
+                <div class="card-inner">
+                    <h6 class="title mb-4">Tren Pendaftaran Magang</h6>
+                    <canvas id="magangTrendChart" height="300"></canvas>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-xxl-4">
+            {{-- <div class="card card-bordered">
+                <div class="card-inner">
+                    <h6 class="title mb-4">Distribusi Magang Berdasarkan Status</h6>
+                    <canvas id="magangStatusChart" height="300"></canvas>
+                </div>
+            </div> --}}
+            <div class="card card-bordered h-100">
+                <div class="card-inner">
+                    <h6 class="title mb-4">Lowongan Terpopuler</h6>
+                    <canvas id="lowonganPopulerChart" height="240"></canvas>
+                </div>
+            </div>
+        </div>
+
         <div class="col-md-6 col-xxl-4">
             <div class="card card-bordered card-full">
                 <div class="card-inner border-bottom">
@@ -259,43 +286,87 @@
             </div>
         </div>
     </div>
-    {{-- <div class="col-md-6 col-xxl-4">
-        <div class="card card-bordered card-full">
-            <div class="card-inner border-bottom">
-                <div class="card-title-group">
-                    <div class="card-title">
-                        <h6 class="title">Perusahaan dengan rating</h6>
-                    </div>
-                </div>
-            </div>
-            @foreach ($mitras as $mitra)
-                @if ($mitra->getRating($mitra->company_id) != '0.0')
-                    <ul class="nk-activity">
-                        <li class="nk-activity-item">
-                            <div class="nk-activity-media user-avatar bg-teal-dim"><img src="./images/avatar/c-sm.jpg"
-                                    alt="">
-                                @if ($mitra->user->image)
-                                    <img src="{{ Storage::url('images/users/' . $mitra->user->image) }}"
-                                        alt="{{ $mitra->user->name }}">
-                                @else
-                                    <span>
-                                        {{ strtoupper(collect(explode(' ', $mitra->user->name))->map(fn($word) => $word[0])->take(2)->implode('')) }}
-                                    </span>
-                                @endif
-                            </div>
-                            <div class="user-info">
-                                <span class="lead-text">{{ $mitra->user->name }}</span>
-                                <span>
-                                    @for ($i = 0; $i < $mitra->getRating($mitra->company_id); $i++)
-                                        <i class="icon ni ni-star-fill" style="font-size: 24px; color: gold;"></i>
-                                    @endfor
-                                </span>
-                            </div>
-
-                        </li>
-                    </ul>
-                @endif
-            @endforeach
-        </div><!-- .card -->
-    </div><!-- .col --> --}}
 @endsection
+
+@push('js')
+    <script>
+        const doughnutCtx = document.getElementById('lowonganPopulerChart').getContext('2d');
+        const doughnutChart = new Chart(doughnutCtx, {
+            type: 'doughnut',
+            data: {
+                labels: {!! json_encode(array_keys($magangStatusCounts)) !!},
+                datasets: [{
+                    label: "Pelamar",
+                    data: {!! json_encode(array_values($magangStatusCounts)) !!},
+                    backgroundColor: [
+                        '#798bff',
+                        '#f4aaa4',
+                        '#8feac5',
+                        '#ffa353',
+                        '#6aabf2'
+                    ],
+                    borderColor: '#fff',
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                cutout: '70%',
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            padding: 20,
+                            color: '#6783b8'
+                        }
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return `${context.label}: ${context.parsed} Pelamar`;
+                            }
+                        },
+                        backgroundColor: '#eff6ff',
+                        titleColor: '#6783b8',
+                        bodyColor: '#526484'
+                    }
+                }
+            }
+        });
+
+        // === Chart 2: Tren Pendaftaran (Line) ===
+        const trendCtx = document.getElementById('magangTrendChart').getContext('2d');
+        new Chart(trendCtx, {
+            type: 'line',
+            data: {
+                labels: {!! json_encode($trendLabels) !!},
+                datasets: [{
+                    label: 'Jumlah Pendaftaran',
+                    data: {!! json_encode($trendCounts) !!},
+                    borderColor: '#798bff',
+                    backgroundColor: 'rgba(121, 139, 255, 0.3)',
+                    fill: true,
+                    tension: 0.3
+                }]
+            },
+            options: {
+                responsive: true,
+                legend: {
+                    display: false
+                },
+                scales: {
+                    xAxes: [{
+                        display: false
+                    }],
+                    yAxes: [{
+                        display: true,
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        });
+    </script>
+@endpush
