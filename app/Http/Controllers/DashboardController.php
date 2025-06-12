@@ -13,12 +13,30 @@ use Database\Seeders\MahasiswaSeeder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
-
-
+use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
 {
     //
+    // public function indexAdmin()
+    // {
+    //     $breadcrumb = (object) [
+    //         'title' => 'Dashboard',
+    //         'subtitle' => 'Welcome to Dashboard Internify'
+    //     ];
+
+    //     $users = User::query()
+    //         ->limit(5)
+    //         ->get();
+    //     $unreviewedLamarans = MagangApplication::with('mahasiswas')->where('status', 'pending')->get();
+    //     // $mitras = Company::all()->sortByDesc(function ($mitra) {
+    //     //     return $mitra->getRating($mitra->company_id);
+    //     // });
+
+    //     $mitras = Company::all();
+    //     $lowongans = LowonganMagang::query()->limit(5)->get();
+    //     return view('admin.dashboard.admin', compact('users', 'breadcrumb', 'unreviewedLamarans', 'mitras', 'lowongans'));
+    // }
     public function indexAdmin()
     {
         $breadcrumb = (object) [
@@ -26,16 +44,32 @@ class DashboardController extends Controller
             'subtitle' => 'Welcome to Dashboard Internify'
         ];
 
-        $users = User::query()
-            ->limit(5)
+        $users = User::query()->limit(5)->get();
+
+        $unreviewedLamarans = MagangApplication::with('mahasiswas')
+            ->where('status', 'pending')
             ->get();
-        $unreviewedLamarans = MagangApplication::with('mahasiswas')->where('status', 'pending')->get();
-        // $mitras = Company::all()->sortByDesc(function ($mitra) {
-        //     return $mitra->getRating($mitra->company_id);
-        // });
-        $mitras = Company::all();
+
+        // Ambil semua perusahaan dan urutkan berdasarkan rating tertinggi
+        $mitras = Company::with('user')
+            ->select('companies.*', DB::raw('AVG(feedback_magang.rating) as avg_rating'))
+            ->leftJoin('lowongan_magangs', 'companies.company_id', '=', 'lowongan_magangs.company_id')
+            ->leftJoin('magang_applications', 'lowongan_magangs.lowongan_id', '=', 'magang_applications.lowongan_id')
+            ->leftJoin('feedback_magang', 'magang_applications.magang_id', '=', 'feedback_magang.magang_id')
+            ->groupBy('companies.company_id')
+            ->orderByDesc('avg_rating')
+            ->take(5)
+            ->get();
+
         $lowongans = LowonganMagang::query()->limit(5)->get();
-        return view('admin.dashboard.admin', compact('users', 'breadcrumb', 'unreviewedLamarans', 'mitras', 'lowongans'));
+
+        return view('admin.dashboard.admin', compact(
+            'users',
+            'breadcrumb',
+            'unreviewedLamarans',
+            'mitras',
+            'lowongans'
+        ));
     }
 
     public function indexMahasiswa()

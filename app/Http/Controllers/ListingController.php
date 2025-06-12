@@ -50,8 +50,19 @@ class ListingController extends Controller
             }
         }
 
-        return view('listing.job.show', compact('lowongan', 'jobcount', 'recent', 'hasProfilAkademik'));
+        $company = Company::with(['user', 'lowongans.kategori'])->findOrFail($lowongan->company_id);
+
+        $lowonganIds = $company->lowongans->pluck('lowongan_id');
+
+        $magangIds = MagangApplication::whereIn('lowongan_id', $lowonganIds)->pluck('magang_id');
+
+        $feedbacks = FeedbackMagang::whereIn('magang_id', $magangIds)->get();
+
+        $averageRating = number_format($feedbacks->avg('rating') ?? 0, 2);
+
+        return view('listing.job.show', compact('lowongan', 'jobcount', 'recent', 'hasProfilAkademik', 'averageRating'));
     }
+
 
     public function perusahaan()
     {
@@ -67,16 +78,18 @@ class ListingController extends Controller
     public function showPerusahaan($id)
     {
         $company = Company::with(['user', 'lowongans.kategori'])->findOrFail($id);
-        // $lowongans = LowonganMagang::where('company_id', $company->company_id)->get();
-        // $lowonganIds = $lowongans->pluck('lowongan_id');
-        // $magangs = MagangApplication::whereIn('lowongan_id', $lowonganIds)->get();
-        // $magangIds = $magangs->pluck('magang_id');
-        // $ratings = FeedbackMagang::whereIn('magang_id', $magangIds)->get();
-        // $averageRating = number_format($ratings->avg('rating') ?? 0, 2);
 
+        $lowonganIds = $company->lowongans->pluck('lowongan_id');
 
-        return view('listing.company.show', compact('company'));
+        $magangIds = MagangApplication::whereIn('lowongan_id', $lowonganIds)->pluck('magang_id');
+
+        $feedbacks = FeedbackMagang::whereIn('magang_id', $magangIds)->get();
+
+        $averageRating = number_format($feedbacks->avg('rating') ?? 0, 2);
+
+        return view('listing.company.show', compact('company', 'averageRating'));
     }
+
 
     public function searchLowongan(Request $request)
     {

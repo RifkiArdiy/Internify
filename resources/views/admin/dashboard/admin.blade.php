@@ -17,6 +17,71 @@
         </div>
         <div class="col-md-6 col-xxl-4">
             <div class="card card-bordered card-full">
+                <div class="card-inner border-bottom">
+                    <div class="card-title-group">
+                        <div class="card-title">
+                            <h6 class="title">Perusahaan dengan rating</h6>
+                        </div>
+                    </div>
+                </div>
+
+                @foreach ($mitras as $mitra)
+                    {{-- @if (!is_null($mitra->avg_rating) && $mitra->avg_rating > 0) --}}
+                    @if (true)
+                        <ul class="nk-activity">
+                            <li class="nk-activity-item">
+                                <div class="nk-activity-media user-avatar bg-indigo-dim">
+                                    @if ($mitra->user->image)
+                                        <img src="{{ Storage::url('images/users/' . $mitra->user->image) }}"
+                                            alt="{{ $mitra->user->name }}">
+                                    @else
+                                        <span>
+                                            {{ strtoupper(collect(explode(' ', $mitra->user->name))->map(fn($word) => $word[0])->take(2)->implode('')) }}
+                                        </span>
+                                    @endif
+                                </div>
+                                <div class="user-info">
+                                    <span class="lead-text">{{ $mitra->user->name }}</span>
+                                </div>
+                                <div class="user-action">
+                                    <span>
+                                        <div class="user-action">
+                                            @php
+                                                $rating = $mitra->avg_rating ?? 0;
+                                                $fullStars = floor($rating);
+                                                $halfStar = $rating - $fullStars >= 0.5;
+                                                $emptyStars = 5 - $fullStars - ($halfStar ? 1 : 0);
+                                            @endphp
+
+                                            <span class="d-flex align-items-center">
+                                                @for ($i = 0; $i < $fullStars; $i++)
+                                                    <i class="icon ni ni-star-fill"
+                                                        style="font-size: 18px; color: gold;"></i>
+                                                @endfor
+
+                                                @if ($halfStar)
+                                                    <i class="icon ni ni-star-half"
+                                                        style="font-size: 18px; color: gold;"></i>
+                                                @endif
+
+                                                @for ($i = 0; $i < $emptyStars; $i++)
+                                                    <i class="icon ni ni-star" style="font-size: 18px; color: #ccc;"></i>
+                                                @endfor
+
+                                                <small
+                                                    class="ms-2 text-soft fs-13px">({{ number_format($rating, 2) }})</small>
+                                            </span>
+                                        </div>
+                                    </span>
+                                </div>
+                            </li>
+                        </ul>
+                    @endif
+                @endforeach
+            </div><!-- .card -->
+        </div>
+        <div class="col-md-6 col-xxl-4">
+            <div class="card card-bordered card-full">
                 <div class="card-inner-group">
                     <div class="card-inner">
                         <div class="card-title-group">
@@ -139,6 +204,7 @@
                 @endforeach
             </div><!-- .card -->
         </div><!-- .col -->
+
         <div class="col-12">
             <div class="card card-bordered card-preview">
                 <table class="table table-tranx">
@@ -194,43 +260,42 @@
         </div>
     </div>
     {{-- <div class="col-md-6 col-xxl-4">
-            <div class="card card-bordered card-full">
-                <div class="card-inner border-bottom">
-                    <div class="card-title-group">
-                        <div class="card-title">
-                            <h6 class="title">Perusahaan dengan rating</h6>
-                        </div>
+        <div class="card card-bordered card-full">
+            <div class="card-inner border-bottom">
+                <div class="card-title-group">
+                    <div class="card-title">
+                        <h6 class="title">Perusahaan dengan rating</h6>
                     </div>
                 </div>
-                @foreach ($mitras as $mitra)
-                    @if ($mitra->getRating($mitra->company_id) != '0.0')
-
-                        <ul class="nk-activity">
-                            <li class="nk-activity-item">
-                                <div class="nk-activity-media user-avatar bg-teal-dim"><img src="./images/avatar/c-sm.jpg" alt="">
-                                    @if ($mitra->user->image)
-                                        <img src="{{ Storage::url('images/users/' . $mitra->user->image) }}"
-                                            alt="{{ $mitra->user->name }}">
-                                    @else
-                                        <span>
-                                            {{ strtoupper(collect(explode(' ', $mitra->user->name))->map(fn($word) => $word[0])->take(2)->implode('')) }}
-                                        </span>
-                                    @endif
-                                </div>
-                                <div class="user-info">
-                                    <span class="lead-text">{{ $mitra->user->name }}</span>
+            </div>
+            @foreach ($mitras as $mitra)
+                @if ($mitra->getRating($mitra->company_id) != '0.0')
+                    <ul class="nk-activity">
+                        <li class="nk-activity-item">
+                            <div class="nk-activity-media user-avatar bg-teal-dim"><img src="./images/avatar/c-sm.jpg"
+                                    alt="">
+                                @if ($mitra->user->image)
+                                    <img src="{{ Storage::url('images/users/' . $mitra->user->image) }}"
+                                        alt="{{ $mitra->user->name }}">
+                                @else
                                     <span>
-                                        @for ($i = 0; $i < $mitra->getRating($mitra->company_id); $i++)
-                                            <i class="icon ni ni-star-fill" style="font-size: 24px; color: gold;"></i>
-                                        @endfor
+                                        {{ strtoupper(collect(explode(' ', $mitra->user->name))->map(fn($word) => $word[0])->take(2)->implode('')) }}
                                     </span>
-                                </div>
+                                @endif
+                            </div>
+                            <div class="user-info">
+                                <span class="lead-text">{{ $mitra->user->name }}</span>
+                                <span>
+                                    @for ($i = 0; $i < $mitra->getRating($mitra->company_id); $i++)
+                                        <i class="icon ni ni-star-fill" style="font-size: 24px; color: gold;"></i>
+                                    @endfor
+                                </span>
+                            </div>
 
-                            </li>
-                        </ul>
-                    @endif
-                @endforeach
-            </div><!-- .card -->
-        </div><!-- .col --> --}}
-    </div>
+                        </li>
+                    </ul>
+                @endif
+            @endforeach
+        </div><!-- .card -->
+    </div><!-- .col --> --}}
 @endsection

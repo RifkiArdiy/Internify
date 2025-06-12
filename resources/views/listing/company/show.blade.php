@@ -197,9 +197,27 @@
                                 @endif
                                 <div>
                                     <h4 class="mb-1">{{ $company->user->name }}</h4>
-                                    {{-- @for ($i = 0; $i < $averageRating; $i++)
-                                        <i class="icon ni ni-star-fill" style="font-size: 24px; color: gold;"></i>
-                                    @endfor --}}
+                                    <div class="d-flex align-items-center mb-2">
+                                        @php
+                                            $fullStars = floor($averageRating);
+                                            $halfStar = $averageRating - $fullStars >= 0.5;
+                                            $emptyStars = 5 - $fullStars - ($halfStar ? 1 : 0);
+                                        @endphp
+
+                                        @for ($i = 0; $i < $fullStars; $i++)
+                                            <i class="icon ni ni-star-fill" style="color: gold; font-size: 20px;"></i>
+                                        @endfor
+
+                                        @if ($halfStar)
+                                            <i class="icon ni ni-star-half" style="color: gold; font-size: 20px;"></i>
+                                        @endif
+
+                                        @for ($i = 0; $i < $emptyStars; $i++)
+                                            <i class="icon ni ni-star" style="color: gold; font-size: 20px;"></i>
+                                        @endfor
+
+                                        <span class="ms-2 text-soft fs-13px">({{ $averageRating }})</span>
+                                    </div>
 
                                     <ul class="list-inline list-split fs-14px text-soft">
                                         <li><em class="icon ni ni-briefcase"></em> Technology</li>

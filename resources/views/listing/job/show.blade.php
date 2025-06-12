@@ -326,6 +326,27 @@
                                             <i class="icon ni ni-star-fill"></i>
                                         @endfor
                                         <br> --}}
+                                        {{-- <div class="mb-1"></div> --}}
+                                        @php
+                                            $fullStars = floor($averageRating);
+                                            $halfStar = $averageRating - $fullStars >= 0.5;
+                                            $emptyStars = 5 - $fullStars - ($halfStar ? 1 : 0);
+                                        @endphp
+
+                                        @for ($i = 0; $i < $fullStars; $i++)
+                                            <i class="icon ni ni-star-fill" style="color: gold; font-size: 20px;"></i>
+                                        @endfor
+
+                                        @if ($halfStar)
+                                            <i class="icon ni ni-star-half" style="color: gold; font-size: 20px;"></i>
+                                        @endif
+
+                                        @for ($i = 0; $i < $emptyStars; $i++)
+                                            <i class="icon ni ni-star" style="color: gold; font-size: 20px;"></i>
+                                        @endfor
+
+                                        <span class="ms-2 text-soft fs-13px">({{ $averageRating }})</span>
+                                        <br>
 
                                         <a href="{{ route('show.perusahaan', $lowongan->company->company_id) }}"
                                             class="text-primary small">View company profile</a>
