@@ -60,7 +60,19 @@ class ListingController extends Controller
 
         $averageRating = number_format($feedbacks->avg('rating') ?? 0, 2);
 
-        return view('listing.job.show', compact('lowongan', 'jobcount', 'recent', 'hasProfilAkademik', 'averageRating'));
+        $sudahMelamar = false;
+
+        if (Auth::check() && Auth::user()->level->level_nama === 'Mahasiswa') {
+            $mahasiswa = Auth::user()->mahasiswa;
+            if ($mahasiswa) {
+                $sudahMelamar = MagangApplication::where('mahasiswa_id', $mahasiswa->mahasiswa_id)
+                    ->where('lowongan_id', $lowongan->lowongan_id)
+                    ->exists();
+            }
+        }
+
+
+        return view('listing.job.show', compact('lowongan', 'jobcount', 'recent', 'hasProfilAkademik', 'averageRating', 'sudahMelamar'));
     }
 
 

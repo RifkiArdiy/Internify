@@ -206,21 +206,24 @@
                             </div>
                             <div class="d-flex g-2 mt-3 mt-md-0">
                                 @guest
-                                    <a href="{{ route('login') }}" class="btn btn-lg btn-primary">Lamar Cepat</a>
+                                    <a href="{{ route('login') }}" class="btn btn-primary">Lamar Cepat</a>
                                 @endguest
 
                                 @auth
                                     @if (Auth::user()->level && Auth::user()->level->level_nama === 'Mahasiswa')
                                         @if ($hasProfilAkademik)
-                                            <form action="{{ route('buatLamaran', ['id' => $lowongan->lowongan_id]) }}"
-                                                method="POST"
-                                                onsubmit="return confirm('Yakin ingin melamar lowongan ini?')">
-                                                @csrf
-                                                <button type="submit" class="btn btn-lg btn-primary">Lamar Cepat</button>
-                                            </form>
+                                            @if ($sudahMelamar)
+                                                <button class="btn btn-secondary" disabled>Sudah Melamar</button>
+                                            @else
+                                                <form id="form-lamaran"
+                                                    data-action="{{ route('buatLamaran', $lowongan->lowongan_id) }}">
+                                                    @csrf
+                                                    <button type="button" class="btn btn-primary btn-lamar">Lamar
+                                                        Cepat</button>
+                                                </form>
+                                            @endif
                                         @else
-                                            <a href="{{ route('profil-akademik.index') }}"
-                                                class="btn btn-lg btn-warning">
+                                            <a href="{{ route('profil-akademik.index') }}" class="btn btn-primary">
                                                 Lengkapi Profil Akademik
                                             </a>
                                         @endif
@@ -435,6 +438,100 @@
     <!-- JavaScript -->
     <script src="{{ asset('assets/home/js/bundle.js') }}"></script>
     <script src="{{ asset('assets/home/js/scripts.js') }}"></script>
+    {{-- <script>
+        $(document).ready(function() {
+            $('#btn-lamar').on('click', function() {
+                const form = $('#form-lamaran');
+                const actionUrl = form.data('action');
+
+                Swal.fire({
+                    title: 'Yakin ingin melamar?',
+                    icon: 'question',
+                    showCancelButton: true,
+                    confirmButtonText: 'Ya, Lamar!',
+                    cancelButtonText: 'Batal',
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            url: actionUrl,
+                            type: 'POST',
+                            data: {
+                                _token: '{{ csrf_token() }}'
+                            },
+                            success: function(res) {
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: 'Lamaran Berhasil!',
+                                    text: 'Lamaran Anda telah dikirim.',
+                                    timer: 2000,
+                                    showConfirmButton: false
+                                }).then(() => {
+                                    window.location.href =
+                                        "{{ route('lamaran') }}";
+                                });
+                            },
+                            error: function(xhr) {
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Gagal!',
+                                    text: xhr.responseJSON?.message ||
+                                        'Terjadi kesalahan.',
+                                });
+                            }
+                        });
+                    }
+                });
+            });
+        });
+    </script> --}}
+    <script>
+        $(document).ready(function() {
+            $('.btn-lamar').click(function() {
+                const form = $('#form-lamaran');
+                const url = form.data('action');
+
+                Swal.fire({
+                    title: 'Yakin ingin melamar?',
+                    icon: 'question',
+                    showCancelButton: true,
+                    confirmButtonText: 'Ya, Lamar!',
+                    cancelButtonText: 'Batal',
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            url: url,
+                            method: 'POST',
+                            data: {
+                                _token: '{{ csrf_token() }}'
+                            },
+                            success: function(res) {
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: 'Berhasil',
+                                    text: res.message,
+                                    timer: 2000,
+                                    showConfirmButton: false,
+                                }).then(() => {
+                                    window.location.href =
+                                        "{{ route('lamaran') }}";
+                                });
+                            },
+                            error: function(xhr) {
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Gagal',
+                                    text: xhr.responseJSON?.message ||
+                                        'Terjadi kesalahan saat mengirim lamaran.',
+                                });
+                            }
+                        });
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 
 </html>
