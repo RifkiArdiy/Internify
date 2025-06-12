@@ -1,17 +1,20 @@
 @extends('layouts.app')
 
 @section('content')
+    @if ($errors->any())
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Validasi Gagal',
+                    html: `{!! implode('<br>', $errors->all()) !!}`,
+                    confirmButtonColor: '#e85347'
+                });
+            });
+        </script>
+    @endif
     <div class="card card-bordered card-preview">
         <div class="card-inner">
-            @if ($errors->any())
-                <div class="alert alert-danger">
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
             <form action="{{ route('companies.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="row g-4">
@@ -57,7 +60,8 @@
                         <div class="form-group">
                             <label class="form-label" for="no_telp">No Telepon:</label>
                             <div class="form-control-wrap">
-                                <input type="number" class="form-control" name="no_telp" placeholder="Masukkan dengan awalan +62 (Contoh: 628123456789)"
+                                <input type="number" class="form-control" name="no_telp"
+                                    placeholder="Masukkan dengan awalan +62 (Contoh: 628123456789)"
                                     value="{{ old('no_telp') }}">
                             </div>
                         </div>

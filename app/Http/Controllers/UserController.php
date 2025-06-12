@@ -76,7 +76,8 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id) {
+    public function show(string $id)
+    {
         $user = User::findOrFail($id);
         $breadcrumb = (object) [
             'title' => 'Detail Admin',
@@ -150,12 +151,30 @@ class UserController extends Controller
      */
     public function destroy(string $id)
     {
-        $user = User::find($id);
         try {
-            User::destroy($id);
-            return redirect()->route('user.index')->with('success', 'Data Admin ' . $user->name . ' berhasil dihapus');
-        } catch (\Illuminate\Database\QueryException $e) {
-            return redirect()->route('user.index')->with('error', 'Data Admin ' . $user->name . ' gagal dihapus karena masih digunakan');
+            $user = User::findOrFail($id);
+            $nama = $user->name;
+
+            $user->delete();
+
+            if (request()->ajax()) {
+                return response()->json([
+                    'success' => true,
+                    'message' => "Admin {$nama} berhasil dihapus."
+                ]);
+            }
+
+            return redirect()->route('user.index')->with('success', "Admin {$nama} berhasil dihapus.");
+        } catch (\Exception $e) {
+            $msg = 'Terjadi kesalahan saat menghapus data.';
+            if (request()->ajax()) {
+                return response()->json([
+                    'success' => false,
+                    'message' => $msg
+                ], 500);
+            }
+
+            return redirect()->route('user.index')->with('error', $msg);
         }
     }
 }

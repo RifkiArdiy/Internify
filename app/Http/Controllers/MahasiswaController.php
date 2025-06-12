@@ -171,22 +171,32 @@ class MahasiswaController extends Controller
         return redirect()->route('mahasiswa.index')->with('success', 'Mahasiswa ' . $user->name . ' berhasil diperbarui.');
     }
 
-
-
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(string $id)
     {
-        $mahasiswa = Mahasiswa::find($id);
-        $mahasiswa->user->delete(); // Hapus user otomatis
-        $mahasiswa->delete();
         try {
-            Mahasiswa::destroy($id);
-            return redirect()->route('mahasiswa.index')->with('success', 'Mahasiswa ' . $mahasiswa->user->name . ' berhasil dihapus');
+            $mahasiswa = Mahasiswa::findOrFail($id);
+
+            $nama = $mahasiswa->user->name;
+            $mahasiswa->user->delete(); // Hapus user otomatis
+            $mahasiswa->delete();
+
+            return response()->json([
+                'success' => true,
+                'message' => "Mahasiswa {$nama} berhasil dihapus."
+            ]);
         } catch (\Illuminate\Database\QueryException $e) {
-            return redirect()->route('mahasiswa.index')->with('error', 'Mahasiswa ' . $mahasiswa->user->name . ' gagal dihapus karena masih digunakan');
+            return response()->json([
+                'success' => false,
+                'message' => 'Mahasiswa gagal dihapus karena masih digunakan.'
+            ], 500);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Terjadi kesalahan saat menghapus data.'
+            ], 500);
         }
     }
-    
 }

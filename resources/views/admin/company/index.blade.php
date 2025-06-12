@@ -1,11 +1,12 @@
 @extends('layouts.app')
 <style>
     .img-avatar {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 50%; /* Agar tetap bulat */
-}
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 50%;
+        /* Agar tetap bulat */
+    }
 </style>
 @section('action')
     <li class="nk-block-tools-opt">
@@ -18,7 +19,33 @@
 
 @section('content')
     @if (session('success'))
-        <div class="alert alert-success">{{ session('success') }}</div>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                NioApp.Toast(
+                    `<h5>Berhasil</h5><p>{{ session('success') }}</p>`,
+                    'success', {
+                        position: 'bottom-right',
+                        icon: 'auto',
+                        clear: true
+                    }
+                );
+            });
+        </script>
+    @endif
+
+    @if (session('error'))
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                NioApp.Toast(
+                    `<h5>Gagal</h5><p>{{ session('error') }}</p>`,
+                    'error', {
+                        position: 'bottom-right',
+                        icon: 'auto',
+                        clear: true
+                    }
+                );
+            });
+        </script>
     @endif
     <div class="card card-bordered card-preview">
         <div class="card-inner">
@@ -38,7 +65,8 @@
                                 <div class="user-card">
                                     <div class="user-avatar bg-indigo-dim d-none d-sm-flex">
                                         @if ($company->user->image)
-                                            <img class="img-avatar" src="{{ Storage::url('images/users/' . $company->user->image) }}"
+                                            <img class="img-avatar"
+                                                src="{{ Storage::url('images/users/' . $company->user->image) }}"
                                                 alt="{{ $company->user->name }}">
                                         @else
                                             <span>
@@ -76,9 +104,19 @@
 
                                                     <li class="divider"></li>
 
-                                                    <li><a href="{{ route('companies.destroy', $company->company_id) }}"><em
+                                                    {{-- <li><a href="{{ route('companies.destroy', $company->company_id) }}"><em
                                                                 class="icon ni ni-trash"></em><span>Hapus
-                                                                Company</span></a></li>
+                                                                Company</span></a></li> --}}
+
+                                                    <li>
+                                                        <button type="button"
+                                                            class="btn btn-link text-danger btn-hapus-company"
+                                                            data-id="{{ $company->company_id }}"
+                                                            data-nama="{{ $company->user->name }}">
+                                                            <em class="icon ni ni-trash"></em><span>Hapus</span>
+                                                        </button>
+                                                    </li>
+
                                                 </ul>
                                             </div>
                                         </div>
@@ -92,3 +130,54 @@
         </div>
     </div>
 @endsection
+
+@push('js')
+    <script>
+        $(document).ready(function() {
+            $('.btn-hapus-company').on('click', function() {
+                const id = $(this).data('id');
+                const nama = $(this).data('nama');
+                const url = `/user/${id}`; // pastikan prefix sesuai
+
+                Swal.fire({
+                    title: 'Yakin ingin menghapus?',
+                    text: `User ${nama} akan dihapus secara permanen.`,
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'Ya, hapus!',
+                    cancelButtonText: 'Batal',
+                    confirmButtonColor: '#e85347',
+                    cancelButtonColor: '#3085d6',
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            url: "{{ url('/admin/companies') }}/" + id,
+                            type: 'POST',
+                            data: {
+                                _token: '{{ csrf_token() }}',
+                                _method: 'DELETE'
+                            },
+                            success: function(res) {
+                                Swal.fire({
+                                    title: 'Terhapus!',
+                                    text: res.message,
+                                    icon: 'success',
+                                    showConfirmButton: false,
+                                    timer: 2000,
+                                    timerProgressBar: true,
+                                    toast: false, // ubah jadi alert biasa di tengah layar
+                                    position: 'center',
+                                });
+
+                                // Hilangkan elemen dari UI jika ada
+                                row.fadeOut(500, function() {
+                                    $(this).remove();
+                                });
+                            }
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+@endpush

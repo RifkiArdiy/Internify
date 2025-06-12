@@ -1,18 +1,20 @@
 @extends('layouts.app')
 
 @section('content')
+    @if ($errors->any())
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Validasi Gagal',
+                    html: `{!! implode('<br>', $errors->all()) !!}`,
+                    confirmButtonColor: '#e85347'
+                });
+            });
+        </script>
+    @endif
     <div class="card card-bordered card-preview">
         <div class="card-inner">
-            @if ($errors->any())
-                <div class="alert alert-danger">
-                    <ul class="mb-0">
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
-
             <style>
                 #quill-feedback {
                     overflow-x: auto;

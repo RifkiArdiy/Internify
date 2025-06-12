@@ -11,10 +11,33 @@
 
 @section('content')
     @if (session('success'))
-        <div class="alert alert-success">{{ session('success') }}</div>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                NioApp.Toast(
+                    `<h5>Berhasil</h5><p>{{ session('success') }}</p>`,
+                    'success', {
+                        position: 'bottom-right',
+                        icon: 'auto',
+                        clear: true
+                    }
+                );
+            });
+        </script>
     @endif
+
     @if (session('error'))
-        <div class="alert alert-danger">{{ session('error') }}</div>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                NioApp.Toast(
+                    `<h5>Gagal</h5><p>{{ session('error') }}</p>`,
+                    'error', {
+                        position: 'bottom-right',
+                        icon: 'auto',
+                        clear: true
+                    }
+                );
+            });
+        </script>
     @endif
 
     <div class="card card-bordered card-preview">
@@ -55,10 +78,14 @@
 
                                                     <li class="divider"></li>
 
-                                                    <li><a
-                                                            href="{{ route('periode-magang.destroy', $pegangs->period_id) }}"><em
-                                                                class="icon ni ni-trash"></em><span>Hapus
-                                                                Data</span></a></li>
+                                                    <li>
+                                                        <button type="button"
+                                                            class="btn btn-link text-danger btn-hapus-periode"
+                                                            data-id="{{ $pegangs->period_id }}"
+                                                            data-nama="{{ $pegangs->name }}">
+                                                            <em class="icon ni ni-trash"></em><span>Hapus Data</span>
+                                                        </button>
+                                                    </li>
                                                 </ul>
                                             </div>
                                         </div>
@@ -72,3 +99,60 @@
         </div>
     </div>
 @endsection
+
+@push('js')
+    <script>
+        $(document).ready(function() {
+            $('.btn-hapus-periode').on('click', function() {
+                const id = $(this).data('id');
+                const nama = $(this).data('nama');
+                const row = $(this).closest('tr');
+
+                Swal.fire({
+                    title: 'Yakin ingin menghapus?',
+                    text: `Periode ${nama} akan dihapus permanen.`,
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'Ya, hapus!',
+                    cancelButtonText: 'Batal',
+                    confirmButtonColor: '#e85347',
+                    cancelButtonColor: '#3085d6',
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            url: `/admin/periode-magang/${id}`,
+                            type: 'POST',
+                            data: {
+                                _token: '{{ csrf_token() }}',
+                                _method: 'DELETE'
+                            },
+                            success: function(res) {
+                                Swal.fire({
+                                    title: 'Terhapus!',
+                                    text: res.message ||
+                                        'Data berhasil dihapus.',
+                                    icon: 'success',
+                                    timer: 2000,
+                                    showConfirmButton: false
+                                });
+
+                                // Hilangkan baris dari UI
+                                row.fadeOut(500, function() {
+                                    $(this).remove();
+                                });
+                            },
+                            error: function(xhr) {
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Gagal Menghapus',
+                                    text: xhr.responseJSON?.message ||
+                                        'Terjadi kesalahan saat menghapus.',
+                                });
+                            }
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+@endpush

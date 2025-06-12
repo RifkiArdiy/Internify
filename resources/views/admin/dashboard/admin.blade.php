@@ -6,7 +6,7 @@
             <div class="card card-bordered">
                 <div class="card-inner">
                     <h6 class="title mb-4">Tren Pendaftaran Magang</h6>
-                    <canvas id="magangTrendChart" height="300"></canvas>
+                    <canvas id="magangTrendChart" height="290"></canvas>
                 </div>
             </div>
         </div>

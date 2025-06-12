@@ -11,13 +11,34 @@
 
 @section('content')
     @if (session('success'))
-        <div class="alert alert-success">{{ session('success') }}</div>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                NioApp.Toast(
+                    `<h5>Berhasil</h5><p>{{ session('success') }}</p>`,
+                    'success', {
+                        position: 'bottom-right',
+                        icon: 'auto',
+                        clear: true
+                    }
+                );
+            });
+        </script>
     @endif
+
     @if (session('error'))
-        <div class="alert alert-danger">{{ session('error') }}</div>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                NioApp.Toast(
+                    `<h5>Gagal</h5><p>{{ session('error') }}</p>`,
+                    'error', {
+                        position: 'bottom-right',
+                        icon: 'auto',
+                        clear: true
+                    }
+                );
+            });
+        </script>
     @endif
-
-
     <div class="card card-bordered card-preview">
         <div class="card-inner">
             <table class="datatable-init-export nowrap nk-tb-list nk-tb-ulist" data-auto-responsive="false">
@@ -65,9 +86,14 @@
                                                     <li><a href="{{ route('lowongan-magang.edit', $item->lowongan_id) }}">
                                                             <em class="icon ni ni-edit-alt"></em><span>Edit</span></a>
                                                     </li>
-                                                    <li><a
-                                                            href="{{ route('lowongan-magang.destroy', $item->lowongan_id) }}">
-                                                            <em class="icon ni ni-trash"></em><span>Hapus</span></a></li>
+                                                    <li>
+                                                        <button type="button"
+                                                            class="btn btn-link text-danger btn-hapus-lowongan"
+                                                            data-id="{{ $item->lowongan_id }}"
+                                                            data-nama="{{ $item->title }}">
+                                                            <em class="icon ni ni-trash"></em><span>Hapus</span>
+                                                        </button>
+                                                    </li>
                                                 </ul>
                                             </div>
                                         </div>
@@ -81,3 +107,58 @@
         </div>
     </div>
 @endsection
+
+@push('js')
+    <script>
+        $(document).ready(function() {
+            $('.btn-hapus-lowongan').on('click', function() {
+                const id = $(this).data('id');
+                const nama = $(this).data('nama');
+                const row = $(this).closest('tr');
+
+                Swal.fire({
+                    title: 'Yakin ingin menghapus?',
+                    text: `Lowongan "${nama}" akan dihapus permanen.`,
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'Ya, hapus!',
+                    cancelButtonText: 'Batal',
+                    confirmButtonColor: '#e85347',
+                    cancelButtonColor: '#3085d6',
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            url: `/admin/lowongan-magang/${id}`,
+                            type: 'POST',
+                            data: {
+                                _token: '{{ csrf_token() }}',
+                                _method: 'DELETE'
+                            },
+                            success: function(res) {
+                                Swal.fire({
+                                    title: 'Terhapus!',
+                                    text: res.message,
+                                    icon: 'success',
+                                    timer: 2000,
+                                    showConfirmButton: false
+                                });
+
+                                row.fadeOut(500, function() {
+                                    $(this).remove();
+                                });
+                            },
+                            error: function(xhr) {
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Gagal Menghapus!',
+                                    text: xhr.responseJSON?.message ||
+                                        'Terjadi kesalahan saat menghapus data.',
+                                });
+                            }
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+@endpush

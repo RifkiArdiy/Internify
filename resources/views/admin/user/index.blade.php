@@ -1,12 +1,12 @@
 @extends('layouts.app')
 <style>
     .img-avatar {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 50%; /* Agar tetap bulat */
-}
-
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 50%;
+        /* Agar tetap bulat */
+    }
 </style>
 @section('action')
     <li class="nk-block-tools-opt">
@@ -19,9 +19,34 @@
 
 @section('content')
     @if (session('success'))
-        <div class="alert alert-success">{{ session('success') }}</div>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                NioApp.Toast(
+                    `<h5>Berhasil</h5><p>{{ session('success') }}</p>`,
+                    'success', {
+                        position: 'bottom-right',
+                        icon: 'auto',
+                        clear: true
+                    }
+                );
+            });
+        </script>
     @endif
 
+    @if (session('error'))
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                NioApp.Toast(
+                    `<h5>Gagal</h5><p>{{ session('error') }}</p>`,
+                    'error', {
+                        position: 'bottom-right',
+                        icon: 'auto',
+                        clear: true
+                    }
+                );
+            });
+        </script>
+    @endif
     <div class="card card-bordered card-preview">
         <div class="card-inner">
             <table class="datatable-init-export nowrap nk-tb-list nk-tb-ulist" data-auto-responsive="false">
@@ -41,8 +66,9 @@
                                 <div class="user-card">
                                     <div class="user-avatar bg-primary-dim d-none d-sm-flex ">
                                         @if ($admin->image)
-                                            <img class="img-avatar" src="{{ Storage::url('images/users/' . $admin->image) }}"
-                                                alt="{{ $admin->name }}" >
+                                            <img class="img-avatar"
+                                                src="{{ Storage::url('images/users/' . $admin->image) }}"
+                                                alt="{{ $admin->name }}">
                                         @else
                                             <span>
                                                 {{ strtoupper(collect(explode(' ', $admin->name))->map(fn($word) => $word[0])->take(2)->implode('')) }}
@@ -89,9 +115,12 @@
                                                     </li>
                                                     <li class="divider"></li>
                                                     <li>
-                                                        <a href="{{ route('user.destroy', $admin->user_id) }}"><em
-                                                                class="icon ni ni-trash"></em><span>Hapus
-                                                                Admin</span></a>
+                                                        <button type="button"
+                                                            class="btn btn-link text-danger btn-hapus-user"
+                                                            data-id="{{ $admin->user_id }}"
+                                                            data-nama="{{ $admin->name }}">
+                                                            <em class="icon ni ni-trash"></em><span>Hapus</span>
+                                                        </button>
                                                     </li>
                                                 </ul>
                                             </div>
@@ -112,3 +141,60 @@
         </div>
     </div>
 @endsection
+
+@push('js')
+    <script>
+        $(document).ready(function() {
+            $('.btn-hapus-user').on('click', function() {
+                const id = $(this).data('id');
+                const nama = $(this).data('nama');
+                const url = `/user/${id}`; // pastikan prefix sesuai
+
+                Swal.fire({
+                    title: 'Yakin ingin menghapus?',
+                    text: `User ${nama} akan dihapus secara permanen.`,
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'Ya, hapus!',
+                    cancelButtonText: 'Batal',
+                    confirmButtonColor: '#e85347',
+                    cancelButtonColor: '#3085d6',
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            url: "{{ url('/admin/user') }}/" + id,
+                            type: 'POST',
+                            data: {
+                                _token: '{{ csrf_token() }}',
+                                _method: 'DELETE'
+                            },
+                            success: function(res) {
+                                Swal.fire({
+                                    title: 'Berhasil!',
+                                    text: res.message,
+                                    icon: 'success',
+                                    timer: 2000,
+                                    showConfirmButton: false
+                                });
+
+                                // Hilangkan elemen tombol dari UI
+                                $(`[data-id="${id}"]`).closest('tr').fadeOut(500,
+                                    function() {
+                                        $(this).remove();
+                                    });
+                            },
+                            error: function(xhr) {
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Gagal Menghapus!',
+                                    text: xhr.responseJSON?.message ||
+                                        'Terjadi kesalahan.',
+                                });
+                            }
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+@endpush

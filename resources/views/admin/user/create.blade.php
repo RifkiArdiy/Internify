@@ -1,17 +1,21 @@
 @extends('layouts.app')
 
 @section('content')
+    @if ($errors->any())
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Validasi Gagal',
+                    html: `{!! implode('<br>', $errors->all()) !!}`,
+                    confirmButtonColor: '#e85347'
+                });
+            });
+        </script>
+    @endif
     <div class="card card-bordered card-preview">
         <div class="card-inner">
-            @if ($errors->any())
-                <div class="alert alert-danger">
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
+
             <form method="POST" action="{{ route('user.store') }}" enctype="multipart/form-data">
                 @csrf
                 <div class="row g-4">

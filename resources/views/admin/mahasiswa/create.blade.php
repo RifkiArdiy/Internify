@@ -1,25 +1,27 @@
 @extends('layouts.app')
 
 @section('content')
+    @if ($errors->any())
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Validasi Gagal',
+                    html: `{!! implode('<br>', $errors->all()) !!}`,
+                    confirmButtonColor: '#e85347'
+                });
+            });
+        </script>
+    @endif
     <div class="card card-bordered card-preview">
         <div class="card-inner">
-            @if ($errors->any())
-                <div class="alert alert-danger">
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
             <form method="POST" action="{{ route('mahasiswa.store') }}" enctype="multipart/form-data"
                 class="form-validate is-alter">
                 @csrf
                 <div class="row g-4">
                     <div class="col-lg-6">
                         <div class="form-group">
-                            <label class="form-label" for="name">Nama Lengkap: <span
-                                    class="text-danger">*</span></label>
+                            <label class="form-label" for="name">Nama Lengkap: <span class="text-danger">*</span></label>
                             <div class="form-control-wrap">
                                 <input type="text" class="form-control" id="name" name="name"
                                     value="{{ old('name') }}" placeholder="Masukkan Nama Lengkap Mahasiswa" required>
@@ -67,7 +69,8 @@
                             <label class="form-label" for="no_telp">No Telepon</label>
                             <div class="form-control-wrap">
                                 <input type="number" class="form-control" id="no_telp" name="no_telp"
-                                    value="{{ old('no_telp') }}" placeholder="Masukkan dengan awalan +62 (Contoh: 628123456789)">
+                                    value="{{ old('no_telp') }}"
+                                    placeholder="Masukkan dengan awalan +62 (Contoh: 628123456789)">
                             </div>
                         </div>
                     </div>

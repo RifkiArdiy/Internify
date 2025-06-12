@@ -84,7 +84,7 @@ class ProgramStudiController extends Controller
         $request->validate([
             'name' => 'required|string|min:10|max:30|unique:program_studis,name',
         ]);
-        
+
         $prodi->update([
             'name' => $request->name
         ]);
@@ -95,13 +95,24 @@ class ProgramStudiController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy($id)
     {
         try {
-            ProgramStudi::destroy($id);
-            return redirect()->route('prodi.index')->with('success', 'Data program studi berhasil dihapus');
-        } catch (\Illuminate\Database\QueryException $e) {
-            return redirect()->route('prodi.index')->with('error', 'Data program studi gagal dihapus karena masih digunakan');
+            $prodi = ProgramStudi::findOrFail($id);
+            $nama = $prodi->name;
+            $prodi->delete();
+
+            if (request()->ajax()) {
+                return response()->json(['message' => "Prodi \"$nama\" berhasil dihapus."]);
+            }
+
+            return redirect()->route('prodi.index')->with('success', "Prodi \"$nama\" berhasil dihapus.");
+        } catch (\Exception $e) {
+            if (request()->ajax()) {
+                return response()->json(['message' => 'Gagal menghapus data.'], 500);
+            }
+
+            return redirect()->route('prodi.index')->with('error', 'Gagal menghapus data.');
         }
     }
 }

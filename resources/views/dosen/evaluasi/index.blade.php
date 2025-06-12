@@ -11,9 +11,34 @@
 @php use Illuminate\Support\Str; @endphp
 @section('content')
     @if (session('success'))
-        <div class="alert alert-success">{{ session('success') }}</div>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                NioApp.Toast(
+                    `<h5>Berhasil</h5><p>{{ session('success') }}</p>`,
+                    'success', {
+                        position: 'bottom-right',
+                        icon: 'auto',
+                        clear: true
+                    }
+                );
+            });
+        </script>
     @endif
 
+    @if (session('error'))
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                NioApp.Toast(
+                    `<h5>Gagal</h5><p>{{ session('error') }}</p>`,
+                    'error', {
+                        position: 'bottom-right',
+                        icon: 'auto',
+                        clear: true
+                    }
+                );
+            });
+        </script>
+    @endif
     <div class="card card-bordered card-preview">
         <div class="card-inner">
             <table class="datatable-init-export nowrap nk-tb-list nk-tb-ulist" data-auto-responsive="false">
@@ -51,31 +76,31 @@
                                                 data-bs-toggle="dropdown"><em class="icon ni ni-more-h"></em></a>
                                             <div class="dropdown-menu dropdown-menu-end">
                                                 <ul class="link-list-opt no-bdr">
-                                    <li><a href="{{ route('evaluasi.edit', $e->evaluasi_id) }}">
-                                            <em class="icon ni ni-edit"></em>
-                                            <span>Edit</span>
-                                        </a>
-                                    </li>
-                                    <li class="divider"></li>
-                                    <li>
-                                        <form action="{{ route('evaluasi.destroy', $e) }}" method="POST"
-                                            onsubmit="return confirm('Yakin ingin menghapus laporan ini?')">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-link text-danger"><em
-                                                    class="icon ni ni-trash"></em><span>Hapus</span></button>
-                                        </form>
+                                                    <li><a href="{{ route('evaluasi.edit', $e->evaluasi_id) }}">
+                                                            <em class="icon ni ni-edit"></em>
+                                                            <span>Edit</span>
+                                                        </a>
+                                                    </li>
+                                                    <li class="divider"></li>
+                                                    <li>
+                                                        <form action="{{ route('evaluasi.destroy', $e) }}" method="POST"
+                                                            onsubmit="return confirm('Yakin ingin menghapus laporan ini?')">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button type="submit" class="btn btn-link text-danger"><em
+                                                                    class="icon ni ni-trash"></em><span>Hapus</span></button>
+                                                        </form>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
                                     </li>
                                 </ul>
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
         </div>
-    </div>
-    </li>
-    </ul>
-    </td>
-    </tr>
-    @endforeach
-    </tbody>
-    </table>
-    </div>
     </div>
 @endsection

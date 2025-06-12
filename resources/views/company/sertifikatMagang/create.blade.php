@@ -1,6 +1,18 @@
 @extends('layouts.app')
 
 @section('content')
+    @if ($errors->any())
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Validasi Gagal',
+                    html: `{!! implode('<br>', $errors->all()) !!}`,
+                    confirmButtonColor: '#e85347'
+                });
+            });
+        </script>
+    @endif
     <div class="card card-bordered">
         <div class="card-inner">
             <form method="POST" action="{{ route('company.sertifikatMagang.store') }}" enctype="multipart/form-data">

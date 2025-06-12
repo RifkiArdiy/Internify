@@ -61,37 +61,80 @@ class MagangApplicationController extends Controller
     /**
      * Store a newly created resource in storage.
      */
+    // public function store($id)
+    // {
+    //     $mahasiswa = Mahasiswa::where('user_id', Auth::user()->user_id)->first();
+    //     if (!$mahasiswa) {
+    //         return redirect()->back()->with('error', 'Silakan login terlebih dahulu.');
+    //     }
+
+    //     // Cek apakah user punya role mahasiswa (opsional tapi disarankan)
+    //     if ($mahasiswa->user->level->level_nama !== 'Mahasiswa') {
+    //         return redirect()->back()->with('error', 'Hanya mahasiswa yang dapat melamar.');
+    //     }
+
+
+    //     // Cek apakah sudah pernah melamar untuk lowongan ini
+    //     $existingApplication = MagangApplication::where('mahasiswa_id', $mahasiswa->mahasiswa_id)
+    //         ->where('lowongan_id', $id)
+    //         ->first();
+
+    //     if ($existingApplication) {
+    //         return redirect(route('lamaran'))->with('error', 'Anda sudah melamar untuk lowongan ini.');
+    //     }
+
+    //     // Jika belum ada, buat lamaran baru
+    //     MagangApplication::create([
+    //         'mahasiswa_id' => $mahasiswa->mahasiswa_id,
+    //         'lowongan_id' => $id,
+    //         'status' => 'Pending',
+    //     ]);
+
+    //     return redirect(route('lamaran'))->with('success', 'Lamaran berhasil dikirim.');
+    // }
+
     public function store($id)
     {
         $mahasiswa = Mahasiswa::where('user_id', Auth::user()->user_id)->first();
+
         if (!$mahasiswa) {
-            return redirect()->back()->with('error', 'Silakan login terlebih dahulu.');
+            $message = 'Silakan login terlebih dahulu.';
+            return request()->ajax()
+                ? response()->json(['success' => false, 'message' => $message], 401)
+                : redirect()->back()->with('error', $message);
         }
 
-        // Cek apakah user punya role mahasiswa (opsional tapi disarankan)
+        // Opsional: Validasi role
         if ($mahasiswa->user->level->level_nama !== 'Mahasiswa') {
-            return redirect()->back()->with('error', 'Hanya mahasiswa yang dapat melamar.');
+            $message = 'Hanya mahasiswa yang dapat melamar.';
+            return request()->ajax()
+                ? response()->json(['success' => false, 'message' => $message], 403)
+                : redirect()->back()->with('error', $message);
         }
 
-
-        // Cek apakah sudah pernah melamar untuk lowongan ini
         $existingApplication = MagangApplication::where('mahasiswa_id', $mahasiswa->mahasiswa_id)
             ->where('lowongan_id', $id)
             ->first();
 
         if ($existingApplication) {
-            return redirect(route('lamaran'))->with('error', 'Anda sudah melamar untuk lowongan ini.');
+            $message = 'Anda sudah melamar untuk lowongan ini.';
+            return request()->ajax()
+                ? response()->json(['success' => false, 'message' => $message], 409)
+                : redirect(route('lamaran'))->with('error', $message);
         }
 
-        // Jika belum ada, buat lamaran baru
         MagangApplication::create([
             'mahasiswa_id' => $mahasiswa->mahasiswa_id,
             'lowongan_id' => $id,
             'status' => 'Pending',
         ]);
 
-        return redirect(route('lamaran'))->with('success', 'Lamaran berhasil dikirim.');
+        $message = 'Lamaran berhasil dikirim.';
+        return request()->ajax()
+            ? response()->json(['success' => true, 'message' => $message])
+            : redirect(route('lamaran'))->with('success', $message);
     }
+
 
     /**
      * Display the specified resource.

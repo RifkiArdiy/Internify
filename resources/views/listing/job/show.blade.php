@@ -206,21 +206,24 @@
                             </div>
                             <div class="d-flex g-2 mt-3 mt-md-0">
                                 @guest
-                                    <a href="{{ route('login') }}" class="btn btn-lg btn-primary">Lamar Cepat</a>
+                                    <a href="{{ route('login') }}" class="btn btn-primary">Lamar Cepat</a>
                                 @endguest
 
                                 @auth
                                     @if (Auth::user()->level && Auth::user()->level->level_nama === 'Mahasiswa')
                                         @if ($hasProfilAkademik)
-                                            <form action="{{ route('buatLamaran', ['id' => $lowongan->lowongan_id]) }}"
-                                                method="POST"
-                                                onsubmit="return confirm('Yakin ingin melamar lowongan ini?')">
-                                                @csrf
-                                                <button type="submit" class="btn btn-lg btn-primary">Lamar Cepat</button>
-                                            </form>
+                                            @if ($sudahMelamar)
+                                                <button class="btn btn-secondary" disabled>Sudah Melamar</button>
+                                            @else
+                                                <form id="form-lamaran"
+                                                    data-action="{{ route('buatLamaran', $lowongan->lowongan_id) }}">
+                                                    @csrf
+                                                    <button type="button" class="btn btn-primary btn-lamar">Lamar
+                                                        Cepat</button>
+                                                </form>
+                                            @endif
                                         @else
-                                            <a href="{{ route('profil-akademik.index') }}"
-                                                class="btn btn-lg btn-warning">
+                                            <a href="{{ route('profil-akademik.index') }}" class="btn btn-primary">
                                                 Lengkapi Profil Akademik
                                             </a>
                                         @endif
@@ -370,63 +373,57 @@
                         </div>
 
                         <!-- Related Jobs -->
-                        @if ($recent->count())
-                            <div class="mt-5">
-                                <h5 class="mb-3">Lowongan Serupa</h5>
-                                <div class="row g-4">
-                                    @foreach ($recent as $job)
-                                        <div class="col-sm-6 col-lg-4">
-                                            <a href="{{ route('show.lowongan', $job->lowongan_id) }}"
-                                                class="card-link-wrapper">
-                                                <div class="card card-bordered service service-s4 h-100">
-                                                    <div class="card-inner">
-                                                        <div class="job">
-                                                            <div class="job-head">
-                                                                <div class="job-title">
-                                                                    @if ($job->company->user->image)
-                                                                        <div class="user-avatar">
-                                                                            <img src="{{ Storage::url('images/users/' . $job->company->user->image) }}"
-                                                                                alt="{{ $job->company->user->name }}">
-                                                                        </div>
-                                                                    @else
-                                                                        <div class="user-avatar sq">
-                                                                            <span>
-                                                                                {{ strtoupper(collect(explode(' ', $job->company->user->name))->map(fn($word) => $word[0])->take(2)->implode('')) }}
-                                                                            </span>
-                                                                        </div>
-                                                                    @endif
-                                                                    <div class="job-info">
-                                                                        <h6 class="title">{{ $job->title }}</h6>
-                                                                        <span
-                                                                            class="sub-text">{{ $job->period->name }}</span>
-                                                                    </div>
+                        @foreach ($recent as $job)
+                            @if ($job->period && \Carbon\Carbon::parse($job->period->end_date)->isFuture())
+                                <div class="col-sm-6 col-lg-4">
+                                    <a href="{{ route('show.lowongan', $job->lowongan_id) }}"
+                                        class="card-link-wrapper">
+                                        <div class="card card-bordered service service-s4 h-100">
+                                            <div class="card-inner">
+                                                <div class="job">
+                                                    <div class="job-head">
+                                                        <div class="job-title">
+                                                            @if ($job->company->user->image)
+                                                                <div class="user-avatar">
+                                                                    <img src="{{ Storage::url('images/users/' . $job->company->user->image) }}"
+                                                                        alt="{{ $job->company->user->name }}">
                                                                 </div>
-                                                            </div>
-                                                            <div class="job-details">
-                                                                <p>{{ Str::limit(strip_tags($job->description), 80) }}
-                                                                </p>
-                                                            </div>
-                                                            <div class="job-meta">
-                                                                <ul class="job-users g-1">
-                                                                    <li>
-                                                                        <span
-                                                                            class="badge badge-dim bg-primary">{{ $job->kategori->name }}</span>
-                                                                    </li>
-                                                                </ul>
-                                                                <span class="badge badge-dim bg-warning">
-                                                                    <em class="icon ni ni-clock"></em>
-                                                                    <span>{{ $job->created_at->diffForHumans() }}</span>
-                                                                </span>
+                                                            @else
+                                                                <div class="user-avatar sq">
+                                                                    <span>
+                                                                        {{ strtoupper(collect(explode(' ', $job->company->user->name))->map(fn($word) => $word[0])->take(2)->implode('')) }}
+                                                                    </span>
+                                                                </div>
+                                                            @endif
+                                                            <div class="job-info">
+                                                                <h6 class="title">{{ $job->title }}</h6>
+                                                                <span class="sub-text">{{ $job->period->name }}</span>
                                                             </div>
                                                         </div>
                                                     </div>
+                                                    <div class="job-details">
+                                                        <p>{{ Str::limit(strip_tags($job->description), 80) }}</p>
+                                                    </div>
+                                                    <div class="job-meta">
+                                                        <ul class="job-users g-1">
+                                                            <li>
+                                                                <span
+                                                                    class="badge badge-dim bg-primary">{{ $job->kategori->name }}</span>
+                                                            </li>
+                                                        </ul>
+                                                        <span class="badge badge-dim bg-warning">
+                                                            <em class="icon ni ni-clock"></em>
+                                                            <span>{{ $job->created_at->diffForHumans() }}</span>
+                                                        </span>
+                                                    </div>
                                                 </div>
-                                            </a>
+                                            </div>
                                         </div>
-                                    @endforeach
+                                    </a>
                                 </div>
-                            </div>
-                        @endif
+                            @endif
+                        @endforeach
+
                     </div><!-- .section-content -->
                 </div><!-- .container -->
             </section><!-- .section -->
@@ -441,6 +438,100 @@
     <!-- JavaScript -->
     <script src="{{ asset('assets/home/js/bundle.js') }}"></script>
     <script src="{{ asset('assets/home/js/scripts.js') }}"></script>
+    {{-- <script>
+        $(document).ready(function() {
+            $('#btn-lamar').on('click', function() {
+                const form = $('#form-lamaran');
+                const actionUrl = form.data('action');
+
+                Swal.fire({
+                    title: 'Yakin ingin melamar?',
+                    icon: 'question',
+                    showCancelButton: true,
+                    confirmButtonText: 'Ya, Lamar!',
+                    cancelButtonText: 'Batal',
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            url: actionUrl,
+                            type: 'POST',
+                            data: {
+                                _token: '{{ csrf_token() }}'
+                            },
+                            success: function(res) {
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: 'Lamaran Berhasil!',
+                                    text: 'Lamaran Anda telah dikirim.',
+                                    timer: 2000,
+                                    showConfirmButton: false
+                                }).then(() => {
+                                    window.location.href =
+                                        "{{ route('lamaran') }}";
+                                });
+                            },
+                            error: function(xhr) {
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Gagal!',
+                                    text: xhr.responseJSON?.message ||
+                                        'Terjadi kesalahan.',
+                                });
+                            }
+                        });
+                    }
+                });
+            });
+        });
+    </script> --}}
+    <script>
+        $(document).ready(function() {
+            $('.btn-lamar').click(function() {
+                const form = $('#form-lamaran');
+                const url = form.data('action');
+
+                Swal.fire({
+                    title: 'Yakin ingin melamar?',
+                    icon: 'question',
+                    showCancelButton: true,
+                    confirmButtonText: 'Ya, Lamar!',
+                    cancelButtonText: 'Batal',
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            url: url,
+                            method: 'POST',
+                            data: {
+                                _token: '{{ csrf_token() }}'
+                            },
+                            success: function(res) {
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: 'Berhasil',
+                                    text: res.message,
+                                    timer: 2000,
+                                    showConfirmButton: false,
+                                }).then(() => {
+                                    window.location.href =
+                                        "{{ route('lamaran') }}";
+                                });
+                            },
+                            error: function(xhr) {
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Gagal',
+                                    text: xhr.responseJSON?.message ||
+                                        'Terjadi kesalahan saat mengirim lamaran.',
+                                });
+                            }
+                        });
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 
 </html>
