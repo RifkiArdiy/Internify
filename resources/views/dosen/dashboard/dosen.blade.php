@@ -7,11 +7,11 @@
                 <div class="card-inner">
                     <div class="d-flex align-items-center justify-content-between">
                         <div>
-                            <h6 class="mb-0 text-white">Total Mahasiswa Bimbingan</h6>
+                            <h6 class="mb-0 text-white">Mahasiswa Bimbingan</h6>
                             <h3 class="text-white mt-1">{{ $totalMahasiswa }}</h3>
                         </div>
                         <div class="icon icon-circle bg-white text-primary">
-                            <em class="icon ni ni-users"></em>
+                            <em class="icon ni ni-users-fill"></em>
                         </div>
                     </div>
                 </div>
