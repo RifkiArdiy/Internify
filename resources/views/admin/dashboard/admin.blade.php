@@ -2,23 +2,6 @@
 
 @section('content')
     <div class="row g-4">
-        {{-- <div class="col-12">
-            <div class="card card-bordered ">
-                <div class="card-inner">
-                    <h6 class="title mb-4">Tren Pendaftaran Magang</h6>
-                    <canvas id="magangTrendChart"></canvas>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-6 col-xxl-4">
-            <div class="card card-bordered ">
-                <div class="card-inner">
-                    <h6 class="title">Distribusi Magang Berdasarkan Status</h6>
-                    <canvas id="magangStatusChart"></canvas>
-                </div>
-            </div>
-        </div> --}}
         <div class="col-12">
             <div class="card card-bordered">
                 <div class="card-inner">
@@ -28,20 +11,13 @@
             </div>
         </div>
         <div class="col-md-6 col-xxl-4">
-            {{-- <div class="card card-bordered">
+            <div class="card card-bordered">
                 <div class="card-inner">
                     <h6 class="title mb-4">Distribusi Magang Berdasarkan Status</h6>
                     <canvas id="magangStatusChart" height="300"></canvas>
                 </div>
-            </div> --}}
-            <div class="card card-bordered h-100">
-                <div class="card-inner">
-                    <h6 class="title mb-4">Lowongan Terpopuler</h6>
-                    <canvas id="lowonganPopulerChart" height="240"></canvas>
-                </div>
             </div>
         </div>
-
         <div class="col-md-6 col-xxl-4">
             <div class="card card-bordered card-full">
                 <div class="card-inner border-bottom">
@@ -53,7 +29,6 @@
                 </div>
 
                 @foreach ($mitras as $mitra)
-                    {{-- @if (!is_null($mitra->avg_rating) && $mitra->avg_rating > 0) --}}
                     @if (true)
                         <ul class="nk-activity">
                             <li class="nk-activity-item">
@@ -290,47 +265,23 @@
 
 @push('js')
     <script>
-        const doughnutCtx = document.getElementById('lowonganPopulerChart').getContext('2d');
-        const doughnutChart = new Chart(doughnutCtx, {
-            type: 'doughnut',
+        // === Chart 1: Distribusi Status Magang (Pie) ===
+        const statusCtx = document.getElementById('magangStatusChart').getContext('2d');
+        new Chart(statusCtx, {
+            type: 'pie',
             data: {
                 labels: {!! json_encode(array_keys($magangStatusCounts)) !!},
                 datasets: [{
-                    label: "Pelamar",
+                    label: 'Status',
                     data: {!! json_encode(array_values($magangStatusCounts)) !!},
-                    backgroundColor: [
-                        '#798bff',
-                        '#f4aaa4',
-                        '#8feac5',
-                        '#ffa353',
-                        '#6aabf2'
-                    ],
-                    borderColor: '#fff',
-                    borderWidth: 2
+                    backgroundColor: ['#6576ff', '#8feac5', '#f4b400', '#ff6b6b'],
+                    borderWidth: 1
                 }]
             },
             options: {
                 responsive: true,
-                maintainAspectRatio: false,
-                cutout: '70%',
-                plugins: {
-                    legend: {
-                        position: 'bottom',
-                        labels: {
-                            padding: 20,
-                            color: '#6783b8'
-                        }
-                    },
-                    tooltip: {
-                        callbacks: {
-                            label: function(context) {
-                                return `${context.label}: ${context.parsed} Pelamar`;
-                            }
-                        },
-                        backgroundColor: '#eff6ff',
-                        titleColor: '#6783b8',
-                        bodyColor: '#526484'
-                    }
+                legend: {
+                    position: 'bottom'
                 }
             }
         });
@@ -357,7 +308,7 @@
                 },
                 scales: {
                     xAxes: [{
-                        display: false
+                        display: true
                     }],
                     yAxes: [{
                         display: true,
