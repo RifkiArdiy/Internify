@@ -20,6 +20,8 @@ class Bimbingan extends Model
         'tanggal_disetujui',
     ];
 
+    protected $with = ['magang.lowongan.company', 'magang.mahasiswa.user'];
+
     public function magang(): BelongsTo
     {
         return $this->belongsTo(MagangApplication::class, 'magang_id', 'magang_id');
@@ -30,9 +32,15 @@ class Bimbingan extends Model
         return $this->belongsTo(User::class, 'dosen_id', 'user_id');
     }
 
-
-    public function mahasiswa(): BelongsTo
+    public function mahasiswa()
     {
-        return $this->belongsTo(Mahasiswa::class, 'magang_id', 'magang_id')->withDefault();
+        return $this->hasOneThrough(
+            Mahasiswa::class,
+            MagangApplication::class,
+            'magang_id', // Foreign key on MagangApplication
+            'mahasiswa_id', // Foreign key on Mahasiswa
+            'magang_id', // Local key on Bimbingan
+            'mahasiswa_id' // Local key on MagangApplication
+        );
     }
 }

@@ -64,7 +64,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @forelse ($bimbingans as $bimbingan)
+                            @foreach ($bimbingans as $bimbingan)
                                 <tr class="nk-tb-item">
                                     <td class="nk-tb-col">
                                         <div class="user-card">
@@ -141,11 +141,7 @@
                                         </ul>
                                     </td>
                                 </tr>
-                            @empty
-                                <tr>
-                                    <td colspan="8" class="text-center">Belum ada pengajuan bimbingan</td>
-                                </tr>
-                            @endforelse
+                            @endforeach
                         </tbody>
                     </table>
                 </div>

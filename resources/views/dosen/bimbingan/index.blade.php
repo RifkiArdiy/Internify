@@ -1,6 +1,35 @@
 @extends('layouts.app')
 
 @section('content')
+    @if (session('success'))
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                NioApp.Toast(
+                    `<h5>Berhasil</h5><p>{{ session('success') }}</p>`,
+                    'success', {
+                        position: 'bottom-right',
+                        icon: 'auto',
+                        clear: true
+                    }
+                );
+            });
+        </script>
+    @endif
+
+    @if (session('error'))
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                NioApp.Toast(
+                    `<h5>Gagal</h5><p>{{ session('error') }}</p>`,
+                    'error', {
+                        position: 'bottom-right',
+                        icon: 'auto',
+                        clear: true
+                    }
+                );
+            });
+        </script>
+    @endif
     <div class="card card-bordered card-review">
         <div class="card-inner">
             <table class="datatable-init-export nowrap table nk-tb-list nk-tb-ulist" data-auto-responsive="true">
@@ -17,7 +46,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @forelse ($bimbingans as $bimbingan)
+                    @foreach ($bimbingans as $bimbingan)
                         <tr class="nk-tb-item">
                             <td class="nk-tb-col">
                                 <div class="user-card">
@@ -89,11 +118,7 @@
                                 </ul>
                             </td>
                         </tr>
-                    @empty
-                        <tr>
-                            <td colspan="8" class="text-center">Belum ada pengajuan bimbingan</td>
-                        </tr>
-                    @endforelse
+                    @endforeach
                 </tbody>
             </table>
         </div>

@@ -184,24 +184,24 @@
 
     {{-- Jika sudah disetujui magangnya --}}
     @if ($hasApprovedMagang)
-        <li class="nk-menu-item">
+        {{-- <li class="nk-menu-item">
             <a href="{{ route('laporan') }}" class="nk-menu-link">
                 <span class="nk-menu-icon"><em class="icon ni ni-report"></em></span>
                 <span class="nk-menu-text">Laporan Harian</span>
             </a>
-        </li>
+        </li> --}}
         <li class="nk-menu-item">
             <a href="{{ route('evaluasi-index') }}" class="nk-menu-link">
                 <span class="nk-menu-icon"><em class="icon ni ni-file-text"></em></span>
                 <span class="nk-menu-text">Evaluasi Magang</span>
             </a>
         </li>
-        <li class="nk-menu-item">
+        {{-- <li class="nk-menu-item">
             <a href="{{ route('feedback-index') }}" class="nk-menu-link">
                 <span class="nk-menu-icon"><em class="icon ni ni-comments"></em></span>
                 <span class="nk-menu-text">Feedback Magang</span>
             </a>
-        </li>
+        </li> --}}
         @php
             $hasFeedbackMagang = $mahasiswa->feedbacks !== null;
         @endphp
