@@ -266,7 +266,6 @@ Route::middleware(['auth'])->group(function () {
         Route::delete('/evaluasi/{id}', [EvaluasiMagangController::class, 'destroy'])->name('evaluasi.destroy');
         Route::get('/evaluasi/verifikasi/{log_id}', [EvaluasiMagangController::class, 'verifikasiDosenDanRedirect'])->name('evaluasi.verifikasi');
 
-        Route::get('/verifikasi', [DosenController::class, 'indexVerifikasi'])->name('dosen.verifikasi');
         Route::put('/verifikasi/{id}', [DosenController::class, 'updateVerifikasi'])->name('dosen.verifikasi.update');
         Route::get('/verifikasi/show/{id}', [DosenController::class, 'showLaporan'])->name('dosen.verifikasi.show');
 
