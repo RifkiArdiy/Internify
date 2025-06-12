@@ -20,7 +20,7 @@ class Bimbingan extends Model
         'tanggal_disetujui',
     ];
 
-    protected $with = ['magang.lowongan.company', 'magang.mahasiswa.user'];
+    protected $with = ['magang.lowongans.company', 'magang.mahasiswas.user'];
 
     public function magang(): BelongsTo
     {

@@ -47,6 +47,11 @@ class User extends Authenticatable
         return $this->hasOne(ProfilAkademik::class, 'user_id', 'user_id');
     }
 
+    public function bimbingan()
+    {
+        return $this->hasMany(Bimbingan::class, 'dosen_id', 'user_id');
+    }
+
     public function getRoleName(): string
     {
         return $this->level->level_nama;

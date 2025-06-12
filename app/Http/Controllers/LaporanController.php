@@ -35,8 +35,15 @@ class LaporanController extends Controller
 
     public function create()
     {
-        $mahasiswa = Mahasiswa::where('user_id', Auth::user()->user_id)->first();
-        $dosen = Dosen::all();
+        // $mahasiswa = Mahasiswa::where('user_id', Auth::user()->user_id)->first();
+        $mahasiswa = Mahasiswa::where('user_id', auth()->id())->first();
+
+        $dosen = \App\Models\User::whereHas('bimbingan', function ($q) use ($mahasiswa) {
+            $q->whereHas('magang', function ($q2) use ($mahasiswa) {
+                $q2->where('mahasiswa_id', $mahasiswa->mahasiswa_id);
+            });
+        })->get();
+        // $dosen = Dosen::all();
         $company = Company::all();
         $breadcrumb = (object) [
             'title' => 'Buat Laporan',

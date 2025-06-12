@@ -31,7 +31,7 @@
                 <div class="row g-4">
                     <input type="hidden" name="mahasiswa_id" value="{{ $mahasiswa->mahasiswa_id }}">
 
-                    <div class="col-lg-6">
+                    {{-- <div class="col-lg-6">
                         <div class="form-group">
                             <label class="form-label" for="dosen_id">Dosen:<span class="text-danger">*</span></label>
                             <div class="form-control-wrap">
@@ -39,6 +39,19 @@
                                     <option disabled selected>Pilih Dosen</option>
                                     @foreach ($dosen as $dsn)
                                         <option value="{{ $dsn->dosen_id }}">{{ $dsn->user->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                    </div> --}}
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label class="form-label" for="dosen_id">Dosen:<span class="text-danger">*</span></label>
+                            <div class="form-control-wrap">
+                                <select class="form-select js-select2" name="dosen_id" required>
+                                    <option disabled selected>Pilih Dosen Pembimbing</option>
+                                    @foreach ($dosen as $dsn)
+                                        <option value="{{ $dsn->dosen->dosen_id }}">{{ $dsn->name }}</option>
                                     @endforeach
                                 </select>
                             </div>
