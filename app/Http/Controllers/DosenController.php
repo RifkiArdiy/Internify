@@ -208,28 +208,29 @@ class DosenController extends Controller
     public function destroy(string $id)
     {
         try {
-            $company = Company::findOrFail($id);
-            $nama = $company->user->name;
+            $dosen = Dosen::with('user')->findOrFail($id);
 
-            // Hapus user-nya juga jika diperlukan
-            $company->user()->delete();
-            $company->delete();
+            $nama = $dosen->user->name;
 
-            if (request()->ajax()) {
-                return response()->json([
-                    'success' => true,
-                    'message' => "Perusahaan {$nama} berhasil dihapus."
-                ]);
-            }
+            // Hapus user terlebih dahulu agar tidak orphan
+            $dosen->user->delete();
+            $dosen->delete();
 
-            return redirect()->route('company.index')->with('success', "Perusahaan {$nama} berhasil dihapus.");
+            // Jika berhasil, kembalikan response JSON
+            return response()->json([
+                'success' => true,
+                'message' => "Dosen {$nama} berhasil dihapus."
+            ], 200);
+        } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Dosen tidak ditemukan.'
+            ], 404);
         } catch (\Exception $e) {
-            $msg = 'Gagal menghapus perusahaan.';
-            if (request()->ajax()) {
-                return response()->json(['success' => false, 'message' => $msg], 500);
-            }
-
-            return redirect()->route('company.index')->with('error', $msg);
+            return response()->json([
+                'success' => false,
+                'message' => 'Terjadi kesalahan saat menghapus dosen.'
+            ], 500);
         }
     }
 }

@@ -99,28 +99,18 @@
                         <h6 class="lead-text mb-3">Tindakan Verifikasi</h6>
                         <div class="d-flex gap-2 flex-wrap mb-4">
                             <!-- Setuju -->
-                            <form action="{{ route('company.verifikasi.update', $log->log_id) }}" method="POST"
-                                onsubmit="return confirm('Apakah Anda yakin menyetujui laporan ini?')">
-                                @csrf
-                                @method('PUT')
-                                <input type="hidden" name="verif_company" value="Disetujui">
-                                <button type="submit" class="btn btn-success">
-                                    <em class="icon ni ni-check-circle"></em>
-                                    <span>Setujui</span>
-                                </button>
-                            </form>
+                            <button type="button" class="btn btn-success btn-verifikasi-log" data-id="{{ $log->log_id }}"
+                                data-status="Disetujui" data-nama="log #{{ $log->log_id }}">
+                                <em class="icon ni ni-check-circle"></em>
+                                <span>Setujui</span>
+                            </button>
 
                             <!-- Tolak -->
-                            <form action="{{ route('company.verifikasi.update', $log->log_id) }}" method="POST"
-                                onsubmit="return confirm('Apakah Anda yakin menolak laporan ini?')">
-                                @csrf
-                                @method('PUT')
-                                <input type="hidden" name="verif_company" value="Ditolak">
-                                <button type="submit" class="btn btn-danger">
-                                    <em class="icon ni ni-cross-circle"></em>
-                                    <span>Tolak</span>
-                                </button>
-                            </form>
+                            <button type="button" class="btn btn-danger btn-verifikasi-log" data-id="{{ $log->log_id }}"
+                                data-status="Ditolak" data-nama="log #{{ $log->log_id }}">
+                                <em class="icon ni ni-cross-circle"></em>
+                                <span>Tolak</span>
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -128,3 +118,55 @@
         </div>
     </div>
 @endsection
+@push('js')
+    <script>
+        $(document).ready(function() {
+            $('.btn-verifikasi-log').on('click', function() {
+                const logId = $(this).data('id');
+                const status = $(this).data('status');
+                const nama = $(this).data('nama');
+
+                Swal.fire({
+                    title: `Yakin ingin ${status.toLowerCase()} laporan ini?`,
+                    text: `Laporan ${nama} akan diberi status: ${status}.`,
+                    icon: 'question',
+                    showCancelButton: true,
+                    confirmButtonText: `Ya, ${status}`,
+                    cancelButtonText: 'Batal',
+                    confirmButtonColor: '#e85347',
+                    cancelButtonColor: '#3085d6',
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            url: `/company/verifikasi/${logId}`,
+                            type: 'POST',
+                            data: {
+                                _token: '{{ csrf_token() }}',
+                                _method: 'PUT',
+                                verif_company: status
+                            },
+                            success: function(res) {
+                                Swal.fire({
+                                    title: 'Berhasil!',
+                                    text: res.message ??
+                                        `Laporan berhasil ${status.toLowerCase()}.`,
+                                    icon: 'success',
+                                    timer: 2000,
+                                    showConfirmButton: false
+                                }).then(() => location.reload());
+                            },
+                            error: function(xhr) {
+                                Swal.fire({
+                                    title: 'Gagal!',
+                                    text: xhr.responseJSON?.message ??
+                                        'Terjadi kesalahan.',
+                                    icon: 'error'
+                                });
+                            }
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+@endpush

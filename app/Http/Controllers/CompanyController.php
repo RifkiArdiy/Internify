@@ -37,15 +37,20 @@ class CompanyController extends Controller
         return view('company.verifikasi', compact('breadcrumb', 'logs'));
     }
 
-    public function updateVerifikasi(Request $request, string $id)
+    public function updateVerifikasi(Request $request, $id)
     {
-        $logs = Log::find($id);
+        $log = Log::findOrFail($id);
+        $log->verif_company = $request->verif_company;
+        $log->save();
 
-        $logs->update([
-            'verif_company' => $request->verif_company,
-        ]);
+        if ($request->ajax()) {
+            return response()->json([
+                'success' => true,
+                'message' => "Laporan berhasil " . strtolower($request->verif_company),
+            ]);
+        }
 
-        return redirect('company/verifikasi')->with('success', 'Laporan berhasil diverifikasi');
+        return redirect()->route('company.verifikasi')->with('success', 'Status laporan berhasil diperbarui.');
     }
 
     public function showLaporan($id)

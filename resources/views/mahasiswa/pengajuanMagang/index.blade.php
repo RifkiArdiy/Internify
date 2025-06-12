@@ -70,54 +70,25 @@
                                         <li>
                                             <div class="drodown">
                                                 <a href="#" class="dropdown-toggle btn btn-icon btn-trigger"
-                                                    data-bs-toggle="dropdown"><em class="icon ni ni-more-h"></em></a>
+                                                    data-bs-toggle="dropdown">
+                                                    <em class="icon ni ni-more-h"></em>
+                                                </a>
                                                 <div class="dropdown-menu dropdown-menu-end">
                                                     <ul class="link-list-opt no-bdr">
                                                         <li>
-                                                            <form action="{{ route('hapusLamaran', $magang->magang_id) }}"
-                                                                method="POST"
-                                                                onsubmit="return confirm('Yakin ingin menghapus data ini?')">
-                                                                @csrf
-                                                                @method('DELETE')
-                                                                <button type="submit"
-                                                                    class="btn text-danger d-flex align-items-center px-0">
-                                                                    <em class="icon ni ni-trash"></em>
-                                                                    <span>Hapus Pengajuan</span>
-                                                                </button>
-                                                            </form>
+                                                            <button type="button"
+                                                                class="btn btn-link text-danger btn-hapus-lamaran"
+                                                                data-id="{{ $magang->magang_id }}"
+                                                                data-nama="{{ $magang->lowongans->title }}">
+                                                                <em class="icon ni ni-trash"></em>
+                                                                <span>Hapus Pengajuan</span>
+                                                            </button>
                                                         </li>
                                                     </ul>
                                                 </div>
                                             </div>
                                         </li>
                                     </ul>
-
-                                    {{-- @if ($magang->status === 'Disetujui' || $magang->status === 'Ditolak')
-                                        <span>Reviewed</span>
-                                    @else
-                                        <form action="{{ route('magangApplication.update', $magang->magang_id) }}"
-                                            method="POST" style="display: inline;"
-                                            onsubmit="return confirm('Apakah anda yakin menyetujui lamaran ini?')">
-                                            @csrf
-                                            @method('PUT')
-                                            <input type="hidden" name="status" value="Disetujui">
-                                            <button type="submit" class="btn btn-link p-0 m-0 align-baseline text-light"
-                                                style="background: rgb(32, 155, 32)">
-                                                <span style="padding:5px;">Setuju</span></button>
-                                        </form>
-
-                                        <form action="{{ route('magangApplication.update', $magang->magang_id) }}"
-                                            method="POST" style="display: inline;"
-                                            onsubmit="return confirm('Apakah anda yakin menolak lamaran ini?')">
-                                            @csrf
-                                            @method('PUT')
-                                            <input type="hidden" name="status" value="Ditolak">
-                                            <button type="submit" class="btn btn-link p-0 m-0 align-baseline text-light"
-                                                style="background: red;">
-                                                <span style="padding: 5px;">Tolak</span>
-                                            </button>
-                                        </form>
-                                    @endif --}}
                                 </td>
                             </tr>
                         @endforeach
@@ -126,3 +97,58 @@
             </div>
         </div>
     @endsection
+
+    @push('js')
+        <script>
+            $(document).ready(function() {
+                $('.btn-hapus-lamaran').on('click', function() {
+                    const id = $(this).data('id');
+                    const nama = $(this).data('nama'); // nama lowongan
+                    const token = '{{ csrf_token() }}';
+
+                    Swal.fire({
+                        title: 'Yakin ingin menghapus?',
+                        text: `Lamaran untuk "${nama}" akan dihapus permanen!`,
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonText: 'Ya, hapus!',
+                        cancelButtonText: 'Batal',
+                        confirmButtonColor: '#e85347',
+                        cancelButtonColor: '#3085d6',
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            $.ajax({
+                                url: `/mahasiswa/pengajuan-magang/hapus-lamaran/${id}`, // pastikan route ini sesuai
+                                method: 'POST',
+                                data: {
+                                    _token: token,
+                                    _method: 'DELETE'
+                                },
+                                success: function(res) {
+                                    Swal.fire({
+                                        title: 'Terhapus!',
+                                        text: res.message ||
+                                            'Lamaran berhasil dihapus.',
+                                        icon: 'success',
+                                        showConfirmButton: false,
+                                        timer: 2000
+                                    });
+
+                                    // Opsional: hapus dari UI
+                                    location.reload();
+                                },
+                                error: function(xhr) {
+                                    Swal.fire({
+                                        icon: 'error',
+                                        title: 'Gagal Menghapus',
+                                        text: xhr.responseJSON?.message ||
+                                            'Terjadi kesalahan saat menghapus data.',
+                                    });
+                                }
+                            });
+                        }
+                    });
+                });
+            });
+        </script>
+    @endpush

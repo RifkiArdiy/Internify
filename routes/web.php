@@ -200,8 +200,8 @@ Route::middleware(['auth'])->group(function () {
 
         Route::prefix('pengajuan-magang')->group(function () {
             Route::get('/', [MagangApplicationController::class, 'indexMhs'])->name('lamaran');
-            Route::post('/buatLamaran/{id}', [MagangApplicationController::class, 'store'])->name('buatLamaran');
-            Route::delete('/hapusLamaran/{id}', [MagangApplicationController::class, 'destroy'])->name('hapusLamaran');
+            Route::post('/buat-lamaran/{id}', [MagangApplicationController::class, 'store'])->name('buatLamaran');
+            Route::delete('/hapus-lamaran/{id}', [MagangApplicationController::class, 'destroy'])->name('hapusLamaran');
         });
 
         Route::get('evaluasi', [EvaluasiMagangController::class, 'indexMhs'])->name('evaluasi-index');

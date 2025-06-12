@@ -187,13 +187,21 @@ class MagangApplicationController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy($id)
     {
         try {
-            MagangApplication::destroy($id);
-            return redirect()->back()->with('success', 'Data lamaran berhasil dihapus');
-        } catch (\Illuminate\Database\QueryException $e) {
-            return redirect()->back()->with('error', 'Data lamaran gagal dihapus karena masih terkait dengan data lain');
+            $lamaran = MagangApplication::findOrFail($id);
+            $lamaran->delete();
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Lamaran berhasil dihapus.'
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Gagal menghapus lamaran.'
+            ], 500);
         }
     }
 }
