@@ -1,16 +1,16 @@
 @extends('layouts.app')
+<style>
+    #quill-editor {
+        overflow-x: auto;
+        word-wrap: break-word;
+    }
 
+    .ql-editor {
+        word-break: break-word;
+    }
+</style>
 @section('action')
-    <style>
-        #quill-editor {
-            overflow-x: auto;
-            word-wrap: break-word;
-        }
-
-        .ql-editor {
-            word-break: break-word;
-        }
-    </style>
+    
 
     <li class="nk-block-tools-opt">
         <a href="{{ route('dosen.verifikasi') }}" class="btn btn-light">
