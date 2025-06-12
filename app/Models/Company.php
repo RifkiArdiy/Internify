@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Facades\DB;
 
 class Company extends Model
 {
@@ -53,4 +54,14 @@ class Company extends Model
 
     //     return $averageRating;
     // }
+    public function getRating($companyId)
+    {
+        $avg = DB::table('feedback_magang')
+            ->join('magang_applications', 'feedback_magang.magang_id', '=', 'magang_applications.magang_id')
+            ->join('lowongan_magangs', 'magang_applications.lowongan_id', '=', 'lowongan_magangs.lowongan_id')
+            ->where('lowongan_magangs.company_id', $companyId)
+            ->avg('feedback_magang.rating');
+
+        return number_format($avg ?? 0, 1); // format seperti 4.2
+    }
 }

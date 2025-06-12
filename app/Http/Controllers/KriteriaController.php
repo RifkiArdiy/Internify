@@ -22,7 +22,7 @@ class KriteriaController extends Controller
     {
         $request->validate([
             'kode' => 'required',
-            'nama' => 'required',
+            'nama' => 'required|min:3',
             'weight' => 'required|numeric',
             'jenis' => 'required|in:benefit,cost',
         ]);

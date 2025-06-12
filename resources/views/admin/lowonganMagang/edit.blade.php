@@ -175,7 +175,7 @@
                         </div>
                     </div>
 
-                    <div class="col-12">
+                    <div class="col-12 text-end">
                         <button type="submit" class="btn btn-primary mt-3">Update</button>
                         <a href="{{ route('lowongan-magang.index') }}" class="btn btn-secondary mt-3">Kembali</a>
                     </div>

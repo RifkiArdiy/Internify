@@ -78,7 +78,7 @@ class EvaluasiMagangController extends Controller
             'mahasiswa_id' => 'required|exists:mahasiswas,mahasiswa_id',
             'company_id' => 'required|exists:companies,company_id',
             'log_id' => 'required|exists:logs,log_id',
-            'evaluasi' => 'required|string',
+            'evaluasi' => 'required|string|min:25',
         ]);
 
         EvaluasiMagang::create([

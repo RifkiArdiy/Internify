@@ -83,11 +83,11 @@ class DosenController extends Controller
     {
         //
         $request->validate([
-            'name' => 'required',
+            'name' => 'required|min:3',
             'username' => 'required|unique:users',
             'email' => 'required|unique:users',
             'password' => 'required|min:6',
-            'nip' => 'required|unique:dosens',
+            'nip' => 'required|unique:dosens|min:18|max:18',
             'no_telp' => 'nullable|max:15',
             'alamat' => 'nullable|min:10',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
@@ -162,7 +162,7 @@ class DosenController extends Controller
             'name' => 'required',
             'username' => 'required|unique:users,username,' . $user->user_id . ',user_id',
             'email' => 'required|unique:users,email,' . $user->user_id . ',user_id',
-            'nip' => 'required|unique:dosens,nip,' . $dosen->dosen_id . ',dosen_id',
+            'nip' => 'required|min:18|max:18|unique:dosens,nip,' . $dosen->dosen_id . ',dosen_id',
             'no_telp' => 'nullable|max:15',
             'alamat' => 'nullable|min:10|max:100',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',

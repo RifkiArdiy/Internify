@@ -46,11 +46,11 @@
                     </tr>
                     <tr>
                         <th>Periode Awal</th>
-                        <td>{{ $logang->period->start_date }}</td>
+                        <td>{{ \Carbon\Carbon::parse($logang->period->start_date)->format('d/m/Y') }}</td>
                     </tr>
                     <tr>
                         <th>Periode Akhir</th>
-                        <td>{{ $logang->period->end_date }}</td>
+                        <td>{{ \Carbon\Carbon::parse($logang->period->end_date)->format('d/m/Y') }}</td>
                     </tr>
                     <tr>
                         <th>Kriteria</th>

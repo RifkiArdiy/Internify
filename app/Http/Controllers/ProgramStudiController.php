@@ -41,6 +41,11 @@ class ProgramStudiController extends Controller
      */
     public function store(Request $request)
     {
+
+        $request->validate([
+            'name' => 'required|string|min:10|max:30|unique:program_studis,name',
+        ]);
+
         ProgramStudi::create([
             'name' => $request->name
         ]);
@@ -75,6 +80,11 @@ class ProgramStudiController extends Controller
     public function update(Request $request, string $id)
     {
         $prodi = ProgramStudi::find($id);
+
+        $request->validate([
+            'name' => 'required|string|min:10|max:30|unique:program_studis,name',
+        ]);
+        
         $prodi->update([
             'name' => $request->name
         ]);

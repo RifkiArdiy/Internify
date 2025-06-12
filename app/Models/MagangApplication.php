@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class MagangApplication extends Model
 {
@@ -24,5 +25,10 @@ class MagangApplication extends Model
     public function lowongans(): BelongsTo
     {
         return $this->belongsTo(LowonganMagang::class, 'lowongan_id', 'lowongan_id');
+    }
+
+    public function feedbacks(): HasMany
+    {
+        return $this->hasMany(FeedbackMagang::class, 'magang_id', 'magang_id');
     }
 }

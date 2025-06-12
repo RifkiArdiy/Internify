@@ -9,7 +9,7 @@
                 <div class="form-group">
                     <label class="form-label">Nama Prodi: <span class="text-danger">*</label>
                     <input type="text" name="name" class="form-control" required
-                        placeholder="Contoh: Teknik Informatika">
+                        placeholder="Minimal 10 Karakter, Contoh: Teknik Informatika">
                 </div>
 
                 <button type="submit" class="btn btn-primary mt-3">Simpan</button>

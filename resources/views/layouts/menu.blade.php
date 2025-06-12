@@ -82,7 +82,7 @@
         </a>
         <!-- .nk-menu-sub -->
     </li>
-    <li class="nk-menu-item has-sub">
+    {{-- <li class="nk-menu-item has-sub">
         <a href="{{ route('monitoring.index') }}" class="nk-menu-link">
             <span class="nk-menu-icon">
                 <em class="icon ni ni-report"></em>
@@ -90,7 +90,7 @@
             <span class="nk-menu-text">Monitoring & Statistik</span>
         </a>
         <!-- .nk-menu-sub -->
-    </li>
+    </li> --}}
 @endif
 @if (Auth::user()->level->level_nama == 'Dosen')
     <li class="nk-menu-heading">
@@ -108,6 +108,14 @@
     <!-- .nk-menu-item -->
     <li class="nk-menu-heading">
         <h6 class="overline-title text-primary-alt">User Management</h6>
+    </li>
+    <li class="nk-menu-item">
+        <a href="{{ route('bimbingan.list') }}" class="nk-menu-link">
+            <span class="nk-menu-icon">
+                <em class="icon ni ni-contact"></em>
+            </span>
+            <span class="nk-menu-text">Mahasiswa Bimbingan</span>
+        </a>
     </li>
     <li class="nk-menu-item">
         <a href="{{ route('evaluasi.index') }}" class="nk-menu-link">
@@ -194,12 +202,17 @@
                 <span class="nk-menu-text">Feedback Magang</span>
             </a>
         </li>
-        <li class="nk-menu-item">
-            <a href="{{ route('sertifikatMagang.index') }}" class="nk-menu-link">
-                <span class="nk-menu-icon"><em class="icon ni ni-notes-alt"></em></span>
-                <span class="nk-menu-text">Sertifikat Magang</span>
-            </a>
-        </li>
+        @php
+            $hasFeedbackMagang = $mahasiswa->feedbacks !== null;
+        @endphp
+        @if ($hasFeedbackMagang)
+            <li class="nk-menu-item">
+                <a href="{{ route('sertifikatMagang.index') }}" class="nk-menu-link">
+                    <span class="nk-menu-icon"><em class="icon ni ni-notes-alt"></em></span>
+                    <span class="nk-menu-text">Sertifikat Magang</span>
+                </a>
+            </li>
+        @endif
     @endif
 @endif
 
@@ -242,6 +255,14 @@
                 <em class="icon ni ni-notes-alt"></em>
             </span>
             <span class="nk-menu-text">Sertifikat Magang</span>
+        </a>
+    </li>
+    <li class="nk-menu-item">
+        <a href="{{ route('feedback-list') }}" class="nk-menu-link">
+            <span class="nk-menu-icon">
+                <em class="icon ni ni-chat"></em>
+            </span>
+            <span class="nk-menu-text">Feedback</span>
         </a>
     </li>
 @endif

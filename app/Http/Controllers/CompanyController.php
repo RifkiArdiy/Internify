@@ -75,9 +75,9 @@ class CompanyController extends Controller
             'username' => 'required|unique:users',
             'email' => 'required|unique:users',
             'password' => 'required|min:6',
-            'about_company' => 'required|string|max:65535',
+            'about_company' => 'required|string|max:150|min:25',
             'no_telp' => 'nullable|string|min:10|max:15',
-            'alamat' => 'nullable|string|min:10|max:100',
+            'alamat' => 'nullable|string|min:20|max:100',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
@@ -126,9 +126,9 @@ class CompanyController extends Controller
             'name' => 'required|string|max:255',
             'username' => 'required|unique:users,username,' . $user->user_id . ',user_id',
             'email' => 'required|unique:users,email,' . $user->user_id . ',user_id',
-            'about_company' => 'required|string|max:65535',
-            'alamat' => 'nullable|max:100',
-            'no_telp' => 'nullable|max:15',
+            'about_company' => 'required|string|max:150|min:25',
+            'alamat' => 'nullable|min:20|max:100',
+            'no_telp' => 'nullable|min:10|max:15',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 

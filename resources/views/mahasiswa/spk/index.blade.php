@@ -55,7 +55,7 @@
 
     <div class="card card-bordered card-preview mb-4">
         <div class="card-inner">
-            <h4 class="mb-3">Delta (|x* - x|)</h4>
+            <h4 class="mb-3">Deviation Sequence</h4>
             <table class="datatable-init-export table table-bordered">
                 <thead>
                     <tr>

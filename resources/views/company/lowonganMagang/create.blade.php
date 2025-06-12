@@ -14,10 +14,12 @@
             @endif
 
             <style>
-                #quill-editor, #quill-requirements {
+                #quill-editor,
+                #quill-requirements {
                     overflow-x: auto;
                     word-wrap: break-word;
                 }
+
                 .ql-editor {
                     word-break: break-word;
                 }
@@ -158,9 +160,10 @@
                         </div>
                     </div>
 
-                    <div class="col-12">
+                    <div class="col-12 text-end">
                         <button type="submit" class="btn btn-primary mt-3">Simpan</button>
-                        <a href="{{ route('companys-lowongan-magang.index') }}" class="btn btn-secondary mt-3">Kembali</a>
+                        <a href="{{ route('companys-lowongan-magang.index') }}"
+                            class="btn btn-secondary mt-3">Kembali</a>
                     </div>
                 </div>
             </form>

@@ -136,12 +136,12 @@
                                             class="icon ni ni-more-v"></em></a>
                                     <div class="dropdown-menu dropdown-menu-end">
                                         <ul class="link-list-opt no-bdr">
-                                            <li>
+                                            {{-- <li>
                                                 <a href="#">
                                                     <em class="icon ni ni-camera-fill"></em>
                                                     <span>Change Photo</span>
                                                 </a>
-                                            </li>
+                                            </li> --}}
                                             @if (Auth::user()->level->level_nama == 'Administrator')
                                                 <li>
                                                     <a href="{{ route('profile.edit') }}">
@@ -195,4 +195,12 @@
             </div><!-- card-aside -->
         </div><!-- .card-aside-wrap -->
     </div>
+    <div class="modal fade" role="dialog" id="profile-edit">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content">
+                {{-- profil.edit.blade.php --}}
+                @include('profile.edit')
+            </div><!-- .modal-content -->
+        </div><!-- .modal-dialog -->
+    </div><!-- .modal -->
 @endsection

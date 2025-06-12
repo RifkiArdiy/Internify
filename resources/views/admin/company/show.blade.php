@@ -79,7 +79,8 @@
                                         <div class="profile-ud-item">
                                             <div class="profile-ud wider">
                                                 <span class="profile-ud-label">Joining Date</span>
-                                                <span class="profile-ud-value">{{ $comp->created_at }}</span>
+                                                <span
+                                                    class="profile-ud-value">{{ \Carbon\Carbon::parse($comp->created_at)->format('d/m/Y') }}</span>
                                             </div>
                                         </div>
                                     </div><!-- .profile-ud-list -->

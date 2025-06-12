@@ -35,11 +35,12 @@
                                 <span>{{ $pegangs->name }}</span>
                             </td>
                             <td class="nk-tb-col tb-col-md">
-                                <span>{{ $pegangs->start_date }}</span>
+                                <span>{{ \Carbon\Carbon::parse($pegangs->start_date)->format('d/m/Y') }}</span>
                             </td>
                             <td class="nk-tb-col tb-col-md">
-                                <span>{{ $pegangs->end_date }}</span>
+                                <span>{{ \Carbon\Carbon::parse($pegangs->end_date)->format('d/m/Y') }}</span>
                             </td>
+
                             <td class="nk-tb-col nk-tb-col-tools">
                                 <ul class="nk-tb-actions gx-1">
                                     <li>
@@ -48,10 +49,6 @@
                                                 data-bs-toggle="dropdown"><em class="icon ni ni-more-h"></em></a>
                                             <div class="dropdown-menu dropdown-menu-end">
                                                 <ul class="link-list-opt no-bdr">
-                                                    <li><a href="#"><em class="icon ni ni-focus"></em><span>Quick
-                                                                View</span></a></li>
-                                                    <li><a href="#"><em class="icon ni ni-eye"></em><span>View
-                                                                Details</span></a></li>
                                                     <li><a href="{{ route('periode-magang.edit', $pegangs->period_id) }}"><em
                                                                 class="icon ni ni-edit-alt"></em><span>Edit</span></a>
                                                     </li>

@@ -6,7 +6,7 @@
         <div class="alert alert-success">{{ session('success') }}</div>
     @endif
     <div class="card card-bordered card-preview">
-        <div class="card-inner table-responsive">
+        <div class="card-inner">
             <table class="datatable-init-export nowrap nk-tb-list nk-tb-ulist" data-auto-responsive="false">
                 <thead>
                     <tr class="nk-tb-item nk-tb-head">
@@ -41,14 +41,14 @@
                                 </div>
                             </td>
                             <td class="nk-tb-col">
-                                <span>{{ $log->report_title}}</span>
+                                <span>{{ $log->report_title }}</span>
                             </td>
                             <td class="nk-tb-col">
-                                <span>{{ $log->created_at->format('d M Y') }}</span>
+                                <span>{{ \Carbon\Carbon::parse($log->created_at)->format('d/m/Y') }}</span>
                             </td>
                             <td class="nk-tb-col">
                                 @if ($log->verif_company === 'Disetujui')
-                                    <span class="tb-status text-success">Verified</span>
+                                    <span class="tb-status text-success">Disetujui</span>
                                 @elseif ($log->verif_company === 'Ditolak')
                                     <span class="tb-status text-danger">Ditolak</span>
                                 @elseif ($log->verif_company === 'Pending')

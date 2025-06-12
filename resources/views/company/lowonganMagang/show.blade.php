@@ -46,11 +46,11 @@
                     </tr>
                     <tr>
                         <th>Periode Awal</th>
-                        <td>{{ $logang->period->start_date }}</td>
+                        <td>{{ \Carbon\Carbon::parse($logang->period->start_date)->format('d/m/Y') }}</td>
                     </tr>
                     <tr>
                         <th>Periode Akhir</th>
-                        <td>{{ $logang->period->end_date }}</td>
+                        <td>{{ \Carbon\Carbon::parse($logang->period->end_date)->format('d/m/Y') }}</td>
                     </tr>
                     <tr>
                         <th>Kriteria</th>
@@ -62,12 +62,13 @@
 
         {{-- Tombol Aksi --}}
         <div class="mt-3 d-flex">
-            <a href="{{ route('companys-lowongan-magang.edit', $logang->lowongan_id) }}" class="btn btn-primary">Edit Lowongan</a>
+            <a href="{{ route('companys-lowongan-magang.edit', $logang->lowongan_id) }}" class="btn btn-primary">Edit
+                Lowongan</a>
         </div>
 
         <h4>Daftar Pelamar</h4>
         @foreach ($mahasiswas as $item)
-            <a href="">{{$item->user->name}}</a>
+            <a href="">{{ $item->user->name }}</a>
         @endforeach
     </div>
 @endsection

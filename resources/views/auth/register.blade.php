@@ -55,7 +55,7 @@
                                     <div class="nk-block-head-content">
                                         <h5 class="nk-block-title">Register</h5>
                                         <div class="nk-block-des">
-                                            <p>Create New Dashlite Account</p>
+                                            <p>Buat Akun Baru untuk Internify</p>
                                         </div>
                                     </div>
                                 </div><!-- .nk-block-head -->
@@ -131,15 +131,15 @@
                                 <div class="form-note-s2 pt-4"> Already have an account ? <a
                                         href="{{ route('login') }}"><strong>Sign in instead</strong></a>
                                 </div>
-                                <div class="text-center pt-4 pb-3">
+                                {{-- <div class="text-center pt-4 pb-3">
                                     <h6 class="overline-title overline-title-sap"><span>OR</span></h6>
-                                </div>
-                                <ul class="nav justify-center gx-8">
+                                </div> --}}
+                                {{-- <ul class="nav justify-center gx-8">
                                     <li class="nav-item"><a class="nav-link" href="#">Facebook</a></li>
                                     <li class="nav-item"><a class="nav-link" href="#">Google</a></li>
-                                </ul>
+                                </ul> --}}
                             </div><!-- .nk-block -->
-                            <div class="nk-block nk-auth-footer">
+                            {{-- <div class="nk-block nk-auth-footer">
                                 <div class="nk-block-between">
                                     <ul class="nav nav-sm">
                                         <li class="nav-item">
@@ -193,62 +193,29 @@
                                 <div class="mt-3">
                                     <p>&copy; 2023 DashLite. All Rights Reserved.</p>
                                 </div>
-                            </div><!-- nk-block -->
+                            </div><!-- nk-block --> --}}
                         </div><!-- nk-split-content -->
                         <div class="nk-split-content nk-split-stretch bg-lighter d-flex toggle-break-lg toggle-slide toggle-slide-right"
                             data-toggle-body="true" data-content="athPromo" data-toggle-screen="lg"
                             data-toggle-overlay="true">
                             <div class="slider-wrap w-100 w-max-550px p-3 p-sm-5 m-auto">
-                                <div class="slider-init" data-slick='{"dots":true, "arrows":false}'>
+                                {{-- <div class="slider-init" data-slick='{"dots":true, "arrows":false}'> --}}
                                     <div class="slider-item">
                                         <div class="nk-feature nk-feature-center">
                                             <div class="nk-feature-img">
-                                                <img class="round"
-                                                    src="{{ asset('assets/home/images/slides/promo-a.png') }}"
-                                                    srcset="{{ asset('assets/home/images/slides/promo-a2x.png') }}"
+                                                <img class="round" style="width: 100%; height: auto;"
+                                                    src="{{ asset('storage/images/dashboard/image.png') }}"
+                                                    srcset="{{ asset('storage/images/dashboard/image.png') }}"
                                                     alt="">
                                             </div>
                                             <div class="nk-feature-content py-4 p-sm-5">
                                                 <h4>Internify</h4>
-                                                <p>You can start to create your products easily with its user-friendly
-                                                    design & most completed responsive layout.</p>
+                                                <p>Sistem Manajemen Magang modern untuk institusi, mahasiswa, dan mitra industri.</p>
                                             </div>
                                         </div>
                                     </div><!-- .slider-item -->
-                                    <div class="slider-item">
-                                        <div class="nk-feature nk-feature-center">
-                                            <div class="nk-feature-img">
-                                                <img class="round"
-                                                    src="{{ asset('assets/home/images/slides/promo-b.png') }}"
-                                                    srcset="{{ asset('assets/home/images/slides/promo-b2x.png') }}"
-                                                    alt="">
-                                            </div>
-                                            <div class="nk-feature-content py-4 p-sm-5">
-                                                <h4>Internify</h4>
-                                                <p>You can start to create your products easily with its user-friendly
-                                                    design & most completed responsive layout.</p>
-                                            </div>
-                                        </div>
-                                    </div><!-- .slider-item -->
-                                    <div class="slider-item">
-                                        <div class="nk-feature nk-feature-center">
-                                            <div class="nk-feature-img">
-                                                <img class="round"
-                                                    src="{{ asset('assets/home/images/slides/promo-c.png') }}"
-                                                    srcset="{{ asset('assets/home/images/slides/promo-c2x.png') }}"
-                                                    alt="">
-                                            </div>
-                                            <div class="nk-feature-content py-4 p-sm-5">
-                                                <h4>Internify</h4>
-                                                <p>You can start to create your products easily with its user-friendly
-                                                    design & most completed responsive layout.</p>
-                                            </div>
-                                        </div>
-                                    </div><!-- .slider-item -->
+                                    {{-- </div><!-- .slider-item --> --}}
                                 </div><!-- .slider-init -->
-                                <div class="slider-dots"></div>
-                                <div class="slider-arrows"></div>
-                            </div><!-- .slider-wrap -->
                         </div><!-- nk-split-content -->
                     </div><!-- nk-split -->
                 </div>
@@ -267,139 +234,7 @@
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <a href="#" class="close" data-bs-dismiss="modal"><em class="icon ni ni-cross-sm"></em></a>
-                <div class="modal-body modal-body-md">
-                    <h5 class="title mb-4">Select Your Country</h5>
-                    <div class="nk-country-region">
-                        <ul class="country-list text-center gy-2">
-                            <li>
-                                <a href="#" class="country-item">
-                                    <img src="{{ asset('assets/home/images/flags/arg.png') }}" alt=""
-                                        class="country-flag">
-                                    <span class="country-name">Argentina</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="country-item">
-                                    <img src="{{ asset('assets/home/images/flags/aus.png') }}" alt=""
-                                        class="country-flag">
-                                    <span class="country-name">Australia</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="country-item">
-                                    <img src="{{ asset('assets/home/images/flags/bangladesh.png') }}" alt=""
-                                        class="country-flag">
-                                    <span class="country-name">Bangladesh</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="country-item">
-                                    <img src="{{ asset('assets/home/images/flags/canada.png') }}" alt=""
-                                        class="country-flag">
-                                    <span class="country-name">Canada <small>(English)</small></span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="country-item">
-                                    <img src="{{ asset('assets/home/images/flags/china.png') }}" alt=""
-                                        class="country-flag">
-                                    <span class="country-name">Centrafricaine</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="country-item">
-                                    <img src="{{ asset('assets/home/images/flags/china.png') }}" alt=""
-                                        class="country-flag">
-                                    <span class="country-name">China</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="country-item">
-                                    <img src="{{ asset('assets/home/images/flags/french.png') }}" alt=""
-                                        class="country-flag">
-                                    <span class="country-name">France</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="country-item">
-                                    <img src="{{ asset('assets/home/images/flags/germany.png') }}" alt=""
-                                        class="country-flag">
-                                    <span class="country-name">Germany</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="country-item">
-                                    <img src="{{ asset('assets/home/images/flags/iran.png') }}" alt=""
-                                        class="country-flag">
-                                    <span class="country-name">Iran</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="country-item">
-                                    <img src="{{ asset('assets/home/images/flags/italy.png') }}" alt=""
-                                        class="country-flag">
-                                    <span class="country-name">Italy</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="country-item">
-                                    <img src="{{ asset('assets/home/images/flags/mexico.png') }}" alt=""
-                                        class="country-flag">
-                                    <span class="country-name">México</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="country-item">
-                                    <img src="{{ asset('assets/home/images/flags/philipine.png') }}" alt=""
-                                        class="country-flag">
-                                    <span class="country-name">Philippines</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="country-item">
-                                    <img src="{{ asset('assets/home/images/flags/portugal.png') }}" alt=""
-                                        class="country-flag">
-                                    <span class="country-name">Portugal</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="country-item">
-                                    <img src="{{ asset('assets/home/images/flags/s-africa.png') }}" alt=""
-                                        class="country-flag">
-                                    <span class="country-name">South Africa</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="country-item">
-                                    <img src="{{ asset('assets/home/images/flags/spanish.png') }}" alt=""
-                                        class="country-flag">
-                                    <span class="country-name">Spain</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="country-item">
-                                    <img src="{{ asset('assets/home/images/flags/switzerland.png') }}" alt=""
-                                        class="country-flag">
-                                    <span class="country-name">Switzerland</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="country-item">
-                                    <img src="{{ asset('assets/home/images/flags/uk.png') }}" alt=""
-                                        class="country-flag">
-                                    <span class="country-name">United Kingdom</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="country-item">
-                                    <img src="{{ asset('assets/home/images/flags/english.png') }}" alt=""
-                                        class="country-flag">
-                                    <span class="country-name">United State</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
+                
             </div><!-- .modal-content -->
         </div><!-- .modla-dialog -->
     </div><!-- .modal -->

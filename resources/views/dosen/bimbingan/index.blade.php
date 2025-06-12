@@ -10,9 +10,9 @@
                         <th class="nk-tb-col export-col"><span class="sub-text">NIM</span></th>
                         <th class="nk-tb-col export-col"><span class="sub-text">Lowongan Magang</span></th>
                         <th class="nk-tb-col export-col"><span class="sub-text">Perusahaan</span></th>
-                        <th class="nk-tb-col export-col"><span class="sub-text">Catatan</span></th>
-                        {{-- <th class="nk-tb-col export-col"><span class="sub-text">Status</span></th> --}}
+                        <th class="nk-tb-col export-col"><span class="sub-text">Status</span></th>
                         <th class="nk-tb-col export-col"><span class="sub-text">Tanggal Pengajuan</span></th>
+                        <th class="nk-tb-col export-col tb-col-md"><span class="sub-text">Progress</span></th>
                         <th class="nk-tb-col nk-tb-col-tools text-end"></th>
                     </tr>
                 </thead>
@@ -56,7 +56,17 @@
                                     <span class="text-danger">Ditolak</span>
                                 @endif
                             </td>
-                            <td class="nk-tb-col"><span>{{ $bimbingan->created_at->format('d M Y') }}</span></td>
+                            <td class="nk-tb-col">
+                                <span>{{ \Carbon\Carbon::parse($bimbingan->created_at)->format('d/m/Y') }}</span>
+                            </td>
+                            <td class="nk-tb-col tb-col-md">
+                                <div class="project-list-progress">
+                                    <div class="progress progress-pill progress-md bg-light">
+                                        <div class="progress-bar" data-progress="{{ $bimbingan->progress }}"></div>
+                                    </div>
+                                    <div class="project-progress-percent">{{ $bimbingan->progress }}%</div>
+                                </div>
+                            </td>
                             <td class="nk-tb-col nk-tb-col-tools">
                                 <ul class="nk-tb-actions gx-1">
                                     <li>

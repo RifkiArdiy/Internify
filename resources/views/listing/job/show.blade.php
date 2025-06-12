@@ -211,14 +211,21 @@
 
                                 @auth
                                     @if (Auth::user()->level && Auth::user()->level->level_nama === 'Mahasiswa')
-                                        <form action="{{ route('buatLamaran', ['id' => $lowongan->lowongan_id]) }}"
-                                            method="POST" onsubmit="return confirm('Yakin ingin melamar lowongan ini?')">
-                                            @csrf
-                                            <button type="submit" class="btn btn-lg btn-primary">Lamar Cepat</button>
-                                        </form>
+                                        @if ($hasProfilAkademik)
+                                            <form action="{{ route('buatLamaran', ['id' => $lowongan->lowongan_id]) }}"
+                                                method="POST"
+                                                onsubmit="return confirm('Yakin ingin melamar lowongan ini?')">
+                                                @csrf
+                                                <button type="submit" class="btn btn-lg btn-primary">Lamar Cepat</button>
+                                            </form>
+                                        @else
+                                            <a href="{{ route('profil-akademik.index') }}"
+                                                class="btn btn-lg btn-warning">
+                                                Lengkapi Profil Akademik
+                                            </a>
+                                        @endif
                                     @endif
                                 @endauth
-
                             </div>
                         </div>
                     </div>
@@ -283,7 +290,8 @@
                                             <li class="d-flex justify-content-between"><strong>Date Posted:</strong>
                                                 {{ $lowongan->created_at->diffForHumans() }}</li>
                                             <li class="d-flex justify-content-between"><strong>Expiration
-                                                    Date:</strong> {{ $lowongan->period->end_date }}
+                                                    Date:</strong>
+                                                {{ \Carbon\Carbon::parse($lowongan->period->end_date)->format('d/m/Y') }}
                                             </li>
                                             <li class="d-flex justify-content-between">
                                                 <strong>Lokasi:</strong>{{ $lowongan->regency->name }}
@@ -318,13 +326,34 @@
                                             <i class="icon ni ni-star-fill"></i>
                                         @endfor
                                         <br> --}}
+                                        {{-- <div class="mb-1"></div> --}}
+                                        @php
+                                            $fullStars = floor($averageRating);
+                                            $halfStar = $averageRating - $fullStars >= 0.5;
+                                            $emptyStars = 5 - $fullStars - ($halfStar ? 1 : 0);
+                                        @endphp
+
+                                        @for ($i = 0; $i < $fullStars; $i++)
+                                            <i class="icon ni ni-star-fill" style="color: gold; font-size: 20px;"></i>
+                                        @endfor
+
+                                        @if ($halfStar)
+                                            <i class="icon ni ni-star-half" style="color: gold; font-size: 20px;"></i>
+                                        @endif
+
+                                        @for ($i = 0; $i < $emptyStars; $i++)
+                                            <i class="icon ni ni-star" style="color: gold; font-size: 20px;"></i>
+                                        @endfor
+
+                                        <span class="ms-2 text-soft fs-13px">({{ $averageRating }})</span>
+                                        <br>
 
                                         <a href="{{ route('show.perusahaan', $lowongan->company->company_id) }}"
                                             class="text-primary small">View company profile</a>
                                         {{-- <ul class="list list-sm text-soft mt-3"> --}}
                                         <ul class="gy-2 mt-3">
                                             <li class="d-flex justify-content-between">
-                                                <strong>Founded:</strong>{{ $lowongan->company->created_at }}
+                                                <strong>Founded:</strong>{{ \Carbon\Carbon::parse($lowongan->company->created_at)->format('d/m/Y') }}
                                             </li>
                                             <li class="d-flex justify-content-between"><strong>Phone:</strong>
                                                 {{ $lowongan->company->user->no_telp }}</li>

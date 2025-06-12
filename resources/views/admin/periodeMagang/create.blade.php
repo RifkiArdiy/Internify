@@ -21,9 +21,10 @@
                                 <div class="form-icon form-icon-right">
                                     <em class="icon ni ni-calendar-alt"></em>
                                 </div>
-                                <input type="text" class="form-control date-picker" name="start_date">
+                                <input type="text" class="form-control date-picker" name="start_date"
+                                    placeholder="dd/mm/yyyy">
                             </div>
-                            <div class="form-note">Date format <code>mm/dd/yyyy</code></div>
+                            <div class="form-note">Date format <code>dd/mm/yyyy</code></div>
                         </div>
                     </div>
                     <div class="col-lg-6">
@@ -35,7 +36,7 @@
                                 </div>
                                 <input type="text" class="form-control date-picker" name="end_date">
                             </div>
-                            <div class="form-note">Date format <code>mm/dd/yyyy</code></div>
+                            <div class="form-note">Date format <code>dd/mm/yyyy</code></div>
                         </div>
                     </div>
                     <div class="col-12">

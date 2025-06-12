@@ -1,15 +1,16 @@
 @extends('layouts.app')
-
-@section('action')
 <style>
-    #quill-editor{
+    #quill-editor {
         overflow-x: auto;
         word-wrap: break-word;
     }
+
     .ql-editor {
         word-break: break-word;
     }
 </style>
+@section('action')
+    
 
     <li class="nk-block-tools-opt">
         <a href="{{ route('dosen.verifikasi') }}" class="btn btn-light">
@@ -43,7 +44,7 @@
                 </div>
                 <div class="col-md-6">
                     <h6 class="mb-1 text-soft">Tanggal Dibuat</h6>
-                    <p class="fw-bold">{{ $logs->created_at->format('d M Y') }}</p>
+                    <p class="fw-bold">{{ \Carbon\Carbon::parse($logs->created_at)->format('d/m/Y') }}</p>
                 </div>
                 <div class="col-md-6 text-end">
                     <li class="nk-block-tools-opt">
@@ -51,8 +52,8 @@
                             Evaluasi
                         </a>
                     </li>
-                    
-                    
+
+
                     {{-- @if ($log->verif_dosen === 'Disetujui')
                     <li class="nk-block-tools-opt">
                         <a href="{{ route('evaluasi.create', [
@@ -61,7 +62,7 @@
                                 'log_id' => $logs->log_id
                             ]) }}" class="btn btn-sm btn-primary">
                             Evaluasi
-                        </a>                        
+                        </a>
                     </li>
                     @elseif ($log->verif_dosen === 'pending')
                         <span class="badge badge-danger">Ditolak</span>

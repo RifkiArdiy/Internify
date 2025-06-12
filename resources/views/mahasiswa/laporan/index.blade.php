@@ -42,7 +42,7 @@
                                 <span>{{ $log->report_title }}</span>
                             </td>
                             <td class="nk-tb-col">
-                                <span>{{ $log->created_at->format('d M Y') }}</span>
+                                <span>{{ \Carbon\Carbon::parse($log->created_at)->format('d/m/Y') }}</span>
                             </td>
                             <td class="nk-tb-col d-none">
                                 <span>{{ $log->verif_company }}</span>

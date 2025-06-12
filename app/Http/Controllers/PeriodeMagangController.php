@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\PeriodeMagang;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 class PeriodeMagangController extends Controller
 {
@@ -40,14 +41,24 @@ class PeriodeMagangController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'start_date' => 'required|date_format:d/m/Y',
+            'end_date' => 'required|date_format:d/m/Y',
+        ]);
+
+        $start = Carbon::createFromFormat('d/m/Y', $request->start_date)->format('Y-m-d');
+        $end = Carbon::createFromFormat('d/m/Y', $request->end_date)->format('Y-m-d');
+
         PeriodeMagang::create([
             'name' => $request->name,
-            'start_date' => $request->start_date,
-            'end_date' => $request->end_date,
+            'start_date' => $start,
+            'end_date' => $end,
         ]);
 
         return redirect(route('periode-magang.index'))->with('success', 'Periode berhasil ditambahkan');
     }
+
 
     /**
      * Display the specified resource.
@@ -77,16 +88,24 @@ class PeriodeMagangController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $pegang = PeriodeMagang::find($id);
-        $pegang->update([
-            'name' => $request->name,
-            'start_date' => $request->start_date,
-            'end_date' => $request->end_date,
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'start_date' => 'required|date_format:d/m/Y',
+            'end_date' => 'required|date_format:d/m/Y',
         ]);
 
-        return redirect(route('periode-magang.index'));
-    }
+        $start = Carbon::createFromFormat('d/m/Y', $request->start_date)->format('Y-m-d');
+        $end = Carbon::createFromFormat('d/m/Y', $request->end_date)->format('Y-m-d');
 
+        $pegang = PeriodeMagang::findOrFail($id);
+        $pegang->update([
+            'name' => $request->name,
+            'start_date' => $start,
+            'end_date' => $end,
+        ]);
+
+        return redirect(route('periode-magang.index'))->with('success', 'Data berhasil diperbarui');
+    }
     /**
      * Remove the specified resource from storage.
      */

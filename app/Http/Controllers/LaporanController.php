@@ -53,7 +53,7 @@ class LaporanController extends Controller
             'dosen_id' => 'required|exists:dosens,dosen_id',
             'company_id' => 'required|exists:companies,company_id',
             'report_title' => 'required|string',
-            'report_text' => 'required|string',
+            'report_text' => 'required|string|min:10',
         ]);
 
         // Simpan log baru ke database

@@ -38,15 +38,12 @@
                                 @endphp
                                 <td>
                                     @if ($nilai && $nilai->nilai > 0)
-                                        {{
-                                            $nilai->kriteria->skorKriterias
-                                                ->firstWhere('nilai', $nilai->nilai)?->parameter ?? 'Parameter tidak ditemukan'
-                                        }}
+                                        {{ $nilai->kriteria->skorKriterias->firstWhere('nilai', $nilai->nilai)?->parameter ??
+                                            'Parameter tidak ditemukan' }}
                                     @else
                                         <span class="text-danger">Belum ada nilai</span>
                                     @endif
                                 </td>
-                                
                             @endforeach
                             <td class="nk-tb-col nk-tb-col-tools">
                                 <ul class="nk-tb-actions gx-1">
@@ -67,7 +64,11 @@
 
                                                     <li class="divider"></li>
                                                     <li>
-                                                        <form action="{{ route('alternatif.destroy', $alt->alternatif_id) }}" method="POST" onsubmit="return confirm('Yakin ingin menghapus alternatif ini?')" style="display:inline;">
+                                                        <form
+                                                            action="{{ route('alternatif.destroy', $alt->alternatif_id) }}"
+                                                            method="POST"
+                                                            onsubmit="return confirm('Yakin ingin menghapus alternatif ini?')"
+                                                            style="display:inline;">
                                                             @csrf
                                                             @method('DELETE')
                                                             <button type="submit" class="dropdown-item">

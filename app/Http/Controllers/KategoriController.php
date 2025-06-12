@@ -31,7 +31,7 @@ class KategoriController extends Controller
     {
         //
         $request->validate([
-            'name' => 'required|string|max:255|unique:kategoris,name',
+            'name' => 'required|string|min:2|max:255|unique:kategoris,name',
         ]);
 
         $kategori = Kategori::create([

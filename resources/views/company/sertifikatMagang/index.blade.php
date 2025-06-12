@@ -5,7 +5,12 @@
 @endphp
 
 @section('action')
-    <a href="{{ route('company.sertifikatMagang.create') }}" class="btn btn-primary mb-3">Buat Sertifikat</a>
+    <li class="nk-block-tools-opt">
+        <a href="{{ route('company.sertifikatMagang.create') }}" class="btn btn-primary">
+            <em class="icon ni ni-plus"></em>
+            <span>Tambah Sertifikat</span>
+        </a>
+    </li>
 @endsection
 
 @section('content')
@@ -24,12 +29,12 @@
                     @foreach ($sertifikats as $index => $sertifikat)
                         <tr class="nk-tb-item">
                             <td class="nk-tb-col tb-col-md">
-                                <span > {{ $index + 1 }}</span>
+                                <span> {{ $index + 1 }}</span>
                             </td>
                             <td class="nk-tb-col tb-col-md">
-                                <span > {{ $sertifikat->judul }}</span>
+                                <span> {{ $sertifikat->judul }}</span>
                             </td>
-                            <td class="nk-tb-col tb-col-md"><span >
+                            <td class="nk-tb-col tb-col-md"><span>
                                     {{ Str::limit(strip_tags($sertifikat->deskripsi), 50) }}</span>
                             </td>
                             <td class="nk-tb-col nk-tb-col-tools">

@@ -3,17 +3,84 @@
 @section('content')
     <div class="row g-4">
         <div class="col-12">
-            <div class="card card-bordered card-preview">
+            <div class="card card-bordered">
                 <div class="card-inner">
-                    <p>Halaman ini menampilkan rekap dari semua data seperti lowangan magang, user, aktivitas, dll</h3>
-                    <div class="example-alert">
-                        <div class="alert alert-warning alert-icon">
-                            <em class="icon ni ni-alert-circle"></em> Halaman ini masih dalam tahap pengembanagan.
-                            Fitur Dashboard akan segera tersedia.
+                    <h6 class="title mb-4">Tren Pendaftaran Magang</h6>
+                    <canvas id="magangTrendChart" height="300"></canvas>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-xxl-4">
+            <div class="card card-bordered card-full">
+                <div class="card-inner">
+                    <h6 class="title mb-4">Distribusi Magang Berdasarkan Status</h6>
+                    <canvas id="magangStatusChart" height="300"></canvas>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-xxl-4">
+            <div class="card card-bordered card-full">
+                <div class="card-inner border-bottom">
+                    <div class="card-title-group">
+                        <div class="card-title">
+                            <h6 class="title">Perusahaan dengan rating</h6>
                         </div>
                     </div>
                 </div>
-            </div>
+
+                @foreach ($mitras as $mitra)
+                    @if (true)
+                        <ul class="nk-activity">
+                            <li class="nk-activity-item">
+                                <div class="nk-activity-media user-avatar bg-indigo-dim">
+                                    @if ($mitra->user->image)
+                                        <img src="{{ Storage::url('images/users/' . $mitra->user->image) }}"
+                                            alt="{{ $mitra->user->name }}">
+                                    @else
+                                        <span>
+                                            {{ strtoupper(collect(explode(' ', $mitra->user->name))->map(fn($word) => $word[0])->take(2)->implode('')) }}
+                                        </span>
+                                    @endif
+                                </div>
+                                <div class="user-info">
+                                    <span class="lead-text">{{ $mitra->user->name }}</span>
+                                </div>
+                                <div class="user-action">
+                                    <span>
+                                        <div class="user-action">
+                                            @php
+                                                $rating = $mitra->avg_rating ?? 0;
+                                                $fullStars = floor($rating);
+                                                $halfStar = $rating - $fullStars >= 0.5;
+                                                $emptyStars = 5 - $fullStars - ($halfStar ? 1 : 0);
+                                            @endphp
+
+                                            <span class="d-flex align-items-center">
+                                                @for ($i = 0; $i < $fullStars; $i++)
+                                                    <i class="icon ni ni-star-fill"
+                                                        style="font-size: 18px; color: gold;"></i>
+                                                @endfor
+
+                                                @if ($halfStar)
+                                                    <i class="icon ni ni-star-half"
+                                                        style="font-size: 18px; color: gold;"></i>
+                                                @endif
+
+                                                @for ($i = 0; $i < $emptyStars; $i++)
+                                                    <i class="icon ni ni-star" style="font-size: 18px; color: #ccc;"></i>
+                                                @endfor
+
+                                                <small
+                                                    class="ms-2 text-soft fs-13px">({{ number_format($rating, 2) }})</small>
+                                            </span>
+                                        </div>
+                                    </span>
+                                </div>
+                            </li>
+                        </ul>
+                    @endif
+                @endforeach
+            </div><!-- .card -->
         </div>
         <div class="col-md-6 col-xxl-4">
             <div class="card card-bordered card-full">
@@ -22,9 +89,6 @@
                         <div class="card-title-group">
                             <div class="card-title">
                                 <h6 class="title">Pengguna Baru</h6>
-                            </div>
-                            <div class="card-tools">
-                                <a href="html/user-list-regular.html" class="link">View All</a>
                             </div>
                         </div>
                     </div>
@@ -108,12 +172,6 @@
                         <div class="card-title">
                             <h6 class="title">Menunggu Review</h6>
                         </div>
-                        <div class="card-tools">
-                            <ul class="card-tools-nav">
-                                <li><a href="#"><span>Cancel</span></a></li>
-                                <li class="active"><a href="#"><span>All</span></a></li>
-                            </ul>
-                        </div>
                     </div>
                 </div>
                 @foreach ($unreviewedLamarans as $item)
@@ -139,6 +197,7 @@
                 @endforeach
             </div><!-- .card -->
         </div><!-- .col -->
+
         <div class="col-12">
             <div class="card card-bordered card-preview">
                 <table class="table table-tranx">
@@ -193,44 +252,87 @@
             </div>
         </div>
     </div>
-    {{-- <div class="col-md-6 col-xxl-4">
-            <div class="card card-bordered card-full">
-                <div class="card-inner border-bottom">
-                    <div class="card-title-group">
-                        <div class="card-title">
-                            <h6 class="title">Perusahaan dengan rating</h6>
-                        </div>
-                    </div>
-                </div>
-                @foreach ($mitras as $mitra)
-                    @if ($mitra->getRating($mitra->company_id) != '0.0')
-
-                        <ul class="nk-activity">
-                            <li class="nk-activity-item">
-                                <div class="nk-activity-media user-avatar bg-teal-dim"><img src="./images/avatar/c-sm.jpg" alt="">
-                                    @if ($mitra->user->image)
-                                        <img src="{{ Storage::url('images/users/' . $mitra->user->image) }}"
-                                            alt="{{ $mitra->user->name }}">
-                                    @else
-                                        <span>
-                                            {{ strtoupper(collect(explode(' ', $mitra->user->name))->map(fn($word) => $word[0])->take(2)->implode('')) }}
-                                        </span>
-                                    @endif
-                                </div>
-                                <div class="user-info">
-                                    <span class="lead-text">{{ $mitra->user->name }}</span>
-                                    <span>
-                                        @for ($i = 0; $i < $mitra->getRating($mitra->company_id); $i++)
-                                            <i class="icon ni ni-star-fill" style="font-size: 24px; color: gold;"></i>
-                                        @endfor
-                                    </span>
-                                </div>
-
-                            </li>
-                        </ul>
-                    @endif
-                @endforeach
-            </div><!-- .card -->
-        </div><!-- .col --> --}}
-    </div>
 @endsection
+
+@push('js')
+    <script>
+        // === Chart 1: Distribusi Status Magang (Pie) ===
+        const statusCtx = document.getElementById('magangStatusChart').getContext('2d');
+
+        new Chart(statusCtx, {
+            type: 'doughnut', // Ubah dari 'pie' ke 'doughnut'
+            data: {
+                labels: {!! json_encode(array_keys($magangStatusCounts)) !!},
+                datasets: [{
+                    label: 'Status Magang',
+                    data: {!! json_encode(array_values($magangStatusCounts)) !!},
+                    backgroundColor: ['#6576ff', '#8feac5', '#f4b400', '#ff6b6b'],
+                    borderColor: '#fff',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                cutout: '60%', // Ini memberi efek "doughnut"
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            color: '#526484',
+                            font: {
+                                size: 13,
+                                weight: '500'
+                            },
+                            padding: 20
+                        }
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                const label = context.label || '';
+                                const value = context.raw;
+                                const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                                const percentage = ((value / total) * 100).toFixed(1);
+                                return `${label}: ${value} (${percentage}%)`;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        // === Chart 2: Tren Pendaftaran (Line) ===
+        const trendCtx = document.getElementById('magangTrendChart').getContext('2d');
+        new Chart(trendCtx, {
+            type: 'line',
+            data: {
+                labels: {!! json_encode($trendLabels) !!},
+                datasets: [{
+                    label: 'Jumlah Pendaftaran',
+                    data: {!! json_encode($trendCounts) !!},
+                    borderColor: '#798bff',
+                    backgroundColor: 'rgba(121, 139, 255, 0.3)',
+                    fill: true,
+                    tension: 0.3
+                }]
+            },
+            options: {
+                responsive: true,
+                legend: {
+                    display: false
+                },
+                scales: {
+                    xAxes: [{
+                        display: false
+                    }],
+                    yAxes: [{
+                        display: true,
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        });
+    </script>
+@endpush
