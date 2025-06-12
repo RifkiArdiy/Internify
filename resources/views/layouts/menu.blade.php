@@ -82,7 +82,7 @@
         </a>
         <!-- .nk-menu-sub -->
     </li>
-    <li class="nk-menu-item has-sub">
+    {{-- <li class="nk-menu-item has-sub">
         <a href="{{ route('monitoring.index') }}" class="nk-menu-link">
             <span class="nk-menu-icon">
                 <em class="icon ni ni-report"></em>
@@ -90,7 +90,7 @@
             <span class="nk-menu-text">Monitoring & Statistik</span>
         </a>
         <!-- .nk-menu-sub -->
-    </li>
+    </li> --}}
 @endif
 @if (Auth::user()->level->level_nama == 'Dosen')
     <li class="nk-menu-heading">

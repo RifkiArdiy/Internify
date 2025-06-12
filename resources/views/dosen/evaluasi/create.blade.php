@@ -43,7 +43,7 @@
 
         <div class="mb-3">
             <label for="evaluasi" class="form-label">Evaluasi</label>
-            <div id="quill-editor" style="height: 200px;">{!! old('evaluasi') !!}</div>
+            <div id="quill-editor" style="height: 200px;" class="form-control">{!! old('evaluasi') !!}</div>
             <input type="hidden" name="evaluasi" id="evaluasi">
         </div>
 

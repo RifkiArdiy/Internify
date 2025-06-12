@@ -92,7 +92,7 @@
                             </div>
                             <div class="col-md-12">
                                 <span class="sub-text">Deskripsi</span>
-                                <p class="lead-text">{{ $magang->lowongans->description }}</p>
+                                <p class="lead-text">{{ strip_tags($magang->lowongans->description) }}</p>
                             </div>
                             <div class="col-md-6">
                                 <span class="sub-text">Periode Awal</span>
@@ -107,7 +107,7 @@
                             </div>
                             <div class="col-md-12">
                                 <span class="sub-text">Kriteria</span>
-                                <p class="lead-text">{{ $magang->lowongans->requirements }}</p>
+                                <p class="lead-text">{{ strip_tags($magang->lowongans->requirements) }}</p>
                             </div>
                         </div>
                     </div>
