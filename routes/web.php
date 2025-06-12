@@ -30,12 +30,10 @@ use App\Http\Controllers\MonitoringController;
 use App\Http\Controllers\NilaiAlternatifController;
 use App\Http\Controllers\SpkController;
 use App\Http\Controllers\WilayahController;
-<<<<<<< HEAD
-use App\Http\Controllers\Dosen\ManajemenBimbinganController;
 
-=======
+use App\Http\Controllers\Dosen\ManajemenBimbinganController;
 use App\Http\Controllers\SertifikatMagangController;
->>>>>>> 10eec9551813a6c8ca89cdf63cbebbf1af298bb2
+
 
 /*
 |--------------------------------------------------------------------------
@@ -311,10 +309,9 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/{id}', [CompanyLowonganMagangController::class, 'pelamars'])->name('companys-lowongan-magang.pelamars');
             Route::delete('/destroy/{id}', [CompanyLowonganMagangController::class, 'destroy'])->name('companys-lowongan-magang.destroy');
         });
-<<<<<<< HEAD
 
-=======
->>>>>>> 10eec9551813a6c8ca89cdf63cbebbf1af298bb2
+
+
     });
 
     Route::get('logout', [AuthController::class, 'logout'])->name('logout');
