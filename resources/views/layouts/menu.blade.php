@@ -165,6 +165,12 @@
             <span class="nk-menu-text">Profil Akademik</span>
         </a>
     </li>
+    <li class="nk-menu-item">
+        <a href="{{ route('bimbingan.index') }}" class="nk-menu-link">
+            <span class="nk-menu-icon"><em class="icon ni ni-user"></em></span>
+            <span class="nk-menu-text">Pengajuan Bimbingan</span>
+        </a>
+    </li>
 
     {{-- Jika belum ada magang disetujui --}}
     @unless ($hasApprovedMagang)
