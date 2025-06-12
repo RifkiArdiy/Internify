@@ -13,7 +13,6 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\WelcomeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CompanyController;
-use App\Http\Controllers\CompanyMagangApplicationController;
 use App\Http\Controllers\ListingController;
 use App\Http\Controllers\LowonganMagangController;
 use App\Http\Controllers\CompanyLowonganMagangController;
@@ -289,6 +288,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/get-regencies', [WilayahController::class, 'getRegencies']);
         Route::get('/get-districts', [WilayahController::class, 'getDistricts']);
         Route::get('/get-villages', [WilayahController::class, 'getVillages']);
+        Route::get('/feedback/list', [FeedbackMagangController::class, 'list'])->name('feedback-list');
 
         Route::prefix('pengajuan-magang')->group(callback: function () {
             Route::get('/show/{id}', [MagangApplicationController::class, 'show'])->name('company.magangApplication.show');

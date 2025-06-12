@@ -257,4 +257,12 @@
             <span class="nk-menu-text">Sertifikat Magang</span>
         </a>
     </li>
+    <li class="nk-menu-item">
+        <a href="{{ route('feedback-list') }}" class="nk-menu-link">
+            <span class="nk-menu-icon">
+                <em class="icon ni ni-chat"></em>
+            </span>
+            <span class="nk-menu-text">Feedback</span>
+        </a>
+    </li>
 @endif
