@@ -97,6 +97,10 @@
 
                     <div class="nk-block">
                         <h6 class="lead-text mb-3">Tindakan Verifikasi</h6>
+                        @if ($log->verif_company === 'Disetujui' || $log->verif_company === 'Ditolak')
+                        <div class="alert alert-info">
+                            Laporan ini sudah diverifikasi dengan status: <strong>{{ $log->verif_company }}</strong>.
+                        @else
                         <div class="d-flex gap-2 flex-wrap mb-4">
                             <!-- Setuju -->
                             <form action="{{ route('company.verifikasi.update', $log->log_id) }}" method="POST"
@@ -122,6 +126,7 @@
                                 </button>
                             </form>
                         </div>
+                        @endif
                     </div>
                 </div>
             </div>
