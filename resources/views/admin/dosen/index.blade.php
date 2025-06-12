@@ -171,14 +171,14 @@
                                     $(this).remove();
                                 });
                             },
-                            // error: function(xhr) {
-                            //     Swal.fire({
-                            //         icon: 'error',
-                            //         title: 'Gagal Menghapus',
-                            //         text: xhr.responseJSON?.message ||
-                            //             'Terjadi kesalahan saat menghapus.',
-                            //     });
-                            // }
+                            error: function(xhr) {
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Gagal Menghapus',
+                                    text: xhr.responseJSON?.message ||
+                                        'Terjadi kesalahan saat menghapus.',
+                                });
+                            }
                         });
                     }
                 });
