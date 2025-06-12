@@ -370,63 +370,57 @@
                         </div>
 
                         <!-- Related Jobs -->
-                        @if ($recent->count())
-                            <div class="mt-5">
-                                <h5 class="mb-3">Lowongan Serupa</h5>
-                                <div class="row g-4">
-                                    @foreach ($recent as $job)
-                                        <div class="col-sm-6 col-lg-4">
-                                            <a href="{{ route('show.lowongan', $job->lowongan_id) }}"
-                                                class="card-link-wrapper">
-                                                <div class="card card-bordered service service-s4 h-100">
-                                                    <div class="card-inner">
-                                                        <div class="job">
-                                                            <div class="job-head">
-                                                                <div class="job-title">
-                                                                    @if ($job->company->user->image)
-                                                                        <div class="user-avatar">
-                                                                            <img src="{{ Storage::url('images/users/' . $job->company->user->image) }}"
-                                                                                alt="{{ $job->company->user->name }}">
-                                                                        </div>
-                                                                    @else
-                                                                        <div class="user-avatar sq">
-                                                                            <span>
-                                                                                {{ strtoupper(collect(explode(' ', $job->company->user->name))->map(fn($word) => $word[0])->take(2)->implode('')) }}
-                                                                            </span>
-                                                                        </div>
-                                                                    @endif
-                                                                    <div class="job-info">
-                                                                        <h6 class="title">{{ $job->title }}</h6>
-                                                                        <span
-                                                                            class="sub-text">{{ $job->period->name }}</span>
-                                                                    </div>
+                        @foreach ($recent as $job)
+                            @if ($job->period && \Carbon\Carbon::parse($job->period->end_date)->isFuture())
+                                <div class="col-sm-6 col-lg-4">
+                                    <a href="{{ route('show.lowongan', $job->lowongan_id) }}"
+                                        class="card-link-wrapper">
+                                        <div class="card card-bordered service service-s4 h-100">
+                                            <div class="card-inner">
+                                                <div class="job">
+                                                    <div class="job-head">
+                                                        <div class="job-title">
+                                                            @if ($job->company->user->image)
+                                                                <div class="user-avatar">
+                                                                    <img src="{{ Storage::url('images/users/' . $job->company->user->image) }}"
+                                                                        alt="{{ $job->company->user->name }}">
                                                                 </div>
-                                                            </div>
-                                                            <div class="job-details">
-                                                                <p>{{ Str::limit(strip_tags($job->description), 80) }}
-                                                                </p>
-                                                            </div>
-                                                            <div class="job-meta">
-                                                                <ul class="job-users g-1">
-                                                                    <li>
-                                                                        <span
-                                                                            class="badge badge-dim bg-primary">{{ $job->kategori->name }}</span>
-                                                                    </li>
-                                                                </ul>
-                                                                <span class="badge badge-dim bg-warning">
-                                                                    <em class="icon ni ni-clock"></em>
-                                                                    <span>{{ $job->created_at->diffForHumans() }}</span>
-                                                                </span>
+                                                            @else
+                                                                <div class="user-avatar sq">
+                                                                    <span>
+                                                                        {{ strtoupper(collect(explode(' ', $job->company->user->name))->map(fn($word) => $word[0])->take(2)->implode('')) }}
+                                                                    </span>
+                                                                </div>
+                                                            @endif
+                                                            <div class="job-info">
+                                                                <h6 class="title">{{ $job->title }}</h6>
+                                                                <span class="sub-text">{{ $job->period->name }}</span>
                                                             </div>
                                                         </div>
                                                     </div>
+                                                    <div class="job-details">
+                                                        <p>{{ Str::limit(strip_tags($job->description), 80) }}</p>
+                                                    </div>
+                                                    <div class="job-meta">
+                                                        <ul class="job-users g-1">
+                                                            <li>
+                                                                <span
+                                                                    class="badge badge-dim bg-primary">{{ $job->kategori->name }}</span>
+                                                            </li>
+                                                        </ul>
+                                                        <span class="badge badge-dim bg-warning">
+                                                            <em class="icon ni ni-clock"></em>
+                                                            <span>{{ $job->created_at->diffForHumans() }}</span>
+                                                        </span>
+                                                    </div>
                                                 </div>
-                                            </a>
+                                            </div>
                                         </div>
-                                    @endforeach
+                                    </a>
                                 </div>
-                            </div>
-                        @endif
+                            @endif
+                        @endforeach
+
                     </div><!-- .section-content -->
                 </div><!-- .container -->
             </section><!-- .section -->

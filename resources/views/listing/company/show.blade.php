@@ -279,9 +279,18 @@
                         {{-- Latest Jobs --}}
                         <div class="mt-5">
                             <h5 class="mb-3">Lowongan Terakhir</h5>
-                            @if ($company->lowongans->count())
+                            @php
+                                $recentLowongans = $company->lowongans
+                                    ->filter(
+                                        fn($l) => $l->period && \Carbon\Carbon::parse($l->period->end_date)->isFuture(),
+                                    )
+                                    ->sortByDesc('created_at')
+                                    ->take(3);
+                            @endphp
+
+                            @if ($recentLowongans->count())
                                 <div class="row g-4">
-                                    @foreach ($company->lowongans->take(3) as $job)
+                                    @foreach ($recentLowongans as $job)
                                         <div class="col-md-6 col-lg-4">
                                             <a href="{{ route('show.lowongan', $job->lowongan_id) }}"
                                                 class="card-link-wrapper">
@@ -305,7 +314,7 @@
                                                                     <div class="job-info">
                                                                         <h6 class="title">{{ $job->title }}</h6>
                                                                         <span
-                                                                            class="sub-text">{{ $job->period->name }}</span>
+                                                                            class="sub-text">{{ $job->period->name ?? '-' }}</span>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -333,9 +342,10 @@
                                     @endforeach
                                 </div>
                             @else
-                                <p class="text-danger">The Latest Job not available.</p>
+                                <p class="text-danger">Lowongan terbaru tidak tersedia.</p>
                             @endif
                         </div>
+
                     </div><!-- .section-content -->
                 </div><!-- .container -->
             </section><!-- .section -->
