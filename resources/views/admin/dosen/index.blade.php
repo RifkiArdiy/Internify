@@ -11,8 +11,35 @@
 
 @section('content')
     @if (session('success'))
-        <div class="alert alert-success">{{ session('success') }}</div>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                NioApp.Toast(
+                    `<h5>Berhasil</h5><p>{{ session('success') }}</p>`,
+                    'success', {
+                        position: 'top-right',
+                        icon: 'auto',
+                        clear: true
+                    }
+                );
+            });
+        </script>
     @endif
+
+    @if (session('error'))
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                NioApp.Toast(
+                    `<h5>Gagal</h5><p>{{ session('error') }}</p>`,
+                    'error', {
+                        position: 'top-right',
+                        icon: 'auto',
+                        clear: true
+                    }
+                );
+            });
+        </script>
+    @endif
+
     <div class="card card-bordered card-preview">
         <div class="card-inner">
             <table class="datatable-init-export nowrap nk-tb-list nk-tb-ulist" data-auto-responsive="false">
@@ -65,7 +92,8 @@
                                                 data-bs-toggle="dropdown"><em class="icon ni ni-more-h"></em></a>
                                             <div class="dropdown-menu dropdown-menu-end">
                                                 <ul class="link-list-opt no-bdr">
-                                                    <li><a href="{{ route('dosen.show', $dosen->dosen_id) }}"><em class="icon ni ni-eye"></em><span>Lihat
+                                                    <li><a href="{{ route('dosen.show', $dosen->dosen_id) }}"><em
+                                                                class="icon ni ni-eye"></em><span>Lihat
                                                                 Detail</span></a></li>
                                                     <li><a href="{{ route('dosen.edit', $dosen->dosen_id) }}"><em
                                                                 class="icon ni ni-edit-alt"></em><span>Edit</span></a>

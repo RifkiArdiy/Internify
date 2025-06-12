@@ -31,18 +31,21 @@
             unicode-bidi: bidi-override;
             display: inline-flex;
         }
+
         .star-rating input[type="radio"] {
             display: none;
         }
+
         .star-rating label {
             color: #ddd;
             cursor: pointer;
             padding: 0 5px;
             transition: color 0.2s;
         }
-        .star-rating input[type="radio"]:checked ~ label,
+
+        .star-rating input[type="radio"]:checked~label,
         .star-rating label:hover,
-        .star-rating label:hover ~ label {
+        .star-rating label:hover~label {
             color: #f5b301;
         }
     </style>

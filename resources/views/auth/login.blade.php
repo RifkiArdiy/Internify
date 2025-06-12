@@ -100,37 +100,39 @@
                             data-toggle-overlay="true">
                             <div class="slider-wrap w-100 w-max-550px p-3 p-sm-5 m-auto">
                                 {{-- <div class="slider-init" data-slick='{"dots":true, "arrows":false}'> --}}
-                                    <div class="slider-item">
-                                        <div class="nk-feature nk-feature-center">
-                                            <div class="nk-feature-img">
-                                                <img class="round" style="width: 100%; height: auto;"
-                                                    src="{{ asset('storage/images/dashboard/image.png') }}"
-                                                    srcset="{{ asset('storage/images/dashboard/image.png') }}"
-                                                    alt="">
-                                            </div>
-                                            <div class="nk-feature-content py-4 p-sm-5">
-                                                <h4>Internify</h4>
-                                                <p>Sistem Manajemen Magang modern untuk institusi, mahasiswa, dan mitra industri.</p>
-                                            </div>
+                                <div class="slider-item">
+                                    <div class="nk-feature nk-feature-center">
+                                        <div class="nk-feature-img">
+                                            <img class="round" style="width: 100%; height: auto;"
+                                                src="{{ asset('storage/images/dashboard/image.png') }}"
+                                                srcset="{{ asset('storage/images/dashboard/image.png') }}"
+                                                alt="">
                                         </div>
-                                    </div><!-- .slider-item -->
-                                    {{-- </div><!-- .slider-item --> --}}
-                                </div><!-- .slider-init -->
-                            </div><!-- .slider-wrap -->
-                        </div><!-- .nk-split-content -->
-                    </div><!-- .nk-split -->
-                </div>
-                <!-- wrap @e -->
+                                        <div class="nk-feature-content py-4 p-sm-5">
+                                            <h4>Internify</h4>
+                                            <p>Sistem Manajemen Magang modern untuk institusi, mahasiswa, dan mitra
+                                                industri.</p>
+                                        </div>
+                                    </div>
+                                </div><!-- .slider-item -->
+                                {{-- </div><!-- .slider-item --> --}}
+                            </div><!-- .slider-init -->
+                        </div><!-- .slider-wrap -->
+                    </div><!-- .nk-split-content -->
+                </div><!-- .nk-split -->
             </div>
-            <!-- content @e -->
+            <!-- wrap @e -->
         </div>
-        <!-- main @e -->
+        <!-- content @e -->
+    </div>
+    <!-- main @e -->
     </div>
     <!-- app-root @e -->
     <!-- JavaScript -->
     <script src="{{ asset('assets/home/js/bundle.js') }}"></script>
     <script src="{{ asset('assets/home/js/scripts.js') }}"></script>
     <script src="{{ asset('assets/admin/js/example-sweetalert.js') }}"></script>
+    <script src="{{ asset('assets/admin/js/example-toastr.js') }}"></script>
     <script>
         $(document).ready(function() {
             $('#form-login').on('submit', function(e) {

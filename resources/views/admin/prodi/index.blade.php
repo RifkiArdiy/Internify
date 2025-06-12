@@ -11,7 +11,33 @@
 
 @section('content')
     @if (session('success'))
-        <div class="alert alert-success">{{ session('success') }}</div>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                NioApp.Toast(
+                    `<h5>Berhasil</h5><p>{{ session('success') }}</p>`,
+                    'success', {
+                        position: 'bottom-right',
+                        icon: 'auto',
+                        clear: true
+                    }
+                );
+            });
+        </script>
+    @endif
+
+    @if (session('error'))
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                NioApp.Toast(
+                    `<h5>Gagal</h5><p>{{ session('error') }}</p>`,
+                    'error', {
+                        position: 'bottom-right',
+                        icon: 'auto',
+                        clear: true
+                    }
+                );
+            });
+        </script>
     @endif
     <div class="card card-bordered card-preview">
         <div class="card-inner">
@@ -34,8 +60,7 @@
                                         </span>
                                     </div>
                                     <div class="user-info">
-                                        <span>{{ $item->name }}<span
-                                                class="dot dot-dark d-md-none ms-1"></span></span>
+                                        <span>{{ $item->name }}<span class="dot dot-dark d-md-none ms-1"></span></span>
                                     </div>
                                 </div>
                             </td>
@@ -59,7 +84,7 @@
 
                                                     <li><a href="{{ route('prodi.destroy', $item->prodi_id) }}"><em
                                                                 class="icon ni ni-trash"></em><span>Hapus
-                                                                </span></a></li>
+                                                            </span></a></li>
                                                 </ul>
                                             </div>
                                         </div>
