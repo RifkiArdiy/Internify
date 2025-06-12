@@ -1,5 +1,12 @@
 @extends('layouts.app')
-
+<style>
+    .img-avatar {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%; /* Agar tetap bulat */
+}
+</style>
 @section('action')
     <li class="nk-block-tools-opt">
         <a href="{{ route('companies.create') }}" class="btn btn-primary">
@@ -57,7 +64,7 @@
                                 <div class="user-card">
                                     <div class="user-avatar bg-indigo-dim d-none d-sm-flex">
                                         @if ($company->user->image)
-                                            <img src="{{ Storage::url('images/users/' . $company->user->image) }}"
+                                            <img class="img-avatar" src="{{ Storage::url('images/users/' . $company->user->image) }}"
                                                 alt="{{ $company->user->name }}">
                                         @else
                                             <span>

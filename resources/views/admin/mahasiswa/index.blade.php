@@ -1,5 +1,13 @@
 @extends('layouts.app')
+<style>
+    .img-avatar {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%; /* Agar tetap bulat */
+}
 
+</style>
 @section('action')
     <li class="nk-block-tools-opt">
         <a href="{{ route('mahasiswa.create') }}" class="btn btn-primary">
@@ -60,7 +68,7 @@
                                 <div class="user-card">
                                     <div class="user-avatar bg-teal-dim d-none d-sm-flex">
                                         @if ($mhs->user->image)
-                                            <img src="{{ Storage::url('images/users/' . $mhs->user->image) }}"
+                                            <img class="img-avatar" src="{{ Storage::url('images/users/' . $mhs->user->image) }}"
                                                 alt="{{ $mhs->user->name }}">
                                         @else
                                             <span>

@@ -1,5 +1,13 @@
 @extends('layouts.app')
+<style>
+    .img-avatar {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%; /* Agar tetap bulat */
+}
 
+</style>
 @section('action')
     <li class="nk-block-tools-opt">
         <a href="{{ route('dosen.create') }}" class="btn btn-primary">
@@ -58,9 +66,9 @@
                         <tr class="nk-tb-item">
                             <td class="nk-tb-col">
                                 <div class="user-card">
-                                    <div class="user-avatar bg-orange-dim d-none d-sm-flex">
+                                    <div class="user-avatar bg-orange-dim d-none d-sm-flex ">
                                         @if ($dosen->user->image)
-                                            <img src="{{ Storage::url('images/users/' . $dosen->user->image) }}"
+                                            <img class="img-avatar" src="{{ Storage::url('images/users/' . $dosen->user->image) }}"
                                                 alt="{{ $dosen->user->name }}">
                                         @else
                                             <span>
