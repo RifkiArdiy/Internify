@@ -207,14 +207,29 @@ class DosenController extends Controller
      */
     public function destroy(string $id)
     {
-        $dosen = Dosen::find($id);
-        $dosen->user->delete(); // Hapus user otomatis
-        $dosen->delete();
         try {
-            Dosen::destroy($id);
-            return redirect()->route('dosen.index')->with('success', 'Dosen ' . $dosen->user->name . ' berhasil dihapus');
-        } catch (\Illuminate\Database\QueryException $e) {
-            return redirect()->route('dosen.index')->with('error', 'Dosen ' . $dosen->user->name . ' gagal dihapus karena masih digunakan');
+            $company = Dosen::findOrFail($id);
+            $nama = $company->user->name;
+
+            // Hapus user-nya juga jika diperlukan
+            $company->user()->delete();
+            $company->delete();
+
+            if (request()->ajax()) {
+                return response()->json([
+                    'success' => true,
+                    'message' => "Dosen {$nama} berhasil dihapus."
+                ]);
+            }
+
+            return redirect()->route('dosen.index')->with('success', "Dosen {$nama} berhasil dihapus.");
+        } catch (\Exception $e) {
+            $msg = 'Gagal menghapus Dosen.';
+            if (request()->ajax()) {
+                return response()->json(['success' => false, 'message' => $msg], 500);
+            }
+
+            return redirect()->route('dosen.index')->with('error', $msg);
         }
     }
 }
