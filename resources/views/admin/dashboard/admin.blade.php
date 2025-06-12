@@ -11,7 +11,7 @@
             </div>
         </div>
         <div class="col-md-6 col-xxl-4">
-            <div class="card card-bordered">
+            <div class="card card-bordered card-full">
                 <div class="card-inner">
                     <h6 class="title mb-4">Distribusi Magang Berdasarkan Status</h6>
                     <canvas id="magangStatusChart" height="300"></canvas>
@@ -89,9 +89,6 @@
                         <div class="card-title-group">
                             <div class="card-title">
                                 <h6 class="title">Pengguna Baru</h6>
-                            </div>
-                            <div class="card-tools">
-                                <a href="html/user-list-regular.html" class="link">View All</a>
                             </div>
                         </div>
                     </div>
@@ -174,12 +171,6 @@
                     <div class="card-title-group">
                         <div class="card-title">
                             <h6 class="title">Menunggu Review</h6>
-                        </div>
-                        <div class="card-tools">
-                            <ul class="card-tools-nav">
-                                <li><a href="#"><span>Cancel</span></a></li>
-                                <li class="active"><a href="#"><span>All</span></a></li>
-                            </ul>
                         </div>
                     </div>
                 </div>
@@ -267,21 +258,45 @@
     <script>
         // === Chart 1: Distribusi Status Magang (Pie) ===
         const statusCtx = document.getElementById('magangStatusChart').getContext('2d');
+
         new Chart(statusCtx, {
-            type: 'pie',
+            type: 'doughnut', // Ubah dari 'pie' ke 'doughnut'
             data: {
                 labels: {!! json_encode(array_keys($magangStatusCounts)) !!},
                 datasets: [{
-                    label: 'Status',
+                    label: 'Status Magang',
                     data: {!! json_encode(array_values($magangStatusCounts)) !!},
                     backgroundColor: ['#6576ff', '#8feac5', '#f4b400', '#ff6b6b'],
+                    borderColor: '#fff',
                     borderWidth: 1
                 }]
             },
             options: {
                 responsive: true,
-                legend: {
-                    position: 'bottom'
+                cutout: '60%', // Ini memberi efek "doughnut"
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            color: '#526484',
+                            font: {
+                                size: 13,
+                                weight: '500'
+                            },
+                            padding: 20
+                        }
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                const label = context.label || '';
+                                const value = context.raw;
+                                const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                                const percentage = ((value / total) * 100).toFixed(1);
+                                return `${label}: ${value} (${percentage}%)`;
+                            }
+                        }
+                    }
                 }
             }
         });
@@ -308,7 +323,7 @@
                 },
                 scales: {
                     xAxes: [{
-                        display: true
+                        display: false
                     }],
                     yAxes: [{
                         display: true,
