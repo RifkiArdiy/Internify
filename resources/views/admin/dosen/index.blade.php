@@ -1,12 +1,12 @@
 @extends('layouts.app')
 <style>
     .img-avatar {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 50%; /* Agar tetap bulat */
-}
-
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 50%;
+        /* Agar tetap bulat */
+    }
 </style>
 @section('action')
     <li class="nk-block-tools-opt">
@@ -24,7 +24,7 @@
                 NioApp.Toast(
                     `<h5>Berhasil</h5><p>{{ session('success') }}</p>`,
                     'success', {
-                        position: 'top-right',
+                        position: 'bottom-right',
                         icon: 'auto',
                         clear: true
                     }
@@ -39,7 +39,7 @@
                 NioApp.Toast(
                     `<h5>Gagal</h5><p>{{ session('error') }}</p>`,
                     'error', {
-                        position: 'top-right',
+                        position: 'bottom-right',
                         icon: 'auto',
                         clear: true
                     }
@@ -68,7 +68,8 @@
                                 <div class="user-card">
                                     <div class="user-avatar bg-orange-dim d-none d-sm-flex ">
                                         @if ($dosen->user->image)
-                                            <img class="img-avatar" src="{{ Storage::url('images/users/' . $dosen->user->image) }}"
+                                            <img class="img-avatar"
+                                                src="{{ Storage::url('images/users/' . $dosen->user->image) }}"
                                                 alt="{{ $dosen->user->name }}">
                                         @else
                                             <span>
@@ -107,9 +108,14 @@
                                                                 class="icon ni ni-edit-alt"></em><span>Edit</span></a>
                                                     </li>
                                                     <li class="divider"></li>
-                                                    <li><a href="{{ route('dosen.destroy', $dosen->dosen_id) }}"><em
-                                                                class="icon ni ni-trash"></em><span>Hapus
-                                                                Dosen</span></a></li>
+                                                    <li>
+                                                        <button type="button"
+                                                            class="btn btn-link text-danger btn-hapus-dosen"
+                                                            data-id="{{ $dosen->dosen_id }}"
+                                                            data-nama="{{ $dosen->user->name }}">
+                                                            <em class="icon ni ni-trash"></em><span>Hapus</span>
+                                                        </button>
+                                                    </li>
                                                 </ul>
                                             </div>
                                         </div>
@@ -123,3 +129,60 @@
         </div>
     </div>
 @endsection
+
+@push('js')
+    <script>
+        $(document).ready(function() {
+            $('.btn-hapus-dosen').on('click', function() {
+                let id = $(this).data('id');
+                let nama = $(this).data('nama');
+                let row = $(this).closest('tr'); // atau sesuaikan jika di luar tabel
+
+                Swal.fire({
+                    title: 'Yakin ingin menghapus?',
+                    text: `Dosen ${nama} akan dihapus permanen!`,
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'Ya, hapus!',
+                    cancelButtonText: 'Batal',
+                    confirmButtonColor: '#e85347',
+                    cancelButtonColor: '#3085d6',
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            url: "{{ url('/admin/dosen') }}/" + id,
+                            type: 'DELETE',
+                            data: {
+                                _token: '{{ csrf_token() }}'
+                            },
+                            success: function(res) {
+                                Swal.fire({
+                                    title: 'Terhapus!',
+                                    text: res.message ||
+                                        `Dosen ${nama} berhasil dihapus.`,
+                                    icon: 'success',
+                                    showConfirmButton: false,
+                                    timer: 2000,
+                                    timerProgressBar: true,
+                                    position: 'center',
+                                });
+
+                                row.fadeOut(500, function() {
+                                    $(this).remove();
+                                });
+                            },
+                            error: function(xhr) {
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Gagal Menghapus',
+                                    text: xhr.responseJSON?.message ||
+                                        'Terjadi kesalahan saat menghapus.',
+                                });
+                            }
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+@endpush

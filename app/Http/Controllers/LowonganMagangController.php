@@ -165,13 +165,24 @@ class LowonganMagangController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy($id)
     {
         try {
-            LowonganMagang::destroy($id);
-            return redirect()->route('lowongan-magang.index')->with('success', 'Data lowongan berhasil dihapus');
-        } catch (\Illuminate\Database\QueryException $e) {
-            return redirect()->route('lowongan-magang.index')->with('error', 'Data lowongan gagal dihapus karena masih terdapat tabel lain yang terkait dengan data ini');
+            $lowongan = LowonganMagang::findOrFail($id);
+            $judul = $lowongan->title;
+            $lowongan->delete();
+
+            if (request()->ajax()) {
+                return response()->json(['message' => "Lowongan \"$judul\" berhasil dihapus."]);
+            }
+
+            return redirect()->route('lowongan-magang.index')->with('success', "Lowongan \"$judul\" berhasil dihapus.");
+        } catch (\Exception $e) {
+            if (request()->ajax()) {
+                return response()->json(['message' => 'Gagal menghapus data.'], 500);
+            }
+
+            return redirect()->route('lowongan-magang.index')->with('error', 'Gagal menghapus data.');
         }
     }
 }

@@ -109,11 +109,24 @@ class PeriodeMagangController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy($id)
     {
-        $pegang = PeriodeMagang::find($id);
-        $pegang->delete();
+        try {
+            $periode = PeriodeMagang::findOrFail($id);
+            $nama = $periode->name;
+            $periode->delete();
 
-        return redirect(route('periode-magang.index'))->with('success', 'Periode berhasil dihapus');
+            if (request()->ajax()) {
+                return response()->json(['message' => "Periode '{$nama}' berhasil dihapus."]);
+            }
+
+            return redirect()->route('periode-magang.index')->with('success', "Periode '{$nama}' berhasil dihapus.");
+        } catch (\Exception $e) {
+            if (request()->ajax()) {
+                return response()->json(['message' => 'Gagal menghapus data.'], 500);
+            }
+
+            return redirect()->route('periode-magang.index')->with('error', 'Gagal menghapus data.');
+        }
     }
 }

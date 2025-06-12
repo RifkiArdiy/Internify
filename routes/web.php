@@ -52,9 +52,9 @@ Route::post('register', [AuthController::class, 'postRegister'])->name('postRegi
 Route::get('/', [WelcomeController::class, 'index']);
 Route::get('/home', [WelcomeController::class, 'index'])->name('welcome.index');
 Route::get('/lowongan', [ListingController::class, 'lowongan'])->name('list.lowongan');
-Route::get('/{id}/lowongan', [ListingController::class, 'showLowongan'])->name('show.lowongan');
+Route::get('/lowongan/{id}', [ListingController::class, 'showLowongan'])->name('show.lowongan');
 Route::get('/perusahaan', [ListingController::class, 'perusahaan'])->name('list.perusahaan');
-Route::get('/{id}/perusahaan', [ListingController::class, 'showPerusahaan'])->name('show.perusahaan');
+Route::get('/perusahaan/{id}', [ListingController::class, 'showPerusahaan'])->name('show.perusahaan');
 Route::get('/lowongan/search', [ListingController::class, 'searchLowongan'])->name('lowongan.search');
 Route::get('/perusahaan/search', [ListingController::class, 'searchCompany'])->name('perusahaan.search');
 Route::get('/notification', [ProfileController::class, 'viewNotif'])->name('notif');
@@ -75,7 +75,7 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/show/{id}', [ProgramStudiController::class, 'show'])->name('prodi.show');
             Route::get('/edit/{id}', [ProgramStudiController::class, 'edit'])->name('prodi.edit');
             Route::put('/{id}', [ProgramStudiController::class, 'update'])->name('prodi.update');
-            Route::get('/{id}', [ProgramStudiController::class, 'destroy'])->name('prodi.destroy');
+            Route::delete('/{id}', [ProgramStudiController::class, 'destroy'])->name('prodi.destroy');
         });
 
         Route::prefix('periode-magang')->group(callback: function () {
@@ -85,7 +85,7 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/show/{id}', [PeriodeMagangController::class, 'show'])->name('periode-magang.show');
             Route::get('/edit/{id}', [PeriodeMagangController::class, 'edit'])->name('periode-magang.edit');
             Route::put('/{id}', [PeriodeMagangController::class, 'update'])->name('periode-magang.update');
-            Route::get('/{id}', [PeriodeMagangController::class, 'destroy'])->name('periode-magang.destroy');
+            Route::delete('/{id}', [PeriodeMagangController::class, 'destroy'])->name('periode-magang.destroy');
         });
 
         Route::prefix('lowongan-magang')->group(callback: function () {
@@ -95,7 +95,7 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/show/{id}', [LowonganMagangController::class, 'show'])->name('lowongan-magang.show');
             Route::get('/edit/{id}', [LowonganMagangController::class, 'edit'])->name('lowongan-magang.edit');
             Route::put('/{id}', [LowonganMagangController::class, 'update'])->name('lowongan-magang.update');
-            Route::get('/{id}', [LowonganMagangController::class, 'destroy'])->name('lowongan-magang.destroy');
+            Route::delete('/{id}', [LowonganMagangController::class, 'destroy'])->name('lowongan-magang.destroy');
         });
 
         Route::get('/get-regencies', [WilayahController::class, 'getRegencies']);
@@ -119,7 +119,7 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/show/{id}', [UserController::class, 'show'])->name('user.show');
             Route::get('/edit/{id}', [UserController::class, 'edit'])->name('user.edit');
             Route::put('/{id}', [UserController::class, 'update'])->name('user.update');
-            Route::get('/{id}', [UserController::class, 'destroy'])->name('user.destroy');
+            Route::delete('/{id}', [UserController::class, 'destroy'])->name('user.destroy');
         });
 
         Route::prefix('mahasiswa')->group(function () {
@@ -129,7 +129,7 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/show/{id}', [MahasiswaController::class, 'show'])->name('mahasiswa.show');
             Route::get('/edit/{id}', [MahasiswaController::class, 'edit'])->name('mahasiswa.edit');
             Route::put('/{id}', [MahasiswaController::class, 'update'])->name('mahasiswa.update');
-            Route::get('/{id}', [MahasiswaController::class, 'destroy'])->name('mahasiswa.destroy');
+            Route::delete('/{id}', [MahasiswaController::class, 'destroy'])->name('mahasiswa.destroy');
         });
 
         Route::prefix('dosen')->group(function () {
@@ -139,7 +139,7 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/edit/{id}', [DosenController::class, 'edit'])->name('dosen.edit');
             Route::get('/show/{id}', [DosenController::class, 'show'])->name('dosen.show');
             Route::put('/{id}', [DosenController::class, 'update'])->name('dosen.update');
-            Route::get('/{id}', [DosenController::class, 'destroy'])->name('dosen.destroy');
+            Route::delete('/{id}', [DosenController::class, 'destroy'])->name('dosen.destroy');
         });
 
         Route::prefix('prodi')->group(function () {
@@ -149,7 +149,7 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/edit/{id}', [ProgramStudiController::class, 'edit'])->name('prodi.edit');
             Route::get('/show/{id}', [ProgramStudiController::class, 'show'])->name('prodi.show');
             Route::put('/{id}', [ProgramStudiController::class, 'update'])->name('prodi.update');
-            Route::get('/{id}', [ProgramStudiController::class, 'destroy'])->name('prodi.destroy');
+            Route::delete('/{id}', [ProgramStudiController::class, 'destroy'])->name('prodi.destroy');
         });
 
         Route::prefix('companies')->group(function () {
@@ -157,7 +157,7 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/create', [CompanyController::class, 'create'])->name('companies.create');
             Route::post('/store', [CompanyController::class, 'store'])->name('companies.store');
             Route::get('/show/{id}', [CompanyController::class, 'show'])->name('companies.show');
-            Route::get('/{id}/edit', [CompanyController::class, 'edit'])->name('companies.edit');
+            Route::get('/edit/{id}', [CompanyController::class, 'edit'])->name('companies.edit');
             Route::put('/{id}', [CompanyController::class, 'update'])->name('companies.update');
             Route::delete('/{id}', [CompanyController::class, 'destroy'])->name('companies.destroy');
         });
@@ -167,7 +167,7 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/create', [MonitoringController::class, 'create'])->name('monitoring.create');
             Route::post('/store', [MonitoringController::class, 'store'])->name('monitoring.store');
             Route::get('/show/{id}', [MonitoringController::class, 'show'])->name('monitoring.show');
-            Route::get('/{id}/edit', [MonitoringController::class, 'edit'])->name('monitoring.edit');
+            Route::get('/edit/{id}', [MonitoringController::class, 'edit'])->name('monitoring.edit');
             Route::put('/{id}', [MonitoringController::class, 'update'])->name('monitoring.update');
             Route::delete('/{id}', [MonitoringController::class, 'destroy'])->name('monitoring.destroy');
         });
@@ -181,7 +181,7 @@ Route::middleware(['auth'])->group(function () {
             Route::get('', [LaporanController::class, 'index'])->name('laporan');
             Route::get('/create', [LaporanController::class, 'create'])->name('laporan.create');
             Route::post('/store', [LaporanController::class, 'store'])->name('laporan.store');
-            Route::get('/{id}/edit', [LaporanController::class, 'edit'])->name('laporan.edit');
+            Route::get('/edit/{id}', [LaporanController::class, 'edit'])->name('laporan.edit');
             Route::put('/{id}', [LaporanController::class, 'update'])->name('laporan.update');
             Route::delete('/{id}', [LaporanController::class, 'destroy'])->name('laporan.destroy');
             Route::get('/show/{id}', [LaporanController::class, 'show'])->name('laporan.show');
@@ -201,14 +201,14 @@ Route::middleware(['auth'])->group(function () {
         Route::prefix('pengajuan-magang')->group(function () {
             Route::get('/', [MagangApplicationController::class, 'indexMhs'])->name('lamaran');
             Route::post('/buatLamaran/{id}', [MagangApplicationController::class, 'store'])->name('buatLamaran');
-            Route::delete('/{id}/hapusLamaran', [MagangApplicationController::class, 'destroy'])->name('hapusLamaran');
+            Route::delete('/hapusLamaran/{id}', [MagangApplicationController::class, 'destroy'])->name('hapusLamaran');
         });
 
         Route::get('evaluasi', [EvaluasiMagangController::class, 'indexMhs'])->name('evaluasi-index');
         Route::get('/evaluasi/create', [EvaluasiMagangController::class, 'create'])->name('evaluasi-create');
         Route::post('/evaluasi/store', [EvaluasiMagangController::class, 'store'])->name('evaluasi-store');
         Route::get('/evaluasi/show/{id}', [EvaluasiMagangController::class, 'showMhs'])->name('evaluasi-show');
-        Route::get('/evaluasi/{id}/edit', [EvaluasiMagangController::class, 'edit'])->name('evaluasi-edit');
+        Route::get('/evaluasi/edit/{id}', [EvaluasiMagangController::class, 'edit'])->name('evaluasi-edit');
         Route::put('/evaluasi/{id}', [EvaluasiMagangController::class, 'update'])->name('evaluasi-update');
         Route::delete('/evaluasi/{id}', [EvaluasiMagangController::class, 'destroy'])->name('evaluasi-destroy');
 
@@ -216,7 +216,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/feedback/create', [FeedbackMagangController::class, 'create'])->name('feedback-create');
         Route::post('/feedback/store', [FeedbackMagangController::class, 'store'])->name('feedback-store');
         Route::get('/feedback/show/{id}', [FeedbackMagangController::class, 'showMhs'])->name('feedback-show');
-        Route::get('/feedback/{id}/edit', [FeedbackMagangController::class, 'edit'])->name('feedback-edit');
+        Route::get('/feedback/edit/{id}', [FeedbackMagangController::class, 'edit'])->name('feedback-edit');
         Route::put('/feedback/{id}', [FeedbackMagangController::class, 'update'])->name('feedback-update');
         Route::delete('/feedback/{id}', [FeedbackMagangController::class, 'destroy'])->name('feedback-destroy');
 
@@ -234,7 +234,7 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/create', [EvaluasiMagangController::class, 'create'])->name('evaluasi-create');
             Route::post('/store', [EvaluasiMagangController::class, 'store'])->name('evaluasi-store');
             Route::get('/show/{id}', [EvaluasiMagangController::class, 'showMhs'])->name('evaluasi-show');
-            Route::get('/{id}/edit', [EvaluasiMagangController::class, 'edit'])->name('evaluasi-edit');
+            Route::get('/edit/{id}', [EvaluasiMagangController::class, 'edit'])->name('evaluasi-edit');
             Route::put('/{id}', [EvaluasiMagangController::class, 'update'])->name('evaluasi-update');
             Route::delete('/{id}', [EvaluasiMagangController::class, 'destroy'])->name('evaluasi-destroy');
         });
@@ -261,7 +261,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/evaluasi', [EvaluasiMagangController::class, 'index'])->name('evaluasi.index');
         Route::get('/evaluasi/create', [EvaluasiMagangController::class, 'create'])->name('evaluasi.create');
         Route::post('/evaluasi/store', [EvaluasiMagangController::class, 'store'])->name('evaluasi.store');
-        Route::get('/evaluasi/{id}/edit', [EvaluasiMagangController::class, 'edit'])->name('evaluasi.edit');
+        Route::get('/evaluasi/edit/{id}', [EvaluasiMagangController::class, 'edit'])->name('evaluasi.edit');
         Route::put('/evaluasi/{id}', [EvaluasiMagangController::class, 'update'])->name('evaluasi.update');
         Route::delete('/evaluasi/{id}', [EvaluasiMagangController::class, 'destroy'])->name('evaluasi.destroy');
         Route::get('/evaluasi/verifikasi/{log_id}', [EvaluasiMagangController::class, 'verifikasiDosenDanRedirect'])->name('evaluasi.verifikasi');
@@ -293,7 +293,7 @@ Route::middleware(['auth'])->group(function () {
         Route::prefix('pengajuan-magang')->group(callback: function () {
             Route::get('/show/{id}', [MagangApplicationController::class, 'show'])->name('company.magangApplication.show');
             Route::put('/{id}', [MagangApplicationController::class, 'update'])->name('company.magangApplication.update');
-            Route::get('/{id}', [MagangApplicationController::class, 'destroy'])->name('company.magangApplication.destroy');
+            Route::delete('/{id}', [MagangApplicationController::class, 'destroy'])->name('company.magangApplication.destroy');
         });
 
         Route::prefix('sertifikat-magang')->group(callback: function () {
