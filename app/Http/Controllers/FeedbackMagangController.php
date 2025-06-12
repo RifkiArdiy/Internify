@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\FeedbackMagang;
+use App\Models\LowonganMagang;
 use App\Models\MagangApplication;
 use App\Models\Mahasiswa;
 use Illuminate\Http\Request;
@@ -75,6 +76,7 @@ class FeedbackMagangController extends Controller
         ];
         return view('mahasiswa.feedbackMagang.edit', compact('breadcrumb', 'feedback'));
     }
+
     public function update(Request $request)
     {
         $mahasiswa_id = Mahasiswa::where('user_id', Auth::user()->user_id)->value('mahasiswa_id');
@@ -88,5 +90,24 @@ class FeedbackMagangController extends Controller
         ]);
 
         return redirect('/mahasiswa/feedback');
+    }
+
+    public function list()
+    {
+        $breadcrumb = (object) [
+            'title' => 'Feedback Magang',
+            'subtitle' => 'List feedback dari mahasiswa semua lowongan'
+        ];
+
+        $companyId = Auth::user()->company->company_id;
+
+        $feedbacks = FeedbackMagang::with(['mahasiswa.user', 'magang.lowongans'])
+            ->whereHas('magang.lowongans', function ($query) use ($companyId) {
+                $query->where('company_id', $companyId);
+            })
+            ->latest()
+            ->get();
+
+        return view('company.feedback.index', compact('breadcrumb', 'feedbacks'));
     }
 }
