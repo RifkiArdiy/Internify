@@ -23,7 +23,12 @@ class ProfileController extends Controller
     public function edit()
     {
         $user = Auth::user();
-        return view('profile.edit', compact('user'));
+
+        $breadcrumb = (object) [
+            'title' => 'Edit Profil',
+            'subtitle' => 'Ubah informasi profil anda'
+        ];
+        return view('profile.edit', compact('user', 'breadcrumb'));
     }
 
     public function update(Request $request)

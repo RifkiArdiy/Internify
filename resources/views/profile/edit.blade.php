@@ -1,3 +1,4 @@
+
 <form method="POST" action="{{ route('profile.update') }}" enctype="multipart/form-data">
     @csrf
     @method('PUT')
@@ -60,3 +61,4 @@
         </div>
     </div>
 </form>
+
