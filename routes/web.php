@@ -243,10 +243,13 @@ Route::middleware(['auth'])->group(function () {
 
         Route::resource('alternatif', AlternatifController::class);
 
+        // Nilai - Create
         Route::get('/alternatif/nilai/{id}', [NilaiAlternatifController::class, 'create'])->name('nilai.create');
         Route::post('/alternatif/nilai/{id}', [NilaiAlternatifController::class, 'store'])->name('nilai.store');
-        // Route::get('/alternatif/{alternatif}/nilai', [NilaiAlternatifController::class, 'edit'])->name('nilai.edit');
-        // Route::post('/alternatif/{alternatif}/nilai', [NilaiAlternatifController::class, 'update'])->name('nilai.update');
+
+        // Nilai - Edit
+        Route::get('/alternatif/edit/{id}', [NilaiAlternatifController::class, 'edit'])->name('nilai.edit');
+        Route::put('/alternatif/edit/{id}', [NilaiAlternatifController::class, 'update'])->name('nilai.update');
 
         Route::get('/spk/perhitungan', [SPKController::class, 'index'])->name('spk.index');
     });

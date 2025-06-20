@@ -58,7 +58,13 @@
                                                     <li>
                                                         <a href="#" class="btn-input-nilai"
                                                             data-id="{{ $alt->alternatif_id }}">
-                                                            <em class="icon ni ni-edit-alt"></em><span>Input Nilai</span>
+                                                            <em class="icon ni ni-plus"></em><span>Input Nilai</span>
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#" class="btn-edit-nilai"
+                                                            data-id="{{ $alt->alternatif_id }}">
+                                                            <em class="icon ni ni-edit-alt"></em><span>Edit Nilai</span>
                                                         </a>
                                                     </li>
 
@@ -67,11 +73,10 @@
                                                         <form
                                                             action="{{ route('alternatif.destroy', $alt->alternatif_id) }}"
                                                             method="POST"
-                                                            onsubmit="return confirm('Yakin ingin menghapus alternatif ini?')"
-                                                            style="display:inline;">
+                                                            onsubmit="return confirm('Yakin ingin menghapus alternatif ini?')">
                                                             @csrf
                                                             @method('DELETE')
-                                                            <button type="submit" class="dropdown-item">
+                                                            <button type="submit" class="btn btn-link text-danger">
                                                                 <em class="icon ni ni-trash"></em><span>Hapus</span>
                                                             </button>
                                                         </form>
@@ -90,7 +95,7 @@
     </div>
     <div class="modal fade" id="tambahAlternatifModal" tabindex="-1" aria-labelledby="tambahAlternatifModalLabel"
         aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered"> <!-- ✅ modal-sm + centered -->
+        <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
             </div>
         </div>
@@ -98,7 +103,12 @@
     <div class="modal fade" id="modalInputNilai" tabindex="-1" aria-labelledby="modalInputNilaiLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content">
-                <!-- Konten form akan dimuat via AJAX -->
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="modalEditNilai" tabindex="-1" aria-labelledby="modalEditNilaiLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
             </div>
         </div>
     </div>
@@ -137,6 +147,31 @@
 
                 $.ajax({
                     url: "/mahasiswa/alternatif/nilai/" + alternatifId,
+                    method: 'GET',
+                    success: function(response) {
+                        modalContent.html(response);
+                        modal.modal('show');
+                    },
+                    error: function() {
+                        modalContent.html(
+                            '<div class="modal-body text-center text-danger p-4">Gagal memuat form nilai.</div>'
+                        );
+                        modal.modal('show');
+                    }
+                });
+            });
+        });
+    </script>
+    <script>
+        $(document).ready(function() {
+            $('.btn-edit-nilai').on('click', function(e) {
+                e.preventDefault();
+                let alternatifId = $(this).data('id');
+                let modal = $('#modalEditNilai');
+                let modalContent = modal.find('.modal-content');
+
+                $.ajax({
+                    url: "/mahasiswa/alternatif/edit/" + alternatifId,
                     method: 'GET',
                     success: function(response) {
                         modalContent.html(response);

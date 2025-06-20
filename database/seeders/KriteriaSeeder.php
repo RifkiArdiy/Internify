@@ -25,7 +25,7 @@ class KriteriaSeeder extends Seeder
             ],
             [
                 'kode' => 'C2',
-                'nama' => 'Benefit',
+                'nama' => 'Fasilitas & Benefit',
                 'weight' => 0.25,
                 'jenis' => 'benefit',
                 'created_at' => now(),
@@ -33,7 +33,7 @@ class KriteriaSeeder extends Seeder
             ],
             [
                 'kode' => 'C3',
-                'nama' => 'Kategori',
+                'nama' => 'Kategori Lowongan',
                 'weight' => 0.2,
                 'jenis' => 'benefit',
                 'created_at' => now(),
@@ -49,7 +49,7 @@ class KriteriaSeeder extends Seeder
             ],
             [
                 'kode' => 'C5',
-                'nama' => 'Fasilitas',
+                'nama' => 'Tipe Lowongan',
                 'weight' => 0.1,
                 'jenis' => 'benefit',
                 'created_at' => now(),
@@ -83,12 +83,11 @@ class KriteriaSeeder extends Seeder
             ['kriteria_id' => 4, 'parameter' => '3 Bulan', 'nilai' => 2],
             ['kriteria_id' => 4, 'parameter' => '2 Bulan', 'nilai' => 1],
 
-            // C5 - Fasilitas (benefit)
-            ['kriteria_id' => 5, 'parameter' => 'Tidak Ada', 'nilai' => 1],
-            ['kriteria_id' => 5, 'parameter' => 'Sedikit', 'nilai' => 2],
-            ['kriteria_id' => 5, 'parameter' => 'Cukup', 'nilai' => 3],
-            ['kriteria_id' => 5, 'parameter' => 'Lengkap', 'nilai' => 4],
-            ['kriteria_id' => 5, 'parameter' => 'Sangat Lengkap', 'nilai' => 5],
+            // C5 - Tipe Lowongan (benefit)
+            ['kriteria_id' => 5, 'parameter' => 'Remote', 'nilai' => 5],
+            ['kriteria_id' => 5, 'parameter' => 'Paruh Waktu', 'nilai' => 3],
+            ['kriteria_id' => 5, 'parameter' => 'Full Time', 'nilai' => 1],
+
         ];
 
         DB::table('skor_kriteria')->insert($data);

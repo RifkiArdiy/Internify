@@ -11,7 +11,8 @@
         <p><strong>Mahasiswa:</strong> {{ $mahasiswa->user->name }}</p>
 
         <label for="lowongan_id">Pilih Lowongan (Multiple)</label>
-        <select name="lowongan_id[]" id="lowongan_id" class="form-select js-select2" multiple="multiple" required>
+        <select name="lowongan_id[]" id="lowongan_id" class="form-select js-select2" data-search="on"
+            multiple="multiple" required>
             @foreach ($lowongans as $low)
                 <option value="{{ $low->lowongan_id }}">{{ $low->title }}</option>
             @endforeach

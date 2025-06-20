@@ -45,15 +45,24 @@ class NilaiAlternatifController extends Controller
 
         return redirect()->route('nilai.create', $id)->with('success', 'Nilai berhasil disimpan!');
     }
-    public function edit(Alternatif $alternatif)
+
+    public function edit($id)
     {
-        $kriterias = Kriteria::all();
+        $alternatif = Alternatif::findOrFail($id);
+        $kriterias = Kriteria::with('skorKriterias')->get();
         $nilai_lama = $alternatif->nilaiAlternatif()->pluck('nilai', 'kriteria_id')->toArray();
-        return view('mahasiswa.alternatif.nilai', compact('alternatif', 'kriterias', 'nilai_lama'));
+
+        $skorKriterias = [];
+        foreach ($kriterias as $kriteria) {
+            $skorKriterias[$kriteria->kriteria_id] = $kriteria->skorKriterias;
+        }
+
+        return view('mahasiswa.nilai.edit', compact('alternatif', 'kriterias', 'nilai_lama', 'skorKriterias'));
     }
 
-    public function update(Request $request, Alternatif $alternatif)
+    public function update(Request $request, $id)
     {
+        $alternatif = Alternatif::findOrFail($id);
         $kriterias = Kriteria::all();
 
         foreach ($kriterias as $kriteria) {
@@ -63,6 +72,6 @@ class NilaiAlternatifController extends Controller
             );
         }
 
-        return redirect()->route('alternatif.index')->with('success', 'Nilai alternatif diperbarui');
+        return response()->json(['message' => 'Nilai berhasil diperbarui']);
     }
 }
