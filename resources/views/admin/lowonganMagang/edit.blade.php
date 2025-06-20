@@ -48,11 +48,30 @@
                         </div>
                     </div>
 
-                    <div class="col-12">
+                    <div class="col-md-6">
                         <div class="form-group">
                             <label class="form-label">Judul</label>
                             <input type="text" class="form-control" name="title"
                                 value="{{ old('title', $logang->title) }}" required>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="form-label">Tipe Lowongan</label>
+                            <select name="job_type" id="job_type" class="form-control js-select2" data-search="on"
+                                required>
+                                <option value="">- Pilih Tipe Lowongan -</option>
+                                <option value="full_time"
+                                    {{ old('job_type', $logang->job_type) == 'full_time' ? 'selected' : '' }}>Full Time
+                                </option>
+                                <option value="part_time"
+                                    {{ old('job_type', $logang->job_type) == 'part_time' ? 'selected' : '' }}>Paruh Waktu
+                                </option>
+                                <option value="remote"
+                                    {{ old('job_type', $logang->job_type) == 'remote' ? 'selected' : '' }}>Remote
+                                </option>
+                            </select>
                         </div>
                     </div>
 

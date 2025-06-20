@@ -51,6 +51,7 @@ return new class extends Migration
             $table->string('title');
             $table->text('description');
             $table->text('requirements');
+            $table->enum('job_type', ['Full time', 'Part time', 'Remote'])->default('Full time');
             $table->foreignId('province_id')->constrained('provinces');
             $table->foreignId('regency_id')->constrained('regencies');
             $table->foreignId('district_id')->constrained('districts');

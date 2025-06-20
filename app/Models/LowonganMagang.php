@@ -21,6 +21,7 @@ class LowonganMagang extends Model
         'title',
         'description',
         'requirements',
+        'job_type',
         'province_id',
         'regency_id',
         'district_id',
@@ -71,7 +72,7 @@ class LowonganMagang extends Model
     {
         return $this->belongsTo(Village::class);
     }
-    
+
     public function jumlahPelamar()
     {
         return $this->applications()->count();

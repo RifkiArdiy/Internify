@@ -271,7 +271,7 @@
                                 <!-- Benefits -->
                                 <div class="card card-bordered mb-4">
                                     <div class="card-inner">
-                                        <h5 class="title mb-3">Benefit</h5>
+                                        <h5 class="title mb-3">Fasilitas & Benefit</h5>
                                         <ul class="list list-sm text-soft">
                                             @foreach ($lowongan->benefits as $benefit)
                                                 {{-- <span class="badge badge-outline-primary">{{ $benefit->name }}</span>
@@ -288,12 +288,13 @@
                                 <!-- Job Overview -->
                                 <div class="card card-bordered mb-4">
                                     <div class="card-inner">
-                                        <h6 class="title">Job Overview</h6>
+                                        <h6 class="title">Informasi Lanjutan</h6>
                                         <ul class="gy-2 mt-3">
-                                            <li class="d-flex justify-content-between"><strong>Date Posted:</strong>
-                                                {{ $lowongan->created_at->diffForHumans() }}</li>
-                                            <li class="d-flex justify-content-between"><strong>Expiration
-                                                    Date:</strong>
+                                            <li class="d-flex justify-content-between"><strong>Tanggal Mulai:</strong>
+                                                {{ \Carbon\Carbon::parse($lowongan->period->start_date)->format('d/m/Y') }}
+                                            </li>
+                                            <li class="d-flex justify-content-between"><strong>Tanggal
+                                                    Kadalwarsa:</strong>
                                                 {{ \Carbon\Carbon::parse($lowongan->period->end_date)->format('d/m/Y') }}
                                             </li>
                                             <li class="d-flex justify-content-between">
@@ -301,8 +302,12 @@
                                                 ({{ $lowongan->province->name }})
 
                                             </li>
-                                            <li class="d-flex justify-content-between"><strong>Job Type:</strong>
+                                            <li class="d-flex justify-content-between"><strong>Kategori
+                                                    Lowongan:</strong>
                                                 {{ $lowongan->kategori->name }}</li>
+                                            <li class="d-flex justify-content-between"><strong>Tipe
+                                                    Lowongan:</strong>
+                                                {{ $lowongan->job_type }}</li>
                                         </ul>
                                     </div>
                                 </div>
@@ -356,9 +361,9 @@
                                         {{-- <ul class="list list-sm text-soft mt-3"> --}}
                                         <ul class="gy-2 mt-3">
                                             <li class="d-flex justify-content-between">
-                                                <strong>Founded:</strong>{{ \Carbon\Carbon::parse($lowongan->company->created_at)->format('d/m/Y') }}
+                                                <strong>Dibuat:</strong>{{ \Carbon\Carbon::parse($lowongan->company->created_at)->format('d/m/Y') }}
                                             </li>
-                                            <li class="d-flex justify-content-between"><strong>Phone:</strong>
+                                            <li class="d-flex justify-content-between"><strong>No Telepon:</strong>
                                                 {{ $lowongan->company->user->no_telp }}</li>
                                             <li class="d-flex justify-content-between"><strong>Lokasi:</strong>
                                                 {{ $lowongan->company->user->alamat }}</li>
@@ -372,9 +377,18 @@
                             </div>
                         </div>
 
-                        <!-- Related Jobs -->
-                        @foreach ($recent as $job)
-                            @if ($job->period && \Carbon\Carbon::parse($job->period->end_date)->isFuture())
+                        @php
+                            $filteredRecent = collect($recent)->filter(function ($job) {
+                                return $job->period && \Carbon\Carbon::parse($job->period->end_date)->isFuture();
+                            });
+                        @endphp
+
+                        @if ($filteredRecent->isNotEmpty())
+                            <div class="mt-5">
+                                <h5 class="mb-3">Kategori yang sama</h5>
+                            </div>
+
+                            @foreach ($filteredRecent as $job)
                                 <div class="col-sm-6 col-lg-4">
                                     <a href="{{ route('show.lowongan', $job->lowongan_id) }}"
                                         class="card-link-wrapper">
@@ -390,9 +404,7 @@
                                                                 </div>
                                                             @else
                                                                 <div class="user-avatar sq">
-                                                                    <span>
-                                                                        {{ strtoupper(collect(explode(' ', $job->company->user->name))->map(fn($word) => $word[0])->take(2)->implode('')) }}
-                                                                    </span>
+                                                                    <span>{{ strtoupper(collect(explode(' ', $job->company->user->name))->map(fn($word) => $word[0])->take(2)->implode('')) }}</span>
                                                                 </div>
                                                             @endif
                                                             <div class="job-info">
@@ -421,9 +433,8 @@
                                         </div>
                                     </a>
                                 </div>
-                            @endif
-                        @endforeach
-
+                            @endforeach
+                        @endif
                     </div><!-- .section-content -->
                 </div><!-- .container -->
             </section><!-- .section -->

@@ -220,7 +220,6 @@
                                     </div>
 
                                     <ul class="list-inline list-split fs-14px text-soft">
-                                        <li><em class="icon ni ni-briefcase"></em> Technology</li>
                                         <li><em class="icon ni ni-map-pin"></em>
                                             {{ $company->user->alamat ?? 'N/A' }}</li>
                                         <li><em class="icon ni ni-call"></em>
@@ -255,19 +254,14 @@
                                     <div class="card-inner">
                                         <ul class="gy-2">
                                             <li class="d-flex justify-content-between"><span
-                                                    class="fw-bold">Ownership:</span> <span
-                                                    class="text-soft">Private</span></li>
-                                            <li class="d-flex justify-content-between"><span class="fw-bold">Company
-                                                    size:</span> <span class="text-soft">11-20</span></li>
-                                            <li class="d-flex justify-content-between"><span class="fw-bold">Founded
-                                                    in:</span> <span
+                                                    class="fw-bold">Dibuat:</span> <span
                                                     class="text-soft">{{ \Carbon\Carbon::parse($company->user->created_at)->format('d/m/Y') }}</span>
                                             </li>
                                             <li class="d-flex justify-content-between"><span
                                                     class="fw-bold">Email:</span> <span
                                                     class="text-soft">{{ $company->user->email }}</span></li>
                                             <li class="d-flex justify-content-between"><span
-                                                    class="fw-bold">Location:</span> <span
+                                                    class="fw-bold">Lokasi:</span> <span
                                                     class="text-soft">{{ $company->user->alamat ?? '-' }}</span>
                                             </li>
                                         </ul>
