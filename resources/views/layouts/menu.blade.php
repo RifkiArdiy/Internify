@@ -175,9 +175,15 @@
     {{-- Jika belum ada magang disetujui --}}
     @unless ($hasApprovedMagang)
         <li class="nk-menu-item">
+            <a href="{{ route('kriteria.index') }}" class="nk-menu-link">
+                <span class="nk-menu-icon"><em class="icon ni ni-briefcase"></em></span>
+                <span class="nk-menu-text">Kriteria Magang</span>
+            </a>
+        </li>
+        <li class="nk-menu-item">
             <a href="{{ url('mahasiswa/alternatif') }}" class="nk-menu-link">
                 <span class="nk-menu-icon"><em class="icon ni ni-briefcase"></em></span>
-                <span class="nk-menu-text">Rekomendasi Lowongan</span>
+                <span class="nk-menu-text">Rekomendasi Magang</span>
             </a>
         </li>
         <li class="nk-menu-item">

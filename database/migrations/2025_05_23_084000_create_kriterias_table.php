@@ -17,14 +17,28 @@ return new class extends Migration
             $table->id('kriteria_id');
             $table->string('kode'); // Misal: C1, C2, ...
             $table->string('nama'); // Misal: Lokasi, Benefit, ...
-            $table->float('weight'); // Optional, jika bobot dari mahasiswa
             $table->enum('jenis', ['benefit', 'cost']); // Harus ditentukan enum-nya
             $table->timestamps();
         });
+
+        // Membuat bobot
+        Schema::create('kriteria_mahasiswa', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('mahasiswa_id')->index();
+            $table->unsignedBigInteger('kriteria_id')->index();
+            $table->float('weight');
+            $table->timestamps();
+
+            $table->foreign('mahasiswa_id')->references('mahasiswa_id')->on('mahasiswas')->onDelete('cascade');
+            $table->foreign('kriteria_id')->references('kriteria_id')->on('kriterias')->onDelete('cascade');
+
+            $table->unique(['mahasiswa_id', 'kriteria_id']); // tidak boleh duplikat
+        });
+
         // Membuat parameter nilai
         Schema::create('skor_kriteria', function (Blueprint $table) {
             $table->id('skor_id');
-            $table->unsignedBigInteger('kriteria_id');
+            $table->unsignedBigInteger('kriteria_id')->index();
             $table->string('parameter'); // Misalnya: "Sangat Baik", "Baik", dsb.
             $table->float('nilai'); // Nilai numerik, misalnya: 1-5
             $table->timestamps();
@@ -34,8 +48,8 @@ return new class extends Migration
 
         Schema::create('alternatif', function (Blueprint $table) {
             $table->id('alternatif_id');
-            $table->unsignedBigInteger('mahasiswa_id');
-            $table->unsignedBigInteger('lowongan_id');
+            $table->unsignedBigInteger('mahasiswa_id')->index();
+            $table->unsignedBigInteger('lowongan_id')->index();
             $table->timestamps();
 
             $table->foreign('lowongan_id')->references('lowongan_id')->on('lowongan_magangs')->onDelete('cascade');
@@ -44,8 +58,8 @@ return new class extends Migration
 
         Schema::create('nilai_alternatif', function (Blueprint $table) {
             $table->id('nilai_id');
-            $table->unsignedBigInteger('alternatif_id');
-            $table->unsignedBigInteger('kriteria_id');
+            $table->unsignedBigInteger('alternatif_id')->index();
+            $table->unsignedBigInteger('kriteria_id')->index();
             $table->float('nilai'); // Nilai numerik (dari skor_kriteria atau input langsung)
             $table->timestamps();
 
@@ -59,9 +73,10 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('kriterias');
-        Schema::dropIfExists('skor_kriteria');
-        Schema::dropIfExists('alternatif');
         Schema::dropIfExists('nilai_alternatif');
+        Schema::dropIfExists('alternatif');
+        Schema::dropIfExists('skor_kriteria');
+        Schema::dropIfExists('kriteria_mahasiswa');
+        Schema::dropIfExists('kriterias');
     }
 };

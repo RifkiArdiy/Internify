@@ -41,12 +41,13 @@ class Mahasiswa extends Model
         return $this->hasMany(EvaluasiMagang::class, 'evaluasi_id', 'evaluasi_id');
     }
 
-    public function criteria()
+    public function kriteriaBobot()
     {
-        return $this->belongsToMany(Kriteria::class, 'mahasiswa_criteria')
-            ->withPivot('value')
+        return $this->belongsToMany(Kriteria::class, 'kriteria_mahasiswa', 'mahasiswa_id', 'kriteria_id')
+            ->withPivot('weight')
             ->withTimestamps();
     }
+
 
     public function profil_akademik()
     {

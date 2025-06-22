@@ -239,6 +239,10 @@ Route::middleware(['auth'])->group(function () {
             Route::delete('/{id}', [EvaluasiMagangController::class, 'destroy'])->name('evaluasi-destroy');
         });
 
+        // Hanya untuk mahasiswa login (bobot kriteria)
+        Route::get('/kriteria/bobot', [KriteriaController::class, 'editBobot'])->name('kriteria.bobot.edit');
+        Route::post('/kriteria/bobot', [KriteriaController::class, 'updateBobot'])->name('kriteria.bobot.update');
+
         Route::resource('kriteria', KriteriaController::class);
 
         Route::resource('alternatif', AlternatifController::class);

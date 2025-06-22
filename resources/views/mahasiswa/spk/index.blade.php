@@ -1,6 +1,20 @@
 @extends('layouts.app')
 
 @section('content')
+    @if (session('error'))
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                NioApp.Toast(
+                    `<h5>Gagal</h5><p>{{ session('error') }}</p>`,
+                    'error', {
+                        position: 'bottom-right',
+                        icon: 'auto',
+                        clear: true
+                    }
+                );
+            });
+        </script>
+    @endif
     <div class="card card-bordered card-preview mb-4">
         <div class="card-inner">
             <h4 class="mb-3">Matriks Awal (Nilai Alternatif)</h4>

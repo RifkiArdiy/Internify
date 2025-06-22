@@ -18,7 +18,6 @@ class KriteriaSeeder extends Seeder
             [
                 'kode' => 'C1',
                 'nama' => 'Lokasi',
-                'weight' => 0.3,
                 'jenis' => 'cost',
                 'created_at' => now(),
                 'updated_at' => now(),
@@ -26,7 +25,6 @@ class KriteriaSeeder extends Seeder
             [
                 'kode' => 'C2',
                 'nama' => 'Fasilitas & Benefit',
-                'weight' => 0.25,
                 'jenis' => 'benefit',
                 'created_at' => now(),
                 'updated_at' => now(),
@@ -34,7 +32,6 @@ class KriteriaSeeder extends Seeder
             [
                 'kode' => 'C3',
                 'nama' => 'Kategori Lowongan',
-                'weight' => 0.2,
                 'jenis' => 'benefit',
                 'created_at' => now(),
                 'updated_at' => now(),
@@ -42,7 +39,6 @@ class KriteriaSeeder extends Seeder
             [
                 'kode' => 'C4',
                 'nama' => 'Periode Magang',
-                'weight' => 0.15,
                 'jenis' => 'cost',
                 'created_at' => now(),
                 'updated_at' => now(),
@@ -50,7 +46,6 @@ class KriteriaSeeder extends Seeder
             [
                 'kode' => 'C5',
                 'nama' => 'Tipe Lowongan',
-                'weight' => 0.1,
                 'jenis' => 'benefit',
                 'created_at' => now(),
                 'updated_at' => now(),

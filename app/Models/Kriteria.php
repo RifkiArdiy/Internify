@@ -9,6 +9,9 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Kriteria extends Model
 {
     protected $primaryKey = 'kriteria_id';
+
+    public $incrementing = true;
+
     protected $fillable = ['kode', 'nama', 'weight', 'jenis'];
 
     public function skorKriterias()
@@ -19,5 +22,11 @@ class Kriteria extends Model
     public function nilaiAlternatifs()
     {
         return $this->hasMany(NilaiAlternatif::class, 'kriteria_id');
+    }
+
+    public function mahasiswa()
+    {
+        return $this->belongsToMany(Mahasiswa::class, 'kriteria_mahasiswa', 'kriteria_id', 'mahasiswa_id')
+            ->withPivot('weight');
     }
 }
